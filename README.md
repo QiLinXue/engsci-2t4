@@ -11,6 +11,6 @@
 * Please message me for any clarifications / suggestions.
 
 # Instructions to Edit LaTeX files Online
-* Make an account on [Overleaf](https://www.overleaf.com/)
+* Make an account on [Overleaf](https://www.overleaf.com?r=e6f6034f&rm=d&rs=b)
 * Open up this [document](https://www.overleaf.com/3163128743tdvybfjhgqvz) and edit / add new details. To set the main tex directory, go to the main tex document (e.g. `esc194.tex`), and click `Recompile`.
 * Once you make edits, please message me on Discord and I will push the changes onto Github.
