@@ -5,6 +5,7 @@
 * [PHY180 (Physics) Notes](http://xueqilin.me/engsci-2t4/phy180/lectures/phys180.pdf) (discontinued)
 
 # How to Contribute
+* Github page is [here](https://github.com/QiLinXue/engsci-2t4/)
 * If you want to add in your own notes/resources, send me (discord: Qcumber#4444) your Github username and I'll make you a contributor
 * If you want to edit my existing notes (e.g. for typos), submit a pull request or follow the instructions in the next section.
 * Please message me for any clarifications / suggestions.
