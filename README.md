@@ -6,5 +6,10 @@
 
 # How to Contribute
 * If you want to add in your own notes/resources, send me (discord: Qcumber#4444) your Github username and I'll make you a contributor
-* If you want to edit my existing notes (e.g. for typos), submit a pull request.
+* If you want to edit my existing notes (e.g. for typos), submit a pull request or follow the instructions in the next section.
 * Please message me for any clarifications / suggestions.
+
+# Instructions to Edit LaTeX files Online
+* Make an account on [Overleaf](https://www.overleaf.com/)
+* Open up this [document](https://www.overleaf.com/3163128743tdvybfjhgqvz) and edit / add new details. To set the main tex directory, go to the main tex document (e.g. `esc194.tex`), and click `Recompile`.
+* Once you make edits, please message me on Discord and I will push the changes onto Github.
