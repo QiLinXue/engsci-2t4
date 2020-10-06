@@ -1,0 +1,184 @@
+\section{Lecture 11: Trig Functions / Derivatives}
+\begin{itemize}
+    \item We can deal with trigonometric functions.
+    \begin{example}
+        Prove $\displaystyle \lim_{x\to 0} \frac{\sin x}{x}=1$.
+        \vspace{2mm}
+
+        Note that we cannot use the product limit theorem and both do not exist at zero. We can do this geometrically by drawing a unit circle:
+        \begin{center}
+            \begin{tikzpicture}
+                \draw[dotted] (-5,0) -- (5,0);
+                \draw[dotted] (0,-5) -- (0,5);
+                \draw[] (0,0) node[below left] {$O$} circle (4);
+                \draw[thick] (0,0) -- (4*3^0.5/2,2) node[left] {$B$};
+                \draw[thick] (0,0) -- (4*3^0.5/2,0);
+                \draw[thick] (4*3^0.5/2,2) -- (4*3^0.5/2,0) node[below] {$C$};
+                \draw[fill=black] (4,0) node[right] {$A$} circle (0.05);
+                \draw[] (3.46410162,2) -- (4,2.30940108) node[right] {$D$};
+                \draw[] (4,0) -- (4,2.30940108) node[right] {$D$};
+            \end{tikzpicture}
+        \end{center}
+        Let $x\equiv \angle BOC$. Then the area of $\triangle OBA$ is:
+        \begin{equation}
+            [\triangle OBA] = \frac{1}{2}\sin x \cdot 1 = \frac{1}{2}\sin x
+            \label{eq:}
+        \end{equation}
+        The area of sector $OBA$ is then:
+        \begin{equation}
+            [OBA] = \frac{1}{2}x\cdot 1^2 = \frac{1}{2}x
+            \label{eq:}
+        \end{equation}
+        The area of $\triangle DOA$, using the fact that $DA=\tan x$ is:
+        \begin{equation}
+            [\triangle DOA] = \frac{1}{2}\tan x \cdot 1 = \frac{1}{2}\tan x
+            \label{eq:}
+        \end{equation}
+        Therefore it is geometrically obvious that:
+        \begin{equation}
+            \sin x \le x \le \tan x
+            \label{eq:}
+        \end{equation}
+        We can divide by two to get:
+        \begin{equation}
+            1 \le \frac{x}{\sin x} \le \frac{1}{\cos x}
+            \label{eq:}
+        \end{equation}
+        which is equivalent to:
+        \begin{equation}
+            \cos x \le \frac{\sin x}{x} \le 1
+            \label{eq:}
+        \end{equation}
+        We can then use the sandwich L.T. to prove that the limit is equal to one.
+    \end{example}
+    \item We can find the derivative of sine functions:
+    \begin{align}
+        \frac{d}{dx}\sin x &= \lim_{h\to 0} \frac{\sin(x+h)-\sin x}{h} \\ 
+        &= \lim_{h\to 0} \frac{\sin x\cos h+\cos x\sin h - \sin x}{h} \\ 
+        &= \lim_{h\to 0} \frac{\sin x(\cos h-1)}{h}+\lim_{h\to0} \cos x\frac{\sin h}{h} \\ 
+        &= \lim_{h\to 0}\sin x \cdot \lim_{h\to 0} \frac{\cos h-1}{h} + \lim_{h\to 0} \cos x \cdot \lim_{h\to 0} \frac{\sin h}{h} \\ 
+        &= \sin x \cdot 0 + \cos x \cdot 1 \\ 
+        &= \cos x
+        \label{eq:}
+    \end{align}
+    Similarly we can show that:
+    \begin{equation}
+        \frac{d}{dx}\cos x = -\sin x
+        \label{eq:}
+    \end{equation}
+    \item For composite functions, we introduce the chain rule:
+    \begin{theorem}
+        The chain rule is given by:
+        \begin{equation}
+            f'(x)=f'(u)u'(x)
+            \label{eq:}
+        \end{equation}
+        and is highly suggestive when written in Leibniz notation:
+        \begin{equation}
+            \frac{df}{dx} = \frac{df}{du}\frac{du}{dx}
+            \label{eq:}
+        \end{equation}
+        
+    \end{theorem}
+    
+    \begin{example}
+        Suppose we have $f(x)=(3x^2+1)^{173}$. What is $f'(x)$?
+        \vspace{2mm}
+
+        \begin{equation}
+            u(x) \equiv 3x^2+1
+            \label{eq:}
+        \end{equation}
+        We can let $f(u)=u^{173}=f(u(x))$. Then:
+        \begin{align}
+            \frac{du}{dx} &= 6x \\ 
+            \frac{df}{du} &= 173u^{172}
+            \label{eq:}
+        \end{align}
+        Therefore:
+        \begin{align}
+            \frac{df}{dx}=\frac{df}{du}\frac{du}{dx} &= 6x(173u^{172}) \\ 
+            &= 6x(173)(3x^2+1)^{172}
+        \end{align}
+    \end{example}
+    \item Sometimes we only have $y(x)$ in the form of an implicit relationship, such as:
+    \begin{equation}
+        x^3y^7-x^2+y^2=0
+        \label{eq:}
+    \end{equation}
+    Note that we can't write $y(x)$ explicitly. While it is less convenient, we can relate $y$ and $x$ with a table and via numerical methods, but we can do it analytically as well. The trick is to apply the $\frac{d}{dx}$ operator to both sides of the implicit equation:
+    \begin{align}
+        \frac{d}{dx}\left(x^3y^7-x^2+y\right) &= \frac{d}{dx}0 \\ 
+        \frac{d}{dx} (x^3y^7) - \frac{d}{dx} x^2 + \frac{d}{dx}(y) = 0 \\ 
+        \label{eq:}
+    \end{align}
+    The first term can be evaluated as:
+    \begin{align}
+        \frac{d}{dx}(x^3y^7) &= x^3\frac{d}{dx}y^7 + y^7\frac{d}{dx}x^3 \\ 
+        &= 7x^3y^6\frac{dy}{dx}+3x^2y^7
+    \end{align}
+    After doing this for all terms, we get:
+    \begin{equation}
+        3x^2y^7+7x^3y^6y'-2x+y' = 0        \label{eq:}
+    \end{equation}
+    and solving for $\frac{dy}{dx}$ gives:
+    \begin{equation}
+        \frac{dy}{dx} = \frac{2x-3x^2y^7}{7x^3y^6+1}
+        \label{eq:}
+    \end{equation}
+    \begin{prooof}
+        To prove that $\frac{d}{dx}x^{p/q} = \frac{p}{q}x^{p/q-1}$, we can use the chain rule.
+        \vspace{2mm}
+
+        Let $u\equiv x^{p/q}$, and we want to find $u(x)$. Note that:
+        \begin{equation}
+            u^q=x^p
+            \label{eq:}
+        \end{equation}
+        Define $f(u)\equiv u^q = x^p$. Therefore, $f(u(x))$ is a composite function. We can use the chain rule to get:
+        \begin{align}
+            \frac{df}{dx} &= px^{p-1} \\ 
+            \frac{df}{du} &= qu^{q-1} \\ 
+            \label{eq:}
+        \end{align}
+        We can divide the two to get:
+        \begin{equation}
+            u' = \frac{df}{dx} / \frac{df}{du} = \frac{px^{p-1}}{qu^{q-1}}
+            \label{eq:}
+        \end{equation}
+        Recall that since $u=x^{p/q}$, we can rewrite:
+        \begin{equation}
+            u^{q-1} = x^{p-p/q}
+            \label{eq:}
+        \end{equation}
+        therefore simplifying the derivative to:
+        \begin{align}
+            u'=\frac{p}{q} \frac{x^{p-1}}{x^{p-p/q}} \\ 
+            &= \frac{p}{q} x^{p/q-1}
+        \end{align}
+        Therefore we have proved that:
+        \begin{equation}
+            \frac{d}{dx} x^n = nx^{n-1}
+            \label{eq:}
+        \end{equation}
+        for any rational number $n$.
+    \end{prooof}
+    \item We can also look at related rates now. For example, suppose we have the volume of a hailstone $V(t)$ and a radius $r(t)$ changing with time $t$. Suppose we are given that:
+    \begin{equation}
+        r(t)=3t^2+t
+        \label{eq:}
+    \end{equation}
+    in appropriate units. To determine how fast $V$ is changing at $t=2\text{ min}$, then we can use the change rule:
+    \begin{align}
+        \frac{dV}{dt} &= \frac{dV}{dr} \cdot \frac{dr}{dt} \\ 
+        &= \frac{d}{dr}\left(\frac{4}{3}\pi r^3\right) (6t+1) \\ 
+        &= (4\pi r^2)(6t+1)
+        \label{eq:}
+    \end{align}
+    Plugging everything in gives:
+    \begin{equation}
+        \frac{dV}{dt}\biggr|_{t=2} = 20
+        \label{eq:}
+    \end{equation}
+    again in appropriate units since I'm too lazy to write them down.
+\end{itemize}

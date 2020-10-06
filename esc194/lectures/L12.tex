@@ -1,0 +1,136 @@
+\section{Lecture 12: Applications of Derivatives}
+\begin{itemize}
+    \item Applications of Derivatives:
+    \begin{definition}
+        $f(x)$ has ``an absolute maximum at $c$'' if $f(c) \ge f(x)$ for all $x\in$ domain of $f(x)$. \textbf{Note} that $f(c)$ must exist!
+        \vspace{2mm}
+
+        For example, if $f(x) = \frac{\sin x}{x}$, it does not have an absolute maximum at $x=0$!
+
+        \begin{center}
+            \begin{tikzpicture}
+            \begin{axis}[
+            legend pos=outer north east,
+            title=Example,
+            axis lines = box,
+            xlabel = $x$,
+            ylabel = $y$,
+            variable = t,
+            trig format plots = rad,
+            ]
+            \addplot [
+                domain=-15:15,
+                samples=70,
+                color=blue,
+                ]
+                {sin(x)/x};
+            \addlegendentry{$\sin(x)/x$}
+            
+            \end{axis}
+            \end{tikzpicture}
+        \end{center}
+    \end{definition}
+    \begin{definition}
+        $f(x)$ has a ``absolute max on $[a,b]$ etc'' if $f(c) \ge f(x)$ for all $x\in[a,b]$
+    \end{definition}
+    \begin{definition}
+        $f(x)$ has a ``local max at $c$'' if $f(c) \ge f(x)$ for \textit{some} open interval containing $c$.
+    \end{definition}
+    \begin{theorem}
+        The \textbf{extreme value theorem} (EVT) says that given $f(x)$ is continuous on $[a,b]$, then $f(x)$ has an absolute maximum $f(c)$ and an absolute minimum $f(x)$ for some $c,d \in [a,b]$.
+        \vspace{2mm}
+
+        However, functions do not need to be continuous to have an absolute max.
+
+        \begin{proof}
+            The outline of the proof is as follows:
+            \begin{enumerate}
+                \item Prove all continuous functions on $[a,b]$ are \textbf{bounded}
+                \item Then prove all continuous functions on $[a,b]$ have a max and a min.
+            \end{enumerate}
+            Note that this is not the same thing! Remember that $\displaystyle f(x)=\frac{\sin x}{x}$ on $[-1,1]$ is bounded, but does not have an absolute maximum! However, this doesn't violate it since it's not continuous.
+            \vspace{2mm}
+
+            We will take (1) to be proven and just prove (2): Consider the set $S=\{f(x): a\le x\le b\}$. Since $S$ is a set of f-values from (1), $S$ is bounded above. By CORA, $\text{lub}(S)$ exists as a real number ,call it $M$. Therefore: $f(x) \le M$ for all $x\in [a,b]$
+            \vspace{2mm}
+
+            We now need to prove that there is some $c\ni[a,b]$ such that $f(c)=M$, i.e. $f(x)$ takes on the value $M$. We can prove this via contradiction:
+            \vspace{2mm}
+
+            Suppose $f(x)$ never equals $M$. We can then define:
+            \begin{equation}
+                g(x)\equiv \frac{1}{M-f(x)}
+                \label{eq:}
+            \end{equation}
+            Note that $g(x)>0$. (It cannot be negative since $M > f(x)$). Therefore, $g(x)$ is also continuous on $[a,b]$ by A.C.T, Q.C.T, and by the fact that $f(x)\neq M$.
+            \vspace{2mm}
+
+            Therefore $g(x)$ is also bounded above by part (1). There exists a number $K$ such that $0<g(x)\le K$ where $K>0$. Taking the inverse, we have:
+            \begin{align}
+                \frac{1}{K} &\le \frac{1}{g(x)} \\ 
+                \frac{1}{K} &\le M-f(x) \\ 
+                f(x) &\le M-\frac{1}{K}
+                \label{eq:}
+            \end{align}
+            This makes $M-\frac{1}{K}$ an upper bound of $S$. However, if $M$ is the least upper bound of $S$, this gives a contradiction.
+            \vspace{2mm}
+
+            Since there is a contradiction, there exists at least one $c\in [a,b]$ such that $f(c)=M$. Therefore, a maximum exists.
+        \end{proof}
+    \end{theorem}
+    \item Fermat's Theorem:
+    \begin{definition}
+        $c$ is a ``critical point'' of $f(x)$ if $f'(c)=0$ or $f'(c)$ DNE.
+    \end{definition}
+    \item We have to be careful however, suppose we look at $f(x)=x^2$ on $x\in [1,2]$. It is continuous by the polynomial C.T., and $f(2)=4$ is an absolute maximum of $f(x)$ in $[1,2]$. However, this doesn't violate Fermat's theorem since it's an absolute max, not a local max!
+    \item Another example is $f(x)=x^3$. We have $f'(0)=0$ but $f(0)$ is not a local max or min. We \textbf{cannot} reverse Fermat's theorem!
+    \begin{idea}
+        The motivation behind Fermat's theorem is as follows:
+        \begin{enumerate}
+                \item We often need to find local max, min.
+                \item But how can we?
+                \item It's usually easy to calculate $f'(x)$ and then find out where $f'(c)=0$ or DNE.
+                \item While these critical points are not necessarily local max, min, only local max, min points will be in this set.\footnote{Like using a net to catch fish. Not everything you catch will be the fish you want but the fish you want will be among it.}
+        \end{enumerate}
+    \end{idea}
+    \item This leads to a test for the absolute max/min on $[a,b]$. Given that $f(x)$ is continuous on $x\in [a,b]$. By the EVT there is an absolute max,min on $[a,b]$ for sure. Then, we can:
+    \begin{enumerate}
+        \item Find all $c_\text{crit}$ and $f(c_\text{crit})$.
+        \item Find $f(a)$, $f(b)$.
+        \item The largest of these number is absolute max, and the smallest is the absolute min.
+    \end{enumerate}
+    \begin{example}
+        Let $f(x)=(9-x^2)^{1/2}$ on $x\in[-1,2]$:
+        \begin{center}
+            \begin{tikzpicture}
+            \begin{axis}[
+            legend pos=outer north east,
+            title=Example,
+            axis lines = box,
+            xlabel = $x$,
+            ylabel = $y$,
+            variable = t,
+            trig format plots = rad,
+            ]
+            \addplot [
+                domain=-1:2,
+                samples=70,
+                color=blue,
+                ]
+                {(9-x^2)^0.5};
+            
+            \end{axis}
+            \end{tikzpicture}
+        \end{center}
+        We can find the derivative as:
+        \begin{equation}
+            f'(x)=\frac{1}{2}(9-x^2)^{-1/2}(-2x)
+            \label{eq:}
+        \end{equation}
+        using the chain rule, polynomial D.T., power D.T. \begin{enumerate}
+            \item We now look for when $f'(c)0=0$, which only happens when $f(0)=3$. When is it undefined? One might be tempted to say at $-3$ or $3$ but they aren't in the interval.
+            \item $f(-1)=\sqrt{8}$ and $f(2)=\sqrt{5}$
+            \item Therefore, the absolute maximum is $f(0)=3$ and the absolute minimum is $f(2)=\sqrt{5}$.
+        \end{enumerate}
+    \end{example}
+\end{itemize}

@@ -1,0 +1,80 @@
+\section{Lecture 9}
+\begin{itemize}
+    \item We want to define a new number $f'(a)$ where it is defined as:
+    \begin{equation}
+        f'(a) \equiv \lim_{h\to 0} \frac{f(a+h)-f(a)}{h}
+        \label{eq:}
+    \end{equation}
+    if it exists where $a \in$ domain of $f(x)$. Note this is known as the derivative of $f(x)$ evaluated at $x=a$.
+    \begin{example}
+        Determine the derivative of $f(x)=x^3$ at $a-1$. We can evaluate:
+        \begin{align}
+            f'(1)&=\lim_{h\to 0} \frac{f(1+h)-f(1)}{h} \\ 
+            &=\lim_{h\to 0} \frac{(1+h)^3-1}{h} \\
+            &= \lim_{h\to 0}\frac{1+3h+3h^2+h^3-1}{h} \\ 
+            &= \lim_{h\to 0}\frac{3h+3h^2+h^3}{h} \\ 
+            &= \lim_{h\to 0} (3+3h+h^2) & \text{provided that } h\neq 0 \\ 
+            &= 3 &\text{polynomial limit theorem}
+            \label{eq:}
+        \end{align}
+    \end{example}
+    \item $h$ disappears when evaluating the limit, as a result, it is known as a \textbf{dummy variable}.
+    \item The tangent line to the curve $f(x)$ at $x=a$ is given by the equation:
+    \begin{equation}
+        y_\text{tangent line}(x)\equiv f(a)+f'(a)(x-a)
+        \label{eq:}
+    \end{equation}
+    \item We can define average speed between $t_0$ and $t_0+h$ to be:
+    \begin{equation}
+        v_\text{avg} =\frac{s(t_0+h)-s(t_0)}{h}
+        \label{eq:}
+    \end{equation}
+    where $s(t)$ is the displacement. We can use our rigorous definition of the derivative to make a rigorous definition of ``speed at an instant $t_0$'' to be:
+    \begin{equation}
+        v(t_0) \equiv \lim_{h\to 0} \frac{s(t_0+h)-s(t_0)}{h}
+        \label{eq:}
+    \end{equation}
+    \item We can extend further and define a new \textit{function} $f'(x)$ such that:
+    \begin{equation}
+        f'(x) \equiv \lim_{h\to 0} \frac{f(x+h)-f(x)}{h}
+        \label{eq:}
+    \end{equation}
+    There are two variables here, but it is still rigorously defined since $h$ is still a dummy variable and it will still disappear after we evaluate the limit.
+    \begin{definition}
+        If $f'(a)$ exists we say $f(x)$ is differentiable at $a$.
+    \end{definition}
+    \begin{definition}
+        If $f'(a)$ is differentiable at all $x\in $ domain of $f(x)$, we can say that $f(x)$ is a differentiable function.
+    \end{definition}
+    \begin{example}
+        Let $f(x)=x^2$. Find $f'(x)$:
+        \begin{align}
+            f'(x) &= \lim_{h\to 0} \frac{(x+h)^2-x^2}{h} \\ 
+            &= \lim_{h\to 0} \frac{(x^2_2hx_h^2-x^2}{h} \\ 
+            &= \lim_{h\to 0} \frac{2hx+h^2}{h} \\ 
+            &= \lim_{h\to 0} (2x+h)
+        \end{align}
+        where we canceled as $h\neq 0$. This is a polynomial function of $h$ as far as $\lim_{h\to 0}$ is concerned! Therefore, by the polynomial limit theorem, we get:
+        \begin{equation}
+            f'(x) = 2x
+            \label{eq:}
+        \end{equation}
+    \end{example}
+    \begin{example}
+        Let $f(x)=x^n$. Prove that $f'(x)=nx^{n-1}$.
+        \begin{align}
+            f'(x) &= \lim_{h\to 0}\frac{(x+n)^n-x^n}{h} \\ 
+            &= \lim_{h\to 0} \frac{x^n+nx^{n-1}h+\binom{n}{2}x^{n-2}h^2+\cdots + \cdots + h^n-x^n}{h} \\ 
+            &=  \lim_{h\to 0} \frac{nx^{n-1}h+\binom{n}{2}x^{n-2}h^2+\cdots + \cdots + h^n}{h} \\ 
+            &= \lim_{h\to 0} nx^{n-1}+\binom{n}{2}x^{n-2}h+\cdots + \cdots + h^{n-1} \\ 
+            &= nx^{n-1}
+        \end{align}
+    \end{example}
+    Later we will show that this is true for any real number, and not just for positive integers.
+    \item Note that there are different notations. For example, the Leibniz notation gives us:
+    \begin{equation}
+        f'(x) \equiv \frac{df}{dx}
+        \label{eq:}
+    \end{equation}
+    
+\end{itemize}

@@ -1,0 +1,153 @@
+\section{Lecture 2: Calculus of Motion}
+\begin{itemize}
+    \item The position, velocity, and acceleration are related by derivatives and integrals.
+    \begin{equation}
+        x(t) \xrightarrow{\frac{d}{dt}} v(t) \xrightarrow{\frac{d}{dt}} a(t)
+        \label{eq:}
+    \end{equation}
+    \begin{equation}
+        x(t) \xleftarrow{\int \dd{t}} v(t) \xleftarrow{\int \dd{t}} a(t)
+        \label{eq:}
+    \end{equation}
+
+    \item Each quantity is consisted of certain dimensions that are not dependent on whether the quantity is a scalar or vector.
+    \begin{itemize}
+        \item Dimensions of length are represented by $L$.
+        \item Dimensions of time are represented by $T$.
+        \item Dimensions of mass are represented by $M$.
+    \end{itemize}
+    \begin{example}
+        Suppose $x(t)=2 \text{ m} + (3 \text{ m/s}^3)t^3$. What is $v(t)$?
+        \vspace{2mm}
+
+        We can take derivatives, and dropping the units, we get:
+        \begin{align}
+            v &= \frac{dx}{dt} \\ 
+            &= \frac{d}{dt}(2+3t^3) \\
+            &= 6t^2
+        \end{align}
+    \end{example}
+    \begin{example}
+        Let $v=3\text{ m/s}$. What is $x(t)$? suppose at $t=0$, we have $x=2 \text{ m}$.
+        \vspace{2mm}
+
+        To solve, we need to integrate with respect to time:
+        \begin{align}
+            x(t) &= \int 3 \dd{t} \\ 
+            &= 3t+C
+        \end{align}
+        We can determine the integration constant by plugging in the relationship $x(t=0)=3(0)+C$ which gives $C=2 \text{ m}$. Therefore:
+        \begin{equation}
+            x(t) = (3 \text{ m/s})t+2 \text{ m}
+            \label{eq:}
+        \end{equation}
+    \end{example}
+    \item A definite integral represents the area under a graph between two certain points. We can compare this to the indefinite integral 
+    \begin{equation}
+        F(t)=\int f(t) dt
+        \label{eq:}
+    \end{equation}
+    such that
+    \begin{equation}
+        \int_a^b \dd{t} = F(b)-F(a)
+        \label{eq:}
+    \end{equation}
+    known as the fundamental theorem of calculus
+    \begin{example}
+        Suppose $f = 5t^2$. What is $\int_{t=1}^{t=2} f(t) \dd{t}$?
+        \vspace{2mm}
+
+        We first integrate $f(t)$:
+        \begin{equation}
+            \int 5t^2 dt = \frac{5}{3}t^3 + C \equiv F(t)
+            \label{eq:}
+        \end{equation}
+        We then use the fundamental theorem of calculus:
+        \begin{equation}
+            F(2)-F(1)=\left(\frac{5}{3}2^3+\cancel{C}\right)-\left(\frac{5}{3}1^3+\cancel{C}\right)=\frac{35}{3}
+            \label{eq:}
+        \end{equation}
+    \end{example}
+    \item We can apply this to position, velocity, and acceleration. If we want to determine:
+    \begin{equation}
+        \int_{t_i}^{t_f} v(t) \dd{t} = F(t_f)-F(t_i) = x_f-x_i = \Delta x
+        \label{eq:}
+    \end{equation}
+    Similarly, the definite integral of acceleration gives the change in velocity:
+    \begin{equation}
+        \int_{t_i}^{t_f} a(t) \dd{t} = \Delta v(t)
+        \label{eq:}
+    \end{equation}
+    \item Similarly, there are several position functions $x(t)$ that lead to the same $v(t)$. Information is lost.
+    \item We can interpret these results graphically.
+    \begin{example}
+        Suppose we have the following $x(t)$ curve, we can draw the corresponding $v(t)$ curve:
+
+        \begin{center}
+            \begin{tikzpicture}
+            \begin{axis}[
+            legend pos=outer north east,
+            title=Position as a function of time,
+            axis lines = box,
+            xlabel = $x$,
+            ylabel = $y$,
+            variable = t,
+            trig format plots = rad,
+            ]
+            \addplot [
+                domain=0:1.5,
+                samples=70,
+                color=blue,
+                ]
+                {-4*x*(x-1)^3+1};            
+            \end{axis}
+            \end{tikzpicture}
+        \end{center}
+        \begin{center}
+            \begin{tikzpicture}
+            \begin{axis}[
+            legend pos=outer north east,
+            title=Position as a function of time,
+            axis lines = box,
+            xlabel = $x$,
+            ylabel = $y$,
+            variable = t,
+            trig format plots = rad,
+            ]
+            \addplot [
+                domain=0:1.5,
+                samples=70,
+                color=blue,
+                ]
+                {-1*(x-1)^3-3*(x-1)^2*x};  
+            
+            \draw[dotted,thick] (-0.15,0) -- (1.65,0);
+            \end{axis}
+            \end{tikzpicture}
+        \end{center}
+        Pay especially close attention to how the points line up when $v=0$.
+    \end{example}
+    \item We can go in the opposite direction as well by looking at how the area is changing via time graphically.
+    \item For the special case where $v(t)=v_0$, we can differentiate to get:
+    \begin{equation}
+        a(t) = \frac{dv}{dt}=\frac{d}{dt}v_0=0
+        \label{eq:}
+    \end{equation}
+    And integrate it to get:
+    \begin{equation}
+        \Delta x = \int_{t_i}^{t_f} v_0 \dd{t} = v_0 \Delta t \implies x(t)=v_0t+x_0
+    \end{equation}
+    \item Similarly we can take a constant acceleration $a(t)=a_0$ so that we can determine that:
+    \begin{equation}
+        v(t) = \int a_0 \dd{t} = a_0t+v_0
+        \label{eq:}
+    \end{equation}
+    and the position is given by:
+    \begin{equation}
+        x(t) = \int (a_0t+v_0) \dd{t} = \frac{1}{2}a_0t^2+v_0t+x_0
+        \label{eq:}
+    \end{equation}
+    
+    
+\end{itemize}
+% -1\left(x-1\right)^{3}-3\left(x-1\right)^{2}x

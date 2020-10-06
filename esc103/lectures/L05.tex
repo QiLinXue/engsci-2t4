@@ -1,0 +1,56 @@
+\section{Lecture 5}
+\begin{itemize}
+    \item Given $v$ and $w$, the definition of cross product gives:
+    \begin{equation}
+        \vec{u} = \vec{v}\times \vec{w} = \begin{bmatrix}
+            v_2w_3=v_3w+2 \\ v_3w_1 - v_1w_3 \\ v_1w_2 - v_2w_1
+        \end{bmatrix}
+        \label{eq:}
+    \end{equation}
+    which is perpendicular to both $\vec{v}$ and $\vec{w}$.
+    \item This is however, not the only orthogonal vector since any scalar multiple of $\vec{u}=\vec{v}\times \vec{w}$ will be orthogonal to both $\vec{v}$ and $\vec{w}$.
+    \item We can prove this orthogonal property by taking the dot product with both $\vec{v}$ and $\vec{w}$.
+    \item There are a few properties:
+    \begin{itemize}
+        \item Consider $3$ vectors, $\vec{v}$, $\vec{w}$, and $\vec{z}$. Then:
+        \begin{equation}
+            \vec{v}\times (\vec{w}+\vec{z}) = \vec{v} \times \vec{w} + \vec{v} \times \vec{z}
+            \label{eq:}
+        \end{equation}
+        \item The cross product is not commutative, but they are anti-commutative:
+        \begin{equation}
+            \vec{v}\times \vec{w} = -\vec{w}\times \vec{v}
+            \label{eq:}
+        \end{equation}
+        \item When crossed with the zero vector, we have:
+        \begin{equation}
+            \vec{v}\times \vec{0} = \vec{0}\times \vec{v} = \vec{0}
+            \label{eq:}
+        \end{equation}
+        \item When multiplied by a scalar,
+        \begin{equation}
+            c(\vec{v}\times\vec{w}) = (c\vec{v})\times \vec{w} = \vec{v}\times (c\vec{w})
+            \label{eq:}
+        \end{equation}
+    \end{itemize}
+    \begin{warning}
+        The cross product its \textbf{not} associative. In general:
+        \begin{equation}
+            \vec{v}\times (\vec{w}\times \vec{z}) \neq (\vec{v} \times \vec{w}) \times \vec{z}
+            \label{eq:}
+        \end{equation}
+    \end{warning}
+    \item The direction of $\vec{u}=\vec{v}\times \vec{w}$ can be easily determined using the right hand rule.
+    \item We can determine the magnitude to be $\lVert \vec{v} \rVert \lVert \vec{w} \rVert \sin\theta$ where $\sin\theta$ is the angle in between. The Lagrange identity shows that:
+    \begin{equation}
+        \lVert \vec{v} \times \vec{w} \rVert^2 = \lvert \vec{v} \rVert^2 \lvert \vec{w}\rVert^2 - (\vec{v}\cdot\vec{w})^2
+        \label{eq:}
+    \end{equation}
+    We can introduce the cosine formula to get:
+    \begin{equation}
+        \lVert \vec{v} \times \vec{w} \rVert^2 = \lvert \vec{v} \rVert^2 \lvert \vec{w}\rVert^2 - \lvert \vec{v} \rVert^2 \lvert \vec{w}\rVert^2\cos^2\theta = \lvert \vec{v} \rVert^2 \lvert \vec{w}\rVert^2(1-\cos^2\theta)
+        \label{eq:}
+    \end{equation}
+    Using the Pythagorean identity, we let $\sin^2\theta=1-\cos^2\theta$.
+    \item The cross product $\vec{v}\times \vec{w}$ has a magnitude equal to the area of the parallelogram defined by $\vec{v}$ and $\vec{w}$.
+\end{itemize}

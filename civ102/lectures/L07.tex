@@ -1,0 +1,53 @@
+\section{Lecture 7: Power of Springing Bodies}
+\begin{itemize}
+    \item The force from an elastic spring is linear with respect to the disturbance:
+    \begin{equation}
+        |F|=k|\Delta x|
+        \label{eq:}
+    \end{equation}
+    \item When a spring is perturbed from its equilibrium position, it will oscillate back and forth:
+    \begin{center}
+        \begin{tikzpicture}
+        \begin{axis}[
+        legend pos=outer north east,
+        title=Oscillation of a Spring,
+        axis lines = box,
+        xlabel = $x$,
+        ylabel = $y$,
+        variable = t,
+        trig format plots = rad,
+        ]
+        \addplot [
+            domain=0:10,
+            samples=70,
+            color=blue,
+            ]
+            {cos(x)};
+        \addlegendentry{$\cos(x)$}
+        \draw[dotted] (0,0) -- (10,0);
+        \draw[dotted] (6.28,0) -- (6.28,1) node[midway,left] {$A$};
+        \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    and the period is given by:
+    \begin{equation}
+        T=2\pi\sqrt{\frac{m}{k}}
+        \label{eq:}
+    \end{equation}
+    \item The differential equation is given by:
+    \begin{equation}
+        \frac{d^2y}{dt^2} = -\frac{k}{m}y-g
+        \label{eq:}
+    \end{equation}
+    and comes from Newton's second law. The solution to this equation gives:
+    \begin{equation}
+        y=A\cos\left(\sqrt{\frac{k}{m}}t\right)
+        \label{eq:}
+    \end{equation}
+    \item The natural frequency is given by:
+    \begin{equation}
+        f=\frac{1}{T}=\frac{1}{2\pi}\sqrt{\frac{k}{m}}
+        \label{eq:}
+    \end{equation}
+    
+\end{itemize}

@@ -1,0 +1,133 @@
+\section{Lecture 2}
+\begin{itemize}
+    \item Numbers are \textit{bases} elements of mathematics, so they cannot be defined explicitly in terms of anything more basic. \item Instead they are defined \textit{implicitly}, by imposing the rules, or \textbf{axioms}, that we require they satisfy.
+    \begin{idea}
+        The axioms are \textit{inspired} by physical reality, but are not \textit{dictated by it}. They do not exist
+    \end{idea}
+    \item It is important to have as few axioms as possible (to make it philosophically more ``pure'', and to reduce the risk of contradictions:
+    \begin{enumerate}
+        \item \textbf{Commutative Law}: For each pair $x,y\in \Re$,
+        \begin{equation}
+            x+y=y+x
+            \label{eq:}
+        \end{equation}
+        and
+        \begin{equation}
+            xy=yx
+            \label{eq:}
+        \end{equation}
+        \item \textbf{Associative Law}: For each triple $x,y,z \in\Re$,
+        \begin{equation}
+            x+(y+z)=(x+y)+z
+            \label{eq:}
+        \end{equation}
+        and
+        \begin{equation}
+            (xy)z=z(yz)
+            \label{eq:}
+        \end{equation}
+        \item \textbf{Distributive Law} For each triple $x,y,z \in \Re$,
+        \begin{equation}
+            x(y+z)=zy+yz
+            \label{eq:}
+        \end{equation}
+        and
+        \begin{equation}
+            (x+y)z=xz+yz
+            \label{eq:}
+        \end{equation}
+        \item \textbf{Existence of Identities}: There exists two distinct real numbers, denoted by $0$ and $1$ for which:
+        \begin{equation}
+            x+0=0+x=x
+        \end{equation}
+        and
+        \begin{equation}
+            x\cdot 1 = 1\cdot x=x
+            \label{eq:}
+        \end{equation}
+        for each $x\in \Re$.
+        \item \textbf{Existence of inverses} For each $x \in \Re$, there exists a unique additive inverse which we denote by $-x$ for which
+        \begin{equation}
+            x+(-x)=(-x)+x=0
+            \label{eq:}
+        \end{equation}
+        For each $x\neq 0$ in $\Re$, there exists a unique multiplactive inverse, which we denote by $x^{-1}$ or $1/x$ for which:
+        \begin{equation}
+            x\cdot \left(x^{-1}\right) = \left(x^{-1}\right)\cdot x=1.
+            \label{eq:}
+        \end{equation}
+        
+        
+    \end{enumerate}
+    \item It's not important to restrict the number of \textbf{definitions}, which are built from axioms, but it gets messy if we make more definitions that are really needed. (e.g. $4 \equiv 3+1$)
+    \begin{definition}
+        \textbf{Positive integers} are the ``natural numbers'': $1,2,3,\dots$ Note that:
+        $$2 \equiv 1+1$$
+        and so forth.
+    \end{definition}
+    \begin{definition}
+        \textbf{Rational numbers} are in the form of:
+        $$\frac{a}{b} \equiv a \cdot \frac{1}{b}$$
+        where $a$, $b$, are integers are $b \neq 0$. Note that this uses axiom 5 with the definition of fractions to create rational numbers.
+    \end{definition}
+    \item There is no limit to the number of theorems. We can and should prove all \textit{arithmetic} and \textit{algebraic} theorems rigorously logically, starting from the Axioms (e.g. $4=2+2$).
+    \begin{example}
+        Let us prove $\sqrt{2}$ is irrational by contradiction. Suppose there is a pair of integers: $a$, $b$, such that:
+        $$\left(\frac{a}{b}\right)^2=2$$
+        where all common factors have been removed.Therefore:
+        \begin{align}
+            \therefore\,& a^2=2b^2 \\ 
+            \therefore\,&a^2 \equiv 0 \pmod{2} \\ 
+            \therefore\,&a \equiv 0 \pmod{2} \\ 
+        \end{align}
+        We can write $a=2q$ where $q$ is some integer such that:
+        \begin{align}
+            \therefore\,& a^2=4q^2 \\ 
+            \therefore\,& 4q^2 = 2b^2 \\ 
+            \therefore\,& b^2 = 2q^2 \\ 
+            \therefore\,& b^2 \equiv 0 \pmod{2} \\ 
+            \therefore\,& b \equiv 0 \pmod{2}
+        \end{align}
+        However, since $a$ and $b$ are both even, we have contradicted our statement that all common factors have been removed. Thus $\sqrt{2}$ cannot be rational and can only be irrational.
+    \end{example}
+    \item However, the 5th field axiom only discusses the creation of rational numbers. We could simply add a ``root 2 axiom'' to create $\sqrt{2}$, just like we did for $0$ and $1$.
+    \vspace{2mm}
+
+    \item This is super messy because it would imply we'd need another axiom for every irrational, including every root of every \textbf{polynomial function}:
+        \begin{equation}
+            P_n(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0
+            \label{eq:}
+        \end{equation}
+    where $a$ can be any specified number and $n$ is a positive integer. If we set $P_n(x)=0$, we get a polynomial equation where we can find the roots.
+    \begin{definition}
+        If $z$ is a root of $p_n(x)$ then $p_n(z)=0$.
+    \end{definition}
+    There are $n$ roots\footnote{Per the fundamental theorem of algebra, which is beyond the scope of this course}, most are irrational and are called \textbf{algebraic numbers}.
+    \item To prevent creating numerous new axioms, we create a new axiom called \textbf{CORA}: Completeness of the Reals Axiom, which tells us that every non-empty set of real numbers that is bounded above has a least upper bound among the real numbers.
+    \begin{definition}
+        A set of real numbers, $\mathbb{S}$ is bounded above if and only if there exists some number $M$ such that $x \le M$ for all $x \in \mathbb{S}$. For example:
+        \begin{equation}
+            \mathbb{S}_1=\{1,3,\frac{17}{5},211\}
+            \label{eq:}
+        \end{equation}
+        Here, $M=211$ or $250$, etc. We can write the first upper bound as:
+        \begin{equation}
+            \mathrm{ub}\mathbb{S}_1=211
+            \label{eq:}
+        \end{equation}
+    \end{definition}
+    \begin{definition}
+        The least upper bound is the smallest of all the upper bounds. Here:
+        \begin{equation}
+            \mathrm{lub}\mathbb{S}_1=211
+            \label{eq:}
+        \end{equation}
+    \end{definition}
+    \item Note that we \textbf{do not} require that $\mathrm{lub}\mathbb{S} \in \mathbb{S}$ necessarily. For example, if:
+    \begin{equation}
+        \mathbb{S}_2 = \{x:x^2<2\}
+        \label{eq:}
+    \end{equation}
+    There are several upper bounds in this set, but is there a least upper bound? We may think intuitively it is $\sqrt{2}$, but we have to be careful! We haven't proved it exists yet. \textbf{However,} CORA has \textit{creates} this new number, $\sqrt{2}$, by demanding that it exists.\footnote{However, proving that the lower upper bound is $\sqrt{2}$ is rather tricky and was removed from the supplement.}
+    \item Additionally, CORA does the same for all \textbf{algebraic irrationals} and \textbf{transcendental irrationals}. Without CORA, there would be no irrational numbers!
+\end{itemize}

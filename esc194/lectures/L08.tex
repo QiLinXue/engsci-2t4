@@ -1,0 +1,83 @@
+\section{Lecture 8}
+\begin{itemize}
+    \item A ``continuous function'' is intuitively clear, but how do we define it rigorously?
+    \begin{definition}
+        $f(x)$ is ``continuous at $c$'' if
+        \begin{equation}
+            \lim_{x\to c}f(x)=f(c)
+            \label{eq:}
+        \end{equation}
+    \end{definition}
+    \begin{definition}
+        A function $f(x)$ is discontinuous at $c$ if it is not continuous.
+    \end{definition}
+    \item There are various types of discontinuity:
+    \begin{itemize}
+        \item \textbf{Jump Discontinuity-} For example:
+        \begin{equation}
+            f(x)=\frac{|x|}{x}
+            \label{eq:}
+        \end{equation}
+        \item \textbf{Removable Discontinuity-} For example:
+        \item Discontinuity because either $f(c)$ DNE or $\displaystyle \lim_{x\to c} f(x)$ DNE, or both.
+    \end{itemize}
+    \item There are also continuity theorems.
+    \begin{theorem}
+        If $f(x)$ is continuous at every $x\in[a,b]$, then $f(x)$ is integrable on $[a,b]$ i.e. $\int_a^b f(x) \dd{x}$ exists.
+    \end{theorem}
+    \begin{theorem}
+        Given $f$, $g$ is continuous at $a$, then $f(x)+g(x)$ is continuous at $a$.
+    \end{theorem}
+    \begin{prooof}
+        Apply the additivity L.T lmao.
+    \end{prooof}
+    \item There is also such a thing as a one-sided continuity.
+    \begin{definition}
+        $f(x)$ is continuous on the right at $c$ if $\displaystyle\lim_{x\to c^+}f(x)=f(c)$.
+    \end{definition}
+    \item amd for an interval.
+    \begin{definition}
+        $f(x)$ is continuous on $(a,b)$ iff $f(x)$ is continuous at all $x \in (a,b)$.
+    \end{definition}
+    \begin{definition}
+        $f(x)$ is continuous on $[a,b]$ iff $f(x)$ is continuous on $(a,b)$ and $f(x)$ is continuous from the right of $a$ and from the left of $b$.
+    \end{definition}
+    \begin{theorem}
+        If $g(x)$ is continuous at $a$ and $f(x)$ is continuous at $g(a)$, then $f(g(x))$ is continuous at $a$.
+    \end{theorem}
+    \item We can now introduce the \textbf{Intermediate Value Theorem}. Recap: We simply want there to be a number $q$ such that $q\cdot q=2$, i.e. $\sqrt{2}$ exists. We proved such a number does not exist among the rationals. So we imposed a new axiom CORA and then defined:
+    \begin{equation}
+        \sqrt{2}=\text{lub}\{x:x^2<2\}
+        \label{eq:}
+    \end{equation}
+    which CORA guarantees exists as a real number. This however doesn't tell us that $\sqrt{2}\cdot\sqrt{2}=2$, but we want to use this result. How can we rigorously prove that:
+    \begin{equation}
+        [\text{lub}\{x:x^2<2\}]\cdot [\text{lub}\{x:x^2<2\}] = 2
+        \label{eq:}
+    \end{equation}
+    \begin{theorem}
+        \begin{enumerate}
+            \item Given that $f(x)$ is continuous on $[a,b]$
+            \item $C$ is some number such that $f(a)<G(a)<f(b)$.
+            \item There exists some $C$ in $[a,b]$ such that $f(C)=G$.
+        \end{enumerate}
+    \end{theorem}
+    \item The point of the IVT is that continuous functions don't skip over any $y$ values. Note that this is a property that intuitively we want continuous functions to have.
+    \begin{example}
+        Prove that there is a number $c$ such that $c\cdot c=2$ using IVT rather than CORA directly.
+        \vspace{2mm}
+
+        Consider $f(x)=x^2$ on $[1,2]$. It is easy to show that $f(x)$ is continuous on $[1,2]$ per the polynomial continuous theorem. Here $f(1)=1$ and $f(2)=4$. Note that $1<2<4$ so $f(1)<2<f(2)$.
+        \vspace{2mm}
+        
+        The IVT shows that there must be some number $c$ where $1<c<2$ in this interval such that $f(c)=c\cdot c=2$. 
+    \end{example}
+    Note that if reals consisted of rationals only, then the IVT would not be true!
+    \item Logically we could have started with the IVA (Intermediate Value Axiom) and used it to prove CORT (Completeness of Reals Theorem). But this would be messy: we would need to define functions before we had finished defining numbers.
+    \begin{example}
+        Prove there's at least one root of $x^{17}+1=3x$ in $[0,1]$.
+        \vspace{2mm}
+
+        Define $f(x)=x^{17}+1-3x$. $f(x)$ is continuous by polynomial continuity theorem. $f(0)=1$ and $f(1)=-1$, so $f(0)>0>f(1)$. By IVT there is some $c$ in $(0,1)$ such that $f(c)=0$. Therefore $c$ is a root of this equation.
+    \end{example}
+\end{itemize}

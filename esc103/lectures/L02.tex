@@ -1,0 +1,236 @@
+\section{Lecture 2}
+\begin{itemize}
+    \item The heart of linear algebra are \textbf{linear combinations}. Let $c$ and $d$ be scalars. Then:
+    \begin{equation}
+        c\vec{v} + d\vec{w}
+        \label{eq:}
+    \end{equation}
+    is a linear combination (LC) of $\vec{v}$ and $\vec{w}$.
+    \item For vectors in three-dimensional ($\mathbb{R}^3$)
+    \begin{center}
+        \tdplotsetmaincoords{60}{120} 
+\begin{tikzpicture} [scale=3, tdplot_main_coords, axis/.style={->,blue,thick}, 
+vector/.style={-stealth,black,very thick}, 
+vector guide/.style={dashed,red,thick}]
+
+%standard tikz coordinate definition using x, y, z coords
+\coordinate (O) at (0,0,0);
+
+%tikz-3dplot coordinate definition using x, y, z coords
+
+\pgfmathsetmacro{\ax}{0.8}
+\pgfmathsetmacro{\ay}{0.8}
+\pgfmathsetmacro{\az}{0.8}
+
+\coordinate (P) at (\ax,\ay,\az);
+
+%draw axes
+\draw[axis] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
+\draw[axis] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+\draw[axis] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
+
+%draw a vector from O to P
+\draw[vector] (O) -- (P) node[right] {$v=\begin{bmatrix}
+    v_1\\v_2\\v_3
+\end{bmatrix}$};
+
+%draw guide lines to components
+\draw[vector guide]         (O) -- (\ax,\ay,0);
+\draw[vector guide] (\ax,\ay,0) -- (P);
+\draw[vector guide]         (P) -- (0,0,\az);
+\draw[vector guide] (\ax,\ay,0) -- (0,\ay,0);
+\draw[vector guide] (\ax,\ay,0) -- (0,\ay,0);
+\draw[vector guide] (\ax,\ay,0) -- (\ax,0,0);
+\end{tikzpicture}
+    % \begin{tikzpicture}[x=1cm, y=1cm, z=-0.6cm]
+    %     % Axes
+    %     \draw [->] (0,0,0) -- (4,0,0) node [right] {$x$};
+    %     \draw [->] (0,0,0) -- (0,4,0) node [left] {$y$};
+    %     \draw [->] (0,0,0) -- (0,0,4) node [left] {$z$};
+    %     % Vectors
+    %     \draw [->, thick] (0,0,0) -- (2,2,1);
+    %     % Ticks
+    %     \foreach \i in {1,2}
+    %     {
+    %     \draw (-0.1,\i,0) -- ++ (0.2,0,0);
+    %     \draw (\i,-0.1,0) -- ++ (0,0.2,0);
+    %     \draw (-0.1,0,\i) -- ++ (0.2,0,0);
+    %     }
+    %     % Dashed lines
+    %     \draw [loosely dashed]
+    %         (0,0,0) -- (2,0,0)
+    %         (2,0,0) -- (2,2,0)
+    %         (2,2,0) -- (2,2,1)
+    %         ;
+    %     % Labels
+    %      \node [right] at (2,2,1) {$\vec{v}=\begin{bmatrix}
+    %                                 2\\2\\1
+    %                                \end{bmatrix}$};
+    % \end{tikzpicture}
+    \end{center}
+    \item The \textbf{transpose} of a matrix changes swaps the $ig$ index with the $ji$ index such that:
+    \begin{equation}
+        \begin{bmatrix}
+            v_1&v_2&v_3
+        \end{bmatrix}^T = \begin{bmatrix}
+            v_1\\v_2\\v_3
+        \end{bmatrix}
+        \label{eq:}
+    \end{equation}
+    \item Addition, subtraction, and multiplication with scalars behave in the same ways.
+    \item There are a few properties that vectors behave:
+        \begin{itemize}
+            \item The \textbf{commutative property} says that:
+            \begin{equation}
+                \vec{v}+\vec{w}+\vec{w+\vec{v}}
+                \label{eq:}
+            \end{equation}
+            \item The \textbf{associative property} says that;
+            \begin{equation}
+                \vec{v}+\vec{w}+\vec{z}=(\vec{v}+\vec{w})+\vec{z}=\vec{v}+(\vec{w}+\vec{z})
+                \label{eq:}
+            \end{equation}
+            
+        \end{itemize}
+    \item To introduce \textbf{vector spaces}, suppose we have three vectors $\vec{v}$, $\vec{w}$, $\vec{z}$ and three scalars $c$, $d$, $e$.
+    \begin{itemize}
+        \item Linear combinations of just $c\vec{v}$ gives a one-dimensional line given that $c\neq 0$.
+        \begin{center}
+            \begin{tikzpicture}[x=1cm, y=1cm]
+                Axes
+                \draw [<->] (-3,0) -- (3,0) node [at end, right] {$x$};
+                \draw [<->] (0,-3) -- (0,3) node [at end, left] {$y$};
+                % node[below] {$O$}
+    
+                % Vectors
+                \foreach \x in {-3,-2.5,...,3}
+                \draw [->, thick] (0,0) -- (\x,0.5*\x);
+            \end{tikzpicture}
+        \end{center}
+        \item Linear combination of $c\vec{v}+d\vec{w}$ given that $\vec{v}$ and $vec{w}$ are not parallel (not colinear) give a plane:
+        \begin{center}
+            \tdplotsetmaincoords{60}{120} 
+    \begin{tikzpicture} [scale=4, tdplot_main_coords, axis/.style={->,blue,very thick}, 
+    vector/.style={-stealth,black}]
+    
+    %standard tikz coordinate definition using x, y, z coords
+    \coordinate (O) at (0,0,0);
+    
+    %tikz-3dplot coordinate definition using x, y, z coords
+    \foreach \x in {-0.4,-0.3,...,1.2}
+        \foreach \y in {-0.4,-0.3,...,1.2}{
+            \pgfmathsetmacro{\ax}{\x}
+            \pgfmathsetmacro{\ay}{\y}
+            \pgfmathsetmacro{\az}{0.7}
+            \coordinate (P) at (\ax,\ay,\az);
+            \draw[vector] (O) -- (P);
+        }
+    
+
+
+    %draw axes
+    \draw[axis] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
+    \draw[axis] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+    \draw[axis] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
+    
+    %draw a vector from O to P
+    
+    \end{tikzpicture}
+    \end{center}
+    \item The linear combinations of $c\vec{v}$+$d\vec{w}$+$e\vec{z}$ where the vectors are not coplanar (lie on the same plane) give all of $\mathbb{R}^3$.
+    \begin{center}
+        \tdplotsetmaincoords{60}{120} 
+\begin{tikzpicture} [scale=4, tdplot_main_coords, axis/.style={->,blue,very thick}, 
+vector/.style={-stealth,black}]
+
+%standard tikz coordinate definition using x, y, z coords
+\coordinate (O) at (0,0,0);
+
+%tikz-3dplot coordinate definition using x, y, z coords
+\foreach \x in {0,0.1,...,1}
+    \foreach \y in {0,0.1,...,1}
+    \foreach \z in {0,0.1,...,1}{
+        \coordinate (P) at (\x,\y,\z);
+        \draw[vector] (O) -- (P);
+    }
+
+
+
+%draw axes
+\draw[axis] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
+\draw[axis] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+\draw[axis] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
+
+\end{tikzpicture}
+\end{center}
+\end{itemize}
+\item The length of a vector of $\vec{v}$ in $\mathbb{R}^N$ is given by:
+\begin{equation}
+    \lVert v \rVert = \sqrt{v_1^2+v_2^2+\cdots+v_N^2}
+    \label{eq:}
+\end{equation}
+
+\begin{prooof}
+    We prove via induction. Suppose:
+    \begin{equation}
+        \lVert v \rVert = \sqrt{v_1^2+v_2^2+\cdots+v_N^2}
+        \label{eq:}
+    \end{equation}
+    is true. We now prove that this is true for $\lVert w \rVert$ as well where $w$ is in $\mathbb{R}^{N+1}$. We can write:
+    \begin{equation}
+        \vec{v'}=\begin{bmatrix}
+            v_1\\v_2\\v_3\\ \ddots \\ v_N \\ 0
+        \end{bmatrix} ,\, 
+        \vec{v''}=\begin{bmatrix}
+            v_1\\v_2\\ v_3 \\ \ddots \\ v_{N-1} \\ v_N
+        \end{bmatrix}
+        ,\, \vec{v'''}=\begin{bmatrix}
+            0\\0\ 0 \\ \ddots \\ 0 \\ v_N
+        \end{bmatrix}
+        \label{eq:}
+    \end{equation}
+    Since these two are orthogonal, we can use Pythagorean theorem:
+    \begin{equation}
+        \lVert\vec{v''}\rVert=\sqrt{(\lVert\vec{v'}\rVert)^2+(\lVert\vec{v'''}\rVert)^2}
+        =\sqrt{v_1^2+v_2^2+\cdots+v_{N-1}^2}
+        \label{eq:}
+    \end{equation}
+    Since this is true for $N=2$, this must be true for all $N$.
+\end{prooof}
+\item A few properties of the absolute magnitude:
+    \begin{itemize}
+        \item When multiplied by a scalar:
+        \begin{equation}
+            \lVert c\vec{v} \rVert = c\lvert \vec{v}\rvert
+            \label{eq:}
+        \end{equation}
+        \item When the magnitude is zero:
+        \begin{equation}
+            \lVert \vec{v} \rVert = 0 \iff \vec{v}=\vec{0}
+            \label{eq:}
+        \end{equation}
+    \end{itemize}
+\item A \textbf{unit vector} is any vector with length equal to one. The most famous ones:
+    \begin{equation}
+        \vec{i}= \begin{bmatrix}
+            1\\0\\0
+        \end{bmatrix} ,\,
+        \vec{j}=\begin{bmatrix}
+            0\\1\\0
+        \end{bmatrix},\,
+        \vec{k}=\begin{bmatrix}
+            0\\0\\1
+        \end{bmatrix}
+    \end{equation}
+    \item To turn any vector $\vec{v}$ into a unit vector, we can multiply it by the scalar $\frac{1}{\lVert \vec{v} \rVert}$.
+    \item Suppose we wish to find the distance between $P_1$ and $P_2$, we can use the following steps:
+    \begin{enumerate}
+        \item Define a coordinate system and orient the vectors in the given system. Draw a diagram.
+        \item We can write the linear combination algebraically:
+        \begin{equation}
+            \overrightarrow{OP_1}+\overrightarrow{P_1P_2} = \overrightarrow{OP_2} \implies \overrightarrow{P_1P_2}=\overrightarrow{OP_2}-\overrightarrow{OP_1}
+            \label{eq:}
+        \end{equation}
+        \item We can then solve for $\lVert\overrightarrow{P_1P_2}\rVert$ and we are done.
+    \end{enumerate}
+\end{itemize}

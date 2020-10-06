@@ -1,0 +1,111 @@
+\section{Lecture 4: Projections}
+\begin{itemize}
+    \item For two nonzero vectors $\vec{v}$ and $\vec{w}$ such that:
+    \begin{equation}
+        \vec{v}\cdot\vec{w}=0\implies \cos\theta=0\implies \theta=\frac{\pi}{2}
+        \label{eq:}
+    \end{equation}
+    If $\vec{v}$ and/or $\vec{w}$ is the zero vector,
+    \begin{equation}
+        \vec{v}\cdot\vec{w}=0
+        \label{eq:}
+    \end{equation}
+    is also true.
+    \begin{definition}
+        $\vec{v}$ and $\vec{w}$ are orthogonal if and only if $\vec{v}\cdot\vec{w}=0$.
+    \end{definition}
+    \item Projections are what we use to define points in 2-d and 3-d. For example:
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (0,0) -- (5,0) node[right] {$x$};
+            \draw[->] (0,0) -- (0,5) node[right] {$y$};
+
+            \draw[thick,->] (0,0) -- (3,4) node[right] {$(v_1,v_2)$};
+            \draw[dotted] (0,4) node[left] {$(0,v_2)$} -- (3,4);
+            \draw[dotted] (3,0) node[below] {$(v_1,0)$} -- (3,4);
+
+            \draw[very thick,->] (0,0) -- (1,0) node[midway,below] {$\vec{i}=\begin{bmatrix}
+                1\\0
+            \end{bmatrix}$};
+            \draw[very thick,->] (0,0) -- (0,1) node[midway,left] {$\vec{j}=\begin{bmatrix}
+                1\\0
+            \end{bmatrix}$};
+
+            \draw[thick,->] (0,0) -- (0,3);
+            \draw[thick,->] (0,0) -- (4,0);
+        \end{tikzpicture}
+    \end{center}
+    We can write $\vec{v}=\begin{bmatrix}
+        v_1\\v_2
+    \end{bmatrix}$ as:
+    \begin{align}
+        \vec{v} &= v_1\vec{i}+v_2\vec{j} \\ 
+        &= v_1\begin{bmatrix}
+            1\\0
+        \end{bmatrix} + v_2\begin{bmatrix}
+            0\\ 1
+        \end{bmatrix}
+        \\ 
+        &= \begin{bmatrix}
+            v_1\\v_2
+        \end{bmatrix}
+    \end{align}
+    \item Let's generalize this concept to project one vector $\vec{w}$ on another vector $\vec{v}$
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[thick,->] (0,0) -- (8,2) node[right] {$\vec{v}$};
+            \draw[thick,->] (0,0) -- (3,3) node[right] {$\vec{w}$};
+            \draw[very thick,->] (0,0) -- (3.53,0.88) node[midway,below] {$\vec{u}$};
+            \draw[dotted] (3,3) -- (3.53,0.88);
+        \end{tikzpicture}
+    \end{center}
+    We can say that: $\vec{u}$ is the projection of $\vec{w}$ on $\vec{v}$. Based on the way we have constructed $\vec{u}$ we know it has certain properties:
+    \begin{itemize}
+        \item $\vec{u}$ is parallel to $\vec{v}$, so it can be expressed as a multiple of $\vec{v}$ such that:
+        \begin{equation}
+            \vec{u}=c\vec{v}
+            \label{eq:}
+        \end{equation}
+        where $c$ is a scalar.
+        \item We can say that $\vec{w}-\vec{u}$ (and by extension $\vec{u}-\vec{w}$) is orthogonal to $\vec{v}$:
+        \begin{equation}
+            (\vec{w}-\vec{u})\cdot \vec{v}=0
+            \label{eq:}
+        \end{equation}
+    \end{itemize}
+    Using these two properties, we can solve for the unknown $c$:
+    \begin{align}
+        (\vec{w}-\vec{u})\cdot \vec{v} &= 0 \\
+        \vec{w}\cdot\vec{v}-\vec{u}\cdot\vec{v} &= 0 \\
+        \vec{w}\cdot\vec{v}-(c\vec{v})\cdot\vec{v} &= 0 \\ 
+        \vec{w}\cdot\vec{v}-c\left(\vec{v}\cdot\vec{v}\right) = 0 
+    \end{align}
+    Solving for $c$ gives:
+    \begin{equation}
+        c=\frac{\vec{w}\cdot\vec{v}}{\vec{v}\cdot\vec{v}}
+        \label{eq:}
+    \end{equation}
+    so we have:
+    \begin{equation}
+        \boxed{\vec{u}=\frac{\vec{w}\cdot\vec{v}}{\vec{v}\cdot\vec{v}}\vec{v}}
+        \label{eq:}
+    \end{equation}
+    \begin{definition}
+        The projection of $\vec{w}$ on $\vec{v}$ can be written as:
+        \begin{equation}
+            \vec{u}=\text{proj}_{\vec{v}}\vec{w}
+            =
+            \frac{\vec{w}\cdot\vec{v}}{\vec{v}\cdot\vec{v}}\vec{v}
+            = \frac{\vec{w}\cdot\vec{v}}{\lVert \vec{v} \rVert^2} \vec{v}
+            = \frac{\vec{w}\cdot\vec{v}}{\lVert \vec{v} \rVert} \frac{1}{\lVert\vec{v}\rVert}\vec{v}
+            \label{eq:}
+        \end{equation}
+        where the last part $\frac{1}{\lVert\vec{v}\rVert}\vec{v}$ is a unit vector pointing in the direction of $\vec{v}$.
+    \end{definition}
+    \item Suppose we wish to project a vector $\vec{v}$ onto another vector (e.g. z-axis) in three dimensions. \textit{The same formula applies.}
+    \item Suppose instead we wish to project $\vec{v}$ on a plane, such as the xy plane? If $\vec{v}=\begin{bmatrix}
+        v_1\\v_2\\v_3
+    \end{bmatrix}$. Then the projection would be $\begin{bmatrix}
+        v_1\\v_2\\0
+    \end{bmatrix}$.
+\end{itemize}

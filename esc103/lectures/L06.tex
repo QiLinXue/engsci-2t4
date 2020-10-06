@@ -1,0 +1,65 @@
+\section{Lecture Six: Equations of Points, Lines, Planes}
+\begin{itemize}
+    \item For a line in three dimensions through the origin, we can write a point on this line as:
+    \begin{equation}
+        \begin{bmatrix}
+            x\\y\\z
+        \end{bmatrix} = c\vec{d}
+        \label{eq:}
+    \end{equation}
+    where $c$ is a scalar and $\vec{d}$ is any nonzero vector that is parallel to the line.
+    \item For a line not through the origin, a point on this line can be expressed as:
+    \begin{equation}
+        \begin{bmatrix}
+            x\\y\\z
+        \end{bmatrix} = \begin{bmatrix}
+            x_0\\y_0\\z_0
+        \end{bmatrix} + c\vec{d}
+        \label{eq:}
+    \end{equation}
+    where $P_0(x_0,y_0,z_0)$ is a known point on the line. 
+    \item We can take the 2D line equation $y=mx+b$ and write it as a two dimensional  vector equation:
+    \begin{equation}
+        \begin{bmatrix}
+            x \\ y
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            0 \\ b
+        \end{bmatrix}
+        +
+        c\begin{bmatrix}
+            1 \\ m
+        \end{bmatrix}
+        \label{eq:}
+    \end{equation}
+    \item For a point on a plane that passes through the origin, we can use linear combinations of $\vec{d_1}$ and $\vec{d_2}$ where both are parallel to the plane:
+    \begin{equation}
+        \begin{bmatrix}
+            x\\y\\z
+        \end{bmatrix} = c\vec{d_1} + d\vec{d_2}.
+    \end{equation}
+    If the plane was not in the origin, we can write it as:
+    \begin{equation}
+        \begin{bmatrix}
+            x\\y\\z
+        \end{bmatrix} = \begin{bmatrix}
+            x_0\\y_0\\z_0
+        \end{bmatrix} + c\vec{d_1} + d\vec{d_2}.
+    \end{equation}
+    \item A generic normal vector $\vec{n}=\begin{bmatrix}
+        a\\b\\c
+    \end{bmatrix}$ parallel to a line $\overrightarrow{P_0P}$ can be written as:
+    \begin{equation}
+        \overrightarrow{P_0P} \cdot \vec{n} = 0
+        \label{eq:}
+    \end{equation}
+    which can be represented as:
+    \begin{equation}
+        \begin{bmatrix}
+            x-x_0\\y-y_0\\z-z_0
+        \end{bmatrix} \cdot \begin{bmatrix}
+            a\\b\\c
+        \end{bmatrix}
+    \end{equation}
+\end{itemize}

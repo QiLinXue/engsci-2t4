@@ -1,0 +1,24 @@
+\section{Lecture 5}
+\begin{itemize}
+    \item We want to rigorously create the rigorous definition of a limit. For example, how does one show that for a function such as equation (\ref{eq:10x+5x^2}), that the limit:
+    \begin{equation}
+        \lim_{x\to 0} f(x)
+        \label{eq:}
+    \end{equation}
+    does exist.
+    \begin{idea}
+        We need to build a rigorous ``test-definition'' for the new number $\displaystyle \lim_{x\to c} f(x)$. We need to be given:
+        \begin{enumerate}
+            \item $c$, some particular $x$ value
+            \item $f(x)$ which may not exist \textit{at} $c$, but $f(x)$ \emph{is} defined for \textbf{all} $x$ \textit{near} $c$.
+            \item A guess or candidate for $\displaystyle \lim_{x\to c}f(x)$ which we call $L$
+        \end{enumerate}
+        It is then imposed on you some positive number $\epsilon>0$, which may be extremely small but never zero. Note that we are not told this exact value for $\epsilon$ and will have to allow for \textit{any} $\epsilon>0$.
+        \vspace{2mm}
+
+        The challenge-test is: ``Can you find some number $\delta>0$\footnote{Here $\delta$oggy $\delta$oggy!}, such that for all $x$'s in the $x-band$, (i.e. in the set $0<|x-c|<\delta$) the corresponding values of $f$ fall somewhere inside the $y$-band, i.e. the set $|f(x)-L|<\epsilon$.
+        \vspace{2mm}
+
+        Note that only $\delta$ is under your control.
+    \end{idea}
+\end{itemize}

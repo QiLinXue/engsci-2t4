@@ -1,0 +1,130 @@
+\section{Lecture 6}
+\begin{itemize}
+    \item We continue to define the definition of the limit.
+    \begin{definition}
+        If for any $\epsilon>0$, a $\delta>0$ can be found such that for all $0<|x-c|<\delta$, it can be proved that $|f(x)-L|<\epsilon$, then we can define $\lim_{x\to c}f(x)$ to be a real number and we can assign it to the value $L$.
+    \end{definition}
+    \item A useful tool is the expression $x=\min\{a,b\}$. For example, for every, for every member you introduce to your club, you get \$10, up to a maximum of \$50. The expression is then $x=\min\{10N,50\}$ where $N$ is the number of new numbers.
+    \begin{example}
+        Prove that $\displaystyle\lim_{x\to 5}x^2=25$.
+
+        \begin{enumerate}
+            \item $\epsilon>0$ is specified.
+            \item It is required that $|f(x)-L|<\epsilon$ or
+            \begin{equation}
+                |x^2-25|<\epsilon
+                \label{eq:x^2-25epsilon}
+            \end{equation}
+            \item when $0<|x-c|<\delta$ or:
+            \begin{equation}
+                0<|x-5|<\delta
+                \label{eq:}
+            \end{equation}
+            \item The left hand side of (2) becomes:
+            \begin{align}
+                LHS &= |x^2-25| \\ 
+                &= |(x-5)(x+5)| \\ 
+                &= |x-5||x+5|
+                \le \delta |x+5|
+                \label{eq:lim x^2=25 LHS of 2}
+            \end{align}
+            where we have applied the basic theorem of algebra in the last step. We now need to specify a \textit{second} feature of $\delta$, additional to anything we will specify in ste (5), i.e. in terms of $\epsilon$. Here, we can specify a guess: $\delta \le 1$. From (3),
+            \begin{align}
+                |x-5|&<\delta \le 1 \\ 
+                5-1 &\le x \le 5+1 \\ 
+                4 &\le x \le 6 \\ 
+                9 &\le x+5 \le 11
+                \label{eq:}
+            \end{align}
+            Note that $x+5 \ge 9$, then $x+5>0$. As a result, it is positive and:
+            \begin{equation}
+                |x+5|=(x+5)
+                \label{eq:}
+            \end{equation}
+            Note also that $x+5 \le 11$. This is helpful when comparing it to equation (\ref{eq:lim x^2=25 LHS of 2}). Therefore:
+            \begin{equation}
+                LHS\le \delta |x+5| \le 11\delta
+                \label{eq:}
+            \end{equation}
+            \item We now need to pick $\delta$ in terms of $\epsilon$. We can try:
+            \begin{equation}
+                \delta = \frac{\epsilon}{11}
+                \label{eq:}
+            \end{equation}
+            then plugging it into :
+            \begin{equation}
+                LHS < 11\cdot \frac{\epsilon}{11}=\epsilon
+                \label{eq:}
+            \end{equation}
+            However, we don't forget our override condition:
+            \begin{equation}
+                \delta = \min\{\epsilon/11,1\}
+                \label{eq:}
+            \end{equation}
+        \end{enumerate}
+    \end{example}
+    \item We can similarly define left and right hand limits. The left hand limit can be written as:
+    \begin{equation}
+        \lim_{x\to 0^-} f(x)
+        \label{eq:}
+    \end{equation}
+    and similarly for the right hand limit
+    \begin{equation}
+        \lim_{x\to 0^+}f(x)
+        \label{eq:}
+    \end{equation}
+    \item For a right hand limit:
+    \begin{definition}
+        If for every $\epsilon >0$, a $\delta >0$ can be found such that for all $c<x<c+\delta$, one can prove $|f(x)-L|<\epsilon$, then $\displaystyle \lim_{x\to c^+} f(x)=L$
+    \end{definition}
+    and we can similarly define it for the left hand limit.
+    \item Note that:
+    \begin{equation}
+        \lim_{x\to c} f(x) = L \iff \lim_{x\to c^+} = \lim_{x \to c^-} f(x) = L
+        \label{eq:}
+    \end{equation}
+    
+    \begin{example}
+        Prove that $\displaystyle \lim_{x\to 0^+} x^{1/2} =0$.
+        \item $\epsilon>0$ is specified.
+        \item It is required that:
+        \begin{align}
+            |\sqrt{x}-0| &< \epsilon \\
+            |\sqrt{x}| &< \epsilon \\
+            \sqrt{x} &< \epsilon 
+        \end{align}
+        \item when $0<x<\delta$.
+        \item From (2) and (3), we have:
+        \begin{equation}
+            x^{1/2} < \delta^{1/2}
+        \end{equation}
+        under $\delta$ control!
+        \item Try $\delta=\epsilon^2$. Then:
+        \begin{equation}
+            |\sqrt{x}-0|<\delta^{1/2}=\epsilon
+            \label{eq:}
+        \end{equation}
+        and we are done. We can also write this compactly.
+        \vspace{2mm}
+        
+        Given $\epsilon>0$, choose $\delta=\epsilon^2$, then when $0<x<\delta$, $|\sqrt{x}-0|<\epsilon$, therefore:
+        \begin{equation}
+            \lim_{x\to 0^+}\sqrt{x}=0.
+            \label{eq:}
+        \end{equation}
+    \end{example}
+    \item We can also deal with infinite limits, such as:
+    \begin{equation}
+        \lim_{x\to 0} \frac{1}{x^4}
+        \label{eq:}
+    \end{equation}
+    We can approach this rigorously: Imagine your ene$M$y imposes some very large number $M>0$, say $M=10^6$. The challenge then becomes: ``Can you find a $\delta>0$ such that for all $0<|x-0|<\delta$, such that $f(x)>M$?'' If yes, we can write:
+    \begin{equation}
+        \lim_{x\to 0}\frac{1}{x^4} = \infty
+        \label{eq:}
+    \end{equation}
+    \begin{warning}
+        Note that this is \textbf{not} an equation as $\infty$ is \textbf{not} a number! All this does is a compact way of saying ``$f(x)$ increases without limit as $x$ approaches $0$.''
+    \end{warning}
+    
+\end{itemize}

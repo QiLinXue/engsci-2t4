@@ -1,0 +1,219 @@
+\section{Lecture Ten}
+\begin{itemize}
+    \item A few formal definitions:
+    \begin{definition}
+        $f(x)$ is differentiable on $(a,b)$ if $f(x)$ is differentiable at all $x\in (a,b)$.
+    \end{definition}
+    \begin{definition}
+        $f(x)$ is differentiable on $[a,b]$ if:
+        \begin{itemize}
+            \item $f(x)$ is differentiable on $(a,b)$.
+            \item The right hand derivative at $a$ exists.
+            \item The left hand derivative at $b$ exists.
+        \end{itemize}
+    \end{definition}
+    \begin{example}
+    There is a cusp in the following example:
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+            legend pos=outer north east,
+            title=Graph with a cusp,
+            axis lines = box,
+            xlabel = $x$,
+            ylabel = $y$,
+            variable = t,
+            trig format plots = rad,
+            ]
+            \addplot [
+                domain=0:10,
+                samples=70,
+                color=blue,
+                ]
+                {x^0.5};
+            \addplot [
+                domain=-10:0,
+                samples=70,
+                color=blue,
+                ]
+                {(-x)^0.5};
+            \end{axis}
+            \end{tikzpicture}
+    \end{center}
+    Another example would be the absolute value of $x$, $|x|$.
+    \end{example}
+    \begin{warning}
+        From above example, $f(x)$ may be continuous at a point but no differentiable. Differentiability is rarer than continuity!
+    \end{warning}
+    \begin{theorem}
+        Given $f(x)$ is differentiable at $a$, then $f(x)$ is continuous at $a$.
+    \end{theorem}
+    \begin{prooof}
+        Consider
+        \begin{equation}
+            f(a+h)-f(a)=\left[\frac{f(a+h)-f(a)}{h}\right]h
+        \end{equation}
+        which is acceptable if $h\neq 0$. Then:
+        \begin{align}
+            \lim_{h\to 0} \left\{f(a+h)-f(a)\right\} &=
+            \lim_{h\to 0} \left[\frac{f(a+h)-f(a)}{h}\right]\cdot \lim_{h\to 0} h & \text{(Product LT)} \\ 
+            &= 0 &\text{(Polynomial LT)}
+        \end{align}
+        Note that the use of the product limit theorem requires that both limits exist. We know the first limit exists since we are given that $f'(a)$ exists. As a result:
+        \begin{align}
+            \lim_{h\to 0} \left\{f(a+h)-f(a)\right\} &= 0 \\ 
+            \lim_{h\to 0} f(a+h) - \lim_{h\to 0}f(a) &= 0
+        \end{align}
+        Note that per the polynomial limit theorem, we have $\displaystyle \lim_{h\to 0} f(a)=f(a)$. Making the substitution $x=a+h \implies h=x-a$, we can rewrite our expression as:
+        \begin{align}
+            \lim_{h\to 0} f(a+h) &= \lim_{x\to a} f(x) \\ 
+            \lim_{x\to a}f(x) &= f(a)
+        \end{align}
+        and therefore $f(x)$ is continuous at $x=a$. Note that the reverse isn't necessarily true!
+    \end{prooof}
+    \item \textbf{Vertical Tangent Lines} can exist. For example, if $f(x)=x^{1/3}$, then:
+    \begin{equation}
+        f'(x) = \frac{1}{3}x^{-2/3}
+        \label{eq:}
+    \end{equation}
+    \begin{center}
+        \begin{tikzpicture}
+        \begin{axis}[
+        legend pos=outer north east,
+        title=Vertical Tangent Line Example,
+        axis lines = box,
+        xlabel = $x$,
+        ylabel = $y$,
+        variable = t,
+        trig format plots = rad,
+        ]
+        \addplot [
+            domain=0:10,
+            samples=70,
+            color=blue,
+            ]
+            {x^(1/2)};      
+        \addplot [
+            domain=-10:0,
+            samples=70,
+            color=blue,
+            ]
+            {-(-x)^(1/2)};   
+        \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \begin{definition}
+        A vertical tangent occurs when
+        \begin{equation}
+            \lim_{x\to c}|f'(x)| = \infty
+            \label{eq:}
+        \end{equation}
+        and $f(x)$ is continuous at $c$.
+    \end{definition}
+    \item There are a few derivative theorems:
+    \begin{theorem}
+        The \textbf{constant derivative theorem}: For $f(x)=C$, then $f'(x)=0$.
+    \end{theorem}
+    \begin{theorem}
+        Additivity D.T:
+        \begin{equation}
+            (f+g)'=f'+g'
+            \label{eq:}
+        \end{equation}
+        which is true if both exist.
+    \end{theorem}
+    \begin{theorem}
+        The product D.T. is:
+        \begin{equation}
+            (fg)'=f'g+fg'
+            \label{eq:}
+        \end{equation}
+    \end{theorem}
+    \begin{theorem}
+        The Power D.T: For $f(x)=Cx^n$, then $f'(x)=nCx^{n-1}$.
+    \end{theorem}
+    \begin{theorem}
+        The polynomial D.T. says that:
+        \begin{equation}
+            P_n'(x)=na_nx^{n-1}+(n-1)a_{n-1}x^{n-2}+\cdots + a_1
+            \label{eq:}
+        \end{equation}
+    \end{theorem}
+    \begin{theorem}
+        The reciprocal function D.T. says that:
+        \begin{equation}
+            \left(\frac{1}{f}\right)'=\frac{-f'}{f^2}
+            \label{eq:}
+        \end{equation}
+    \end{theorem}
+    \begin{prooof}
+        We can write
+        \begin{align}
+            \left(\frac{1}{f}\right)'&=\lim_{h\to 0} \left\{\frac{\frac{1}{f(x+h)}-\frac{1}{f(x)}}{h}\right\} \\ 
+            &= \lim_{h\to 0}\left\{\frac{f(x)-f(x+h)}{hf(x)f(x+h)}\right\} \\ 
+            &= \overbrace{\underbrace{\lim_{h\to 0}\left\{\frac{f(x)-f(x+h)}{h}\right\}}_{A}\cdot\underbrace{\lim_{h\to 0} \frac{1}{f(x)}}_B \cdot\underbrace{\lim_{h\to 0} \frac{1}{f(x+h)}}_C}^\text{product limit theorem}
+        \end{align}
+        Let us now deal with each limit individually. We have:
+        \begin{equation}
+            A = -f'(x)
+            \label{eq:}
+        \end{equation}
+        per definition. For $B$, we can apply the constant limit theorem to get:
+        \begin{equation}
+            B = \frac{1}{f(x)}
+            \label{eq:}
+        \end{equation}
+        To tackle $C$, because $\frac{1}{f(x)}$ is differentiable, it is continuous, so we can invoke the definition of continuity to get:
+        \begin{equation}
+            C=\frac{1}{f(x)}
+            \label{eq:}
+        \end{equation}
+        and combining everything together:
+        \begin{equation}
+            \left(\frac{1}{f}\right)'=-\frac{f'(x)}{f(x)^2}
+            \label{eq:}
+        \end{equation}
+    \end{prooof}
+    \begin{example}
+        If $f(x)=x^4$, what is $f'(x)$?
+        \vspace{2mm}
+
+        Set $g(x)\equiv x^4$, then $f(x)=\frac{1}{g(x)}$. Therefore:
+        \begin{align}
+            f'(x)&=-\frac{g'(x)}{g(x)^2} &\text{reciprocal LT} \\ 
+            &= \frac{-4x^3}{(x^4)^2} \\ 
+            &= -4x^{-5}
+        \end{align}
+        So we have proved $(x^n)'=nx^{n-1}$ for even when $n$ is a negative integer!
+    \end{example}
+    \begin{theorem}
+        The quotient derivative theorem says:
+        \begin{equation}
+            (f/g)'=\frac{f'g-fg'}{g^2}
+            \label{eq:}
+        \end{equation} 
+    \end{theorem}
+    \item We can now tackle \textbf{rates of change}. The volume of a sphere is $V=\frac{4}{3}\pi r^3$. Therefore:
+    \begin{equation}
+        \frac{dV}{dr} \equiv V' = \frac{4}{3}\pi \underbrace{(3r^2)}_{P.D.T} = \underbrace{4\pi r^2}_\text{surface area of the sphere!}
+        \label{eq:}
+    \end{equation}
+    \begin{idea}
+        Intuitively, this makes sense! We can interpret the derivative (in Leibniz notation) gives us that $\frac{dV}{dr}$ is a fraction. If we write it as small increments, then:
+        \begin{equation}
+            \underbrace{\Delta V}_\text{small increment of volume} \simeq 4\pi r^2 \underbrace{\Delta r}_\text{small increment of radius}
+            \label{eq:}
+        \end{equation}
+        Note that this is only approximate. We can get the actual change in volume as:
+        \begin{align}
+            \Delta V_\text{actual} &= \frac{4}{3}\pi\left[(r+\Delta r)^3-r^3\right] \\ 
+            &= \Delta V_\text{approx}\left(1+\frac{\Delta r}{r}+\underbrace{\frac{1}{3}\left(\frac{\Delta r}{r}\right)^2}_\text{goes to zero}\right)
+            \label{eq:}
+        \end{align}
+        Therefore As $\Delta r \to 0$, we then have:
+        \begin{equation}
+            \Delta V_\text{approx} \to \Delta V_\text{actual} 
+            \label{eq:}
+        \end{equation}
+    \end{idea}
+\end{itemize}
