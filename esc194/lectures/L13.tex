@@ -1,0 +1,131 @@
+\section{Lecture 13}
+\begin{itemize}
+    \item We introduce the \textbf{Mean Value Theorem (MVT)}. First, we need to prove a simpler version known as \textbf{Rolle's Theorem}
+    \begin{theorem}
+        Given that $f$ is continuous on $[a,b]$ and $f$ is differentiable on $[a,b)$ and $f(a)=f(b)$. Then there exists some $c \in (a,b)$ such that $f'(c)=0$. Note that there may be more than one $c$
+    \end{theorem}
+    \begin{prooof}
+        There are only three possibilities:
+        \begin{enumerate}
+            \item $f(x)>f(a)$ for some $x$ in $(a,b)$
+            \item $f(x)<f(a)$ for some $x$ in $(a,b)$
+            \item $f(x)=f(a)=f(b)$ for all $x$ in $(a,b)$
+        \end{enumerate}
+        To prove the third case, since $f'(x)=0$ (C.D.T.), for all $x$ in $[a,b]$, then it is automatically satisfied. To prove the first case, by the extreme value theorem, there is an absolute maximum in $[a,b]$. It can't be an end-point maximum so it by Fermat's principle it must be a critical point. It can't be a critical point where the derivative doesn't exist, so it must be a point where $f'(c_\text{crit})=0$. The second case is identical to the first.
+    \end{prooof}
+    \begin{theorem}
+        The \textbf{Mean Value Theorem:} Given that $f(x)$ is continuous on $[a,b]$ and $f(x)$ is differentiable on $(a,b)$, then there exists some $c\in (a,b)$ such that:
+        \begin{equation}
+            f'(c)=\frac{f(b)-f(a)}{b-a}
+            \label{eq:}
+        \end{equation}
+        Note that both continuity and differentiability is needed.
+    \end{theorem}
+    \begin{example}
+        Physics example: Let $d(t)$ be the distance travelled in time $t$. The $MVT$ tells us that at some time in the trip your instantaneous speed must equal your average speed on the trip.
+    \end{example}
+    \begin{prooof}
+        The equation of a secant line is:
+        \begin{equation}
+            y_\text{secant}(x)=f(a)+\frac{f(b)-f(a)}{b-a}\left(x-a\right)
+            \label{eq:13-secant}
+        \end{equation}
+        Note that this is in the form of $y_\text{secant}(x)=A+Bx$, a first order polynomial. Then we can define:
+        \begin{equation}
+            g(x)\equiv f(x)-y_\text{secant}(x)
+            \label{eq:}
+        \end{equation}
+        We now show that $g(x)$ satisfies Rolle's theorem. $g(x)$ is continuous on $[a,b]$ since $f(x)$ is. Also $y_\text{secant}(x)$ is continuous (Poly CT) so $g(x)$ is also continuous (ACT). Similarly, $g(x)$ is also differentiable on $(a,b)$ since $f(x)$ is. $y_\text{secant}(x)$ is also differentiable per Poly DT and $g(x)$ is also (ADT). We have $g(a)=g(b)=0$, so by Rolle, there is some $c\in (a,b)$ such that $g'(c)=0$ or:
+        \begin{equation}
+            f'(c)-y_\text{secant}'(c)=0
+            \label{eq:}
+        \end{equation}
+        Using equation \ref{eq:13-secant}, we have:
+        \begin{equation}
+            f'(c)=\frac{f(b)-f(a)}{b-a}
+            \label{eq:}
+        \end{equation}
+    \end{prooof}
+    \begin{example}
+        Given $f(x)=x^2$ on $[2,3]$. Prove that $f$ satisfies the conditions of MVT. We have $f(a)=$ and $f(b)=9$ such that:
+        \begin{equation}
+            \frac{f(b)-f(a)}{b-a}=\frac{9-4}{3-2}=5
+            \label{eq:}
+        \end{equation}
+        Is there some $c\in (2,3)$ such that $f'(c)=5$? Yes! We can let $f'(x)=2x=5 \implies x-5/2$. Since $2<5/2<3$, then this all checks out.
+    \end{example}
+\begin{multicols}{2}
+    \textbf{General Case:}
+    \begin{itemize}
+        \item Let $y=f(x)$ where $y$ is the dependent variable and $x$ is the independent variable.
+        \item Define increments $\Delta y$ and $\Delta x$, 2 \textit{new} variables! They are related by:
+        \begin{equation}
+            \Delta y = f(x+\Delta x)-f(x)
+            \label{eq:}
+        \end{equation}
+        Here $\Delta x$ is the independent variable and $\Delta y$ is the dependent variable.
+    \end{itemize}
+    \vfill\null
+    \columnbreak
+    \textbf{Example Case:}
+    \begin{itemize}
+        \item Let $y=x^{1/3}$. Choose $x=27$ for example. We have free choice for picking the value of $x$.
+        \item Choose $\Delta x=2$, say for example. Remember we have free choice! Then:
+        \begin{equation}
+            \Delta y = 29^{1/3}-27^{1/3}=29^{1/3}-3
+            \label{eq:}
+        \end{equation}
+    \end{itemize}
+\end{multicols}
+\begin{idea}
+    Note that the value of $\Delta y$ depends on choices for both $x$ and $\Delta x$!
+\end{idea}
+\begin{multicols}{2}
+    \begin{itemize}
+        \item Define differentials $dx$, $dy$, 2 new variables related by:
+        \begin{equation}
+            dy \equiv f'(x) dx
+            \label{eq:}
+        \end{equation}
+    \end{itemize}
+    \vfill\null
+    \columnbreak
+    \begin{itemize}
+        \item Choose $dx=1/2$ for example. Then we can say:
+        \begin{equation}
+            dy=\underbrace{\frac{1}{3}(26)^{-2/3}}_\text{derivative of f}\left(\frac{1}{2}\right)=\frac{1}{54}
+            \label{eq:}
+        \end{equation}
+    \end{itemize}
+\end{multicols}
+\begin{idea}
+    Since $dx$ and $\Delta x$ are both independent variables, we are free to choose them to be equal: $dx=\Delta x$. This can be useful! Note that this implies that:
+    \begin{equation}
+        \Delta y \approx dy
+        \label{eq:}
+    \end{equation}
+    is an approximation, and this approximation improves as $\Delta x \to 0$. The practical point is that we may want to know $\Delta y$, i.e. $f(x+\Delta x)-f(x)$. It may, however might be easy to calculate $f'(x)$ such that:
+    \begin{equation}
+        f(x+\Delta x) \approx f(x)+f'(x)\Delta x
+        \label{eq:}
+    \end{equation}
+\end{idea}
+\begin{example}
+    Suppose we wish to estimate $29^{1/3}$, then we can define $f(x)=x^{1/3}$ and pick $x=27$, $\Delta x=2$ such that:
+    \begin{align}
+        \Delta y &= f(x+\Delta x)-f(x) \\ 
+        &= f(29)-f(27)=29^{1/3}-3 
+        \label{eq:}
+    \end{align}
+    We can now use the approximation $\Delta y \approx dy = f'(x)dx = f(x)\Delta x$ where:
+    \begin{equation}
+        \Delta y \approx \frac{1}{3}x^{-2/3}\Delta x = \frac{2}{27}
+        \label{eq:}
+    \end{equation}
+    and:
+    \begin{equation}
+        \frac{2}{27} \approx 29^{1/3}-3 \implies 29^{1/3} \approx 3+\frac{2}{27}
+        \label{eq:}
+    \end{equation}    
+\end{example}
+\end{itemize}

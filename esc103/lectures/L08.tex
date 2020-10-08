@@ -1,0 +1,78 @@
+\section{Lecture Eight: Matrix Multiplication}
+\begin{itemize}
+    \item When multiplying two matrices, the entry in row $i$ and column $j$ of $AB$ is:
+    \begin{equation}
+        \text{(Row i of A)} \cdot \text{(column j of B)}
+    \end{equation}
+    \item Recall that $A$ and $B$ can only be multiplied of $A$ is $m\times n$ and $B$ is $n\times p$. The size of the resulting matrix is therefore $m\times p$.
+    \begin{example}
+        Suppose we wish to multiply $A=\begin{bmatrix}
+            2&4&8\\1&3&6
+        \end{bmatrix}$ and $B=\begin{bmatrix}
+            1&9 \\ 4&2 \\ 3&7
+        \end{bmatrix}$. To determine $AB$, we get:
+        \begin{equation}
+            AB = \begin{bmatrix}
+                2\cdot 1+4\cdot 4 + 8\cdot 3 & 2\cdot 9 + 4\cdot 2 + 8\cdot 7 \\ 
+                1\cdot 1 + 3\cdot 4 + 3\cdot 6 & 1\cdot 9 + 3\cdot 2 + 6\cdot 7
+            \end{bmatrix} = \begin{bmatrix}
+                42 & 82 \\ 31 & 57
+            \end{bmatrix}
+            \label{eq:}
+        \end{equation}
+    \end{example}
+    \item This leads properties of matrices:
+    \begin{enumerate}
+        \item $A+B=B+A$ (commutative)
+        \item $c(A+B)=cA+cB$ (where $c$ is scalar)
+        \item $A+(B+C)=(A+B)+C$ (associative)
+        \item $C(A+B)=CA+CB$ (distributive from left)
+        \item $(A+B)C=AC+BC$ (distributive from right)
+        \item $A(BC)=(AB)C$ (associative)
+    \end{enumerate}
+    \item We can take exponents:
+    \begin{align}
+        AA&=A^2\\ 
+        A^pA^q &= A^{p+q} \\ 
+        \left(A^{p}\right)^q &= A^{pq}
+        \label{eq:}
+    \end{align}
+    and later on we will see the inverse:
+    \begin{equation}
+        A^{-1}
+        \label{eq:}
+    \end{equation}
+    \item We can also view matrices as \textbf{transformations}. A linear transformation $L$ is a function that maps that maps a vector in $\mathbb{R}^n$ to a vector in $\mathbb{R}^n$ with the following properties:
+    \begin{equation}
+        L:\mathbb{R}^n \to \mathbb{R}^n
+        \label{eq:}
+    \end{equation}
+    This is analogous to the mapping:
+    \begin{equation}
+        y=f(x)
+        \label{eq:}
+    \end{equation}
+    or
+    \begin{equation}
+        f:x\to y
+        \label{eq:}
+    \end{equation}
+    \item If $\vec{v}$ and $\vec{w}$ $\in$ $\mathbb{R}^n$, then $L(\vec{v})$ and $L(\vec{w})$ $\in$ $\mathbb{R}^n$. It has the following properties:
+    \begin{enumerate}
+        \item $L(c\vec{v})=cL(\vec{v})$
+        \item $L(\vec{v}+\vec{w})=L(\vec{v})+L(\vec{w})$
+    \end{enumerate}
+    \begin{example}
+        Suppose we define a transformation $T_1$ that adds a constant vector $\vec{u}_0$ to every vector where:
+        \begin{equation}
+            T_1: \mathbb{R}^n \to \mathbb{R}^n
+            \label{eq:}
+        \end{equation}
+        Is this a linear transformation? If so, then the following must be true:
+        \begin{align}
+            T_1(\vec{v})+T_2(\vec{w})&=T_1(\vec{v}+\vec{w}) \\ 
+            \vec{v}+\vec{w}+2\vec{u}_0&=\vec{v}+\vec{w}+\vec{u}_0
+        \end{align}
+        which is only true when $\vec{u}$ is the zero vector.
+    \end{example}
+\end{itemize}
