@@ -1,0 +1,120 @@
+\section{Lecture 14}
+\begin{itemize}
+    \item Using differentials, we estimated $29^{1/3} \approx 3.074$. We need to know how far it could be off.
+    \item We can use the MVT to bracket our estimate. Apply the MVT to $f(x)=x^{1/3}$ on $[27,29]$. There is some $c \in (27,29)$ such that:
+    \begin{equation}
+        f'(c)=\frac{29^{1/3}-27^{1/3}}{29-27}=\frac{29^{1/3}-3}{2}
+        \label{eq:}
+    \end{equation}
+    or:
+    \begin{equation}
+        f'(c)=\frac{1}{3}c^{-2/3}
+        \label{eq:}
+    \end{equation}
+    Therefore:
+    \begin{equation}
+        29^{1/3}=3+\frac{2}{3}c^{-2/3}
+        \label{eq:}
+    \end{equation}
+    The largest is when $c=27 \implies c^{-2/3}=\frac{1}{9}$. The smallest is when $c=29$, but we don't know what $29^{-2/3}$ is!
+    \item Note however that $29<64$ such that:
+    \begin{equation}
+        29^{2/3} < 64^{2/3} = 16 \implies \frac{1}{16} < 29^{-2/3} \implies c^{-2/3} > \frac{1}{16}
+        \label{eq:}
+    \end{equation}
+    and therefore:
+    \begin{equation}
+        3+\frac{2}{3}\frac{1}{16} < 29^{1/3} < 3+\frac{2}{3}\frac{1}{9} \implies 3.0416 < 29^{1/3} < 3.074
+        \label{eq:}
+    \end{equation}
+    \item To graph functions, we need a few quick tests.
+    \item QT1: First is the \textbf{Increasing/Decreasing Test}
+    \begin{idea}
+        Given that $f$ is differentiable on interval $I$, we show that:
+    \begin{itemize}
+        \item If $f'>0$, $f$ is increasing.
+        \item If $f'<0$, $f$ is decreasing.
+        \item If $f'=0$, $f$ is constant.
+    \end{itemize}
+    \end{idea}
+    We can prove the first statement.
+    \begin{proof}
+        Since $f$ is differentiable, the MVT holds. There is some $c\ in I$ such that:
+        \begin{equation}
+            f(x_2)-f(x_1)= f'(c)(x_2-x_1) \implies f(x_2)-f(x_1)
+            \label{eq:}
+        \end{equation}
+        which is the definition of an increasing function. The proof goes similarly for the other two.
+    \end{proof}
+    \item QT2: First derivative test. The motivation behind this is that $f(c_\text{crit})$ includes max and min values, but also others. How do we know which to keep?
+    \begin{idea}
+        Given that $I$ contains a critical point and $f$ is continuous at $c_\text{crit}$. $f$ is differentiable in $I$, but not necessarily at $c_\text{crit}$. Then:
+        \begin{itemize}
+            \item If $f'>0$ to the left of $c_\text{crit}$ and $f'<0$ is to the right, then $c_\text{crit}$ is a local max.
+            \item If it's the opposite, we get the local minimum.
+        \end{itemize}
+    \end{idea}
+    We can also prove this:
+    \begin{proof}
+        There is some $a$ such that $f'>0$ for $x \in (a,c)$, by QT1, $f$ is increasing where:
+        \begin{equation}
+            f(c) \ge f(x)
+            \label{eq:}
+        \end{equation}
+        in $(a,c)$. There is also some $b$ such that $f'<0$ for $x \in (c,b)$ where $f'<0$. By QT1, $f$ decreases. As a result:
+        \begin{equation}
+            f(c) \ge f(x)
+            \label{eq:}
+        \end{equation}
+        in $(c,b)$. Therefore:
+        \begin{equation}
+            f(c) \ge f(x)
+            \label{eq:}
+        \end{equation}
+        for all $x\in (a,b)$. Therefore, $f(c)$ is a local maximum, by definition. 
+    \end{proof}
+    \item Concavity: Points of Inflection
+    \begin{definition}
+        If the graph of $y=f(x)$ lies above all its tangents in $I$, then $f(x)$ is concave up in $I$.
+    \end{definition}
+    \item QT3: Concavity Test:
+    \begin{idea}
+        Given that $f(x)$ is twice differentiable on $I$, then $f''(x)$ exists on $I$. As a result:
+        \begin{itemize}
+            \item If $f''>0$, $f$ is concave up.
+            \item If $f''<0$, $f$ is concave down.
+        \end{itemize}
+    \end{idea}
+    \begin{proof}
+        Proof assigned (pg A43). Uses MVT and QT1.
+    \end{proof}
+    \begin{definition}
+        A point of inflection is at $c$ if:
+        \begin{itemize}
+            \item $f(x)$ is continuous at $c$ and
+            \item Sign of concavity changes at $c$.
+        \end{itemize} 
+    \end{definition}
+    \begin{example}
+        Let $f(x)=x^3$. Then $f'=3x^2$ and $f''=6x$. Since $f(x)$ is continuous at $c$ and the sign of concavity changes at $x=0$, therefore $(0,0)$ is an inflection point.
+    \end{example}
+    \item QT4: Second derivative test:
+    \begin{idea}
+        Given that $f''(x)$ is continuous near $c$ and $f'(c)=0$, then:
+        \begin{itemize}
+            \item If $f''(c)>0$, $f(c)$ is a local minimum.
+            \item If $f''(c)<0$, $f(c)$ is a local maximum.
+            \item If $f''(c)=0$, there is no verdict!
+        \end{itemize}
+    \end{idea}
+    Note that this is even quicker than QT2!
+    \begin{idea}
+        In summary, the recipe to test for local max and min is to:
+        \begin{itemize}
+            \item Find all $c_\text{crit}$.
+            \item If QT4 applies, use it.
+            \item If it doesn't, and if QT2 applies, use it.
+            \item If QT2 doesn't apply, use the basic definition of increasing/decreasing.
+        \end{itemize}
+    \end{idea}
+\end{itemize}
