@@ -1,0 +1,37 @@
+\section{Lecture 15}
+\begin{itemize}
+    \item We can define horizontal asymptotes:
+    \begin{definition}
+        A horizontal asymptote occurs when $\lim_{x\to\infty}f(x)=L$. We can say that 
+        $f(x)$ goes to $L$ as $x$ goes to infinity if for any $\epsilon>0$, a number $A$ can be found s.t. for all $x>A$, $|f(x)-L|<\epsilon$.
+        \vspace{2mm}
+
+        The idea behind this revolves around finding $f$ values as close to $L$ as might be wanted by going to large enough $x$ values.
+    \end{definition}
+    \item Geometrically, we can say that if $\displaystyle \lim_{x\to\infty}f(x) = L$, then the line $y=L$ is the horizontal asymptote of $f(x)$ at $x=\infty$.
+    \begin{theorem}
+        The reciprocal horizontal asymptote limit:
+        \begin{equation}
+            \lim_{x\to \pm \infty} \frac{1}{x^r} = 0
+            \label{eq:}
+        \end{equation}
+    \end{theorem}
+    \item Slant asymptotes are a thing too. For example, suppose we have the function:
+    \begin{equation}
+        f(x)=\frac{x+2}{1+\frac{1}{x^2}}
+        \label{eq:}
+    \end{equation}
+    We might say that intuitively $f(x)\to x+2$ as $x\to \infty$.
+    \begin{definition}
+        If $\lim_{x\to \infty} \left[f(x)-(mx+b)\right]=0$, then $y=mx+b$ is a slant asymptote to $f(x)$ at $+\infty$.
+    \end{definition}
+    \item Curve Sketching Check-list:
+    \begin{itemize}
+        \item Find domain/range/limits at infinity, end points if they exist, vert/horz/slant asymptote
+        \item Intercepts: Find x/y intercepts.
+        \item Establish if $f(x)$ is symmetrical/even/odd/periodic
+        \item Find $f'(x)$ then find all critical points and $f(c_\text{crit})$. Find when $f(x)$ is increasing/decreasing. Use 1st derivative test (QT2). Find vertical tangents/cusps if they exist.
+        \item Find $f''(x)$, find where $f(x)$ is concave up/down. Find points of inflection if they exist. (Optional: use 2nd derivative test QT4 to confirm local max/min)
+        \item Choose largest and smallest values of $f$ from the above as abs. max, min, if they exist.
+    \end{itemize}
+\end{itemize}

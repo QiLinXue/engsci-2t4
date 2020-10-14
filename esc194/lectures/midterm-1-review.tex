@@ -1,0 +1,261 @@
+\documentclass{article}
+\usepackage{esc}
+
+\title{ESC194: Midterm 1 Review}
+\author{QiLin Xue}
+\date{Fall 2020}
+\usepackage{lmodern}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{bm}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{bbm}
+\usepackage{parskip}
+\usepackage{multicol}
+\usetikzlibrary{arrows}
+\pgfplotsset{compat=1.16}
+\setlength\parindent{0pt}
+\everymath{\displaystyle}
+\usepackage{makeidx}
+\makeindex
+\let\oldtextbf\textbf
+\renewcommand{\textbf}[1]{\oldtextbf{#1}\index{#1}}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\printindex
+
+\newpage
+\section{Delta-Epsilon Proofs}
+\subsection{Brief Overview}
+The formal definition of the limit $\displaystyle \lim_{x\to c} f(x) = L$:
+\begin{definition}
+    If for any $\epsilon >0$, a $\delta >0$ can be found such that for all $0<|x-c|<\delta$, it can be proved that $|f(x)-L|<\epsilon$, then $\displaystyle \lim_{x\to c} f(x) = L$.
+\end{definition}
+\noindent The \textit{general steps} are as follows:
+\begin{itemize}
+    \item Write: ``For any $\epsilon > 0$, we want to pick a $\delta >0$ such that $0<|x-c|<\delta \implies |f(x)-L|<\epsilon$'' 
+    \item Start with $|f(x)-L|<\epsilon$ to start getting it under $\delta$ control (e.g. by expressing the LHS in terms of $\delta$)
+    \item Pick an arbitrary value of $\delta=a$ (if in doubt, choose $a=1$) and modify $0<|x-c|<a$ to write $x$ in terms of $a$. Substitute this back into $|f(x)-L|<\epsilon$ to fully express the LHS in terms of $\delta$.
+    \item Solve for $\delta$ in terms of $\epsilon$ and pick $\delta = \min\{a,f(\epsilon)\}$.
+\end{itemize}
+A few \textit{tips/tricks:}
+\begin{itemize}
+    \item Apply the \textbf{Triangle Inequality:} $|a+b|\le |a| + |b|$.
+    \item Apply the identity: $|ab|=|a||b|$.
+    \item Apply the inequality: $\displaystyle \frac{1}{x} > \frac{1}{x+a}$ for $x>0$ given $a>0$.
+    \item Remember that $0<|x-c|<\delta \implies c-\delta < x < c+\delta$.
+\end{itemize}
+\begin{example}
+(2019 Midterm, Modified) Prove $\displaystyle \lim_{x\to 2} \frac{3x+1}{(x+1)^2}=1$.
+\vspace{2mm}
+
+For any $\epsilon > 0$, we want to pick a $\delta > 0$ such that $0<|x-2|<\delta \implies \left|\frac{3x+1}{(x+1)^2}-1\right|<\epsilon$. We can start with:
+\begin{align}
+    \left|\frac{3x+1}{(x+1)^2}-1\right|<\epsilon &\implies \left|\frac{3x+1-(x^2+2x+1)}{(x+1)^2}\right| \\ 
+    &\implies \left|\frac{x-x^2}{(x+1)^2}\right|<\epsilon \\ 
+    &\implies \left|\frac{x(1-x)}{(x+1)^2}\right|<\epsilon \\
+    &\implies \left|\frac{x}{(x+1)^2}\right||x-1|<\epsilon \\
+    &\implies \left|\frac{x}{(x+1)^2}\right||(x-1-1)+(1)|<\epsilon \\
+    &\implies \left|\frac{x}{(x+1)^2}\right|(|x-2|+|1|)<\epsilon \\
+    &\implies \left|\frac{x}{(x+1)^2}\right|(\delta+1)<\epsilon \\
+    \label{eq:}
+\end{align}
+We can set $\delta=1$. If this is the case then:
+\begin{equation}
+    0<|x-2|<1 \implies 1<x<3 \iff 2<x+1<4
+    \label{eq:}
+\end{equation}
+We can bound the denominator $|(x+1)^2|$ by its lower bound $2^2=4$ and the numerator $|x|$ by its upper bound of $3$, which we can substitute back in to get:
+\begin{equation}
+    \left|\frac{x}{(x+1)^2}\right|(\delta+1)<\frac{3}{4}(\delta+1)\le \epsilon \implies \delta \le \frac{4}{3}\epsilon-1
+    \label{eq:}
+\end{equation}
+Thus, we can pick:
+\begin{equation}
+    \delta = \min\{1,\frac{4}{3}\epsilon-1\}
+    \label{eq:}
+\end{equation}
+and we are done. Note that we could also have applied the identity $\frac{1}{x}>\frac{1}{x+a}$ to bound the denominator by $1^2$ instead.
+\end{example}
+\subsection{Special Limits}
+For right handed limit, we have:
+\begin{definition}
+    If for every $\epsilon>0$, a $\delta>0$ can be found such that $c<x<c+\delta \implies |f(x)-L|<\epsilon$, then $\displaystyle\lim_{x\to c^+} = L$.
+\end{definition}
+For left handed limits:
+\begin{definition}
+    If for every $\epsilon>0$, a $\delta>0$ can be found such that $c-\delta<x<c \implies |f(x)-L|<\epsilon$, then $\displaystyle\lim_{x\to c^-} = L$.
+\end{definition}
+For infinite limits:
+\begin{definition}
+    If for every $M>0$, a $\delta>0$ can be found such that $0<|x-c|<\delta \implies f(x) > M$, then $\displaystyle \lim_{x\to c} = \infty$.
+\end{definition}
+Here's an example using both:
+\begin{example}
+    (2019 Quiz 2H, Modified) Prove the infinite limit $\displaystyle \lim_{x\to 2^+}\frac{x^{3/2}}{(x-2)^2} = \infty$.
+    \vspace{2mm}
+
+    For any $M > 0$, we want to pick a $\delta > 0$ such that $2<x<2+\delta \implies \frac{x^{3/2}}{(x-2)^2}>M$. We can immediately start putting $\displaystyle \frac{x^{3/2}}{(x-2)^2}>M$ under $\delta$ control by minimizing the numerator and maximizing the denominator:
+    \begin{align}
+        \frac{x^{3/2}}{(x-2)^2} &> \frac{2^{3/2}}{(2+\delta-2)^2} \ge M \\
+        &\implies \frac{2^{3/2}}{\delta^2} \ge M \\ 
+        &\implies \frac{\delta^2}{2^{3/2}} \le \frac{1}{M} \\ 
+        &\implies \delta \le \frac{2^{3/4}}{\sqrt{M}}
+        \label{eq:}
+    \end{align}
+\end{example}
+For horizontal asymptotes as $x\to\infty$:
+\begin{theorem}
+    If for every $\epsilon>0$, a $A>0$ can be found such that $x>A \implies |f(x)-L|<\epsilon$, then $\displaystyle \lim_{x\to \infty} = L$.
+\end{theorem}
+\begin{example}
+    (Lecture 15, Assigned) Prove the limit $\displaystyle \lim_{x\to \infty} \frac{1}{x^r} = 0$ where $r>0$.
+    \vspace{2mm}
+    
+    For any $\epsilon > 0$, we want to pick a $A > 0$ such that $x>A \implies \left|\frac{1}{x^r}\right|<\epsilon$. We can place the LHS of $\left|\frac{1}{x^r}\right|<\epsilon$ straight away by minimizing the denominator by selecting the lower bound of $x$, which is $A$ to get:
+    \begin{equation}
+        \frac{1}{x^r} < \frac{1}{A^r} \le \epsilon \implies A \ge \epsilon^{1/r}
+        \label{eq:}
+    \end{equation}
+    so choosing $A = \epsilon^{1/r}$ will always work.
+\end{example}
+\section{Limit Theorems}
+Here are the limit theorems covered in class. Given $\lim_{x\to c}f(x)=L$ and $\lim_{x\to c}g(x)=M$ are both well defined, then:
+\begin{itemize}
+    \item \textbf{Constant Limit Theorem:} $\displaystyle \lim_{x\to c} A = A$
+    \item \textbf{Additivity Limit Theorem:} $\displaystyle \lim_{x\to c}\left[f(x)+g(x)\right]=L+M$
+    \item \textbf{Product Limit Theorem:} $\displaystyle \lim_{x\to c}\left[f(x)g(x)\right]=LM$
+    \item \textbf{Polynomial Limit Theorem:} $\displaystyle \lim_{x\to c}P(x)=P(c)$ if $P(x)$ is a polynomial.
+    \item \textbf{Rational Function Limit Theorem:} $\displaystyle \lim_{x\to c}\frac{f(x)}{g(x)}=\frac{L}{M}$
+    \item \textbf{Root Limit Theorem:} $\displaystyle \lim_{x\to c}f(x)^{1/n}=L^{1/n}$
+    \item \textbf{Sandwich Limit Theorem:} If $\lim_{x\to c}f(x)=\lim_{x\to c}h(x)=L$ and $f(x)\le g(x) \le h(x)$ near $c$ but not necessarily at $c$, then $\lim_{x\to c} g(x) = L$.
+\end{itemize}
+To help with trigonometry problems, here are a few properties you should know (and understand how to derive):
+\begin{itemize}
+    \item $\lim_{x\to 0} \frac{\sin x}{x}=1$
+    \item $\sin x \le x \le \tan x$ for $x\ge 0$. Since all these functions are odd, the inequality works in reverse for $x < 0$.
+    \item $\sqrt{1-x^2} \le \cos x \le 1$
+\end{itemize}
+\textit{Tip:} When solving difficult trigonometry limits, try to break it up into $\sin x/x$ terms. If not possible, try to either bound the limit using the sandwich limit theorem, or bash through applying trig identities.
+
+\section{Continuity Theorems}
+Here are the definitions for continuity at different points:
+\begin{itemize}
+    \item \textbf{Continuity at a point}: $f(x)$ is continuous at $c$ if $\lim_{x\to c}=f(c)$
+    \item \textbf{Continuity on the right}: $f(x)$ is continuous on the right of $c$ if $\lim_{x\to c^+}=f(c)$.
+    \item \textbf{Continuity on the left}: $f(x)$ is continuous on the left of $c$ if $\lim_{x\to c^-}=f(c)$.
+    \item \textbf{Continuity on open interval}: $f(x)$ is continuous on $(a,b)$ iff $f(x)$ is continuous at all $x\in (a,b)$.
+    \item \textbf{Continuity on closed interval}: $f(x)$ is continuous on $[a,b]$ iff $f(x)$ is continuous at all $x\in (a,b)$ and $f(x)$ is continuous from the right of $a$ and from the left of $b$.
+\end{itemize}
+There are also a few continuity theorems discussed in class:
+\begin{itemize}
+    \item Given $f$, $g$, is continuous at $a$, then $f(x)+g(x)$ is continuous at $a$.
+    \item If $g(x)$ is continuous at $a$ and $f(x)$ is continuous at $g(a)$, then $f(g(x))$ is continuous at $a$.
+\end{itemize}
+\section{Derivative Theorems}
+The derivative $f'(x)$ is defined as:
+\begin{equation}
+    f'(x) \equiv \lim_{h\to 0} \frac{f(x+h)-f(x)}{h}
+    \label{eq:}
+\end{equation}
+where $h$ is a dummy variable. A few definitions:
+\begin{itemize}
+    \item \textbf{Differentiability at a point:} If $f'(a)$ exists, we say that $f(x)$ is differentiable at $a$.
+    \item \textbf{Differentiability of function:} If $f'(x)$ is differentiable at all $x \in$ domain of $f(x)$, then $f(x)$ is a differentiable function.
+    \item \textbf{Differentiability on open interval:} $f(x)$ is differentiable on $(a,b)$ if $f'(x)$ is defined for all $x\in (a,b)$
+    \item \textbf{Differentiability on closed interval:} $f(x)$ is differentiable on $[a,b]$ if $f'(x)$ is defined for all $x\in (a,b)$ and the right hand derivative at $a$ exists and the left hand derivative at $b$ exists.
+    \item \textbf{Relation to Continuity:} Given $f(x)$ is differentiable at $a$, then $f(x)$ is continuous at $a$.
+\end{itemize}
+When evaluating derivatives, there are a few theorems that we've learned. The following only apply if the derivatives of each function exists.
+\begin{itemize}
+    \item \textbf{Constant DT:} If $f(x)=C$, then $f'(x)=0$.
+    \item \textbf{Additivity DT:} $(f+g)'=f'+g'$
+    \item \textbf{Product DT:} $(fg)'=f'g+fg'$
+    \item \textbf{Power DT:} If $f(x)=Cx^n$, then $f'(x)=nCx^{n-1}$.
+    \item \textbf{Poly DT:} If $P(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots + a_1x^1+a_0$, then $P'(x)=na_nx^{n-1}+(n-1)a_{n-1}x^{n-2}+\cdots+a_1$.
+    \item \textbf{Reciprocal DT:} $\left(\frac{1}{f}\right)'=\frac{-f'}{f^2}$
+    \item \textbf{Quotient DT:} $(f/g)'=\frac{f'g-fg'}{g^2}$.
+    \item \textbf{Chain DT:} $\frac{d}{dx} f(g(x)) = g'(x) f'g(x) \iff \frac{df}{dx}=\frac{df}{dg}\frac{dg}{dx}$.
+\end{itemize}
+\section{Features of a Graph}
+We can look at extrema points with derivatives:
+\begin{itemize}
+    \item \textbf{Absolute Max}: $f(x)$ has an absolute maximum at $c$ if $f(c) \ge f(x)$ for all $x\in$ domain of $f(x)$.
+    \item \textbf{Absolute Max in closed interval}: $f(x)$ has an absolute max on $[a,b]$ if $f(c) \ge f(x)$ for all $x\in[a,b]$.
+    \item \textbf{Local Max}: $f(x)$ has a local max at $c$ if $f(c) \ge f(x)$ for some open interval containing $c$.
+\end{itemize}
+Here are a few important theorems:
+\begin{theorem}
+    \textbf{Intermediate Value Theorem:} Given that $f(x)$ is continuous on $[a,b]$ and $C$ is some number such that $f(a)<G(a)<f(b)$, there exists some $C$ in $[a,b]$ such that $f(C)=G$.
+\end{theorem}
+\begin{theorem}
+    \textbf{Extreme Value Theorem:} Given $f(x)$ is continuous on $[a,b]$, then $f(x)$ has an absolute maximum $f(c)$ and an absolute minimum $f(x)$ for some $c,d \in [a,b]$.
+\end{theorem}
+\begin{theorem}
+    \textbf{Rolle's Theorem}: Given that $f$ is continuous on $[a,b]$ and $f$ is differentiable on $[a,b)$ and $f(a)=f(b)$, then there exists some $c\in (a,b)$ such that $f'(c)=0$. Note that there may be more than one $c$.
+\end{theorem}
+\begin{theorem}
+    \textbf{Mean Value Theorem:} Given that $f(x)$ is continuous on $[a,b]$ and $f(x)$ is differentiable on $(a,b)$, then there exists some $c\in (a,b)$ such that $f'(c)=\frac{f(b)-f(a)}{b-a}$.
+\end{theorem}
+\subsection{Estimation}
+We can approximate a function $f(x+\Delta x)$ as: $f(x+\Delta x) \approx f(x)+f'(x)\Delta x$. For example, this allows us to estimate something like $29^{1/3}$ as $27^{1/3}+\frac{d}{dx}x^{1/3} \biggr|_{x=27} \cdot 2$.
+\vspace{2mm}
+
+An approximation by itself is useless without a bound. We can create lower and upper bounds by applying the MVT between $[x,x+\Delta x]$ and/or between $[x+\Delta x, x_1]$ and finding the minimum and maximum values for $f'(x)$.
+\subsection{Curve Sketching Prelims}
+We can use Fermat's theorem to determine critical points:
+\begin{definition}
+    $c$ is a critical point of $f(x)$ if $f'(c)=0$ or $f'(c)$ DNE.
+\end{definition}
+Here are some key features that might be seen on a graph:
+\begin{itemize}
+    \item \textbf{Concavity:} If the graph of $y=f(x)$ lies above all its tangents in $I$, then $f(x)$ is concave up in $I$. If it lies below, then it is concave down.
+    \item \textbf{Cusp:} A point $c$ is a cusp if $f(x)$ is continuous at $x=c$ but $\lim_{x\to c^-}f(x)= \pm \infty$ and $\lim_{x\to c^+}f(x)=\mp \infty$.
+    \item \textbf{Vertical Tangent:} A vertical tangent occurs when $\lim_{x\to c} |f'(x)|= \infty$ and $f(x)$ is continuous at $c$.
+    \item \textbf{Slant Asymptote:} If $\lim_{x\to \infty} \left[f(x)-(mx+b)\right]=0$, then $y=mx+b$ is a slant asymptote to $f(x)$ at $+\infty$.
+    \item \textbf{Inflection point:} A point of inflection is at $c$ if $f(x)$ is continuous at $c$ and the sign of concavity changes at $c$.
+\end{itemize}
+A function is increasing on an interval $I$ if $f(x_1)<f(x_2)$ for all $x_1<x_2$ in $I$. Although we can use this definition to find local max/mins, there are a few cutie (QT/quick test) ways to do so:
+\begin{itemize}
+    \item \textbf{QT1: Increasing/Decreasing Test.} If $f$ is differentiable on the interval $I$, we show that if $f'>0$, $f$ is increasing. If $f'<0$, $f$ is decreasing. If $f'=0$, $f$ is constant.
+    \item \textbf{QT2: First Derivative Test} Given that $I$ contains a critical point and $f$ is continuous at $c_\text{crit}$, and $f$ is differentiable in $I$ but not necessarily at $c_\text{crit}$. Then, if $f'>0$ to the left of $c_\text{crit}$ and $f'<0$ to the right, then $c_\text{crit}$ is a local max. If it's the opposite, we get the local minimum.
+    \item \textbf{QT3: Concavity} Given that $f(x)$ is twice differentiable on $I$, then $f''(x)$ exists on $I$. As a result if $f''(x)>0$, $f$ is concave up. If $f''<0$, $f$ is concave down.
+    \item \textbf{QT4: Second Derivative Test} Given that $f''(x)$ is continuous near $c$ and $f'(c)=0$, then if $f''(c)>0$, $f(c)$ is a local minimum. If $f''(c)<0$, $f(c)$ is a local maximum. If $f''(c)=0$, there is no verdict.
+\end{itemize}
+In general, the recipe to test for local max and min is to:
+\begin{itemize}
+    \item Find all $c_\text{crit}$.
+    \item If QT4 applies, use it.
+    \item If it doesn't, and if QT2 applies, use it.
+    \item If QT2 doesn't apply, use the basic definition of increasing/decreasing.
+\end{itemize}
+\subsection{Curve Sketching Steps}
+\begin{enumerate}
+    \item Determine general behaviour:
+    \begin{itemize}
+        \item Find Domain / Range / Limits at $\infty$.
+        \item Determine endpoints if they exist.
+        \item Find vertical, horizontal, slant asymptotes if they exist:
+    \end{itemize}
+    \item Determine $x$ and $y$ intercepts.
+    \item Establish if $f(x)$ is symmetrical, even, odd, and/or periodic.
+    \item Find $f'(x)$ and use this to:
+    \begin{itemize}
+        \item Find all critical points and $f(c_\text{crit})$.
+        \item Find when $f(x)$ is increasing/decreasing.
+        \item Apply QT2.
+        \item Find vertical tangents / cusps if they exist.
+    \end{itemize}
+    \item Find $f''(x)$ and use it to:
+    \begin{itemize}
+        \item Find when $f(x)$ is concave up/down.
+        \item Find points of inflection if they exist.
+        \item Optional: Use QT4 to confirm local max/min
+    \end{itemize}
+    \item Determine the absolute maximum and min by choosing the largest and smallest values of $f$, if they exist.
+\end{enumerate}
+\end{document}
