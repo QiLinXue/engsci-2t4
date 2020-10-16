@@ -1,0 +1,177 @@
+\section{Lecture 17: Sigma Notation + Areas}
+\begin{itemize}
+    \item We begin by introducing sigma notation:
+    \begin{definition}
+        If $a_m,a_{m+1},a_{m+2},\dots,a_n$ are real numbers and $m$ and $n$ are integers such that $m\le n$, then:
+        \begin{equation}
+            \sum_{i=m}^{n}a_i=a_m+a_{m+1}+\cdots+a_{n-1}+a_n
+            \label{eq:}
+        \end{equation}
+    \end{definition}
+    For example:
+    \begin{equation}
+        \sum_{i=1}^4 i^2 = 1^2+2^2+3^3+4^2
+        \label{eq:}
+    \end{equation}
+    There are a few theorems:
+    \begin{itemize}
+        \item For a constant $\alpha$:
+        \begin{equation}
+            \sum_{i=m}^n \alpha a_i = \alpha\sum_{i=m}^n a_i
+            \label{eq:}
+        \end{equation}
+        \item It is also linear:
+        \begin{equation}
+            \sum_{i=m}^n (a_i+b_i) = \sum_{i=m}^na_i + \sum_{i=m}^nb_i
+            \label{eq:}
+        \end{equation}
+        \item $\sum_{i=1}^n \alpha = \alpha n$
+        \item $\sum_{i=1}^n i = \frac{n(n+1)}{2}$
+        \item $\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}$
+        \item $\sum_{i=1}^n i^3 = \left(\frac{n(n+1)}{2}\right)^2$
+        \item $\sum_{i=1}^n i^4 = \frac{n(n+1)(2n+1)(3n^2+3n-1)}{30}$
+    \end{itemize}
+    \item We can prove the last few properties via \textbf{induction}.
+    \item We can also have limits inducing sums. For example, we can think of a sum as a function of $n$:
+    \begin{equation}
+        \sum_{i=1}^n a_i = f(n)
+        \label{eq:}
+    \end{equation}
+    We can then think of the limit:
+    \begin{equation}
+        \lim_{n\to\infty}\sum_{i=1}^na_i
+        \label{eq:}
+    \end{equation}
+    Since $n$ is a parameter, it can appear in other parts of the sum as well.
+    \begin{example}
+        Evaluate $\lim_{n\to \infty}\left[\frac{5}{n}\sum_{i=1}^n\left(\frac{i}{n}\right)^2\right]$. We can evaluate this by separating: to get:
+        \begin{align}
+            \lim_{n\to \infty}\left[\frac{5}{n}\sum_{i=1}^n\left(\frac{i}{n}\right)^2\right] &= \lim_{n\to\infty} \left(\frac{5}{n^3}\sum_{i=1}^n i^2\right) \\ 
+            &= \lim_{n\to\infty} \left(\frac{5}{n^3}\frac{n(n+1)(2n+1)}{6}\right) \\ 
+            \frac{5}{3}
+        \end{align}
+    \end{example}
+    \item Suppose we wish to solve the problem of determining the area under a curve. We can do this via a Riemann sum by approximating a curve as many sub-intervals.
+    \begin{example}
+        Suppose we wish to find the area under the curve of $x \in [0,1]$. Then if there are $n$ rectangles, then the width of each rectangle is
+        \begin{equation}
+            \text{width} = \frac{1-0}{n}=\frac{1}{n}
+            \label{eq:}
+        \end{equation}
+        The height for each of these is:
+        \begin{equation}
+            \frac{1}{n^2},\frac{2^2}{n^2},\dots,\frac{n^2}{n^2}
+            \label{eq:}
+        \end{equation}
+        so the total area is:
+        \begin{align}
+            \text{Area} &= \frac{1}{n}\frac{1}{n^2}+\frac{1}{n}\frac{2^2}{n^3}+\cdots+\frac{1}{n}\frac{n^2}{n^2} \\ 
+            &= \frac{1}{n^3}(1+2^2+3^2+\cdots+n^2) \\ 
+            &= \frac{1}{n^3}\sum_{i=1}^n i^2 \\ 
+            &= \frac{n(n+1)(2n+1)}{6n^3} \\
+            &= \frac{(n+1)(2n+1)}{6n^2} \\
+        \end{align}
+        We can take the limit to find the area to be $\text{Area}=\frac{1}{3}.$
+    \end{example}
+    \begin{definition}
+        A partition is a finite subset of the closed interval $[a,b]$, which contains the points $a$ and $b$. Denoted by $P$.
+    \end{definition}
+    \begin{definition}
+        The norm of $P=\lVert P \rVert$ which is the length of the longest subinterval:
+        \begin{equation}
+            \lVert P \rVert = \max\left(\Delta x_1, \Delta x_2, \dots , \Delta x_n\right)
+        \end{equation}
+    \end{definition}
+    \item In general, the approximated total area under a curve becomes:
+    \begin{equation}
+        \sum_{i=1}^n A_i = \sum_{i=1}^n f(x_i^*)\Delta x_2
+    \end{equation}
+    And we let the largest subinterval go to zero:
+    \begin{equation}
+        A = \lim_{\lVert P \rVert \to 0} \sum_{i=1}^n f(x_i^*)\Delta x_i
+        \label{eq:}
+    \end{equation}
+    to get the total area.
+    \begin{idea}
+        In practice, our subintervals would be equal but this is not always the case in numerical methods.
+    \end{idea}
+    \begin{example}
+        Let $y=\cos x$ and $0\le x\le b\le \frac{\pi}{2}$. To find the area, we can choose a regular partition:
+        \begin{equation}
+            \Delta x_1= \Delta x_2 = \dots = \Delta x_n = \frac{b}{n} = \lVert P \rVert
+            \label{eq:}
+        \end{equation}
+        The right hand endpoints are:
+        \begin{equation}
+            x_i^*=x_i=\frac{ib}{n}
+            \label{eq:}
+        \end{equation}
+        The area is thus:
+        \begin{align}
+            A &= \lim_{\lVert P \rVert \to 0} \sum_{i=1}^n f(x_i^*)\Delta x_i \\ 
+            &= \lim_{n\to \infty}\sum_{i=1}^n \cos\left(\frac{ib}{n}\right)\cdot \frac{b}{n}
+            \label{eq:}
+        \end{align}
+        We can apply the identity that:
+        \begin{equation}
+            \sum_{i=1}^n \cos(ix) = \frac{\sin(nx/2)\cos\left(\frac{x}{2}(n+1)\right)}{\sin(x/2)}
+            \label{eq:}
+        \end{equation}
+        If we let $x=\frac{b}{n}$, then we get:
+        \begin{align}
+            A &= \lim_{n\to \infty} \frac{b}{n} \frac{\sin(b/2)\cos\left(\frac{(n+1)b}{2n}\right)}{\sin(b/2n)} 
+        \end{align}
+        We can look at the limit involving the cosine term:
+        \begin{align}
+            \lim_{n\to \infty} \cos\left(\frac{(n+1)n}{2n}\right) = \cos\left(\frac{b}{2}\right)
+        \end{align}
+        We can then make the substitution $t=\frac{b}{2n}$ to get:
+        \begin{align}
+            \lim_{n\to \infty} \frac{b}{2n} \cdot \frac{2}{\sin(b/2m)} &= \lim_{t\to 0+} 2\cdot \frac{t}{\sin t} \\ 
+            &= 2
+        \end{align}
+        Similarly, we can find the limit of the denominator to get:
+        \begin{equation}
+            A = 2\sin(b/2)\cos(b/2)=\sin(b)
+            \label{eq:}
+        \end{equation}
+    \end{example}
+    \item Here is an example using a nonuniform partition.
+    \begin{example}
+        Evaluate $\int_0^2 x^{1/2} dx$. We can use a non-uniform partition:
+        \begin{equation}
+            x_i=i^2\frac{2}{n^2}
+            \label{eq:}
+        \end{equation}
+        such that:
+        \begin{equation}
+            \Delta x_i=x_i-x_{i-1} = \frac{2}{n^2}\left(i^2-(i-1)^2\right)
+            \label{eq:}
+        \end{equation}
+        For example for $n=4$:
+        \begin{equation}
+            P=\left\{0,\frac{2}{16},\frac{8}{16},\frac{18}{16},\frac{32}{16}\right\}
+            \label{eq:}
+        \end{equation}
+        We can then approximate the area as:
+        \begin{align}
+            A &\approx \sum_{i=1}^n \Delta x_i f(x_i) \\ 
+            &= \sum_{i=1}^n \frac{2}{n^2}\left(i^2-(i-1)^2\right) \cdot \left(i^2 \frac{2}{n^2}\right)^{1/2} \\
+            &= \sum_{i=1}^n \frac{2\sqrt{2}}{n^3}(i(i^3-i^2+2i-1)) \\ 
+            &= \sum_{i=1}^n \frac{2\sqrt{2}}{n^3}(2i^2-1) \\ 
+            &= \frac{2\sqrt{2}}{3} \left(2+\frac{3}{n}+\frac{1}{n^2}\right)
+            \label{eq:}
+        \end{align}
+        where we have applied our properties. Taking the limit as $n\to\infty$ gives us:
+        \begin{equation}
+            A = \frac{2}{3}2^{3/2}
+            \label{eq:}
+        \end{equation}
+        Note that we also have to check that each of our subintervals go to zero, or:
+        \begin{equation}
+            \lim_{n\to \infty} \lVert P \rVert = \Delta x_n = \frac{2}{n^2}\left(n^2-(n-1)^2\right) = 0
+            \label{eq:}
+        \end{equation}
+        
+    \end{example}
+\end{itemize}

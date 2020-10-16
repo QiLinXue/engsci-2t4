@@ -1,0 +1,50 @@
+\section{Lecture 16: Max/Min Problems}
+\begin{itemize}
+    \item When often setting up max min problems, we might have two variables.
+    \begin{example}
+        Suppose that the area of two shapes is $A=x^2+4y^2$ and the total perimeter is a fixed $28$ units. Then:
+        \begin{align}
+            4x+2\pi y &= 28 \\
+            x &= 7 - \frac{\pi}{2}y \\ 
+            A(y) &= \left(7-\frac{\pi}{2}y\right)^2+4y^2
+        \end{align}
+        We can then find the domain of $A(y)$: $0 \le y \le \frac{14}{\pi}$. Endpoints are important! We can have a checklist:
+        \begin{itemize}
+            \item Check critical points. When is $A'=0$? Occurs when $y_\text{crit} = \frac{7}{2+\pi/2} \approx 2\text{ cm}.$
+            \item Check for Endpoints
+            \item Check for local max, min
+            \item Check $\lim_{y\to\infty}$. Doesn't apply here.
+            \item Decision. \small{help that midterm fucked me so hard}
+        \end{itemize}
+    \end{example}
+    \item Method of successive Bisections. If:
+    \begin{itemize}
+        \item $f$ is continuous
+        \item We can find $a$ st $f(a)>0$
+        \item We can find $b$ st $f(b)<0$
+    \end{itemize}
+    These values are determined by trial and error. Then by IVT, the root exists in between $a$ and $b$! We can calculate the halfway point and call that $x_{h1}$. Then we can recursively perform this function to find the root.
+    \item Newton's method is more sophisticated and is easier to use and is much faster. However, $f(x)$ must be differentiable and it doesn't always work.
+    \begin{itemize}
+        \item Make a first guess for $c$, $x_1$.
+        \item Find equation for tangent line at $(x_1,f(x_1))$
+        \item Find x intercept of tangent line. Then let:
+        \begin{equation}
+            x_2=x_1-\frac{f(x_1)}{f'(x_1)}
+            \label{eq:}
+        \end{equation}
+    \end{itemize}
+    \begin{warning}
+        Note that sometimes it doesn't work! E.g. divergence ($x^{1/3}$)
+    \end{warning}
+    \item General approach to find roots:
+    \begin{itemize}
+        \item Try NM first
+        \item If $x_n$'s converge, OK.
+        \item If not,try another.
+        \item If they still diverge, use MOSB.
+    \end{itemize}
+    \begin{definition}
+        $F(x)$ is an antiderivative of $f(x)$ if $F'(x)=f(x)$. For $f(x)=x^5$, $F(x)=\frac{1}{6}x^6+C$.
+    \end{definition}
+\end{itemize}
