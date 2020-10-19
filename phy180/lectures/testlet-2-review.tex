@@ -1,0 +1,123 @@
+\documentclass{article}
+\usepackage{phy}
+
+\title{PHY180: Testlet 2 Review}
+\author{QiLin Xue}
+\date{Fall 2020}
+\usepackage{lmodern}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{bm}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{bbm}
+\usepackage{parskip}
+\usepackage{multicol}
+\usetikzlibrary{arrows}
+\pgfplotsset{compat=1.16}
+\setlength\parindent{0pt}
+\everymath{\displaystyle}
+\usepackage{makeidx}
+\makeindex
+\let\oldtextbf\textbf
+\renewcommand{\textbf}[1]{\oldtextbf{#1}\index{#1}}
+
+\begin{document}
+
+\maketitle
+% \tableofcontents
+\section{General Collisions}
+There are three types of collisions:
+\begin{itemize}
+    \item \textbf{Elastic:} Energy is conserved.
+    \item \textbf{Inelastic:} Some energy is lost.
+    \item \textbf{Completely Inelastic:} Maximum loss of energy. Objects stick together afterwards.
+\end{itemize}
+The \textbf{coefficient of restitution} is defined as:
+\begin{equation}
+    e = \frac{v_{2,f}-v_{1,f}}{v_{1,i}-v_{2,i}}
+    \label{eq:}
+\end{equation}
+For an elastic collision, $e=1$. The \textbf{conservation of momentum} applies when the net external force is zero:
+\begin{equation}
+    m_1v_{1,i}+m_2v_{2,i}=m_1v_{1,f}+m_2v_{2,f}.
+    \label{eq:}
+\end{equation}
+The conservation of energy applies when no energy is being transferred in or out of the system (e.g. friction / explosions could make it lose energy):
+\begin{equation}
+    \frac{1}{2}m_1v_{1,i}^2+\frac{1}{2}m_2v_{2,i}^2=\frac{1}{2}m_1v_{1,f}^2+\frac{1}{2}m_2v_{2,f}^2.
+\end{equation}
+Oftentimes, problems are easier to deal with in the \textbf{center of mass frame}, as the net momentum is zero. The velocity of the center of mass is:
+\begin{equation}
+    v_\text{cm} = \frac{m_1v_1+m_2v_2}{m_1+m_2}
+    \label{eq:}
+\end{equation}
+We can write the energy of the system as:
+\begin{equation}
+    K_\text{tot}=K_\text{cm}+K_\text{conv}
+    \label{eq:}
+\end{equation}
+where:
+\begin{equation}
+    K_\text{cm}=\frac{1}{2}(M+m)v_\text{cm}^2
+    \label{eq:}
+\end{equation}
+For a totally inelastic collision, the energy dissipated (which so happens to be the max) is given by the \textbf{convertible kinetic energy}:
+\begin{equation}
+    K_\text{conv}=\frac{1}{2}\mu v_{12}^2
+    \label{eq:}
+\end{equation}
+where $\mu=\frac{m_1m_2}{m_1+m_2}$ is the \textbf{reduced mass} and $v_{12}$ is the relative velocity of the two objects.
+\subsection{Tips and Tricks}
+When solving a general collisions problem, there are two ways (that are equally as valid) to do so.
+\begin{enumerate}
+    \item Use conservation of momentum and the coefficient of restitution equation. Avoid using conservation of energy unless absolutely needed, since that will give a quadratic.
+    \item View things in the center of mass frame where the total momentum is zero. In this frame, the objects simply collide, switch directions, and have their speeds scaled by a factor of $e$. Switching back to the lab frame gives us the answer.
+\end{enumerate}
+\begin{example}
+    As an example and for practice, I will solve the most general problem. A mass $m_1$ has velocity $v_i$ and collides with a mass $m_2$ with velocity $u_i$. If the coefficient of restitution is $e$, what are their final velocities $v_f$ and $u_f$?
+    \vspace{2mm}
+
+    We have two equations:
+    \begin{align}
+        u_f-v_f&=ev_i-eu_i \\
+        m_1v_i+m_2u_i &= m_1v_f+m_2u_f
+    \end{align}
+    Making the substitution $u_f=ev_i-eu_i+v_f$ gives us:
+    \begin{align}
+        m_1v_i+m_2u_i &= m_1v_f+m_2(ev_i-eu_i+v_f) \\
+        m_1v_i+m_2u_i &= (m_1+m_2)v_f+m_2ev_i-m_2eu_i \\ 
+        v_f &= \frac{m_1v_i+m_2u_i-em_2(u_i-v_i)}{m_1+m_2}
+    \end{align}
+    and similarly for $u_f$, we have:
+    \begin{equation}
+        u_f = \frac{m_1v_i+m_2u_i-em_1(v_i-u_i)}{m_1+m_2}
+    \end{equation}
+\end{example}
+\begin{example}
+\vspace{2mm}
+We can also solve this from the center of mass frame. The CoM has a velocity of $v_\text{cm}=\frac{m_1v_i+m_2u_i}{m_1+m_2}$, so in this frame, the two objects have a velocity of $v'_i=v_i-v_\text{cm}$ and $u'_i=u_i-v_\text{cm}$. When they collide, their velocities change by a factor of $-e$ to become:
+\begin{align}
+    v'_f &= -e(v_i-v_\text{cm}) \\
+    u'_f &= -e(u_i-v_\text{cm}) 
+\end{align}
+and shifting back to the lab frame, they have velocities of:
+\begin{align}
+    v'_f &= -e(v_i-v_\text{cm})+v_\text{cm}=\frac{m_1v_i+m_2u_i}{m_1+m_2}(1+e)-ev_i \\
+    u'_f &= -e(u_i-v_\text{cm})+v_\text{cm}=\frac{m_1v_i+m_2u_i}{m_1+m_2}(1+e)-eu_i
+\end{align}
+which you can verify is the same result as in example 1.
+\end{example}
+\section{Energy}
+For a closed system, the change in \textbf{mechanical energy} is zero:
+\begin{equation}
+    \Delta E_\text{mech}=\Delta K + \Delta U = 0
+    \label{eq:}
+\end{equation}
+The potential energy near Earth's surface is:
+\begin{equation}
+    U_g = mgh
+    \label{eq:}
+\end{equation}
+
+\end{document}
