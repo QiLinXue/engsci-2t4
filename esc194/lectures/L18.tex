@@ -1,0 +1,133 @@
+\section{The Definite Integral}
+\begin{itemize}
+    \item We introduce the definite integral. We have already seen that:
+    \begin{equation}
+        \lim_{\lVert P\rVert \to 0} \sum_{i=1}^n f(x_i^*) \Delta x_i
+        \label{eq:}
+    \end{equation}
+    which arises when we find the area under a curve.
+    \begin{definition}
+        If $f$ is a function defined on a closed interval $[a,b]$, let $P$ be a partition of $[a,b]$ with partition $x_0,x_1,x_2,\dots,x_n$ where:
+        \begin{equation}
+            a=x_0<x_1<x_2<\dots<x_n=b
+            \label{eq:}
+        \end{equation}
+        Choose points $x_i^*$ within each subinterval $[x{i+1},x_i]$ and let $\Delta x_i=x_i-x_{i-1}$, and $\lVert P \rVert =\max\{\Delta x_i\}$. Then the \textbf{definite integral} of $f$ from $a$ to $b$ is:
+        \begin{equation}
+            \int_a^b f(x) \dd{x} \equiv \lim_{\Vert P \rVert} \sum_{i=1}^n f(x_i^*)\Delta x_i
+            \label{eq:}
+        \end{equation}
+        if the limit exists. If the limit does exist, then $f$ is called integrable on the interval $[a,b]$. The sign $\int$ is called the integral sign. $f(x)$ is known as the \textbf{integrand}, and $a,b$ are the limits of integration. The output is a single number that does not depend on $x$.
+    \end{definition}
+    \item A Riemann Sum is:
+    \begin{equation}
+        \sum_{i=1}^n f(x_i^*)\Delta x
+        \label{eq:}
+    \end{equation}
+    and we have used this to define an integral, but there are other definitions as well.
+    \begin{warning}
+        The integral is not defined as the area under a curve, but it can be approximated as such.
+    \end{warning}
+    \begin{idea}
+        If we have:
+        \begin{equation}
+            \in_a^b f(x) \dd{x} = I
+            \label{eq:}
+        \end{equation}
+        then for ever $\epsilon>0$, there exists a $\delta >0$ such that:
+        \begin{equation}
+            \left|I-\sum_{i=1}^nf(x_i^*)\Delta x_i\right| < \epsilon
+            \label{eq:}
+        \end{equation}
+        for all partitions $P$ of $[a,b]$ with $\lVert P \rVert <\delta $ and all possible choices of $x_i^*$ in $[x_{i-1},x_i].$
+    \end{idea}
+    \item If $b<a$, then:
+    \begin{equation}
+        \int_a^b f(x) \dd{x} = -\int_b^a f(x)\dd{x}
+        \label{eq:}
+    \end{equation}
+    and if $a=b$, then:
+    \begin{equation}
+        \int_a^b f(x)\dd{x} = 0 
+        \label{eq:}
+    \end{equation}
+    \item How can we proved that the integral exists? We can use the theorem:
+    \begin{theorem}
+        Continuous and/or piecewise continuous on $[a,b]$ guarantees integrability on $[a,b]$,
+    \end{theorem}
+    \begin{definition}
+        A function is \textbf{piecewise continuous} if it only has a finite number of jump discontinuities.
+    \end{definition}
+    \item There are a few conventions to make Riemann sums more accessible:
+    \begin{itemize}
+        \item We usually select regular partitions:
+        \begin{equation}
+            \Delta x = \Delta x_1= \Delta x_2 = \cdots = \Delta x_n = \frac{b-a}{n}
+            \label{eq:}
+        \end{equation}
+        \item And we select $x_i^*$ to be the RH end point such that:
+        \begin{equation}
+            x_i^* = x_i = a+i\Delta x = a+i\frac{b-a}{n}
+            \label{eq:}
+        \end{equation}
+    \end{itemize}
+    Therefore, the integral can be written as:
+    \begin{equation}
+        \int_a^b f(x) \dd{x} = \lim_{n\to \infty}\sum_{i=1}^n f\left(a+i\frac{b-a}{n}\right)\frac{b-a}{n}
+        \label{eq:}
+    \end{equation}
+    \begin{example}
+        Suppose we wish to evaluate $\int_0^3 (x^3-5x) \dd{x}$. Then:
+        \begin{align}
+            I &= \lim_{n\to\infty} \frac{3}{n} \sum_{i=1}^n \left[\left(\frac{3i}{n}\right)^3-5\left(\frac{3i}{n}\right)\right] \\ 
+            &= \lim_{n\to \infty} \left[\frac{81}{n^4}\sum_{i=1}^n i^3 - \frac{45}{n^2}\sum_{i=1}^n i\right] \\ 
+            &= \lim_{n\to \infty}\left[\frac{81}{n^4}\left(\frac{n(n+1)}{2}\right)^2-\frac{45}{n^2}\frac{n(n+1)}{2}\right] \\ 
+            &= \lim_{n\to\infty} \left[\frac{81}{4}\left(1+\frac{1}{n}\right)^2-\frac{45}{2}\left(1+\frac{1}{n}\right)\right] \\ 
+            &= \frac{81}{4}-\frac{45}{2} \\ 
+            &= -\frac{9}{4}
+        \end{align}
+        Note that since right hand endpoints can be a problem, we can also define this by using a LH end point or even a midway endpoint.
+    \end{example}
+    \item There are a few properties:
+\begin{itemize}
+    \item Constant:    \begin{equation}
+        \int_a^b c\dd{x} = c(b-a)
+        \label{eq:}
+    \end{equation}
+    \item Additivity: \begin{equation}
+        \int_a^b \left(f(x) \pm g(x)\right) \dd{x} = \int_a^b f(x)\dd{x} \pm \int_a^b g(x)\dd{x}
+    \end{equation}
+    \item Constant Multiple:
+    \begin{equation}
+        \int_a^b c(f)x \dd{x} = c\int_a^b f(x)\dd{x}
+    \end{equation}
+    \item Changing Limits:
+    \begin{equation}
+        \int_a^b f(x) \dd{x} = \int_a^zf(x)\dd{x} + \int_z^b\dd{x}
+    \end{equation}
+\end{itemize}
+\item There are also order properties of integrals. If $a<b$, then:
+\begin{itemize}
+    \item If $f(x)\ge 0$ for $a\le x\le b$, then
+    \begin{equation}
+        \int_a^b f(x)\dd{x} \ge 0
+        \label{eq:}
+    \end{equation}
+    \item If $f(x) \ge g(x)$ for $a\le x\le b$, then:
+    \begin{equation}
+        \int_a^b f \dd{x} \ge \int_a^b g(x) \dd{x}
+        \label{eq:}
+    \end{equation}
+    \item If $m\le f(x) \le M$ for $a\le x\le b$, then:
+    \begin{equation}
+        m(b-a) \le \int_a^b f\dd{x} \le M(b-a)
+        \label{eq:}
+    \end{equation}
+    \item Absolute values:
+    \begin{equation}
+        \left|\int_a^b f(x) \dd{x}\right| \le \int_a^b |f(x)| \dd{x}
+    \end{equation}
+    
+\end{itemize}
+    
+\end{itemize}
