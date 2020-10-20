@@ -119,5 +119,94 @@ The potential energy near Earth's surface is:
     U_g = mgh
     \label{eq:}
 \end{equation}
+\section{Notes on Frames of Reference}
+\textit{Note:} Invariant is simply a fancy word for ``does not change.'' Mazur doesn't use this vocabulary but it is the technical term when talking about what doesn't change as we move across reference frames, and will be very important when we discuss special relativity next year.
 
+The following are invariant in different inertial reference frames.
+\begin{itemize}
+    \item The relative velocity is invariant across frames.
+    \item The maximum convertible energy is invariant across frames.
+    \item The change in energy is invariant across frames.
+    \item The mass is invariant across frames.
+\end{itemize}
+
+Note that the following are not invariant:
+\begin{itemize}
+    \item The kinetic energy is not invariant.
+    \item The velocity of the center of mass is not invariant.
+\end{itemize}
+\section{Center of Mass}
+The center of mass is defined as for a system of point objects:
+\begin{equation}
+    x_\text{cm} = \frac{m_1x_1+m_2x_2+\cdots+m_nx_n}{m_1+m_2+\cdots+m_n}
+\end{equation}
+For a continuous distribution, the center of mass is:
+\begin{equation}
+    x_\text{cm} = \frac{1}{M}\int_a^b x \dd{m}
+    \label{eq:}
+\end{equation}
+where $x=a$ and $x=b$ are the endpoints, and $M$ is the total mass.
+\begin{idea}
+    The motivation behind this formulation is intuition. Imagine taking a continuous distribution and breaking everything up into extremely small pieces each with a mass $dm$. The denominator is still the total mass. However in the numerator, you are summing up each individual mass $dm$ with its x-coordinate (which can be as large or as small as the problem requires). Instead of writing it as a sum $\sum$, we can treat it as an integral for infinitely many tiny masses.
+\end{idea}
+\begin{warning}
+    We'll probably not need this for the test, but I'm writing it down just in case.
+\end{warning}
+To find the center of mass of any distribution, perform the following steps:
+\begin{enumerate}
+    \item Define where your coordinate system starts. In other words, where in the diagram is $x=0$?
+    \item Determine the two endpoints of the object. It is often helpful to set one endpoint to be at the origin $x=0$.
+    \item Find the total mass of the system. You may need to introduce a new density variable $\rho$ (either mass/volume, mass/area, or mass/length), depending if your object is in 3d, 2d, or 1d. This term (if you need it), will cancel out at the end.
+    \item Write $dm$ as a function of $x$ and $dx$. (Recall error lesson in calculus, think of differentials as physical quantities!) Consider a small segment of the mass a distance $x$ away with a width of $dx$. What is the mass $dm$ of this segment?
+    \item Replace $dm$ with what you found, solve the integral, and simplify.
+    \item Repeat the above if you wish to find the center of mass in the $y$ direction as well.
+    \item Double check that your answer has dimensions of length.
+\end{enumerate}
+\begin{example}
+    Suppose we wish to solve for the center of mass of a cone with radius $R$ and a height $h$.
+    \begin{enumerate}
+        \item Set $x=0$ to be at the tip of the cone.
+        \item Set the bounds to be at $x=0$ and $x=h$.
+        \item If the density of the cone is $\rho$ (which we assume to be constant), then the mass of the cone is given by:
+        \begin{equation}
+            M = \rho V = \rho \frac{1}{3}\pi R^2 h
+            \label{eq:}
+        \end{equation}
+        \item If we consider a tiny segment a distance $x$ away with thickness $dx$, then we essentially have a disk with a radius of:
+        \begin{equation}
+            r = \frac{R}{h}x
+            \label{eq:}
+        \end{equation}
+        so it has a cross sectional area of:
+        \begin{equation}
+            A = \pi r^2 = \pi \left(\frac{R}{h}x\right)^2
+            \label{eq:}
+        \end{equation}
+        and a mass of:
+        \begin{equation}
+            dm = \rho A dx = \rho \pi \left(\frac{R}{h}\right)^2 x^2 \dd{x}
+            \label{eq:}
+        \end{equation}
+        \item The integral now becomes:
+        \begin{align}
+            x_\text{cm}&=\frac{1}{\rho \frac{1}{3}\pi R^2 h} \int_0^h \rho \pi \left(\frac{R}{h}\right)^2 x^3 \dd{x} \\ 
+            &= \frac{3}{h^3} \int_0^h  x^3 \dd{x} \\ 
+            &= \frac{3}{h^3} \cdot \frac{h^4}{4} \\ 
+            &= \frac{3}{4}h
+            \label{eq:}
+        \end{align}
+        \item This has dimensions of length, so we're all good.
+    \end{enumerate}
+\end{example}
+Another representation of the center of mass that you may have seen in your tutorial is:
+\begin{equation}
+    x_\text{cm} = \frac{\displaystyle \int_0^L m(x)x \dd{x}}{\displaystyle\int_0^L m(x) \dd{x}}
+    \label{eq:}
+\end{equation}
+where $m(x)$ here is the mass per unit length. Note that the denominator is just the total mass of the system $M$ and the quantity:
+\begin{equation}
+    m(x)\dd{x}
+    \label{eq:}
+\end{equation}
+is exactly the same as the differential mass $\dd{m}$.
 \end{document}
