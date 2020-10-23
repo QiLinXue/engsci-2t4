@@ -1,0 +1,100 @@
+\documentclass{article}
+\usepackage{phy}
+
+\title{PHY180: Testlet 2 Unofficial Solutions}
+\author{QiLin Xue}
+\date{Fall 2020}
+\usepackage{lmodern}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{bm}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{bbm}
+\usepackage{parskip}
+\usepackage{multicol}
+\usetikzlibrary{arrows}
+\pgfplotsset{compat=1.16}
+\setlength\parindent{0pt}
+\everymath{\displaystyle}
+\usepackage{makeidx}
+\makeindex
+\let\oldtextbf\textbf
+\renewcommand{\textbf}[1]{\oldtextbf{#1}\index{#1}}
+
+\begin{document}
+
+\maketitle
+% \tableofcontents
+\section*{MC Problem 1: Five Choices}
+\begin{enumerate}
+    \item Incorrect. Gravity is doing external work on the ball, so on the way up, the kinetic energy is constantly decreasing.
+    \item Incorrect. The momentum of the ball is constantly changing since there is an external force (gravity) acting on the ball.
+    \item Correct. Energy of the ball-Earth system is conserved and there is no external work (ignore air resistance).
+    \item Correct. Gravity is now an internal force and the momentum of the ball-Earth system is conserved.
+    \item Incorrect. Since $U_g$ changes, the kinetic energy of the ball-earth system also changes.
+\end{enumerate}
+\section*{MC Problem 2: Center of Mass}
+False. We can find a counterexample where the center of mass does not evenly divide two sides with equal masses. Consider an object with mass $m=1\text{ kg}$ at $x=0$ and a mass $m=2\text{ kg}$ at $x=1 \text{ m}$. It's evident that the center of mass will lie somewhere in between these two point objects (specifically at $x=2/3\text{ m}$), where the mass on both sides is not the same.
+
+\section*{FRQ Problem 1: Potential Energy}
+From conservation of energy:
+\begin{equation}
+    U_i+K_i+K_f=U_f
+    \label{eq:}
+\end{equation}
+We are told that the initial conditions: The object starts off at $x=1\text{ m}$ with a speed $v_0$. We wish to find the final speed $v_f$ at $x=x_f$. We are given the potential energy function to be: $U(x)=10/x^2$ and the mass of the object as $m$. Thus:
+\begin{align*}
+    10+\frac{1}{2}mv_0^2&=\frac{1}{2}mv_f^2+\frac{10}{x_f^2} \\
+    v_f &= \sqrt{\frac{2}{m}\left(10+\frac{1}{2}mv_0^2-\frac{10}{x_f^2}\right)}
+\end{align*}
+
+\section*{FRQ Problem 2: Two colliding balls}
+Hmm, not actually sure about this one and had to read up in Mazur what source energy was referring to. We shall assume that an additional kinetic energy of $\Delta E$ was added to the system. Let the two masses be $m$ and $M$ where $M$ is the mass originally at rest. If $m$ has an initial speed of $v$ and $M$ has an initial speed of $u=0$, then conservation of momentum + energy gives:
+\begin{align*}
+    mv &= mv_f+Mu_f \\
+    \frac{1}{2}mv^2+\Delta E &= \frac{1}{2}mv_f^2+\frac{1}{2}Mu_f^2
+\end{align*}
+We have two unknowns and two equations, so we can solve for the final two velocities to get the relative velocity. There's probably a slicker way using the CoM but I panicked and defaulted to the bashy method.
+
+\section*{FRQ Problem 3: Pulley}
+Conservation of energy gives (here $m_2$ refers to the heavier object):
+\begin{equation}
+    K_i+U_i = K_f + U_f \implies K_f = -\Delta U 
+    \label{eq:}
+\end{equation}
+where the change in potential energy is:
+\begin{equation}
+    \Delta U = m_1g \Delta h_1-m_2\Delta h_1 = (m_1-m_2)g\Delta h_1
+    \label{eq:}
+\end{equation}
+so the final speed of both objects are:
+\begin{equation}
+    \frac{1}{2}(m_1+m_2)v^2 = (m_2-m_2)g\Delta h_1 \implies v = \sqrt{\frac{2(m_2-m_1)}{m_2+m_1}g\Delta h_1}
+    \label{eq:}
+\end{equation}
+and the velocity of the center of mass is given by:
+\begin{equation}
+    v_\text{cm} = \frac{m_1v+m_2(-v)}{m_1+m_2} 
+    \label{eq:}
+\end{equation}
+taking upwards to be positive. This should give a negative quantity.
+
+\section*{FRQ Problem 4: Coefficient of Restitution}
+Let the height that the first pendulum decreases to be $f$ (e.g. $f=0.101$ for $10.1\%$.) The initial speed of the first mass is $\sqrt{2gh}$ if the initial height is $h$. This is a result from conservation of energy. Similarly the final speed right after the collision of the first mass is $\sqrt{2gfh}$. Conservation of momentum then gives:
+\begin{equation}
+    m\sqrt{2gh}+m(0)=m\sqrt{2gfh}+mu \implies u =\sqrt{2gh}\left(1-\sqrt{f}\right)
+    \label{eq:}
+\end{equation}
+where $u$ is the unknown speed of the second mass. The coefficient of restitution is given by:
+\begin{equation}
+    e = \frac{u-\sqrt{2gfh}}{\sqrt{2gh}-0} = \frac{\sqrt{2gh}\left(1-\sqrt{f}\right)-\sqrt{2gfh}}{\sqrt{2gh}}
+    \label{eq:}
+\end{equation}
+we can divide top and bottom by $\sqrt{2gh}$ to get:
+\begin{equation}
+    e = \frac{1-\sqrt{f}-\sqrt{f}}{1} = 1-2\sqrt{f}
+    \label{eq:}
+\end{equation}
+If you have $f=10.1\%$, this corresponds to a CoR of $e=0.364$. As a quick check, note that if $f=0$, then we would have $e=1$ which corresponds to an elastic collision. This makes sense since in a Newton's cradle, the incoming mass stays still afterwards.
+\end{document}

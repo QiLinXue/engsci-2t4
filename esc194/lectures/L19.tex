@@ -1,0 +1,100 @@
+\section{The Fundamental Theorem of Calculus}
+\begin{itemize}
+    \item Suppose we have the new function:
+    \begin{equation}
+        F(x) = \int_a^x f(t) \dd{t}
+        \label{eq:}
+    \end{equation}
+    where $t$ is the dummy variable. For example, the area of a 45 degree triangle is:
+    \begin{equation}
+        \int_0^x t dt = \frac{1}{2}x^2 = F(x)
+        \label{eq:}
+    \end{equation}
+    Notice that:
+    \begin{equation}
+        F'(x) = x = f(x)
+        \label{eq:}
+    \end{equation}
+    \item For $h>0$, we can approxiamately write that:
+    \begin{equation}
+        F(x+h)-F(x) \simeq hf(x) \implies \frac{F(x+h)-F(x)}{h} \simeq f(x)
+        \label{eq:}
+    \end{equation}
+    \begin{theorem}
+        Let $f$ be continuous on $[a,b]$. The function $F$ is defined on $[a,b]$ by:
+        \begin{equation}
+            F(x)=\int_a^x f(t) \dd{t}
+            \label{eq:}
+        \end{equation}
+        is continuous on $[a,b]$, differentiable on $(a,b)$ and has derivative
+        \begin{equation}
+            F'(x) = f(x)
+            \label{eq:}
+        \end{equation}
+        for all $x\in (a,b)$.
+    \end{theorem}
+    \begin{prooof}
+        For $x$ and $x+h$ in $(a,b)$,
+        \begin{align}
+            F(x+h)-F(x) &= \int_a^{x+h} f(x) \dd{t} - \int_a^x f(x) \dd{t} \\ 
+            &= \int_a^x f(t)\dd{t} + \int_x^{x+h}f(t)\dd{t}-\int_a^x f(t)\dd{t} \\ 
+            &= \int_x^{x+h} f(t) \dd{t}
+        \end{align}
+        For $h\neq 0$, we have:
+        \begin{equation}
+            \frac{F(x+h)-F(x)}{h}=\frac{1}{h}\int_x^{x+h}f(t)\dd{t}
+            \label{eq:}
+        \end{equation}
+        We can separate it into cases. If $h>0$, then we can write per the extreme value theorem the minimum value of $f$ as $f(u)=m$ and the maximum value as $f(v)=M$ for $u,v\in[x,x+h]$ such that:
+        \begin{equation}
+            mh \le \int_x^{x+h} f(t)\dd{t} \le Mh
+            \label{eq:}
+        \end{equation}
+        or:
+        \begin{equation}
+            f(u)h \le \int_x^{x+h}f(t)\dd{t} \le f(v)h
+            \label{eq:}
+        \end{equation}
+        which we can rewrite, after dividing through by $h$:
+        \begin{equation}
+            f(u) \le \frac{F(x+h)-F(x)}{h} \le f(v)
+            \label{eq:}
+        \end{equation}
+        As $h\to 0$, we have $u\to x$ and $v\to x$. Therefore:
+        \begin{align}
+            \lim_{h\to 0} f(u) &= \lim_{u\to x}f(u) = f(x) \\ 
+            \lim_{h\to 0} f(v) &= \lim_{v\to x}f(v) = f(x)
+            \label{eq:}
+        \end{align}
+        which gives us:
+        \begin{equation}
+            F'(x)=\lim_{h\to 0} \frac{F(x+h)-F(x)}{h} = f(x)
+            \label{eq:}
+        \end{equation}
+        or:
+        \begin{equation}
+            \frac{d}{dx}\int_a^x f(t) \dd{t} = f(x)
+            \label{eq:}
+        \end{equation}
+    \end{prooof}
+    \item Now we can come to the \textbf{fundamental theorem of calculus}
+    \begin{theorem}
+        Let $f$ be continuous on $[a,b]$. If $G$ is any antiderivative for $f$ on $[a,b]$, then:
+        \begin{equation}
+            \int_a^b f(t) \dd{t} = G(b)-G(a)
+            \label{eq:}
+        \end{equation}
+    \end{theorem}
+    \begin{prooof}
+        Given that $F(x)=\int_a^x f(t) \dd{t}$ is an antiderivative of $f$ and given that $G$ is an antiderivative, then:
+        \begin{equation}
+            F'(x)=G'(x) \implies F(x) = G(x)+C
+            \label{eq:}
+        \end{equation}
+        We know that $F(a)=0$, so $G(a)+C=0$ or $C=-G(a)$, which gives:
+        \begin{equation}
+            \int_a^b f(t) \dd{t} = F(b) = G(b) - G(a)
+            \label{eq:}
+        \end{equation}
+    \end{prooof}
+\end{itemize}

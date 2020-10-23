@@ -1,0 +1,45 @@
+\section{Indefinite Integrals and the net Change Theorem}
+\begin{itemize}
+    \item Recall that antiderivatives are not unique. If $F(x)$ is an antiderivative, then: $G(x)=F(x)+C$ is also an antiderivative.
+    \item For example, the indefinite integral of:
+    \begin{equation}
+        \int x \dd{x} = \frac{1}{2}x^2 + C
+        \label{eq:}
+    \end{equation}
+    gives a family of curves. The textbook gives a list of common derivatives.
+    \item We can alternatively write the fundamental theorem of calculus as:
+    \begin{equation}
+        \int_a^b F'(x) \dd{x} = F(b)-F(a)
+        \label{eq:}
+    \end{equation}
+    which can be interpreted as the net change of $F'(x)$. For example:
+    \begin{equation}
+        \Delta x = \int_a^b v(t) \dd{t}
+        \label{eq:}
+    \end{equation}
+    gives the displacement from $t=a$ to $t=b$.
+    \item Recall that the chain rule for derivatives is given by:
+    \begin{equation}
+        \frac{d}{dx}f(g(x)) =f'(g(x))\cdot g'(x)
+        \label{eq:}
+    \end{equation}
+    \begin{idea}
+        We can extend this to integration. Suppose we have an integral in the form:
+        \begin{equation}
+            \int f(g(x))g'(x) \dd{x}
+            \label{eq:}
+        \end{equation}
+        If we let $u=g(x)$, then $du=g'(x) dx$. So we can simplify the integral to:
+        \begin{equation}
+            \int f(u) \dd{u} = F(u) +C = F(g(x)) + C
+            \label{eq:}
+        \end{equation}      
+    \end{idea}
+    Once we have the indefinite integral, we can use back substitution to find the definite integral. We can avoid this step using a change of variables.
+    \begin{theorem}
+        \begin{equation}
+            \int_a^b f(g(x))g'(x)\dd{x} = \int_{g(a)}^{g(b)} f(u) \dd{u}
+        \end{equation}
+    \end{theorem}
+    \item We can also abuse symmetry.
+\end{itemize}
