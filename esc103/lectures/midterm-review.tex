@@ -143,7 +143,7 @@ We can write out any point on a plane given a linear combination of two vectors 
         x\\y\\z
     \end{bmatrix}=\begin{bmatrix}
         x_0\\y_0\\z_0
-    \end{bmatrix}c\vec{d}_1+d\vec{d}_2
+    \end{bmatrix}+c\vec{d}_1+d\vec{d}_2
     \label{eq:}
 \end{equation}
 where $\begin{bmatrix}
@@ -160,7 +160,80 @@ by taking the cross product between any two vectors $\overrightarrow{P_0P}$ that
     \overrightarrow{P_0P} \cdot \vec{n} = 0
     \label{eq:}
 \end{equation}
-TODO: Will revisit this part with more plane related things (e.g. projections onto a plane, distance from line to plane, alternate representations of planes.)
+Using this information, we can derive the following theorems and ideas:
+\begin{idea}
+    If $\vec{n}=\begin{bmatrix}
+        a\\b\\c
+    \end{bmatrix}$ is a normal vector, then the plane that it defines can be represented by the \textbf{scalar equation} $ax+by+cz+d=0$.
+    \begin{proof}
+        Suppose we know a given point $P_0=\begin{bmatrix}
+            x_0\\y_0\\z_0
+        \end{bmatrix}$ on the plane. Then we can choose any other point on the plane $P=\begin{bmatrix}
+            x\\y\\z
+        \end{bmatrix}$ which can define any arbitrary vector that is paralell to the plane:
+        \begin{equation}
+            \vec{v} = P-P_0 = \begin{bmatrix}
+                x-x_0\\y-y_0\\z-z_0
+            \end{bmatrix}
+            \label{eq:}
+        \end{equation}
+        The dot product between $\vec{v}$ and $\vec{n}$ must be equal to zero, which gives:
+        \begin{equation}
+            a(x-x_0)+b(y-y_0)+c(z-z_0)=0
+            \label{eq:}
+        \end{equation}
+        Expanding, we get the form that we desire.
+    \end{proof}
+\end{idea}
+\begin{idea}
+    The distance from a point $P=(x_0,y_0,z_0)$ to the plane $ax+by+cz+d=0$ is given by:
+    \begin{equation}
+        D = \frac{|ax_0+by_0+cz_0+d|}{\sqrt{a^2+b^2+c^2}}
+        \label{eq:}
+    \end{equation}
+    \textit{Note:} We are not allowed to use this formula on the test, but we can derive it below. Refer to the following diagram:
+\begin{center}
+    \includegraphics[width=0.4\linewidth]{plane-point.png}
+\end{center}
+    \begin{proof}
+        The normal vector to the plane is given by:
+        \begin{equation}
+            \vec{n}=\begin{bmatrix}
+                a\\b\\c
+            \end{bmatrix}
+            \label{eq:}
+        \end{equation}
+        
+        Define $\vec{w}$ as the vector from any point $P$ to any given point $(x,y,z)$ on the plane such that:
+        \begin{equation}
+            \vec{w} = \begin{bmatrix}
+                x-x_0\\ 
+                y-y_0 \\ 
+                z-z_0
+            \end{bmatrix}
+            \label{eq:}
+        \end{equation}
+        The scalar projection of $\vec{w}$ on $\vec{n}$ then gives the orthogonal component, and thus the shortest distance between $P$ and the plane:
+        \begin{align}
+            D &= |\text{proj}_{\vec{n}}\vec{w}| \\ 
+            &= \frac{|\vec{n}\cdot\vec{w}|}{|\vec{v}|} \\ 
+            &=
+             \left|\frac{a(x-x_0)+b(y-y_0)+c(z-z_0)}{\sqrt{a^2+b^2+c^2}}\right| \\ 
+             &= \left|\frac{(ax+by+cz)-ax_0-by_0-cz_0}{\sqrt{a^2+b^2+c^2}}\right| \\ 
+             &= \left|\frac{-d-ax_0-by_0-cz_0}{\sqrt{a^2+b^2+c^2}}\right| \\ 
+             &= \left|\frac{d+ax_0+by_0+cz_0}{\sqrt{a^2+b^2+c^2}}\right|
+        \end{align}
+    \end{proof}
+    This is the general way when determining the distance from a point to a plane. You first need to figure out the normal vector (e.g. this can also be done by determining two vectors that lie parallel to the plane and taking their cross product), and then the vector between any given point to the point of interest. Getting the orthogonal projection yields the distance to the plane.
+\end{idea}
+\begin{idea}
+    The projection of a vector $\vec{v}$ onto a plane $\Pi$ defined by the normal vector $\vec{n}$ is:
+    \begin{equation}
+        \text{proj}_{\Pi} = \vec{v}-\text{proj}_{\vec{n}}\vec{v}
+        \label{eq:}
+    \end{equation}
+    We can also show this by drawing a picture!
+\end{idea}
 \section{Matrix Multiplication and Linear Transformations}
 A matrix can be used to represent systems of linear equations. For example, the following set:
 \begin{align}
