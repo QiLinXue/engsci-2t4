@@ -1,0 +1,55 @@
+\section{Volumes}
+\begin{itemize}
+    \item Suppose we have a cylinder whose axis is parallel to the $x$ axis. Then we can break up the volume into thin sections:
+    \begin{equation}
+        V_i \simeq A_i \Delta x_i 
+        \label{eq:}
+    \end{equation}
+    so the volume is:
+    \begin{equation}
+        V = \int_a^b A(x) \dd{x}
+        \label{eq:}
+    \end{equation}
+    which is the general formula for the volume of any shape. If we can figure out $A(x)$ and the necessary bounds, we can find the volume for any change.
+    \begin{example}
+        Suppose we wish to find the volume of a sphere. If we slice it up into small disks, then the area of each disk is:
+        \begin{equation}
+            A=\pi\left(\sqrt{r^2-x^2}\right)^2
+            \label{eq:}
+        \end{equation}
+        then the volume is:
+        \begin{equation}
+            V=\int_{-r}^r \pi (r^2-x^2)\dd{x} = \frac{4}{3}\pi r^3
+            \label{eq:}
+        \end{equation}
+    \end{example}
+    \item For \textbf{solids of revolution}, imagine rotating the curve around the x-axis. Then the area of each disk is:
+    \begin{equation}
+        A(x) = \pi f(x)^2
+        \label{eq:}
+    \end{equation}
+    so using the disk method gives us the volume as:
+    \begin{equation}
+        V = \int_a^b \pi f(x)^2 \dd{x}
+        \label{eq:}
+    \end{equation}
+    when the function $f(x)$ is rotated around the $x$ axis.
+    \item This even works for curves that cross the axis, since we end up squaring $f(x)$. For example, we can apply the same formula to $y=2-x^2$ from $x\in[0,2]$.
+    \item Additionally, we can use the disk method about the y-axis:
+    \begin{equation}
+        V=\int_c^d \pi g(y)^2 \dd{y}
+        \label{eq:}
+    \end{equation}
+    \item If we want the volume of revolution formed by rotating the region between two curves. The area between the two curves $f(x)$ and $g(x)$ is:
+    \begin{equation}
+        A = \pi \left(f(x)^2-g(x)^2\right)
+        \label{eq:}
+    \end{equation}
+    and we get:
+    \begin{equation}
+        V = \int_a^b \pi \left(f(x)^2-g(x)^2\right)\dd{x}
+        \label{eq:}
+    \end{equation}
+    known as the washer method. It works similarly for regions rotated about the $y$ axis. Another way of looking at it is determining the volume of $f(x)$ rotated around the $x$ axis and subtracting the volume of $g(x)$ rotated around the $x$ axis from it.
+    \item If we wish to find the volume bounded by two curves, then we need to find their intersection points first.
+\end{itemize}
