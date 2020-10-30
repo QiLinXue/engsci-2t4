@@ -1,0 +1,54 @@
+\section{Volumes by Cylindrical Shells}
+\begin{itemize}
+    \item Sometimes, the washer method is difficult to apply. Suppose we wish to rotate a curve $f(x)$ from $x=a$ to $x=b$ around the $y$ axis. Then we can look at a small rectangle with width $\Delta x$ such that the volume of the cylindrical shell once rotated is:
+    \begin{equation}
+        V_i = f(x_i^*)\Delta x_i \cdot 2\pi x_i^*
+        \label{eq:}
+    \end{equation}
+     so the volume is:
+     \begin{equation}
+         V = \int_a^b 2\pi x f(x) \dd{x}
+         \label{eq:}
+     \end{equation}
+    This is known as the \textbf{shell method about y-axis}
+    \item Similarly we can apply this for a curve rotated about the $x$ axis:
+    \begin{equation}
+        V = \int_a^b 2\pi y f(y) \dd{y}
+        \label{eq:}
+    \end{equation}
+    which is the \textbf{shell method about x-axis}.
+    \begin{warning}
+        Note that this is the opposite to the washer method. If we rotated across the $x$ axis in this case, we integrate with respect to $y$.
+    \end{warning}
+    \begin{example}
+        Find the volume bounded by $y^2-x^2=1$ and $y=2$ when they are rotated about the $x$ axis.
+        \vspace{2mm}
+
+        It is essentially a hyperbola. Solving for $x$ gives:
+        \begin{equation}
+            x = \pm \sqrt{y^2-1}
+            \label{eq:}
+        \end{equation}
+        If we integrate with respect to $y$, then the bound is between $y=1$ and $y=2$. We can use symmetry and look at only positive values of $x$, then double it to get:
+        \begin{equation}
+            V = 2\int_1^2 (2\pi y)\sqrt{y^2-1} \dd{y}
+            \label{eq:}
+        \end{equation}
+        Using the u substitution of $u=y^2-1$, we get:
+        \begin{equation}
+            V = 4\sqrt{3}\pi
+            \label{eq:}
+        \end{equation}
+    \end{example}
+    \begin{example}
+        Find the volume bounded by $y=x^2$ and $y=\sqrt{x}$ when rotated about the $y$ axis.
+        \vspace{2mm}
+
+        We get:
+        \begin{equation}
+            V = \int_0^1 2\pi x (\sqrt{x}-x^2) \dd{x} = \frac{3\pi}{10}
+            \label{eq:}
+        \end{equation}
+        where I have omitted the intermediate steps, where we can just apply the power rules.
+    \end{example}
+\end{itemize}
