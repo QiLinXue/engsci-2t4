@@ -1,0 +1,149 @@
+\section{Average Value of a Function}
+\begin{itemize}
+    \item The average of a discrete set $\{a_1,a_2,\dots,a_N\}$ is given by:
+    \begin{equation}
+        a_\text{avg} = \frac{1}{N}\sum_{i}^{N} a_i
+        \label{eq:}
+    \end{equation}
+    \item For a continuous distribution, we can extend this to:
+    \begin{equation}
+        f_\text{avg} = \frac{1}{N}\sum_{i}^N f(x_i^*)
+        \label{eq:}
+    \end{equation}
+    Taking the limit as $N\to\infty$, we get:
+    \begin{equation}
+        f_\text{avg} = \frac{1}{b-a} \int_a^b f(x) \dd{x}
+        \label{eq:}
+    \end{equation}
+    \begin{theorem}
+        \textbf{Mean Value Theorem for Integrals:} If $f$ is continuous on $[a,b]$, then there exists a number $c$ in $[a,b]$ such that:
+        \begin{equation}
+            f(c) = f_\text{avg} = \frac{1}{b-a} \int_a^b f(x) \dd{x}
+            \label{eq:}
+        \end{equation}      
+    \end{theorem}
+    \begin{prooof}
+        Define $F(x)=\int_a^x f(t) \dd{t}$. If we apply the mean value theorem to $F$, then:
+        \begin{equation}
+            F'(c) = \frac{F(b)-F(a)}{b-a}
+            \label{eq:}
+        \end{equation}
+        for some $c \in [a,b]$. Now since:
+        \begin{equation}
+            F'(x) = f(x)
+            \label{eq:}
+        \end{equation}
+        it becomes apparent that:
+        \begin{equation}
+            f(c) = \frac{\int_a^b f(t) \dd{t} - \cancel{\int_a^a f(t) \dd{t}}}{b-a} = \frac{1}{b-a}\int_a^b f(t) \dd{t}
+            \label{eq:}
+        \end{equation}
+    \end{prooof}
+    \item We can also introduce \textbf{inverse functions}.
+    \begin{definition}
+        A function $f(x)$ is said to be one-to-one if $f(x_1)=f(x_2)$ implies $x_1=x_2$. Alternatively, we can say that $f(x_1)\neq f(x_2)$ whenever $x_1 \neq x_2$.
+    \end{definition}
+    \item We can use the \textbf{horizontal line test}. If any horizontal line crosses the function more than one time, then it is not one-to-one.
+    \begin{definition}
+        Let $f$ be a 1-1 function with domain $A$ and range $B$. Then its inverse function, $f^{-1}$ has domain $B$ and range $A$, and is defined by:
+        \begin{equation}
+            f^{-1}(x) = x \iff f(x) = y
+            \label{eq:}
+        \end{equation}
+        Therefore:
+        \begin{equation}
+            f^{-1}(f(x))=f(f^{-1}(x))=x
+            \label{eq:}
+        \end{equation}
+    \end{definition}
+    \begin{warning}
+        To prevent confusion, not that:
+        \begin{equation}
+            \frac{1}{f(x)} = \left[f(x)\right]^{-1} \neq f^{-1}(x)
+            \label{eq:}
+        \end{equation}
+    \end{warning}
+    \item Geometrically, the inverse of a function represents a reflection of each point across the line $y=x$.
+    \begin{example}
+        If $g(x)=\sqrt{2x+1}$, it is implied that $x \ge -1/2$, so it is a one-to-one function. Therefore, the inverse function is:
+        \begin{equation}
+            g^{-1}(x) = \frac{x^2-1}{2}
+            \label{eq:}
+        \end{equation}
+        \begin{center}
+            \begin{tikzpicture}
+                \begin{axis}[
+                legend pos=outer north east,
+                title=Inverse Function Example,
+                axis lines = box,
+                xlabel = $x$,
+                ylabel = $y$,
+                variable = t,
+                trig format plots = rad,
+                ]
+                \addplot [
+                    domain=0:3,
+                    samples=70,
+                    color=blue,
+                    ]
+                    {0.5*x^2-0.5};
+                \addlegendentry{$\frac{x^2-1}{2}$}
+                \addplot [
+                    domain=-1:3,
+                    samples=70,
+                    color=red,
+                    ]
+                    {(2*x+1)^0.5)};
+                \addlegendentry{$\sqrt{2x+1}$}
+                \draw[dotted] (-1,-1) -- (3,3);
+                \end{axis}
+                \end{tikzpicture}
+        \end{center}
+    \end{example}
+    \begin{theorem}
+        If $f$ is either an increasing or decreasing function, then $f$ is $1-1$, and hence, has an inverse.
+        \begin{proof}
+            Say $f(x)$ is decreasing, then $x_1<x_2 \implies f(x_1)>f(x_2)$ and if $x_1 \neq x_2 \implies f(x_1) \neq f(x_2)$.
+        \end{proof}
+    \end{theorem}
+    \begin{theorem}
+        Let $f$ be a 1-1 function defined on an interval $I$. If $f$ is continuous, then $f^{-1}$ is also continuous. (Proof provided in Appendix F)
+    \end{theorem}
+    \item Let $g(x)=f^{-1}(x)$. Then:
+    \begin{align}
+        f(g(x)) &= x \\
+        \frac{d}{dx} f(g(x)) &= 1 \\ 
+        f'(g(x))g'(x) &= 1 \\ 
+        g'(x) &= \frac{1}{f'(g(x))}
+    \end{align}
+    or:
+    \begin{equation}
+        \frac{d}{dx} f^{-1}(x) = \frac{1}{f'(f^{-1}(x))}
+        \label{eq:}
+    \end{equation}
+    which is equivalent to:
+    \begin{equation}
+        \frac{dy}{dx} = \frac{1}{\frac{dy}{dx}}
+        \label{eq:}
+    \end{equation}
+    \begin{theorem}
+        The inverse of composite functions is given by:
+        \begin{equation}
+            (f \circ g)^{-1} = g^{-1} \circ f^{-1}
+            \label{eq:}
+        \end{equation}
+        \begin{proof}
+            Let $y=(f\circ g)^{-1}(x)$. Then:
+            \begin{equation}
+                x = (f\circ g)(y) = f(g(y))
+                \label{eq:}
+            \end{equation}
+            so we have:
+            \begin{align}
+                g(y) &= f^{-1}(x) \\ 
+                y &= g^{-1}(f^{-1})(x) \\ 
+                &= (g^{-1} \circ f^{-1})(x)
+            \end{align}
+        \end{proof}
+    \end{theorem}
+\end{itemize}
