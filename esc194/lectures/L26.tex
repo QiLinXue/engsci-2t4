@@ -1,0 +1,33 @@
+\section{More Natural Logarithms}
+\begin{itemize}
+    \item If we want to graph a function $\ln(f(x))$, the domain is given by $x$ values such that $f(x)>0$. As a result:
+    \begin{equation}
+        \ln(x) \neq \frac{1}{x}
+        \label{eq:}
+    \end{equation}
+    since $x$ cannot be negative.
+    \item Instead, we define:
+    \begin{equation}
+        \ln|x| = \frac{1}{x}
+        \label{eq:}
+    \end{equation}
+    And similarly the following definite integral is defined as:
+    \begin{equation}
+        \int \frac{\dd{x}}{x} = \ln|x|+C
+        \label{eq:}
+    \end{equation}
+    \begin{theorem}
+        \textbf{Feynman's trick of Differentiation} (otherwise known as logarithmic differention): The following was popularized by Richard Feynman during the first of his Feynman Lectures. If we have a function:
+        \begin{equation}
+            g(x)=g_1(x)g_2(x)g_3(x)\cdots g_n(x)
+            \label{eq:}
+        \end{equation}
+         Then taking the natural logarithm of both sides, applying the chain rule, and simplifying gives:
+         \begin{equation}
+             g'(x) = g(x)\left(\frac{g_1'}{g_1}+\frac{g_2'}{g_2}+\cdots+\frac{g_n'}{g_n}\right)
+             \label{eq:}
+         \end{equation}
+         
+    \end{theorem}
+    \item Disgusting curve sketching ensues.
+\end{itemize}

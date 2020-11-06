@@ -1,0 +1,54 @@
+\section{Lecture 25: The Natural Logarithm}
+\begin{itemize}
+    \item The logarithm is defined as:
+    \begin{definition}
+        A logarithm function is a nonconstant differentiable function $f$ defined for $x\in \{\mathbb{R},(0,\infty)\}$ such that for all $a>0$ and $b>0$:
+        \begin{equation}
+            f(a\cdot b) = f(a)+f(b)
+            \label{eq:}
+        \end{equation}
+    \end{definition}
+    \item It has the following properties:
+    \begin{itemize}
+        \item $f(1)=0$
+        \item $f(1/x)=-f(x)$
+        \item $f(x/y)=f(x)-f(y)$
+        \item $f'(x)=\frac{1}{x}f'(1)$.
+    \end{itemize}
+    The first three are trivial to prove, but the last one is not obvious:
+    \begin{prooof}
+        Define:
+        \begin{align}
+            f'(x)&=\lim_{h\to 0} \frac{f(x+h)-f(x)}{h} \\ 
+            &= \lim_{h\to 0} \frac{1}{h}f\left(\frac{x+h}{x}\right) \\ 
+            &= \lim_{h\to 0} \frac{f(1+\frac{h}{x})-f(1)}{x\cdot \frac{h}{x}} 
+            \label{eq:}
+        \end{align}
+        Let $k\equiv \frac{h}{x}$ such that the limit becomes:
+        \begin{equation}
+            = \frac{1}{x} \lim_{k\to 0} \frac{f(1+k)-f(1)}{k}
+            \label{eq:}
+        \end{equation}
+        where the right hand side gives the derivative of $f(x)$ evaluated to $f'(1)$. If we choose a function $f'(1)=1$, then it is known as the natural logarithm.
+    \end{prooof}
+    \item This leads to the definition of the natural logarithm:
+    \begin{equation}
+        \ln(x) = \int_1^x \frac{\dd{t}}{t}
+        \label{eq:}
+    \end{equation}
+    for $x>0$. It has the following properties:
+    \begin{itemize}
+        \item $\ln(x)$ is defined on $(0,\infty)$. For $x>0$, it is strictly increasing.
+        \item $\ln(x)$ is continuous, since it is differentiable.
+        \item For $x>1$, $\ln(x)>0$.
+        \item For $0<x<1$, $\ln(x)<0$.
+        \item $\ln(a\cdot b) = \ln(a)+\ln(b)$.
+        \item $\ln(x^{p/q}) = \frac{p}{q}\ln(x)$.
+        \item The range of $\ln(x)$ is from $(-\infty,\infty)$.
+        \item There is a number $e$ such that $\ln(e)=1$.
+        \item $\ln(e^{p/q})=p/q$.
+        \item For convention $\ln(x)=\log_e(x)$.
+        \item $(\ln x)' = \frac{1}{x}$, increasing.
+        \item $(\ln x)'' = -\frac{1}{x^2}$, concave down.
+    \end{itemize}
+\end{itemize}
