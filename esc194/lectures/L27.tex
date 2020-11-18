@@ -1,0 +1,62 @@
+\section{The Natural Exponential Function}
+\begin{itemize}
+    \item The exponential function can be written as:
+    \begin{equation}
+        \ln e^{p/q} = \frac{p}{q}
+        \label{eq:}
+    \end{equation}
+    where $p$ and $q$ are integers. Thus, there must also be some number $q$ such that:
+    \begin{equation}
+        \ln q = \pi \implies q = e^{\pi}
+        \label{eq:}
+    \end{equation}
+    \begin{definition}
+        If $z$ is irrational, then $e^z$ is the number such that:
+        \begin{equation}
+            \ln(e^z) = z
+            \label{eq:}
+        \end{equation}
+    \end{definition}  
+    \begin{definition}
+        The exponential function is written as:
+        \begin{equation}
+            \exp\left(x\right)=e^x
+            \label{eq:}
+        \end{equation}
+        for all real $x$.
+    \end{definition}
+    \item Here are the properties of $e^x$:
+    \begin{itemize}
+        \item $\ln(e^x)=x$ where $x\in\mathbb{R}$
+        \item The exponential function is always greater than zero. Comes from the fact that it is the inverse of the natural logarithm function.
+        \item $e^0=1$
+        \item $\lim_{x\to-\infty} e^x = 0$
+        \item $e^{\ln x} = x$
+        \item $e^{a+b}=e^ae^b$ for all real $a$ and $b$
+        \item $e^{-b}=\frac{1}{e^b}$
+        \item $\frac{d}{dx}e^x=e^x$
+        \begin{prooof}
+            $$\ln(e^x)= x \implies \frac{d}{dx} \ln(x) = \frac{1}{e^x} \cdot \frac{d}{dx}(e^x) = 1$$
+        \end{prooof}
+        \item $\int e^x \dd{x} = e^x + C$
+        \item $\int e^{g(x)}g'(x) \dd{x} = e^{g(x)}+C$
+    \end{itemize}
+    \begin{example}
+        Show $e^x>1+x$ for $x>0$. We can show this via integration:
+        \begin{equation}
+            e^x = 1+ \int_0^x e^{t} \dd{t} = 1+e^x-e^0 = e^x
+            \label{eq:}
+        \end{equation}
+        Note that $\frac{d}{dx}e^x > 0$ is always increasing. Therefore, we can claim that $e^x > 1$ for $x>0$. Therefore:
+        \begin{align}
+            1 + \int_0^x e^t \dd{t} &> 1 + \int_0^x \dd{t} = 1+x \\ 
+            e^x &> 1 + x
+        \end{align}
+        If we continue this, we will get:
+        \begin{equation}
+            e^x > 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots+\frac{x^n}{n!}
+            \label{eq:}
+        \end{equation}
+        Try this yourself pls.
+    \end{example}
+\end{itemize}
