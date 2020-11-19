@@ -1,0 +1,110 @@
+\section{General Loagrithmic and Exponential Functions}
+\begin{itemize}
+    \item The general exponential function can be defined below:
+    \begin{definition}
+        \begin{equation}
+            x^{z} = e^{z\ln x}
+            \label{eq:}
+        \end{equation}
+        for $x>0$
+    \end{definition}
+    \item As a result, we have the following properties:
+    \begin{align}
+        x^{r+s} &= x^rx^s \\ 
+        x^{r-s} &= \frac{x^r}{x^s} \\ 
+        (x^r)^s &= x^{rs} \\ 
+        \label{eq:}
+    \end{align}
+    For $r,s \in \mathbb{R}$ and $x>0$.
+    \item We also have:
+    \begin{align}
+        \frac{d}{dx}x^p &= px^{p-1} \\ 
+        \frac{d}{dx}x^r = rx^{r-1}
+    \end{align}
+    \begin{example}
+        Evaluate
+        \begin{equation}
+            I = \int \frac{x \dd{x}}{(x^2+1)^{\sqrt{2}}}
+            \label{eq:}
+        \end{equation}
+        Set $u=x^2+1$ such that $\dd{u}=2x\dd{x}$ such that:
+        \begin{align}
+            I &= \frac{1}{2} \int \frac{\dd{u}}{u^{\sqrt{2}}} \\ 
+            &= \frac{1}{2}\left(\frac{1}{1-\sqrt{2}}\right)(x^2+1)^{1-\sqrt{2}}
+        \end{align}
+    \end{example}
+    \begin{example}
+        If $f(x)=x^x$, evaluate $f'(x)$.
+        \vspace{2mm}
+
+        We let:
+        \begin{align}
+            x^x &= e^{x\ln(x)} \\
+            (x^x)' &= e^{x\ln(x)}\left(x\cdot \frac{1}{x}+\ln(x)\right) \\ 
+            &= x^x(1-\ln(x)) 
+        \end{align}
+    \end{example}
+    \item The derivative of $f(x)=p^x$ is given as:
+    \begin{equation}
+        \frac{d}{dx}p^u = p^u \ln(p)\frac{du}{dx}
+    \end{equation}
+    Notice that the $\ln(p)$ term goes to one as $p\to e$.
+    \item We can introduce logarithm functions to a base $p$:
+    \begin{equation}
+        f(x) = \frac{\ln(x)}{\ln(p)},\, g(x)=p^x
+        \label{eq:}
+    \end{equation}
+    such that:
+    \begin{equation}
+        f(g(x)) = \frac{\ln(p^x)}{\ln(p)} = x
+        \label{eq:}
+    \end{equation}
+    so they are inverse functions.
+    \begin{definition}
+        The logarithm is defined as
+        \begin{equation}
+            \log_{p}(x) = \frac{\ln x}{\ln p}
+        \end{equation}
+    \end{definition}
+    \begin{example}
+        \begin{align}
+            \frac{d}{dx} \log_{7}(2x^3-2) = \frac{6x^2-1}{(2x^3-x)\ln(7)}
+        \end{align}
+    \end{example}
+    \item It is possible to estimate the value of $e$ by bounding it. We have that:
+    \begin{equation}
+        \ln x = \int_1^x \frac{\dd{t}}{t}
+        \label{eq:}
+    \end{equation}
+    such that:
+    \begin{equation}
+        \ln\left(1+\frac{1}{n}\right) = \int_1^{1+1/n} \frac{\dd{t}}{t} < \int_1^{1+1/n} 1 \dd{t}
+        \label{eq:}
+    \end{equation}
+    Since $frac{1}{t} < \frac{1}{1}$ for $t>0$. The upper bound then becomes:
+    \begin{equation}
+        1+\frac{1}{n}-1 = \frac{1}{n} \implies \ln\left(1+\frac{1}{n}\right) < \frac{1}{n}
+        \label{eq:}
+    \end{equation}
+    We can similarly repeat this process:
+    \begin{equation}
+        1+\frac{1}{n} < e^{1/n} \implies (1+\frac{1}{n})^n < e
+        \label{eq:}
+    \end{equation}
+    Note that if we take the limit as $n\to\infty$, \textit{intuitively} we would expect the upper bound to become closer and closer to the true value. We shall explore this further, and we can write the lower bound as:
+    \begin{equation}
+        \ln\left(1+\frac{1}{n}\right) = \int_{1}^{1+1/n} \frac{\dd{t}}{t} > \int_1^{1+1/n} \frac{\dd{t}}{1+1/n}
+    \end{equation}
+    since $\frac{1}{t}>\frac{1}{1+1/n}$. We can write this in logarithm form to get:
+    \begin{equation}
+        \ln\left(1+\frac{1}{n}\right)>\left(\frac{1}{1+1/n}\right)\left(1+\frac{1}{n}-1\right) = \frac{1}{n+1} \implies \left(1+\frac{1}{n}\right)^{n+1} > e
+        \label{eq:}
+    \end{equation}
+    Putting it altogether, we have the following statement:
+    \begin{idea}
+        $e$ can be estimated with its lower and upper bound with the following:
+        \begin{equation}
+            \left(1+\frac{1}{n}\right)^n < e < \left(1+\frac{1}{n}\right)^{n+1}
+        \end{equation}
+    \end{idea}
+\end{itemize}
