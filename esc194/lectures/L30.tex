@@ -1,0 +1,118 @@
+\section{Differential Equations}
+\begin{itemize}
+    \item A differential equation can be defined as:
+    \begin{definition}
+        A differential equation is an equation which contains an unknown function with one or more of its derivatives.
+    \end{definition}
+    \item A ordinary differential equation refers to one independent variable.
+    \item A partial differential equation refers to having two or more independent variables.
+    \item The order of a differential equation refers to the highest derivative.
+    \begin{definition}
+        The general solution refers to an $n$ parameter family of solutions if they include all solutions to the differential equation.
+    \end{definition}
+    \begin{definition}
+        A particular solution refers to constants that are assigned particular values according to initial values, or boundary values.
+    \end{definition}
+    \item Not all differential equations have solutions, but separable ones can be written as:
+    \begin{equation}
+        \frac{dy}{dx} = F(x,y) = g(x)f(y)
+        \label{eq:}
+    \end{equation}
+    For example:
+    \begin{equation}
+        \frac{dy}{dx} = \frac{1}{2}e^x y^2\,; y(0)=-1
+        \label{eq:}
+    \end{equation}
+    is a separable differential equation. Solving, we get:
+    \begin{equation}
+        \int \frac{2}{y^2} \dd{y} = \int e^x \dd{x}
+        \label{eq:}
+    \end{equation}
+    such that the general solution is:
+    \begin{equation}
+        y = \frac{-2}{e^x+C}
+        \label{eq:}
+    \end{equation}
+    and the particular solution is:
+    \begin{equation}
+        y = \frac{-2}{e^x+1}
+        \label{eq:}
+    \end{equation}
+    \begin{idea}
+        In general, if the differential equation is in the form of:
+        \begin{equation}
+            \frac{dy}{dx} = \frac{g(x)}{h(x)}
+            \label{eq:}
+        \end{equation}
+        then the solution can be written in the form of:
+        \begin{equation}
+            \int h(y) \dd{y} = \int g(x) \dd{x}
+            \label{eq:}
+        \end{equation}
+        This can be verified by writing the function as:
+        \begin{align}
+            h(y) \frac{dy}{dx} &= g(x) \\ 
+            \int h(y) \frac{dy}{dx} \dd{x} &= \int g(x) \dd{x} \\ 
+            \frac{d}{dy}H(y) &= h(y) \\
+            \frac{d}{dx} H(y) &= h(y) \frac{dy}{dx} \\ 
+            \int h(y) \frac{dy}{dx} &= \int \frac{d}{dx} H(y) \dd{x} \\ 
+            H(y) &= \int \frac{dH(y)}{dy} \dd{y} \\ 
+            &= \int h(y) \dd{y} \\ 
+            \therefore \int h(y) \dd{y} &= \int g(x) \dd{x}  
+        \end{align}
+    \end{idea}
+    \begin{example}
+        We can model the current in a resistor-inductor (RL) circuit if we know the energy dissipated by the resistor and inductor as:
+        \begin{align}
+            V=IR &\text{resistor}
+            V=L\frac{dI}{dt} & \text{inductor}
+        \end{align}
+        If the voltage source is a constant $V$, then the differential equation becomes:
+        \begin{equation}
+            V = L\frac{dI}{dt} + IR
+            \label{eq:}
+        \end{equation}
+        and we can set the initial condition to be $I(0)=0$. We can write this in the form:
+        \begin{align}
+            \frac{dI}{dt} &= \frac{V-RI}{L} \\
+            \int \frac{1}{V-IR} \dd{I} &= \int \frac{1}{L} \dd{t} \\ 
+            -\frac{1}{R}\ln(V-IR) &= \frac{t}{L}+C \\ 
+            V-IR &= Ce^{-tR/L} \\ 
+            I &= \frac{V}{R} - Ce^{-tR/L}
+        \end{align}
+        Note that the $C$ value is not necessarily the same at each step. This is allowed as long as we only try to determine the value of $C$ at the last step. For $R=10 \Sigma$, $L= 5\text{ H}$, and $V=100\text{ V}$, we get:
+        \begin{equation}
+            I(t) = 10(1-e^{-2t})
+            \label{eq:}
+        \end{equation}
+        as the particular equation.
+    \end{example}
+    \item \textbf{Orthogonal trajectories} refer to curves that pass through a family of curves such that they remain perpendicular to each other such that:
+    \begin{equation}
+        f' = \frac{-1}{g'}
+        \label{eq:}
+    \end{equation}
+    \begin{example}
+        Take the family of curves $y^2=kx^3$. Using implicit differentiation, we get:
+        \begin{equation}
+            2yy' = 3kx^2 \implies y' = \frac{3kx^2}{2y}
+            \label{eq:}
+        \end{equation}
+        Since we also have $k=\frac{y^2}{x^3}$, we get:
+        \begin{equation}
+            \frac{dy}{dx} = \frac{3}{2}\frac{y}{x}
+            \label{eq:}
+        \end{equation}
+        The curve that is perpendicular to this original curve is thus described by the differential equation:
+        \begin{equation}
+            \frac{dy}{dx} = -\frac{2x}{3y}
+            \label{eq:}
+        \end{equation}
+        Solving it gives:
+        \begin{equation}
+            3y^2+2x^2=2C
+            \label{eq:}
+        \end{equation}
+        which represents a family of ellipses.
+    \end{example}
+\end{itemize}
