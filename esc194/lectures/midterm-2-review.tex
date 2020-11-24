@@ -1,0 +1,787 @@
+\documentclass{article}
+\usepackage{esc}
+
+\title{ESC194: Midterm 1 Review}
+\author{QiLin Xue}
+\date{Fall 2020}
+\usepackage{lmodern}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{bm}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{bbm}
+\usepackage{parskip}
+\usepackage{multicol}
+\usetikzlibrary{arrows}
+\pgfplotsset{compat=1.16}
+\setlength\parindent{0pt}
+\everymath{\displaystyle}
+\usepackage{makeidx}
+\makeindex
+\let\oldtextbf\textbf
+\renewcommand{\textbf}[1]{\oldtextbf{#1}\index{#1}}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\printindex
+
+\newpage
+\section{Curve sketching}
+\subsection{Formally Defining Horizontal Aymptotes}
+Horizontal asymptotes are formally defined as:
+\begin{definition}
+    A horizontal asymptote occurs when $\lim_{x\to\infty}f(x)=L$. We can say that 
+    $f(x)$ goes to $L$ as $x$ goes to infinity if for any $\epsilon>0$, a number $A$ can be found s.t. for all $x>A$, $|f(x)-L|<\epsilon$.
+    \vspace{2mm}
+
+    The idea behind this revolves around finding $f$ values as close to $L$ as might be wanted by going to large enough $x$ values.
+\end{definition}
+An important theorem to determine horizontal asymptotes of reciprocal functions:
+\begin{theorem}
+    The reciprocal horizontal asymptote limit:
+    \begin{equation}
+        \lim_{x\to \pm \infty} \frac{1}{x^r} = 0
+        \label{eq:}
+    \end{equation}
+\end{theorem}
+\subsection{Prelims}
+We can use Fermat's theorem to determine critical points:
+\begin{definition}
+    $c$ is a critical point of $f(x)$ if $f'(c)=0$ or $f'(c)$ DNE.
+\end{definition}
+Here are some key features that might be seen on a graph:
+\begin{itemize}
+    \item \textbf{Concavity:} If the graph of $y=f(x)$ lies above all its tangents in $I$, then $f(x)$ is concave up in $I$. If it lies below, then it is concave down.
+    \item \textbf{Cusp:} A point $c$ is a cusp if $f(x)$ is continuous at $x=c$ but $\lim_{x\to c^-}f(x)= \pm \infty$ and $\lim_{x\to c^+}f(x)=\mp \infty$.
+    \item \textbf{Vertical Tangent:} A vertical tangent occurs when $\lim_{x\to c} |f'(x)|= \infty$ and $f(x)$ is continuous at $c$.
+    \item \textbf{Slant Asymptote:} If $\lim_{x\to \infty} \left[f(x)-(mx+b)\right]=0$, then $y=mx+b$ is a slant asymptote to $f(x)$ at $+\infty$.
+    \item \textbf{Inflection point:} A point of inflection is at $c$ if $f(x)$ is continuous at $c$ and the sign of concavity changes at $c$.
+\end{itemize}
+A function is increasing on an interval $I$ if $f(x_1)<f(x_2)$ for all $x_1<x_2$ in $I$. Although we can use this definition to find local max/mins, there are a few cutie (QT/quick test) ways to do so:
+\begin{itemize}
+    \item \textbf{QT1: Increasing/Decreasing Test.} If $f$ is differentiable on the interval $I$, we show that if $f'>0$, $f$ is increasing. If $f'<0$, $f$ is decreasing. If $f'=0$, $f$ is constant.
+    \item \textbf{QT2: First Derivative Test} Given that $I$ contains a critical point and $f$ is continuous at $c_\text{crit}$, and $f$ is differentiable in $I$ but not necessarily at $c_\text{crit}$. Then, if $f'>0$ to the left of $c_\text{crit}$ and $f'<0$ to the right, then $c_\text{crit}$ is a local max. If it's the opposite, we get the local minimum.
+    \item \textbf{QT3: Concavity} Given that $f(x)$ is twice differentiable on $I$, then $f''(x)$ exists on $I$. As a result if $f''(x)>0$, $f$ is concave up. If $f''<0$, $f$ is concave down.
+    \item \textbf{QT4: Second Derivative Test} Given that $f''(x)$ is continuous near $c$ and $f'(c)=0$, then if $f''(c)>0$, $f(c)$ is a local minimum. If $f''(c)<0$, $f(c)$ is a local maximum. If $f''(c)=0$, there is no verdict.
+\end{itemize}
+In general, the recipe to test for local max and min is to:
+\begin{itemize}
+    \item Find all $c_\text{crit}$.
+    \item If QT4 applies, use it.
+    \item If it doesn't, and if QT2 applies, use it.
+    \item If QT2 doesn't apply, use the basic definition of increasing/decreasing.
+\end{itemize}
+\subsection{Curve Sketching Steps}
+\begin{enumerate}
+    \item Determine general behaviour:
+    \begin{itemize}
+        \item Find Domain / Range / Limits at $\infty$.
+        \item Determine endpoints if they exist.
+        \item Find vertical, horizontal, slant asymptotes if they exist:
+    \end{itemize}
+    \item Determine $x$ and $y$ intercepts.
+    \item Establish if $f(x)$ is symmetrical, even, odd, and/or periodic.
+    \item Find $f'(x)$ and use this to:
+    \begin{itemize}
+        \item Find all critical points and $f(c_\text{crit})$.
+        \item Find when $f(x)$ is increasing/decreasing.
+        \item Apply QT2.
+        \item Find vertical tangents / cusps if they exist.
+    \end{itemize}
+    \item Find $f''(x)$ and use it to:
+    \begin{itemize}
+        \item Find when $f(x)$ is concave up/down.
+        \item Find points of inflection if they exist.
+        \item Optional: Use QT4 to confirm local max/min
+    \end{itemize}
+    \item Determine the absolute maximum and min by choosing the largest and smallest values of $f$, if they exist.
+\end{enumerate}
+\section{Optimization}
+Here is a checklist for solving optimization problems. If we want to optimize $f$:
+\begin{itemize}
+    \item Check critical points.
+    \item Check for endpoints.
+    \item Check for local max, min.
+    \item Check $\lim_{x\to \infty}$ and $\lim_{x\to -\infty}$.
+    \item Make a decision.
+\end{itemize}
+\subsection{Numerical Methods}
+\begin{theorem}
+    The \textbf{method of successive bisections} can be performed if $f$ is a continuous function and we can find values $a$ and $b$ such that $f(b)<0<f(a).$ These two values can be determined by trial and error. By IVT, the root must exist in between $a$ and $b$. To use this method, we calculate the halfway point $x_{h1}$. If $f(x_{h1})$ is positive, we replace $a$ with $x_{h1}$. If it's negative, we replace $b$ with $x_{h1}$.
+\end{theorem}
+\begin{theorem}
+    Using \textbf{Newton's Method} is much faster computationally. However, there is the added restriction that $f(x)$ \textit{must} be differentiable. It works in the following steps:
+    \begin{enumerate}
+        \item Make a first guess for the root, $x_1$
+        \item Find the equation for the tangent line at $(x_1, f(x_1))$
+        \item Find the $x$ intercept of the tangent line, and let
+        \begin{equation}
+            x_2 = x_1 - \frac{f(x_1)}{f'(x_1)}
+            \label{eq:}
+        \end{equation}
+        and continue with $x_2$. Note however, that this doesn't always work such as when it diverges away from the root such as $x^{1/3}$.
+    \end{enumerate}
+\end{theorem}
+Here are the overall steps that are recommended:
+\begin{enumerate}
+    \item Try Newton's Method first if function is differentiable.
+    \item If the $x_n$ values converge, great!
+    \item If they do not, try another value.
+    \item If they still diverge, use the method of successive bisections.
+\end{enumerate}
+\section{Formal Definition of an Integral}
+The summation notation is denoted below:
+\begin{definition}
+    If $a_m,a_{m+1},a_{m+2},\dots,a_n$ are real numbers and $m$ and $n$ are integers such that $m\le n$, then:
+    \begin{equation}
+        \sum_{i=m}^{n}a_i=a_m+a_{m+1}+\cdots+a_{n-1}+a_n
+        \label{eq:}
+    \end{equation}
+\end{definition}
+There are a few theorems:
+\begin{itemize}
+    \item For a constant $\alpha$:
+    \begin{equation}
+        \sum_{i=m}^n \alpha a_i = \alpha\sum_{i=m}^n a_i
+        \label{eq:}
+    \end{equation}
+    \item It is also linear:
+    \begin{equation}
+        \sum_{i=m}^n (a_i+b_i) = \sum_{i=m}^na_i + \sum_{i=m}^nb_i
+        \label{eq:}
+    \end{equation}
+    \item $\sum_{i=1}^n \alpha = \alpha n$
+    \item $\sum_{i=1}^n i = \frac{n(n+1)}{2}$
+    \item $\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}$
+    \item $\sum_{i=1}^n i^3 = \left(\frac{n(n+1)}{2}\right)^2$
+    \item $\sum_{i=1}^n i^4 = \frac{n(n+1)(2n+1)(3n^2+3n-1)}{30}$
+\end{itemize}
+One way of defining an integral is thinking of the area under the curve. This introduces the concept of a \textbf{Riemann Sum}:
+\begin{equation}
+    \sum_{i=1}^n f(x_i^*) \Delta x_i
+    \label{eq:}
+\end{equation}
+where $x_i$ represents points in the \textbf{partition} of the domain in which we want to approximate the area. The approximation gets more and more precise at the size $\Delta x_i$ decreases. A few technical definitions to help:
+\begin{definition}
+    A \textbf{partition} is a finite subset of the closed interval $[a,b]$, which contains the points $a$ and $b$. Denoted by $P$.
+\end{definition}
+\begin{definition}
+    The \textbf{norm} of $P=\lVert P \rVert$ which is the length of the longest subinterval:
+    \begin{equation}
+        \lVert P \rVert = \max\left(\Delta x_1, \Delta x_2, \dots , \Delta x_n\right)
+    \end{equation}
+\end{definition}
+Which can all be tied together to formally define the definite integral.
+\begin{definition}
+    If $f$ is a function defined on a closed interval $[a,b]$, let $P$ be a partition of $[a,b]$ with partition $x_0,x_1,x_2,\dots,x_n$ where:
+    \begin{equation}
+        a=x_0<x_1<x_2<\dots<x_n=b
+        \label{eq:}
+    \end{equation}
+    Choose points $x_i^*$ within each subinterval $[x{i+1},x_i]$ and let $\Delta x_i=x_i-x_{i-1}$, and $\lVert P \rVert =\max\{\Delta x_i\}$. Then the \textbf{definite integral} of $f$ from $a$ to $b$ is:
+    \begin{equation}
+        \int_a^b f(x) \dd{x} \equiv \lim_{\Vert P \rVert} \sum_{i=1}^n f(x_i^*)\Delta x_i
+        \label{eq:}
+    \end{equation}
+    if the limit exists. If the limit does exist, then $f$ is called integrable on the interval $[a,b]$. The sign $\int$ is called the integral sign. $f(x)$ is known as the \textbf{integrand}, and $a,b$ are the limits of integration. The output is a single number that does not depend on $x$.
+\end{definition}
+We can formally show that the definite integral can take on a specific value $I$ with a $\delta-\epsilon$ statement:
+\begin{idea}
+    If we have:
+    \begin{equation}
+        \int_a^b f(x) \dd{x} = I
+        \label{eq:}
+    \end{equation}
+    then for ever $\epsilon>0$, there exists a $\delta >0$ such that:
+    \begin{equation}
+        \left|I-\sum_{i=1}^nf(x_i^*)\Delta x_i\right| < \epsilon
+        \label{eq:}
+    \end{equation}
+    for all partitions $P$ of $[a,b]$ with $\lVert P \rVert <\delta $ and all possible choices of $x_i^*$ in $[x_{i-1},x_i].$
+\end{idea}
+However, going through this proof would be a nightmare. Instead, we can show \textbf{integrability} via the following theorem:
+\begin{theorem}
+    Continuous and/or piecewise continuous on $[a,b]$ guarantees integrability on $[a,b]$,
+\end{theorem}
+\begin{definition}
+    A function is \textbf{piecewise continuous} if it only has a finite number of jump discontinuities.
+\end{definition}
+Now that we know when the integral exists, we can find ways of calculating it from scratch:
+\begin{idea}
+    Going through with a full Riemann sum calculation is also tedious. As a result, here are a few conventions to make it easier:
+    \begin{itemize}
+        \item We usually select regular partitions:
+        \begin{equation}
+            \Delta x = \Delta x_1= \Delta x_2 = \cdots = \Delta x_n = \frac{b-a}{n}
+            \label{eq:}
+        \end{equation}
+        \item And we select $x_i^*$ to be the RH end point such that:
+        \begin{equation}
+            x_i^* = x_i = a+i\Delta x = a+i\frac{b-a}{n}
+            \label{eq:}
+        \end{equation}
+    \end{itemize}
+    Therefore, the integral can be written as:
+    \begin{equation}
+        \int_a^b f(x) \dd{x} = \lim_{n\to \infty}\sum_{i=1}^n f\left(a+i\frac{b-a}{n}\right)\frac{b-a}{n}
+        \label{eq:}
+    \end{equation}
+\end{idea}
+\section{Properties of Integration}
+\subsection{Definite Integral Properties}
+There are a few properties:
+\begin{itemize}
+    \item Constant:    \begin{equation}
+        \int_a^b c\dd{x} = c(b-a)
+        \label{eq:}
+    \end{equation}
+    \item Additivity: \begin{equation}
+        \int_a^b \left(f(x) \pm g(x)\right) \dd{x} = \int_a^b f(x)\dd{x} \pm \int_a^b g(x)\dd{x}
+    \end{equation}
+    \item Constant Multiple:
+    \begin{equation}
+        \int_a^b c(f)x \dd{x} = c\int_a^b f(x)\dd{x}
+    \end{equation}
+    \item Changing Limits:
+    \begin{equation}
+        \int_a^b f(x) \dd{x} = \int_a^zf(x)\dd{x} + \int_z^bf(x)\dd{x}
+    \end{equation}
+\end{itemize}
+There are also \textbf{order properties} of integrals. If $a<b$, then:
+\begin{itemize}
+    \item If $f(x)\ge 0$ for $a\le x\le b$, then
+    \begin{equation}
+        \int_a^b f(x)\dd{x} \ge 0
+        \label{eq:}
+    \end{equation}
+    \item If $f(x) \ge g(x)$ for $a\le x\le b$, then:
+    \begin{equation}
+        \int_a^b f \dd{x} \ge \int_a^b g(x) \dd{x}
+        \label{eq:}
+    \end{equation}
+    \item If $m\le f(x) \le M$ for $a\le x\le b$, then:
+    \begin{equation}
+        m(b-a) \le \int_a^b f\dd{x} \le M(b-a)
+        \label{eq:}
+    \end{equation}
+    \item Absolute values:
+    \begin{equation}
+        \left|\int_a^b f(x) \dd{x}\right| \le \int_a^b |f(x)| \dd{x}
+    \end{equation}
+\end{itemize}
+\subsection{Fundamental Theorem of Calculus}
+The \textbf{first fundamental theorem of calculus} states that:
+\begin{theorem}
+    Let $f$ be continuous on $[a,b]$. The function $F$ is defined on $[a,b]$ by:
+    \begin{equation}
+        F(x) = \int_a^x f(t) \dd{t}
+        \label{eq:}
+    \end{equation}
+    is continuous on $[a,b]$, differentiable on $(a,b)$, and has derivative:
+    \begin{equation}
+        F'(x) = f(x)
+        \label{eq:}
+    \end{equation}
+    for all $x\in(a,b)$.
+\end{theorem}
+Rarely (never) will you get a simple question like this. Sometimes, the upper bound is a function $g(x)$ instead. If this is the case, then:
+\begin{idea}
+    Assuming that $f$ is continuous in $[a,b]$, then the function $F$ is defined on $[a,b]$ by:
+    \begin{equation}
+        F(x) = \int_a^{g(x)} f(t) \dd{t}
+        \label{eq:}
+    \end{equation}
+    has a derivative:
+    \begin{equation}
+        F'(x) = g'(x)f(g(x))
+        \label{eq:}
+    \end{equation}
+    for $x\in (a,b)$. To see why this is true, we can apply the chain rule:
+    \begin{equation}
+        F'(x) = \frac{d}{dx} f(g(x)) = g'(x)f(g(x))
+        \label{eq:}
+    \end{equation}
+\end{idea}
+The \textbf{second fundamental theorem of calculus} states that:
+\begin{theorem}
+    Let $f$ be continuous on $[a,b]$. If $G$ is any antiderivative for $f$ on $[a,b]$, then:
+    \begin{equation}
+        \int_a^b f(t) \dd{t} = G(b)-G(a)
+        \label{eq:}
+    \end{equation}
+\end{theorem}
+This can alternatively be written as:
+\begin{equation}
+    \int_a^b F'(x) \dd{x} = F(b) - F(a)
+    \label{eq:}
+\end{equation}
+which can be interpreted as the net change of $F(x)$. For example:
+\begin{equation}
+    \Delta x = \int_a^b v(t) \dd{t}
+    \label{eq:}
+\end{equation}
+gives the displacement from $t=a$ to $t=b$. The proofs for these two theorems are provided below:
+\begin{prooof}
+    \textbf{(1st theorem)} For $x$ and $x+h$ in $(a,b)$,
+    \begin{align}
+        F(x+h)-F(x) &= \int_a^{x+h} f(x) \dd{t} - \int_a^x f(x) \dd{t} \\ 
+        &= \int_a^x f(t)\dd{t} + \int_x^{x+h}f(t)\dd{t}-\int_a^x f(t)\dd{t} \\ 
+        &= \int_x^{x+h} f(t) \dd{t}
+    \end{align}
+    For $h\neq 0$, we have:
+    \begin{equation}
+        \frac{F(x+h)-F(x)}{h}=\frac{1}{h}\int_x^{x+h}f(t)\dd{t}
+        \label{eq:}
+    \end{equation}
+    We can separate it into cases. If $h>0$, then we can write per the extreme value theorem the minimum value of $f$ as $f(u)=m$ and the maximum value as $f(v)=M$ for $u,v\in[x,x+h]$ such that:
+    \begin{equation}
+        mh \le \int_x^{x+h} f(t)\dd{t} \le Mh
+        \label{eq:}
+    \end{equation}
+    or:
+    \begin{equation}
+        f(u)h \le \int_x^{x+h}f(t)\dd{t} \le f(v)h
+        \label{eq:}
+    \end{equation}
+    which we can rewrite, after dividing through by $h$:
+    \begin{equation}
+        f(u) \le \frac{F(x+h)-F(x)}{h} \le f(v)
+        \label{eq:}
+    \end{equation}
+    As $h\to 0$, we have $u\to x$ and $v\to x$. Therefore:
+    \begin{align}
+        \lim_{h\to 0} f(u) &= \lim_{u\to x}f(u) = f(x) \\ 
+        \lim_{h\to 0} f(v) &= \lim_{v\to x}f(v) = f(x)
+        \label{eq:}
+    \end{align}
+    which gives us:
+    \begin{equation}
+        F'(x)=\lim_{h\to 0} \frac{F(x+h)-F(x)}{h} = f(x)
+        \label{eq:}
+    \end{equation}
+    or:
+    \begin{equation}
+        \frac{d}{dx}\int_a^x f(t) \dd{t} = f(x)
+        \label{eq:}
+    \end{equation}
+\end{prooof}
+\begin{prooof}
+    \textbf{(2nd theorem)} Given that $F(x)=\int_a^x f(t) \dd{t}$ is an antiderivative of $f$ and given that $G$ is an antiderivative, then:
+    \begin{equation}
+        F'(x)=G'(x) \implies F(x) = G(x)+C
+        \label{eq:}
+    \end{equation}
+    We know that $F(a)=0$, so $G(a)+C=0$ or $C=-G(a)$, which gives:
+    \begin{equation}
+        \int_a^b f(t) \dd{t} = F(b) = G(b) - G(a)
+        \label{eq:}
+    \end{equation}
+\end{prooof}
+\subsection{Integration Tricks}
+The \textbf{u-substitution} essentially reverses the chain rule.
+\begin{idea}
+    Suppose we have an integral in the form:
+    \begin{equation}
+        \int f(g(x))g'(x) \dd{x}
+        \label{eq:}
+    \end{equation}
+    If we let $u=g(x)$, then $du=g'(x) dx$. So we can simplify the integral to:
+    \begin{equation}
+        \int f(u) \dd{u} = F(u) +C = F(g(x)) + C
+        \label{eq:}
+    \end{equation}      
+\end{idea}
+Once we have the indefinite integral, we can use back substitution to find the definite integral. We can avoid this step using a change of variables.
+\begin{theorem}
+    \begin{equation}
+        \int_a^b f(g(x))g'(x)\dd{x} = \int_{g(a)}^{g(b)} f(u) \dd{u}
+    \end{equation}
+\end{theorem}
+In general, here are a few tips, in no particular order:
+\begin{itemize}
+    \item Refer to the table of integrals at the back of the book. You are allowed to use them.
+    \item Look for symmetry and periodicity.
+    \item Draw a picture. Sometimes, you can avoid a complicated integral and use plain old geometry this way!
+    \item For u-substitution, look for derivative-function pairs.
+    \item If there are not too many terms, you can sometimes expand functions into a polynomial.
+    \item Check if the integral even exists!
+    \item Apply the first theorem of calculus, if applicable.
+    \item See if the integral (or a similar one) is in the book.
+\end{itemize}
+\section{Areas and Volumes}
+\subsection{Areas Between Curves}
+Suppose we wish to find the \textbf{area between two curves} $f(x)$ and $g(x)$. We can do this by partitioning the area into infinitesimally small rectangles:
+\begin{equation}
+    \Delta A_i = [f(x_i^*)-g(x_i^*)]\Delta x_i
+    \label{eq:}
+\end{equation}
+so that the area is given by:
+\begin{align}
+    A &= \lim_{\lVert P \rVert \to 0} \sum_{i=1}^n \left[f(x_i^*)-g(x_i^*)\right]\Delta x_i \\ 
+    &= \int_a^b\left[f(x)-g(x)\right]\dd{x}
+\end{align}
+If we let 
+$f(x)\ge g(x)$ when $x\in[a,b]$, then this gives the difference in their areas $A_1-A_2$.
+If the condition $f(x)\ge g(x)$ is not satisfied, then we must break up the integral into multiple parts (if we interpret the area as having a positive area only). We can modify the area formula to be:
+\begin{equation}
+    A = \int_a^b |f(x)-g(x)| \dd{x}
+    \label{eq:}
+\end{equation}
+Suppose we have a curve $x=f(y)$ and $x=g(y)$ instead. The area between $y=a$ and $y=b$ works in the same way:
+\begin{equation}
+    A = \int_a^b |f(y)-g(y)| \dd{y}
+    \label{eq:}
+\end{equation}
+\subsection{Volumes}
+We can determine the \textbf{volume} of a solid by partitioning it into thin cylinders whose axes area parallel to the $x$ axis. Then we can break up the volume into thin sections:
+\begin{equation}
+    V_i \simeq A_i \Delta x_i 
+    \label{eq:}
+\end{equation}
+so the volume is:
+\begin{equation}
+    V = \int_a^b A(x) \dd{x}
+    \label{eq:}
+\end{equation}
+which is the general formula for the volume of any shape. If we can figure out $A(x)$ and the necessary bounds, we can find the volume forany change.
+\begin{idea}
+    For \textbf{solids of revolution}, we rotate a curve $f(x)$ about the $x$ axis. The volume of this solid using the \textbf{disk method} is:
+    \begin{equation}
+        V = \int_a^b \pi f(x)^2 \dd{x}
+    \end{equation}
+    Similarly around the $y$ axis:
+    \begin{equation}
+        V = \int_c^d \pi g(y)^2 \dd{x}
+        \label{eq:}
+    \end{equation}
+    For the volume by rotating the region between two curves $f(x)$ and $g(x)$, we get:
+    \begin{equation}
+        V = \int_a^b \pi (f(x)^2-g(x)^2) \dd{x}
+        \label{eq:}
+    \end{equation}
+    which is known as the \textbf{washer method}.
+\end{idea}
+Sometimes, the disk and washer method is too difficult to apply.
+\begin{idea}
+    We can use the \textbf{shell method about the y-axis} to find the volume when a curve is rotated about the $y$ axis. Suppose we wish to rotate a curve $f(x)$ from $x=a$ to $x=b$ around the $y$ axis. Then the volume is:
+    \begin{equation}
+        V = \int_a^b 2\pi x f(x) \dd{x}
+        \label{eq:}
+    \end{equation}
+    Similarly, if a curve is rotated about the $x$ axis, we use the \textbf{shell method about the x-axis}:
+    \begin{equation}
+        V = \int_a^b 2\pi yf(y) \dd{y}
+        \label{eq:}
+    \end{equation}
+\end{idea}
+\section{Misc}
+I honestly don't know where this section belongs, so I'm just copying and pasting from my notes (which I actually spent a decent amount of effort on):
+\begin{itemize}
+    \item The average of a discrete set $\{a_1,a_2,\dots,a_N\}$ is given by:
+    \begin{equation}
+        a_\text{avg} = \frac{1}{N}\sum_{i}^{N} a_i
+        \label{eq:}
+    \end{equation}
+    \item For a continuous distribution, we can extend this to:
+    \begin{equation}
+        f_\text{avg} = \frac{1}{N}\sum_{i}^N f(x_i^*)
+        \label{eq:}
+    \end{equation}
+    Taking the limit as $N\to\infty$, we get:
+    \begin{equation}
+        f_\text{avg} = \frac{1}{b-a} \int_a^b f(x) \dd{x}
+        \label{eq:}
+    \end{equation}
+    \begin{theorem}
+        \textbf{Mean Value Theorem for Integrals:} If $f$ is continuous on $[a,b]$, then there exists a number $c$ in $[a,b]$ such that:
+        \begin{equation}
+            f(c) = f_\text{avg} = \frac{1}{b-a} \int_a^b f(x) \dd{x}
+            \label{eq:}
+        \end{equation}      
+    \end{theorem}
+    \begin{prooof}
+        Define $F(x)=\int_a^x f(t) \dd{t}$. If we apply the mean value theorem to $F$, then:
+        \begin{equation}
+            F'(c) = \frac{F(b)-F(a)}{b-a}
+            \label{eq:}
+        \end{equation}
+        for some $c \in [a,b]$. Now since:
+        \begin{equation}
+            F'(x) = f(x)
+            \label{eq:}
+        \end{equation}
+        it becomes apparent that:
+        \begin{equation}
+            f(c) = \frac{\int_a^b f(t) \dd{t} - \cancel{\int_a^a f(t) \dd{t}}}{b-a} = \frac{1}{b-a}\int_a^b f(t) \dd{t}
+            \label{eq:}
+        \end{equation}
+    \end{prooof}
+    \item We can also introduce \textbf{inverse functions}.
+    \begin{definition}
+        A function $f(x)$ is said to be one-to-one if $f(x_1)=f(x_2)$ implies $x_1=x_2$. Alternatively, we can say that $f(x_1)\neq f(x_2)$ whenever $x_1 \neq x_2$.
+    \end{definition}
+    \item We can use the \textbf{horizontal line test}. If any horizontal line crosses the function more than one time, then it is not one-to-one.
+    \begin{definition}
+        Let $f$ be a 1-1 function with domain $A$ and range $B$. Then its inverse function, $f^{-1}$ has domain $B$ and range $A$, and is defined by:
+        \begin{equation}
+            f^{-1}(x) = x \iff f(x) = y
+            \label{eq:}
+        \end{equation}
+        Therefore:
+        \begin{equation}
+            f^{-1}(f(x))=f(f^{-1}(x))=x
+            \label{eq:}
+        \end{equation}
+    \end{definition}
+    \begin{warning}
+        To prevent confusion, not that:
+        \begin{equation}
+            \frac{1}{f(x)} = \left[f(x)\right]^{-1} \neq f^{-1}(x)
+            \label{eq:}
+        \end{equation}
+    \end{warning}
+    \item Geometrically, the inverse of a function represents a reflection of each point across the line $y=x$.
+    \begin{example}
+        If $g(x)=\sqrt{2x+1}$, it is implied that $x \ge -1/2$, so it is a one-to-one function. Therefore, the inverse function is:
+        \begin{equation}
+            g^{-1}(x) = \frac{x^2-1}{2}
+            \label{eq:}
+        \end{equation}
+        \begin{center}
+            \begin{tikzpicture}
+                \begin{axis}[
+                legend pos=outer north east,
+                title=Inverse Function Example,
+                axis lines = box,
+                xlabel = $x$,
+                ylabel = $y$,
+                variable = t,
+                trig format plots = rad,
+                ]
+                \addplot [
+                    domain=0:3,
+                    samples=70,
+                    color=blue,
+                    ]
+                    {0.5*x^2-0.5};
+                \addlegendentry{$\frac{x^2-1}{2}$}
+                \addplot [
+                    domain=-1:3,
+                    samples=70,
+                    color=red,
+                    ]
+                    {(2*x+1)^0.5)};
+                \addlegendentry{$\sqrt{2x+1}$}
+                \draw[dotted] (-1,-1) -- (3,3);
+                \end{axis}
+                \end{tikzpicture}
+        \end{center}
+    \end{example}
+    \begin{theorem}
+        If $f$ is either an increasing or decreasing function, then $f$ is $1-1$, and hence, has an inverse.
+        \begin{proof}
+            Say $f(x)$ is decreasing, then $x_1<x_2 \implies f(x_1)>f(x_2)$ and if $x_1 \neq x_2 \implies f(x_1) \neq f(x_2)$.
+        \end{proof}
+    \end{theorem}
+    \begin{theorem}
+        Let $f$ be a 1-1 function defined on an interval $I$. If $f$ is continuous, then $f^{-1}$ is also continuous. (Proof provided in Appendix F)
+    \end{theorem}
+    \item Let $g(x)=f^{-1}(x)$. Then:
+    \begin{align}
+        f(g(x)) &= x \\
+        \frac{d}{dx} f(g(x)) &= 1 \\ 
+        f'(g(x))g'(x) &= 1 \\ 
+        g'(x) &= \frac{1}{f'(g(x))}
+    \end{align}
+    or:
+    \begin{equation}
+        \frac{d}{dx} f^{-1}(x) = \frac{1}{f'(f^{-1}(x))}
+        \label{eq:}
+    \end{equation}
+    which is equivalent to:
+    \begin{equation}
+        \frac{dy}{dx} = \frac{1}{\frac{dy}{dx}}
+        \label{eq:}
+    \end{equation}
+    \begin{theorem}
+        The inverse of composite functions is given by:
+        \begin{equation}
+            (f \circ g)^{-1} = g^{-1} \circ f^{-1}
+            \label{eq:}
+        \end{equation}
+        \begin{proof}
+            Let $y=(f\circ g)^{-1}(x)$. Then:
+            \begin{equation}
+                x = (f\circ g)(y) = f(g(y))
+                \label{eq:}
+            \end{equation}
+            so we have:
+            \begin{align}
+                g(y) &= f^{-1}(x) \\ 
+                y &= g^{-1}(f^{-1})(x) \\ 
+                &= (g^{-1} \circ f^{-1})(x)
+            \end{align}
+        \end{proof}
+    \end{theorem}
+\end{itemize}
+\section{Logarithms and Exponentials}
+\begin{warning}
+    Note that in this section, I make the assumption you are already familiar with general logarithm and exponential properties, so I won't spend time writing those down.
+\end{warning}
+\begin{definition}
+    A \textbf{logarithm function} is a nonconstant differentiable function $f$ defined for $x\in \{\mathbb{R},(0,\infty)\}$ such that for all $a>0$ and $b>0$:
+    \begin{equation}
+        f(a\cdot b) = f(a)+f(b)
+        \label{eq:}
+    \end{equation}
+    It has the following properties:
+    \begin{itemize}
+        \item $f(1)=0$
+        \item $f(1/x)=-f(x)$
+        \item $f(x/y)=f(x)-f(y)$
+        \item $f'(x)=\frac{1}{x}f'(1)$.
+    \end{itemize}
+\end{definition}
+This leads to the definition of the \textbf{natural logarithm}:
+\begin{definition}
+    The natural logarithm is defined as:
+    \begin{equation}
+        \ln(x) = \int_1^x \frac{\dd{t}}{t}
+        \label{eq:}
+    \end{equation}
+\end{definition}
+Note that $\ln(x)$ is not the antiderivative of $\frac{1}{t}$. We can instead write:
+\begin{equation}
+    \int \frac{\dd{t}}{dt} = \ln|x| + C
+    \label{eq:}
+\end{equation}
+since $x$ can be negative as well.
+\begin{theorem}
+    \textbf{Feynman's trick of Differentiation}\footnote{Note that this is not a formal name. I just chose it to name it after Feynman because I'm a huge Feynman stan and I first heard about it in the preface to the Feynman Lectures where he was talking about mathematical tricks.} (otherwise known as logarithmic differention): The following was popularized by Richard Feynman during the first of his Feynman Lectures. If we have a function:
+    \begin{equation}
+        g(x)=g_1(x)g_2(x)g_3(x)\cdots g_n(x)
+        \label{eq:}
+    \end{equation}
+     Then taking the natural logarithm of both sides, applying the chain rule, and simplifying gives:
+     \begin{equation}
+         g'(x) = g(x)\left(\frac{g_1'}{g_1}+\frac{g_2'}{g_2}+\cdots+\frac{g_n'}{g_n}\right)
+         \label{eq:}
+     \end{equation}
+\end{theorem}
+Exponential functions can be introduced:
+\begin{definition}
+        If $z$ is a real number, then $e^z$ is the number such that:
+    \begin{equation}
+        \ln(e^z) = z
+        \label{eq:}
+    \end{equation}
+\end{definition}
+More formally, we can write the exponential function as $\exp(x)=e^x$. The most useful property of $e^x$ is that:
+\begin{equation}
+    \frac{d}{dx}e^x = e^x
+    \label{eq:}
+\end{equation}
+We can extend this to general logarithmic and exponential functions. If $x>0$, then we can define:
+\begin{definition}
+    The \textbf{general exponential} function is defined as
+    \begin{equation}
+        x^z = e^{z\ln x}
+        \label{eq:}
+    \end{equation}
+    if $x>0$.
+    \label{eq:}
+\end{definition}
+ Similarly:
+ \begin{definition}
+     The \textbf{general logarithm} can be defined as:
+     \begin{equation}
+         \log_p(x) = \frac{\ln x}{\ln p}
+         \label{eq:}
+     \end{equation}
+ \end{definition}
+ such that:
+ \begin{equation}
+     \frac{d}{dx} a^x = \ln(a)a^x
+     \label{eq:}
+ \end{equation}
+ and
+ \begin{equation}
+     \frac{d}{dx} \log_p(x) = \frac{1}{x\ln p}
+     \label{eq:}
+ \end{equation}
+ \subsection{Bounding $e$}
+ \begin{idea}
+     We can first bound $e^x$ by setting a lower limit (which happens to be the Taylor series!). Notice that via integration:
+     \begin{equation}
+         e^x = 1 + \int_0^x e^t \dd{t}
+         \label{eq:}
+     \end{equation}
+     Since $e^x$ is always increasing, we can claim that $e^x > 1$ for $x>0$ such that:
+     \begin{equation}
+         e^x = 1 + \int_0^x e^t \dd{t} > 1 + \int_0^x 1 \dd{t} = 1 + x
+         \label{eq:}
+     \end{equation}
+     We can then repeat the previous step to show that
+     \begin{equation}
+        e^x = 1 + \int_0^x e^t \dd{t} > 1 + \int_0^x (1+x) \dd{t} = 1 + x + \frac{x^2}{2}
+        \label{eq:}
+    \end{equation}
+    Repeating the process, we eventually get:
+    \begin{equation}
+        e^x > 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots + \frac{x^n}{n!}
+        \label{eq:}
+    \end{equation}
+ \end{idea}
+ Instead of choosing to bound $e^x$, we can also choose to bound $e$. We have that:
+ \begin{equation}
+     \ln x = \int_1^x \frac{\dd{t}}{t}
+     \label{eq:}
+ \end{equation}
+ such that:
+ \begin{equation}
+     \ln\left(1+\frac{1}{n}\right) = \int_1^{1+1/n} \frac{\dd{t}}{t} < \int_1^{1+1/n} 1 \dd{t}
+     \label{eq:}
+ \end{equation}
+ Since $frac{1}{t} < \frac{1}{1}$ for $t>0$. The upper bound then becomes:
+ \begin{equation}
+     1+\frac{1}{n}-1 = \frac{1}{n} \implies \ln\left(1+\frac{1}{n}\right) < \frac{1}{n}
+     \label{eq:}
+ \end{equation}
+ We can similarly repeat this process:
+ \begin{equation}
+     1+\frac{1}{n} < e^{1/n} \implies (1+\frac{1}{n})^n < e
+     \label{eq:}
+ \end{equation}
+ Note that if we take the limit as $n\to\infty$, \textit{intuitively} we would expect the upper bound to become closer and closer to the true value. We shall explore this further, and we can write the lower bound as:
+ \begin{equation}
+     \ln\left(1+\frac{1}{n}\right) = \int_{1}^{1+1/n} \frac{\dd{t}}{t} > \int_1^{1+1/n} \frac{\dd{t}}{1+1/n}
+ \end{equation}
+ since $\frac{1}{t}>\frac{1}{1+1/n}$. We can write this in logarithm form to get:
+ \begin{equation}
+     \ln\left(1+\frac{1}{n}\right)>\left(\frac{1}{1+1/n}\right)\left(1+\frac{1}{n}-1\right) = \frac{1}{n+1} \implies \left(1+\frac{1}{n}\right)^{n+1} > e
+     \label{eq:}
+ \end{equation}
+ Putting it altogether, we have the following statement:
+ \begin{idea}
+     $e$ can be estimated with its lower and upper bound with the following:
+     \begin{equation}
+         \left(1+\frac{1}{n}\right)^n < e < \left(1+\frac{1}{n}\right)^{n+1}
+     \end{equation}
+ \end{idea}
+ \section{Inverse Trigonometric Functions}
+ We can define the inverse function of trigonometric functions by restricting their domain, such as from $-\pi/2$ to $\pi/2$ for $\sin(x)$.
+    \begin{definition}
+        The inverse function for $\sin(x)$ is given by :
+        \begin{equation}
+            \sin^{-1}(x) = \arcsin(x)
+            \label{eq:}
+        \end{equation}
+    \end{definition}
+\begin{warning}
+    You need to be very careful with the domain and range. Sometimes, if $x$ falls out of the domain, it can lead to a different answer altogether, or it could be undefined.
+\end{warning}
+ There's a lot of formulas for this one, but to derive formula such as $\sin(\tan^{-1}(x))$, you just need to draw a picture of a right angled triangle with one of the legs as $x$ and either the hypotenuse or the other leg as $1$. If proofs are not needed, there is a formula sheet with all properties at the end of the book.
+\end{document}

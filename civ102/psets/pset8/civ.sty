@@ -11,9 +11,9 @@
 \usepackage{textcomp}
 \usepackage{graphicx}
 \usepackage{bbm}
+\usepackage{physics}
 \usepackage{parskip}
 \pgfplotsset{compat=1.16}
-\usepackage{physics}
 % \setlength{\parskip}{\baselineskip}%
 
 \setlength{\parindent}{3em}
@@ -100,9 +100,9 @@
 %%%%%%%%%%%%%%%%%%   Box Definitions %%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newtcolorbox[auto counter]{example}{
+\newtcolorbox{prooof}{
     simple,
-    title=\textbf{Example} \thetcbcounter,
+    title=\textbf{Proof},
     % add a `\thetcbcounter` to the end if you want to keep track of numberings.
 }
 
@@ -111,11 +111,14 @@
   title=\textbf{{#1}},
 }
 
-\newtcolorbox{definition}{
+\newtcolorbox{lemma}{
     one-sided-color=my-green,
-    title=\textbf{Definition},
+    title=\textbf{Lemma},
 }
-
+\newtcolorbox{property}{
+    one-sided-color=my-green,
+    title=\textbf{Property},
+}
 \newtcolorbox{mnemonic}{
     one-sided-color=my-green,
     title=\textbf{Mnemonic},
@@ -126,17 +129,14 @@
 }
 
 \newtcolorbox{idea}{
-    one-sided-color=my-yellow,
+    one-sided-color=my-blue,
     title=\textbf{Idea},
 }
 \newtcolorbox{think}{
     one-sided-color=my-green,
     title=\textbf{Think},
 }
-\newtcolorbox{axiom}{
-    one-sided-color=my-green,
-    title=\textbf{Axiom},
-}
+
 \newtcolorbox{warning}{
     one-sided-color=my-pink,
     title=\textbf{Warning},
@@ -153,11 +153,6 @@
     % add a `\thetcbcounter` to the end if you want to keep track of numberings.
 }
 
-\newtcolorbox{prooof}{
-    simple,
-    title=\textbf{Proof},
-    % add a `\thetcbcounter` to the end if you want to keep track of numberings.
-}
 
 \newtcolorbox[auto counter]{solution}{
     simple,

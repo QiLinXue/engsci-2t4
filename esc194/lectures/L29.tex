@@ -1,0 +1,80 @@
+\section{Inverse Trigonometric Functions}
+\begin{itemize}
+    \item We can define the inverse function of trigonometric functions by restricting their domain, such as from $-\pi/2$ to $\pi/2$ for $\sin(x)$.
+    \begin{definition}
+        The inverse function for $\sin(x)$ is given by :
+        \begin{equation}
+            \sin^{-1}(x) = \arcsin(x)
+            \label{eq:}
+        \end{equation}
+    \end{definition}
+    \item It has the following properties such that:
+    \begin{itemize}
+        \item $\sin^{-1}(\sin(x))=x$ for $x\in[-\pi/2,\pi/2]$
+        \item $\sin(\sin^{-1}(x))=x$ for $x\in[-1,1]$
+    \end{itemize}
+    \begin{warning}
+        Note that these only work for the listed domains.
+    \end{warning}
+    \item Note that $\sin^{-1}(x)=-\sin^{-1}(x)$, so the inverse of $\sin(x)$ is also odd.
+    \item We can also list the following properties:
+    \begin{itemize}
+        \item $\cos(\sin^{-1}(x))=\sqrt{1-x^2}$
+        \item $\tan(\sin^{-1}(x))=\frac{x}{\sqrt{1-x^2}}$
+        \item $\sec(\sin^{-1}(x)) = \frac{1}{\sqrt{1-x^2}}$
+        \item $\cot(\sin^{-1}(x)) = \frac{\sqrt{1-x^2}}{x}$
+        \item $\csc(\sin^{-1}(x)) = \frac{1}{x}$ 
+    \end{itemize}
+    \item The derivative of inverse sine can be calculated by considering the composite function:
+    \begin{align}
+        \frac{d}{dx}\sin(\sin^{-1}(x)) &= \frac{d}{dx} \\ 
+        \cos(\sin^{-1}(x)) \cdot \frac{d}{dx}(\sin^{-1}(x)) &= 1 \\
+        \frac{d}{dx} \sin^{-1}(x) = \frac{1}{\sqrt{1-x^2}}
+    \end{align}
+    for $x\in (-1,1)$.
+    \item A useful antiderivative:
+        \begin{equation}
+            \int \frac{\dd{x}}{\sqrt{a^2-x^2}} = \sin^{-1}\left(\frac{x}{a}\right) + C
+            \label{eq:}
+        \end{equation}
+    \item We can similarly define the inverse tangent:
+    \begin{equation}
+        y = \tan^{-1}(x)
+        \label{eq:}
+    \end{equation}
+    for $x\in(-\infty,\infty)$ and has a range of $\left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$.
+    \item Some properties:
+    \begin{itemize}
+        \item $\tan(\tan^{-1}(x)) = x$ for $x\in (-\infty, \infty)$
+        \item $\tan^{-1}(\tan(x)) = x $ for $x\in\left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$
+    \end{itemize}
+    \item Similarly, we can come up with the following composites by drawing a picture:
+    \begin{itemize}
+        \item $\cot\left(\tan^{-1}(x)\right) = \frac{1}{x}$
+        \item $\sin(\tan^{-1}(x))= \frac{x}{\sqrt{1+x^2}}$
+        \item $\cos(\tan^{-1}(x)) = \frac{1}{\sqrt{1+x^2}}$
+        \item $\sec(\tan^{-1}(x)) = \sqrt{1+x^2}$
+        \item $\csc(\tan^{-1}(x)) = \frac{\sqrt{1+x^2}}{x}$
+    \end{itemize}
+    \item The derivative of the inverse tangent is:
+    \begin{equation}
+        \frac{d}{dx}\tan^{-1}(x) = \frac{1}{1+x^2}
+        \label{eq:}
+    \end{equation}
+
+    \item Also know the following antiderivative:
+    \begin{equation}
+        \frac{\dd{x}}{a^2+x^2} = \frac{1}{a}\tan^{-1}\left(\frac{x}{a}\right) + C
+        \label{eq:}
+    \end{equation}
+    \item Two useful results from the inverse secant function is:
+    \begin{equation}
+        \frac{d}{dx}\sec^{-1}(x) = \frac{1}{|x|\sqrt{x^2-1}}
+        \label{eq:}
+    \end{equation}
+    \begin{equation}
+        \int \frac{\dd{x}}{x\sqrt{x^2-a^2}} = \frac{1}{a}\sec^{-1}\left(\frac{|x|}{a}\right) + C
+        \label{eq:}
+    \end{equation}
+    
+\end{itemize}
