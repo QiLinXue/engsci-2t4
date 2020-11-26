@@ -1,0 +1,60 @@
+\section{Exponential Growth and Decay}
+\begin{itemize}
+    \item There are many instances in physics and nature where the growth of a function is related to the function at that point, such as:
+    \begin{equation}
+        \frac{df}{dt} = kf(t) \implies k =\frac{1}{f}\frac{df}{dt} = \frac{d}{dt}(\ln f)
+        \label{eq:}
+    \end{equation}
+    Separating, we get:
+    \begin{equation}
+        \ln(f) + kt + C \implies f = Ce^{kt}
+        \label{eq:}
+    \end{equation}
+    where $C$ is based off initial conditions.
+    \item The \textbf{doubling time} refers to the time for a function to double:
+    \begin{equation}
+        2P_0 = P_0 e^{kt_2} \ implies t_2 = \frac{\ln 2}{k}
+        \label{eq:}
+    \end{equation}
+    \item In many areas (such as radioactive decay), the half life gives the time necessary for the function to half. This occurs in functions where the DE looks like:
+    \begin{equation}
+        \frac{df}{dt} = -kN
+        \label{eq:}
+    \end{equation}
+    where $k>0$. Similarly, the half life is given by:
+    \begin{equation}
+        t_{1/2} = \frac{\ln 2}{k}
+        \label{eq:}
+    \end{equation}
+    \item For compound interest, the annual interest is given by:
+    \begin{equation}
+        V(t) = V_0(1+i)^t
+        \label{eq:}
+    \end{equation}
+    If we compound the interest more and more often, we get:
+    \begin{equation}
+        V(t) = V_0\left(1+\frac{i}{n}\right)^{nt}
+        \label{eq:}
+    \end{equation}
+    Taking the limit as $n\to \infty$, we get:
+    \begin{align}
+        \lim_{n\to\infty} \left(1+\frac{i}{n}\right)^{nt} &= V_0\lim_{m\to \infty} \left(\left(1+\frac{1}{m}\right)^m\right)^{it} \\ 
+        &= V_0e^{it}
+    \end{align}
+    where we made the substitution $m=n/i$.
+    \item The \textbf{logistic model} is a more realistic model for population growth:
+    \begin{equation}
+        \frac{dP}{dt} = kP\left(1-\frac{P}{M}\right)
+        \label{eq:}
+    \end{equation}
+    where $M$ is the carry capacity or max population:
+    \begin{align}
+        \int \frac{\dd{P}}{P(1-P/M)} &= k \int \dd{t} \\ 
+        \int \left(\frac{1}{P}+\frac{1}{M-P}\right) \dd{P} &= k\int \dd{t} \\ 
+        \ln|P|-\ln|M-P| &= kt + C \\ 
+        \ln\left|\frac{P}{M-P}\right| &= kt + C \\ 
+        \frac{P}{M-P} &= \pm e^{kt+C} \\
+        P(t) &= \frac{M}{1+Ae^{-kt}}  
+    \end{align}
+    where $A \equiv \frac{M-P_0}{P_0}$ and $P_0 = P(t=0)$.
+\end{itemize}
