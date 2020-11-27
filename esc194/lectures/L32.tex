@@ -1,0 +1,115 @@
+\section{Linear Equations}
+\begin{itemize}
+    \item We introduce linear differential equations
+    \begin{definition}
+        A \textbf{linear first order differential equation} is in the form of:
+        \begin{equation}
+            y' + p(x)y = q(x)
+            \label{eq:}
+        \end{equation}
+        where $p(x)$, and $q(x)$ are continuous on the interval $I$.
+    \end{definition}
+    \begin{example}
+        Take the differential equation:
+        \begin{equation}
+            xy' + y= x^2
+            \label{eq:}
+        \end{equation}
+        Notice that the left hand side is the result of the product rule, so:
+        \begin{align}
+            (xy)' &= xy' + y \\
+            (xy)' &= x^2 \\ 
+            \int \dd{xy} &= \int x^2 \dd{x} \\ 
+            xy &= \frac{x^3}{3} + C \\ 
+            y &= \frac{x^2}{3} + \frac{C}{x}
+        \end{align}
+    \end{example}
+    \item In general, we have to work a bit harder. We can define:
+    \begin{equation}
+        H(x) = \int p(x) \dd{x}
+        \label{eq:}
+    \end{equation}
+    Note that we can set the integration constant to zero since this is not the solution, but just a helpful quantity. We can then exponentiate and take the derivative:
+    \begin{align}
+        \frac{d}{dx} e^{H(x)} &= e^{H(x)} \frac{d}{dx}H(x) \\ 
+        &= e^{H(x)}p(x) \\ 
+        \frac{d}{dx}(ye^{H(x)}) &= y'e^{H(x)} + ye^{H(x)}p(x) \\ 
+        &= e^{H(x)}(y'+p(x)y)
+    \end{align}
+    Note that the right factor is the LHS of the general differential equation. The other factor $e^{H(x)}$ is known as the \textbf{integrating factor.} As a result:
+    \begin{align}
+        \frac{d}{dx}(ye^{H(x)}) &= e^{H(x)}q(x) \\ 
+        ye^{H(x)} &= \int e^{H(x)}q(x) \dd{x} + C \\ 
+        y &= e^{-H(x)}\left[\int e^{H(x)}q(x) \dd{x} + C\right]
+    \end{align}
+    \begin{idea}
+        In general, the solution to
+        \begin{equation}
+            y' + p(x)y = q(x)
+            \label{eq:}
+        \end{equation}
+        is
+        \begin{equation}
+            y = e^{-H(x)}\left[\int e^{H(x)}q(x) \dd{x} + C\right]
+            \label{eq:}
+        \end{equation}
+    \end{idea}
+    \begin{example}
+        Suppose $y'+2y=4$. Then we can let $p(x)=2$ and $q(x)=4$. Therefore,
+        \begin{equation}
+            H(x) = \int 2 \dd{x} = 2x
+            \label{eq:}
+        \end{equation}
+        such that:
+        \begin{equation}
+            e^{2x}
+            \label{eq:}
+        \end{equation}
+        is the integrating factor. Finally, we have:
+        \begin{equation}
+            \int e^{H(x)}q(x)\dd{x} = \int 4e^{2x} \dd{x} = 2e^{2x}
+            \label{eq:}
+        \end{equation}
+        so that the general solution is:
+        \begin{equation}
+            y = e^{-2x}\left(2e^{2x}+C\right) = 2 + Ce^{-2x}
+            \label{eq:}
+        \end{equation}
+    \end{example}
+    \begin{idea}
+        Note that the solution has two terms, each representing a different solution. $y=2$ represents a solution to:
+        \begin{equation}
+            y' + 2y = 4
+            \label{eq:}
+        \end{equation}
+        while $Ce^{-2x}$ represents a solution to:
+        \begin{equation}
+            y' + 2y = 0
+            \label{eq:}
+        \end{equation}
+        This is a surprise tool that will come in handy later.
+    \end{idea}
+    \begin{example}
+        Suppose:
+        \begin{equation}
+            y' - 4y = 3e^xy^{1/2}
+            \label{eq:}
+        \end{equation}
+        This is not in the usual form but we can turn it into such with the substitution:
+        \begin{equation}
+            u = \sqrt{y} \implies u' = \frac{1}{2}y^{-1/2}y'
+            \label{eq:}
+        \end{equation}
+        which gives:
+        \begin{equation}
+            u' - 2u = \frac{3}{2}e^x
+            \label{eq:}
+        \end{equation}
+    \end{example}
+    \item In general, an equation in the form of:
+    \begin{equation}
+        y' + p(x)y = q(x)y^r
+        \label{eq:}
+    \end{equation}
+    with $r \neq 0,1$ can be substituted using $u=y^{1-r} \implies u'+(1-r)p(x)u = (1-r)q(x)$. Equations in this form is known as \textbf{Bernoulli Equations} 
+\end{itemize}
