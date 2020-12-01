@@ -1,0 +1,131 @@
+\section{Complex Numbers}
+\begin{itemize}
+    \item We can introduce complex numbers to assign values to the solutions of algebraic equations such as:
+    \begin{equation}
+        x^2 = -1
+        \label{eq:}
+    \end{equation}
+    \begin{definition}
+        A complex number is defined as $z=a+ib$ where $a,b\in \mathbb{R}$ and $\Re(z)=a$ and $\Im(z)=b$.
+    \end{definition}
+    \item We can represent complex numbers on a plane:
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (0,0) -- (3,0);
+            \draw[->] (0,0) -- (0,3);
+            \draw[fill=black] (2,1) circle (0.05) node[right] {$z=2+i$};
+            \draw[->,thick] (0,0) -- (2,1);
+        \end{tikzpicture}
+    \end{center}
+    \item It is often helpful to write out a complex number using polar coordinates. The \textbf{modulus} of the number is:
+    \begin{equation}
+        |z| = |a+ib| = \sqrt{a^2+b^2}
+        \label{eq:}
+    \end{equation}
+    and the argument is the angle it makes with the real axis:
+    \begin{equation}
+        \arg(z) = \theta + 2k\pi
+        \label{eq:}
+    \end{equation}
+    where $k$ is an integer. This means that:
+    \begin{align*}
+        |z|\cos(\theta) &= a \\
+        |z|\sin(\theta) &= b
+    \end{align*}
+    \begin{idea}
+        The \textbf{polar representation} can be written as:
+        \begin{equation}
+            z = r\left(\sin\cos\theta + i\sin\theta\right)
+            \label{eq:}
+        \end{equation}
+        where $r=|z|$.
+    \end{idea}
+    \item The \textbf{complex conjugate} for a complex number $z=a+ib$ is:
+    \begin{equation}
+        \bar{z} = a - ib
+        \label{eq:}
+    \end{equation}
+    \item Let $z_1=a+ib$ and $z_1=c+id$. Then complex addition/subtraction has the following properties:
+    \begin{itemize}
+        \item $z_1+z_2 = (a+c) + i(b+d)$
+        \item $z_1+z_2 = z_2+z_1$ (commutative)
+        \item $(z_1+z_2)+z_3=z_1+(z_2+z_3)$ (associative)
+        \item $|z_1+z_2| \le |z_1| + |z_2|$ (triangle inequality)
+        \item $\overline{z_1+z_2} = \bar{z_1}+\bar{z_2}$
+    \end{itemize}
+    \item Complex multiplication can be defined as:
+    \begin{equation}
+        (a+ib)(c+id) = (ab-bd)+i(ad+bc)
+        \label{eq:}
+    \end{equation}
+    It has the following properties:
+    \begin{itemize}
+        \item $z_1 \cdot z_2 = z_2 \cdot z_1$ (commutative)
+        \item $(z_1 z_2) z_3 = z_1(z_2z_3)$ (associative)
+        \item $z_1(z_2+z_3) = z_1z_2+z_1z_3$ (distributive)
+        \item $\overline{z_1z_2} = \bar{z_1} \cdot \bar{z_2}$
+    \end{itemize}
+    \begin{idea}
+        When multiplying two complex numbers in their polar form, we get:
+        \begin{equation}
+            z_1z_2 = r_1r_2\left(\cos(\theta_\phi)+i\sin(\theta+\phi)\right)
+            \label{eq:}
+        \end{equation}
+        Note that:
+        \begin{equation}
+            \arg(z_1 \cdot z_2) = \arg(z_1) + \arg(z_2)
+            \label{eq:}
+        \end{equation}
+        and the modulus is:
+        \begin{equation}
+            |z_2z_2| = |z_1||z_2|
+            \label{eq:}
+        \end{equation}
+        What this means is that the magnitudes get multiplied like scalars and $z_1$ is rotated by the argument of $z_2$.
+    \end{idea}
+    \item One direct consequence of this idea is that multiplying by $i$ is equivalent to rotating counterclockwise a complex number by 90 degrees. Note that this is an important concept that will appear when dealing with phasors in the circuit course.
+    \begin{theorem}
+        \textbf{De Moivre's Theorem:} Let $z=\cos\theta+i\sin\theta$. We have $|z|=1$ and $\arg(z)=\theta$. Then:
+        \begin{equation}
+            (\cos\theta+i\sin\theta)^n = \cos(n\theta)+i\sin(n\theta)
+        \end{equation}
+    \end{theorem}
+    \begin{definition}
+        We can define division by multiplying the denominator by its conjugate:
+        \begin{equation}
+            \frac{1}{z} = \frac{1}{a+ib} = \frac{a-ib}{a^2+b^2} + \frac{\bar{z}}{|z|^2}
+            \label{eq:}
+        \end{equation}
+        Therefore:
+        \begin{equation}
+            \left|\frac{1}{z}\right| = \frac{1}{|z|}
+            \label{eq:}
+        \end{equation}
+        and:
+        \begin{equation}
+            \arg\left(\frac{1}{z}\right) = - \arg(z)
+            \label{eq:}
+        \end{equation}
+    \end{definition}
+    \item The most important tool in working with complex numbers is the complex exponential:
+    \begin{equation}
+        z = e^{ix}
+        \label{eq:}
+    \end{equation}
+    We cannot define this by making the following observation. Note that the derivative of $f(x)=e{ix}$ is:
+    \begin{equation}
+        f'(x) = ie^{ix} = if(x)
+        \label{eq:}
+    \end{equation}
+    and $f(0)=1$. If we define $g(x)=\cos(x)+i\sin(x)$, then:
+    \begin{equation}
+        g'(x) = -\sin(x)+i\cos(x) = ig(x)
+        \label{eq:}
+    \end{equation}
+    and $g(0)=1$ also. Therefore, it seems convincing that $f(x)=g(x)$ or:
+    \begin{equation}
+        e^{ix} = \cos(x)+i\sin(x)
+        \label{eq:}
+    \end{equation}
+    This is not a complete proof however, but will be rigorously proved next semester by using a Taylor series.
+\end{itemize}
