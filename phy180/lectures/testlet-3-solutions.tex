@@ -1,0 +1,231 @@
+\documentclass{article}
+\usepackage{phy}
+
+\title{PHY180: Testlet 4 Unofficial Solutions}
+\author{QiLin Xue}
+\date{Fall 2020}
+\usepackage{lmodern}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{bm}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{bbm}
+\usepackage{parskip}
+\usepackage{calc}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage{multicol}
+\usepackage[inline]{asymptote}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+
+\pgfplotsset{compat=1.16}
+\setlength\parindent{0pt}
+\everymath{\displaystyle}
+\usepackage{makeidx}
+\makeindex
+\let\oldtextbf\textbf
+\renewcommand{\textbf}[1]{\oldtextbf{#1}\index{#1}}
+
+\begin{document}
+
+\maketitle
+% \tableofcontents
+\section{Block Pendulum}
+For this question, you will have to use the moment of inertia of a block through an axis perpendicular to the plane and passing through the center of mass:
+\begin{equation}
+    I_\text{cm} = \frac{1}{12}M(H^2+W^2)
+    \label{eq:}
+\end{equation}
+The distance from the center of mass to the pivot is given by $L+\frac{H}{2}$ so the moment of inertia with respect to the pivot can be calculated using the parallel axis theorem:
+\begin{equation}
+    I=\frac{1}{12}M(H^2+W^2)
+\end{equation}
+The percent change in the moment of inertia as the width gets increased from $W_A$ to $W_B$ is:
+\begin{align}
+    \frac{I_B}{I_A}-1 &= \left(\frac{\frac{1}{12}M(H^2+W_B^2)+M\left(L+\frac{H}{2}\right)^2}{\frac{1}{12}M(H^2+W_A^2)+M\left(L+\frac{H}{2}\right)^2}-1\right) \\ 
+    &= \boxed{\frac{W_B^2-W_A^2}{H^2+W_A^2+12\left(L+\frac{H}{2}\right)^2}}
+\end{align}
+To verify that this is correct, we can check some limiting cases. If $W_B=W_A$, we expect the blocks to be the exact same and thus a $0\%$ change in the MOI. Plugging this in, this is exactly what we get.
+\subsection*{Remarks}
+The moment of inertia of a block is provided in the table. If you were not allowed to use this table, it can be easily calculated using the \textit{perpendicular axis theorem}, which states that for a flat planar object:
+\begin{equation}
+    I_x+I_y=I_z
+    \label{eq:}
+\end{equation}
+where $I_x$ and $I_y$ are the moment of inertia of the object about two axes that are parallel to the shape, pass through the center of mass, and perpendicular to each other. $I_z$ is the moment of inertia in the $z$ direction, which is orthogonal to both the axes for $I_x$ and $I_y$. Therefore:
+\begin{equation}
+    I_x+I_y = \frac{1}{12}MW^2 + \frac{1}{12}MH^2 \implies I_z = \frac{1}{12}M(W^2+H^2)
+    \label{eq:}
+\end{equation}
+ 
+\newpage
+\section{Block on a Plane}
+We can balance forces in the horizontal and vertical directions, with horizontal taken to be parallel to the ground. The free body diagram looks like the following:
+\begin{center}
+    \begin{tikzpicture}[x=2cm,y=2cm]
+        \coordinate (A) at (0, 0);
+        \coordinate (B) at (-1.5,0);
+        \coordinate (C) at (-4,2);
+        \coordinate (M) at (-2,1);
+
+        \draw[dotted] (A) -- (B);
+        \draw[] (A) -- (C);
+        \draw[fill=black] (M) circle (0.05);
+        \draw[thick, ->] (M) -- ($(M) !.5! (C)$) node[above] {$f_\text{fr}$};
+        \draw[thick, ->] (M) -- ++(0, -2) node[right] {$mg$};
+        \draw[thick, ->] (M) -- ++(1,2) node[right] {$N$};
+
+        \tkzMarkAngle[fill=red,%
+                 size=0.4,   % for small squares you may want to use this
+                 opacity=0.4](M,A,B)
+                 \tkzLabelAngle[pos=0.5](M,A,B){$\theta$}
+    \end{tikzpicture}
+\end{center}
+Note that the friction forces points up the ramp because if the acceleration was smaller by just a bit, the block would slide down. This also means that the static friction achieves its maximum value of:
+\begin{equation}
+    f_\text{fr} = \mu_sN
+    \label{eq:}
+\end{equation}
+Equilibrium equations give:
+\begin{align}
+    \sum F_y = 0 &\implies N\cos\theta + \mu_sN\sin\theta = mg \\ 
+    \sum F_x = 0 &\implies ma = N\sin\theta - \mu_sN\cos\theta
+\end{align}
+Solving for $a$ gives:
+\begin{equation}
+    \boxed{a_\text{min} = g\left(\frac{\sin\theta-\mu_s\cos\theta}{\cos\theta+\mu_s\sin\theta}\right)}
+    \label{eq:}
+\end{equation}
+\subsection*{Remarks}
+There is actually an elegant solution to this that involves much less computation. We can switch into a \textit{noninertial} reference frame by introducing a fictitious force $-ma$ that acts in the leftwards direction. This is D'alembert's principle. We can pair up the force vectors $N$ with $\mu N$ and $mg$ with $ma$ to get the following diagram: 
+\begin{center}
+    \begin{tikzpicture}[x=2cm,y=2cm]
+        \coordinate (B) at (-1.5,0);
+
+
+        \coordinate (A) at (0, 0);
+        \coordinate (C) at (-3,3);
+        
+        \coordinate (M) at (-1.5,1.5);
+        \coordinate (mg) at (-1.5,0.5);
+        \coordinate (ma) at (-2,0.5);
+        \coordinate (N) at (-0.75,2.25);
+        \coordinate (N') at (-2.5,0.5);
+
+        \coordinate (fr) at (-1,2.5);
+
+        \draw[dotted] (A) -- (B);
+        \draw[] (A) -- (C);
+        \draw[fill=black] (M) circle (0.05);
+        \draw[thick, ->] (M) -- (mg) node[midway, right] {$mg$};
+        \draw[thick, ->] (mg) -- (ma) node[midway, below] {$ma$};
+        
+        \draw[thick, ->] (M) -- (N) node[midway, right] {$N$};
+        \draw[thick, ->] (N) -- (fr) node[midway, right] {$\mu N$};
+        \draw[dotted] (fr) -- (ma);
+        \draw[dotted] (M) -- (N');
+
+        \tkzMarkAngle[fill=red,%
+                 size=0.3,   % for small squares you may want to use this
+                 opacity=0.4](N',M,mg)
+                 \tkzLabelAngle[pos=0.35](N',M,mg){$\theta$}
+
+        \tkzMarkAngle[fill=blue,%
+                 size=0.5,   % for small squares you may want to use this
+                 opacity=0.4](N,M,fr)
+                 \tkzLabelAngle[pos=0.6](N,M,fr){$\alpha$}
+        \tkzMarkAngle[fill=blue,%
+                 size=0.5,   % for small squares you may want to use this
+                 opacity=0.4](N',M,ma)
+                 \tkzLabelAngle[pos=0.6](N',M,ma){$\alpha$}
+
+                 
+        \tkzMarkAngle[fill=red,%
+        size=0.4,   % for small squares you may want to use this
+        opacity=0.4](M,A,B)
+        \tkzLabelAngle[pos=0.5](M,A,B){$\theta$}
+    \end{tikzpicture}
+\end{center}
+Now we essentially have a statics problem with two forces, so they must be equal and opposite. This means that the ratio of $ma$ and $mg$ satisfy:
+\begin{equation}
+    \tan(\theta-\alpha) = \frac{ma}{mg}
+    \label{eq:}
+\end{equation}
+The powerful part of this method is that it does not depend on what $N$ is. Looking at the top right triangle, we see that:
+\begin{equation}
+    \tan\alpha = \frac{\mu N}{N} = \mu
+    \label{eq:}
+\end{equation}
+is always a constant, and thus:
+\begin{equation}
+    a_\text{min} = g\tan(\theta-\arctan(\mu))
+    \label{eq:}
+\end{equation}
+We can use similar reasoning to determine the maximum acceleration (e.g. just before it slips upwards) as:
+\begin{equation}
+    a_\text{max} = g\tan(\theta+\arctan(\mu))
+    \label{eq:}
+\end{equation}
+Note that we can verify that this first answer is equivalent to the algebraic approach by using tangent angle addition formulas.
+
+\newpage
+\section{Gears}
+There are two rolling without slipping conditions here.
+\begin{itemize}
+    \item Relationship between velocity of mass and angular speed of wheel two: $v=(2R)\omega_2$.
+    \item Relationship between angular velocity of wheel one and wheel two: $\omega_1R = \omega_2(2R) \implies \omega_1=2\omega_2$.
+\end{itemize}
+Conservation of energy then gives:
+\begin{align}
+    mgh &= \frac{1}{2}mv^2+\frac{1}{12}I_1\omega_1^2+\frac{1}{2}I_2\omega_2^2 \\ 
+    mgh &= \frac{1}{2}m(2\omega_2 R)^2 + \frac{1}{2}I_1(2\omega_w)^2 + \frac{1}{2}I_w \omega_2^2 \\ 
+    mgh &= (2mR^2+2I+\frac{1}{2}I_2)\omega_2^2 \\ 
+    \omega_2^2 &= \frac{mgh}{2mR^2+2I_1+\frac{1}{2}I_2}
+\end{align}
+The rotational kinetic energy of wheel two is thus:
+\begin{equation}
+    K_\text{rot,2} = \frac{1}{2}I_2\omega_2^2 = \boxed{\frac{\frac{1}{2}I_2mgh}{2mR^2+2I_1+\frac{1}{2}I_2}}
+    \label{eq:}
+\end{equation}
+\section{Rod Collision}
+This is similar to one of the tutorial questions. We calculate the angular momentum before and after the collision at the center of mass of both objects, which is located a distance $L/4$ from the tips of the rods. Therefore, the initial angular momentum was:
+\begin{equation}
+    L_i = 2 \times Mv\left(\frac{L}{4}\right) = \frac{1}{2}MvL
+    \label{eq:}
+\end{equation}
+To write an expression for the final moment of inertia, we need to determine their moment of inertia after the collision when they stick together. Using the parallel axis theorem, we get:
+\begin{equation}
+    I = 2\left(\frac{1}{12}ML^2+M\left(\frac{L}{4}\right)^2\right) = \frac{7}{24}ML^2
+    \label{eq:}
+\end{equation}
+And the final angular momentum is then:
+\begin{equation}
+    L_f = \frac{7}{24}ML^2\omega
+    \label{eq:}
+\end{equation}
+Setting $L_i=L_f$ and solving for $\omega$ gives:
+\begin{equation}
+    \boxed{\omega = \frac{2}{7} \frac{v}{L}}
+    \label{eq:}
+\end{equation}
+\newpage
+\section{Work}
+We have a line integral, so we can break up the path into two parts: the vertical and the horizontal journey. For the vertical journey, the work done is:
+\begin{equation}
+    W_1 = \int_{y=0}^{y=2} F_y \dd{y} = \int_0^2 B(1) \dd{y} = 2B
+    \label{eq:}
+\end{equation}
+where I have let the vertical force $F_y=B(x)$. Since the $x$ position does not change in this path, we can set $x=1$ for the entire first part. For the second part, the $x$ value changes, and we have:
+\begin{equation}
+    W_2 = \int_{x=1}^{x=3} F_x \dd{x} = \int_1^3 -Ax \dd{x} = -4A
+    \label{eq:}
+\end{equation}
+Such that together, the total work is:
+\begin{equation}
+    \boxed{W = 2B-4A}
+    \label{eq:}
+\end{equation}
+\end{document}
