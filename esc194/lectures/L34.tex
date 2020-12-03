@@ -1,0 +1,103 @@
+\section{Second Order Differential Equations}
+\begin{itemize}
+    \item A typical \textbf{second order linear equation} takes the form of:
+    \begin{equation}
+        p(x)\frac{d^2y}{dx^2} + q(x)\frac{dy}{dx} + r(x)y = g(x)
+        \label{eq:}
+    \end{equation}
+    However we will only look at cases with \textbf{constant coefficients}, that is equations in the form of:
+    \begin{equation}
+        \frac{d^2y}{dx^2} + a\frac{dy}{dx} + by = g(x)
+        \label{eq:}
+    \end{equation}
+    \item \textbf{Homogeneous 2nd order linear differential equations} with constant coefficients are in the form of:
+    \begin{equation}
+        \frac{d^2y}{dx^2} + a\frac{dy}{dx}+by= 0
+        \label{eq:}
+    \end{equation}
+    \begin{theorem}
+        If $y_1(x)$ and $y_2(x)$ are both solutions of a homogeneous second order linear differential equation and $c_1$, $c_2$ are any constants, then the linear combination:
+        \begin{equation}
+            y(x) = C_1y_1(x) + C_2y_2(x)
+            \label{eq:}
+        \end{equation}
+        is also a solution.
+    \end{theorem}
+    \begin{prooof}
+        We have:
+        \begin{align}
+            (c_1y_1+c_2y_2)'' + a(c_1y_1+c_2y_2)' + b(c_1y_1+c_2y_2) &= 0 \\ 
+            c_1(y_1''+ay_1'+by_1) + c_2(y_2''+ay_2'+by_2) &= 0 \\ 
+            c_1(0) + c_2(0) &= 0
+        \end{align}
+    \end{prooof}
+    \begin{theorem}
+        If $y_1(x)$ and $y_2(x)$ are linearly independent solutions to a homogeneous second order linear differential equation, then:
+        \begin{equation}
+            y(x) = C_1y_1(x) + C_2y_2(x)
+            \label{eq:}
+        \end{equation}
+        is the general solution. Two solutions are linearly independent iff:
+        \begin{equation}
+            y_2(x) \neq Cy_1(x)
+            \label{eq:}
+        \end{equation}
+    \end{theorem}
+    \item To solve this homogeneous second order differential equation:
+    \begin{equation}
+        y'' + ay' + by = 0
+        \label{eq:}
+    \end{equation}
+    We might \textit{guess} a solution in the form of $y=e^{rx}$, to get:
+    \begin{equation}
+        (e^{rx})'' + a(e^{rx})' + b(e^{rx}) = 0 \implies (r^2+ar+b)e^{rx}=0
+        \label{eq:}
+    \end{equation}
+    Here, the \textbf{characteristic equation} (also referred to as the auxillary equation) is:
+    \begin{equation}
+        r^2+ar+b = 0
+        \label{eq:}
+    \end{equation}
+    \item There are three cases:
+    \begin{itemize}
+        \item Case One: $a^2-4b>0$: Then $r_1$, $r_2$ are real and distinct so the general solution is:
+        \begin{equation}
+            y=C_1e^{r_1x} + C_2e^{r_2x}
+            \label{eq:}
+        \end{equation}
+        \item Case Two: $a^2-4b=0$: Then $r_1=r_2=-\frac{a}{2}=r$. Then the solution is:
+        \begin{equation}
+            y = e^{rx} + xe^{rx}
+            \label{eq:}
+        \end{equation}
+        \item Case Three: $a^2-4b<0$: Then $r_1=\alpha+i\beta$ and $r_2=\alpha-i\beta$ where $\alpha=-\frac{\alpha}{2}$ and $\beta=\frac{1}{2}\sqrt{4b-a^2}$. Using the complex identity, we can rewrite this as:k
+        \begin{align}
+            y&=C_1e^{(\alpha+i\beta)x}+C_2e^{(\alpha-i\beta)x} \\ 
+            &= C_1e^{\alpha x}\left(\cos\beta x + i\sin\beta x\right) + C_2e^{\alpha x}(\cos\beta x-i\sin \beta x) \\ 
+            &= e^{\alpha x}\left((C_1+C_2)\cos\beta x + i(C_1-C_2)\sin\beta x\right) \\ 
+            &= e^{\alpha x}(A\cos\beta x + B\sin\beta x)
+            \label{eq:}
+        \end{align}
+        where the coefficients could either be real or complex. Typically, we only look at the real part when dealing with boundary conditions that only look at the real part.
+    \end{itemize}
+    \item Initial value problems need two conditions, $y(x_0)=y_0$ and $y'(x_0)=y_1$. They will always have a solution (for our purposes).
+    \item Boundary value problems have two differential conditions, such as: $y(x_0)=y_0$ and $y(x_1)=y_1$ OR $y'(x_0)=y_0$ and $y'(x_1)=y_1$. They will not always have a solution.
+    \begin{example}
+        Suppose $y''+4y'+5y=0$ and the following boundary conditions: $y(0)=1$ and $y(\pi/2)=0$. The characteristic equation is:
+        \begin{equation}
+            r^2+re+5 \implies r=-2\pm i
+            \label{eq:}
+        \end{equation}
+        so the general solution is:
+        \begin{equation}
+            y = e^{-2x}\left(A\cos x+B\sin x\right)
+            \label{eq:}
+        \end{equation}
+        Using the initial conditions, we get $A=1$ and $B=0$. Therefore:
+        \begin{equation}
+            y = e^{-2x}\cos(x)
+            \label{eq:}
+        \end{equation}
+        However, note that if the second boundary condition was $y(\pi) = 0$, which would have resulted in $A=0$, but is a direct contradiction of $y(0)=1$.
+    \end{example}
+\end{itemize}
