@@ -1,0 +1,279 @@
+\section{Non homogenous Linear Equations}
+\begin{itemize}
+    \item We now have the tools to solve the nonhomogeneous linear equation:
+    \begin{equation}
+        y''+ay'+by' = \phi(x)
+        \label{eq:}
+    \end{equation}
+    We can define the \textbf{complementary equation} to be:
+    \begin{equation}
+        y''+ay'+by= 0
+        \label{eq:}
+    \end{equation}
+    \begin{theorem}
+        The general solution of a nonhomogeneous second order linear differential equation gwith constant coefficients is given by:
+        \begin{equation}
+            y(x)=y_p(x)+y_c(x)
+            \label{eq:}
+        \end{equation}
+        where $y_p(x)$ is a particular solution of the complete differential equation and $y_c(x)$ is the general solution of the complementary homogeneous equation.
+        \begin{proof}
+            Given $y_{p_1}(x)$ and $y_{p_2}(x)$, let $z=y_{p_1}-y_{p_2}$ such that:
+            \begin{align}
+                \implies y_{p_2} &= y_{p_1} - z \\ 
+                y'_{p_2} &= y'_{p_1} - z' \\ 
+                y''_{p_2} = y''_{p_1} - z''
+            \end{align}
+        \end{proof}
+        so that:
+        \begin{align}
+            y'_{p_2}+ay'_{p_2}+by_{p_2} &= \phi(x) \\
+            (y''_{p_1}-z'') + a(y'_{p_1}-z')+b(y_{p_1}-z) &= \phi (x) \\
+            [y''_{p_1}+ay'_{p_1}+by_{p_1}] - [z''+az'+bz] &= \phi(x) \\ 
+            \phi(x) - [z''+az'+bz] &= \phi(x) \\ 
+            z''+az'+bz &= 0
+        \end{align}
+    \end{theorem}
+    Therefore, $z$ is a solution of the complementary homogeneous equation.
+    \item The idea behind the \textbf{method of undetermined coefficients} is to assume that the undetermined function has the same form as $\phi(x)$. For example, take:
+    \begin{equation}
+        y''-6y' +8y = x^2+2x
+        \label{eq:}
+    \end{equation}
+    Solving the auxillary equation $r^2-yr+8=0$ gives two roots: $y_1=C_1e^{2x}+C_2e^{4x}$. For the particular solution, we also assume that $y$ has the same form as $\phi(x)$ which is a second order polynomial:
+    \begin{equation}
+        y_p = Ax^2+Bx+C
+        \label{eq:}
+    \end{equation}
+    Therefore, we get:
+    \begin{align}
+        2A-6(2Ax+B)+8(Ax^2+Bx+C)&=x^2+2x
+    \end{align}
+    which after solving gives $A=1/8$, $B=7/16$, and $C=19/64$. Therefore, we would get:
+    \begin{equation}
+        y = C_1e^{2x}+C_2e^{4x}+\frac{1}{8}x^2+\frac{7}{17}x+\frac{19}{64}
+        \label{eq:}
+    \end{equation}
+    \item We can extend this to equations in the form of:
+    \begin{equation}
+        y''+ay'+by = \phi_1(x)+\phi_2(x)
+        \label{eq:}
+    \end{equation}
+    we can apply the superposition principle to determine the particular solution to be the particular solution to $\phi_1(x)$ added to the particular solution to $\phi_2(x)$.
+    \item A neat trick occurs when the complementary solution resembles the form of $\phi(x)$, such as
+    \begin{equation}
+        y''+y=\sin(x)
+        \label{eq:}
+    \end{equation}
+    The solution of the complementary equation is $y_c=C_1\cos(x)+C_2\sin(x)$, so instead of trying $y_p=A\sin(x)$, we should try $y_p=Ax\cos(x)+Bx\sin(x)$ instead.
+    \begin{warning}
+        Note that we need to multiply it by a factor of $x$ to prevent redundancy.
+    \end{warning}
+    \begin{example}
+        Solve $y''-y'-6y=e^{-2x}$. We first get the auxillary equation:
+        \begin{equation}
+            r^2-r-6=0 \implies r = -2,3
+            \label{eq:}
+        \end{equation}
+        so the complementary equation is:
+        \begin{equation}
+            y_c = C_1e^{-2x}+C_2e^{3x}
+            \label{eq:}
+        \end{equation}
+        and we try the particular equation in the form of:
+        \begin{equation}
+            y_p=Axe^{-2x}
+            \label{eq:}
+        \end{equation}
+        to get:
+        \begin{align}
+            y_p &= Axe^{-2x} \\ 
+            y'_p &= Ae^{-2x}-2Axe^{-2x} \\ 
+            y_p'' &= (4Ax-4A)e^{-2x}
+        \end{align}
+        We want:
+        \begin{equation}
+            (Ax-4A)e^{-2x}-(A-2Ax)e^{-2x}-6Axe^{-2x}=e^{-2x}
+            \label{eq:}
+        \end{equation}
+        which we can solve by matching coefficients. To ensure that the coefficients for the $xe^{-2x}$ terms sum up to zero, we have:
+        \begin{equation}
+            4A+2A-6A=0 \implies 0=0
+            \label{eq:}
+        \end{equation}
+        which means this is always satisfied. Matching the coefficients for the $e^{-2x}$ terms, we get:
+        \begin{equation}
+            -4A-A=1 \implies A=-\frac{1}{5}
+            \label{eq:}
+        \end{equation}
+        Therefore, the solution is:
+        \begin{equation}
+            y = C_1e^{-2x} + C_2e^{3x} - \frac{1}{5}xe^{-2x}
+            \label{eq:}
+        \end{equation}
+    \end{example}
+    \item We can also use the methods of \textbf{variation of parameters} since guessing may not always be the most reliable. To begin, we look at the general solution of the homogeneous second order equation:
+    \begin{equation}
+        y''+ay'+by = 0
+        \label{eq:}
+    \end{equation}
+    is:
+    \begin{equation}
+        y_c = c_1y_1(x) + c_2y_2(x)
+        \label{eq:}
+    \end{equation}
+    Instead of having $c_1$ and $c_2$ are constants, we can let them be functions $u_1(x)$ and $u_2(x)$ when solving the nonhomogeneous equation:
+    \begin{equation}
+        y''+ay'+by=\phi(x) \implies y_p = u_1(x)y_1(x) + u_2(x)y_2(x)
+        \label{eq:}
+    \end{equation}
+    Note that this means:
+    \begin{equation}
+        y'_p = (u_1y'_1+u_2y'_2)+(u'_1y_1+u'_2y_2)
+        \label{eq:}
+    \end{equation}
+    To simplify things, we can arbitrarily choose:
+    \begin{equation}
+        u'_1y_1+u'_2y_2 = 0
+        \label{eq:}
+    \end{equation}
+    This gives:
+    \begin{equation}
+        y'_p = u_1y'_1+u_2y'_2
+        \label{eq:}
+    \end{equation}
+    The second derivative is now:
+    \begin{equation}
+        y''_p = u_1y''_1 + u'_1y'_1+u_2y''_2+u'_2y'_2
+        \label{eq:}
+    \end{equation}
+    The advantage of this is that there are no second derivatives of $u_1$ or $u_2$. Substituting into the original equation gives:
+    \begin{equation}
+        (u_1y''_1+u'_1y'_1+u_2y''_2+u'_2y'_2) + a(u_1y'_1+u_2y'_2)+b(u_1y_1+u_2y_2)=\phi(x)
+        \label{eq:}
+    \end{equation}
+    We can rearrange them to be in the form of:
+    \begin{equation}
+        (y''_1+ay'_1+by_1)u_1 + (y''_2+ay'_2+by_2)u_2 + (u'_1y'_1+u'_2y'_2) = \phi(x)
+        \label{eq:}
+    \end{equation}
+    The first two terms evaluate to zero since $y_1$ and $y_2$ are solutions to the complementary equation, so we are left with:
+    \begin{align}
+        u'_1y'_1+u'_2y'_2 &= \phi(x) \\ 
+        u'_1y_1+u'_2y_2 &= 0
+        \label{eq:}
+    \end{align}
+    We have two equations and two unknowns and we just need to solve for $u'_1(x)$ and $u'_2(x)$.
+    \begin{example}
+        Take the differential equation $y''+y'-2y = e^x$. The auxillary equation gives:
+        \begin{equation}
+            r^2+r-2 = 0 \implies r=1,-2
+            \label{eq:}
+        \end{equation}
+        This means that $y_1=e^x$ and $y_2=e^{-2x}$. We then get the system of equations:
+        \begin{align}
+            u'_1(e^x)+u'_2(-2e^{-2x}) &= e^x \\
+            u'_1(e^x)+u'_2(e^{-2x}) &= 0 
+        \end{align}
+        Solving for $u'_1$ gives $u'_1 = \frac{1}{3}$ such that $u_1=\frac{x}{3}$. Similarly, solving for $u'_2$ gives:
+        \begin{equation}
+            u'_2 = -\frac{1}{3}e^{3x} \implies u_2=-\frac{1}{8}e^x
+            \label{eq:}
+        \end{equation}
+        So the particular solution is:
+        \begin{equation}
+            \frac{1}{3}xe^x-\frac{1}{9}e^x
+            \label{eq:}
+        \end{equation}
+        The second term can be included as one of the terms in the complementary solution, so the general solution is:
+        \begin{equation}
+            y=C_1e^{x}+C_2e^{-2x}+\frac{1}{3}xe^x
+            \label{eq:}
+        \end{equation}
+    \end{example}
+    \begin{example}
+        Take the differential equation:
+        \begin{equation}
+            y''+y= 3\sin x\sin 2x
+            \label{eq:}
+        \end{equation}
+        The auxillary equation leads to:
+        \begin{equation}
+            r^2+1=0\implies r = \pm i
+            \label{eq:}
+        \end{equation}
+        which gives the complementary solution as:
+        \begin{equation}
+            y_c=A\cos x+B\sin x
+            \label{eq:}
+        \end{equation}
+        such that we have:
+        \begin{equation}
+            y_p=u_1(x)\cos x+u_2(x)\sin(x)
+            \label{eq:}
+        \end{equation}
+        And solving the system:
+        \begin{align}
+            u_1'\cos x + u'_2\sin x &= 0 \\ 
+            -u_1'\sin x + u'_2\cos x &= 3\sin x\sin 2x
+        \end{align}
+        gives:
+        \begin{equation}
+            u_1' = -3\sin^2x\sin(2x)
+            \label{eq:}
+        \end{equation}
+        and:
+        \begin{equation}
+            u_2' = 3\cos x\sin x\sin 2x
+            \label{eq:}
+        \end{equation}
+        Integrating these gives:
+        \begin{align}
+            u_1 &= -\frac{3}{2}\sin^4{x} \\
+            u_2 &=  \frac{3}{4}\left(x-\frac{1}{4}\sin(4x)\right)
+        \end{align}
+        The particular solution then becomes:
+        \begin{equation}
+            y_p = -\frac{3}{2}\cos x\sin^4{x} + \frac{3}{16}(4x-\sin 4x)\sin x
+            \label{eq:}
+        \end{equation}
+        and the general solution is:
+        \begin{equation}
+            y = A\cos(x)+B\sin(x) -\frac{3}{2}\cos x\sin^4{x} + \frac{3}{16}(4x-\sin 4x)\sin x
+            \label{eq:}
+        \end{equation}
+    \end{example}
+    \begin{theorem}
+        In general, if we have a differential equation in the form of:
+        \begin{equation}
+            y''+ay'+by = \phi(x)
+            \label{eq:}
+        \end{equation}
+        then the complementary solution is given as:
+        \begin{equation}
+            y_c = Ay_1(x)+By_2(x)
+            \label{eq:}
+        \end{equation}
+        where $y_1(x)=e^{r_1x}$, $y_2(x)=e^{r_2x}$, and $r_1, r_2$ are the solutions to the quadratic:
+        \begin{equation}
+            r^2+ar+b=0
+            \label{eq:}
+        \end{equation}
+        except for the case of a double root, which you should see lecture 34 for. The particular solution is given by:
+        \begin{equation}
+            y_p(x) = u_1(x)y_1(x)+u_2(x)y_2(x)
+            \label{eq:}
+        \end{equation}
+        where $u_1'(x)$ and $u_2'(x)$ are given by:
+        \begin{align}
+            u_1'(x) &= \frac{-y_2\phi(x)}{y_1y_2'-y_2y_1'} \\ 
+            u_2'(x) &= \frac{y_1\phi(x)}{y_1y_2'-y_2y_1'}
+        \end{align}
+        Integrating and letting the constant of integration to be zero, we can solve for $u_1(x)$ and $u_2(x)$. The general solution is then:
+        \begin{equation}
+            y = y_c(x) + y_p(x)
+            \label{eq:}
+        \end{equation}
+        
+    \end{theorem}
+\end{itemize}
