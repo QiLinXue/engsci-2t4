@@ -286,7 +286,26 @@ In general, the recipe to test for local max and min is to:
     \end{itemize}
     \item Determine the absolute maximum and min by choosing the largest and smallest values of $f$, if they exist.
 \end{enumerate}
-\section{Optimization}
+\section{Applications of Derivatives}
+\subsection{Related Rates}
+\begin{itemize}
+    \item The basic idea behind \textbf{related rates} is to relate two changing but related quantities (e.g. between the rate of change of the volume and the surface area). It comes from the chain rule:
+    \begin{equation}
+        \frac{df}{dx}=\frac{df}{dg} \cdot \frac{dg}{dx}
+        \label{eq:}
+    \end{equation}
+    \item \textit{Usually:} this is a result of a chain of relations. For example, if we know the radius of a bubble $r(t)$ and we want to figure out how fast the volume is changing, this is a result of the following chain:
+    \begin{itemize}
+        \item Time is changing, which changes the radius.
+        \item The radius is changing, which changes the volume.
+    \end{itemize}
+    which intuitively makes it clear that:
+    \begin{equation}
+        \frac{dV}{dt} = \frac{dV}{dr} \frac{dr}{dt}
+        \label{eq:}
+    \end{equation}
+\end{itemize}
+\subsection{Optimization}
 Here is a checklist for solving optimization problems. If we want to optimize $f$:
 \begin{itemize}
     \item Check critical points.
@@ -295,7 +314,7 @@ Here is a checklist for solving optimization problems. If we want to optimize $f
     \item Check $\lim_{x\to \infty}$ and $\lim_{x\to -\infty}$.
     \item Make a decision.
 \end{itemize}
-\subsection{Numerical Methods}
+\subsection{Numerical Methods for Optimization}
 \begin{theorem}
     The \textbf{method of successive bisections} can be performed if $f$ is a continuous function and we can find values $a$ and $b$ such that $f(b)<0<f(a).$ These two values can be determined by trial and error. By IVT, the root must exist in between $a$ and $b$. To use this method, we calculate the halfway point $x_{h1}$. If $f(x_{h1})$ is positive, we replace $a$ with $x_{h1}$. If it's negative, we replace $b$ with $x_{h1}$.
 \end{theorem}
@@ -932,7 +951,7 @@ We can extend this to general logarithmic and exponential functions. If $x>0$, t
      \ln\left(1+\frac{1}{n}\right) = \int_1^{1+1/n} \frac{\dd{t}}{t} < \int_1^{1+1/n} 1 \dd{t}
      \label{eq:}
  \end{equation}
- Since $frac{1}{t} < \frac{1}{1}$ for $t>0$. The upper bound then becomes:
+ Since $\frac{1}{t} < \frac{1}{1}$ for $t>0$. The upper bound then becomes:
  \begin{equation}
      1+\frac{1}{n}-1 = \frac{1}{n} \implies \ln\left(1+\frac{1}{n}\right) < \frac{1}{n}
      \label{eq:}
