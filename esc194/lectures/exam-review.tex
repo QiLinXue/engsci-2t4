@@ -288,13 +288,12 @@ In general, the recipe to test for local max and min is to:
 \end{enumerate}
 \section{Applications of Derivatives}
 \subsection{Related Rates}
-\begin{itemize}
-    \item The basic idea behind \textbf{related rates} is to relate two changing but related quantities (e.g. between the rate of change of the volume and the surface area). It comes from the chain rule:
+The basic idea behind \textbf{related rates} is to relate two changing but related quantities (e.g. between the rate of change of the volume and the surface area). It comes from the chain rule:
     \begin{equation}
         \frac{df}{dx}=\frac{df}{dg} \cdot \frac{dg}{dx}
         \label{eq:}
     \end{equation}
-    \item \textit{Usually:} this is a result of a chain of relations. For example, if we know the radius of a bubble $r(t)$ and we want to figure out how fast the volume is changing, this is a result of the following chain:
+\textit{Usually:} this is a result of a chain of relations. For example, if we know the radius of a bubble $r(t)$ and we want to figure out how fast the volume is changing, this is a result of the following chain:
     \begin{itemize}
         \item Time is changing, which changes the radius.
         \item The radius is changing, which changes the volume.
@@ -304,7 +303,6 @@ In general, the recipe to test for local max and min is to:
         \frac{dV}{dt} = \frac{dV}{dr} \frac{dr}{dt}
         \label{eq:}
     \end{equation}
-\end{itemize}
 \subsection{Optimization}
 Here is a checklist for solving optimization problems. If we want to optimize $f$:
 \begin{itemize}
@@ -511,6 +509,17 @@ Rarely (never) will you get a simple question like this. Sometimes, the upper bo
         \label{eq:}
     \end{equation}
 \end{idea}
+Notice that the lower bound is a constant $a$ so the final answer does not depend on it (since it is a constant). However, there are other types of problems where both the lower and upper bound depend on $x$, if this is the case, then we can break it up into two integrals:
+\begin{equation}
+    \frac{d}{dx} \int_{g(x)}^{h(x)} f(t) \dd{t} = \frac{d}{dx}\left(\int_0^{h(x)}f(t)\dd{t} + \int_{g(x)}^0 f(t) \dd{t}\right)
+    \label{eq:}
+\end{equation}
+To apply the FTC on an integral where the lower bound is a function of $x$, but the upper bound is a constant, we can flip it:
+\begin{equation}
+    \frac{d}{dx}\int_{g(x)}^0 f(t) \dd{t} = -\frac{d}{dx}\int_0^{g(x)} f(t) \dd{t}
+    \label{eq:}
+\end{equation}
+
 The \textbf{second fundamental theorem of calculus} states that:
 \begin{theorem}
     Let $f$ be continuous on $[a,b]$. If $G$ is any antiderivative for $f$ on $[a,b]$, then:
@@ -991,8 +1000,7 @@ We can extend this to general logarithmic and exponential functions. If $x>0$, t
 \end{warning}
  There's a lot of formulas for this one, but to derive formula such as $\sin(\tan^{-1}(x))$, you just need to draw a picture of a right angled triangle with one of the legs as $x$ and either the hypotenuse or the other leg as $1$. If proofs are not needed, there is a formula sheet with all properties at the end of the book.
 \section{Complex Numbers}
-\begin{itemize}
-    \item We can introduce complex numbers to assign values to the solutions of algebraic equations such as:
+We can introduce complex numbers to assign values to the solutions of algebraic equations such as:
     \begin{equation}
         x^2 = -1
         \label{eq:}
@@ -1000,7 +1008,7 @@ We can extend this to general logarithmic and exponential functions. If $x>0$, t
     \begin{definition}
         A complex number is defined as $z=a+ib$ where $a,b\in \mathbb{R}$ and $\Re(z)=a$ and $\Im(z)=b$.
     \end{definition}
-    \item We can represent complex numbers on a plane:
+We can represent complex numbers on a plane:
     \begin{center}
         \begin{tikzpicture}
             \draw[->] (0,0) -- (3,0);
@@ -1009,7 +1017,7 @@ We can extend this to general logarithmic and exponential functions. If $x>0$, t
             \draw[->,thick] (0,0) -- (2,1);
         \end{tikzpicture}
     \end{center}
-    \item It is often helpful to write out a complex number using polar coordinates. The \textbf{modulus} of the number is:
+It is often helpful to write out a complex number using polar coordinates. The \textbf{modulus} of the number is:
     \begin{equation}
         |z| = |a+ib| = \sqrt{a^2+b^2}
         \label{eq:}
@@ -1032,12 +1040,12 @@ We can extend this to general logarithmic and exponential functions. If $x>0$, t
         \end{equation}
         where $r=|z|$.
     \end{idea}
-    \item The \textbf{complex conjugate} for a complex number $z=a+ib$ is:
+The \textbf{complex conjugate} for a complex number $z=a+ib$ is:
     \begin{equation}
         \bar{z} = a - ib
         \label{eq:}
     \end{equation}
-    \item Let $z_1=a+ib$ and $z_1=c+id$. Then complex addition/subtraction has the following properties:
+Let $z_1=a+ib$ and $z_1=c+id$. Then complex addition/subtraction has the following properties:
     \begin{itemize}
         \item $z_1+z_2 = (a+c) + i(b+d)$
         \item $z_1+z_2 = z_2+z_1$ (commutative)
@@ -1045,7 +1053,7 @@ We can extend this to general logarithmic and exponential functions. If $x>0$, t
         \item $|z_1+z_2| \le |z_1| + |z_2|$ (triangle inequality)
         \item $\overline{z_1+z_2} = \bar{z_1}+\bar{z_2}$
     \end{itemize}
-    \item Complex multiplication can be defined as:
+Complex multiplication can be defined as:
     \begin{equation}
         (a+ib)(c+id) = (ab-bd)+i(ad+bc)
         \label{eq:}
@@ -1075,7 +1083,7 @@ We can extend this to general logarithmic and exponential functions. If $x>0$, t
         \end{equation}
         What this means is that the magnitudes get multiplied like scalars and $z_1$ is rotated by the argument of $z_2$.
     \end{idea}
-    \item One direct consequence of this idea is that multiplying by $i$ is equivalent to rotating counterclockwise a complex number by 90 degrees. Note that this is an important concept that will appear when dealing with phasors in the circuit course.
+One direct consequence of this idea is that multiplying by $i$ is equivalent to rotating counterclockwise a complex number by 90 degrees. Note that this is an important concept that will appear when dealing with phasors in the circuit course.
     \begin{theorem}
         \textbf{De Moivre's Theorem:} Let $z=\cos\theta+i\sin\theta$. We have $|z|=1$ and $\arg(z)=\theta$. Then:
         \begin{equation}
@@ -1099,7 +1107,7 @@ We can extend this to general logarithmic and exponential functions. If $x>0$, t
             \label{eq:}
         \end{equation}
     \end{definition}
-    \item The most important tool in working with complex numbers is the complex exponential:
+    The most important tool in working with complex numbers is the complex exponential:
     \begin{equation}
         z = e^{ix}
         \label{eq:}
@@ -1120,7 +1128,6 @@ We can extend this to general logarithmic and exponential functions. If $x>0$, t
         \label{eq:}
     \end{equation}
     This is not a complete proof however, but will be rigorously proved next semester by using a Taylor series.
-\end{itemize}
 \section{Differential Equations}
 \begin{itemize}
     \item A differential equation can be defined as:
