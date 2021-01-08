@@ -1,0 +1,119 @@
+\documentclass{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usepackage{physics}
+\usetikzlibrary{shapes,arrows}
+\begin{document}
+\pagestyle{empty}
+
+
+% Define block styles
+\tikzstyle{decision} = [rectangle, draw, fill=red!20, 
+text width=10em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+text width=9em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=yellow!20, node distance=3cm,
+minimum height=4em]
+
+\begin{figure}[!ht]
+  \centering
+  \vspace*{-110pt}
+  \hspace*{-110pt}
+  \begin{tikzpicture}[node distance = 2cm, auto]
+    % nodes
+    \node [cloud] (init) {\Large Start Here};
+    \node (init) [right]{3}
+    \node [decision, below of = init, node distance = 2cm] (separable?) {Separable? $$\frac{dy}{dx} = f(x)g(y)$$};
+    \node [block, right of = separable?, node distance = 6.4cm, text width=16em] (solve separable){Solve it by separating: $$\int \frac{\dd{y}}{g(y)} = \int f(x) \dd{x}$$};
+
+    \node [decision, below of = separable?, node distance = 2.5cm] (first order?) {Linear $1^\text{st}$ order? $$\frac{dy}{dx} + p(x)y = q(x)$$};
+    \node [block, right of = first order?, node distance = 6.4cm, text width=16em] (solve first order){Define $H(x)=\int p(x) \dd{x}$ and solve: $$y = e^{-H(x)}\left[\int e^{H(x)} q(x) \dd{x} + C\right]$$};
+
+    \node [decision, below of = first order?, node distance = 2.5cm] (bernoulli?) {Bernoulli $1^\text{st}$ order? $$\frac{dy}{dx} + p(x)y = q(x)y^r$$};
+    \node [block, right of = bernoulli?, node distance = 6.4cm, text width=16em] (solve bernoulli){Let $u=y^{1-r}$ for $r\neq 0,1$ to get: $$\frac{du}{dx} + (1-r)p(x)u = (1-r)q(x)$$};
+
+    \node [decision, below of = bernoulli?, node distance = 3.5cm] (homo 2?) {Homogeneous $2^\text{nd}$ order? $$\frac{d^2y}{dx^2} + a\frac{dy}{dx} + by = 0$$};
+    \node [decision, right of = homo 2?, node distance = 5cm, text width=8em] (characteristic eqns) {Solutions to characteristic equation? $$r^2+ar+b=0$$};
+    \node [block, right of = characteristic eqns, node distance = 6.5cm, text width=14em] (0 sol) {Let $r=\alpha + i\beta$. Then: $$y=e^{\alpha x}\left(A\cos(\beta x) + B\sin(\beta x)\right)$$};
+    \node [block, below of = 0 sol, node distance = 2cm, text width=9em] (1 sol) {General solution: $$y=Ae^{rx}+Bxe^{rx}$$};
+    \node [block, above of = 0 sol, node distance = 2cm, text width=9em] (2 sol) {General solution: $$y=Ae^{r_1x}+Be^{r_2x}$$};
+
+    \node [decision, below of = homo 2?, node distance = 8cm] (nonhomo 2?) {Non-homogeneous $2^\text{nd}$ order? $$\frac{d^2y}{dx^2} + a\frac{dy}{dx} + by = \phi(x)$$};
+
+    \node [block, right of = nonhomo 2?, node distance = 5cm, text width=8em] (complimentary) {Solve the complementary equation: $$y_c''+ay_c'+b=0$$};
+
+    \node [decision, right of = complimentary, node distance = 3.5cm, text width=6em] (choose) {Choose a method to solve for $y_p$};
+    \node [block, above of = choose, node distance = 3.5cm, text width=14em] (variation) {Let $y_c=Ay_1+By_2$. \\ Then define: \begin{align*}
+            u_1'(x) &= \frac{-y_2\phi(x)}{y_1y_2'-y_2y_1'} \\ 
+            u_2'(x) &= \frac{y_1\phi(x)}{y_1y_2'-y_2y_1'}
+    \end{align*}};
+    \node [block, right of = variation, node distance = 6.5cm, text width=16em] (variation finish) {After solving, particular solution is $$y_p=u_1(x)y_1(x)+u_2(x)y_2(x)$$ and the solution is:
+    $$y=y_c(x)+y_p(x)$$};
+    
+    \node [decision, below of = choose, node distance = 3.5cm, text width=14em] (undetermined coefficients) {$y_c$ is in the form of:
+    $$y_c=e^{kx}f(x)$$ where $k=0$ is a possibility. What describes $f(x)$?};
+    \node [block, right of = undetermined coefficients, node distance = 7cm, text width=10em] (polynomial) {Let $Q(x)$ have the same degree as $f(x)$. Try: $$y_p(x)=e^{kx}Q(x)$$ };
+    \node [block, below of = undetermined coefficients, node distance = 3cm, text width=18em] (sine) {Let $Q(x)$ and $R(x)$ be polynomials with the same degree as $P(x)$. Try: $$y_p(x)=e^{kx}\left(Q(x)\cos mx + R(x)\sin mx\right)$$};
+    \node [block, below of = polynomial, node distance = 3cm, text width=10em] (final) {If part of $y_p$ is contained in $y_c$, try multiplying it by $x$ or $x^2$. The solution is:
+    $$y=y_c(x)+y_p(x)$$};
+
+    \node [block, below of = nonhomo 2?, node distance = 3cm, text width=8em] (fucked) {You're fucked.};
+
+    
+    % \node [block, below of = followup, node distance = 3.5cm] (assessn) {\Large Repeated assessment};
+    % \node [block, left of = followup, node distance = 4cm] (interval) {\Large Data processing};
+    % \node [block, below of = assessn, node distance = 2.5cm] (end) {\Large End of study};
+    % \node [block, below of = case, node distance = 3cm] (bloodcase) {\Large Take urine \& blood sample only};
+    % % edges
+
+    \path [line] (init) -- (separable?);\
+    \path [line] (separable?) -- node {Yes}(solve separable);
+    \path [line] (separable?) -- node {No}(first order?);
+    \path [line] (first order?) -- node {No}(bernoulli?);
+    \path [line] (first order?) -- node {Yes}(solve first order);
+    \path [line] (bernoulli?) -- node {Yes}(solve bernoulli);
+    \path [line] (solve bernoulli) -- (solve first order);
+    \path [line] (bernoulli?) -- node {No}(homo 2?);
+    \path [line] (homo 2?) -- node {No}(nonhomo 2?);
+    \path [line] (nonhomo 2?) -- node {No}(fucked);
+
+    \path [line] (nonhomo 2?) -- node {Yes}(complimentary);
+    \path [line] (complimentary) -- (choose);
+
+    \path [line] (characteristic eqns) -- node {$0$ solutions}(0 sol);
+    \path [line] (characteristic eqns) |- node[below] {$1$ solution}(1 sol);
+    \path [line] (characteristic eqns) |- node {$2$ solutions}(2 sol);
+
+
+    % \path [line] (contact) -- (consent);
+    % \path [line] (consent) -- (screening);
+    % \path [line] (screening) -- node {eligible}(assess0);
+    % \path [line] (screening) -- node {\Large no}(refer);
+    % \path [line] (assess0) -- (followup);
+    % \path [line] (followup) -- node {\Large no}(confirm);
+    % \path [line] (followup) -- node {\Large yes}(assessn);
+    \path [line] (separable?) -- node {Yes}(solve separable);
+    \path [line] (homo 2?) -- node {Yes}(characteristic eqns);
+
+    \path [line] (choose) -- node[align=left, right]{\small Undetermined \\ \small Coefficients} (undetermined coefficients);
+    \path [line] (variation) -- (variation finish);
+
+    \path [line] (choose) -- node[align=left, right]{\small Variation of \\ \small Parameters} (variation);
+
+    \path [line] (undetermined coefficients) -- node[align=left, above]{\small Polynomial} (polynomial);
+    \path [line] (undetermined coefficients) -- node[align=left, right]{\small $P(x)\sin(mx)$} (sine);
+
+    \path [line] (sine) -- (final);
+    \path [line] (polynomial) -- (final);
+
+    % \path [line] (interval) -- (followup);
+    % \path [line] (confirm) -- node {\Large yes}(case);
+    % \path [line] (confirm) |- node {\Large no}(assessn);
+    % \path [line] (assessn) -- (end);
+    % \path [line] (case) -- (bloodcase);
+  \end{tikzpicture}
+\end{figure}
+
+\end{document}
