@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{phy}
+
+\title{PHY180: Classical Mechanics \\ Bonus Questions (Chapter 15)}
+\author{QiLin Xue}
+\date{\today}
+\usepackage{siunitx}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\maketitle
+\subsection*{Problem 1}
+No energy is lost during the collision, so we can apply the conservation of energy. The energy of a simple harmonic oscillator is given by:
+\begin{equation}
+    E = \frac{1}{2}k(\Delta x_\text{eq}+A)^2 = \frac{1}{2}m\omega^2 (\Delta x_\text{eq}+A)^2 = \frac{2\pi^2 m (\Delta x_\text{eq}+A)^2}{T^2}
+    \label{eq:}
+\end{equation}
+where we have used the substitution $\omega^2 = \frac{k}{m}$. After the clay collides, it performs simple harmonic motion about the equilibrium location, which can be calculated to be:
+\begin{equation}
+    mg = k\Delta x_\text{eq} \implies \Delta x_\text{eq} = \frac{mg}{k}=\frac{g}{\omega^2}=\frac{gT^2}{4\pi^2}
+    \label{eq:}
+\end{equation}
+Then we can finally apply conservation of energy by setting $y=0$ to be at maximum compression, such that:
+\begin{equation}
+    \frac{2\pi^2 m \left(\frac{gT^2}{4\pi^2}+A\right)^2}{gT^2} = mg\left(h+\Delta x_\text{eq}+A\right)
+    \label{eq:}
+\end{equation}
+Solving for $h$ gives:
+\begin{equation}
+    h = \frac{2\pi^2 \left(\frac{gT^2}{4\pi^2}+A\right)^2}{T^2} - \frac{gT^2}{4\pi^2} - A = 17.8\text{ cm}
+    \label{eq:}
+\end{equation}
+\subsection*{Problem 2}
+It is possible that the clay may lose contact at the top, so we can analyze the forces there. At the maximum amplitude when the coin is just about to lose contact, the normal force will be zero, so a force balance on the coin gives:
+\begin{equation}
+    m_\text{coin}a = m_\text{coing}g \implies a=-g
+    \label{eq:}
+\end{equation}
+Since the coin is still in contact with the clay, they have the same acceleration. Recall that the restoring acceleration in simple harmonic motion is $a=-\omega^2 x$ so we have $a=-\omega^2 A$ at the very top.
+Substituting in for $a$, and letting $T=\frac{2\pi}{\omega}$, we get:
+\begin{equation}
+    A = \frac{gT^2}{4\pi^2} = 8.95\text{ cm}.
+    \label{eq:}
+\end{equation}
+\textbf{Note:} We can also show that the above is true by balancing forces on the clay:
+\begin{equation}
+    m_\text{clay}a = -k(A-x_\text{eq}) - m_\text{clay}g
+    \label{eq:}
+\end{equation}
+Note that $x_\text{eq}=\frac{mg}{k}$ so that this becomes:
+\begin{equation}
+    m_\text{clay}a = -kA + m_\text{clay}g - m_\text{clay}g = -kA \implies a = -\omega^2 A
+    \label{eq:}
+\end{equation}
+which leads to the same thing.
+\end{document}

@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage{phy}
+
+\title{PHY180: Classical Mechanics \\ Tutorial \#1}
+\author{QiLin Xue}
+\date{Sept 21 2020}
+\usepackage{siunitx}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\maketitle
+\subsection*{Problem 1}
+We can model velocity as a linear function:
+\begin{equation}
+    a(t)=1-\frac{1}{2}t
+    \label{eq:}
+\end{equation}
+where each term has units of acceleration. Then the velocity as a function of time is given by:
+\begin{equation}
+    v(t) = \int \left(1-\frac{1}{2}t\right)\dd{t} = t-\frac{1}{4}t^2+C
+    \label{eq:}
+\end{equation}
+Here $C=0$ since $v(0)=0$. Integrating again, we find:
+\begin{equation}
+    x(t) = \int \left(t-\frac{1}{4}t^2\right) \dd{t} = \frac{1}{2}t^2-\frac{1}{12}t^3 + C
+    \label{eq:}
+\end{equation}
+Again, $C=0$ since $x(0)=0$. To find the position at $t=4\si{\second}$, we plug this in to get:
+\begin{equation}
+    x(4) = 2.7\si{\meter}
+    \label{eq:}
+\end{equation}
+To find the average velocity, we have:
+\begin{equation}
+    v_\text{avg} = \frac{\Delta x}{\Delta t} = \frac{x(2)}{2\si{\second}} = 0.67\si{\meter\per\second}
+    \label{eq:}
+\end{equation}
+\subsection*{Problem 2}
+The average velocity in the first part of the journey is $\frac{v_f}{2}$ and the average velocity in the second part of the journey is $v_f$. If the first part of the journey takes a time $\Delta t=3\si{\second}$, then we can write the total distance traveled as:
+\begin{equation}
+    L=\frac{1}{2}v_f\Delta t + (10-\Delta t)v_f = v_f\left(10-\frac{1}{2}\Delta t\right)
+    \label{eq:}
+\end{equation}
+Solving for $v_f$ then gives:
+\begin{equation}
+    v_f=\frac{L}{10-\frac{1}{2}\Delta t} = 11.76\si{\meter\per\second}.
+    \label{eq:}
+\end{equation}
+\subsection*{Problem 3}
+From conservation of energy (or the $v_f^2=v_i^2+2ad$ equation), we can find that the impact velocity on the ground is $v_i=\sqrt{2gh_0}$ and the exit velocity from the impact as $v_f=-\sqrt{2gh'}$ where the down direction as taken as the positive direction. Then the change in velocity is:
+\begin{equation}
+    \Delta v = \sqrt{2g}\left(\sqrt{h_0}+\sqrt{h'}\right)
+    \label{eq:}
+\end{equation}
+and the time it takes is thus:
+\begin{equation}
+    \Delta t = 0.89-\left(\sqrt{\frac{2h_0}{g}}+\sqrt{\frac{2h'}{g}}\right)
+    \label{eq:}
+\end{equation}
+and the average acceleration is thus:
+\begin{equation}
+    a_\text{avg} = \frac{\Delta v}{\Delta t} = \frac{\sqrt{2g}\left(\sqrt{h_0}+\sqrt{h'}\right)}{0.89-\left(\sqrt{\frac{2h_0}{g}}+\sqrt{\frac{2h'}{g}}\right)} = 344\si{\meter\per\second\squared}.
+    \label{eq:}
+\end{equation}
+
+\end{document}

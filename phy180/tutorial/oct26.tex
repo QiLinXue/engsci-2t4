@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage{phy}
+
+\title{PHY180: Classical Mechanics \\ Tutorial Questions}
+\author{QiLin Xue}
+\date{\today}
+\usepackage{siunitx}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\maketitle
+\subsection*{Problem 1}
+Assume that the elevator undergoes unciform acceleration, then the scale reading as it moves up with acceleration $a$ should be:
+\begin{equation}
+    W'=m(g+a)
+    \label{eq:}
+\end{equation}
+Letting $m=W/g$ be the mass of the student with $W$ being the weight before the elevator moves, then:
+\begin{equation}
+    W'=\frac{W}{g}(g+a) \implies a = g\left(\frac{W'}{W}-1\right)
+    \label{eq:}
+\end{equation}
+So the top speed would be:
+\begin{equation}
+    v_\text{max} = a\Delta t = g\Delta t\left(\frac{W'}{W}-1\right) \approx 2.1\si{\meter\per\second}
+    \label{eq:}
+\end{equation}
+\subsection*{Problem 2}
+At steady state, each mass has the same acceleration of:
+\begin{equation}
+    a = \frac{F}{2m}
+    \label{eq:}
+\end{equation}
+For mass $B$, the only force acting on it is the spring force, so this must mean from Newton's second law:
+\begin{equation}
+    m\left(\frac{F}{2m}\right)=k\Delta x \implies \Delta x = \frac{F}{2k}
+    \label{eq:}
+\end{equation}
+so the distance between the two carts is $\boxed{L+\frac{F}{2k}}$. At the instant we let go, box $B$ would still have the same acceleration and box $A$ would have the same acceleration as box $B$ but in the opposite direction.
+
+\noindent After I stop pulling, I expect the carts to undergo SHM around their center of mass, which moves at a constant velocity. When cart $B$ is moving at its fastest, the spring is not stretched.
+
+\subsection*{Problem 3}
+\textbf{(a)} The quantity $F_0$ represents the initial force at $t=0$.
+
+\noindent \textbf{(b)} The time integral of the force gives us the change in momentum:
+\begin{equation}
+    p_f - 0 = \int_0^\tau F_0 e^{-t/\tau} \dd{t} = -F_0\tau e^{-t/\tau}\Big|^{t=\tau}_{t=0} = F_0\tau \left(1-e^{-1}\right)
+    \label{eq:}
+\end{equation}
+\noindent \textbf{(c)} We do the same thing to get:
+\begin{equation}
+    p_f = \int_0^{5\tau} F_0e^{-t/\tau}\dd{t} = F_0\tau\left(1-e^{-1/5}\right)
+    \label{eq:}
+\end{equation}
+\textbf{(d)} As $t\to\infty$, we get:
+\begin{equation}
+    p_f = F_0\tau
+    \label{eq:}
+\end{equation}
+\textbf{(e)} Suppose this time occurs at $t=N\tau$, then the momentum after this time has elapsed is:
+\begin{equation}
+    fF_0\tau = F_0\tau\left(1-e^{-1/N}\right)
+    \label{eq:}
+\end{equation}
+where $f=95\%$. Solving this, we get:
+\begin{equation}
+    e^{-1/N} = 1-f \implies -\frac{1}{N} = \ln(1-f) \implies N = \frac{1}{\ln\left(\frac{1}{1-f}\right)}=0.334
+    \label{eq:}
+\end{equation}
+for a total time of:
+\begin{equation}
+    t=N\tau = 0.167\si{\milli\second}.
+    \label{eq:}
+\end{equation}
+
+
+\end{document}

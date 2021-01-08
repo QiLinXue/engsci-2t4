@@ -1,0 +1,180 @@
+\documentclass{article}
+\usepackage{phy}
+
+\title{PHY180: Classical Mechanics \\ 2017 Exam Solutions}
+\author{QiLin Xue}
+\date{\today}
+\usepackage{lmodern}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{bm}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{bbm}
+\usepackage{parskip}
+\usepackage{calc}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage{multicol}
+\usepackage[inline]{asymptote}
+\usepackage{siunitx}
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+
+\pgfplotsset{compat=1.16}
+\setlength\parindent{0pt}
+\everymath{\displaystyle}
+\usepackage{makeidx}
+\makeindex
+
+
+
+\let\oldtextbf\textbf
+\renewcommand{\textbf}[1]{\oldtextbf{#1}\index{#1}}
+
+\begin{document}
+
+\maketitle
+\section*{Problem 1}
+\textbf{(a)} We integrate with respect to time to get velocity:
+\begin{equation}
+    v(t) = \int 5-t \dd{t} = 5t -\frac{1}{2}t^2 - 8
+    \label{eq:}
+\end{equation}
+where I have added in the condition $v(0)=-8\si{\meter\per\second}$. This is zero when:
+\begin{equation}
+    t^2-10t+16=0 \implies (t-8)(t-2)=0
+    \label{eq:}
+\end{equation}
+So the particle will stop at $t=2\si{\second}$ and $t=8\si{\second}$.
+
+\textbf{(b)} We integrate again:
+\begin{equation}
+    x(t) = \int (5t-\frac{1}{2}t^2-8) \dd{t} = \frac{5}{2}t^2-\frac{1}{6}t^3-8t+10
+    \label{eq:}
+\end{equation}
+using the condition that $x(0)=10$. At $t=3\si{\second}$, the position of the particle is:
+\begin{equation}
+    x(3) =4 \si{\meter}
+    \label{eq:}
+\end{equation}
+\textbf{(c)} A critical point for the velocity of the particle occurs when $v'(t)=a(t)=0$, or when $t=5\si{\second}$, and the particle is travelling at a speed of:
+\begin{equation}
+    v(4) = 4\si{\meter\per\second}
+    \label{eq:}
+\end{equation}
+Note that the initial and end points do not satisfy this as they are both moving in the $-\hat{i}$ direction.
+
+\section*{Problem 2}
+\textbf{(a)} Before it hits object $m$, it is moving at a speed of $v=\sqrt{2gh}$, from conservation of energy.
+
+\textbf{(b)} We have a perfectly inelastic collision, where momentum is conserved:
+\begin{equation}
+    M\sqrt{2gh} = (M+m)v_A \implies v_A = \frac{M}{M+m}\sqrt{2gh}
+    \label{eq:}
+\end{equation}
+\textbf{(c)} For the minimum speed, they are just about to leave contact with the track so the normal force becomes zero at the top of the track. Therefore:
+\begin{equation}
+    (m+M)g = \frac{(m+M)v_A'^2}{R}
+    \label{eq:}
+\end{equation}
+where from conservation of energy, $v_A'$ is the speed at the top of the track and is given by:
+\begin{equation}
+    \frac{1}{2}(M+m)v_A^2 = \frac{1}{2}(M+m)v_A'^2 + (m+M)g(2R) \implies v_A' = \sqrt{v_A^2-4gR}
+    \label{eq:}
+\end{equation}
+Substituting this into the force balance equation gives:
+\begin{equation}
+    gR = v_A^2-4gR \implies v_A = \sqrt{5gR}
+    \label{eq:}
+\end{equation}
+
+\section*{Problem 3}
+\textbf{(a)} The distance the contact point between the applied force and the rod moves is given by:
+\begin{equation}
+    y\tan(\Delta\theta)
+    \label{eq:}
+\end{equation}
+so the work done is:
+\begin{equation}
+    W = Fy\tan(\Delta\theta) = 3.5\si{\joule}
+    \label{eq:}
+\end{equation}
+\textbf{(b)} Let $y=0$ to be at the top of the rod. From conservation of energy, we have:
+\begin{equation}
+    -Mg\frac{L}{2} + W_\text{ext} = -Mg\frac{L}{2}\cos\theta  + K
+    \label{eq:}
+\end{equation}
+Solving for $K$ gives:
+\begin{equation}
+    K = \frac{MgL}{2}\left(\cos\Delta\theta-1\right) + W_\text{ext} = 1.4\si{\joule}
+    \label{eq:}
+\end{equation}
+
+\section*{Problem 4}
+Consider a force balance on the mass:
+\begin{equation}
+    m_2(a-\alpha R) = T - m_2g
+    \label{eq:}
+\end{equation}
+Note that the $a$ comes from the acceleration of the elevator and the $-\alpha R$ comes from the acceleration of the block with respect to the spool. A torque balance gives:
+\begin{equation}
+    I_\text{cm}\alpha = TR = m_2(g+a)R-m_2\alpha R^2
+    \label{eq:}
+\end{equation}
+Solving for $\alpha$ then gives:
+\begin{equation}
+    \alpha = \frac{m_2R(a+g)}{I_\text{cm}+m_2R^2}
+    \label{eq:}
+\end{equation}
+\section*{Problem 5}
+Some orbital mechanics is needed for this problem, so feel free to skip this.
+
+\textbf{(a)} We can calculate the center of mass in the radial direction away from mass $M$ to be:
+\begin{equation}
+    x_\text{cm} = \frac{2MD}{M+2M} = \frac{2}{3}D
+    \label{eq:}
+\end{equation}
+Therefore, a force balance on mass $M$ gives:
+\begin{equation}
+    M\omega^2\left(\frac{2}{3}D\right) = \frac{GM(2M)}{D^2} \implies \omega = \sqrt{\frac{3GM}{D^3}}
+    \label{eq:}
+\end{equation}
+\textbf{(b)} The angular velocity of both masses are the same about their centroid. Their respective velocities are $v=\frac{2}{3}\omega D$ and $v=\frac{1}{3}\omega D$, so their total kinetic energy is:
+\begin{equation}
+    K = \frac{1}{2}(M)\frac{4D}{9}\frac{3GM}{D^3} + \frac{1}{2}(2M)\frac{D}{9}\frac{3GM}{D^3} = \frac{GM^2}{D^2}
+    \label{eq:}
+\end{equation}
+\textbf{(c)} The potential energy is:
+\begin{equation}
+    U = -\frac{GM(2M)}{D^2} = -\frac{2GM^2}{D^2}
+    \label{eq:}
+\end{equation}
+Note that $2K+U=0$. This is a special case of a well known result called the \textbf{Virial Theroem}.
+\section*{Problem 6} 
+Consider a tiny displacement $\theta$ of the rod. The spring would exert a torque of:
+\begin{equation}
+    \tau_s = -k\Delta x \frac{L\cos\theta}{2}
+\end{equation}
+Approximating $\cos\theta\approx 1$ and $\Delta x = \frac{L}{2}\theta$, we get the torque from the spring to be:
+\begin{equation}
+    \tau_s = -\frac{kL^2}{4}\theta 
+    \label{eq:}
+\end{equation}
+and the torque from gravity is:
+\begin{equation}
+    \tau_g = -mg\frac{L}{2}\sin\theta \approx -\frac{mgL}{2}\theta 
+    \label{eq:}
+\end{equation}
+such that the torque balance equation becomes:
+\begin{equation}
+    \frac{1}{12}mL^2\alpha = -\left(\frac{mgL}{2} + \frac{kL^2}{4}\right)\theta \implies \alpha = -\left(\frac{6g}{L}+\frac{3k}{m}\right)\theta 
+    \label{eq:}
+\end{equation}
+so the angular frequency is:
+\begin{equation}
+    \omega = \sqrt{\frac{6g}{L}+\frac{3k}{m}}
+    \label{eq:}
+\end{equation}
+
+\end{document}

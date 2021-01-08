@@ -1,0 +1,260 @@
+\documentclass{article}
+\usepackage{phy}
+
+\title{PHY180: Classical Mechanics \\ 2018 Exam Solutions}
+\author{QiLin Xue}
+\date{\today}
+\usepackage{lmodern}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{bm}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{bbm}
+\usepackage{parskip}
+\usepackage{calc}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage{multicol}
+\usepackage[inline]{asymptote}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+
+\pgfplotsset{compat=1.16}
+\setlength\parindent{0pt}
+\everymath{\displaystyle}
+\usepackage{makeidx}
+\makeindex
+\let\oldtextbf\textbf
+\renewcommand{\textbf}[1]{\oldtextbf{#1}\index{#1}}
+
+\begin{document}
+
+\maketitle
+\section*{Problem 1}
+A particle in a potential is at an equilibrium point when $V'(x)=0$. This spot is stable if $V''(x)>0$ and unstable if $V''(x)<0$. Therefore, we have:
+\begin{equation}
+    V'(x) = ax+bx^3 = x(a+bx^2)=0
+    \label{eq:}
+\end{equation}
+and:
+\begin{equation}
+    V''(x)=a+3bx^2
+    \label{eq:}
+\end{equation}
+
+There is an equilibrium point when $x=0$ and when $x=\sqrt{-\frac{a}{b}}$ (but the second one does not always exist).
+
+\textbf{(a)} When $a>0$, there is only one equilibrium location at $x=0$, and the second derivative there is: $V''(0)=a$, which is positive so it is stable. The frequency of small oscillations around it is then:
+\begin{equation}
+    \omega = \sqrt{\frac{V''(0)}{m}} = \sqrt{\frac{a}{m}}
+    \label{eq:}
+\end{equation}
+\textbf{(b)} When $a<0$, $x=0$ is still an equilibrium location but the second derivative is now negative, so it is unstable. There is another equilibrium location at $x=\sqrt{\frac{|a|}{b}}$. Similarly, the angular frequency about this point is:
+\begin{equation}
+    \omega = \sqrt{\frac{2|a|}{m}}
+    \label{eq:}
+\end{equation}
+where we have used the fact that:
+\begin{equation}
+    V''\left(\sqrt{\frac{-a}{b}}\right) = 2|a|
+    \label{eq:}
+\end{equation}
+
+\section*{Problem 2}
+We can balance forces in the horizontal and vertical directions, with horizontal taken to be parallel to the ground. The free body diagram looks like the following:
+\begin{center}
+    \begin{tikzpicture}[x=2cm,y=2cm]
+        \coordinate (A) at (0, 0);
+        \coordinate (B) at (-1.5,0);
+        \coordinate (C) at (-4,2);
+        \coordinate (M) at (-2,1);
+
+        \draw[dotted] (A) -- (B);
+        \draw[] (A) -- (C);
+        \draw[fill=black] (M) circle (0.05);
+        \draw[thick, ->] (M) -- ($(M) !.5! (C)$) node[above] {$f_\text{fr}$};
+        \draw[thick, ->] (M) -- ++(0, -2) node[right] {$mg$};
+        \draw[thick, ->] (M) -- ++(1,2) node[right] {$N$};
+
+        \tkzMarkAngle[fill=red,%
+                 size=0.4,   % for small squares you may want to use this
+                 opacity=0.4](M,A,B)
+                 \tkzLabelAngle[pos=0.5](M,A,B){$\theta$}
+    \end{tikzpicture}
+\end{center}
+Note that the friction forces points up the ramp because if the angle was bigger by just a bit, the block would slide down. This also means that the static friction achieves its maximum value of:
+\begin{equation}
+    f_\text{fr} = \mu_sN
+    \label{eq:}
+\end{equation}
+Equilibrium equations give:
+\begin{align}
+    \sum F_y = 0 &\implies N\cos\theta + \mu_sN\sin\theta = mg \\ 
+    \sum F_x = 0 &\implies ma = N\sin\theta - \mu_sN\cos\theta
+\end{align}
+Dividing both sides by $\cos\theta$ gives:
+\begin{align}
+    mg/\cos\theta &= N + \mu_sN\tan\theta \\ 
+    ma/\cos\theta &= N\tan\theta - \mu_sN
+\end{align}
+Dividing the two equations gives:
+\begin{equation}
+    \frac{g}{a} = \frac{1+\mu \tan\theta}{\tan\theta-\mu} \implies \frac{g}{a}\tan\theta - \frac{\mu g}{a} - \mu\tan\theta = 1
+    \label{eq:}
+\end{equation}
+And solving for $\theta$ gives:
+\begin{equation}
+    \theta = \arctan\left(\frac{1+\frac{\mu g}{a}}{-\mu + \frac{g}{a}}\right)
+    \label{eq:}
+\end{equation}
+\subsection*{Alternate Solution}
+There is actually an elegant solution to this that involves much less computation. We can switch into a \textit{noninertial} reference frame by introducing a fictitious force $-ma$ that acts in the leftwards direction. This is D'alembert's principle. We can pair up the force vectors $N$ with $\mu N$ and $mg$ with $ma$ to get the following diagram: 
+\begin{center}
+    \begin{tikzpicture}[x=2cm,y=2cm]
+        \coordinate (B) at (-1.5,0);
+
+
+        \coordinate (A) at (0, 0);
+        \coordinate (C) at (-3,3);
+        
+        \coordinate (M) at (-1.5,1.5);
+        \coordinate (mg) at (-1.5,0.5);
+        \coordinate (ma) at (-2,0.5);
+        \coordinate (N) at (-0.75,2.25);
+        \coordinate (N') at (-2.5,0.5);
+
+        \coordinate (fr) at (-1,2.5);
+
+        \draw[dotted] (A) -- (B);
+        \draw[] (A) -- (C);
+        \draw[fill=black] (M) circle (0.05);
+        \draw[thick, ->] (M) -- (mg) node[midway, right] {$mg$};
+        \draw[thick, ->] (mg) -- (ma) node[midway, below] {$ma$};
+        
+        \draw[thick, ->] (M) -- (N) node[midway, right] {$N$};
+        \draw[thick, ->] (N) -- (fr) node[midway, right] {$\mu N$};
+        \draw[dotted] (fr) -- (ma);
+        \draw[dotted] (M) -- (N');
+
+        \tkzMarkAngle[fill=red,%
+                 size=0.3,   % for small squares you may want to use this
+                 opacity=0.4](N',M,mg)
+                 \tkzLabelAngle[pos=0.35](N',M,mg){$\theta$}
+
+        \tkzMarkAngle[fill=blue,%
+                 size=0.5,   % for small squares you may want to use this
+                 opacity=0.4](N,M,fr)
+                 \tkzLabelAngle[pos=0.6](N,M,fr){$\alpha$}
+        \tkzMarkAngle[fill=blue,%
+                 size=0.5,   % for small squares you may want to use this
+                 opacity=0.4](N',M,ma)
+                 \tkzLabelAngle[pos=0.6](N',M,ma){$\alpha$}
+
+                 
+        \tkzMarkAngle[fill=red,%
+        size=0.4,   % for small squares you may want to use this
+        opacity=0.4](M,A,B)
+        \tkzLabelAngle[pos=0.5](M,A,B){$\theta$}
+    \end{tikzpicture}
+\end{center}
+Now we essentially have a statics problem with two forces, so they must be equal and opposite. This means that the ratio of $ma$ and $mg$ satisfy:
+\begin{equation}
+    \tan(\theta-\alpha) = \frac{ma}{mg}
+    \label{eq:}
+\end{equation}
+The powerful part of this method is that it does not depend on what $N$ is. Looking at the top right triangle, we see that:
+\begin{equation}
+    \tan\alpha = \frac{\mu N}{N} = \mu
+    \label{eq:}
+\end{equation}
+is always a constant, and thus:
+\begin{equation}
+    a = g\tan(\theta-\arctan(\mu)) \implies \theta = \arctan\left(\frac{a}{g}\right)+\arctan(\mu)
+    \label{eq:}
+\end{equation}
+which is actually the same result as earlier. There is actually an even more elegant explanation to this. Suppose there are ants living on this accelerated inclined plane. From their perspective, they do not know that they are accelerating. In fact, they may even conclude that on their inclined plane, gravity is tilted! In fact, if we introduce the concept of the fictitious force, that is exactly what is happening. We have an ``effective gravity that makes an angle''
+\begin{equation}
+    \theta - \arctan\left(\frac{g}{a}\right)
+    \label{eq:}
+\end{equation}
+ with the normal line. We know for a regular inclined plane, if the gravity vector makes an angle $\alpha$ with the normal, then the maximum angle for a block to stay still is:
+ \begin{equation}
+     \alpha = \arctan(\mu)
+     \label{eq:}
+ \end{equation}
+ Making the substitution $\alpha = \theta -\arctan\left(\frac{g}{a}\right)$ naturally leads to the above answer. In a nutshell, the scenario described by the paper is equivalent to that of a slightly modified inclined in a world where gravity acts in a slightly different direction.
+\section*{Problem 3}
+We solve this with the conservation of energy. Comparing the energy when the ball is at the top versus when it is at the bottom gives:
+\begin{equation}
+    mg(h+R)=mgR + \frac{1}{2}mv^2 + \frac{1}{2}I\omega^2
+    \label{eq:}
+\end{equation}
+For a uniform sphere, $I=\beta mR^2$ where the shape factor is $\beta=\frac{2}{5}$ (in the textbook, it is denoted by the symbol $c$). Applying the rolling without slipping condition $v=R\omega$ gives:
+\begin{equation}
+    mgh = \frac{1}{2}mv^2 + \frac{\beta}{2}mv^2 \implies v = \sqrt{\frac{2gh}{1+\beta}}
+    \label{eq:}
+\end{equation}
+The linear momentum is then:
+\begin{equation}
+    \vec{p} = m\sqrt{\frac{10}{7}gh} \hat{i}
+    \label{eq:}
+\end{equation}
+and the angular momentum is given by:
+\begin{equation}
+    \vec{L} = \beta mR^2\vec{\omega} = -\frac{2mR}{5}\sqrt{\frac{10}{7}gh} \hat{k}
+    \label{eq:}
+\end{equation}
+\section*{Problem 4}
+To solve this problem, we need to make use of Kepler's third law, which was not taught, therefore it is not something that can be testable. Note that:
+\begin{equation}
+    T^2 \propto a^3
+    \label{eq:}
+\end{equation}
+Therefore, increasing $T$ by a factor of $12$ means $a$ increases by a factor of $12^{2/3}$. The angular momentum of a point mass is:
+\begin{equation}
+    L = mr^2\omega \propto \frac{mr^2}{T}
+    \label{eq:}
+\end{equation}
+We have $r^2$ increasing by a factor of $12^{4/3}$, $T$ increasing by a factor of $12$, and $m$ increasing by a factor of $320$, such that:
+\begin{equation}
+    \frac{L_\text{jupiter}}{L_\text{earth}} = \frac{(320)(12^{4/3})}{12}=733
+    \label{eq:}
+\end{equation}
+Therefore, the orbital momentum of Jupiter is: $L=733L_0.$
+\section*{Problem 5}
+This doesn't make sense at all.
+\section*{Problem 6}
+\textbf{(a)} We can approach this problem with dimensional analysis. The angular frequency will depend on the radius $R$ and the gravitational acceleration $g$, so that the angular frequency is proportional to:
+\begin{equation}
+    \omega \propto \sqrt{\frac{g}{R}}
+    \label{eq:}
+\end{equation}
+sort of like an inverted pendulum. Therefore, if $R$ doubles, then $\omega$ decreases by a factor of:
+\begin{equation}
+    \omega = \frac{\omega_0}{\sqrt{2}}
+    \label{eq:}
+\end{equation}
+\textbf{(b)} The moment of inertia of an object scales like:
+\begin{equation}
+    I \propto mR^2
+    \label{eq:}
+\end{equation}
+here, $m\propto R^2$ such that:
+\begin{equation}
+    I \propto R^4
+    \label{eq:}
+\end{equation}
+Therefore, doubling $R$ means quadrupling $I$, or:
+\begin{equation}
+    I = 16I_0
+    \label{eq:}
+\end{equation}
+\textbf{Fun fact:} The angular frequency of the system is actually:
+\begin{equation}
+    \omega = \frac{1}{6}\sqrt{\frac{g}{R}}
+    \label{eq:}
+\end{equation}
+assuming I did my algebra correctly.
+\end{document}
