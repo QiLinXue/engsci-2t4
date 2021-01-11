@@ -143,14 +143,14 @@
     title=\textbf{Theorem},
 }
 
-\newtcolorbox{tip}{
-    one-sided-color=my-blue,
-    title=\textbf{Tip},
-}
-
 \newtcolorbox{idea}{
     one-sided-color=my-yellow,
     title=\textbf{Idea},
+}
+
+\newtcolorbox{tip}{
+    one-sided-color=my-blue,
+    title=\textbf{Tip},
 }
 
 \newtcolorbox{think}{
@@ -187,3 +187,14 @@
 % NEW COMMANDS
 
 \renewcommand\textbullet{\ensuremath{\bullet}}
+% axis style, ticks, etc
+\pgfplotsset{every axis/.append style={
+                    axis x line=middle,    % put the x axis in the middle
+                    axis y line=middle,    % put the y axis in the middle
+                    axis line style={<->}, % arrows on the axis
+                    xlabel={$x$},          % default put x on x-axis
+                    ylabel={$y$},          % default put y on y-axis
+                    }}
+
+% arrows as stealth fighters
+\tikzset{>=stealth}
