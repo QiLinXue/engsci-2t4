@@ -1,0 +1,22 @@
+\section{Vector Spaces}
+\begin{itemize}
+    \item A vector space consistso f three things: a set $V$ together with the two operations of vector addition and scalar multiplication. We use $V$ to describe both the vector space and the set itself. Specifically:
+    \begin{definition}
+        A \textbf{real vector space} is a set $V$ together with two operations called \textit{vector addition} and \textit{scalar multiplication} such that the following \textit{axioms} hold:
+        \vspace{2mm}
+        \begin{enumerate}
+            \setlength\itemsep{1em}
+            \item \textbf{Additive Closure (AC):} For all vectors $\bm{x}, \bm{y} \in V$, $\bm{x}+\bm{y} \in V$.
+            \item \textbf{Scalar Closure (SC):} For all vectors $\bm{x} \in V$, and scalars $c \in \mathbb{R}$, $c\bm{x} \in V$.
+            \item \textbf{Additive Associativity (AA):} For all vectors $\bm{x},\bm{y},\bm{z} \in V$, $(\bm{x}+\bm{y})+\bm{z} = \bm{x} + (\bm{y}+\bm{z})$
+            \item \textbf{Zero Vector (Z):} There exists a unique vector $\bm{0} \in V$ with the property that $\bm{x}+\bm{0}=\bm{x}$ for all vectors $\bm{x} \in V$.
+            \item \textbf{Additive Inverse (AI):} For each vector $\bm{x} \in V$, there exists a unique vector $-\bm{x} \in V$ with the property that $\bm{x} + (-\bm{x})=\bm{0}$.
+            \item \textbf{Scalar Multiplication Associativity (SMA):} For all vectors $\bm{x} \in V$, and scalars $c$, $d\in \mathbb{R}$, $(cd)\bm{x} = c(d\bm{x})$.
+            \item \textbf{Distributivity of Vector Addition (DVA):} For all vectors $\bm{x},\bm{y} \in V$, and scalars $c \in \mathbb{R}$, $c(\bm{x}+\bm{y})=c\bm{x}+c\bm{y}$.
+            \item \textbf{Distributivity of Scalar Addition (DSA):} For all vectors $\bm{x} \in V$, and scalars $c,d \in \mathbb{R}$, $(c+d)\bm{x}=c\bm{x}+d\bm{x}$.
+            \item \textbf{Identity (I):} For all vectors $\bm{x} \in V$, $1\bm{x} = \bm{x}$.
+        \end{enumerate}
+    \end{definition}
+    \item Note that \textit{anything} can be a vector space as long as we define operations such that it has properties that satisfies the above properties.
+    \item To define a \textbf{complex vector space}, we let the scalars belong in the complex space instead.
+\end{itemize}

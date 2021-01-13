@@ -2,6 +2,7 @@
 \usepackage[english]{babel}
 \usepackage[margin=0.6in]{geometry} % Page Dimensions
 \renewcommand{\familydefault}{\sfdefault}
+\renewcommand\textbullet{\ensuremath{\bullet}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%% Logistics %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -16,10 +17,13 @@
 \usepackage{xcolor} % more colors
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% STYLE %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{lmodern} % Better font quality
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
 \usepackage{parskip} % automatically skip paragraphs
 \setlength\parindent{0pt} % no indent
 \everymath{\displaystyle} % automatically display style
@@ -44,6 +48,7 @@
 \usetikzlibrary{shapes,arrows}
 \usepackage{pgfplots} % Plotting capabilities
 \pgfplotsset{compat=1.14}
+
 
 
 
@@ -143,6 +148,11 @@
     title=\textbf{Idea},
 }
 
+\newtcolorbox{tip}{
+    one-sided-color=my-blue,
+    title=\textbf{Tip},
+}
+
 \newtcolorbox{think}{
     one-sided-color=my-green,
     title=\textbf{Think},
@@ -173,3 +183,18 @@
     simple,
     title={Solution \thetcbcounter},
 }
+
+% NEW COMMANDS
+
+\renewcommand\textbullet{\ensuremath{\bullet}}
+% axis style, ticks, etc
+\pgfplotsset{every axis/.append style={
+                    axis x line=middle,    % put the x axis in the middle
+                    axis y line=middle,    % put the y axis in the middle
+                    axis line style={<->}, % arrows on the axis
+                    xlabel={$x$},          % default put x on x-axis
+                    ylabel={$y$},          % default put y on y-axis
+                    }}
+
+% arrows as stealth fighters
+\tikzset{>=stealth}

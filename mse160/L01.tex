@@ -26,4 +26,81 @@
     \begin{equation}
         \sigma = E\varepsilon
     \end{equation}
+    \item There are two possible definitions for elastic deformation. When viewing it from a macroscopic perspective:
+    \begin{definition}
+        Definition 1: During elastic deformation the sample dimensions return to their original dimensions upon unloading.
+    \end{definition}
+    but it is also possible to view it from a microscopic perspective:
+    \begin{definition}
+        During elastic deformation atoms return to their original positions upon unloading.
+    \end{definition}
+\end{itemize}
+\subsection{Simple Model for Bonding in solids}
+\begin{itemize}
+    \item A crudge (but quite accurate) model is to assume nearby atoms in a solid are connected by springs. (This is actually Einstein's model of solid, except he modeled the interactions as quantum harmonic oscillators)
+    \begin{idea}
+        A more realistic model would be using the Lennard-Jones potential, which gives the force between two atoms as:
+        \begin{equation}
+            V = -\frac{a_1}{r^{13}}+\frac{a_2}{r^7}
+        \end{equation}
+        and is graphically represented below (here, $a_1=5$ and $a_2=3$ for illustration purposes only)
+        \begin{center}
+            \begin{tikzpicture}
+            \begin{axis}[
+            legend pos=outer north east,
+            title=Lennard Jones Force,
+            axis lines = box,
+            xlabel = $r$,
+            ylabel = $F$,
+            variable = t,
+            trig format plots = rad,
+            ]
+            \addplot [
+                domain=1:2,
+                samples=70,
+                color=blue,
+                ]
+                {-5/x^13+3/x^7};            
+            \end{axis}
+            \end{tikzpicture}
+        \end{center}
+    \end{idea}
+    When the two atoms are close to each other, the force scales roughly linearly with displacement, which is exactly the description of Hooke's Law.
+    \item Specifically, the Young's Modulus can be recovered by defining it as:
+    \begin{equation}
+        E \propto \frac{dF}{dr} \Big|_{r=r_0}
+    \end{equation}
+    where $r_0$ is the equilibrium distance and is only dependent on the material. Permanently deforming a metal will not change its Young's Modulus.
+\end{itemize}
+\subsection{Getting a stress-strain curve}
+\begin{itemize}
+    \item The tensile specimen is in a \textbf{dogbone} shape as illustrated below:
+    \begin{figure}[h]
+        \centering
+        \incfig{dogbone}
+    \end{figure}
+\end{itemize}
+\subsection{Poisson's Ratio and Shear}
+\begin{itemize}
+    \item When a material deforms, it does not deform in only one direction. The \textbf{poisson's ratio} $\nu$ relates the strain in all three directions:
+    \begin{equation}
+        \nu = -\frac{\varepsilon_R}{\varepsilon_Z}=-\frac{\varepsilon_x}{\varepsilon_z}=-\frac{\varepsilon_y}{\varepsilon_z}
+    \end{equation}
+    for a cylindrically symmetrical material.
+    \item Shear stress is defined as
+    \begin{equation}
+        \tau = \frac{F}{A_0}
+    \end{equation}
+    and shear strain is defined as:
+    \begin{equation}
+        \gamma = \frac{\Delta \ell}{\ell_0}
+    \end{equation}
+    \item Similarly, shear stress and strain is related via the shear modulus $G$:
+    \begin{equation}
+        \tau = G\gamma
+    \end{equation}
+    \item The Young's modulus and the shear modulus is related via the poisson ratio:
+    \begin{equation}
+        E = 2G(1+\nu)
+    \end{equation}
 \end{itemize}

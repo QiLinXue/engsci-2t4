@@ -1,8 +1,11 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage[margin=0.6in]{geometry} % Page Dimensions
-\renewcommand{\familydefault}{\sfdefault}
-\renewcommand\textbullet{\ensuremath{\bullet}}
+
+% \usepackage{fontspec}
+% \setmainfont{Comic Sans MS}
+% \renewcommand{\familydefault}{\sfdefault}
+% \renewcommand\textbullet{\ensuremath{\bullet}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%% Logistics %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -187,3 +190,13 @@
 % NEW COMMANDS
 
 \renewcommand\textbullet{\ensuremath{\bullet}}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
