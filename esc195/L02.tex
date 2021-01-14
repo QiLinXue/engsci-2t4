@@ -1,0 +1,187 @@
+\section{Indeterminate Forms}
+\begin{itemize}
+    \item A lot of the times, limits have an indeterminate form, where if we substitute in what $x$ approaches to, we get it in the form of $\frac{0}{0}$, for example:
+    \begin{equation}
+        \lim_{x\to 0} \frac{\sin x}{x}
+    \end{equation}
+    \begin{theorem}
+        If $f(x)\to 0$ and $g(x) \to 0$ as $x \to \pm, \infty$ or $x \to c$ or $x \to c^{+-}$ and if $\frac{f'(x)}{g'(x)} \to L$, then:
+        \begin{equation}
+            \frac{f(x)}{g(x)} \to L
+        \end{equation}
+    \end{theorem}
+    \begin{example}
+        Solve: $\lim_{x\to 0} \frac{\sin x}{x}$
+        \vspace{2mm}
+
+        We can set $f(x)=\sin x$, $f'(x) = \cos x$, $g(x)=x$ and $g'(x)=1$ such that:
+        \begin{align}
+            \lim_{x\to 0} \frac{f'}{g'}=\lim_{x\to 0}\cos x = 1
+        \end{align}
+    \end{example}
+    \begin{example}
+        Solve $\lim_{x\to 0^+} \frac{\sin x}{\sqrt{x}}$.
+        \vspace{2mm}
+
+        Set $f=\sin x$, $f'=\cos x$, $g=\sqrt{x}$, $g'=\frac{1}{2}x^{-1/2}$ and so:
+        \begin{equation}
+            \lim_{x\to 0^+} 2x^{1/2}\cos x = 0 \implies \lim_{x \to 0^+} = 0
+        \end{equation}
+    \end{example}
+    \begin{example}
+        Solve $\lim_{x\to 0} \frac{e^x-x-1}{3x^2}$.
+        \vspace{2mm}
+
+        If we take the derivative, we get:
+        \begin{equation}
+            \lim_{x\to 0} \frac{e^x-1}{6x}
+        \end{equation}
+        which is still $\frac{0}{0}$!. We can take derivatives again:
+        \begin{equation}
+            \lim_{x\to 0} \frac{e^x}{6}=\frac{1}{6}
+        \end{equation}
+        so the original limit is $\frac{1}{6}$.
+    \end{example}
+    \begin{warning}
+        L'hopital's rule can \textit{only} be used in indeterminate forms. Applying them to limits where 
+    \end{warning}
+    \item To prove the L'hopital's rule, we first prove the \textbf{Cauchy Mean Value Theorem} as a lemma
+    \begin{theorem}
+        \textbf{Cauchy Mean Value Theorem}: Given $f$ and $g$ differentiable on $(a,b)$, continuous on $[a,b]$ and $g'\neq 0$ on $(a,b)$, there must exist some number $r$ in $(a,b)$ such that:
+        \begin{equation}
+            \frac{f'(r)}{g'(r)} = \frac{f(b)-f(a)}{g(b)-g(a)}
+        \end{equation}
+    \end{theorem}
+    \item We then apply \textbf{Rolle's Theorem} to prove the Cauchy Mean Value Theorem:
+    \begin{proof}
+        Set:
+        \begin{align*}
+            G(x) = &[g(b)-g(a)][f(x)-f(a)] \\ 
+                -&[g(x)-g(a)][f(b)-f(a)]
+        \end{align*}
+        Note that $G(a)=G(b)=0$ so it satisfies the conditions of Rolle's Theorem. Taking the derivative, we get:
+        \begin{equation}
+            G'(x) = [g(b)-g(a)]f'(x)-g'(x)[f(b)-f(a)]
+        \end{equation}
+        Accoridng to Rolle's, there must be some $x=r$ such that $G'(r)=0$, we can then substitute for this and solve:
+        \begin{equation}
+            G'(r)=0 \implies [g(b)-g(a)]f'(r) = g'(r)[f(b)-f(a)]
+        \end{equation}
+        Which is equivalent to:
+        \begin{equation}
+            \frac{f'(r)}{g'(r)} = \frac{f(b)-f(a)}{g(b)-g(a)}
+        \end{equation}
+        Furthermore, we have $g'(c) = \frac{g(b)-g(a)}{b-a}$ from the mean value theorem. Since $g' \neq 0$ we have $g(b)-g(a) \neq 0$. 
+    \end{proof}
+    \item Given $x \to c^+$ and $f(x),g(x) \to 0$ where:
+    \begin{equation}
+        \lim_{x\to c^+} \frac{f'(x)}{g'(x)} = L
+    \end{equation}
+    we will now prove that $\lim_{x\to c^+} \frac{f(x)}{g(x)} = L$.
+    \begin{proof}
+        Consider the interval $[c, c+h]$ and apply Cauchy MVT. There must be some number $c_2$ in $[c, c+h]$ such that:
+        \begin{equation}
+            \frac{f'(c_2)}{g'(c_2)} = \frac{f(c+h)-f(c)}{g(c+h)-g(c)} = \frac{f(c+h)}{g(c+h)}
+        \end{equation}
+        The last step is a result of the given $f(c)=g(c)=0$. The LHS can be rewritten as:
+        \begin{equation}
+            \lim_{h\to 0} \frac{f'(c_2)}{g'(c_2)} = \frac{f'(c)}{g'(c)}
+        \end{equation}
+        since $c_2$ lies in the interval $[c, c+h]$ so if $h\to 0$, then the interval becomes smaller to contain just $c$. The RHS can be rewritten as:
+        \begin{equation}
+            \lim_{h\to 0} \frac{f(c+h)}{g(c+h)} = \lim_{x\to c^+} \frac{f(x)}{g(x)}
+        \end{equation}
+        and therefore:
+        \begin{equation}
+            \lim_{x\to c^+} \frac{f(x)}{g(x)} = \frac{f'(c)}{g'(c)} = L
+        \end{equation}
+    \end{proof}
+    \item To prove the case for $x \to \pm \infty$, we can let $x = \frac{1}{t}$ and take the limit as $t \to \infty$.
+    \begin{example}
+        Find $\lim_{x\to\infty} \frac{\ln x}{x}$.
+        \vspace{2mm}
+
+        Taking the derivative of top and bottom, we have:
+        \begin{equation}
+            \lim_{x\to \infty} \frac{\frac{1}{x}}{1} = 0 \implies \lim_{x\to \infty} \frac{\ln x}{x} =0
+        \end{equation}
+    \end{example}
+    \begin{idea}
+        The logarithm function grows very slowly. In fact, any positive power of $x$ will grow faster than $\ln x$.
+    \end{idea}
+    \begin{example}
+        Solve $\lim_{x\to \infty} \frac{x^3}{e^x}$
+        \vspace{2mm}
+
+        This is indeterminate in the form of $\frac{\infty}{\infty}$. We apply L'hopital's rule multiple times:
+        \begin{align}
+            \lim_{x\to \infty} \frac{x^3}{e^x} &\stackrel{*}{=} \lim_{x\to\infty} \frac{3x^2}{e^x} \left(=\frac{\infty}{\infty}\right) \\ 
+            &\stackrel{*}{=} \lim_{x\to \infty} \frac{6x}{e^x} \left(=\frac{\infty}{\infty}\right) \\ 
+            &\stackrel{*}{=} \lim_{x\to \infty} \frac{6}{e^x} = 0
+        \end{align}
+    \end{example}
+    \item Generally, $\lim_{x\to \infty} \frac{x^m}{e^x} = 0$ where $m$ is any positive integer.
+    \item There are other indeterminate forms, such as $0^0$, for example:
+    \begin{equation}
+        \lim_{x\to 0} x^x
+    \end{equation}
+    The central idea behind this is that $a^b = e^{a\ln b}$. Therefore, this limit is equal to:
+    \begin{equation}
+        \lim_{x\to 0} e^{x\ ln x}
+    \end{equation}
+    We can take the limit of the exponent to get:
+    \begin{equation}
+        \lim_{x\to 0} x\ln x = \lim_{x\to 0} \frac{\ln x}{1/x}
+    \end{equation}
+    Note that the first equation is another indeterminate form with the $0 \cdot \infty$ type, so we had to multiply top and bottom by $\frac{1}{x}$ to get the quotient form. Then we have:
+    \begin{align}
+        \lim_{x\to 0} \frac{\left(\frac{1}{x}\right)}{\left(-\frac{1}{x^2}\right)}=\lim_{x\to 0} -x = 0
+    \end{align}
+    Therefore:
+    \begin{equation}
+        \lim_{x\to 0} e^{x\ln x} = e^ 0 = 1
+    \end{equation}
+    so $\lim_{x\to 0} x^x = 1$.
+    \begin{example}
+        Solve $\lim_{x\to \infty}(x+2)^{2/\ln x}$.
+        \vspace{2mm}
+
+        This is of the type $\infty^0$. The approach is exactly the same as the previous example. We write it in exponential form:
+        \begin{equation}
+            =\lim_{x\to \infty} e^{\frac{2}{\ln x}\ln(x+2)}
+        \end{equation}
+        and looking at the exponent gives:
+        \begin{align}
+            \lim_{x\to\infty} \frac{2\ln(x+2)}{\ln x} \\ 
+            &\stackrel{*}{=} \lim_{x\to \infty} \frac{\left(\frac{2}{x+2}\right)}{\left(\frac{1}{x}\right)} = \lim_{x\to \infty} \frac{2x}{x+2}\left( = \frac{\infty}{\infty}\right) \\ 
+            &\stackrel{*}{=} \lim_{x\to \infty} \frac{2}{1} = 2
+        \end{align}
+        Therefore:
+        \begin{equation}
+            \lim_{x\to \infty} e^{\frac{2}{\ln x}\ln(x+2)} = e^2
+        \end{equation}
+        so:
+        \begin{equation}
+            \lim_{x\to\infty}(x+2)^{2/\ln x} = e^2
+        \end{equation}
+    \end{example}
+    \begin{example}
+        Solve $\lim_{x\to \infty} \left[\sin\left(\frac{\pi}{x}+\frac{\pi}{2}\right)\right]^x$
+        \vspace{2mm}
+
+        This is in the form of $1^\infty$. We rewrite it as:
+        \begin{equation}
+            \lim_{x\to \infty} \exp\left(x\ln\left(\sin\left(\frac{\pi}{x}+\frac{\pi}{2}\right)\right)\right)
+        \end{equation}
+        and taking the limit of the exponent:
+        \begin{align}
+            &= \lim_{x\to \infty} x\ln\left(\sin\left(\frac{\pi}{x}+\frac{\pi}{2}\right)\right) \left(=\frac{0}{0}\right)\\ 
+            &\stackrel{*}{=} \lim_{x\to \infty} \frac{\cos\left(\frac{\pi}{x}+\frac{\pi}{2}\right) \cdot \left(-\frac{\pi}{x^2}\right)}{\sin\left(\frac{\pi}{x}+\frac{\pi}{2}\right) \cdot \left(-\frac{1}{x^2}\right)} = \frac{0\cdot \pi}{1} = 0
+        \end{align}
+        Therefore:
+        \begin{equation}
+            \lim_{x\to \infty} \left[\sin\left(\frac{\pi}{x}+\frac{\pi}{2}\right)\right]^x = \lim_{x\to \infty} \exp\left(x\ln\left(\sin\left(\frac{\pi}{x}+\frac{\pi}{2}\right)\right)\right) = 1
+        \end{equation}
+    \end{example}
+    
+\end{itemize}
