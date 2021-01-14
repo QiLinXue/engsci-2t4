@@ -19,4 +19,89 @@
     \end{definition}
     \item Note that \textit{anything} can be a vector space as long as we define operations such that it has properties that satisfies the above properties.
     \item To define a \textbf{complex vector space}, we let the scalars belong in the complex space instead.
+    \begin{theorem}
+        \textbf{The Cancellation Theorem:} Let $V$ be a vector space, and let $\bm{x}, \bm{y}, \bm{z} \in V$. If:
+        \begin{equation}
+            \bm{x}+ \bm{z} = \bm{y}+ \bm{z}
+        \end{equation}
+        then:
+        \begin{equation}
+            \bm{x} = \bm{y}
+        \end{equation}
+        \begin{proof}
+            For $\bm{x},\bm{y},\bm{z} \in V$,
+            \begin{align*}
+                \bm{x} &= \bm{x} + \bm{0} & (Z) \\ 
+                &= \bm{x} + (\bm{z} + -\bm{z}) & (AI) \\ 
+                &= (\bm{x} + \bm{z}) + -\bm{z} & (AA) \\ 
+                &= (\bm{y}+\bm{z}) + -\bm{z} & \text{(given)} \\
+                &= \bm{y} + \bm{0} & (AI) \\ 
+                &= \bm{y} & (Z)
+            \end{align*}
+            Alternatively:
+            \begin{align*}
+                \bm{x} + \bm{z} &= \bm{y} + \bm{z} & \text{(given)} \\ 
+                \bm{x} + \bm{z} + -\bm{z} &= \bm{y} + \bm{z} + -\bm{z} \\ 
+                \bm{x} + \bm{0} &= \bm{y} + \bm{0} & (AI) \\ 
+                \bm{x} &= \bm{y} & (Z)
+            \end{align*}
+        \end{proof}
+    \end{theorem}
+    \begin{proposition}
+        Let $V$ be a vector space and let $\bm{x} \in V$. Then $0\bm{x} = \bm{0}$.
+        \begin{proof}
+            For $\bm{x} \in V$:
+            \begin{align*}
+                0\bm{x} &= (0+0)\bm{x} \\ 
+                &= 0\bm{x} + 0\bm{x} & (DSA) \\ 
+                0\bm{x} + -0\bm{x} &= 0\bm{x} + 0\bm{x} + -0\bm{x} \\ 
+                \bm{0} &= 0\bm{x} + \bm{0} & (AI) \\ 
+                \bm{0} &= 0\bm{x} & (Z)
+            \end{align*}
+        \end{proof}
+    \end{proposition}
+    \begin{proposition}
+        Let $V$ be a vector space, and let $\bm{x} \in V$. Then $(-1)\bm{x}=-\bm{x}$.
+        \begin{proof}
+            For $\bm{x} \in V$,
+            \begin{align*}
+                -\bm{x} = -\bm{x} + \bm{0} & (Z) \\ 
+                &= -\bm{x} + 0\bm{x} & (P1) \\ 
+                &= -\bm{x} + (1 + (-1))\bm{x} \\ 
+                &= -\bm{x}+1\bm{x}+(-1)\bm{x} & (DSA) \\ 
+                &= (-\bm{x}+\bm{x}) + (-1)\bm{x} & (AA) \\ 
+                &= \bm{0} + (-1)\bm{x} & (P3) \\ 
+                &= (-1)\bm{x} & (P4)
+            \end{align*}
+        \end{proof}
+    \end{proposition}
+    \begin{proposition}
+        Let $V$ be a vector space and let $\bm{x} \in V$. Then $-\bm{x}+\bm{x}=\bm{0}$.
+        \begin{proof}
+            For $x \in V$,
+            \begin{align*}
+                -\bm{x}+\bm{x} &= -\bm{x}+\bm{x} + \bm{0} & (Z) \\ 
+                &= -\bm{x}+\bm{x}+\left((-\bm{x}+\bm{x})+-(\bm{-x}+\bm{x})\right) & (AI) \\ 
+                &= ((-\bm{x}+\bm{x})+(-\bm{x}+\bm{x}))+-(-\bm{x}+\bm{x}) & (AA) \\ 
+                &= (-\bm{x}+(\bm{x}+(-\bm{x}+\bm{x}))) +-(-\bm{x}+\bm{x}) & (AA) \\ 
+                &= (-\bm{x}+((\bm{x}+-\bm{x})+\bm{x}))+-(-\bm{x}+\bm{x}) & (AA) \\ 
+                &= (-\bm{x}+(\bm{0} + \bm{x})) +-(-\bm{x}+\bm{x}) & (Z) \\ 
+                &= ((-\bm{x}+\bm{0})+\bm{x})) + -(-\bm{x}+\bm{x}) & (AI) \\
+                &=  (-\bm{x}+\bm{x})+-(-\bm{x}+\bm{x})  & (Z) \\ 
+                &= \bm{0} & (AI)
+            \end{align*}
+        \end{proof}
+    \end{proposition}
+    \begin{proposition}
+        Let $V$ be a vector space, and let $\bm{x}\in V$. Then $\bm{0}+\bm{x}=\bm{x}$.
+        \begin{proof}
+            For $x\in V$,
+            \begin{align*}
+                \bm{0} + \bm{x} &= (\bm{x}+(-\bm{x}))+ \bm{x} & (AI) \\ 
+                &= \bm{x} + (-\bm{x} + \bm{x}) & (AA) \\ 
+                &= \bm{x} + \bm{0} & (P3) \\
+                &= \bm{x} & (Z)
+            \end{align*}
+        \end{proof}
+    \end{proposition}
 \end{itemize}
