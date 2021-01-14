@@ -1,0 +1,58 @@
+\section{Foundation}
+\begin{itemize}
+    \item Electric current describes the rate of \textit{positive} charge flow\footnote{\url{https://xkcd.com/567/}}:
+    \begin{equation}
+        i(t) = \frac{dq}{dt}
+    \end{equation}
+    and is measured in amperes $[A]$. The charge $Q$ that passes a given point is:
+    \begin{equation}
+        Q = \int_{t_0}^{t} i \dd{t}
+    \end{equation}
+    and is measured in coulombs $[C]$.
+    \item Voltage describes the electric potential difference across the element:
+    \begin{equation}
+        V_{ab} = \frac{dW}{dq}
+    \end{equation}
+    which is physically described as the work required to move a unit positive charge of $+1\si{\coulomb}$ from $b$ to $a$. It is measured in volts $[V]$.
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (-2,0) node[left] {$a$} to [european resistor, v_={~}, l^=$V_{ab}$] (2,0) node[right] {$b$};
+        \end{tikzpicture}
+    \end{center}
+    Notice that the below two setups are equivalent:
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (-2,0) node[left] {$a$} to [european resistor, v_={~}, l^=$10\si{\volt}$] (2,0) node[right] {$b$};
+        \end{tikzpicture}\hspace{10mm}
+        \begin{tikzpicture}
+            \draw (2,0) node[right] {$b$} to [european resistor, v^={~}, l_=$-10\si{\volt}$] (-2,0) node[left] {$b$};
+        \end{tikzpicture}
+    \end{center}
+    \item Power is the rate of energy flow:
+    \begin{equation}
+        P = V \cdot I
+    \end{equation}
+    Energy produced by the battery and the current generated runs through the bulb and the energy is dissipated into heat and light. Measured in watts $[W]$. We show this is true from the classical definition of power:
+    \begin{equation}
+        P = \frac{dW}{dt} = \frac{dW}{dq} \cdot \frac{dq}{dt} = V \cdot i
+    \end{equation}
+    \item In a DC (direct current) circuit, current flows in one direction and is constant with respect to time. In an AC (alternating current) circuit, the curret varies direction with respect to time.
+    \item To distinguish between supplying or absorbing power, we use passive sign convention:
+    \begin{definition}
+        If power is positive, the element absorbs power and if negative, the element supplies power. Take the following circuit for example:
+        \begin{center}
+            \begin{tikzpicture}
+                \draw (0,0) to [battery, v^={~}, l_=$9\si{\volt}$, invert] (0,3) to [short,i={$50\si{\milli\ampere}$}] (4,3) to [lamp] (4,0) to [short,i=$50\si{\milli\ampere}$] (0,0);
+            \end{tikzpicture}
+        \end{center}
+        and we will get:
+        \begin{align}
+            P_\text{bulb} &= + iV = +0.45\si{\watt} ,\, \text{(absorbing)} \\ 
+            P_\text{battery} &= - iV = -0.45\si{\watt} ,\, \text{(supplying)}
+        \end{align}
+        which gives:
+        \begin{equation}
+            \sum P = 0
+        \end{equation}
+    \end{definition}
+\end{itemize}
