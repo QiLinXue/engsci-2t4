@@ -193,6 +193,24 @@
         \begin{equation}
             0 + C' = -1 + C
         \end{equation}
-        which does not tell us anything interesting.
+        which does not tell us anything interesting. This brings We can see this concretely by repeating the same steps but trying to evaluate the definite integral $\int_a^b \tan x \dd{x}$ instead, which gives:
+        \begin{equation}
+            \int_a^b \tan \dd{x} = \left(-1\right)\Big|^{x=b}_{x=a} + \int_a^b \tan x \dd{x} \implies 0 = (-1) - (-1) \implies 0=0
+        \end{equation}
+        which confirms our suspcision that this isn't anything useful, but it's also not an incorrect statement.
     \end{example}
+    \begin{warning}
+        Sometimes it is possible to get more than one answer through various means that differ by a constant factor when solving indefinite integrals. When this happens, nothing is wrong: we simply need to consider the constant of integration.
+    \end{warning}
+    \begin{idea}
+        But how do we know \textit{which} values of $u$ and $\dd{v}$ we should pick? A common strategy is to use \textbf{LIATE}:
+        \begin{enumerate}
+            \item L: Logarithms
+            \item I: Inverse Trig
+            \item A: Algebraic
+            \item T: Trigonometric
+            \item E: Exponential
+        \end{enumerate}
+        If a function consists of two terms, the term that is higher up (closer to L) usually gets differentiated and the term near the bottom (closer to E) usually gets integrated. See \href{https://math.stackexchange.com/questions/768332/liate-how-does-it-work}{this} for how it works, and this \href{https://www.youtube.com/watch?v=fnHxq8ZK0rE}{video} for a tutorial.
+    \end{idea}
 \end{itemize}
