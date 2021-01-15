@@ -1,0 +1,198 @@
+\section{Integration}
+\subsection{Recap of Integration}
+\begin{itemize}
+    \item The definite integral has the geometric interpretation as the area under the curve $f(x)$ between $x=a$ and $x=b$ and the $x$ axis:
+    \begin{equation}
+        \int_a^b f(x) \dd{x}
+    \end{equation}
+    but can be rigorously defined using a Riemann sum:
+    \begin{equation}
+        \int_a^b f(x) \dd{x} \equiv \lim_{\Vert P \rVert} \sum_{i=1}^n f(x_i^*)\Delta x_i
+        \label{eq:}
+    \end{equation}
+    Often, we have a uniform partition, such that $\Delta x_i = \frac{b-a}{n}$ where $n$ is the number of partitions. And if we choose to use the right hand endpoint, then:
+    \begin{equation}
+        f(x_i^*) = f(x_i) = f(x_i) = f\left(a+\frac{b-a}{n}i\right)
+    \end{equation}
+    \begin{example}
+        To solve $\int_0^5 x^2 \dd{x}$, we can choose a uniform partition with:
+        \begin{equation}
+            \Delta x = \frac{5-0}{n} = \frac{5}{n}
+        \end{equation}
+        and:
+        \begin{equation}
+            x_i^* = x_i = i\Delta x \implies f(x_i^*)=(i\Delta x)^2 = \left(i\frac{5}{n}\right)^2
+        \end{equation}
+        The area approximation is:
+        \begin{align}
+            A \simeq \sum_{i=1}^n \Delta x_i f(x_i^*) &= \sum_{i=1}^n \left(\frac{5}{n}\right)\left(i\frac{5}{n}\right)^2 \\ 
+            &= \frac{125}{n^2} \sum_{i=1}^n i^2 = \frac{125}{n^3} \frac{n(n+1)(2n+1)}{6}
+        \end{align}
+        Taking the limit as $n\to \infty$, we get:
+        \begin{equation}
+            \int_0^5 x^2 \dd{x} =  \lim_{n\to\infty} \frac{125}{6}\left(2+\frac{2}{n}+\frac{1}{n^2}\right) = \frac{5^3}{3}.
+        \end{equation}
+    \end{example}
+    \begin{example}
+        To evaluate $\int_1^2 x^{-2} \dd{x}$, we can choose
+        \begin{equation}
+            x_i^* = \sqrt{x_{i-1}x_i}
+        \end{equation}
+        and a uniform partition of:
+        \begin{equation}
+            \Delta x = \frac{2-1}{n} = \frac{1}{n}
+        \end{equation}
+        such that:
+        \begin{equation}
+            x_i = 1+i\Delta x = 1 + \frac{i}{n} = \frac{n+i}{n}
+        \end{equation}
+        and
+        \begin{equation}
+            x_{i-1} = \frac{n+i-1}{n}
+        \end{equation}
+        such that the area is:
+        \begin{align*}
+            A &\simeq \sum_{i=1}^n \Delta xf(x_i^*) \\ 
+            &= \sum_{i=1}^n \frac{1}{n} \left(\frac{1}{x_i^*}\right)^2 \\ 
+            &= \sum_{i=1}^n \frac{1}{n} \frac{1}{x_{i-1}x_i} \\ 
+            &= \sum_{i=1}^n \frac{1}{n} \frac{n}{n+i-1}\cdot \frac{n}{n+i} \\
+            &= \sum_{i=1}^n n \frac{1}{n+i-1} \cdot \frac{1}{n+i} \\ 
+            &= \sum_{i=1}^n \left(\frac{1}{n+i-1}-\frac{1}{n+i}\right) \\ 
+            &= n\left[\sum_{i=1}^n \frac{1}{n+i-1} - \sum_{i=1}^n \frac{1}{n+i}\right] \\ 
+            &= n\left[\sum_{i=0}^n \frac{1}{n+i} - \sum_{i=1}^n \frac{1}{n+i}\right] \\ 
+            &= n\left[\frac{1}{n}+\frac{1}{n+1}+\frac{1}{n+2}+\cdots+\frac{1}{2n-1}-\frac{1}{n+1}-\frac{1}{n+2}-\cdots-\frac{1}{2n}\right] \\ 
+            &=n\left(\frac{1}{n}-\frac{1}{2n}\right) \\ 
+            &= 1 - \frac{1}{2} = \frac{1}{2}
+        \end{align*}
+        The part where we cancel out everything is called a \textbf{telescoping series}. Notice how the area doesn't depend on $n$ so we get the exact area, even if we let $n=1$!.
+    \end{example}
+    \item We need a better way to do integration, so we can define:
+    \begin{equation}
+        F(x) \equiv \int_a^x f(t) \dd{t}
+    \end{equation}
+    such that $F'(x) = f(x)$. This is the definition of the antiderivative. This leads to the fundamental theorem of calculus:
+    \begin{equation}
+        \int_a^b f(t) \dd{t} = F(h) - F(a)
+    \end{equation}
+    and the indefinite integral can be written as:
+    \begin{equation}
+        \int f(x) \dd{x} = G(x) + C
+    \end{equation}
+    The main problem now becomes trying to \textit{find antiderivatives}, which is much easier than Riemann sums, though still more difficult than calculating derivatives.
+\end{itemize}
+\subsection{Techniques of Integration}
+\begin{itemize}
+    \item \textbf{Integration by Parts} attempts to reverse the product rule:
+    \begin{equation}
+        (fg)' = fg' + f'g
+    \end{equation}
+    Taking the integral of both sides gives:
+    \begin{align}
+        f(x)g(x) &= \int f(x)g'(x) \dd{x} + \int f'(x) g(x) \dd{x} \\ 
+        \int f(x)g'(x) \dd{x} &= \int f(x) g'(x) \dd{x} = f(x)g(x) - \int f'(x)g(x) \dd{x}
+    \end{align}
+    If the second integral is easier than the first, then we have made substaintial progress.
+    \begin{idea}
+        Integration of parts tells us that:
+        \begin{equation}
+            \int u \dd{v} = uv - \int v \dd{u}
+        \end{equation}
+    \end{idea}
+    \begin{example}
+        To solve $\int xe^{2x}$, we can let:
+        \begin{align}
+            &u=x            &\dd{v} = e^{2x} \dd{x} \\ 
+            &\dd{u}=\dd{x} &v=\frac{1}{2}e^{2x} 
+        \end{align}
+        which gives:
+        \begin{align}
+            & \frac{1}{2}xe^{2x} - \int \frac{1}{2}e^{2x} \dd{x} \\ 
+            &= \frac{1}{2}xe^{2x} - \frac{1}{4}e^{2x} + C
+        \end{align}
+        We can check:
+        \begin{align}
+            \frac{d}{dx}\left(\frac{1}{2}xe^{2x}-\frac{1}{4}e^{2x}+C\right) \\ 
+            &= xe^{2x} + \frac{1}{2}e^{2x}-\frac{2}{4}e^{2x} \\ 
+            &= xe^{2x}
+        \end{align}
+    \end{example}
+    \begin{example}
+        To solve $\int x^2\sin(2x) \dd{x}$, we let:
+        \begin{align}
+            &u=x^2            &\dd{v} = \sin 2x\dd{x} \\ 
+            &\dd{u}=2x\dd{x} &v=-\frac{1}{2}\cos(2x) 
+        \end{align}
+        which gives:
+        \begin{equation}
+            =-\frac{1}{2}x^2\cos 2x + \int x\cos(2x) \dd{x}
+        \end{equation}
+        and we can apply integration by parts a second time, if we let:
+        \begin{align}
+            &u=x            &\dd{v} = \cos 2x\dd{x} \\ 
+            &\dd{u}=\dd{x} &v=\frac{1}{2}\sin(2x) 
+        \end{align}
+        which gives us:
+        \begin{align}
+            &=-\frac{1}{2}x^2\cos(2x) + \frac{1}{2}x\sin(2x) - \int \frac{1}{2}\sin(2x) \dd{x} \\ 
+            &=-\frac{1}{2}x^2\cos(2x)+\frac{1}{2}x\sin(2x) +\frac{1}{4}\cos(2X)+C
+        \end{align}
+    \end{example}
+    \begin{example}
+        To solve $I=\int e^{x}\sin x\dd{x}$, we can let:
+        \begin{align}
+            &u=\sin x            &\dd{v} =e^x\dd{x} \\ 
+            &\dd{u}=\cos x\dd{x} &v=e^x
+        \end{align}
+        to give us:
+        \begin{equation}
+            = e^x\sin x - \int e^{x}\cos x \dd{x}
+        \end{equation}
+        We apply integration by parts a second time:
+        \begin{align}
+            &u=\cos x            &\dd{v} =e^x\dd{x} \\ 
+            &\dd{u}=-\sin x\dd{x} &v=e^x
+        \end{align}
+        to get:
+        \begin{align}
+            I&=e^x\sin x - e^x\cos x - \underbrace{\int e^x\sin x \dd{x}}_{I} \\ 
+            2I &= e^x\left(\sin x - \cos x\right) + C' \\ 
+            I &= \frac{1}{2}e^x\left(\sin x - \cos x\right) + C
+        \end{align}
+        and we are done.
+    \end{example}
+    \begin{example}
+        We can also solve integrals that do not appear to have parts, such as $\int \ln x \dd{x}$. We choose:
+        \begin{align}
+            &u=\ln x            &\dd{v} =\dd{x} \\ 
+            &\dd{u}=\frac{1}{x}\dd{x} &v=x
+        \end{align}
+        to give us:
+        \begin{equation}
+            \ln x - \int \dd{x} = x\ln x - x + C
+        \end{equation}
+    \end{example}
+    \item For a definite integral, we can write IBP as:
+    \begin{equation}
+        f(x)g(x)\Big|^b_a-\int_a^b f'(x)g(x) \dd{x}
+    \end{equation}
+    \begin{example}
+        It is \textit{possible} to apply integration of parts to find the integral of $\int \tan x \dd{x} = \int \frac{\sin x}{\cos x} \dd{x}$. We can let:
+        \begin{align}
+            &u=\frac{1}{\cos x}=\sec x            &\dd{v} =\sin x\dd{x} \\ 
+            &\dd{u}=\sec x\tan x &v=-\cos x
+        \end{align}
+        this gives us:
+        \begin{align}
+            \int \tan x \dd{x} &= -\frac{\cos x}{\cos x}+ \int \tan x \dd{x}
+        \end{align}
+        Notice that we could try to subtract the original integral from both sides and get:
+        \begin{equation}
+            0 = -1
+        \end{equation}
+        which is clearly wrong! However, we forgot the constant of integration, so the correct statement would be:
+        \begin{equation}
+            0 + C' = -1 + C
+        \end{equation}
+        which does not tell us anything interesting.
+    \end{example}
+\end{itemize}
