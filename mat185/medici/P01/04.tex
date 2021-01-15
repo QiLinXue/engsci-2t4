@@ -1,0 +1,20 @@
+\begin{sol}
+The case for $n=1$ is trivial so we prove the base case for $n=2$. Let $\bm{A}_1=[a_{ij}]$ be a $m\times n$ matrix and let $\bm{A}_2=[b_{ij}]$ be a $n\times p$ matrix. We then have:
+\begin{align}
+    \left(\bm{A}_1\bm{A}_2\right)^T &= \left(\left[\sum_{k=1}^n a_{ik}b_{kj}\right]\right)^T \\ 
+    &= \left[\sum_{k=1}^n a_{ki}b_{jk}\right]
+\end{align}
+We also know that:
+\begin{align}
+    \bm{A}_2^T\bm{A}_1^T &= [b_{ji}][a_{ji}] \\ 
+     &= \left[\sum_{k=1}^n b_{jk}a_{ki} \right]
+\end{align}
+and thus, the two are equivalent: $\left(\bm{A}_1\bm{A}_2\right)^T = \bm{A}_2^T\bm{A}_1^T$. We now assume this holds true for $n=m$ and show that it's true for $n=m+1$, such that:
+\begin{align}
+    \left(\underbrace{\bm{A}_1\bm{A}_2\cdots \bm{A}_m}_{\bm{P}}\bm{A}_{m+1}\right)^T &= (\bm{P}\bm{A}_{m+1})^T \\ 
+    &= \bm{A}_{m+1}^T\bm{P}^T & \text{(base case)} \\
+    &= \bm{A}_{m+1}^T\left(\bm{A}_m^T\cdots\bm{A}_2^T\bm{A}_1^T\right) & \text{(assumption)} \\ 
+    &= \bm{A}_{m+1}^T\bm{A}_m^T\cdots\bm{A}_2^T\bm{A}_1^T
+\end{align}
+which is what we want. Since this is true for $n=2$, then it must hold true for all $n \in \mathbb{Z}^+$.
+\end{sol}

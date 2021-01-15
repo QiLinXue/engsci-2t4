@@ -1,0 +1,42 @@
+\begin{sol}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Let us write $\bm{A}$ as:
+    \begin{equation}
+        \bm{A} = \begin{bmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\ 
+        a_{21} & a_{22} & \cdots & a_{2n} \\ 
+        \vdots & \vdots & \ddots & \vdots \\ 
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+        \end{bmatrix}
+    \end{equation}
+    Then its transpose is:
+    \begin{equation}
+        \bm{A}^T = \begin{bmatrix}
+        a_{11} & a_{21} & \cdots & a_{n1} \\ 
+        a_{12} & a_{22} & \cdots & a_{n2} \\ 
+        \vdots & \vdots & \ddots & \vdots \\ 
+        a_{1n} & a_{n2} & \cdots & a_{nn}
+        \end{bmatrix}
+    \end{equation}
+    Their sum is:
+    \begin{equation}
+        \bm{A} + \bm{A}^T = \begin{bmatrix}
+        2a_{11} & a_{21} + a_{12} & \cdots & a_{n1} + a_{1n} \\ 
+        a_{12} + a_{21} & 2a_{22} & \cdots & a_{n2} + a_{2n} \\ 
+        \vdots & \vdots & \ddots & \vdots \\ 
+        a_{1n} + a_{n1} & a_{n2} + a_{2n} & \cdots & 2a_{nn}
+        \end{bmatrix}
+    \end{equation}
+    which from inspection is symmetric. More rigorously, during the addition, each value $a_{ij}$ in matrix $\bm{A}$, with $1 \le i,j \le n$, was added to $a_{ji}$ such that in the sum $\bm{A}+\bm{A}^T$, the value indexed by $ij$ is: $a_{ij}+a_{ji}$. For the sum to be symmetric, we must demand that:
+    \begin{equation}
+        (\bm{A}+\bm{A}^T)^T = \bm{A} + \bm{A}^T
+    \end{equation}
+    To take the transpose, we swap the indices $i$ and $j$ such that if the value at a certain index was initially $a_{ij}+a_{ji}$, then after taking the transpose, it would be $a_{ji}+a_{ij}$, which is the same value as before.
+    \item Similarly, if the value at a certain index in $\bm{A}$ was initially $a_{ij}$, then the value at that same index in $\bm{A}-\bm{A}^T$ would be: $a_{ij}-a_{ji}$. For the sum to be skew-symmetric, the following property needs to be satisfied:
+    \begin{equation}
+        (\bm{A}-\bm{A}^T)^T= -(\bm{A} - \bm{A}^T)
+    \end{equation}
+    After taking the transpose, the value at the same index as before would be $a_{ji}-a_{ij}$, which is equivalent to $-(a_{ij}-a_{ji})$, the negative of the previous value.
+\end{enumerate}
+
+\end{sol}

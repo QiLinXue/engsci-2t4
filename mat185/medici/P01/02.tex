@@ -1,0 +1,43 @@
+% \begin{sol}
+% We solve for the most general case via induction, that if $\bm{A}_1\bm{A_2} \cdots \bm{A_n}$ is invertible, then each of $\bm{A}_1,\bm{A}_2,\dots,\bm{A}_n$ are invertible. We start with the base case of $n=2$:
+% Let $\bm{P}\equiv \bm{A}_1\bm{A_2}$ such that:
+% \begin{align}
+%     \bm{A}_1\bm{A_2}\bm{P}^{-1} &= \bm{I} & \text{(given)} \\ 
+%     \bm{A}_1\left(\bm{A_2}\bm{P}^{-1}\right) &= \bm{I} & \text{(associativity)}
+% \end{align}
+% This shows that $\bm{A}_1$ is invertible and its inverse is equal to $\bm{A}_1^{-1} = \bm{A_2}\bm{P}^{-1}$. We can then multiply both sides by $\bm{A}^{-1}$ from the left side:
+% \begin{align}
+%     \bm{A_2}\bm{P}^{-1} &= \bm{A_1}^{-1} \\ 
+%     \bm{A_2}\bm{P}^{-1}\bm{A}_1 &= I \\ 
+%     \bm{A_2}\left(\bm{P}^{-1}\bm{A}_1\right) &= I
+% \end{align}
+% and by the same reasoning, $\bm{A_2}$ is also invertible. We then suppose that this is true for $n=k$ and we want to show it also holds true for $n=k+1$. We let:
+% \begin{align}
+%     \bm{A}_1\bm{A_2}\cdots\bm{A}_k\bm{A}_{k+1} &= \bm{P} \\ 
+%     \bm{A}_1\bm{A_2}\cdots\bm{A}_k\bm{A}_{k+1}\bm{P}^{-1} &= \bm{I} \\
+%     \bm{A}_{k+1}\bm{P}^{-1} &= \left(\bm{A}_1\bm{A_2}\cdots\bm{A}_k\right)^{-1} \\
+%     \bm{A}_{k+1}\bm{P}^{-1}\left(\bm{A}_1\bm{A_2}\cdots\bm{A}_k\right) &= \bm{I} \\ 
+%     \bm{A}_{k+1}\left(\bm{P}^{-1}\left(\bm{A}_1\bm{A_2}\cdots\bm{A}_k\right)\right) &= \bm{I}
+% \end{align}
+% We have shown that $\bm{A}_{k+1}$ is invertible, and from our assumption earlier that the original statement holds true for $n=k$, then the statement must also hold true for $n=k+1$. However, we proved that this was true for $n=2$, so by induction, it must hold for all $n$, including $n=3$.
+% \end{sol}
+
+%%% NOTE: I don't actually think the above proof is valid.
+
+\begin{sol}
+We define the invertible matrix $\bm{P}=\bm{A}\bm{B}\bm{C}$ such that:
+\begin{align}
+    \bm{A}\bm{B}\bm{C}\bm{P}^{-1} &= \bm{I} \\ 
+    \bm{A}\underbrace{\left(\bm{B}\bm{C}\bm{P}^{-1}\right)}_{\bm{A}^{-1}} &= \bm{I} \\
+\end{align}
+\begin{align}
+    \left(\bm{B}\bm{C}\bm{P}^{-1}\right) &= \bm{A}^{-1} \\ 
+    \left(\bm{B}\bm{C}\bm{P}^{-1}\right)\bm{A} &= \bm{I} \\ 
+    \bm{B}\underbrace{\left(\bm{C}\bm{P}^{-1}\bm{A}\right)}_{\bm{B}^{-1}} &= \bm{I} 
+\end{align}
+\begin{align}
+    \left(\bm{C}\bm{P}^{-1}\bm{A}\right) &= \bm{B}^{-1} \\ 
+    \bm{C}\underbrace{\left(\bm{P}^{-1}\bm{A}\bm{B}\right)}_{\bm{C}^{-1}} &= \bm{I}
+\end{align}
+and we are done.
+\end{sol}

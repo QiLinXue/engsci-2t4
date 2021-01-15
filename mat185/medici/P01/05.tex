@@ -1,0 +1,21 @@
+\begin{sol}
+\begin{enumerate}[label=\textbf{(\alph*)}]
+    \item Let $\bm{A} = [a_{ij}]$ and $\bm{B} = [b_{ij}]$ so that the trace of the sum is:
+    \begin{equation}
+        \Tr\left(\bm{A}+\bm{B}\right) = \sum_{i=1}^n \left(a_{ii}+b_{ii}\right) = \sum_{i=1}^n a_{ii} + \sum_{i=1}^n b_{ii} = \Tr \bm{A} + \Tr \bm{B}
+    \end{equation}
+    where we have applied the linearity of the summation.
+    \item Similarly, we have:
+    \begin{equation}
+        \Tr\left(\bm{A}\bm{B}\right) = \sum_{i=1}^n \left(a_{ii}b_{ii}\right) = \sum_{i=1}^n \left(b_{ii}a_{ii}\right) = \Tr \bm{B} \Tr \bm{A}
+    \end{equation}
+    since scalar multiplication is commutative.
+    \item We take the trace of both sides, using the properties we derived above:
+    \begin{align}
+        \Tr\left(\bm{AB}-\bm{BA}\right) &= \Tr\bm{1} \\
+        \Tr\bm{AB} - \Tr\bm{AB} &= n \\ 
+        0 &= n
+    \end{align}
+    Since $n>0$, this is impossible.
+\end{enumerate}
+\end{sol}

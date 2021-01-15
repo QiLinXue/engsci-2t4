@@ -1,0 +1,57 @@
+\begin{sol}
+For the sake of practice, we will test all nine axioms:
+\begin{enumerate}
+    \item (AC) Addition gives a vector in $\mathbb{R}^2$
+    \item (SC) Scalar multiplication gives a vector in $\mathbb{R}^2$
+    \item (AA) We can test for additive associativity via:
+    \begin{align}
+        \left((x_1,x_2) \oplus (y_1,y_2)\right) \oplus (z_1, z_2) &= (x_1+y_1, 0) \oplus (z_1, 0) \\ 
+        &= (x_1+y_1+z_1, 0)
+    \end{align}
+    and similarly:
+    \begin{align}
+        (x_1,x_2) \oplus \left((y_1,y_2) \oplus (z_1,z_2) \right) &= (x_1,x_2) \oplus (y_1+z_1,0) \\ 
+        &= (x_1+y_1+z_1,0)
+    \end{align}
+    so this property also holds.
+    \item (Z) Let the zero vector be $\bm{0}=(z_1,z_2)$. Then we want:
+    \begin{align}
+        (x_1,x_2) \oplus (z_1,z_2) &= (x_1, x_2) \\
+        (x_1+z_1, 0) &= (x_1, x_2)
+    \end{align}
+    Since it's possible for $x_2 \neq 0$, this property will not hold and the set $V$ is not a vector space.
+    \item (AI) Let the additive inverse of $\bm{x}$ be $\bm{z}=(z_1,z_2)$. We want:
+    \begin{align}
+        (x_1,x_2) \oplus (z_1,z_2) &= (0,0) \\ 
+        (x_1+z_1,0) &= (0,0) 
+    \end{align}
+    If $z_1=-x_1$, then $(-x_1, z_2)$ is an additive inverse of $\bm{x}$ where $z_2 \in \mathbb{R}$ has nor restrictions. However, there are infinitely many such inverses so this axiom is still violated as no unique inverse can be found.
+    \item (SMA) We want to show that:
+    \begin{align}
+        c \odot \left(d \odot (x_1, y_1) \right) &= \left(c \cdot d \right) \odot (x_1,y_1) \\ 
+        c \odot \left(dx_1, 0\right) &= cd \odot (x_1,y_1)  
+        (cdx_1, 0) &= (cdx_1,0)
+    \end{align}
+    which is always true, so this axiom is satisfied.
+    \item (DVA) We want to show that:
+    \begin{align}
+        c \odot \left((x_1,y_1) \oplus (x_2,y_2) \right) &= \left(c \odot (x_1,y_1)\right) \oplus \left(c \odot (x_2,y_2)\right) \\
+        c \odot \left(x_1+x_2, 0\right) &= (cx_1,0) \oplus (cx_2,0) \\ 
+        (cx_1+cx_2,0) &= (cx_1+cx_2,0)
+    \end{align}
+    This is always true, so this axiom is satisfied.
+    \item (DSA) We want to show that:
+    \begin{align}
+        (c+d) \odot (x_1,y_1) &= c \odot (x_1,y_1) \oplus d \odot (x_1,y_1) \\ 
+        ((c+d)x_1,0) &= (cx_1+dx_1,0) 
+    \end{align}
+    which is also always true.
+    \item (I) We want to show that:
+    \begin{align}
+        1 \odot (x_1,y_1) &= (x_1,y_1) \\ 
+        (x_1,0) &= (x_1,y_1) 
+    \end{align}
+    Since it's possible to choose a $y_1 \neq 0$, this axiom is not satisfied.
+\end{enumerate}
+Since this set $V$ doesn't satisfy (Z), (AI), and (I), it is not a vector space.
+\end{sol}
