@@ -1,6 +1,6 @@
 %% Creator: Inkscape 1.0.1 (3bc2e813f5, 2020-09-07), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'drawing.pdf' (pdf, eps, ps)
+%% Accompanies image file 'tempered_glass.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{595.27559055bp}%
+    \setlength{\unitlength}{612bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,10 +50,14 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,1.41428571)%
+  \begin{picture}(1,0.24235293)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0.68835086,1.09573495){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}reduced section\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{drawing.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{tempered_glass.pdf}}%
+    \put(0.51810402,0.19647215){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$F$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{tempered_glass.pdf}}%
+    \put(0.68418628,0.12875073){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}cool\end{tabular}}}}%
+    \put(0.68604313,0.07211535){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}hot\end{tabular}}}}%
+    \put(0.68294826,0.01640848){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}cool\end{tabular}}}}%
   \end{picture}%
 \endgroup%

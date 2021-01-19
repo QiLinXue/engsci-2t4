@@ -9,11 +9,52 @@
     \end{enumerate}
     \item Plastic comes from the greek word \textit{plastikos}, which means to shape or to sculpt. In this course, plastic does not refer to the material type but instead the permanent deformation.
     \item The \textbf{strength} of a material describes when the permanent deformation occurs.
+    \begin{warning}
+        Strength depends on context and is not always defined as above.
+    \end{warning}
     \item The stress strain curve for different materials resemble different shapes.
     \begin{itemize}
         \item Polymers have a distinct yielding region
         \item Metals start a concave down behaviour as soon as elastic deformation ends
         \item Ceramics have linear behaviour all the way until they fracture
     \end{itemize}
+    \begin{figure}[ht]
+        \centering
+        \incfig{stress_strain}
+    \end{figure}
     \item For polymers, the use of \textit{Young's Modulus} is misleading since the elastic behaviour depends on several different types of bonds, while Young's Modulus is related to the bahviour of a single bond. As a result, the term \textbf{elastic modulus} is used to describe polymers and composite materials.
+    \subsection{Ceramics}
+    \item Ceramics are not typically tested in tension because:
+    \begin{enumerate}
+        \item It is difficult to grip because it crumbles easily
+        \item It is difficult to shape it into a dogbone shape
+        \item Machine alignment is difficult to achieve.
+    \end{enumerate}
+    \item Instead, we test them by \textbf{3-point bending}:
+    \begin{figure}[ht]
+        \centering
+        \incfig{3point_bending}
+    \end{figure}
+    \item The dotted line is the neutral axis and since it is weak in tension, the plate will break in the lower half at a stress value of:
+    \begin{equation}
+        \sigma = \frac{3FL}{2wh^2}
+    \end{equation}
+    \subsection{Tempered Glass}
+    \begin{itemize}
+        \item \textbf{Tempered glass} has a very high strength and is relatively ``safe'' when it fractures (small pieces instead of large ones)
+        \begin{idea}
+            Initially, tempered glass is very hot in a large volume. However, as it rapidly cools, the surfaces cool faster than the center. Since glass is made of silica bonded to four oxygen, it forms a very complex network structure. Therefore, during this rapid cooling, it ``fixes'' in excess volume.
+            \vspace{2mm}
+            
+            The regions in the middle that are cooling more slowly is trying to contract but is constrained by the outer surface that it goes into tension. The fast cooling regions on the other hand will be in tension.
+        \end{idea}
+        \item When the glass bends, the opposite side of the window can still be in considerable compression even though for a regular ceramic it should be in tension. This increases the strength.
+        \begin{figure}[ht]
+            \centering
+            \incfig{tempered_glass}
+        \end{figure}
+        \item The stress distribution creates \textbf{residual stress} which results in stored strain energy. When the glass gets fractured, the stored strain energy gets transformed into \textbf{surface energy}.
+        \item Since surface energy is proportional to surface area, this means that the fractured pieces are smaller.
+        \item \textbf{Chemical processes} can also be used to create tempered glass, usch as gorilla glass. Ions with a larger size diffuse into the surface and take up a larger space in the network resulting in an increase in volume at the surface.
+    \end{itemize}
 \end{itemize}
