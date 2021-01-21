@@ -1,0 +1,199 @@
+\section{Partial Fractions}
+\begin{itemize}
+    \item Rational functions are in the form of:
+    \begin{equation}
+        R(x) = \frac{P_n(x)}{P_m(x)}
+    \end{equation}
+    where $m,n$ represent the order of the polynomial. If $n \ge m$, it is an \textbf{improper} fraction, such as:
+    \begin{equation}
+        \frac{x^2-x}{1+x}
+    \end{equation}
+    and if $n < m$, we have a proper fraction such as:
+    \begin{equation}
+        \frac{x}{x^2+3x+2}
+    \end{equation}
+    \item If we have an improper fraction, we use long division to simplify it. For example:
+    \begin{equation}
+        \frac{x^3-2x^2}{x^2+9} = x - 2 + \frac{18-9x}{x^2+9}
+    \end{equation}
+    which turns the expression into a polynomial (trivial to integrate) as well as a proper fraction.
+    \item There are different types of factors:
+    \begin{itemize}
+        \item Linear factors (e.g. $3x+2$)
+        \item Irreducible quadratic factors (e.g. $x^2+1$)
+    \end{itemize}
+    which gives us the different factors:
+    \item \textbf{Case 1:} If we have distinct linear factors in the denominator, we can break it into fractions of the form:
+    \begin{equation}
+        (x+\alpha) \implies \frac{A}{x+\alpha}
+    \end{equation}
+    \begin{example}
+        The partial fraction of $\frac{2x-17}{x^2+3x+2}$ can be written as the \textbf{partial fraction deconvolution}:
+        \begin{equation}
+            = \frac{A}{x+1} + \frac{B}{x+2}
+        \end{equation}
+        We now need to solve for $A$ and $B$. We can multiply both sides by $(x+1)(x+2)$ to get:
+        \begin{align}
+            2x-17 &= A(x+2) + B(x+1)
+        \end{align}
+        and match up the coefficients. Alternatively, we can pick various values of $x$ (e.g. $x=-2$ and $x=-1$) to solve for the coefficients.
+    \end{example}
+    \item \textbf{Case 2:} If we have repeated linear factors, then the decomposition is in the form of:
+    \begin{equation}
+        (x+\alpha)^k \implies \frac{A}{x+\alpha} + \frac{B}{(x+\alpha)^2} + \frac{C}{(x+\alpha)^3} + \cdots + \frac{K}{(x+\alpha)^k}
+    \end{equation}
+    \begin{example}
+        To get the decomposition of $\frac{2}{x(x+1)^2}$, we can get:
+        \begin{equation}
+            \frac{2}{x(x+1)^2} = \frac{A}{x} + \frac{B}{x+1} + \frac{C}{(x+1)^2}
+        \end{equation}
+        which gives:
+        \begin{equation}
+            2 = A(x+1)^2 + Bx(x+1) + Cx
+        \end{equation}
+        matching the coefficients, we get three equations and three unknowns:
+        \begin{align}
+            x^2 &: A + B = 0 \\ 
+            x &: 2A+B+C = 0
+            1 &: A = 2
+        \end{align}
+        Solving this system gives $A=2$, $B=-2$, and $C=-2$. Note that taking the integral of this sum is much easier. We have:
+        \begin{align}
+            \int \frac{d}{x(x+1)^2} \dd{x} &= \int \frac{2}{x} \dd{X} - \int \frac{2}{x} \dd{x} - \int \frac{2}{(x+1)^2} \dd{x} \\ 
+            &= 2\ln|x| - 2\ln|x+1| + \frac{2}{x+1} + C
+        \end{align}
+    \end{example}
+    \begin{idea}
+        As a general rule of thumb, the number of unknown coefficients is equal to the order of the polynomial in the denominator.
+    \end{idea}
+    \item \textbf{Case 3:} If we have irreducible quadratic factors, then the partial fraction deconvolution is in the form of:
+    \begin{equation}
+        x^2+px+8 \implies \frac{Ax+B}{x^2+px+8}
+    \end{equation}
+    \begin{example}
+        Suppose we have $\frac{2}{(x+1)(x^2+x+1)}$, we can get the partial fraction decomposition as:
+        \begin{equation}
+            =\frac{A}{x+1} + \frac{Bx+C}{x^2+x+1}
+        \end{equation}
+        and we work through the deconvolution process in exactly the same way, we remove the denominators on both sides to get (after expanding):
+        \begin{align}
+            2 &= Ax^2+Ax+A+Bx^2+Bx+Cx+C \\ 
+            0x^2 + 0x^1 + 2x^0 &= (A+B)x^2 + (A+B+C)x^1 + (A+C)x^0
+        \end{align}
+        which gives three equations and three unknowns, after we match coefficients:
+        \begin{align}
+            x^2 &: A+B = 0 \\ 
+            x &: A+B+C = 0 \\ 
+            1 &: A + C = 2
+        \end{align}
+        and solving the system of equations gives $A=2, B=-2, C=0$. To get the integral of this second term, we can write the second term as:
+        \begin{equation}
+            \int \frac{2x \dd{x}}{x^2+2x+1} = \underbrace{\int \frac{2x+1}{x^2+x+1} \dd{x}}_{(1)} - \underbrace{\int \frac{\dd{x}}{x^2+x+1}}_{(2)}
+        \end{equation}
+        We ``added'' $1$ and ``subtracted'' $1$ to get these two slightly easier integrals, which we can apply other techniques. The first one can be solved using a u-sub while the second can be solved by completing the square and applying a trigonometric substitution:
+        \begin{align}
+            (1) &= \ln |x^2+x+1| + C \\ 
+            (2) &= \int \frac{\dd{x}}{\left(x+\frac{1}{2}\right)^2 + \frac{3}{4}} = \frac{2}{\sqrt{3}}\tan^{-1}\left[\frac{2}{\sqrt{3}}\left(x+\frac{1}{2}\right)\right] + C
+        \end{align}
+        allowing us to put everything together.
+    \end{example}
+    \begin{example}
+        Let's take an integral we already know the answer of: $\int \frac{2x}{x^2+1} \dd{x} = \ln(x^2+1) + C$. We can try a partial fraction decomposition:
+        \begin{equation}
+            \frac{2x}{x^2+1} = \frac{A}{x+i} + \frac{B}{x-i} = \frac{1}{x+i} + \frac{1}{x-i}
+        \end{equation}
+        which gives:
+        \begin{equation}
+            \int \frac{2x}{x^2+1} \dd{x} = \int \frac{\dd{x}}{x+i} + \int \frac{\dd{x}}{x-i}
+        \end{equation}
+        In complex analysis, most mathematical functions we are familiar with are sitll valid, so the integral is:
+        \begin{equation}
+            = \ln|x+i| + \ln|x-i| + C
+        \end{equation}
+        and simplifying it gives:
+        \begin{equation}
+            \ln(x^2+1) + C
+        \end{equation}
+    \end{example}
+    \begin{warning}
+        While it is \textit{possible} to use complex numbers to solve irreducible quadratic factors, it isn't always as easy as the above example. To get the logarithm of a complex number, we can apply the identity (without proving):
+        \begin{equation}
+            \ln(a+ib) = \ln\sqrt{a^2+b^2} + i \arctan\left(\frac{b}{a}\right)
+        \end{equation}
+    \end{warning}
+    \begin{example}
+        Bonus content: Try evaluating the integral $\int \frac{\dd{x}}{x^2+1}$ with complex analysis. Taking a partial fraction, we get:
+        \begin{equation}
+            \frac{1}{x^2+1} = \frac{A}{x+i} + \frac{B}{x-i}
+        \end{equation}
+        multiplying both sides, we get:
+        \begin{align}
+            1 &= A(x-i) + B(x+i) \\ 
+            1 &= (A+B)x + i(-A+B)
+        \end{align}
+        we have the systems of two equations:
+        \begin{align}
+            x^1 &: A+B = 0 \\ 
+            x^0 &: (B-A)i = 1
+        \end{align}
+        which gives $A=\frac{1}{2}i$ and $B=-\frac{1}{2}i$. This gives:
+        \begin{align}
+            &= \int \frac{0.5i}{x+i} \dd{x} - \int \frac{0.5i}{x-i} \dd{x} \\ 
+            &= 0.5i\ln(x+i) - 0.5i\ln(x-i) + C \\ 
+            &= 0.5i\ln\sqrt{x^2+1} + (0.5i)i\arctan\left(\frac{b}{x}\right) - (0.5i)\ln\sqrt{x^2+1} - (0.5i)i\arctan\left(-\frac{1}{x}\right)\\ 
+            &= -\arctan\left(\frac{1}{x}\right) + C
+        \end{align}
+        Note that for $x \ge 0$:
+        \begin{equation}
+            -\arctan\left(\frac{1}{x}\right) + \frac{\pi}{2} = \arctan x
+        \end{equation}
+        and for $x < 0$:
+        \begin{equation}
+            -\arctan\left(\frac{1}{x}\right) - \frac{\pi}{2} = \arctan x
+        \end{equation}
+    \end{example}
+    \item \textbf{Case 4:} Repeated irreducible quadratic terms, the decomposition is in the form of:
+    \begin{equation}
+        (x^2+\beta x + 8)^k \implies \frac{A_1x+B_1}{(x^2+\beta x+8)} + \frac{A_2x+B_2}{(x^2+\beta x+8)^2} + \cdots + \frac{A_kx+B_k}{(x^2+\beta x+x)^k}
+    \end{equation}
+    These can be extremely messy, but the process is similar to the above examples. For example, we can write:
+    \begin{equation}
+        \frac{Ax+B}{(x^2+\beta x + 8)^2} = \frac{A}{2}\left[\frac{2x+\beta}{(x^2+\beta x + 8)^2} + \frac{2B/A - \beta}{(x^2+\beta x +8)^2}\right]
+    \end{equation}
+    \begin{idea}
+        The general strategy for dealing with a proper fraction integral is to break it up into two terms, one that can be easily be solved via a u-substitution and the second one does not have an $x$ term in the numerator and can be solved using a trigonometric substitution.
+    \end{idea}
+    \item We can also introduce a strategy rationalizing substitutions by turning a function such as:
+    \begin{equation}
+        \int \frac{\sqrt{x}}{1+x} \dd{x}
+    \end{equation}
+    into a form that we are familiar with. We can let $u^2=x \implies 2u \dd{u} = \dd{x}$ to give:
+    \begin{align}
+        &= \int \frac{u \cdot 2u \dd{u}}{1+u^2} \\ 
+        &= 2\int \frac{u^2}{1+u^2} \dd{u} \\ 
+        &= 2 \int \left(1 - \frac{1}{1+u^2}\right) \dd{u} \\ 
+        &= 2u -2\tan^{-1}u + C \\ 
+        &= 2\sqrt{x} - 2\tan^{-1}\sqrt{x} + C
+    \end{align}
+    \item Another method is to use a \textbf{Weierstrass substitution}, by making the substitution:
+    \begin{equation}
+        t = \tan \frac{x}{2}
+    \end{equation}
+    which leads to the following substitutions:
+    \begin{align}
+        \sin x &= \frac{2t}{1+t^2} \\ 
+        \cos x &= \frac{1-t^2}{1+t^2} \\ 
+        \dd{x} &= \frac{2}{1+t^2} \dd{t}
+    \end{align}
+    This allows us to turn any trigonometric function into a rational function.
+    \begin{example}
+        For example, to solve the integral $\int \frac{\dd{x}}{1+\cos x}$, we make the specified substitution to turn this into:
+        \begin{align}
+            &= \int \frac{1}{1+\frac{1-t^2}{1+t^2}} \cdot \frac{2}{1+t^2} \dd{t} \\ 
+            &= \int \frac{2 \dd{t}}{(1+t^2)+(1-t^2)} \dd{t} \\ 
+            &= \int \dd{t} \\ 
+            &= t + C \\ 
+            &= \tan\left(\frac{x}{2}\right) + C
+        \end{align}
+    \end{example}
+\end{itemize}
