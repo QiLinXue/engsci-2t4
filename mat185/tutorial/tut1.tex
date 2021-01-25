@@ -1,0 +1,130 @@
+\documentclass{article}
+
+\usepackage{qilin}
+\usepackage{multicol}
+
+\title{MAT185 Tutorial 1}
+\author{QiLin Xue}
+\usepackage{bm}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\textit{Note:} The treatment of these tutorial questions are not always very rigorous. The general ideas however for a completely rigorous proof are provided and should not be difficult to complete.
+\section{Tutorial Problems}
+\subsection*{Problem One}
+\textbf{(a)} The vector space must be $\{\bm{x}\}$ where $\bm{x}=\bm{0}$. This is because the zero vector belongs in all vector spaces, and if this space only has one vector, then it must be the zero vector.
+\vspace{2mm}
+
+\noindent \textbf{(b)} We have:
+\begin{align}
+    c\bm{x} &= (c+d-d)\bm{x} \\ 
+    &= (c-d+d)\bm{x} \\ 
+    &= (c-d)\bm{x} + c\bm{x} & (DSA) \\
+\end{align}
+We have a vector $\bm{v} \equiv (c-d) \bm{x}$ such that:
+\begin{equation}
+    \bm{v} + c\bm{x} = c\bm{x} 
+\end{equation}
+Per proposition 4, we must have $\bm{v} = \bm{0}$. Since $\bm{x}$ can be nonzero, then this means that $(c-d)=0$ (Z) or $c=d$. Alternatively, we could arrive at this in a much easier way using the cancellation theorem.
+\vspace{2mm}
+
+\noindent \textbf{(c)} Proof by contradiction: Suppose for the sake of contradiction that a vector space $V$ consists of $N$ distinct vectors with $N>0$. Per SC, if $\bm{x} \in V$, then $\lambda \bm{x} \in V$ with $\lambda \in \mathbb{R}$. However, there are infinite possible values of $\lambda$. We now need to show that $\lambda_1 \bm{x} \neq \lambda_2 \bm{x}$ if $\bm{x}\neq \bm{0}$ and $\lambda_1 \neq \lambda_2$. From (b), we have determined that if the two vectors are equal, then it must demand that $\lambda_1 = \lambda_2$, which isn't satisfied here, and thus we have found a contradiction. The vector space can however consist of one vector, the zero vector.
+\subsection*{Problem Two}
+\textbf{(i)} Since we are using normal addition and scalar multiplication, then the addition and multiplication axioms are satisfied. We now need to show that this is closed. Let $x=\frac{a}{b}$ and $y=\frac{c}{d}$ with $b,d \neq 0$ and $\gcd(a,b), \gcd(b,d) \neq 0$. We need to show that their sum is also a rational number:
+\begin{equation}
+    x+y = \frac{ad+cb}{bd}
+\end{equation}
+and since it can be written as a fraction, $x+y$ is also rational. Note that from our earlier condition, $bd\neq 0$. Similarly for scalar multiplication by $\lambda$, we have:
+\begin{equation}
+    \lambda x = \frac{\lambda a}{b}
+\end{equation}
+which is also a fraction.
+\vspace{2mm}
+
+\noindent \textbf{(ii)} We first make sure that the space is closed under addition:
+\begin{equation}
+    \bm{A} + \bm{B} =
+    \begin{bmatrix}
+    1 & 0 \\ 
+    a & 1
+    \end{bmatrix}
+        \begin{bmatrix}
+    1 & 0 \\ 
+    b & 1
+    \end{bmatrix}
+    = 
+    \begin{bmatrix}
+    1 & 0 \\ 
+    a+b & 1
+    \end{bmatrix}
+\end{equation}
+Addition only changes the bottom left entry, and modifies it under normal addition rules. As a result, both addition closure and addition axioms will be satisfied since the set of all real numbers is a vector space. Similarly, scalar multiplication only affects the bottom left corner in the regular way, so this is a vector space.
+\vspace{2mm}
+
+\noindent  \textbf{(iii)} So many things are violated here! Take associativity of addition for example:
+\begin{align}
+    (\bm{x} + \bm{x}) + \bm{y} &= \bm{y} + \bm{y} \\ 
+    &= \bm{x}
+\end{align}
+but:
+\begin{align}
+    \bm{x} + (\bm{x}+\bm{y}) &= \bm{x} + \bm{y} \\ 
+    &= \bm{y}
+\end{align}
+\subsection*{Problem Three}
+We first note that $a_1=b_1 \equiv \lambda_1$ and $a_2=b_2 \equiv \lambda_2$, otherwise commutativity  does not hold. Also notice that the first index is independent from the second index during addition and scalar multiplication. As a result, we consider the simpler problem. Is the following a vector space?
+\begin{align}
+    \bm{x} + \bm{y} = a(x+y)
+\end{align}
+From associativity, we have:
+\begin{align}
+    (c+d)\bm{x} = c\bm{x}+d\bm{x} = \lambda_1(cx+dx) = \lambda_1(c+d)x
+\end{align}
+but also
+\begin{align}
+    (c+d)\bm{x} = (c+d)x
+\end{align}
+which implies that $\lambda_1=\lambda_2 = a_1=b_1=a_2=b_2=1$.
+\subsection*{Problem Four}
+We only need to worry about closure since regular matrices are a vector space. We can tell that the vector space is closed under addition. Let $w(A)$ be the weight of a magic square $A \in \mathbb{M}_n$, then $w(A+B)=w(A)+w(B)$. Formally, let $\bm{A} = [a_{ij}]$ and $\bm{B} = [b_{ij}]$. Then:
+\begin{align}
+    \bm{A} + \bm{B} = [a_{ij}+b_{ij}]
+\end{align}
+The sum of the $m^\text{th}$ row of a magic square $\bm{A}$ is given by $S_m(\bm{A})$:
+\begin{equation}
+    S_m(\bm{A}) = \sum_{k=1}^n a_{mk}
+\end{equation}
+and thus:
+\begin{equation}
+    S_m(\bm{A}+\bm{B}) = \sum_{k=1}^n (a_{mk}+b_{mk}) = \sum_{k=1}^n a_{mk} + \sum_{k=1}^n a_{nk} = S_m(\bm{A}) + S_m(\bm{B})
+\end{equation}
+and similar reasoning for the columns and diagonals. We can also show that this is closed under scalar multiplication:
+\begin{equation}
+    S_m(\lambda \bm{A} ) =\sum_{k=1}^n \lambda a_{mk} = \lambda \sum_{k=1}^n a_{mk} = \lambda S_m(\bm{A})
+\end{equation}
+\vspace{2mm}
+
+\noindent \textbf{Remarks:} It's interesting that this is almost closed under matrix multiplication, we can represent multiplication of two matrices by:
+\begin{equation}
+    \bm{A}\bm{B} = \left[\sum_{p=1}^n a_{ip}b_{pj}\right] 
+\end{equation}
+and thus:
+\begin{equation}
+    S_m\left(\bm{A}\bm{B}\right) = \sum_{k=1}^n \sum_{p=1}^n a_{mp}b_{pk}
+\end{equation}
+We can interchange the sums:
+\begin{align}
+    &= \sum_{p=1}^n \sum_{k=1}^n a_{mp}b_{pk} \\ 
+    &= \sum_{p=1}^n \left(a_{mp} \sum_{k=1}^n b_{pk}\right) \\ 
+    &= \sum_{p=1}^n \left(a_{mp} \cdot S_p(\bm{B}) \right) \\ 
+    &= S_p(\bm{B}) \cdot \sum_{p=1}^n a_{mp} \\ 
+    &= S_p(\bm{B}) \cdot S_m(\bm{B})
+\end{align}
+However for a magic square, $S_i=S_j$ for any $1 \le i,j \le n$ so this means that:
+\begin{align}
+    S_m(\bm{A}\bm{B}) = S_m(\bm{A}) S_m(\bm{B})
+\end{align}
+In words, this means that for \textit{any} row in the product $\bm{A}\bm{B}$, the sum will equal to the product of the weights of the original two matrices. However, this result is not true for columns or diagonals.
+\end{document}

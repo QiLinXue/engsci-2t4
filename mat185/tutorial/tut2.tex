@@ -1,0 +1,141 @@
+\documentclass{article}
+
+\usepackage{qilin}
+\usepackage{multicol}
+\newcommand{\divides}{\mid}
+
+\title{MAT185 Tutorial 2}
+\author{QiLin Xue}
+\usepackage{bm}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\textit{Note:} The treatment of these tutorial questions are not always very rigorous. The general ideas however for a completely rigorous proof are provided and should not be difficult to complete.
+\section{Tutorial Problems}
+\subsection*{Problem One}
+\textbf{(a)} From the subspace test theorem, we must show three things:
+\begin{enumerate}[label=(S\Roman*)]
+    \item We propose that the zero vector is $\bm{0} = \begin{bmatrix}
+        0 & 0 \\ 
+        0 & 0
+    \end{bmatrix}$ which belongs in both $U$ and $W$.
+    \item If $u_1,u_2 \in U$, then $u_1+u_2 \in U$. This is because the top right entry will always be zero, and the matrix will always be in $^2\mathbb{R}^2$. Similar reasoning applies to $V$.
+    \item The exact same reasoning applies as above.
+\end{enumerate}
+As a result, $U$ and $W$ are both subspaces of $^2\mathbb{R}^2$.
+\vspace{2mm}
+
+\noindent \textbf{(b)} The intersection of $U$ and $W$ is:
+$$
+\begin{bmatrix}
+    a & 0 \\ 
+    0 & b
+\end{bmatrix}
+$$
+since the top right and bottom left diagonal entries must all be zero. The other entries are free to be anything in $\mathbb{R}$.
+\vspace{2mm}
+
+\textbf{(c)} Yes, per the same reasoning as (a).
+\subsection*{Problem Two}
+\begin{proof}
+Let $\bm{u},\bm{v} \in U \cap V$. We need to show that:
+\begin{enumerate}[label=(S\Roman*)]
+    \item If a vector $\bm{0}$ is the zero vector of both $U$ and $V$, then it is also the zero vector of $U \cap V$.
+    \item We have $\bm{u}+\bm{v} \in U$ by the given statement and also $\bm{u}+\bm{v} \in V$. So by definition, $\bm{u}+\bm{v} \in U \cap V$.
+    \item The exact same reasoning applies as above.
+\end{enumerate}
+\end{proof}
+\subsection*{Problem Three}
+\noindent \textbf{(a)} We have:
+\begin{equation}
+    U + W = \left\{\begin{bmatrix}
+        e & f \\ g & h
+    \end{bmatrix} \Bigg| e,f,g,h \in \mathbb{R}\right\} = \ ^2\mathbb{R}^2
+\end{equation}
+\begin{proof}
+    Let $\bm{u}=\begin{bmatrix}
+        a&0\\b&c
+    \end{bmatrix} \in U$ and $\bm{v} = \begin{bmatrix}
+        x & y \\ 0 & z
+    \end{bmatrix} \in V$. Then: $\bm{u}+\bm{v} = \begin{bmatrix}
+        a+x & y \\ b & y+c
+    \end{bmatrix}$. Since all of these entries have a domain of $\mathbb{R}$ and are independent from each other, any matrix in $^2\mathbb{R}^2$ can be created. 
+\end{proof}
+\vspace{2mm}
+
+\noindent \textbf{(b)} Yes. Any vector space is a subspace of itself.
+\subsection*{Problem Four}
+\begin{proof}
+Let $\bm{u} \in U$ and $\bm{w} \in W$. We need to show that:
+\begin{enumerate}[label=(S\Roman*)]
+    \item The zero vector is defined such that $0\bm{x} = \bm{0}$ where $x \in V$. This means that the zero vector will be the same for all subsets of $V$.
+    \item We can write each vector in $U+W$ as a composition of two vectors. For example, we have $\bm{u}_1+\bm{w}_1 \in U + W$ by the given statement as well as $\bm{u}_2+\bm{w}_2 \in U + W$. Therefore, the sum of these two vectors is:
+    \begin{equation}
+        \bm{u}_1+\bm{u_2}+\bm{v}_1+\bm{v}_2
+    \end{equation}
+    which is in $U+W$.
+    \item Same reasoning as above.
+\end{enumerate}
+\end{proof}
+\section{Unofficial Tutorial Problems}
+\subsection*{Problem One}
+\begin{proof}
+    To prove $185$ is odd, let $k=92$ such that $185=2k+1$ and therefore it is odd by definition. To prove that $-420$ is odd, pick $k=-210$ such that $-420=2k$ and therefore it is even by definition.
+\end{proof}
+\subsection*{Problem Two}
+If $m,n$ are odd, we can write them in the form of $m=2k_1+1$ and $n=2k_2+1$ such that:
+\begin{equation}
+    m+n = 2(k_1+1+k_2)
+\end{equation}
+If we pick $k=k_1+1+k_2$, then $m+n$ is even by definition.
+Note: We can also prove this via modular arithmetic. We have:
+\begin{align*}
+    m \equiv 1 \pmod{2} \\ 
+    n \equiv 1 \pmod{2}
+\end{align*}
+Adding them, we get:
+\begin{equation*}
+    m+n \equiv 2\pmod{2} \implies m+n \equiv 0 \pmod{0}
+\end{equation*}
+\subsection*{Problem Three}
+Two integers $m$ and $n$ either have the parity, or they do not have the parity. We will show that if they have different parity, they will not be even. WLOG, let $m=2k_1$ and let $n=2k_2+1$ such that:
+\begin{equation*}
+    m+n = 2(k_1+k_2)+1
+\end{equation*}
+and we can choose $k_1+k_2$ to be $k$ to show that $m+n$ is odd. We also want to use the proposition that being odd or even is mutually exclusive.
+\subsection*{Problem Four}
+For the sake of contradiction, assume that $k$ divides $p! + 1$ (which can be written as $k \divides p! + 1$. This means that $\frac{p!+1}{k}$ is an integer, or:
+\begin{equation*}
+    \frac{p(p-1)(p-2)\cdots (2)(1) + 1}{k} = \frac{p(p-1)(p-2)\cdots (2)(1)}{k} + \frac{1}{k}
+\end{equation*}
+Since $2 \le k \le p$, the first term is an integer. For the sum to also be an integer, the second term also needs to be an integer. However, $1/k$ is never an integer for $k \neq 1$, so our original assumption is false.
+\subsection*{Problem Five}
+For the sake of contradiction, assume there are a finite number of primes. If so, multiply all the primes together and add one. By similar reasoning as in problem four, this cannot be divided by any number except $1$ and itself, and thus is a new prime. Asa  result, there are an infinite number of primes.
+\subsection*{Problem Six}
+First, assume that a solution exists. If the solution exists, we will show that it must be in $V$.
+
+Assume for the sake of contradiction that $\bm{x} \notin V$. Then, we have: $\bm{x} = \bm{v} + -\bm{u}$ from the cancellation theorem. From the closure axioms, then $\bm{x} \in V$. Now we show that the solution must exist. Again, this is trivial under the closure axiom.
+\section{Tutorial Worksheet}
+\subsection*{Task 2.1}
+The vector $(0,a,0) \in Y$ and $(0,0,b) \in Z$. Therefore, the intersection results in $(0,0,0)$ and $Y+Z = (0,a,b)$.
+\subsection*{Task 2.2}
+Let $V = Y$ and $W = Z$. Then $(0,3,3) \in V+W$ but $(0,3,3) \notin V \cup W$.
+\subsection*{Task 2.3}
+\begin{itemize}
+    \item This is the definition of the intersection.
+    \item V is a subspace, so by definition $c\bm{s} \in V$ since $\bm{s} \in V$.
+    \item Same reasoning as above.
+    \item The vector $c\bm{s}$ is in both $V$ and $W$ so $c\bm{s} \in V \cap W$.
+    \item See official problem set for how to finish.
+\end{itemize}
+\subsection*{Task 2.4}
+No, it's not always a subspace. See task 2.2.
+\subsection*{Task 2.5}
+The subspace $U$ represents a line with the same slope that passes through the origin and $\bm{p}$ represents the offset from the origin.
+\subsection*{Task 2.6}
+Notice that the line $L$ in the previous task is only not a suspace because the zero vector does not exist. We want a vector $\bm{0}$ such that $\bm{x}+\bm{0}=\bm{x}$ and the only zero vector that can do this is $\bm{0}=(0,0)$. However, $0\bm{x}=\bm{0}$ is not necessarily contained in $L$.
+
+Now, we can define the zero vector to be $\bm{0}=(\bm{p},0)$ such that $0\bm{x}=\bm{0}$ always and $(\bm{p},0) \in L$ (see the geometric interpretation of the previous task). Note that $\mathbb{R}^2_p$ is not a subspace of $\mathbb{R}^2$ because the rules for scalar multiplication and addition is different.
+\end{document}
