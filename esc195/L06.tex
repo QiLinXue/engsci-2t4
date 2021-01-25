@@ -1,0 +1,171 @@
+\section{Improper Integrals}
+\begin{itemize}
+    \item Since infinity is not a number, our typical definite integral definition cannot be used for an \textbf{improper integral} like:
+    \begin{equation}
+        \int_0^\infty f(x) \dd{x}
+    \end{equation}
+    Instead, we use the following definition:
+    \begin{definition}
+        If $\lim_{b\to\infty} \int_a^b f(x) \dd{x} = L$ exists, then we can define:
+        \begin{equation}
+            \int_a^\infty f(x) \dd{x} = L
+        \end{equation}
+    \end{definition}
+    \begin{example}
+        To solve $\int_0^\infty e^{-x} \dd{x}$, we can write it as:
+        \begin{align}
+            &= \lim_{b\to \infty} \int_0^b e^{-x} \dd{x} \\ 
+            &= \lim_{b\to \infty} \left(1-e^{-b}\right) = 1
+        \end{align}
+        This is remarkable because even though the area appears infinite (since it is infinitely long), the area is actually finite.
+        \begin{center}
+            \begin{tikzpicture}
+            \begin{axis}[
+            legend pos=outer north east,
+            title=Improper Integral for $e^{-x}$,
+            axis lines = box,
+            xlabel = $x$,
+            ylabel = $y$,
+            variable = t,
+            trig format plots = rad,
+            ]
+            \addplot [
+                domain=-1:10,
+                samples=70,
+                color=blue,
+                ]
+                {e^-x};
+            \addlegendentry{$e^{-x}$}
+            \draw[dotted] (0,0) -- (0,2.5);
+            \end{axis}
+            \end{tikzpicture}
+        \end{center}
+    \end{example}
+    \begin{example}
+        For the integral $\int_{-\infty}^{-1}$, we have:
+        \begin{align}
+            &= \lim_{a\to -\infty} \int_a^{-1} \frac{\dd{x}}{x^2} \\ 
+            &= \lim_{a\to -\infty}\left(1+\frac{1}{a}\right) = 1
+        \end{align}
+    \end{example}
+    \item However, improper integrals can diverge as well.
+    \begin{example}
+        For $\int_3^\infty \frac{\dd{x}}{x}$, we get:
+        \begin{equation}
+            =\lim_{b\to\infty} \left(\ln b - \ln 3\right) = \infty
+        \end{equation}
+    \end{example}
+    \begin{example}
+        For something like $\int_{-\infty}^{2\pi} \sin x \dd{x}$, the integral does not go to infinity, but since we get:
+        \begin{equation}
+            \lim_{a\to -\infty}\left(-1+\cos a\right)
+        \end{equation}
+        it will diverge, since $\lim_{a\to-\infty} \cos a$ does not exist.
+    \end{example}
+    \item We can generalize this for all reciprocal functions:
+    \begin{idea}
+        For $\int_a^\infty \frac{\dd{x}}{x^p}$ with $p > 0$, $p \neq 1$, and $a>0$, we get:
+        \begin{align}
+            &= \lim_{b\to\infty} \int_a^b \frac{\dd{x}}{x^p} \\ 
+            &= \lim_{b\to\infty} \left(\frac{1}{1-p}x^{-p+1}\right)\Bigg|^b_a \\ 
+            &= \lim_{b\to \infty} \left(\frac{b^{-p+1}}{1-p} - \frac{a^{-p+1}}{1-p}\right)
+        \end{align}
+        For $p>1$, we get:
+        \begin{equation}
+            = \frac{a^{1-p}}{p-1}
+        \end{equation}
+        and diverges for $p \le 1$.
+    \end{idea}
+    \item There are techniques to check if an improper integral will converge or diverge. This is useful especially if we want to perform a numerical integration but want to verify that it indeed will converge.
+    \begin{theorem}
+        Let $f,g$ be continuous functions and $0 \le f(x) \le g(x)$ where $x\in [a,\infty)$,. 
+        \begin{itemize}
+            \item If $\int_a^\infty g \dd{x}$ converges, so does $\int_a^\infty f(x) \dd{x}$.
+            \item If $\int_a^\infty f$ diverges, so does $\int_a^\infty g(x) \dd{x}$.
+        \end{itemize}
+    \end{theorem}
+    \begin{example}
+        The integral $\int_2^\infty \frac{\dd{x}}{\sqrt{1+x^{44/17}}}$ is difficult to evaluate, but we can easily tell that it converges via:
+        \begin{equation}
+            \frac{1}{\sqrt{1+x^{44/12}}} < \frac{1}{\sqrt{x^{44/12}}} = \frac{1}{x^{22/12}}
+        \end{equation}
+        Since $p>1$, this converges, so the original integral must also converge.
+    \end{example}
+    \begin{example}
+        For the integral $\int_3^\infty \frac{\dd{x}}{\sqrt{7+x^2}}$, we can check that it diverges by:
+        \begin{equation}
+            (7+x^2)^{1/2} < \sqrt{7} + x
+        \end{equation}
+        We can check this via: $7+x^2 < 7 + 2\sqrt{7} + x^2$. Since:
+        \begin{equation}
+            \int_3^\infty \frac{\dd{x}}{\sqrt{7}+x} = \ln\left(\sqrt{7}+x\right)\Big|^{\infty}_{3}
+        \end{equation}
+        which diverges, so the original integral must also diverge.
+    \end{example}
+    \begin{warning}
+        The notation $f(x)\Big|^\infty_3$ needs to be defined explicitly since $\infty$ is not a number. This expression simply implies that we are taking the limit as $b$ approaches infinity, even though it might look like we're treating $\infty$ as a number.
+    \end{warning}
+    \item We can look at more interesting examples. Both the lower and upper bounds can be $\pm \infty$, such as:
+    \begin{equation}
+        \int_{-\infty}^{+\infty} e^{-x^2} \dd{x} = \sqrt{\pi}
+    \end{equation}
+    \begin{definition}
+        We can define an integral from $-\infty$ to $+\infty$ as:
+        \begin{equation}
+            \int_{-\infty}^{\infty} f(x) \dd{x} = \int_{-\infty}^a f(x) \dd{x} + \int_a^\infty f(x) \dd{x}
+        \end{equation}
+    \end{definition}
+    \begin{warning}
+        Do \textit{not} evaluate integrals of the above form as:
+        \begin{equation}
+            \int_{-\infty}^{\infty} f(x) \dd{x} \neq \lim_{b\to \infty} \int_{-b}^b f(x) \dd{x}
+        \end{equation}
+    \end{warning}
+    \item For example, take the integral $\int_{-\infty}^{\infty}$. If we use the proper definition, then we add two limits that don't exist, so we know this diverges. Note that it might be tempting to write:
+    \begin{equation}
+        = \lim_{b\to\infty} \int_{-b}^b x \dd{x} = \lim_{b\to \infty} \left(\frac{b^2}{2}-\frac{b^2}{2}\right) = 0
+    \end{equation}
+    but this is only because we are approaching $-\infty$ and $+\infty$ at the same rate. If we instead wrote:
+    \begin{equation}
+        \lim_{b\to \infty} \int_{-b}^{2b} x \dd{x} = \lim_{b\to\infty}\left(\frac{4b^2}{2}-\frac{b^2}{2}\right) = \infty
+    \end{equation}
+    If we instead used this approach for our other improper integrals, it wouldn't make a difference since it shouldn't matter the rate at which we approach infinity. Here's another example:
+    \begin{equation}
+        \lim_{b\to \infty} \int_{-b}^{\sqrt{b^2+138}} x \dd{x} = \lim_{b\to\infty} \left(\frac{b^2+138}{2} - \frac{b^2}{2}\right) = \lim_{b\to \infty} \frac{138}{2} = 69
+    \end{equation}
+    \item Improper integrals can also be in the form where there are infinite dicontinuities at the bounds of integration. Suppose $\lim_{x \to b^{-}} f(x) = \infty$. We can treat an integral such as:
+    \begin{equation}
+        \int_a^b f(x) \dd{x} = \lim_{c\to b^-} \int_a^c f(x) \dd{x}
+    \end{equation}
+    \begin{example}
+        For example, take $\int_0^1 \frac{\dd{x}}{x^{1/3}}$, and we can evaluate this via:
+        \begin{align}
+            &= \lim_{c\to 0^+} \int_c^1 \frac{\dd{x}}{x^{1/3}} \\ 
+            &= \lim_{c\to 0^+} \frac{3}{2}\left(1-c^{2/3}\right) = \frac{3}{2}
+        \end{align}
+        Again, we have a region that extends to an infinite extend, but it has a finite area. Of course, this won't always be the case.
+    \end{example}
+    \begin{example}
+        Take the example where $\int_0^1 \frac{\dd{x}}{x^2}$, then we can evaluate this integral via:
+        \begin{align}
+            &= \lim_{c\to 0^+} \int_c^1 \frac{\dd{x}}{x^2} \\ 
+            &= \lim_{c \to 0^+} \left(\frac{1}{c}-1\right) = \infty
+        \end{align}
+        so this integral will diverge.
+    \end{example}
+    \begin{idea}
+        Notice that we can draw an anaology between: $\int_0^a \frac{\dd{x}}{x^p}$ and $\int_a^\infty \frac{\dd{x}}{x^{1/p}}$, as they are reflections of one another across the line $y=x$. If one diverges, the other will converge, with the exception being $p=1$.
+    \end{idea}
+    \item We can also deal with discontinuities that occur between the given bounds. Similar to before, we break it up into two integrals and \textit{both} integrals must converge for the original integral to converge. For example, take:
+    \begin{equation}
+       \int_{-a}^b \frac{1}{|x^{1/2}|} \dd{x}
+    \end{equation}
+    with $a,b>0$. For this integral to converge, then both $\int_{-a}^0 \frac{\dd{x}}{|x^{1/2}|}$ and $\int_{0}^b \frac{\dd{x}}{|x^{1/2}|}$ must converge.
+    \begin{warning}
+        Here is an example of when things go wrong when the integral is not broken up into separate integrals. For example, suppose we wish to evaluate $\int_{-1}^3 \frac{\dd{x}}{x^2}$. From our previous discussion, we know that $\int_{-1}^0 \frac{\dd{x}}{x^2}$ and $\int_{0}^3 \frac{\dd{x}}{x^2}$ both diverges. However, one might naively think that:
+        \begin{equation}
+            \left(-\frac{1}{x}\right)\Bigg|^3_{-1} = -\frac{1}{3}-\frac{1}{1} = - \frac{4}{3}
+        \end{equation}
+        which is definitely wrong, since $\frac{1}{x^2}$ is never negative!
+    \end{warning}
+\end{itemize}
