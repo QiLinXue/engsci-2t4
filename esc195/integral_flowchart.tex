@@ -1,0 +1,172 @@
+\documentclass[
+border={1cm 1cm 1cm 1cm}
+]{standalone}
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usepackage{physics}
+\usetikzlibrary{shapes,arrows}
+% \usepackage[paperheight=100cm]{geometry}
+\begin{document}
+\pagestyle{empty}
+
+
+% Define block styles
+\tikzstyle{decision} = [rectangle, draw, fill=red!20, 
+text width=10em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+text width=9em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=yellow!20, node distance=3cm,
+minimum height=4em]
+  \begin{tikzpicture}[node distance = 2cm, auto]
+    % nodes
+    \node [cloud] (init) {\Large Start Here};
+    \node [right,shift={(2,0)}] {QiLin Xue, Spring 2021};
+
+    \node [decision, below of = init, node distance = 3cm] (polynomial?) {Polynomial or power? $$f(x) = x^p$$ with $p \neq -1$.};
+    \node [block, right of = polynomial?, node distance = 6.5cm, text width=12em] (solve polynomial) {Apply reverse power rule: $$\int x^p \dd{u} = \frac{1}{p+1} x^{p+1}$$};
+    \node [decision, below of = polynomial?, node distance = 3cm] (usub?) {Can it be written as the product of a function and its derivative?};
+    \node [block, right of = usub?, node distance = 6cm] (solve usub) {Write it in the form of $$\int u \dd{u}$$};
+    \node [decision, below of = usub?, node distance = 3cm] (ibp?) {Is it a product  of two functions, one of which has an easy derivative?};
+    \node [block, right of = ibp?, node distance = 6.5cm, text width=12em] (solve ibp) {Let the function which has an easy derivative be $u$ and write the integral as: $$\int u \dd{v} = uv - \int v \dd{u}$$};
+    
+    \node [decision, below of = ibp?, node distance = 11cm] (trig?) {Does the integral consist of a product of trigonmetric functions?};
+    \node [decision, right of = trig?, node distance = 6cm] (trig yes?) {Try out these cases};
+    
+    \node [decision, right of = trig yes?, node distance = 5.5cm, text width=12em] (case 3?) {It is in the form of $$\int \sin^n x \dd{x},\, \int \cos^n x \dd{x}$$};
+    \node [decision, above of = case 3?, node distance = 4cm] (case 1/2?) {It is in the form of $$ \int \sin^n x \cos^m x \dd{x}$$};
+    \node [block, right of = case 1/2?, node distance = 7.2cm, text width=16em] (case 2) {Apply the double angle formulas: \begin{align*}
+        \sin x \cos x &= \frac{1}{2}\sin(2x) \\ 
+        \sin^2 x &= \frac{1}{2} - \frac{1}{2}\cos 2x \\ 
+        \cos^2 x &= \frac{1}{2} + \frac{1}{2}\cos 2x
+    \end{align*}};
+    \node [block, above of = case 2, node distance = 4cm, text width=16em] (case 1) {Apply the identity $$
+        \sin^2 x + \cos^2 x = 1
+    $$};
+    \node [block, right of = case 3?, node distance = 8.7cm, text width=24em] (case 3) {Apply the reduction formula: \begin{align*}
+        \int \sin^n \dd{x} &= -\frac{1}{n}\sin^{n-1}x\cos x + \frac{n-1}{n} \int \sin^{n-2} x \dd{x} \\ 
+        \int \cos^n \dd{x} &= +\frac{1}{n}\cos^{n-1}x\sin x + \frac{n-1}{n} \int \cos^{n-2} x \dd{x}
+    \end{align*}
+    };
+    \node [decision, below of = case 3?, node distance = 4cm] (case 4?) {It is in the form of \begin{align*}
+        \int \sin(mx)\cos(nx) \dd{x} \\ 
+        \int \sin(mx)\sin(nx) \dd{x} \\ 
+        \int \cos(mx)\cos(nx) \dd{x}
+    \end{align*}
+    };
+    \node [block, right of = case 4?, node distance = 8.7cm, text width=24em] (case 4) {Apply the following identities: \begin{align*}
+        \sin A \sin B &= \frac{1}{2}\left[\cos(A-B)-\cos(A+B)\right] \\ 
+        \cos A \cos B &= \frac{1}{2}\left[\cos(A-B)+\cos(A+B)\right] \\ 
+        \sin A \cos B &= \frac{1}{2}\left[\sin(A-B)+\sin(A+B)\right]
+    \end{align*}
+    };
+    \node [decision, below of = case 4?, node distance = 5cm] (case 5?) {It is in the form of \begin{align*}
+        \int \tan^n x \dd{x} \\ 
+        \int \cot^n x \dd{x} \\ 
+        \int \sec^n x \dd{x} \\ 
+        \int \csc^n x \dd{x}
+    \end{align*}
+    };
+    \node [block, right of = case 5?, node distance = 7.3cm, text width=16em] (case 5) {Apply the following identities: \begin{align*}
+        \tan^2 x &= \sec^2 x - 1 \\ 
+        \cot^2 x &= \csc^2 x - 1 \\
+        (\tan x)' &= \sec^2 x
+    \end{align*}
+    };
+    \node [decision, below of = trig?, node distance = 14cm, text width = 12em] (trig sub?) {Is the integral a rational function with any of the following: \begin{align*}
+        \sqrt{a^2-x^2} \\ 
+        \sqrt{a^2 + x^2} \\ 
+        \sqrt{x^2 - a^2}
+    \end{align*}
+    };
+    \node [block, right of = trig sub?, node distance = 8.7cm, text width=24em] (trig sub) {Apply the following substitutions: \begin{align*}
+        \sqrt{a^2-x^2} &\implies x=a\sin u,\, \sqrt{a^2-x^2}=a\cos u \\
+        \sqrt{a^2+x^2} &\implies x=a\tan u,\, \sqrt{a^2+x^2}=a\sec u \\
+        \sqrt{x^2-a^2} &\implies x=a\sec u,\, \sqrt{x^2-a^2}=a\tan u
+    \end{align*}
+    };
+    \node [decision, below of = trig sub?, node distance = 4cm, text width = 12em] (improper?) {Is the integral an improper rational function?};
+    \node [block, right of = improper?, node distance = 6.6cm, text width=12em] (improper) {Perform long division to simplify it to a proper fraction.};
+    \node [decision, below of = trig sub?, node distance = 12cm, text width = 12em] (proper?) {Is the integral a proper rational function?};
+    \node [decision, right of = proper?, node distance = 6.6cm, text width = 12em] (partial?) {Attempt to use partial fractions. Look at the denominator.};
+
+    \node [decision, right of = partial?, node distance = 6cm] (p3?) {Irreducible quadratic factors: $$x^2+px+q$$};
+    \node [decision, right of = p3?, node distance = 6.6cm, text width=12em] (p3) {Use real numbers?};
+    
+    \node [block, right of = p3, node distance = 8.7cm, text width=24em] (p3 imaginary) {Factor using complex numbers, and apply the identity $$\ln(a+ib) = \ln\sqrt{a^2+b^2} + i\arctan\left(\frac{b}{a}\right)$$};
+    \node [block, below of = p3 imaginary, node distance = 3cm, text width=12em] (p3 real) {Partial fraction deconvolution in the form of:
+    $$\frac{Ax+B}{x^2+px+8}$$};
+    
+    \node [decision, above of = p3?, node distance = 3cm] (p2?) {Repeated linear Factors: $$(x+\alpha)^k$$};
+    \node [block, right of = p2?, node distance = 8.7cm, text width=24em] (p2) {Partial fraction deconvolution in the form of:
+    $$\frac{A}{(x+\alpha)} + \frac{B}{(x+\alpha)^2} + \frac{C}{(x+\alpha)^3} + \cdots + \frac{K}{(x+\alpha)^k}$$};
+    
+    \node [decision, above of = p2?, node distance = 3cm] (p1?) {Distinct linear Factors: $$x+\alpha$$};
+    \node [block, right of = p1?, node distance = 6.6cm, text width=12em] (p1) {Partial fraction deconvolution in the form of:
+    $$\frac{A}{x+\alpha}$$};
+    
+    \node [decision, below of = p3?, node distance = 6cm] (p4?) {Repeated irreducible quadratic factors: $$(x^2+px + q)^k$$};
+    \node [block, right of = p4?, node distance = 9.8cm, text width=30em] (p4) {Partial fraction deconvolution in the form of:
+    $$\frac{A_1x + B_1}{(x^2+px + q)} + \frac{A_1x + B_1}{(x^2+px + q)^2} + \frac{A_1x + B_1}{(x^2+px + q)^3} + \cdots + \frac{A_kx + B_k}{(x^2+px + q)^k}$$};
+    \node [decision, below of = proper?, node distance = 10cm, text width = 12em] (w?) {Is the integral a complicated rational function?
+    };
+    \node [block, right of = w?, node distance = 7.3cm, text width=16em] (w) {Apply the Weierstrass substitutions: \begin{align*}
+        t &= \tan \frac{x}{2} \\ 
+        \sin x &= \frac{2t}{1+t^2} \\ 
+        \cos x &= \frac{1-t^2}{1+t^2} \\ 
+        \dd{x} &= \frac{2}{1+t^2} \dd{t}
+    \end{align*}
+    };
+    
+    \node [block, below of =w?, node distance = 3cm, text width=8em] (fucked) {You're fucked.};
+
+    
+    
+    \path [line] (init) -- (polynomial?);
+    \path [line] (polynomial?) -- (solve polynomial) node[midway] {yes};
+    \path [line] (polynomial?) -- (usub?)  node[midway, right] {no};
+    \path [line] (usub?) -- (solve usub) node[midway] {yes};
+    \path [line] (usub?) -- (ibp?)  node[midway, right] {no};
+    \path [line] (ibp?) -- (solve ibp) node[midway] {yes};
+    \path [line] (ibp?) -- (trig?)  node[midway, right] {no};
+    
+    \path [line] (case 1/2?) |- (case 1) node[midway] {\small either $m,n$ odd};
+    \path [line] (case 1/2?) -- (case 2) node[midway] {\small both $m,n$ even};
+    \path [line] (case 3?) -- (case 3);
+    \path [line] (case 4?) -- (case 4);
+    \path [line] (case 5?) -- (case 5);
+    
+    \path [line] (trig yes?) |- (case 1/2?);
+    \path [line] (trig yes?) -- (case 3?);
+    \path [line] (trig yes?) |- (case 4?);
+    \path [line] (trig yes?) |- (case 5?);
+    
+    \path [line] (trig?) -- (trig yes?) node[midway] {yes};
+    
+    \path [line] (trig?) -- (trig sub?) node[midway] {no};
+    \path [line] (trig sub?) -- (trig sub) node[midway] {yes};
+    
+    \path [line] (p1?) -- (p1);
+    \path [line] (p2?) -- (p2);
+    \path [line] (p3?) -- (p3);
+    \path [line] (p3) |- (p3 real) node[midway,left] {yes};
+    \path [line] (p3) -- (p3 imaginary) node[midway] {no};
+
+    \path [line] (p4?) -- (p4);
+    
+    
+    \path [line] (partial?) |- (p1?);
+    \path [line] (partial?) |- (p2?);
+    \path [line] (partial?) -- (p3?);
+    \path [line] (partial?) |- (p4?);
+    
+    \path [line] (trig sub?) -- (improper?)  node[midway, right] {no};
+    \path [line] (improper?) -- (proper?) node[midway, right] {no};
+    \path [line] (improper?) -- (improper) node[midway] {yes};
+    \path [line] (proper?) -- (partial?) node[midway] {yes};
+    
+    \path [line] (proper?) -- (w?) node[midway,right] {no};
+    \path [line] (w?) -- (w) node[midway] {yes};
+    \path [line] (w?) -- (fucked) node[midway,right] {no};
+  \end{tikzpicture}
+\end{document}
