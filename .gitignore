@@ -6,6 +6,9 @@
 /putnam
 *.mp4
 
+tasks.json
+launch.json
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
