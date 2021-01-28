@@ -1,0 +1,34 @@
+\section{Applications to Physics and Engineering}
+\begin{itemize}
+    \item The \textbf{hydrostatic pressure} depends on the density $\rho$, gravitational constant $g$ and the depth $d$:
+    \begin{equation}
+        p = \rho g d
+    \end{equation}
+    and the force of pressure acting on the surface is:
+    \begin{equation}
+        F = \rho g d \cdot A = pA
+    \end{equation}
+    \begin{figure}[ht]
+        \centering
+        \incfig{L8a}
+    \end{figure}
+    \begin{example}
+        Suppose we have a curved container. The force acting on the entire container can be broken up into segments, each with a force of:
+        \begin{equation}
+            F_i = \underbrace{w(x_i^*)\Delta x_i}_\text{area} \cdot \underbrace{\rho gx_i^*}_\text{pressure}
+        \end{equation}
+        where $w(x)$ is the width of the container as a function of height. The force exerted on the container is thus:
+        \begin{equation}
+            F = \int_a^b \rho g x w(x) \dd{x}
+        \end{equation}
+    \end{example}
+    \begin{example}
+        Suppose we have a pipe half with a radius of $1\si{\meter}$ filled with water and we wish to find the force it exerts on the end face of the pipe. We can do this via:
+        \begin{align}
+            F &= \int_0^1 \rho gx 2\sqrt{1-x^2}\dd{x} \\ 
+            &= 2\rho g\left(-\frac{1}{3}(1-x^2)^{3/2}\right)\Biggr|^1_0 \\ 
+            &= \frac{2}{3}\rho g = 6533 \si{\newton}
+        \end{align}
+    \end{example}
+
+\end{itemize}

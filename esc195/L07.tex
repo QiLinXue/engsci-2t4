@@ -1,0 +1,88 @@
+\section{Applications of Integrals}
+\subsection{Arclength}
+\begin{itemize}
+    \item Suppose w ehave a curve $y = f(x)$ where $x \in [a,b]$ and is differentiable. The problem is to find the length of the curve in this range.
+    \begin{figure}[ht]
+        \centering
+        \incfig{L7a}
+    \end{figure}
+    \item We can approximate this by partitioning the curve into segments at locations $x_i$ where:
+    \begin{equation}
+        a = x_0 < x_1 <x_@ < \dots < x_{n-1} < x_{n} = b
+    \end{equation}
+    such that the arclength is:
+    \begin{equation}
+        s_i = \sqrt{(\Delta x_i)^2 + (\Delta y_i)^2} = \sqrt{(x_i-x_{i-1})^2+(y(x_i)-y(x_{i-1}))^2}
+    \end{equation}
+    We can use the mean value theorem to write:
+    \begin{equation}
+        \frac{\Delta y_i}{\Delta x_i} = \frac{y(x_i)-y(x_{i-1})}{x_i-x_{i-1}} = y'(x_i^*)
+    \end{equation}
+    so we can rewrite:
+    \begin{equation}
+        s_i = \sqrt{\Delta x_i^2 + \left(f'(x_i^*)\Delta x_i\right)^2}
+    \end{equation}
+    \begin{figure}[ht]
+        \centering
+        \incfig{L7b}
+    \end{figure}
+    The total length is approximated by the total sum. If we take the limit:
+    \begin{align}
+        s &= \lim_{\lVert P \rVert \to 0} \sum_{i=1}^n sqrt{1+f'(x_i^*)^2} \Delta x_i \\ 
+        &= \int_a^b \sqrt{1+f'(x)^2} \dd{x}
+    \end{align}
+    \begin{example}
+        For example, the arclength in $x \in [0,44]$ for $f(x)=x^{3/2}$ can be calculated if we know the derivative:
+        \begin{equation}
+            f'(x) = \frac{3}{2}x^{1/2}
+        \end{equation}
+        so:
+        \begin{equation}
+            1+f'(x)^2 = 1 + \frac{9}{4}x
+        \end{equation}
+        which gives:
+        \begin{align}
+            s &= \int_0^{44} \sqrt{1+\frac{9}{4}x}\dd{x} \\ 
+            &= \left(\frac{4}{9}\cdot \frac{2}{3}\left(1+\frac{9}{4}x\right)^{3/2}\right)\Biggr|^{44}_{0} \\ 
+            &= 296
+        \end{align}
+    \end{example}
+\end{itemize}
+\subsection{Area of a Surface of Revolution}
+\begin{itemize}
+    \item Consider the new problem of finding the area of a surface of revolution. Similarly, we break it up into smaller segment with width $\Delta x$.
+    \begin{figure}[ht]
+        \centering
+        \incfig{L7c}
+    \end{figure}
+    \item Each small segment is a tapered cone, with an area of:
+    \begin{align}
+        A_i &\simeq \pi (f(x_{i-1})+f(x_i))s_i \\ 
+        &\simeq \pi (f(x_{i-1})+f(x_i))\sqrt{1+f'(x_i^*)^2} \Delta x_{i}
+    \end{align}
+    From the Intermediate Value Theorem, we have:
+    \begin{equation}
+        f(x_{i-1})+f(x_i) = 2f(x_{i}^{**})
+    \end{equation}
+    where $x_i^{**} \in [x_{i-1},x_{i}]$ so the area can be written as:
+    \begin{equation}
+        A_i \simeq 2\pi f(x_{i}^{**})\sqrt{1+f'(x_{i}^*)^2}\Delta x_i
+    \end{equation}
+    However, we cannot turn this into an integral just yet since we have both $ x_i^*$ and $ x_i^{**}$. But in the limit where $\Delta x_i \to 0$, we also have $x_{i}^{**} \to x_{i}^*$. We therefore get:
+    \begin{equation}
+        A = \int_a^b 2\pi f(x)\sqrt{1+f'(x)^2} \dd{x}
+    \end{equation}
+    \begin{example}
+        Suppose we have the function $y=\sqrt{x}$ rotated across the $x$ axis and we want the surface area between $x\in [0,1]$. We have $y' = \frac{1}{2}x^{-1/2}$ and the area becomes:
+        \begin{align}
+            A = \int_0^1 2\pi \sqrt{x} \sqrt{1+\frac{1}{4x}}\dd{x} \\ 
+            &= \pi \int_0^1 \sqrt{4x+1} \dd{x}
+        \end{align}
+        Let $u=4x+1$ and $\dd{u}=4\dd{x}$, and we'll get:
+        \begin{align}
+            A &= \int_1^5 \pi \sqrt{u} \frac{\dd{u}}{4} \\
+            &= \frac{\pi}{4}\left(\frac{2}{3}u^{3/2}\right)\Biggr|5_1 \\ 
+            &= \frac{\pi}{6}(5^{3/2}-1)
+        \end{align}
+    \end{example}
+\end{itemize}
