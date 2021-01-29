@@ -30,5 +30,107 @@
             &= \frac{2}{3}\rho g = 6533 \si{\newton}
         \end{align}
     \end{example}
-
+    \item We investigate the \textbf{center of mass} of a two dimensional object, which intuitively is the point at which it'll balance, also known as the \textbf{centroid}. We can use two principles to help us out:
+    \item \textbf{Principle 1: Symmetry:} If there is an axis of symmetry, then $(\bar{x},\bar{y})$ is on any axis of symmetry. If there are more than one axes of symmetry, then we simply need to find the intersection.
+    \item \textbf{Principle 2: Additivity:} We can find the centroid of a collection of segments by taking the weighted average of each of the segments it is composed of. For a discrete set, the total area is:
+    \begin{equation}
+        A = A_1 + A_2 + \cdots + A_n
+    \end{equation}
+    and the $x$ location of the centroid is:
+    \begin{equation}
+        \bar{x} = \bar{x_1} \frac{A_1}{A} + \bar{x_2}\frac{A_2}{A} + \cdots + \bar{x}_n \frac{A_n}{A}
+    \end{equation}
+    and similarly for the $y$ location:
+    \begin{equation}
+        \bar{y} = \bar{y_1} \frac{A_1}{A} + \bar{y_2}\frac{A_2}{A} + \cdots + \bar{y}_n \frac{A_n}{A}
+    \end{equation}
+    \item Suppose we wish to find the centroid of a curve $f(x)$ from $x=a$ to $x=b$. We can approximate this region via a series of recxtangles such that:
+    \begin{align}
+        A_i &= f(x_i^*)\Delta x_i \\ 
+        \bar{x}_i &= \frac{x_{i-1}+x_i}{2} = x_i^* \\ 
+        \bar{y}_i &= \frac{1}{2}f(x_i^*)
+    \end{align}
+    such that:
+    \begin{equation}
+        \bar{x}A = \sum_{i=1}^n \bar{x}_i A_i = \sum_{i=1}^n x_i^* f(x_i^*)\Delta x_i
+    \end{equation}
+    \begin{equation}
+        \bar{y}A = \frac{1}{2}\sum_{i=1}^n x_i^* f(x_i^*)\Delta x_i
+    \end{equation}
+    If we take the limit, we get:
+    \begin{align}
+        \bar{x} &= \frac{\int_a^b xf(x) \dd{x}}{\int_a^b f(x) \dd{x}} \\ 
+        \bar{y} &= \frac{\int_a^b f(x)^2 \dd{x}}{2\int_a^b f(x) \dd{x}}
+    \end{align}
+    \begin{example}
+        Suppose we wish to find the area of $y=3x$ between $x=0$ and $x=2$:
+        \begin{center}
+            \begin{tikzpicture}
+            \begin{axis}[
+            legend pos=outer north east,
+            title=Example,
+            axis lines = box,
+            xlabel = $x$,
+            ylabel = $y$,
+            variable = t,
+            trig format plots = rad,
+            ]
+            \addplot [
+                domain=0:2,
+                samples=70,
+                color=blue,
+                ]
+                {3*x};
+            \addlegendentry{$ y=3x$}
+            \end{axis}
+            \end{tikzpicture}
+        \end{center}
+        The area is $A = \int_0^2 3x \dd{x} = 6$. And we have:
+        \begin{align}
+            \bar{x}A = \int_0^2 x(3x) \dd{x} = 8 \implies \bar{x} = \frac{4}{3} \\ 
+            \bar{y}A = \int_0^2 \frac{1}{2}(3x)^2 \dd{x} = 12 \implies \bar{y} = 2
+        \end{align}
+        which is as we expected from the centroid of a triangle.
+    \end{example}
+    \item If we want the centroid of the region of intersection between two curves $f$ and $g$, we can use the additivity rule, we can have:
+    \begin{align}
+        \bar{x}A &= \bar{x}_g A_g - \bar{x}_fA_f \\ 
+        \bar{y}A &= \bar{y}_g A_g - \bar{y}_fA_f \\
+        A &= A_g - A_f
+    \end{align}
+    or in integral form:
+    \begin{align}
+        \bar{x}A &= \int_a^b x\left[f(x)-g(x)\right] \dd{x} \\ 
+        \bar{y}A &= \frac{1}{2}\int_a^b \left[f(x)^2-g(x)^2\right] \dd{x}
+    \end{align}
+    \begin{example}
+        Suppose we have two curves $y=6$ and $y=3$ and we wish to find the centroid of the area between the curves between $2<x<5$. This gives us:
+        \begin{align}
+            \bar{x}A &= \int_2^5 x(6-3) \dd{x} = \frac{63}{2} \\
+            \bar{y}A &= \frac{1}{2} \int_2^5 \frac{1}{2}(36-9)\dd{x} = \frac{9}{2}
+        \end{align}
+        which gives us: $\bar{x} = \frac{7}{2}$ and $\bar{y} = \frac{9}{2}$.
+    \end{example}
+    \item \textbf{Pappu's Centroid Theorem} can be used to easily find the volume of revolution. We have:
+    \begin{equation}
+        V = 2\pi \bar{R} a
+    \end{equation} 
+    where $\bar{R}$ is the distance from the centroid to the axis of revolution.
+    \begin{example}
+        Suppose we have an elliptical torus whose center is The area of the ellipse whose major axis is parallel to the axis of revolution and whose centroid is a distance $R$ away from the axis. The volume is thus:
+        \begin{equation}
+            V = 2\pi R \pi ab = 2\pi^2 abR
+        \end{equation}
+    \end{example}
+    \item We can prove this using the washer method about $x$:
+    \begin{align}
+        V_x &= \int_a^b \pi (f(x)^2-g(x)^2)\dd{x} \\ 
+        &= 2\pi \int_a^b \frac{1}{2}(f(x)^2-g(x)^2)\dd{x} \\ 
+        &= 2\pi \bar{y}A
+    \end{align}
+    and using the shell method about $x$:
+    \begin{align}
+        V_y &= \int_a^b 2\pi x(f(x)-g(x))\dd{x} \\ 
+        &= 2\pi \bar{x} A
+    \end{align}
 \end{itemize}

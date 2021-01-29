@@ -1,0 +1,50 @@
+\section{Parametric Equations}
+\begin{itemize}
+    \item Until now, we have described two dimensional curves in the form $y=f(x)$. However, we can describe this in parametric equations as well in the form:
+    \begin{align}
+        x &= x(t) \\ 
+        y &= y(t)
+    \end{align}
+    \item For example, numerous applications in physics and engineering arise using parametized coordinates such as projectile motion. The equations of motion are:
+    \begin{align}
+        x(t) &= x_0 + v_0 \cos\theta t \\ 
+        y(t) &= y_0 + v_0 \sin\theta t - \frac{1}{2}g t^2
+    \end{align}
+    \item We can parametize a straight line using:
+    \begin{align}
+        x(t) &= x_c + t(x_1 - x_0) \\ 
+        y(t) &= y_0 + t(y_1- y_0)
+    \end{align}
+    with $t \in (-\infty ,\infty)$. We can check this by letting $t=0$, which gives $(x_0,y_0)$ and when $t=1$ we get $(x_1, y_1)$.
+    \item For an ellipse, we can parametize using:
+    \begin{align}
+        x &= a\cos t \\ 
+        y &= b\sin t
+    \end{align}
+    \item Suppose we have two curves parametized by:
+    \begin{align}
+        C_1 &= x_1(t),\, y_1(t) \\ 
+        C_2 &= x_2(t),\, y_2(t) 
+    \end{align}
+    An intersection occurs when $y_1(x)=y_2(x)$ and a collision occurs when $x_1(t) = x_2(t)$ and $y_1(t) = y_2(t)$.
+    \begin{example}
+        Suppose we have the following curves:
+        \begin{align}
+            C_1 &: x_1(t) = 2t+6,\, y_1(t) = 5 - 4t \\ 
+            C_2 &: x_2(t) = 3-5\cos\pi t,\, y_2 = 1+5\sin \pi t
+        \end{align}
+        for $t>0$. The first curve is a straight line and the second curve is an offset circle. We can find the intersection via:
+        \begin{align}
+            C_1 &: t = \frac{x-6}{2} \implies y_1(x) = 16-2x \\ 
+            C_2 &=: (x-3)^2 + (y-1)^2 = 25
+        \end{align}
+        There will be two points of intersection, and after we solve this, we get $(6,5)$ and $(8,1)$. We now need to look at if the two objects will arise at that point at the same time. We do this by looking at each point first
+        \begin{align}
+            (6,5) &: C_1 \implies t = 0 \\ 
+            & C_2|_{t=0} = (-2,1) \\ 
+            (8,1) &: C_1 \implies t = 1 \\
+            & C_2|_{t=1} = (8,1)
+        \end{align}
+        Therefore, there is a collision between the two objects at $(8,1)$ at a time $t=1$.
+    \end{example}
+\end{itemize}
