@@ -8,7 +8,7 @@
 /mse160/psets
 tasks.json
 launch.json
-
+settings.json
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
