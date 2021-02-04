@@ -1,0 +1,28 @@
+\section{Crystallographic Planes and Directions}
+\begin{itemize}
+    \item We develop a set of notation to describe directions. It comes with a set of rules:
+    \begin{itemize}
+        \item Translate vector, if it simplifies things.
+        \item Determine projection onto $x$, $y$, $z$.
+        \item Reduce to lowest integers.
+        \item Enclose in square brackets (negative signs are moved above, no commas)
+    \end{itemize}
+    \begin{example}
+        We can find the crystallographic directions of both the blue and the red vectors in the figure below.
+        \begin{center}
+            \incfig{crystallographic_intro}
+        \end{center}
+        For the blue vector, we first let the tail by the origin. The vector travels $1$ in the negative $x$ direction, $0$ in the $y$ direction, and $-1$ in the negative $z$ direction, which gives $[\bar{1}\,0\,\bar{1}]$.
+        \vspace{2mm}
+
+        For the red vector, it travels in the negative $y$ direction for $0.5$ and in the negative $z$ direction for $1$ so we get, after getting rid of fractions: $[0\,\bar{1}\,\bar{2}]$.
+    \end{example}
+    \item To denote a family of directions, we can use braket notation. All face diagonals can be written as:
+    \begin{equation}
+        <0\,1\,1>
+    \end{equation}
+    which includes:
+    \begin{equation}
+        [0\,1\,1],\, [0\,\bar{1}\,1],\, [0\,1\,\bar{1}],\, [1\,0\,1], \ddots
+    \end{equation}
+\end{itemize}

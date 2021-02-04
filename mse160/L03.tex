@@ -45,4 +45,40 @@
     \end{equation}
     where $a$ is the length of the unit cube known as the \textbf{lattice parameter}, $A$ is the molar mass, and $N_A$ is Avocado's number.
     \item Based off of the hard sphere model, we treat atoms in ordered solids as hard spheres that make contact with their nearest neighbours. However, this is very hard to draw so we will go by the \textit{reduced sphere} model by drawing atoms smaller.
+    \begin{example}
+        Suppose we wish to find the theoretical density of Aluminum, which is a FCC structure. We are given:
+        \begin{align*}
+            A &= \SI{26.892}{\gram\per\mole} \\ 
+            R &= \SI{143}{\pico\meter}
+        \end{align*}
+        The lattice parameter is given by:
+        \begin{equation}
+            a = 2\sqrt{2}R
+        \end{equation}
+        which gives us:
+        \begin{equation}
+            \rho = \frac{nA}{(2\sqrt{2}R)^3 N_A} = \SI{2.71}{\gram\per\centi\meter\cubed}
+        \end{equation}
+    \end{example}
+    \item The \textbf{atomic packing factor} is given by:
+    \begin{equation}
+        \text{APF} = \frac{V_\text{spheres}}{V_\text{unit cell}}
+    \end{equation}
+    Since the unit cell is a cube with volume $a^3$, we have:
+    \begin{equation}
+        \text{APF} = \frac{4\pi R^3 n}{3a^3}
+    \end{equation}
+    and for FCC:
+    \begin{equation}
+        \text{APF} = \frac{16\pi R^3}{3a^3}
+    \end{equation}
+    We can also relate the $R$ and $a$ together via:
+    \begin{equation}
+        a = 2\sqrt{2}R
+    \end{equation}
+    for FCC packing, which yields:
+    \begin{equation}
+        \text{APF}_\text{FCC} = \frac{\pi}{3\sqrt{2}} \approx 0.74
+    \end{equation}
+    which is the highest possible value. The maximum fraction that a volume can be filled up is $74\%$.
 \end{itemize}

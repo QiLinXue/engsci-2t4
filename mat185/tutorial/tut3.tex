@@ -1,0 +1,73 @@
+\documentclass{article}
+
+\usepackage{qilin}
+\usepackage{multicol}
+\newcommand{\divides}{\mid}
+
+\title{MAT185 Tutorial 3}
+\author{QiLin Xue}
+\usepackage{bm}
+\date{\today}
+\DeclareMathOperator{\spn}{span}
+
+\begin{document}
+
+\maketitle
+\textit{Note:} The treatment of these tutorial questions are not always very rigorous. The general ideas however for a completely rigorous proof are provided and should not be difficult to complete.
+\section{Tutorial Problems}
+\subsection*{Problem One}
+\textbf{(a)} We want to be able to have $a$, $b$, $c$, and $d$ such that:
+\begin{equation}
+    5x^4+5x^3+5x^2+13x+4 = ax^2+ax+a+bx^3+bx^2+2bx + cx^3+cx^2+c+dx^4+8dx
+\end{equation}
+or more suggestively:
+\begin{align}
+    5x^4 &= dx^4 \\ 
+    5x^3 &= (b+c)x^3 \\ 
+    5x^2 &= (a+b+c)x^2 \\ 
+    13x  &= (a+2b+8d)x \\ 
+    4 &= a+c
+\end{align}
+Solving, we get $d=5$, $a=0$, $c=4$, $b=1$ using every equation except the fourth one. However, we quickly realize that $13 \neq 0 + 2(1) + 8(5)$ and as a result, it is not in the span.
+\vspace{2mm}
+
+\textbf{(b)} No, because quartic equations have five degrees of freedom but the subset $S$ only has four degrees of freedom.
+\subsection*{Problem Two}
+\textbf{(i)} False. Let $\bm{x}_1=\bm{\hat{i}}$ and $\bm{y}_1=\bm{\hat{j}}$ in $\mathbb{R}^2$. Adding the two spans of these two vectors spans the entire vector space. However, the span of $\bm{x}_1+\bm{x}_2$ only gives a straight line 
+\vspace{2mm}
+
+\textbf{(ii)} True. The span of $U \cup W$ consists of linear combinations of vectors that are in $U \cup W$ which we have proved last time is a subspace and we have also proved that $U \cup W = U +W$.
+\subsection*{Problem Three}
+Notice that since $S$ is a subset, then we may have $\spn S \notin S$ since $S$ is not necessarily a subspace. However, $\spn S \in V$ is a subspace. Suppose there is another subspace $W \in V$ such that $S \in W$. Then by definition of the subspace, linaer combinations of vectors in $S$, we must have $\spn S \in W$. Let us then define another subspace $X = \spn S$.
+\vspace{2mm}
+
+To summarize, we have shown that all subspaces of $V$ contain $\spn S$ and there is one subspace of $V$ that is $\spn S$. Therefore, the intersection of all subspaces must be $\spn S$.
+\section{Tutorial Worksheet}
+\subsection*{Task 2.1}
+Yes it is possible:
+\begin{equation}
+    \frac{1}{14} \bm{v}_1 + \frac{1}{14} \bm{v}_2 = \mathbb{1}
+\end{equation}
+where $\bm{v}_1, \bm{v}_2 \in S$.
+\subsection*{Task 2.2}
+Yes it is possible:
+\begin{equation}
+    -\frac{1}{12} \bm{v}_1 + \frac{1}{30} \bm{v}_2 = \begin{bmatrix}
+        0 & -1 \\ 1 & 0 
+    \end{bmatrix}
+\end{equation}
+\subsection*{Task 2.3}
+Yes, as per below reasoning.
+\subsection*{Task 2.4}
+Let $$\begin{bmatrix}
+    1&0\\ 0 & 1
+\end{bmatrix} = \bm{x}_1$$ and $$\begin{bmatrix}
+    0 & -1 \\ 
+    1 & 0
+\end{bmatrix} = \bm{x}_2.$$ Then:
+\begin{align}
+    a\bm{x}_1 + b\bm{x}_2 &= a\left(a_1\bm{v}_1+a_2\bm{v}_2\right) + b\left(b_1\bm{v}_1+b_2\bm{v}_2\right) \\ 
+    &= (aa_1+bb_1)\bm{v}_1 + (aa_2+bb_2)\bm{v}_2
+\end{align}
+where $a_1, a_2, b_1, b_2$ are coefficients determined above. These are orthogonal to each other, so they span $\mathbb{M}_2$.
+\end{document}
