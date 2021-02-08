@@ -1,0 +1,160 @@
+\documentclass{article}
+\usepackage{qilin}
+\hfuzz=1000pt 
+\newcommand{\bff}[1]{\mathbf{#1}}
+
+\title{MAT185 Test 1 Review}
+\author{QiLin Xue}
+\lhead{MAT185}
+\rhead{QiLin Xue}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+    Note: Axiom propositions and names will be taken from two sources: Prof. Sean Uppal's notes and Prof. GDE's textbook: Medici. Work
+    \section{Axioms}
+    \begin{minipage}[t]{.45\textwidth} %
+        \begin{center}
+            \textbf{Medici}
+        \end{center}
+            A vector space $\mathcal{V}$ over a field $\Gamma$ of elements $\{\alpha, \beta, \gamma, \dots\}$, called scalars, is a set of elements $\{\bm{u},\bm{v},\frac{}{}bm{w},\dots\}$ called vectors, such that the following axioms are satisfied:
+            \vspace{2mm}
+            \begin{enumerate}
+                \item There exists an operation of vector addition, denoted $\bm{u}+\bm{v}$, such that for all $\bm{u},\bm{v},\bm{w} \in \mathcal{V}$,
+                \vspace{2mm}
+                \begin{enumerate}[label=\textbf{A\Roman*.}]
+                    \item Closure: $\bm{u}+\bm{v} \in \mathcal{V}$.
+                    \item Associativity: $(\bm{u} + \bm{v}) + \bm{w} = \bm{u} + (\bm{v}+\bm{w})$.
+                    \item Zero: There exists a zero or null vector $\bm{0} \in \mathcal{V}$ such that $\bm{u}+\bm{0}=\bm{u}$.
+                    \item Negative: There exists an negative $\bm{-u} \in \mathcal{V}$ such that $\bm{u}+(\bm{-u}) = \bm{0}$.
+                \end{enumerate}
+                \item There exists an operation of scalar multiplication, denoted $\alpha\bm{u}$, such that for all $\bm{u},\bm{v} \in \mathcal{V}$ and all $\alpha, \beta \in \Gamma$,
+                \vspace{2mm}
+                \begin{enumerate}[label=\textbf{M\Roman*.}]
+                    \item Closure: $\alpha\bm{u} \in \mathcal{V}$.
+                    \item Associativity: $\alpha(\beta \bm{u}) = (\alpha \beta)\bm{u}$.
+                    \item Distributivity:
+                    \begin{enumerate}[label=(\alph*)]
+                        \item $(\alpha+\beta)\bm{u} = \alpha\bm{u} + \beta\bm{u}$
+                        \item $\alpha(\bm{u}+\bm{v}) = \alpha\bm{u}+\alpha\bm{v}$
+                    \end{enumerate}
+                    \item Unitary: For the identity element $1 \in \Gamma$, $1\bm{u}=\bm{u}$.
+                \end{enumerate}
+            \end{enumerate}
+    \end{minipage} %
+    \hfill
+    \begin{minipage}[t]{.45\textwidth} %
+        \begin{center}
+            \textbf{Uppal}
+        \end{center}
+        A real vector space is a set $V$ together with two operations called vector addition and scalar multiplication such that the following axioms hold. For all vectors $\bff{x}, \bff{y}, \bff{Z} \in V$ and scalars $c,d \in \mathbb{R}$:
+        \vspace{2mm}
+
+        \begin{enumerate}
+            \setlength\itemsep{1.5mm}
+            \item (AC) Additive Closure: $\bff{x}+\bff{y} \in V$
+            \item (SC) Scalar Closure: $c\bff{x} \in V$.
+            \item (AA) Additive Associativity: $(\bff{x}+\bff{y})+\bff{z}=\bff{x}+(\bff{y}+\bff{z})$.
+            \item (Z) Zero vector: There exists a unique vector $\bff{0} \in V$ with the property that $\bff{x}+\bff{0} = \bff{x}$.
+            \item (AI) Additive Inverse: There exists a unique vector $\bff{-x} \in V$ with the property that $\bff{x} + (\bff{-x})=\bff{0}$.
+            \item (SMA) Scalar Multipication Associativity: $(cd)\bff{x} = c(d\bff{x})$.
+            \item (DVA) Distributivity of Vector Addition: $c(\bff{x}+\bff{y})=c\bff{x}+c\bff{y}$.
+            \item (DSA) Distributivity of Scalar Addition: $(c+d)\bff{x}=c\bff{x}+d\bff{x}$.
+            \item (I) Identity: $1\bff{x} = \bff{x}$.
+        \end{enumerate}
+    \end{minipage}
+    \subsection{Corrolaries}
+    \begin{theorem}
+        \textbf{The Cancellation Theorem:} Let $\mathcal{V}$ be a vector space, and let $\bm{u}, \bm{v}, \bm{w} \in \mathcal{V}$. If:
+        \begin{equation}
+            \bm{u}+ \bm{w} = \bm{v}+ \bm{w}
+        \end{equation}
+        then:
+        \begin{equation}
+            \bm{u} = \bm{v}
+        \end{equation}
+    \end{theorem}
+    \begin{minipage}[t]{.45\textwidth} %
+        \begin{center}
+            \textbf{Medici}
+        \end{center}
+        \begin{enumerate}[label = \textbf{Prop \Roman*.}, leftmargin=16mm]
+            \item For every $\bm{u}, -\bm{u} \in \mathcal{V}$, $-\bm{u}+\bm{u}=\bm{0}$.
+            \item For every $\bm{u} \in \mathcal{V}$, $\bm{0}+\bm{u} = \bm{u}$.
+            \item Let $\bm{u} \in V$. Then:
+            \begin{enumerate}
+                \item The zero vector $\bm{0}\in \mathcal{V}$ is unique.
+                \item The negative $-\bm{u}$ of $\bm{u}$ is unique.
+                \item $-(\bm{-u})=\bm{u}$.
+            \end{enumerate}
+            \item For $\bm{u}, \bm{v} \in \mathcal{V}$, $\bm{u}+\bm{v}=\bm{v}+\bm{u}$.
+            \item For all $\bm{u}\in \mathcal{V}$ and $\alpha \in \Gamma$:
+            \begin{enumerate}
+                \item $0\bm{v} = \bm{0}$
+                \item $\alpha\bm{0}=\bm{0}$
+                \item If $\alpha\bm{v}=\bm{0}$, then either $\alpha=0$ or $\bm{v}=\bm{0}$.
+            \end{enumerate}
+            \item For all $\bm{u} \in \mathcal{V}$ and $\alpha \in \Gamma$, $(-\alpha)\bm{v} = -(\alpha \bm{v}) = \alpha(-\bm{v})$.
+        \end{enumerate}
+    \end{minipage} %
+    \hfill
+    \begin{minipage}[t]{.45\textwidth}
+        \begin{center}
+            \textbf{Uppal}
+        \end{center}
+        \begin{enumerate}[label = \textbf{Prop \Roman*.}, leftmargin=16mm]
+            \item For every $\bff{x} \in V$, then $0\bff{x}=\bff{0}$.
+            \item For every $\bff{x} \in V$, then $(-1)\bff{x} = \bff{-x}$.
+            \item For every $\bff{x} \in V$, then $\bff{-x}+\bff{x}=\bff{0}$.
+            \item For every $\bff{x} \in V$, then $\bff{0}+\bff{x}=\bff{x}$.
+        \end{enumerate}
+        \vspace{2mm}
+        This introduces an additional axiom:
+        \vspace{2mm}
+
+        \begin{enumerate}[label=10.]
+            \item (C) Commutativity: For all vectors $\bff{x}, \bff{y} \in V$, $\bff{x}+\bff{y}=\bff{y}+\bff{x}$.
+        \end{enumerate}
+        \vfill
+    \end{minipage}
+    \subsection{Important Facts}
+    You should know and be able to prove the following facts:
+    \begin{itemize}
+        \item Every vector space is either infinite or contains only the zero vector. 
+    \end{itemize}
+    \section{Subspaces}
+    \begin{minipage}[t]{.45\textwidth} %
+        \begin{center}
+            \textbf{Medici}
+        \end{center}
+        A subspace $\mathcal{U}$ of a vector space $\mathcal{V}$ is a subspace of $\mathcal{V}$ if and only if $\mathcal{U}$ is itself a vector space over the same fiedl $\Gamma$ with the same vector addition and scalar multiplication of $\mathcal{V}$.
+        \vspace{2mm}
+
+        To show a subset is a subspace:
+        \vspace{2mm}
+        \begin{enumerate}[label=\textbf{S\Roman*.}]
+            \item Zero: There exists a zero vector $\bm{0} \in \mathcal{U}$.
+            \item Closure under Vector Addition: $\bm{u}+\bm{v} \in \mathcal{U}$.
+            \item Closure under Scalar Multiplication: $\alpha\bm{u}\in\mathcal{U}$.
+        \end{enumerate}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{.45\textwidth} %
+        \begin{center}
+            \textbf{Uppal}
+        \end{center}
+        A subspace of a vector $V$ is a subset $W \subseteq V$ that is itself a vector space with the same operations of vector addition and scalar multiplication as in $V$.
+        \vspace{2mm}
+
+        To show a subset is a subspace:
+        \vspace{2mm}
+        \begin{enumerate}
+            \item (AC \& SC): Sums and scalar multiples of vectors from $W$ are in $W$
+            \item (Z) $W$ contains the zero vector of $V$.
+            \item (AI) The additive inverse of each vector in $W$ is in $W$.
+        \end{enumerate}
+        \vspace{2mm}
+
+        \textbf{Alternative Formulation:} A non-empty subset $W$ of a vector space $V$ is a subspace of $V$ if and only if $c\bff{x}+\bff{y} \in W$ whenever $\bff{x},\bff{y} \in W$, and $c \in \mathbb{R}$.
+    \end{minipage}
+\end{document}

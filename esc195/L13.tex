@@ -1,0 +1,113 @@
+\section{Infinite Sequences and Series}
+% \subsection{Sequences}
+\begin{itemize}
+    \item We use curly brackets to indicate a sequence, such as:
+    \begin{equation}
+        f(n) = \frac{1}{n} = \left\{1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \dots\right\}
+    \end{equation}
+    Alternatively, we can use $a_n$ to represent a sequence.
+    \begin{definition}
+        A sequence $\{a_n\}$ is:
+        \begin{itemize}
+            \item increasing iff $a_n < a_{n+1}$
+            \item non-decreasing iff $a_k \le a_{n+1}$
+            \item decreasing iff $a_n > a_{n+1}$
+            \item non-increasing iff $a_n \ge a_{n+1}$
+        \end{itemize}
+        A function that satisfies any of these are known as \textbf{monotonic} functions.
+    \end{definition}
+    \item Bounded functions have an upper or lower bound, while unbounded functions diverge to infinity or negative infinity.
+    \begin{example}
+        Suppose we wish to prove that $2^k$ is unbounded. We wish to find $k$ such that $a_k > M$ or $2^k > M$. Taking the natural logarithm of both sides, we have:
+        \begin{equation}
+            k > \frac{\ln M}{\ln 2}
+        \end{equation}
+        which is possible to do and we are done.
+    \end{example}
+    \begin{example}
+        Suppose we wish to find if $a_n = \frac{n^2}{e^n}$ is bounded or unbounded. This can be approached by working with derivatives through the function $f(x) = \frac{x^2}{e^x}$, represented in the following plot:
+        \begin{center}
+            \begin{tikzpicture}
+            \begin{axis}[
+            legend pos=outer north east,
+            title=Example,
+            axis lines = box,
+            xlabel = $x$,
+            ylabel = $y$,
+            variable = t,
+            trig format plots = rad,
+            ]
+            \addplot [
+                domain=0:5,
+                samples=70,
+                color=blue,
+                ]
+                {x^2/e^x};
+            \end{axis}
+            \end{tikzpicture}
+        \end{center}
+        Taking the derivative $f'(x)=xe^{-x}(2-x)$, we see that $f$ decreases for $x>2$ so this means that $a_n$ decreases for $n>2$
+    \end{example}
+    \begin{warning}
+        Not everything in functions carries over to sequences. For example, $f(x)=\frac{1}{x-\sqrt{2}}$ is unbounded but $a_n = \frac{1}{n-\sqrt{2}}$ is bounded since $n \neq \sqrt{2}$ is impossible.
+    \end{warning}
+    \item We can only take the limit of a sequence as $n\to\infty$.
+    \begin{definition}
+        We can define $\lim_{n\to\infty} a_n = L$ iff for every $\epsilon>0$, there exists an integer $k>0$ such that if $n \ge k$, then $|a_n - L| < \epsilon$.
+    \end{definition}
+    \begin{example}
+        Let us prove $\lim_{n\to\infty} \frac{n}{n+1}=1$. We  find $k$ such that $\left|\frac{n}{n+1}-1\right|<\epsilon$ for $n\ge k$. This can be rewritten as:
+        \begin{equation}
+            \left|\frac{1}{n+1}\right| < \epsilon 
+        \end{equation}
+        or $|n+1| > \frac{1}{\epsilon}$. Thus, if we choose $k = \frac{1}{\epsilon}$ such that if we choose $n>k=\frac{1}{\epsilon}$, then:
+        \begin{equation}
+            \left|\frac{n}{n+1}-1\right| = \left|\frac{1}{n+1}\right| < \left|\frac{1}{n}\right| < \frac{1}{k} = \epsilon
+        \end{equation}
+        Therefore, $\lim_{n\to\infty} \frac{n}{n+1}=1$.
+    \end{example}
+    \begin{theorem}
+        \textbf{Uniqueness of a Limit}: If $\lim_{n\to\infty} = L$ and $\lim_{n\to\infty}a_n = M$, then $L=M$.
+    \end{theorem}
+    \begin{definition}
+        If a sequence has a limit, it is said to be convergent. Otherwise, it is divergent.
+    \end{definition}
+    \item This leads to the following:
+    \begin{enumerate}
+        \item If a sequence is convergent, it is bounded.
+        \item If a sequence is unbounded, it is divergent.
+        \item A bounded sequence is not necessarily convergent.
+    \end{enumerate}
+    \item For example, $a_n = \cos \pi n$ is bounded but not convergent.
+    \begin{theorem}
+        \textbf{Monotonic Sequence Theorem}: A bounded nondecreasing sequence converges to its least upper bound. A bounded non increasing sequence converges to its greatest lower bound.
+    \end{theorem}
+    \item The limit has a few properties. Let $\lim_{n\to\infty} a_n = L$ and $\lim_{n\to\infty}b_n = M$. Then:
+    \begin{enumerate}
+        \item $\lim_{n\to\infty}(a_n+b_n) = L+M$
+        \item $\lim_{n\to\infty} \alpha a_n = \alpha L$ for $\alpha \in \mathbb{R}$.
+        \item $\lim_{n\to\infty} a_nb_n = L \cdot M$
+        \item $\lim_{n\to\infty} \frac{1}{b_n} = \frac{1}{M}$ for $b_n \neq 0, M \neq 0$.
+        \item $\lim_{n\to\infty} \frac{a_n}{b_n} = \frac{L}{M}$ for $b_n \neq 0, M\neq 0$.
+    \end{enumerate}
+    \begin{theorem}
+        \textbf{Pinching Theorem for Sequences}: If for large $n$, $a_n \le b_n \le c_n$ and if $\lim_{n\to\infty}a_n = L$ and $\lim_{n\to\infty} = L$, then $\lim_{n\to\infty}b_n = L$.
+    \end{theorem}
+    \begin{example}
+        Suppose we wish to find the limit $\lim_{n\to\infty} \frac{\sin (n\pi/6)}{n}$. We can let:
+        \begin{equation}
+            -\frac{1}{n} \le \frac{\sin(n\pi/6)}{n} \le \frac{1}{n}
+        \end{equation}
+        Since $\lim_{n\to\infty} -\frac{1}{n} = \lim_{n\to\infty}\frac{1}{n} = 0$, then the original limit must also be zero.
+    \end{example}
+    \begin{theorem}
+        Supose we have a sequence: $c_n = g(f_n)$. Given $\lim_{n\to\infty}c_n = C$. If $f$ is continuous at $c$, in the traditional way, then: $\lim_{n\to\infty} f(c_n) = f(c)$.
+    \end{theorem}
+    \begin{example}
+        Let us look at the function $\sin\left(\frac{1}{n^2+1}\right)$. We know that $\lim_{n\to\infty} \frac{1}{n^2+1}=0$, so:
+        \begin{equation}
+            \lim_{n\to\infty} \sin\left(\frac{1}{n^2+1}\right) = \sin(0) = 0
+        \end{equation}
+        where we have applied the previous theorem.
+    \end{example}
+\end{itemize}
