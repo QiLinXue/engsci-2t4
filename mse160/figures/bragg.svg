@@ -191,9 +191,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.1819805"
-     inkscape:cx="435.87961"
-     inkscape:cy="181.72206"
+     inkscape:zoom="2.25"
+     inkscape:cx="481.29339"
+     inkscape:cy="220.65921"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -360,14 +360,14 @@
     <text
        xml:space="preserve"
        style="font-size:3.88056px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="179.33937"
-       y="-20.268906"
+       x="179.62946"
+       y="-17.584469"
        id="text5898"
-       transform="rotate(34.705667)"><tspan
+       transform="rotate(33.885168)"><tspan
          sodipodi:role="line"
          id="tspan5896"
-         x="179.33937"
-         y="-20.268906"
+         x="179.62946"
+         y="-17.584469"
          style="stroke-width:0.264583">detector</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.265, 0.265;stroke-dashoffset:0;stroke-opacity:1"

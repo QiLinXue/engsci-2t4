@@ -57,7 +57,7 @@
     \put(0.73886147,0.05269917){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}atomic planes\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{bragg.pdf}}%
     \put(0.24493358,0.29327391){\rotatebox{32.90127}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}source\end{tabular}}}}}%
-    \put(0.61176768,0.32665389){\rotatebox{-34.705667}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}detector\end{tabular}}}}}%
+    \put(0.61154277,0.32616759){\rotatebox{-33.885168}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}detector\end{tabular}}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{bragg.pdf}}%
     \put(0.34751707,0.1144897){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\theta$\end{tabular}}}}%
     \put(0.42791718,0.0723934){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\theta$\end{tabular}}}}%
