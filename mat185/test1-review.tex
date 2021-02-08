@@ -2,6 +2,10 @@
 \usepackage{qilin}
 \hfuzz=1000pt 
 \newcommand{\bff}[1]{\mathbf{#1}}
+\newcommand{\image}[1]{\mathrm{im}\,#1}
+\newcommand{\spann}[1]{\mathrm{span}\{#1\}}
+\newcommand{\spannn}[1]{\mathrm{span}\,#1}
+% \newcommand{\dim}[1]{\mathrm{dim}\,#1}
 
 \title{MAT185 Test 1 Review}
 \author{QiLin Xue}
@@ -11,7 +15,14 @@
 \begin{document}
     \maketitle
     \tableofcontents
-    Note: Axiom propositions and names will be taken from two sources: Prof. Sean Uppal's notes and Prof. GDE's textbook: Medici. Work
+    Note: Axiom propositions, names, theorems, etc. will be taken from two sources: Prof. Sean Uppal's notes and Prof. GDE's textbook: Medici. Work is taken to present the material such that differences between the two approaches can be clearly seen and important theorems that are presented in both approaches are put in blue.
+    \vspace{2mm}
+
+    Medici uses a different notation than Uppal, even up to the font for the math. I've tried to replicate both styles, though for commonly shared ideas, I do not stick to a single system.
+    \vspace{2mm}
+
+    Please let me know via discord (Qcumber\#4444) if I am missing anything, there exists any typos, and especially if something is horrendously wrong! Note that this is an unofficial resource and I am not responsible if the use of this study sheet causes you to fail the midterm, break up with your partner, find your house burned down, or be captured by the North Korean government to be forced to work on their nuclear missile project which leads to the destruction of the entire world.
+
     \section{Axioms}
     \begin{minipage}[t]{.45\textwidth} %
         \begin{center}
@@ -121,6 +132,7 @@
     You should know and be able to prove the following facts:
     \begin{itemize}
         \item Every vector space is either infinite or contains only the zero vector. 
+        \item If $\mathbf{u} \in \mathcal{V}$ and $\mathbf{v} \notin \mathcal{V}$. Then $\mathbf{u}+\mathbf{v} \notin \mathcal{V}$.
     \end{itemize}
     \section{Subspaces}
     \begin{minipage}[t]{.45\textwidth} %
@@ -157,4 +169,212 @@
 
         \textbf{Alternative Formulation:} A non-empty subset $W$ of a vector space $V$ is a subspace of $V$ if and only if $c\bff{x}+\bff{y} \in W$ whenever $\bff{x},\bff{y} \in W$, and $c \in \mathbb{R}$.
     \end{minipage}
+    \subsection{Linear Combination and Span}
+    \begin{minipage}[t]{.45\textwidth} %
+        \begin{center}
+            \textbf{Medici}
+        \end{center}
+        \textbf{Definition of Linear Combination:} A vector $\bm{v} \in \mathcal{V}$ is a linear combination of $\{\bm{v}_1, \bm{v}_2, \dots, \bm{v}_n\} \subset \mathcal{V}$ if and only if it can be written as:
+        \begin{equation*}
+            \bm{v} = \sum_{j=1}^n \lambda_j \bm{v}_j = \lambda_1\bm{v}_1 + \cdots + \lambda_n \bm{v}_n
+        \end{equation*}
+        for some $\lambda_j \in \Gamma$.
+        \vspace{2mm}
+
+        \textbf{Definition of Span:} The span of $\{\bm{v}_1,\bm{v}_2, \dots, \bm{v}_n\} \subset \mathcal{V}$, denoted $\spann{\bm{v}_1,\bm{v}_2,\dots,\bm{v}_n}$ is given by:
+        \begin{equation*}
+            \spann{\bm{v}_1,\bm{v}_2,\dots,\bm{v}_n} = \left\{\bm{v} \Biggr| \bm{v} = \sum_{j=1}^n \lambda_j\bm{v}_j,\, \forall \lambda_j \in \Gamma\right\}
+        \end{equation*}
+        Here are the propositions:
+        \vspace{2mm}
+
+        \begin{enumerate}[label = \textbf{Prop \Roman*.}, leftmargin=16mm]
+            \item The span of $\{\bm{v}_1,\bm{v}_2,\dots,\bm{v}_n \subset \mathcal{V}$ is a subspace of the vector space $\mathcal{V}$. 
+            \item Let $\mathcal{U} = \spann{\bm{v}_1,\bm{v}_2,\dots,\bm{v}_n} \sqsubseteq \mathcal{V}$. If $\mathcal{W}$ is a subspace of $\mathcal{V}$ containing the vectors $\{\bm{v}_1,\bm{v}_2,\dots,\bm{v}_n\}$, then $\mathcal{U} \sqsubseteq W$.
+        \end{enumerate}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{.45\textwidth} %
+        \begin{center}
+            \textbf{Uppal}
+        \end{center}
+        \textbf{Definition of Linear Combination:} Let $S$ be a non-empty subset of a vector space $V$. A linear combination of vectors in $S$ is an expression of the form:
+        \begin{equation*}
+            c_1\bff{s}_1+c_2\bff{s}_2+\cdots+c_k\bff{s}_k
+        \end{equation*}
+        where $\bff{s}_1,\bff{s}_2,\dots,\bff{s}_k \in S$, and $c_1,c_2,\dots,c_k \in \mathbb{R}$.
+        \vspace{7.5mm}
+
+        \textbf{Definition of Span:} Let $S$ be a subset of a vector space $V$. If $S$ is non-empty, then $\spannn{S}$ is the set of all linear combinations of vectors in $S$. We define $\spannn{\emptyset}=\{\bff{0}\}$ where $\emptyset$ denotes the empty set.
+        \vspace{11mm}
+
+        We can make use of one important theorem:
+        \vspace{2mm}
+
+        \textbf{Theorem:} If $S$ is a subset of a vector space $V$, then $\spannn{S}$ is a subspace of $V$.
+        \vspace{1mm}
+
+        \textbf{Definition:} We can say $S$ \textit{spans} $V$ or $S$ is a spanning set for $V$ if $\spannn S = V$.
+    \end{minipage}
+    \subsection{Important Facts}
+    Here are a few important subspaces you should be able to verify:
+    \begin{itemize}
+        \item The image space of $\bff{A}$: $\image \bff{A} \triangleq \{\bff{y} | \bff{y} = \bff{Ax}, \bff{x}\in {}^n\mathbb{R}\}$
+        \item The null space of $\bff{A} \in {}^n\mathbb{R}^n$, otherwise known as the \textit{solution space} is given by $\bff{OA} \triangleq \{\bff{x}|\bff{Ax}=\bff{0}\} \subseteq {}^n\mathbb{R}$
+        \item If $U$ and $W$ are subspaces of a vector space $V$, then $\spann{U \cup W} = U + W$.
+        \item The intersection of any two subspaces is a subspace.
+    \end{itemize}
+    \section{Linear Dependence}
+    \begin{minipage}[t]{.45\textwidth} %
+        \begin{center}
+            \textbf{Medici}
+        \end{center}
+        \textbf{Definition of Linear Independence:} A set of vectors $\{\bm{v}_1,\bm{v}_2,\dots,\bm{v}_n\} \subset \mathcal{V}$ is linearly independent if and only if:
+        \begin{equation*}
+            \sum_{j=1}^n \lambda_j \bm{v}_j = \lambda_1\bm{v}_1 +\cdots + \lambda_n\bm{v}_n = \bm{0}
+        \end{equation*}
+        implies that all $\lambda_j=0$.
+        \vspace{2mm}
+        
+        \textbf{Prop 1:} If $\{\bm{v}_1,\bm{v}_2,\dots,\bm{v}_n\} \subset \mathcal{V}$ is linearly independent and $\bm{v} = \sum_{j=1}^n \lambda_j \bm{v}_j$ for all $\bm{v} \in \mathcal{V}$, then $\lambda_j$ are uniquely determined.
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $\{\bm{v}_1,\bm{v}_2,\dots,\bm{v}_n\} \subset \mathcal{V}$, where $\mathcal{V}$ is a vector space. For every $\bm{v}_k$ with $k=1,2,\dots,n$, $\spann{\bm{v}_1,\dots,\bm{v}_{k-1},\bm{v}_{k+1},\dots,\bm{v}_n} \subset \spann{\bm{v}_1,\dots,\bm{v}_n}$ if and only if $\{\bm{v}_1,\bm{v}_2,\dots,\bm{v}_n\}$ is linearly independent.
+        \vspace{2mm}
+
+        \textbf{Corollary:} Let $\{\bm{v}_1,\bm{v}_2,\dots,\bm{v}_n\} \subset \mathcal{V}$, where $\mathcal{V}$ is a vector space. For at least one $\bm{v}_k$ (where $1 \le k \le n$), $\spann{\bm{v}_1,\dots,\bm{v}_{k-1},\bm{v}_{k+1},\dots,\bm{v}_n} = \spann{\bm{v}_1,\dots,\bm{v}_n}$ if and only if $\{\bm{v}_1,\bm{v}_2,\dots,\bm{v}_n\}$ is linaerly dependent.
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{.45\textwidth} %
+        \begin{center}
+            \textbf{Uppal}
+        \end{center}
+        \textbf{Definition of Linear Dependence} A list of vectors $\bff{x}_1, \bff{x}_2, \dots, \bff{x}_k$ in a vector space $V$ is linearly dependent if there is a nontrivial combination of scalars $c_1,c_2,\dots, c_k$ such that $c_1\bff{x}_1+c_2\bff{x}_2+\cdots+c_k\bff{x}_k=\bff{0}$. If the only combination is $c_1=c_2=\cdots =c_k$, then the vectors are \textit{linearly independent}.
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $\bff{x}_1, \bff{x}_2,\dots,\bff{x}_k$ be a linearly independent list of vectors in vector space $V$. Then:
+        \begin{equation*}
+            a_1\bff{x}_1 + \cdots + a_k\bff{x}_k = b_1\bff{x}_1+ \cdots + b_k\bff{x}_k
+        \end{equation*}
+        iff $a_j = b_j$ for all $j=1,2,\dots,k.$
+        \vspace{2mm}
+
+        \textbf{Extend-Reduce Theorem:} Let $\bff{x}_1, \bff{x}_2, \dots, \bff{x}_k$ be a list of vectors in a non-zero vector space $V$:
+        \begin{enumerate}[label=(\alph*)]
+            \item Suppose the list is linearly independent and doesn't span $V$. If $\bff{x} \in V$ and $x \notin \spann{\bff{x}_1, \dots, \bff{x}_k}$, then the list $\bff{x}_1, \dots,\bff{x}_k,\bff{x}$ is linearly independent.
+            \item Suppose the list is linearly dependent and spans $V$. If $c_1\bff{x}_1+\cdots+c_k\bff{x}_k=\bff{0}$ is a non-trivial linear combination, then $\bff{x}_1,\bff{x}_2,\dots,\hat{\bf{x}}_j,\dots, \bff{x}_k$ spans $V$.
+        \end{enumerate}
+    \end{minipage}\newpage
+    \section{Bases and Dimensions}
+    \begin{theorem}
+        \textbf{Fundamental Theorem}: Let $\mathcal{V}$ be a vector space spanned by $n$ vectors. If a set of $m$ vectors from $\mathcal{V}$ is linearly independent, then $m \le n$.
+    \end{theorem}
+    \begin{minipage}[t]{.45\textwidth} %
+        \begin{center}
+            \textbf{Medici}
+        \end{center}
+        \textbf{Definition of Bases:} A set of vectors $\{\bm{e}_1,\bm{e}_2,\dots,\bm{e}_n\} \in \mathcal{V}$ is a basis for the vector space $\mathcal{V}$ if and only if:
+        \begin{enumerate}
+            \item $\{\bm{e}_1,\bm{e}_2,\dots,\bm{e}_n\}$ is linearly independent.
+            \item $\{\bm{e}_1,\bm{e}_2,\dots,\bm{e}_n\}$ spans $\mathcal{V}$.
+        \end{enumerate}
+        \vspace{2mm}
+
+        \textbf{Theorem:} Every basis for a given vector space contains the same number of vectors.
+        \vspace{2mm}
+
+        \textbf{Definition of Dimensions:} The dimension of a vector space $\mathcal{V}$, denoted $\dim \mathcal{V}$, is the number of vectors in any of its bases.
+        \vspace{2mm}
+
+        \textbf{Proposition:} Let $\mathcal{V}$ be a finite dimensional vector space with $\dim \mathcal{V} = n$. Then:
+        \begin{enumerate}
+            \item A linearly independent set of vectors in $\mathcal{V}$ can at most contain $n$ vectors.
+            \item A spanning set for $\mathcal{V}$ must at least contain $n$ vectors.
+        \end{enumerate}
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $\{\bm{v}_1,\bm{v}_2,\dots,\bm{v}_n\} \subset \mathcal{V}$ be linearly independent. Then for a vector $\bm{v} \in \mathcal{V}$, $\{\bm{v}_1,\bm{v}_2,\dots,\bm{v}_n\}$ is linearly independent if and only if $\bm{v} \notin \spann{\bm{v}_1,\bm{v}_2,\dots,\bm{v}_n}$.
+        \vspace{2mm}
+
+        \textbf{Theorem (Existence of Bases):} Let $\mathcal{V}$ be a vector space spanned by a finite set of vectors. Then every linaerly independent set of vectors in $\mathcal{V}$ can be extended to a basis for $\mathcal{V}$. If $\mathcal{V} = \{\bm{0}\}$, then $\mathcal{V}$ has the ``empty'' basis.
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $\mathcal{U}$ and $\mathcal{W}$ be subspaces of a finite dimensional vector space $\mathcal{V}$. Then:
+        \begin{enumerate}
+            \item $\mathcal{U}$ is finite dimensional and $\dim \mathcal{U} \le \dim \mathcal{V}$.
+            \item If $\mathcal{U} \subseteq \mathcal{W}$, then $\dim \mathcal{U} \le \dim \mathcal{W}$.
+            \item If $\mathcal{U} \subseteq \mathcal{W}$ and $\dim \mathcal{U} = \dim\mathcal{W}$, then $\mathcal{U} = \mathcal{W}$.
+        \end{enumerate}
+        \vspace{2mm}
+
+        \textbf{Theorem:} Any spanning set for a vector space $\bm{V}$ contains a basis for $\mathcal{V}$.
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $\mathcal{V}$ be a vector space and $\dim \mathcal{V} = n$. Then:
+        \begin{enumerate}
+            \item Any set $\{\bm{v}_1,\dots,\bm{v}_n\} \subset \mathcal{V}$ that is linearly independent is a basis for $\mathcal{V}$
+            \item Any set $\{\bm{v}_1,\dots,\bm{v}_n\} \subset V$ that spans $V$ is a basis for $\mathcal{V}$.
+        \end{enumerate}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{.45\textwidth} %
+        \begin{center}
+            \textbf{Uppal}
+        \end{center}
+        \textbf{Definition of bases:} A list of vectors $\bff{x}_1,\bff{x}_2,\dots,\bff{x}_k$ in the vector space $V$ forms a basis for $V$ if $V = \spann{\bff{x}_1,\bff{x}_2,\dots,\bff{x}_k}$, and $\bff{x}_1,\bff{x}_2,\dots,\bff{x}_k$ are linearly independent.
+        \vspace{12.5mm}
+
+        \textbf{Definition of Dimensions:} Let $V$ be a vector space and let $n$ be a positive integer. If there is a list of vectors $\bff{x}_1,\bff{x}_2,\dots,\bff{x}_n$ of vectors that is a basis for $V$, then $V$ has dimension $n$ (or $V$ is \textit{n-dimensional}). The zero vector space has dimension zero.
+        \vspace{2mm}
+
+        \textbf{Corollary:} Suppose $\bff{x}_1,\bff{x}_2,\dots,\bff{x}_n$ is a basis for a vector space $V$. Then:
+        \begin{enumerate}
+            \item each vector in  vector space $V$ is a linear combination of $\bff{x}_1,\bff{x}_2,\dots,\bff{x}_n$ since $\bff{x}_1,\bff{x}_2,\dots,\bff{x}_n$ spans $V$.
+            \item this linear combination is unique since $\bff{x}_1,\dots,\bff{x}_n$ is linearly independent.
+        \end{enumerate}
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $V$ be a nonzero vector space and suppose the list $\bff{x}_1,\bff{x}_2,\dots,\bff{x}_k$ spans $V$. Let $\bff{x}$ be a nonzero vector in $V$, and suppose:
+        \begin{equation*}
+            \bff{x} = c_1\bff{x}_1+c_2\bff{x}_2+\cdots+c_k\bff{x}_k
+        \end{equation*}
+        If $c_j \neq 0$ for some $j=1,2,\dots, k$ then the list $\bff{x}_1,\bff{x}_2,\dots,\hat{\bff{x}}_j,\dots,\bff{x}_k,\bff{x}$ is also a basis for $V$.
+        \vspace{2mm}
+
+        \textbf{Extend-Reduce Theorem Redux}: Let $V$ be a finite dimensional vector space, and let $\bff{x}_1,\bff{x}_2,\dots,\bff{x}_k \in V$.
+        \begin{enumerate}[label=(\alph*)]
+            \item If $\dim V > k$, and $\bff{x}_1,\bff{x}_2, \dots , \bff{x}_k$ are linearly independent, then there is a basis for $V$ that includes the list $\bff{x}_1, \bff{x}_2, \dots, \bff{x}_k.$
+            \item If $\spann{\bff{x}_1,\bff{x}_2,\dots,\bff{x}_k} = V$, then $\dim V \le k$ and there is a sublist of $\bff{x}_1,\bff{x}_2,\dots,\bff{x}_k$ that is a basis for $V$.
+        \end{enumerate}
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $U$ be a subspace of an $n$-dimensional vector space $V$. Then $U$ is finite dimensional and $\dim U \le n$. Furthermore, $\dim U = n$ if and only if $U = V$.
+    \end{minipage}
+    \newpage
+    \section{Proofs}
+    \subsection{Notation}
+    \begin{itemize}
+        \item $A \iff B$: A is true if and only if B is true.
+        \item $A \implies B$: If A is true, then B is true.
+        \item $A \impliedby B$: If B is true, then A is true.
+        \item $A = B$: A and B are equivalent.
+        \item $A \subseteq B$: A is a subset of B that may or may not include B.
+        \item $A \supseteq B$: A is a superset of B (or B is a subset of A).
+        \item $A \subset B$: A is a subset of B that does not include B (proper subset).
+        \item $A \sqsubseteq B$: A is a subspace of B.
+        \item $\neg A$: not A (opposite of A).
+        \item $U \cap W$: The intersection of two sets $U$ and $W$: $U \cap W = \{\bff{x} | \bff{x} \in U \text{ and } \bff{x} \in W\}$.
+        \item $U + W$: The sum of two sets $U$ and $W$: $U + W = \{\bff{u}+\bff{w} | \bff{u} \in U \text{ and } \bff{w} \in W\}$.
+
+    \end{itemize}
+    \subsection{Proof Techniques}
+    \begin{itemize}
+        \item Proof by Contradiction: To prove $A$ is true, assume for the sake of contradiction that $A$ is false. Continue with this line of reasoning until you reach a contradiction. Since $A$ is not false, it must be true.
+        \item Proof by Contraposition: Instead of proving $A \implies B$, sometimes it is easier to prove $\neg B \implies \neg A$.
+        \item Proof by Induction: To show that a statement is true for all integers $n$, you will need to show that if the statement is true for $n=k$, then it is also true for $n=k+1$. Finally, by showing that this statement is true for a base case (e.g. $n=1$), it automatically shows that the statement is true for all $n \ge 1$.
+        \item Casework: For complicated problems, it may be easier to break it down into easier cases to work with.
+        \item Negation: To show that a statement is not true, you only need to find one counterexample.
+        \item If and only if statements. Your proof will generally consist of two parts. If you wish to prove $A \iff B$, you need to show $A \implies B$ and $B \implies A$.
+        \item Showing two sets are equal: Suppose you wish to show that $A=B$ where $A,B$ are both sets. Oftentimes, it is possible to directly do so, but sometimes it may be easier to show that $A \subseteq B$ and $B \subseteq A$.
+    \end{itemize}
 \end{document}
