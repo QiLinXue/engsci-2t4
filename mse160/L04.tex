@@ -23,6 +23,39 @@
     \end{equation}
     which includes:
     \begin{equation}
-        [0\,1\,1],\, [0\,\bar{1}\,1],\, [0\,1\,\bar{1}],\, [1\,0\,1], \ddots
+        [0\,1\,1],\, [0\,\bar{1}\,1],\, [0\,1\,\bar{1}],\, [1\,0\,1], \dots
     \end{equation}
+    \item To determine crystallographic planes, we use \textbf{crystallographic planes}. It uses the following set of rules:
+    \begin{itemize}
+        \item Translate plane so origin is not on the plane (defining new origin).
+        \item Determine distance to intercept plane by travelling along each axis, from the origin.
+        \item Take the reciprocol of the distance.
+        \item Enclose in parentheses (use $h$, $k$, $\ell$). Negatives go above, no commas.
+    \end{itemize}
+    \begin{example}
+        We can represent the following plane using Miller indices:
+        \begin{center}
+            \incfig{miller-1}
+        \end{center}
+        We can start from the origin and travel a length of $1$ in both the positive $x$, $y$, and $z$ direction. Taking the reciprocal, we still have $1,1,1$, so the final miller index is $(1\,1\,1)$.
+    \end{example}
+    \begin{example}
+        We can represent the following plane using Miller indices:
+        \begin{center}
+            \incfig{miller-2}
+        \end{center}
+        We can start from the origin and travel a length of $1$ in the $x$ direction, $1/2$ in the $y$ direction, and $\infty$ in the $z$ direction. Taking the reciprocal we get $(1\,2\,0)$.
+    \end{example}
+    \item We can represent \textbf{families of planes} using curly braces. For example, faces of a cube can be represented by:
+    \begin{equation}
+        \{0\,0\,1\}
+    \end{equation}
+    which represent the following planes:
+    \begin{equation}
+        (1\,0\,0),\, (0\,1\,0),\, (0\,0\,1)
+    \end{equation}
+    corresponding to the below blue, yellow, and red plane respectively:
+    \begin{center}
+        \incfig{miller-3}
+    \end{center}
 \end{itemize}
