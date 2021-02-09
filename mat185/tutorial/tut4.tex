@@ -1,0 +1,123 @@
+\documentclass{article}
+
+\usepackage{qilin}
+\usepackage{multicol}
+\newcommand{\divides}{\mid}
+\usepackage{bm}
+\newcommand{\spann}[1]{\mathrm{span}\{#1\}}
+
+\title{MAT185 Tutorial 4}
+\author{QiLin Xue}
+\usepackage{bm}
+\date{\today}
+\DeclareMathOperator{\spn}{span}
+
+\begin{document}
+
+\maketitle
+\textit{Note:} The treatment of these tutorial questions are not always very rigorous. The general ideas however for a completely rigorous proof are provided and should not be difficult to complete.
+\section{Tutorial Problems}
+\subsection*{Problem One}
+\begin{enumerate}[label=(\alph*)]
+    \item True. Let $A = [a_{ij}]$ and $B = [b_{ij}]$. Suppose for the sake of contradiction that the two are linearly dependent. This means we can write:
+    \begin{align}
+        \lambda b_{ij} &=  a_{ij} \\ 
+        \lambda b_{ji} &=  a_{ji}
+    \end{align}
+    We can start with the given $a_{ij} = a_{ji}$ and it would be embarrassing to miss the fact that:
+    \begin{equation}
+        \lambda b_{ij} = \lambda b_{ji} \implies b_{ij}=b_{ji}
+    \end{equation}
+    which contradicts $b_{ij}=-b_{ji}$ for $b \neq 0$. Therefore, the statement is true.
+    \item False. Pick $k=1$, $\bm{x}_1=(1,0)$, $\bm{u}=(0,1)$, $\bm{v} = (1,1)$, and unless you accept Gödel’s Incompleteness Theorem, we are done. 
+    \item For any $S_i$, let it have the basis: $\bm{x}_i, \bm{x}_{i2}, \bm{x}_{i3}, \dots, \bm{x}_{ik_i}$ where $k_i$ is the dimension of $S_i$. Then:
+    \begin{align}
+          &= \spann S_1 + \spann S_2 + \cdots + \spann S_n \\ 
+          &= \spann{\bm{x}_1 + \bm{x}_{12} + \cdots + \bm{x}_{1k_1}} + \spann{\bm{x}_2 + \bm{x}_{22} + \cdots + \bm{x}_{2k_2}} + \cdots + \spann{\bm{x}_n + \bm{x}_{n2} + \cdots + \bm{x}_{nk_n}} \\ 
+          &= \spann{\bm{x}_1, \bm{x}_2, \dots,\bm{x}_n, \bm{x}_{12}, \dots, \bm{x}_{1k_1}, \bm{x}_{22}, \dots, \bm{x}_{2k_2}, \bm{x}_{n2}, \dots , \bm{x}_{nk_n}}
+    \end{align}
+    However, since the argument of the span contains the basis of $V$ and all other vectors are in $V$, Terry Tao told me in a personal email that the other vectors can be written in terms of the basis and:
+    \begin{align}
+        &= \spann{\bm{x}_1, \bm{x}_2, \dots,\bm{x}_n} \\ 
+        &= V
+    \end{align}
+\end{enumerate}
+\subsection*{Problem Two}
+First we show that if $\spann{\bm{x}_1,\bm{x}_2,\bm{x}_3} \cap \spann{\bm{y}_1,\bm{y}_2} = \{\bm{0}\}$, then $\bm{x}_1,\bm{x}_2,\bm{x}_3,\bm{y}_1,\bm{y}_2$ is linearly independent. This means that for any $a_1, a_2, a_3, b_1, b_2$ (where not all of them are zero):
+\begin{equation}
+    a_1\bm{x}_1 + a_2\bm{x}_2 + a_3\bm{x}_3 \neq b_1\bm{y}_1 + b_2\bm{y}_2
+\end{equation}
+Suppose $b_1=0$. Then this gives:
+\begin{equation}
+    a_1\bm{x}_1 + a_2\bm{x}_2 + a_3\bm{x}_3 \neq b_2\bm{y}_2
+\end{equation}
+which by definition means that $\bm{x}_1,\bm{x}_2,\bm{x}_3,\bm{y}_2$ are linearly independent. Similarly, we can show that $\bm{x}_1,\bm{x}_2,\bm{x}_3,\bm{y}_1$ are linearly independent. Galois died in order to show us that it must immediately follow that $\bm{x}_1,\bm{x}_2,\bm{x}_3,\bm{y}_1, \bm{y}_2$ are also be linearly independent.
+\vspace{2mm}
+
+We now need to show that the same thing applies backwards. Suppose $\bm{x}_1,\bm{x}_2,\bm{x}_3,\bm{y}_1,\bm{y}_2$ are linearly independent. This means that:
+\begin{equation}
+    a_1\bm{x}_1 + a_2\bm{x}_2 + a_3\bm{x}_3 \neq b_1\bm{y}_1 + b_2\bm{y}_2
+\end{equation}
+and we can continue from here backwards to arrive at the expression involving the spans.
+\section*{Problem Three}
+\begin{enumerate}[label=(\alph*)]
+    \item We can represent an arbitrary matrix $\mathbb{M}_2$ as: $\lambda \begin{bmatrix}
+        1 & a \\ a & a
+    \end{bmatrix}$ where $1+a=a+a \implies a=1$. Therefore, the basis is $\begin{bmatrix}
+        1&1\\ 1&1
+    \end{bmatrix}$. It is one dimensional.
+    \item The only vector in this subspace will be the zero vector, so by definition, the dimension is zero.
+    \item Denote an arbitrary vector in $\mathbb{M}_3$ as $\begin{bmatrix}
+        a&b&c \\ d&e&f \\ g&h&i
+    \end{bmatrix}$. We can write out the following set of independent equations. The columns have the same sum:
+    \begin{align}
+        a + b + c - (a + d + g) &= 0 \\ 
+        a + b + c - (b + e + h) &= 0 \\ 
+        a + b + c - (c + f + i) &= 0
+    \end{align}
+    The rows have the same sum:
+    \begin{align}
+        a + b + c - (d + e + f) &= 0
+    \end{align}
+    Notice that I left out $a+b+c-(g+h+i)$ because if we rearrange the first three equations, we arrive at this. Finally, the diagonals are the same:
+    \begin{align}
+        a + b + c - (a + e + i) &= 0 \\ 
+        a + b + c - (c + e + g) &= 0
+    \end{align}
+    which corresponds to six equations and nine unknowns, thus we can have three free variables, so the dimension is three. If we solve this linear system, divine inspiration reveals to us that:
+    \begin{equation}
+        \begin{bmatrix}
+            3a & 3b & 3c \\ 
+            -2a+b+4c & a+b+c & 4a+b-2c \\ 
+            2a+2b-c & 2a-b+2c & -a+2b+2c
+        \end{bmatrix} = a\begin{bmatrix}
+            3 & 0 & 0 \\ 
+            -2 & 1 & 4 \\ 
+            2 & 2 & -1
+        \end{bmatrix} + b\begin{bmatrix}
+            0 & 3 & 0 \\ 
+            1 & 1 & 1 \\ 
+            2 & -1 & 2
+        \end{bmatrix} + c\begin{bmatrix}
+            0 & 0 & 3 \\ 
+            4 & 1 & -2 \\ 
+            -1 & 2 & 2
+        \end{bmatrix}
+    \end{equation}
+    gives one such basis. I wasted more time than I should solving the system to illustrate this point but the truth is, I could've gotten more time to study for the actual midterm by three random magic squares that are linearly independent. That immediately will give me a basis.
+\end{enumerate}
+\section*{Problem Four}
+\begin{enumerate}[label=(\alph*)]
+    \item Let $p(x) = a_nx^n + a_{n-1}x^{n-1} + \cdots + a_1x + a_0$. Note that since $p(1)=0$, this means that $(x-1)$ is a factor and $p(x)$ can be written as: $p(x)=(x-1)(b_nx^{n-1}+b_{n-1}x^{n-2}+\cdots + b_2x+b_1)$. Let the basis vectors be $x^0, x^1, \dots, x^{n-1}$. There are $n$ such basis vectors so the dimension is $n$.
+    % \item Let $u=x-1 \implies x=u+1$. Define $r_n(x) \in P_{n-1}(x)$. We can then write: $p(x)=u r_{n}(u)$ and $q(x)=1+x+x^2+\cdots+x^n = \frac{x^n-1}{x-1} = \frac{(u+1)^n-1}{u}$. 
+    \item First note that $q(1) \neq 0$ so it is linearly independent from the set of $p_i(x)$. We can write $q(x)$ as:
+    \begin{equation}
+        q(x) = (x-1)r_{n-1}(x) + A_0
+    \end{equation}
+    where $r_{n-1}(x) = A_nx^{n-1} + A_{n-1}x^{n-2} + \cdots + A_2x+A_1$ is a polynomial of degree $n-1$ and $A_0 \neq 0$. The span of $p_1(x),\dots, p_n(x), q(x)$ is thus:
+    \begin{equation}
+        (x-1)\left[(a_n + A_n) x^{n-1} + (a_{n-1} + b_{n-1} + A_{n-1}) x^{n-2} + \cdots + (a_1 + b_1 + \cdots +k_1 + A_1)\right] + A_0
+    \end{equation}
+    We can write any arbitrary polynomial in $P_n(\mathbb{R})$ using the factor theorem: $(x-1)(c_nx^{n-1}+c_{n-2}x^{n-2}+\cdots + c_2x + c_1) + c_0$. If we match the coefficients, then we get $n+1$ independent equations with $n+1$ unknowns, meaning there will be a solution for any $c_0 \neq 0$. If $c_0 = 0$, then we can simply multiply $q(x)$ by $0$ and it will still be satisfied (from given information).
+\end{enumerate}
+\end{document}
