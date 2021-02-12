@@ -1,0 +1,66 @@
+\section{Sequences}
+\begin{itemize}
+    \item We begin with some \textbf{important limits}:
+    \begin{itemize}
+        \item For $x>0$, $\lim_{n\to\infty} x^{1/n} = 1$.
+        \item If $|x| < 1$, then $\lim_{n\to \infty} x^n = 0$.
+        \begin{proof}
+            We know the function is decreasing: $|x|^{n+1} = |x| |x^n| < |x|^n$. Alternatively, we want to show taht $|x^k - 0| < \epsilon$ for all $n > k$. We want to find $k$ such that:
+            \begin{equation}
+                |x^k=0| = |x^n| = |x|^k < \epsilon
+            \end{equation}
+            or: $|x|<\epsilon^{1/n}$. We know that:
+            \begin{align}
+                \lim_{n\to\infty}\epsilon^{1/k} = 1
+            \end{align}
+            and since $|x|<\epsilon^{1/k}$, we must have $|x^n|<\epsilon$ for all $n>k$.
+        \end{proof}
+        \item For $\alpha > 0$, $\lim_{n\to\infty} \frac{1}{n^\alpha}=0$.
+        \begin{proof}
+            Note that:
+            \begin{equation}
+                0 < \frac{1}{n^\alpha} = \left(\frac{1}{n}\right)^\alpha
+            \end{equation}
+            We can pick an odd positive integer $p$ such that $1/p < \alpha$ such that:
+            \begin{equation}
+                \left(\frac{1}{n}\right)^\alpha \le \left(\frac{1}{n}\right)^{1/p} \implies \lim_{n\to\infty}\left(\frac{1}{n}\right)^{1/p} = \left(\lim_{n\to\infty} \frac{1}{n}\right)^{1/p}=0
+            \end{equation}
+        \end{proof}
+        \item $\lim_{n\to\infty} \frac{x^n}{n!}=0$ for $x\in \mathbb{R}$.
+        \item $\lim_{n\to\infty} \frac{n!}{n^n}=0$
+        \item $\lim_{n\to\infty} \frac{\ln n}{n} = 0$.
+        \item $\lim_{n\to\infty} n ^{1/n} = 1$.
+        \item $\lim_{n\to\infty}\left(1+\frac{x}{n}\right)^n=e^x$
+        \begin{proof}
+            First let's deal with the $x=0$ case, which is trivial. Now:
+            \begin{align}
+                \ln\left(1+\frac{x}{n}\right)^n &= n\ln\left(1+\frac{x}{n}\right) \\ 
+                &=\frac{x \ln(1+x/n)}{x/n} \\ 
+                &= x\left(\frac{\ln(1+x/n) - \ln(1)}{x/n}\right)
+            \end{align}
+            Taking the limit, we have:
+            \begin{align}
+                \lim_{n\to\infty} \frac{\ln(1+x/h)- \ln 1}{x/h} = \lim_{h\to 0} \frac{\ln(1+h)-\ln 1}{h}
+            \end{align}
+            which is the first principles definition of the derivative of $\ln(x)$ at $x=1$, which gives:
+            \begin{align}
+                \lim_{h \to \infty} \ln(1+x/n)^n = x \cdot 1 = x \implies \lim_{n\to\infty}\left(1+\frac{x}{n}\right)^n = e^x
+            \end{align}
+        \end{proof}
+    \end{itemize}
+    \item Sequences can also be defined recursively. We need a base term, e.g. $a_1=1$ and also a general relationship, such as:
+    \begin{equation}
+        a_ n = \sqrt{6+a_{n-1}}
+    \end{equation}
+    this gives the sequence $\{1, \sqrt{7}, \sqrt{6+\sqrt{7}},\dots\}$
+    \item How do we find the \textbf{limit} of such a recursively defined function? To do so, we first need to show that the limit actually exists. To do so, we must have both:
+    \begin{align}
+        \lim_{n\to\infty} a_n &= L \\ 
+        \lim_{n\to\infty} a_{n-1} &= L
+    \end{align}
+    Therefore, we get:
+    \begin{align}
+        L = \sqrt{6 + L} \implies L=3,-2
+    \end{align}
+    Since it is increasing, we must have $L=3$.
+\end{itemize}
