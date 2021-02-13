@@ -1,0 +1,93 @@
+\section{More Structures}
+\begin{itemize}
+    \item We begin our discussion of various more complicated crystal structures.
+    \subsection{Rock Salts}
+    \item A common crystal structure are \textbf{rock salts}, such as NaCl, Mgo, FeO, \dots
+    \item The rock salt structure is visualized below, with blue representing anions (negative) and red representing cations.
+    \begin{center}
+        \incfig{rocksalt}
+    \end{center}
+    Notice that the number of cations and anions are equal in a unit cube. It consists of three layers, with cations and anions alternating across each layer such that all adjacent neighbours have a parity charge. As a result, we have $n=4$.
+    \item We can define the \textbf{coordination number} as the number of atoms directly adjacent to a particular atom. For rock salts, the coordination number is $6$.
+    \item The theoretical density can be calculated as:
+    \begin{equation}
+        \rho = \frac{n_cA_c + n_AA_A}{V_cN_A}
+    \end{equation}
+    where for a rock salt, $a=2R_A+2R_c$.
+    \begin{warning}
+        Anions do \textit{not} touch along face diagonals for a rock salt. Instead, they touch their adjacent neighbours only.
+    \end{warning}
+    \subsection{Body Centered Cubic}
+    \item Another common structure are \textbf{body centered cubic} (BCC) crystals.
+    \begin{center}
+        \incfig{bcc}
+    \end{center}
+    They consist of atoms at the corners of the cube with another atom at the very beginning. As a result, we have $n=2$.
+    \item To calculate the lattice parameter, we can apply Pythagorean's theorem:
+    \begin{equation}
+        a^2+a^2+a^2 = (4R)^2 \implies a = \frac{4}{\sqrt{3}}R
+    \end{equation}
+    \item The coordinate number of a BCC structure is $8$ since each atom is directly adjacent to eight other atoms.
+    \item The coordinate number of a FCC structure is $12$. This is harder to see but can be illustrated below:
+    \begin{center}
+        \incfig{fcc-coord}
+    \end{center}
+    Suppose we look at the black atom located on the rightmost plane. It is $a/\sqrt{2}$ away from the other four atoms on its face, but it's also $a/\sqrt{2}$ away from four other atoms (shown in red). Since the unit cell pattern repeats forever, by symmetry, there must be four more atoms it touches on the other side (if pattern continues).
+    \item The atomic packing factor for BCC is given by:
+    \begin{equation}
+        APF_\text{BCC} = \frac{n\frac{4}{3}\pi R^3}{a^3} \approx 0.68
+    \end{equation}
+    which is below the $0.74$ atomic packing factor for FCC.
+    \subsection{Interstitial Sites}
+    \item An interstitial site is a position between the atoms that can be occupied by other atoms.
+    \item An octahedral interstitial site exists within rock salt crystals, illustrated below:
+    \begin{center}
+        \incfig{octahedral-iss}
+    \end{center}
+    The yellow outline forms an octahedron with eight faces, and the red ion is placed in the octahedral site. We can calculate exactly the maximum size of $R_c$ with respect to $R_A$ by consider a two dimensional plane:
+    \begin{center}
+        \incfig{octahedral-calc}
+    \end{center}
+    We see that:
+    \begin{equation}
+        R_A= (R_A+R_c)\sin(45^\circ)
+    \end{equation}
+    and we get the ratio to be:
+    \begin{equation}
+        \frac{R_c}{R_a} = \frac{1-\sin(45^\circ)}{\sin(45^\circ)} \approx 0.414
+    \end{equation}
+    \item We can perform a similar calculation for a body centered cubic by slicing a plane across the diagonal:
+    \begin{center}
+        \incfig{simple-cubic-calc}
+    \end{center}
+    and we get a similar result:
+    \begin{equation}
+        \frac{R_c}{R_A} = \frac{1-\sin\theta}{\sin\theta}
+    \end{equation}
+    Here, $\theta =\tan^{-1}\left(\frac{1}{\sqrt{2}}\right)=35.3^\circ$ which gives:
+    \begin{equation}
+        \frac{R_c}{R_A} \approx 0.732
+    \end{equation}
+    \subsection{Hexagonal Close Packed}
+    \item Another common packing structure is \textbf{hexagonal closed packed} (HCP). It has the same atomic packing factor as FCC:
+    \begin{center}
+        \incfig{HCP}
+    \end{center}
+    It consists of atoms stacked in an $ABA$ pattern in hexagons. If we continue the pattern for several unit cells and connect the centers of the atoms in each layer, it will form a hexagonal honeycomb shape.
+    \item The height of this unit cell is $c=1.633a$ where $a=2R$ is the side length. The volume of the prism is given by:
+    \begin{equation}
+        V = \frac{3\sqrt{3}}{2}a^2c
+    \end{equation}
+    \item Similar to an FCC structure, each atom in HCP has a coordinate number of $12$.
+    \item These similarities between FCC and HCP are not a conicidence. It's possible to stack face centered cubic unit cells such that it forms a HCP structure.
+    \subsection{Examples}
+    \item Aluminum is a fascinating example of a FCC structure. It starts off as a thin flat piece of aluminum and through a series of plastic deformations, it's able to elongate.
+
+    This shows that FCC and HCP lead to materials that can experience greater plastic deformations. This is because the layers can shift and ``snap'' into place.
+    \item Recall that iron has a BCC structure. The spacing of atoms along the diagonal and the edges are not the same. As a result, we can expect the Young's Modulus in these two directions to also differ and this is verifiable.
+    \item We can also look at the differences between the behaviour of a metal versus the behaviour of a ceramic.
+    \begin{itemize}
+        \item In metals, planes are able to slide past each other. The result is plastic deformation.
+        \item In ceramics, we cannot have a lot of plastic deformation using the rock salt crystal structure. If planes do attempt to slide, like charges would overlap and would create fracture.
+    \end{itemize}
+\end{itemize}

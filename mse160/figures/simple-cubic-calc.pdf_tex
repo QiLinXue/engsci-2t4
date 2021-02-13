@@ -1,6 +1,6 @@
 %% Creator: Inkscape 1.0.1 (3bc2e813f5, 2020-09-07), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'fcc.pdf' (pdf, eps, ps)
+%% Accompanies image file 'simple-cubic-calc.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -50,9 +50,15 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.32037816)%
+  \begin{picture}(1,0.36045027)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{fcc.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{simple-cubic-calc.pdf}}%
+    \put(0.47910393,0.00502513){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\sqrt{2}a$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{simple-cubic-calc.pdf}}%
+    \put(0.46277094,0.17265159){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$R_c$\end{tabular}}}}%
+    \put(0.40764417,0.12646566){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$R_A$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{simple-cubic-calc.pdf}}%
+    \put(0.64740271,0.17893709){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$2R_A$\end{tabular}}}}%
   \end{picture}%
 \endgroup%
