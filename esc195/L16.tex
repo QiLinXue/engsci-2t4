@@ -11,4 +11,106 @@
         \end{equation}
         However, the integral $\int_1^\infty \frac{\dd{x}}{x} = \lim_{b\to\infty} \ln b$ diverges.
     \end{example}
+    \item The $p$-series is:
+    \begin{equation}
+        \sum_{k=1}^\infty \frac{1}{k^p}
+    \end{equation}
+    which will converge if $p > 1$ since $\int_1^\infty \frac{\dd{x}}{x^p}$ converges iff $p>1$.
+    \begin{example}
+        Suppose we wish to look at $\sum_{n=5}^\infty \frac{1}{n^2+9}$. First, we notice that:
+        \begin{equation}
+            \lim_{t\to\infty} \int_5^t \frac{\dd{x}}{x^2+9} = \lim_{t\to\infty} \left[\frac{1}{3}\tan^{-1}\left(\frac{x}{3}\right)\right]\Biggr|^{t}_5
+        \end{equation}
+        which converges, and after checking the relevant conditions, this means that the sum converges too.
+    \end{example}
+    \begin{definition}
+        The \textbf{remainder} for a sequence $\{f_n\}$ is given as:
+        \begin{equation}
+            R_n = f(n) - f_n
+        \end{equation}
+        where $f(n)$ denotes a continuous functoin while $f_n$ is discrete.
+    \end{definition}
+    \item For a decreasing function, $R_n \le \int_{n}^\infty f(x) \dd{x}$ and $R_n \ge \int_{n+1}^\infty f(x) \dd{x}$. This means that:
+    \begin{equation}
+        S_n + \int_{n+1}^\infty f(x) \dd{x} \le S \le S_n + \int_n^{\infty} f(x) \dd{x}
+    \end{equation}
+    \item We can also use the \textbf{comparison test}
+    \begin{theorem}
+        Given $\sum a_k$ and $\sum b_k$ with $a_k > 0 $ and $b_k > 0$:
+        \begin{enumerate}
+            \item If $\sum b_k$ is convergent, and if $a_k \le b_k$ for all sufficiently large $k$, then $\sum a_k$ converges.
+            \item If $\sum b_k$ is diverge and $a_k > b_k$ for all $k$ sufficiently large, then $\sum a_k$ diverges.
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        Assume $a_k \le b_k$ for all $k$ we can define:
+        \begin{equation}
+            S_n = \sum_{k=1}^n a_k
+        \end{equation}
+        as the sequence of partial sums where:
+        \begin{equation}
+            b_k = \sum_{k=1}^n b_k
+        \end{equation}
+        where $t=\sum_{k=1}^\infty b_k$ exists. This implies that $\{S_n\}$ is increasing since $a_k > 0$ and so:
+        \begin{equation}
+            S_n \le t_n < t
+        \end{equation}
+        where $\{S_n\}$ is a bounded sequence. By the monotonic sequence theorem, $\{S_n\}$ has a limit and $\sum_{k=1}^\infty a_k$ is defined to be equal to that limit. Therefore, $\sum a_k$ converges.
+    \end{proof}
+    \begin{example}
+        Suppose we wish to determine if $\sum_{n=1}^\infty \frac{7}{17n^2+3\sqrt{n}+5}$ converges. Notice that for $n \ge 1$, we have:
+        \begin{equation}
+            17n^2+3\sqrt{n}+5 > 17n^2
+        \end{equation}
+        and so:
+        \begin{equation}
+            \frac{7}{17n^2+3\sqrt{n}+5} < \frac{7}{17n^2}
+        \end{equation}
+        Since $\frac{7}{17}\sum \frac{1}{n^2}$ converges, then the original sum must also converge.
+    \end{example}
+    \begin{example}
+        Suppose we wish to determine if $\sum_{k=1}^\infty \frac{\ln(n/1000)}{n}$ converges. We want to find a $k$ such that:
+        \begin{equation}
+            \frac{\ln(k/1000)}{k} > \frac{1}{k}
+        \end{equation}
+        wihch means that we want to pick $k > 1000e > 2718$. Therefore, since $\sum_{k=2719}^\infty \frac{1}{k}$ is divergent, then the original sum is also divergent.
+    \end{example}
+    \item Suppose we wish to determine if $\sum{n=2}^\infty$ converges. This looks like $\frac{1}{n^3}$, but we notice that:
+        \begin{equation}
+            \frac{1}{n^3-n} > \frac{1}{n^3}
+        \end{equation}
+        and we run into trouble. This means we have to turn to the \textbf{limit comparison test}
+    \begin{theorem}
+        The limit comparison test: Given $\sum a_k$, $\sum b_k$ where $a_k > 0 $ and $b_k > 0$:
+        \begin{enumerate}
+            \item If $\lim_{n\to\infty} \frac{a_n}{b_n} = c > 0$, then both series converge or diverge.
+            \item If $\lim_{n\to\infty} \frac{a_n}{b_n} = 0$ and if $\sum b_{n}$ converges, then $\sum_{a_n}$ converges.
+            \item If $\lim_{n\to\infty} \frac{a_n}{b_n} = \infty$ and if $\sum b_n$ diverges, then $\sum a_n$ diverges.
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        We are given that:
+        \begin{equation}
+            \lim_{n\to\infty} \frac{a_n}{b_n} = c \implies \left|\frac{a_n}{b_n}-c\right| < \epsilon
+        \end{equation}
+        for $n<N$. We are working \textit{backwards} here, so we are free to choose \textit{any} value of $\epsilon$ and this will hold true. We can choose $\epsilon = \frac{c}{2}$ such that:
+        \begin{equation}
+            \frac{c}{2} < \frac{a_n}{b_n} < \frac{3c}{2}
+        \end{equation}
+        which gives:
+        \begin{equation}
+            \frac{c}{2}b_n < a_n < \frac{3c}{2}b_n
+        \end{equation}
+        with $n>N$. If $\sum b_n$ converges, so does $\frac{3c}{2}\sum b_n$ since $c$ is just a number. Thereforfe, $\sum a_n$ converges by the comparison test. If $\sum b_n$ diverges, so does $\frac{c}{2}\sum b_n$ and again by the comparison test, $\sum a_n$ diverges.
+    \end{proof}
+    \begin{example}
+        We continue our previous discussion of $\sum_{n=2}^\infty \frac{1}{n^3-n}$. We let $a_n = \frac{1}{n^3-n}$ and $b_n= \frac{1}{n^3}$. Both $a_n$ and $b_n$ are convergent and:
+        \begin{equation}
+            \lim_{n\to\infty} \frac{a_n}{b_n} = \lim_{n\to\infty} \frac{1}{1-\frac{1}{n^2}}=1 > 0
+        \end{equation}
+        so the original sequence is convergent.
+    \end{example}
+    \begin{example}
+        We can also revisit $\sum \frac{\ln(n/1000)}{n}$. We consider $a_n = \frac{\ln(n/1000)}{n}$ and $b_n=\frac{1}{n}$. Since $\sum b_n$ diverges and $\lim_{n\to\infty} \frac{a_n}{b_n}$ diverges too, then $\sum a_n$ diverges as well.
+    \end{example}
 \end{itemize}
