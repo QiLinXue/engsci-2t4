@@ -5,10 +5,114 @@
         \sum_{n=1}^\infty \frac{(-1)^n}{n^2}
     \end{equation}
     \begin{theorem}
-        The \textbf{Alternating Series Test}: Let $\{a_k\}$ be a sequence of positive numbers. If $a_{k+1}<a_k$ and $a_k \to 0$ as $k \to \infty$, then:
+        The \textbf{Alternating Series Test}: Let $\{a_k\}$ be a sequence of positive numbers. If and only if $a_{k+1}<a_k$ and $a_k \to 0$ as $k \to \infty$, then:
         \begin{equation}
             \sum_{k=1}^\infty (-1)^{k-1} a_k
         \end{equation}
         converges.
+        \begin{proof}
+            Let $S_2=a_1-a_2>0$ and $s_4=s_2+(a_3-a_4)$. We can generalize this to:
+            \begin{equation}
+                S_{2n} = S_{2n-2}+(a_{2n-1}-a_{2n}) > S_{2n-2}
+            \end{equation}
+            such that $\{S_{2n}\}$ is monotonically increasing. However, we also have:
+            \begin{equation}
+                S_{2n}=a_1-(a_2-a_3)-(a_4-a_5)-\cdots - (a_{2n-2}-a_{2n-1})-a_{2n}
+            \end{equation}
+            Since $S_{2n}<a_1$ for all $n$, we can apply the monotonic limit theorem to show that the limit $L$ exists. We then have:
+            \begin{equation}
+                \lim_{n\to\infty}S_{2n+1} = \lim_{n\to\infty}S_{2n}+\lim_{n\to\infty}a_{2n+1}=L
+            \end{equation}
+        \end{proof}
     \end{theorem}
+    \begin{example}
+        Take the sum $1-\frac{1}{4}+\frac{1}{2}-\frac{1}{9}+\frac{1}{3}-\cdots$. Although $a_n \to 0$, the terms are not decreasing in mangitude, so it is divergent.
+    \end{example}
+    \item For an alternating sequence, the limit will be between $S_n$ and $S_{n+1}$ so we can estimate the error as:
+    \begin{equation}
+        |L-S_n| \le a_{n+1}
+    \end{equation}
+    \item For example, the series expansion for $e^{-1}$ is:
+    \begin{equation}
+        e^{-1} = \sum_{n=0}^\infty \frac{(-1)^n}{n!} = 1-1+\frac{1}{2!}-\frac{1}{3!}+\cdots
+    \end{equation}
+    If we continue to the $\frac{1}{5!}$ term, then we get:
+    \begin{equation}
+        e^{-1} \simeq 0.3666 \pm \frac{1}{6!}
+    \end{equation}
+    \item We introduce the absolute convergence and the ratio and root tests.
+    \begin{definition}
+        If $\sum |a_k|$ converges, we say that $\sum a_{k}$ is absolutely convergent. If $\sum a_k$ converges, but $\sum |a_k|$ does not, we say $\sum a_k$ is conditionally convergent.
+    \end{definition}
+    \begin{theorem}
+        If $\sum |a_k|$ converges, then $\sum a_k$ converges.
+    \end{theorem}
+    \begin{proof}
+        Let:
+        \begin{align}
+            -|a_n| &\le a_n \le |a_n| \\ 
+            0 &\le a_n + |a_n| \le 2|a_n| \\ 
+            0 &\le b_n \le 2|a_n|
+        \end{align}
+        Note: Let $\sum a_n = \sum b_n - \sum |a_n|$. Since both $\sum b_n$ and $\sum |a_n|$ is convergent, then the original sum must be convergent as well.
+    \end{proof}
+    \item For example, $\sum_{i=1}^\infty \frac{(-1)^{i+1}}{i}$ is conditionally convergent.
+    \begin{theorem}
+        The \textbf{Root Test:} Given $\sum a_k$, $a_k \ge 0$. If $(a_k)^{1/k} \to p$ as $k\to\infty$, then:
+        \begin{enumerate}
+            \item If $p<1$, then $\sum a_k$ converges.
+            \item If $p>1$, then $\sum a_k$ diverges.
+            \item If $p=1$ the test is inconclusive.
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        Given $p<1$, choose $\mu$ such that $p<\mu<1$. Since $(a_k)^{1/k} \to p$, we have:
+        \begin{equation}
+            (a_k)^{1/k} < \mu
+        \end{equation}
+        or
+        \begin{equation}
+            a_k < \mu^k
+        \end{equation}
+        for $k$ sufficiently large. But $\sum \mu^k$ converges (geometric series, $x<1$), so $\sum a_k$ converges as well.
+    \end{proof}
+    \begin{example}
+        Take the series $\sum \left(\frac{n^2+1}{2n^1+1}\right)^n$. Note that $a_n^{1/k}=\frac{2k}{k+1} \to \frac{1}{2}$ so the series is convergent.
+    \end{example}
+    \begin{theorem}
+        The \textbf{ratio test:} GTiven $\sum a_k$, with $a_k>0$. If $\frac{a_{k+1}}{a_k}\to \lambda$ as $k\to\infty$, then:
+        \begin{enumerate}
+            \item If $\lambda < 1$, $\sum a_k$ converges.
+            \item If $\lambda >1$, $\sum a_k$ diverges.
+            \item If $\lambda = 1$, the test is inconclusive.
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        Given $\lambda < 1$, we can choose $\mu$ such that $\lambda < \mu < 1$. Thus:
+        \begin{equation}
+            \frac{a_{k+1}}{a_k}<\mu
+        \end{equation}
+        for $k$ sufficiently large, say $k>K$. We have:
+        \begin{align}
+            a_{K+1} &< \mu a_K \\
+            a_{K+2} &< \mu a_{K+1} < \mu^2 a_{K} \\ 
+            &\vdots \\ 
+            a_{K+j} < \mu^j a_K
+        \end{align}
+        for $j=1,2,3,\dots$. Let $n=K+j$. Then we can rewrite the last line as:
+        \begin{equation}
+            a_n < \mu^{n-k}a_K = \frac{a_K}{\mu^K}\mu^n
+        \end{equation}
+        Since the factor $\frac{a_K}{\mu^K}$ is some constant and $\mu^n$ converges, then the original sum is convergent.
+    \end{proof}
+    \begin{tip}
+        The ratio test is usually the most straightforward and the most useful test to employ.
+    \end{tip}
+    \begin{example}
+        Suppose we take the sum $\sum \frac{k^2}{e^k}$. We have:
+        \begin{equation}
+            \frac{a_{k+1}}{a_k} = \frac{(k+1)^2}{e^{k+1}} \cdot \frac{e^k}{k^2} = \frac{(k+1)^2}{k^2} \cdot \frac{1}{e}
+        \end{equation}
+        As $k\to\infty$, we get $\frac{1}{e}<1$ so the sum is convergent.
+    \end{example}
 \end{itemize}
