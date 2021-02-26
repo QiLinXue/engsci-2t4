@@ -1,0 +1,178 @@
+\section{Power Series}
+\begin{itemize}
+    \item We can introduce the power series:
+    \begin{definition}
+        A power series is a series in the form:
+        \begin{equation}
+            \sum_{n=0}^\infty c_n x^n = c_0 + c_1x+c_2x^2+c_3x^3 + \cdots
+        \end{equation}
+    \end{definition}
+    \item For example, if we let $c_n=1$. Then for all $n$, we get:
+    \begin{equation}
+        \sum_{n=0}^\infty x_n = 1 + x + x^2 + \cdots = \frac{1}{1-x}
+    \end{equation}
+    and converges if $|x|<1$.
+    \item A power series about $a$ can be written as:
+    \begin{equation}
+        \sum_{n=0}^\infty c_n(x-a)^n = c_0 + c_1(x-a)+c_2(x-a)^2 + \cdots
+    \end{equation}
+    \item Note that for $x=a$, the sum will always converge. However, we are interested for the entire range of values at which it converges..
+    \begin{example}
+        Suppose we have the power series $\sum_{n=1}^\infty \frac{x^n}{n^2}$. To test when it converges, we can apply the ratio test:
+        \begin{align}
+            \left|\frac{a_{n+1}}{a_n}\right| &= \left|\frac{x^{n+1}}{(n+1)^2} \cdot \frac{n^2}{x^n}\right| \\ 
+            &= |x| \frac{n^2}{n+1}^2
+        \end{align}
+        As $n\to\infty$, we get $|x|$. Therefore, the series converges when $|x|<1$. However, the test says nothing about the endpoints, so we have to test them separately. If $x=1$, we have:
+        \begin{equation}
+            \sum_{n=1}^{\infty} \frac{1}{n^2}
+        \end{equation}
+        We can apply a p-series test to show it converges. For $x=-1$, we have:
+        \begin{equation}
+            \sum_{n=1}^\infty \frac{(-1)^n}{n^2}
+        \end{equation}
+        and apply the alternating series test to show that it converges. Therefore, the power series converges for:
+        \begin{equation}
+            -1 \le x \le 1
+        \end{equation}
+    \end{example}
+    \begin{example}
+        Suppose we have the power series $\sum_{n=0}^\infty \frac{(1+5^n)x^n}{n!}$. Using the ratio test, we have:
+        \begin{equation}
+            \left|\frac{a_{n+1}}{a_n}\right| = \left|\frac{(1+5^{n+1})x^{n+1}}{(n+1)! }\cdot \frac{n!}{(1+5^n)x^n}\right| = \frac{1+5^{n+1}}{1+5^n} \cdot \left|\frac{x}{n+1}\right|
+        \end{equation}
+        which approaches $0$ as $n\to\infty$ so it is convergent for all $x \in \mathbb{R}$.
+    \end{example}
+    \begin{example}
+        Take the power series $\sum n! x^n$. The ratio test then gives:
+        \begin{equation}
+            \left|\frac{a_{n+1}}{a_n}\right| = \left|\frac{(n+1)!}{n!} \cdot \frac{x^{n+1}}{x^n}\right| = (n+1)|x|
+        \end{equation}
+        This approaches $\infty$ as $n\to\infty$ so it diverges except for $x=0$.
+    \end{example}
+    \begin{theorem}
+        For a power series $\sum_{n=0}^\infty c_n (x-a)^n$, there are three possibilities with respect to convergence:
+        \begin{enumerate}
+            \item The series converges only when $x=a$
+            \item The series converges for all $x$
+            \item The series converges in some interval $|x-a| < R$ where $R$ is the \textbf{radius of convergence}. However, the endpoints must be tested serparately.
+        \end{enumerate}
+    \end{theorem}
+    \begin{example}
+        Take the power series $\sum_{n=0}\sum^\infty \frac{(-2)^n (x-1)^n}{n+2}$. The ratio test gives us:
+        \begin{equation}
+            \left|\frac{a_{n+1}}{a_n}\right| = \left|\frac{2^{n+1}(x-1)^{n+1}}{n+3} \cdot \frac{n+2}{2^n(x-1)^n}\right| = 2\left(\frac{n+2}{n+3}\right)|x-1|
+        \end{equation}
+        As $n\to\infty$, we get:
+        \begin{equation}
+            |x-1| < \frac{1}{2}\, \therefore R = \frac{1}{2}
+        \end{equation}
+        We now need to check the endpoints. Test $x=\frac{1}{2}$. We get:
+        \begin{equation}
+            \sum_{n=0}^\infty \frac{(-2)^n \left(-\frac{1}{2}\right)^n}{n+2} = \sum_{n=0}^\infty \frac{1}{n+2} = \sum_{i=2}^\infty \frac{1}{i}
+        \end{equation}
+        which diverges as it is the harmonic series. We now need to test $x=\frac{3}{2}$. We then get:
+        \begin{align}
+            \sum_{n=0}^\infty \frac{(-2)^n\left(\frac{1}{2}\right)^n}{n+2} = \sum \frac{(-1)^n}{n+2}
+        \end{align}
+        Using the alternating series test, we see that this converges. Therefore, the interval of convergence is $\left(\frac{1}{2}, \frac{3}{2}\right]$.
+    \end{example}
+    \item It is possible to represent functions as a power series. We saw that for $|x|<1$, the infinite series:
+    \begin{equation}
+        \sum_{n=0}^\infty = 1 + x + x^2 + \cdots = \frac{1}{1-x}
+    \end{equation}
+    If we let $f(x) = \frac{1}{1-x}$, then we can \textit{approximate} it using a truncated power series representation for between $-1<x<1$.
+    \begin{example}
+        Suppose we have the function $\frac{x}{x-3}$. If we want to write it as a power series, we can write it as:
+        \begin{align}
+            x \cdot \frac{1}{x-3} &= -x \frac{1}{3-x} \\ 
+            &= -\frac{x}{3} \frac{1}{1-\frac{x}{3}} \\ 
+            &= -\frac{x}{3}\left[1+\frac{x}{3}+\left(\frac{x}{3}\right)^2+\cdots\right] \\ 
+            &= -\frac{x}{3} \sum_{n=0}^\infty \left(\frac{x}{3}\right)^n \\ 
+            &= -\sum_{n=0}^\infty \left(\frac{x}{3}\right)^{n+1} \\ 
+            &= -\sum_{n=1}^\infty \left(\frac{x}{3}\right)^n
+        \end{align}
+        and it converges for $|x|<3$.
+    \end{example}
+    \begin{theorem}
+        \textbf{Term by Term Differentiation and Integration:} Consider the pwoer series $\sum c_n(x-a)^n$ with $R=R_0 > 0$, then
+        \begin{equation}
+            f(x) = c_0 + c_1(x-a)+c_2(x-a)^2+\cdots = \sum_{n=0}^\infty c_n(x-a)^n
+        \end{equation}
+        is differentiable and continuous on $(a-R_0, a+R_0)$ and:
+        \begin{equation}
+            f'(x) = c_1 + 2c_2(x-a)+3c_3(x-a)^2+\cdots = \sum_{n=1}^\infty n c_n (x-a)^{n-1}
+        \end{equation}
+        We can also take the integral:
+        \begin{equation}
+            \int f(x) \dd{x} = C + c_0(x-a) + \frac{c_1(x-a)^2}{2} + \frac{c_2(x-a)^3}{3} + \cdots = C + \sum_{n=0}^\infty \frac{c_n(x-a)^{n+1}}{n+1}
+        \end{equation}
+        Notice that derivatives and infinite sums can be interchanged. Specifically:
+        \begin{align}
+            \frac{d}{dx} \sum_{n=0}^\infty c_n(x-a)^n &=  \sum_{n=0}^\infty \frac{d}{dx} c_n(x-a)^n \\ 
+            \int \sum_{n=0}^\infty c_n(x-a)^n \dd{x} &=  \sum_{n=0}^\infty \int c_n(x-a)^n \dd{x}
+        \end{align}
+    \end{theorem}
+    \begin{warning}
+        The radius of convergence between derivatives will always be the same, but the endpoints may change.
+    \end{warning}
+    \begin{example}
+        Suppose we have the function $f(x)=\frac{1}{(1+x)^2}$. Note that:
+        \begin{equation}
+            \frac{d}{dx} \frac{-1}{1+x} = -\frac{1}{(1+x)^2}
+        \end{equation}
+        so we can write it in terms of its derivative:
+        \begin{equation}
+            \frac{d}{dx} -\frac{1}{1+x} = \frac{d}{dx} \left[-\sum_{n=0}^\infty (-x)^n\right] = \sum_{n=1}^\infty (-1)^{n+1}nx^{n-1} = \sum_{n=0}^\infty (-1)^n(n+1)x^n
+        \end{equation}
+    \end{example}
+    \begin{example}
+        Let's find the power series representation of $\ln(1-x)$. We notice that it can be written as an integral:
+        \begin{equation}
+            \ln(1-x) = -\int \frac{\dd{x}}{1-x} = -\int \sum_{n=0}^\infty x^n \dd{x} = C - \sum_{n=0}^\infty \frac{x^{n+1}}{n+1}
+        \end{equation}
+        We can determine the constant of integration by setting $x=0$, which gives $\ln(1)=0=C$. Therefore, we can write:
+        \begin{equation}
+            \ln(1-x) = -\sum_{n=1}^\infty \frac{x^n}{n}
+        \end{equation}
+        For $x=1$, this diverges and for $x=-1$, it conditionally converges.
+    \end{example}
+    \begin{example}
+        Let us attempt to evaluate $\int_0^{0.1} \frac{\dd{x}}{1+x^4}$ to $6$ decimal places without a calculator. We first write it as a power series:
+        \begin{equation}
+            \frac{1}{1-(-x)^4} = \sum_{n=0}^\infty (-x^4)^n = 1-x^4-x^8- \cdots 
+        \end{equation}
+        which converges for $|x|<1$. Therefore, the integral is:
+        \begin{align}
+            \int \frac{\dd{x}}{1+x^4} &= \sum_{n=0}^\infty \int (-x^4)^n \dd{x} \\ 
+            &= C + \sum_{n=0}^\infty (-1)^n \frac{x}{4n+1} \\ 
+            &= C + x - \frac{x^5}{5} + \frac{x^9}{9} - \cdots 
+        \end{align}
+        The integral is then:
+        \begin{equation}
+            \int_{0}^{0.1} \frac{\dd{x}}{1+x^4} = 0.1 - \frac{0.1^5}{5} + \frac{0.1^9}{9} - \cdots = 0.099998 \pm 1.1 \times 10^{-10}
+        \end{equation}
+    \end{example}
+    \begin{example}
+        Let us try to write the power series representaiton of the inverse tangent function $f(x)=\tan^{-1}(x)$. Note that:
+        \begin{equation}
+            \frac{d}{dx}\tan^{-1}(x) = \frac{1}{1+x^2}
+        \end{equation}
+        We can write $f(x)$ as the integral:
+        \begin{equation}
+            \tan^{-1}(x) = \int \frac{\dd{x}}{1+x^2} = \int (1-x^2+x^4-x^6 +\cdots) \dd{x} = C + x - \frac{x^3}{3} + \frac{x^5}{5} - \cdots
+        \end{equation}
+        We can calculate the constant of integration to be $C=\tan^{-1}(0)=0$ such that we have:
+        \begin{equation}
+            \tan^{-1}(x) = \sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{2n+1}
+        \end{equation}
+        with a radius of convergence of $R=1$.
+        \vspace{2mm}
+
+        \textit{Remarks:} If we substitute in $x=1$, then we can a special series:
+        \begin{equation}
+            \tan^{-1}(1) = \frac{\pi}{4} = 1-\frac{1}{3}+\frac{1}{5}-\frac{1}{7}+\cdots 
+        \end{equation}
+        and is known as Leibniz's formula for $\pi$.
+    \end{example}
+\end{itemize}
