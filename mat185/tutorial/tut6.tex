@@ -1,0 +1,204 @@
+\documentclass{article}
+
+\usepackage{qilin}
+\usepackage{multicol}
+\newcommand{\divides}{\mid}
+\usepackage{bm}
+\newcommand{\spann}[1]{\mathrm{span}\left\{#1\right\}}
+\newcommand{\nullity}[1]{\mathrm{dim\,null\,} #1}
+\newcommand{\col}[1]{\mathrm{col\,} #1}
+\newcommand{\row}[1]{\mathrm{row\,} #1}
+
+\title{MAT185 Tutorial 6}
+\author{QiLin Xue}
+\usepackage{bm}
+\date{\today}
+\DeclareMathOperator{\spn}{span}
+
+\begin{document}
+
+\maketitle
+\textit{Note:} The treatment of these tutorial questions are not always very rigorous. The general ideas however for a completely rigorous proof are provided and should not be difficult to complete.
+\section{Tutorial Problems}
+\subsection*{Problem One}
+We can invoke the rank-nullity theorem:
+\begin{equation}
+    \nullity A = n - \dim \col A
+\end{equation}
+and for the transpose:
+\begin{equation}
+    \nullity A^T = n -\dim \col B
+\end{equation}
+Since $\dim\col A = \dim\col B$, we have $\nullity A = \nullity A^T$.
+
+\subsection*{Problem Two}
+% Let $\bm{A}$ be a $m\times n$ matrix. Then $\bm{A}^T\bm{y}=\bm{0}$ has nontrivial solutions if $\rank A \neq m$. We have:
+% \begin{equation}
+%     \nullity A^T = m - \rank A
+% \end{equation}
+% Since $\rank A \le \min\{m,n\} = n$, then the lower bound of the nullity of $A^T$ is:
+% \begin{equation}
+%     \nullity A^T \ge m-n
+% \end{equation}
+Since $A\bm{x}=\bm{b}$ is inconsistent, we know that $b \not\in \col A$ such that the column space is a proper subset (not equal) to:
+\begin{equation}
+    \col A \subset \mathbb{R}^m
+\end{equation}
+which gives:
+\begin{equation}
+    \rank A = \dim \col A < m
+\end{equation}
+Since we know that $\rank A = \rank A^T$, we can write the nullity as:
+\begin{equation}
+    \nullity A^T = m - \rank A
+\end{equation}
+But since the maximum value of $\rank A$ is $m-1$, we have:
+\begin{equation}
+    \nullity A^T \ge 1
+\end{equation}
+Therefore, there exists a nonzero vector $\bm{v}$ such that:
+\begin{equation}
+    A^T\bm{v}=\bm{0}
+\end{equation}
+\subsection*{Problem Three}
+First, we show that if the points are colinear, then:
+\begin{equation}
+    \rank A \le 2
+\end{equation}
+where:
+\begin{equation}
+    A = \begin{bmatrix}
+        1 & x_1 & y_1 \\ 
+        1 & x_2 & y_2 \\ 
+        \vdots & \vdots & \vdots \\ 
+        1 & x_n & y_n
+    \end{bmatrix}
+\end{equation}
+is true. Note that this means there are two numbers $b$ and $m$ such that for each $x_i, y_i$, the following will be true:
+\begin{equation}
+    y_i = mx_i + b
+\end{equation}
+Therefore, the column space is then:
+\begin{equation}
+    \col A = \spann{\begin{bmatrix}
+        1\\1\\ \vdots \\ 1
+    \end{bmatrix}, \begin{bmatrix}
+        x_1\\x_2\\\vdots \\ x_n
+    \end{bmatrix}, \begin{bmatrix}
+        y_1\\y_2\\\vdots \\ y_n
+    \end{bmatrix}}
+\end{equation}
+However, we noted that since all points are colinear, we can write the third vector as a linear combination of the first two:
+\begin{equation}
+    \begin{bmatrix}
+        y_1\\y_2\\\vdots \\ y_n
+    \end{bmatrix} = m\begin{bmatrix}
+        x_1\\x_2\\\vdots \\ x_n
+    \end{bmatrix} + b\begin{bmatrix}
+        1\\1\\ \vdots \\ 1
+    \end{bmatrix}
+\end{equation}
+Now we want to show the reverse. We are given that:
+\begin{equation}
+    \dim\col A \le 2
+\end{equation}
+This means that the column space of $A$ is not linearly independent, then by applying the Extend-Reduce theorem, we can write the column space of $A$ as:
+\begin{equation}
+    \col A = \spann{\begin{bmatrix}
+        1\\1\\ \vdots \\ 1
+    \end{bmatrix}, \begin{bmatrix}
+        x_1\\x_2\\\vdots \\ x_n
+    \end{bmatrix}}
+\end{equation}
+and thus it is possible to write:
+\begin{equation}
+    \begin{bmatrix}
+        y_1\\y_2\\\vdots \\ y_n
+    \end{bmatrix} = b\begin{bmatrix}
+        1\\1\\ \vdots \\ 1
+    \end{bmatrix} + m\begin{bmatrix}
+        x_1\\x_2\\\vdots \\ x_n
+    \end{bmatrix}
+\end{equation}
+which is equivalent to saying that the points lie on the same line.
+\subsubsection*{More compact Way}
+After writing the above, I found that it was hard to read. We can make it easier to read by defining:
+\begin{equation}
+    A = [\bm{1}, \bm{x}, \bm{y}]
+\end{equation}
+We first show that the points are colinear if and only if $\bm{y}=m\bm{x}+b\bm{1}$. If this is true, then the column space of $A$ can be written as:
+\begin{equation}
+    \col A = \spann{\bm{1},\bm{x},\bm{y}}
+\end{equation}
+but since $\bm{y}$ can be written in terms of $\bm{1}$ and $\bm{x}$, this is equivalent to:
+\begin{equation}
+    \col A = \spann{\bm{1}, \bm{x}}
+\end{equation}
+We do not know if $\bm{1}$ and $\bm{x}$ are linearly independent, but the maximum dimension of this span can only be two. To show the reverse, we show that since the dimension of the span is at most two, we can apply the Extend-Reduce theorem to show that:
+\begin{equation}
+    \spann{\bm{1},\bm{x},\bm{y}} = \spann{\bm{1},\bm{x}}
+\end{equation}
+and as a result, since $\bm{y} \in \col A$, we can write $\bm{y}$ as a linaer combination of $\bm{1}$ and $\bm{x}$ such that:
+\begin{equation}
+    \bm{y} = m\bm{x}+b\bm{1}
+\end{equation}
+and we are done.
+\subsection{Problem Four}
+\noindent \textbf{(a)} Let us write:
+\begin{equation}
+    \bm{x} = \begin{bmatrix}
+        x_1 \\ 
+        x_2 \\ 
+        \vdots \\ 
+        x_m
+    \end{bmatrix}
+\end{equation}
+and:
+\begin{equation}
+    \bm{y^T} = [\bm{Y}]
+\end{equation}
+such that:
+\begin{equation}
+    A = \begin{bmatrix}
+        x_1\bm{Y} \\ 
+        x_2\bm{Y} \\ 
+        \vdots \\ 
+        x_m\bm{Y}
+    \end{bmatrix}
+\end{equation}
+where the row space is:
+\begin{equation}
+    \row A = \spann{x_1\bm{Y}, x_2\bm{Y}, \dots, x_m\bm{Y}}
+\end{equation}
+WLOG, let $x_1 \neq 0$. Then, every vector in the row space can be written in terms of $x_1\bm{Y}$ since:
+\begin{equation}
+    x_i \bm{Y} = x_1 \bm{Y} \cdot \left(\frac{x_i}{x_1}\right)
+\end{equation}
+and using the Extend-Reduce theorem, the row space is equivalent to:
+\begin{equation}
+    \row A = \spann{x_1\bm{Y}}
+\end{equation}
+which has a rank of $1$.
+\vspace{2mm}
+
+\textbf{(b)} Similarly, if $A$ has a rank of one, that means there is only one vector in its row space. If its row space is:
+\begin{equation}
+    \row A = \spann{\bm{a}_1, \bm{a}_2, \dots, \bm{a}_n}
+\end{equation}
+where at least one of the vectors is nonzero (or else the rank will be $0$). WLOG, let $\bm{a}_1$ be a nonzero vector. Then we are given that the other vectors can be written as:
+\begin{equation}
+    \bm{a}_i = f_i \bm{a}_1
+\end{equation} 
+for some constant $f_i$. As a result, we can write the matrix $A$ as:
+\begin{equation}
+    A = \begin{bmatrix}
+        \bm{a}_1 \\ 
+        f_2\bm{a}_1 \\
+        \vdots \\ 
+        f_n\bm{a}_1 
+    \end{bmatrix} = \begin{bmatrix}
+        1 \\ f_2 \\ \vdots \\ f_n
+    \end{bmatrix}\bm{a}_1
+\end{equation}
+and we are done.
+\end{document}
