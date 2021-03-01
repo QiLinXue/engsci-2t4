@@ -1,0 +1,166 @@
+\section{Taylor and Maclaurin Series}
+\begin{itemize}
+    \item Recall that the power series can be written as:
+    \begin{equation}
+        f(x) = c_0 + c_1(x-a) + c_2(x-a)^2 + \cdots 
+    \end{equation}
+    for $|x-a|<R$, we note that $f(a)=c_0$. However, if we take the derivative:
+    \begin{equation}
+        f'(x) = c_1+2c_2(x-a)+3c_3(x-a)^2 + \cdots 
+    \end{equation}
+    and we similarly get $f'(a)=c_1$. For the second derivative:
+    \begin{equation}
+        f''(x) = 2c_2 + 6c_3(x-a) + \cdots 
+    \end{equation}
+    we get $f''(a)=2c_2$.
+    \item In general:
+    \begin{equation}
+        f^(n)(a) = n!c_n
+    \end{equation}
+    \begin{theorem}
+        If $f(x)$ has a power series representation about $a$:
+        \begin{equation}
+            f(x)= \sum_{n=0}^\infty c_n (x-a)^n
+        \end{equation}
+        with $|x-a|<R$. Then the coefficients of the series are $c_n = \frac{f^{(n)(a)}}{n!}$
+    \end{theorem}
+    \item For a Taylor series of $f$ about $a$, we have:
+    \begin{equation}
+        f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x-a)^n = f(a) + \frac{f'(a)(x-a)}{1!} + \frac{f''(a)(x-a)^2}{2!} + \cdots
+    \end{equation}
+    \item For the Maclaurin Series, it is simply a Taylor series taken at $x=a$:
+    \begin{equation}
+        f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!}x^n = f(0) + \frac{f'(0)}{1!}x+\frac{f''(0)}{2!}x^2+\cdots
+    \end{equation}
+    \begin{definition}
+        A definition is called \textbf{analytic at a} if it can be represented as a power series about $a$.
+    \end{definition}
+    \begin{example}
+        Let us attempt to write out the Maclaurin series of $f(x)=e^x$. First note that:
+        \begin{equation}
+            f'(x)=e^x=f''(x)=f'''(x)=f^{(n)}(x)
+        \end{equation}
+        Therefore: $f^{(n)}(0)=e^0=1$. Therefore, we can write it as the series:
+        \begin{equation}
+            e^x = \sum_{n=0}^\infty \frac{x^n}{n!} = 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots
+        \end{equation}
+        We can check that this converges using the ratio test. Let $a_n=\frac{x^n}{n!}$. Then:
+        \begin{equation}
+            \left|\frac{a_{n+1}}{a_n}\right| = \left|\frac{x^{n+1}}{(n+1)!} \cdot \frac{n!}{x^n}\right| = \frac{|x|}{n+1}
+        \end{equation}
+        which approaches zero as $n\to\infty$. As a result, $R=\infty$
+    \end{example}
+    \item We ask ourselves the question: When is it true that $f(x)=\sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x-a)^n$
+    \begin{definition}
+        The nth degree Taylor polynomial of $f$ about $a$ can be written as:
+        \begin{equation}
+            T_n(x) = \sum_{i=0}^n \frac{f^{(i)}(a)}{i!}(x-a)^i = f(a) + \frac{f'(a)}{1!}(x-a)+\cdots + \frac{f^{(n)}(a)}{n!}(x-a)^n
+        \end{equation}
+    \end{definition}
+    \begin{example}
+        Let us take a look at $e^x$ about $a=0$. Then the first, second, third degree series can be written as:
+        \begin{align}
+            T_1(x) &=  1+x \\ 
+            T_2(x) &= 1+x+\frac{x^2}{2} \\ 
+            T_3(x) &= 1+x+\frac{x^2}{2}+\frac{x^3}{3!}
+        \end{align}
+        We can then define the remainder function as:
+        \begin{equation}
+            R_n(x)=f(x)-T_n(x)
+        \end{equation}
+    \end{example}
+    \begin{theorem}
+        If $f(x)=T_n(x)+R_n(x)$ and $\lim_{n\to\infty} R_n(x)=0$ for $|x-a|<R$. Then $f$ is equal to the sum of its Taylor series.
+        \vspace{2mm}
+
+        Given that $f$ has $n+1$ continuous derivatives on an open interval $I$ containing $a$, tyhen for all $x\in I$:
+        \begin{equation}
+            f(x) = f(a)+f'(a)(x-a)+\frac{f''(a)(x-a)^2}{2!}+\cdots + \frac{f^{(n)}(a)(x-a)^n}{n!}+R_n(x)
+        \end{equation}
+        where
+        \begin{equation}
+            R_n(x) = \frac{1}{n!}\int_a^x f^{(n+1)}(t)(x-t)^n \dd{t}
+        \end{equation}
+        \begin{proof}
+            Consider the fundamental theorem of calculus:
+            \begin{equation}
+                \int_a^b f'(t) \dd{t} = f(b)-f(a)
+            \end{equation}
+            Suppose we evaluate this via integration by parts:
+            \begin{align*}
+                u = f'(t) && \dd{v}=\dd{t} \\ 
+                \dd{u}=f''(t) && v = t-b
+            \end{align*}
+            This gives:
+            \begin{align}
+                \int_a^b f'(t) \dd{t} &= [f'(t)(t-b)]^b_a - \int_a^b f''(t)(t-b)\dd{t} \\ 
+                &= (b-a)f'(a) + \int_a^b (b-t)fL''(t)\dd{t}
+            \end{align}
+            We integrate by parts again:
+            \begin{align}
+                u=f''(t) && \dd{v}=(b-t)\dd{t} \\ 
+                \dd{u}=f'''(t)\dd{t} && v = -\frac{(b-t)^2}{2}
+            \end{align}
+            which gives:
+            \begin{align}
+                \int_a^b f^n(t) (b-t)\dd{t} = \left[-\frac{(b-t)^2}{2}f''(t)\right]^b_a+\int_a^b \frac{(b-t)^2}{2}f'''(t)\dd{t}
+            \end{align}
+            If we continue this a total of $n$ times, then we eventually get:
+            \begin{equation}
+                \int_a^b f'(t) \dd{t} = (b-a)f'(a) + \frac{(b-a)^2}{2!}f''(a) + \frac{(b-a)^3}{3!}f''(a) + \cdots + \frac{(b-a)^n}{n!}f^{(n)}(a) + \int_a^b \frac{(b-t)^n}{n!}f^{n+1}(t)\dd{t}
+            \end{equation}
+            However, remember that this integration is equal to $f(b)-f(a)$. If we let $x=b$, then we get:
+            \begin{equation}
+                f(x) = f(a)+(x-a)f'(a)+\frac{(x-a)^2}{2!}f''(a)+\cdots + \frac{(x-a)^n}{n!}f^{(n)}(a) + R_n(x)
+            \end{equation}
+            where from our previous work, we have
+            \begin{equation}
+                R_n(x) = \int_a^x \frac{(x-t)^n}{n!}f^{n+1}(t) \dd{t}
+            \end{equation}
+        \end{proof}
+    \end{theorem}
+    \item For $|f^{(n+1)}(t)| \le M$ for $a<t < x$ we can bound the remainder function by:
+    \begin{equation}
+        |R_n(x)| \le \left|\int_0^x \frac{M(x-t)^n}{n!}\dd{t}\right| = \left|M\left[\frac{(x-t)^{n+1}}{(n+1)!}\right]^x_a\right| = M\frac{|x-a|^{n+1}}{(n+1)!}
+    \end{equation}
+    \item If we instead use the MVT, we can obtain a slightly different expression for the reaminder:
+    \begin{equation}
+        R_n(x) = \frac{f^{n+1}(c)(x-a)^{n+1}}{(n+1)!}
+    \end{equation}
+    with $a<c<x$.
+    \begin{example}
+        Suppose we wish to continue the proof that $e^x$ is indeed equal to the sum of its Taylor series, we note again that $f^{(n+1)}(t)=e^t$. For $x>0$, we can pick an $x$ such that $0<t<x$ where $e^t<e^x$. The remainder can then be written as:
+        \begin{equation}
+            R_n(x) < \frac{e^xx^{n+1}}{(n+1)!}
+        \end{equation}
+        As $n\to\infty$, the remainder approaches zero and as a result:
+        \begin{equation}
+            e^x = \sum_{n=0}^\infty \frac{x^n}{n!}
+        \end{equation}
+        for all $x$ is a true statement.
+    \end{example}
+    \begin{example}
+        Let us now find the Maclaurin series for $\cos x$. We have:
+        \begin{align}
+            f(x)=\cos x && f(0)=1 \\ 
+            f'(x)=-\sin x && f'(0)=0 \\ 
+            f''(x) = -\cos x && f''(0)=-1 \\ 
+            f'''(x) = \sin x && f'''(0)= 0 \\ 
+            f^{(4)}(x) = \cos x && f(0) = 1
+        \end{align}
+        and it repeats. Therefore, we propose that:
+        \begin{align}
+            \cos x &= f(0)+f'(0)x+\frac{f''(0)x^2}{2}+\cdots \\ 
+            &= 1-\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^6}{6!}+\cdots \\ 
+            &= \sum_{n=0}^\infty (-1)^n \frac{x^{2n}}{(2n)!}
+        \end{align}
+        We can use the ratio test to show that the radius of convergence is $R=\infty$. Finally, we need to prove that this sum is $\cos x$. We note that:
+        \begin{equation}
+            |f^{n+1}(t)| = \pm \cos t \text{ or } \pm \sin t \le 1
+        \end{equation}
+        so we can bound the remainder by:
+        \begin{equation}
+            |R_n(x)| \le \left|\frac{Mx^{n+1}}{(n+1)!}\right| = \left|\frac{x^{n+1}}{(n+1)!}\right|
+        \end{equation}
+    \end{example}
+\end{itemize}
