@@ -163,4 +163,98 @@
             |R_n(x)| \le \left|\frac{Mx^{n+1}}{(n+1)!}\right| = \left|\frac{x^{n+1}}{(n+1)!}\right|
         \end{equation}
     \end{example}
+    \item An important idea is that it does not matter where the coefficients in the power series expansion comes from. There is only one unique set of coefficients so if one possible set is found, then it is the only set.
+    \begin{example}
+        Let us find the Maclaurin series for $\sin x$:
+        \begin{align}
+            \sin x &= -\frac{d}{dx}\cos x \sum_{n=0}^\infty (-1)^n \frac{x^{2n}}{(2n)!} \\ 
+            &= \sum_{n=1}^\infty (-1)^{n-1} 2n\frac{x^{2n-1}}{2n!} \\ 
+            &= \sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{(2n+1)!}
+        \end{align}
+    \end{example}
+    \begin{example}
+        Consider the function $x\sin x$. The power expansion is thus:
+        \begin{equation}
+            x\sin x = \sum_{n=0}^\infty (-1)^n \frac{x^{2n+2}}{(2n+1)!}
+        \end{equation}
+    \end{example}
+    \begin{example}
+        Let us try to find the Taylor series of $\cos x$ about $\frac{17 \pi}{4}$. This gives:
+        \begin{align}
+            f(x)=\cos x && f\left(\frac{17\pi}{4}\right) = \frac{1}{\sqrt{2}} \\ 
+            f'(x)=-\sin x && f'\left(\frac{17\pi}{4}\right) = -\frac{1}{\sqrt{2}} \\ 
+            f''(x)=-\cos x && f''\left(\frac{17\pi}{4}\right) = -\frac{1}{\sqrt{2}} \\ 
+            f'''(x)=\sin x && f'''\left(\frac{17\pi}{4}\right) = \frac{1}{\sqrt{2}} \\ 
+            f''''(x)=\cos x && f''''\left(\frac{17\pi}{4}\right) = \frac{1}{\sqrt{2}}
+        \end{align}
+    \end{example}
+    \begin{example}
+        We have already seen that:
+        \begin{equation}
+            \ln(1+x)=\sum_{n=1}^\infty \frac{(-1)^{n+1}x^n}{n} = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots
+        \end{equation}
+        fpr $-1<x \le 1$. We can verify this by verifying coefficients:
+        \begin{align}
+            f(x) &= \ln(1+x) \\ 
+            f'(x) &= \frac{1}{1+x} \\ 
+            f''(x) &= -\frac{1}{(1+x)^2} \\ 
+            f'''(x) &= \frac{2}{(1+x)^3} \\ 
+            f''''(x) &= \frac{-3!}{(1+x)^4} \\ 
+            f^{(n)}(x) &= (-1)^{n+1} \frac{(n-1)!}{(1+x)^n}
+        \end{align}
+        Suppose we wish to bound the $n^\text{th}$ derivative using the remainder function:
+        \begin{align}
+            R_n &= \frac{1}{n!}\int_0^x f^{(n+1)}(t)(x-t)^n \dd{t} \\ 
+            &= \frac{1}{n!}\int_0^x (-1)^{n+2} \frac{n!}{(1+t)^{n+1}}(x-t)^n \dd{t} \\ 
+            &= (-1)^n \int_0^x \frac{(x-t)^n}{(1+t)^{n+1}}\dd{t}
+        \end{align}
+        Let us work with nonzero values of $x$: $0 \le x \le 1$. Then:
+        \begin{align}
+            |R_n(x)| &= \int_0^x \frac{(x-t)^n}{(1+t)^{n+1}} \dd{t} \\ 
+            &\le \int_0^x (x-t)^n \dd{t} & (1+t)>1 \\ 
+            &= \frac{x^{n+1}}{n+1}
+        \end{align}
+        As $n\to\infty$, this approaches zero. Now let $-1<x<0$. Then:
+        \begin{align}
+            |R_n(x)| &= \left|\int_0^x \frac{(x-t)^n}{(1+t)^{n+1}} \dd{t}\right| \\ 
+            &= \int_x^0 \left(\frac{t-x}{1+t}\right)^n \frac{\dd{t}}{1+t}
+        \end{align}
+        Note that from the mean value theorem, a number $z$ exists, where $x<z<0$ such that\footnote{
+            To see it explicitly, we can interpret the function as the area under the curve from $x$ to $0$ of: $\frac{(t-x)^n}{(1+t)^{n+1}}$. The mean value theorem tells us that the average height of this function has to occur at a value of $t=z$ where $x<z<0$ and the total area can be represented as the average height (at $t=z$) multiplied by the width, which is $0-x=-x$ (note that since $x$ is negative, we can interpret this as multiplying it by $-1$ to get a positive area).
+        }:
+        \begin{equation}
+            \int_x^0 \left(\frac{t-x}{1+t}\right)^n \frac{\dd{t}}{1+t} = \left(\frac{z-x}{1+z}\right)^n \left(\frac{-x}{1+z}\right)
+        \end{equation}
+        Now $|x|<1$ so $|x|-|z| < 1 - |z|$. This implies:
+        \begin{align}
+            \frac{|x|-|z|}{1-|z|} &< 1 \\
+            \frac{-x+z}{1+z} &< 1 
+        \end{align}
+        We then have the limit:
+        \begin{equation}
+            \lim_{n\to 0} \left(\frac{z-x}{1+z}\right)^n = 0
+        \end{equation}
+        and therefore:
+        \begin{equation}
+            R_n(x) \to 0
+        \end{equation}
+        as $n\to \infty$.
+    \end{example}
+    \item It is possible to multiply and divide different power series
+    \begin{example}
+        Suppose we have the function $\frac{e^x}{1-x}$. Then the power series is given as:
+        \begin{align}
+            &= \left(1 + x + \frac{x^2}{2}+\cdots\right)(1+x+x^2+\cdots) \\ 
+            &= 1 + 2x + \frac{5}{2}x^2 + \frac{16}{6}x^3 + \cdots 
+        \end{align}
+    \end{example}
+    \begin{example}
+        We can determine the power expansion for $\tan x$ by using long division. We have:
+        \begin{align}
+            \tan x &= \frac{\sin x}{\cos x} \\ 
+            &= \frac{x-x^3/3! + x^5/5! + \cdots}{1-x^2/2 + x^4/4! + \cdots} \\ 
+            &= x + \frac{x^3}{2} + \frac{2}{15}x^5 + \cdots 
+        \end{align}
+        which for obvious reasons, I have omitted the long division steps. The radius of convergence is $|x|<R=\frac{\pi}{2}$ since the function diverges at $\tan \frac{\pi}{2}$.
+    \end{example}
 \end{itemize}
