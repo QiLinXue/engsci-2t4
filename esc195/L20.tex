@@ -43,4 +43,63 @@
         \end{equation}
         Note that we can also use our alternating series result to get the same error.
     \end{example}
+    \begin{example}
+        Suppose we wish to find $\ln(1.4)$ to within $0.001$ using the series expansion for $\ln(1-x)$:
+        \begin{equation}
+            \ln(1-x) = - x - \frac{x^2}{2}-\frac{x^3}{3}-\frac{x^4}{4}-\cdots
+        \end{equation}
+        which converges for $|x|<1$. Here, we want $x=-0.4$ and we get an alternating series. The remainders are then"
+        \begin{align}
+            |R_1(x)| &< \left|\frac{x^2}{2}\right| = 0.8 \\ 
+            |R_2(x)| &< \left|\frac{x^3}{3}\right| = 0.02 \\ 
+            |R_3(x)| &< \left|\frac{x^4}{4}\right| = 0.006 \\ 
+            |R_4(x)| &< \left|\frac{x^5}{5}\right| = 0.002 \\ 
+            |R_5(x)| &< \left|\frac{x^6}{6}\right| = 0.0007 < 0.001
+        \end{align}
+        Therefore, we can take the first five terms of the expansion and get an answer within $0.0007$ of the actual answer.
+    \end{example}
+    \item The binomial theorem tells us:
+    \begin{align}
+        (a+b)^k &= a^k + ka^{k-1}b + \frac{k(k-1)}{2!}a^{k-2}b^2 + \cdots + \frac{k(k-1)(k-2)\cdots (k-n+1)}{k!}a^{k-n}b^{n} \\ 
+        &= \sum_{n=0}^k \binom{k}{n}a^{k-n}b^n
+    \end{align}
+    \item If we let $a=1$ and $b=x$, we get:
+    \begin{equation}
+        (1+x)^k = \sum_{n=0}^k \binom{k}{n}x^n
+    \end{equation}
+    which represents a power series. We can also get the coefficients using the Taylor series:
+    \begin{align}
+        f(x)=(1+x)^k && f(0)=1 \\ 
+        f'(x)=k(1+x)^{k-1} && f'(1) = k \\ 
+        f''(x)=k(k-1)(1+x)^{k-1} && f''(0) = k(k-1)
+    \end{align}
+    such that:
+    \begin{equation}
+        f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!}x^n
+    \end{equation}
+    which is equiavlent to before. We can compare the ratio test:
+    \begin{equation}
+        \left|\frac{a_{n+1}}{a_n}\right| = \left|\frac{k(k-1)(k-2)\cdots (k-x)(x^{n+1})}{(n+1)!}\cdot \frac{n!}{k(k-1)\cdots (k-n+1)x^n}\right| = \left|\frac{k-n}{n+1}x\right|
+    \end{equation}
+    which approaches $|x|<1$ as $n\to \infty$. The interval convergence is:
+    \begin{align}
+        k \le -1 && I = (-1,1) \\ 
+        -1<k<0: && I= (-1,1] \\ 
+        k \ge 0: && I = [-1,1]
+    \end{align}
+    \begin{example}
+        Suppose we have $f(x)=\frac{1}{\sqrt{2+x}}$. We then have:
+        \begin{align}
+            (2+x)^{-0.5}{n} &= \frac{1}{\sqrt{2}}\left(1+\frac{x}{2}\right)^{-1/2} \\ 
+            &= \frac{1}{\sqrt{2}}\sum_{n=0}^\infty \binom{-1/2}{n}\left(\frac{x}{2}{}\right)^n \\ 
+            &= \frac{1}{\sqrt{2}}\left[1-\frac{1}{2}\frac{x}{2}+\frac{3}{4}\frac{(x/2)^2}{2!}-\cdots\right]
+        \end{align}
+        and the radius of convergence is $2$ since we want $|x/2|<1$.
+    \end{example}
+    \begin{example}
+        This is an extremely important linear approximation:
+        \begin{equation}
+            (1+x)^k \approx 1+kx
+        \end{equation}
+    \end{example}
 \end{itemize}

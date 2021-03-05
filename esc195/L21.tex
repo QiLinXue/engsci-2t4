@@ -1,0 +1,81 @@
+\section{Fourier Series}
+\begin{itemize}
+    \item Fourier Series is used to represent periodic functions using a series consisting of trigonometric functions.
+    \begin{definition}
+        A function is periodic if and only if there exists a constant $T$ such that $f(t+T)=f(t)$. The smallest positive value $T$ is known as the fundamental period.
+    \end{definition} 
+    \begin{example}
+        If we have a function in the form of: 
+        \begin{equation}
+            f(t) = \cos(\pi t) + \frac{1}{2}\sin(2\pi t)
+            \label{eqn:fourier}
+        \end{equation}
+        The period of the first term is $2$ and the period of the second term is $1$. The smallest period for $f$ is $2$:
+\begin{example}
+    \begin{tikzpicture}
+        \begin{axis}[
+        legend pos=outer north east,
+        title=Example,
+        axis lines = box,
+        xlabel = $x$,
+        ylabel = $y$,
+        variable = t,
+        trig format plots = rad,
+        ]
+        \addplot [
+            domain=-4:4,
+            samples=200,
+            color=blue,
+            ]
+            {cos(pi*x)+0.5*sin(2*pi*x)};
+        \addlegendentry{$f(t)$}
+        \end{axis}
+        \end{tikzpicture}
+\end{example}
+    \end{example}
+    \begin{theorem}
+        For $f(t)$ periodic, with fundamental period $T$, continuous and piecewise differentiable, then:
+        \begin{equation}
+            f(t)=\frac{a_0}{2}+\sum_{n=1}^\infty a_n\cos (n\omega t) + b_n\sin(n\omega t)
+        \end{equation}
+        where $\omega = \frac{2\pi}{T}$ is known as the Fourier series of $f$. $a_n$ and $b_n$ are Fourier coefficients.
+    \end{theorem}
+    \item To determine the coefficients, we need the following integrals:
+    \begin{equation}
+        \int_{-T/2}^{T/2} \cos(n\omega t)\dd{t} = \begin{cases}
+            0 & n\neq 0 \\ 
+            T & n=0
+        \end{cases}
+    \end{equation}
+    \begin{equation}
+        \int_{-T/2}^{T/2}\sin(n\omega t)\dd{t} = 0
+    \end{equation}
+    \begin{equation}
+        \int_{-T/2}^{T/2}\cos(m\omega t)\cos(n\omega t)\dd{t} = \begin{cases}
+            0 & m\neq n \\ 
+            T/2 & m=n
+        \end{cases}
+    \end{equation}
+    % \begin{equation}
+    %     \int_{-T/2}^{T/2} \cos(m\omega t)\sin(n\omega t)\dd{t} =0 
+    % \end{equation}
+    \begin{example}
+        Take the integral $\int_{-T/2}^{T/2} \cos(5\omega t)\cos(3\omega t)\dd{t}$. We can write this as:
+        \begin{align}
+            &= \frac{1}{2}\int_{-T/2}^{T/2}(\cos(2\omega t) + \cos(8\omega t))\dd{t} \\ 
+            &= \frac{1}{2}\left[\frac{1}{2\omega} \sin(2\omega t) + \frac{1}{8\omega}\sin(8\omega t)\right]^{T/2}_{-T/2} \\ 
+            &= 0
+        \end{align}
+    \end{example}
+    \item Consider the integrals:
+    \begin{align}
+        \int_{-T/2}^{T/2} f(t)\cos(m\omega t) \dd{t} &= \frac{T}{2}a_m \\ 
+        \int_{-T/2}^{T/2} f(t)\sin(m\omega t) \dd{t} &= \frac{T}{2}b_m 
+    \end{align}pi/
+    where we have substituted in equation \ref{eqn:fourier} alongside the above integral identities. This then gives the coefficients as:
+    \begin{align}
+        a_n &= \frac{2}{T}\int_{-T/2}^{T/2} f(t)\cos(n\omega t)\dd{t} \\ 
+        b_n &= \frac{2}{T}\int_{-T/2}^{T/2} f(t)\sin(n\omega t)\dd{t}
+    \end{align}
+    for $n=1,2,3,\dots$.
+\end{itemize}
