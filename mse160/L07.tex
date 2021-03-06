@@ -9,7 +9,7 @@
     \item Uniform deformation occurs when the thickness of the material is uniform. Non-uniform deformation occurs when an increase in strain results in a decrease in stress. This is known as \textbf{necking}.
     \item Crystalline imperfections are called \textbf{dislocations}. The dislocation density can be reduced by heating (annealing), and plastic deformation can increase the density.
     \item Dislocations are known as \textbf{linear imperfection} as they can form a ``tunnel'' like bonding environment where there is a dislocation line.
-    \item Plastic deformation is the result of the step by step movement of linaer imperfections:
+    \item Plastic deformation is the result of the step by step movement of linear imperfections:
     \begin{enumerate}
         \item As a force is applied, the bonds to the right of the dislocation stretch and eventually break
         \item A new set of bonds re-forms
@@ -19,4 +19,48 @@
     \begin{warning}
         Remember that this mechanism is \textit{not} the breaking of all bonds at the same time on a plane of atoms.
     \end{warning}
+    \item It is possible to classify imperfections:
+    \begin{itemize}
+        \item 0-dimensional: point defect
+        \item 1-dimensional: linear imperfections (dislocations)
+        \item 2-dimensional: interfacial imperfections (grain boundaries, free surfaces)
+        \item 3-dimensional: volume defects  (pores, 2nd phases)
+    \end{itemize}
+    \subsection{Point Defects}
+    \item An example of a 0-dimensional imperfection is an \textbf{interstitial impurity}, for example putting in the much smaller carbon atoms in a lattice with iron atoms.
+    \item A substitutional impurity is when an atom gets replaced by another atom, and satisfies the following conditions:
+    \begin{itemize}
+        \item Same crystal structure
+        \item Similar size (usually ~10\%)
+        \item Similar electronegativity (prevent unwanted reactions)
+    \end{itemize}
+    \item These impurities can disrupt the intermolecular interactions, causing other atoms to move slightly from their original equilibrium location. This is known as \textbf{lattice strain.}
+    \item A \textbf{vacancy} is when an atom is missing altogether. The number of vacancies is given as:
+    \begin{equation}
+        N_v = N\exp\left(-\frac{Q_v}{kT}\right)
+    \end{equation}
+    where $Q_v$ is the energy to form vacancies, $k$ is the Boltzmann constant, $T$ is the temperature, and $N_v$ is the number of vacancies.
+    \item We can obtain interesting behaviour if we introduce two impurities (i.e. a dislocation and a interstitial impurity). We can often find that impurities diffuse towards dislocations (state with less energy). This is known as a \textbf{pin dislocation}
+    \item Impurities can also inhibit dislocation movements.
+    \item Adding impurities creates defects, but defects aren't bad. Most of the time, they are able to inhibit dislocation movements, which actually increases the strength of the material!
+    \subsection{One-dimensional Dislocations}
+    \item There exists strain fields that surround dislocations (areas of tension and compression). They can repel or under special circumstances, cancel out, leaving a small region of a perfect crystal structure.
+    \item Since plastic deformation is able to increase the dislocation density, it makes it harder for lattices to slide past each other. As an industry practice, this is known as \textbf{cold work} and plastic deformation is known as \textbf{forging}
+    \item \textbf{cold forging} and \textbf{hot forging} is used to classify the different types of forging, as it can involve very high temperatures sometimes.
+    \item Because the metal accumulates plastic strain during the strengthening process we also use the term strain hardening. 
+    \subsection{Two-dimensional Dislocations}
+    \item Atoms at a free surface have fewer nearer neighbours cause be a smaller amount of unsatisfied bonds. This causes atoms at the surface to be at a higher energy state. For water, this behaviour at the surface is known as the \textbf{surface tension}.
+    \item However, we are interested in what happens at an internal surface. Suppose we have two separate crystals (or grains) initially growing independently. However, when these two grains come into contact, it creates a \textit{two-dimensional dislocation}.
+    \item The dislocation at the grain boundary will have to:
+    \begin{itemize}
+        \item Change direction
+        \item Planar Mismatch
+        \item Lattice Strain
+    \end{itemize}
+    As a result, grain boundaries inhibits dislocation movement and strengthens metals by decreasing grain size.
+    \subsection{Three-Dimensional Dislocations}
+    \item Pores can be thought of ``bubbles'' in a material. They can be visible to the naked eye or may be finer.
+    % They are usually but not always detrimental to a material.
+    \item A second phase is when we insert a different material with a different crystal structure to strengthen materials (i.e. $Fe_3C$)
+    \item Similarly to before, it is difficult to navigate across these phases.
 \end{itemize}
