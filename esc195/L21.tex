@@ -78,4 +78,77 @@
         b_n &= \frac{2}{T}\int_{-T/2}^{T/2} f(t)\sin(n\omega t)\dd{t}
     \end{align}
     for $n=1,2,3,\dots$.
+    \begin{example}
+        Suppose we have a triangle function: $f(t)=\pi - t$ from $[-\pi,\pi]$:
+        \begin{center}
+            \begin{tikzpicture}
+                \begin{axis}[
+                legend pos=outer north east,
+                title=Triangle Function,
+                axis lines = box,
+                xlabel = $x$,
+                ylabel = $y$,
+                variable = t,
+                trig format plots = rad,
+                ]
+                \addplot [
+                    domain=-pi:pi,
+                    samples=70,
+                    color=blue,
+                    ]
+                    {pi-abs(t)};
+                \addlegendentry{$\pi - |t|$}
+                
+                \end{axis}
+                \end{tikzpicture}
+        \end{center}
+
+        We start by calculating the $b$ coefficient:
+        \begin{align}
+            b_n &= \frac{2}{2\pi} \int_{-\pi}^{\pi} f(t) \sin(nt) \dd{t} \\ 
+            &= \frac{1}{\pi}\int_{-\pi}^{\pi} \pi \sin(nt) \dd{t} - \frac{1}{\pi}(-t)\int_{-\pi}^{\pi}\sin (nt) \dd{t}
+        \end{align}
+        Notice that since this is an odd function, we have $b_n=0$. Next, we calcluate $a_n$:
+        \begin{align}
+            a_n &= \frac{2}{2\pi}\int_{-\pi}^{\pi} f(t) \cos(nt) \dd{t} \\ 
+            &= 2\frac{1}{\pi} \int_0^{\pi}(\pi -t)\cos(nt) \dd{t} \\ 
+            &= \begin{cases}
+                \pi & n=0 \\ 
+                0 & n\neq 0,\,\text{n is even} \\ 
+                \frac{4}{\pi n^2} & \neq 0,\,\text{n is odd}
+            \end{cases}
+        \end{align}
+        Therefore, we have:
+        \begin{equation}
+            f(t) = \frac{\pi}{2} + \sum_{n=0}^\infty \frac{4}{\pi (2k-1)^2}
+        \end{equation}
+    \end{example}
+    \begin{idea}
+        It is helpful to look if the function is even or odd at the beginning, allowing us to immediately set $a_n=0$ or $b_n=0$.
+    \end{idea}
+    \begin{example}
+        Suppose we wish to write the Fourier series of $f(x)=x^2$ from $-\pi \le x \le \pi$. The period is $T=2\pi$ and $\omega = \frac{2\pi}{T}=1$. We then have:
+        \begin{align}
+            a_n &= \frac{2}{2\pi} \int_{-\pi}^{\pi} t&2 \cos(nt) \dd{t}
+        \end{align}
+        For $n=0$ we have:
+        \begin{equation}
+            a_0 = \frac{1}{\pi}\int_{-\pi}^{\pi} t^2 \dd{t} = \frac{2\pi^2}{3}
+        \end{equation}
+        For $n\neq 0$, we have:
+        \begin{align}
+            a_n &= \frac{1}{\pi}\int_{-\pi}^{\pi} t^2\cos(nt)\dd{t} \\ 
+            &= \frac{1}{\pi n^2}\int_{-\pi}^{\pi} (nt)^2 \cos(nt) \dd{(nt)} \\ 
+            &= \frac{1}{\pi n^2}\left[(nt)^2\sin(nt)\right]\Biggr|^{t=\pi}_{t=-\pi}-\frac{2}{\pi n^2}\int_{-\pi}^{\pi} (nt)\sin(nt)\dd{(nt)} & \text{(reduction)} \\ 
+            &= -\frac{2}{\pi n^3}(\sin(nt)-nt\cos(nt))\Biggr|^{t=\pi}_{t=-\pi} & \text{(by parts)} \\ 
+            &= \begin{cases}
+                -\frac{4}{n^2} & \text{n odd} \\ 
+                +\frac{4}{n^2} & \text{n even}
+            \end{cases}
+        \end{align}
+        Since the function is even, we have $b_n=0$. Thus:
+        \begin{equation}
+            f = \frac{\pi^2}{3} + \sum_{n=1}^\infty \frac{4}{n^2}(-1)^{n} \cos nt
+        \end{equation}
+    \end{example}
 \end{itemize}

@@ -1,0 +1,48 @@
+\section{Vectors and the Geometry of Space}
+\begin{itemize}
+    \item Vectors can be written in the form of $\vec{a} = (1,1,1) = 1\hat{i}+1\hat{j}+1\hat{k}$. They do not typically represent a physical point in space.
+    \item If we want to specify that the vector starts at the origin, we use the \textbf{radius vector} $\vec{r}$.
+    \item Planes are written as:
+    \begin{align}
+        ax+by+cz=d \\ 
+        a(x-x_0) + b(y-y_0)+c(z-z_0)=0
+    \end{align}
+    Let $\vec{n}$ be the normal vector, let $\vec{r}$ be a general vector whose head lies on the plane and let $\vec{r}_0$ be a generic vector that lies on the vector. Then: $\vec{r}-\vec{r}_0$ lies on the plane so:
+    \begin{equation}
+        \vec{n}\cdot (\vec{r}-\vec{r}_0) = 0
+    \end{equation}
+    Given $\vec{n}=(n_1,n_2,n_3)$, $\vec{r}_0 = (x_0,y_0,z_0)$, and $\vec{r}=(x,y,z)$. Then:
+    \begin{equation}
+        n_1(x-x_0)+n_2(y-y_0)+n_3(z-z_0) = 0
+    \end{equation}
+    \begin{example}
+        Suppose we wish to represent the $yz$ plane. We can let the normal vector be $\vec{n}=(2,0,0)$ and $\vec{r}_0=(0,2,3)$. We can check that the solution to:
+        \begin{equation}
+            2(x-0)+0(y-2)+0(z-3)=0
+        \end{equation}
+        is $x=0$.
+    \end{example}
+    \item For a line, we follow a similar process. Let $r_0$ be a fixed point on a line and let $\vec{r}$ be a general vector that lies on the line. Let $t\vec{v} = \vec{r}-\vec{r}_0$ be a vector that lies on the line such that:
+    \begin{equation}
+        \vec{r}=\vec{r}_0 + t\vec{v}
+    \end{equation}
+    where $t$ is a parameter.
+    \item We can write this in parametric form:
+    \begin{align}
+        x &= x_0 + tv_1 \\ 
+        y &= y_0 + tv_2 \\ 
+        z &= z_0 + tv_3
+    \end{align}
+    Or we can write it in its equivalent symmetric form:
+    \begin{equation}
+        t = \frac{x-x_0}{v_1} = \frac{y-y_0}{v_2} = \frac{z-z_0}{v_3}
+    \end{equation}
+    \begin{example}
+        Let $P_0=(-3,0,0)$ and $\vec{v}=(2,0,0)$. This gives the equation:
+        \begin{align}
+            x &= -3 + 2t \\ 
+            y &= 0 \\ 
+            z &= 0
+        \end{align}
+    \end{example}
+\end{itemize}
