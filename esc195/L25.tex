@@ -1,0 +1,25 @@
+\section{Arc Length and Curvature}
+\begin{itemize}
+    \item The arclength can be extended to three dimensions:
+    \begin{equation}
+        s = \int_a^b \sqrt{x'(t)^2 + y'(t)^2 + z'(t)^2} \dd{t}
+    \end{equation}
+    \begin{example}
+        Suppose we have a circular helix (which looks like a screw):
+        \begin{equation}
+            \vec{r}(t) = 3\sin t \hat{i} + 3\cos t\hat{j} + 4t\hat{k}
+        \end{equation}
+        for $t \in [0, 2\pi]$. The derivative is:
+        \begin{equation}
+            \vec{r}'(t) = 3\cos t \hat{i} - 3\sin t\hat{k} + 4\hat{k}
+        \end{equation}
+        This gives:
+        \begin{equation}
+            \lVert \vec{r}'(t) \rVert = \sqrt{9\cos^2 t + 9\sin^2 t + 16} = 5
+        \end{equation}
+        so:
+        \begin{equation}
+            s = \int_0^{2\pi} \lVert \vec{r}'(t) \rVert \dd{t} = 5 \cdot 2\pi = 10\pi
+        \end{equation}
+    \end{example}
+\end{itemize}

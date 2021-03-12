@@ -1,0 +1,118 @@
+\section{Cylinders and Quadratic Cylinders}
+\begin{itemize}
+    \item The simplest \textit{non-planar} function is in the form of:
+    \begin{equation*}
+        Ax^2+By^2+Cz^2 + Dxy + Exz + Fyz + Gx + Hy + Iz + J =0
+    \end{equation*}
+    whicha re known as \textbf{quadratic surfaces.} There are nine distinct types of surfaces that can be represented. A list of shapes can be found in the Stewart textbook.
+    \item There are several properties that are worth investigating to understand a quadratic surface:
+    \begin{itemize}
+        \item Domain/Range
+        \item Intercepts with coordinate axes
+        \item Traces (intercepts with coordinates planes)
+        \item Sections (Intersections with other planes)
+        \item Center
+        \item Symmetry
+        \item Bounded / Unbounded
+    \end{itemize}
+    \begin{example}
+        Suppose we look at the hyperboloid of two sheets:
+        \begin{equation}
+            \frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=-1 \implies z = \pm c\sqrt{1+\frac{x^2}{a^2}+\frac{y^2}{b^2}}
+        \end{equation}
+        This means the domain is $(x,y) \in (-\infty, \infty)$ and the range is $z \ge c$ or $z \le c$. We now look at intercepts and we realize that at $x=0$ and $y=0$, we have $z = \pm c$. We then look at the traces:
+        \begin{itemize}
+            \item For the $xy$ plane, we have nothing since $z \neq 0$.
+            \item For the $xz$ plane, we have $y=0$ and we get a hyperbola:
+            \begin{equation}
+                z = \pm c\sqrt{1+\frac{x^2}{a^2}}
+            \end{equation}
+            \item For the $yz$ plane $(x=0$, we have another hyperbola)
+            \begin{equation}
+                z = \pm c\sqrt{1+\frac{y^2}{b^2}}
+            \end{equation}
+        \end{itemize}
+        We then look at sections. We can start with the plane defined by $z=z_0$ with $|z_0|>c$. This gives:
+        \begin{equation}
+            \frac{a^2}{a^2}+\frac{y^2}{b^2}=\frac{z_0^2}{c^2}-1
+        \end{equation}
+        since $z_0^2>c^2$, the RHS is greater than zero so the section is an ellipse. The center is at the origin. No offset terms. There is also a lot of symmetry:
+        \begin{align}
+            x &\to -x \\ 
+            y &\to -y \\ 
+            z &\to -z
+        \end{align}
+        so it is symmetric about each coordinate axis and it is unbounded in all directions.
+    \end{example}
+    \item Another important concept is the \textbf{projection}. If we have two three dimensional currves and they intersect, then we can define:
+    \begin{definition}
+        A curve of intersection: $C=(x,y,z)$ is defined such that $z=f(x,y)$ and $z=g(x,y)$. Then :$f(x,y)=g(x,y)$.
+    \end{definition}
+    If we set $z=0$, then the curve of intersection is given by $(x,y,z=0)$. This is known as the projection and can be seen as the shadow of the points of intersection.
+    \begin{example}
+        Suppose we have a cone: $x^2+y^2=2z^2$. We can rearrange this to:
+        \begin{equation}
+            z=\pm\sqrt{(x^2+y^2)/2}
+        \end{equation}
+        We can look at the plane $y+4z=5$. We then have:
+        \begin{equation}
+            \frac{5-y}{4}=\sqrt{\frac{x^2+y^2}{2}}
+        \end{equation}
+        After solving, we get:
+        \begin{equation}
+            \frac{x^2}{25/7} + \frac{(y+5/7)^2}{200/49} = 1
+        \end{equation}
+        gives the projection onto the plane $z=0$.
+    \end{example}
+    \item Recall that a vector can be written like $\vec{r}=3\hat{i}+2\hat{j}+5\hat{k}$. However, instead of having constants, we can have functions instead:
+    \begin{equation}
+        \vec{f}(t) = f_1(t)\hat{i} + f_2(t)\hat{j} + f_3(t)\hat{k} = (f_1(t), f_2(t), f_3(t))
+    \end{equation}
+    which is known as a vector-valued function or a \textbf{vector function}
+    \item One simple example is that of a straight line, where we have:
+    \begin{equation}
+        \vec{f}(t) = (f_1,f_2,f_3) = (a_1+b_1t,a_2+b_2t,a_3+b_3t)
+    \end{equation}
+    \item Suppose we have a three dimensional function $y=g(x)$. We can let $f_1(t)=t=x$. This gives $f_2(t)=g(t)$, and $f_3(t)=0$. This gives:
+    \begin{equation}
+        \vec{f}(t) = (t, g(t), 0)
+    \end{equation}
+    and the same concept can be extended to three dimensions.
+    \begin{definition}
+        Let the vector function $\vec{f}$ be defined on some interval $I$ containing the point $t_0$, except possibly at $t_0$ itself, and let $\vec{L}$ be a vector. Then:
+        \begin{equation}
+            \lim_{t\to t_0} \vec{f}(t) = \vec{L}
+        \end{equation}
+        if 
+        \begin{equation}
+            \lim_{t\to t_0} \lVert\vec{f}(t)-\vec{L}\rVert = 0
+        \end{equation}
+    \end{definition}
+    \item The simplest case is when $\lim_{t\to t_0} \vec{f}(t) = \vec{L}$. Then we can immediately see that:
+    \begin{equation}
+        \lim_{t\to t_0} \lVert \vec{f}(t) \rVert = \lVert \vec{L} \rVert
+    \end{equation}
+    \begin{warning}
+        Note that this is not an if and only if statement. It is totally possible for two vectors to have the same magnitude, but are not equal to each other.
+    \end{warning}
+    \item Limit rules carry over from two dimensional calculus. Given $\vec{f}(t) \to \vec{L}$ and $\vec{g}(t) \to \vec{M}$ and $u(t) \to A$ as $t\to t_0$. Then:
+    \begin{itemize}
+        \item $\vec{f}+\vec{g} \to \vec{L}+\vec{M}$
+        \item $\alpha \vec{f}(t) \to \alpha \vec{L}$
+        \item $u(t)\vec{f}(t) \to A\vec{L}$
+        \item $\vec{f}(t)\cdot \vec{g}(t) \to \vec{L}\cdot \vec{M}$
+        \item $\vec{f}(t) \times \vec{g}(t) \to \vec{L} \times \vec{M}$
+    \end{itemize}
+    \item We have $\vec{f}(t) \to \vec{L}$ \textit{if and only if} $f_1(t) \to L_1$, $f_2(t) \to L_2$, and $f_3(t) \to L_3$.
+    \begin{example}
+        Suppose we have a vector function:
+        \begin{equation}
+            f(t) = \frac{\sin t}{t} \hat{i} + (2+t^2)\hat{j} + e^{t^2}\cos t\hat{k}
+        \end{equation}
+        then:
+        \begin{equation}
+            \lim_{t\to 0} \vec{f}(t) = (1,2,1)
+        \end{equation}
+    \end{example}
+    \item A vector function $\vec{f}(t)$ is continuous at $t_0$ if $\lim_{t\to t_0} \vec{f}(t) =\vec{f}(t_0)$.
+\end{itemize}

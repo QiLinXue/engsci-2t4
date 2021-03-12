@@ -1,0 +1,124 @@
+\section{Derivatives and Integrals of Vector Functions}
+\begin{itemize}
+    \item We can define derivatives as:
+    \begin{align}
+        \vec{f}'(t) &\equiv \lim_{h\to 0} \frac{\vec{f}(t+h)-\vec{t}}{h} \\ 
+        &= f_1'(t)\hat{i}+f_2'(t)\hat{j}+f_3'(t)\hat{k}
+    \end{align}
+    \begin{proof}
+        We have:
+        \begin{align}
+            \vec{f}'(t) &= \lim_{h\to 0} \frac{\vec{f}(t+h)-\vec{f}(t)}{h} \\ 
+            &= \lim_{h\to 0}\left[\frac{f_1(t+h)-f_1(t)}{h}\hat{i}+\cdots\right] \\ 
+            &= \lim_{h\to 0} \frac{f_1(t+h)-f_1(t)}{h}\hat{i}+\lim_{h\to 0} \cdots \\ 
+            &= f_1'(t) \hat{i} + f_2'(t)\hat{j} +f_3'(t)\hat{k}
+        \end{align}
+    \end{proof}
+    \begin{example}
+        Suppose we have:
+        \begin{equation}
+            \vec{f}(t) = \frac{\sin t}{t} \hat{i} + (2+t^2)\hat{j}+e^{t^2}\cos t\hat{k}
+        \end{equation}
+        We can take the derivative of each term to get:
+        \begin{equation}
+            \vec{f}'(t) = \frac{t\cos t-\sin t}{t^2}\hat{i} + 2t\hat{j} + (2te^{t^2}\cos t - e^{t^2}\sin t)\hat{k}
+        \end{equation}
+    \end{example}
+    \item Similarly we can take the integral of a vector function as:
+    \begin{equation}
+        \int_a^b \vec{f}(t) \dd{t} = \hat{i}\int_a^b f_1(t) \dd{t} + \hat{j} \int_a^b f_2(t) \dd{t} + \hat{k}\int_a^b f_3(t) \dd{t}
+    \end{equation}
+    For example, this is useful if we wish to get a velocity function from an acceleration function. The usual integration rules apply. For example:
+    \begin{itemize}
+        \item $\int_a^b \vec{c} \cdot \vec{f}(t) \dd{t} = \vec{c} \cdot \int_a^b \vec{f}(t) \dd{t}$
+        \item $\left\lVert \int_a^b \vec{f}(t) \dd{t} \right\rVert \le \int_a^b \left\lVert \vec{f}(t) \right\rVert \dd{t}$
+    \end{itemize}
+    \item We can define a composite function as:
+    \begin{equation}
+        (\vec{f} \circ u)(t) =\vec{f}(u(t))
+    \end{equation}
+    \begin{example}
+        Let $u(t)=e^t$ and $\vec{f}(t) = (\cos t, \sin t, t^2)$. Then:
+        \begin{equation}
+            (\vec{f} \circ u)(t) = \cos(e^t)\hat{i} + \sin(e^t)\hat{j} + e^{2t}\hat{k}
+        \end{equation}
+    \end{example}
+    \begin{warning}
+        We can only take the composite of a vector function with a scalar function, not the other way around.
+    \end{warning}
+    \item We have the following differentiation rules:
+    \begin{itemize}
+        \item $(\vec{f}+\vec{g})'(t) = \vec{f}'(t) + \vec{g}'(t)$
+        \item $(\alpha\vec{f})'(t) = \alpha f'(t)$
+        \item $(u\vec{f})'(t) = u(t)\vec{f}'(t) + u'(t)\vec{f}(t)$
+        \item $(\vec{f}\cdot \vec{g})'(t) = \left[\vec{f}(t) \cdot \vec{g}(t)\right] + \left[\vec{f}'(t) \cdot \vec{g}(t)\right]$
+        \item $(\vec{f} \times \vec{g})'(t) = \left[\vec{f}(t) \times \vec{g}(t)\right] + \left[\vec{f}'(t) \times \vec{g}(t)\right]$
+        \item $(\vec{f}\circ u)'(t) = \vec{f}'(u(t))u'(t)$
+    \end{itemize}
+    \begin{example}
+        Let us take the position vector $\vec{r} = x\hat{i} + y\hat{j}+z\hat{k}$ where $r\equiv \lVert \vec{r} \rVert$ or $\vec{r}\cdot \vec{r} = r^2$. If we differentiate this, we get:
+        \begin{equation}
+            \frac{d\vec{r}}{dt} \cdot \vec{r} + \vec{r} \cdot \frac{d\vec{r}}{dt} = 2r\frac{dr}{dt}
+        \end{equation}
+        which confirms the dot product.
+    \end{example}
+    \begin{example}
+        Let us take the derivative $\frac{d}{dt} \frac{\vec{r}}{r}$. This is always the scalar function with a constant magnitude. However, the direction can change. The derivative then points to the direction in which the curve is changing in. We use the quotient rule:
+        \begin{align}
+            \frac{d}{dt} \frac{\vec{r}}{r} &= \frac{1}{r} \frac{d\vec{r}}{dt} - \frac{1}{r^2} \frac{dr}{dt} \vec{r} \\ 
+            &= \frac{1}{r^2}\left(r^2 \frac{d\vec{r}}{dt} - r\frac{dr}{dt}\vec{r}\right) \\ 
+            &= \frac{1}{r^3}\left((\vec{r}\cdot\vec{r}) \frac{d\vec{r}}{dt} - \vec{r} \frac{d\vec{r}}{dt} \vec{r}\right) \\ 
+            &= \frac{1}{r^3}\left((\vec{r} \times \frac{d\vec{r}}{dt}) \times \vec{r}\right)
+        \end{align}
+        where we have applied the triple cross product:
+        \begin{equation}
+            (\vec{a} \times \vec{b}) \times \vec{c} = (\vec{c} \cdot \vec{a})\vec{b} - (\vec{c} \cdot \vec{b})\vec{a}
+        \end{equation}
+    \end{example}
+    \item Suppose we have a generic position vector $\vec{r}(t) = x(t)\hat{i} + y(t)\hat{j}+z(t)\hat{k}$. This is a three dimensional curve where we can visualize an object moving across this curve. This gives us intuition for the following definition:
+    \begin{definition}
+        Let $C$ be parametized by $\vec{r}(t) = x(t) \hat{i} + y(t)\hat{j} +z(t)\hat{k}$ and be diffferentiable. Then $\vec{r}'(t)= x'(t)\hat{i}+y'(t)\hat{j}+z'(t)\hat{k}$ if not $\vec{0}$, is tangent to the curve $C$ at the point $P(x(t), y(t), z(t))$ and $\vec{r}'(t)$ points in the direction of increasing $t$.
+    \end{definition}
+    \begin{example}
+        Suppose we have a circle defined as $\vec{r} = a\cos t\hat{i} + a\sin t\hat{j}$. The derivative is:
+        \begin{equation}
+            \vec{r}' = -a\sin t \hat{i} + a\cos t\hat{j}
+        \end{equation}
+        Since the direction of increasing $t$ should be perpendicular to the position vector (radius), then the dot product should be zero:
+        \begin{equation}
+            \vec{r} \cdot \vec{r}' = -a^2 \sin t \cos t + a^2\cos t\sin t = 0
+        \end{equation}
+        which we verified.
+    \end{example}
+    \begin{example}
+        Suppose we have a striahgt line with direction $\vec{d}$ through a point $P(x_0, y_0, z_0)$. This gives us: $\vec{r}=\vec{a} + t\vec{d}$ where $\vec{a} = (x_0,y_0,z_0)$. Taking the derivative, we get:
+        \begin{equation}
+            \vec{r}' = \vec{d}
+        \end{equation}
+        as expected.
+    \end{example}
+    \begin{example}
+        Let us find the derivative of $\vec{r}(t) = (1+2t)\hat{i} + t^2\hat{j} + \frac{t}{2}\hat{k}$ at $P(9, 64, 2)$. This occurs at $t=4$. We have:
+        \begin{align}
+            \vec{r}'(t) &= 2\hat{i}+3t^2\hat{j} + \frac{1}{2}\hat{k} \\
+            \vec{(4)} &= 2\hat{i} + 48\hat{j} + \frac{1}{2}\hat{k}
+        \end{align}
+        The \textbf{tangent line} can be written as:
+        \begin{equation}
+            \vec{R}(q) = 9\hat{i}+64\hat{j}+2\hat{k} + q(2\hat{i}+48\hat{j}+\frac{1}{2}\hat{k})
+        \end{equation}
+    \end{example}
+    \item The \textbf{unit tangent vector} is given as:
+    \begin{equation}
+        \vec{T}(t) \equiv \frac{\vec{r}'(t)}{\lVert \vec{r'(t)} \rVert}
+    \end{equation}
+    Note that the dot product is:
+    \begin{equation}
+        \vec{T}(t) \cdot \vec{T}(t) = 1
+    \end{equation}
+    Differentiating,
+    \begin{equation}
+        \vec{T}'(t) \cdot \vec{T}(t) + \vec{T}(t) \cdot \vec{T}'(t) = 0 \implies \vec{T}'(t) \cdot \vec{T}(t) = 0
+    \end{equation}
+    This means the tangent vector is perpendicular to the derivative of the tangent vector.
+\end{itemize}
