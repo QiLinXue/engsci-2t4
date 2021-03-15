@@ -11,15 +11,149 @@
         \end{equation}
         for $t \in [0, 2\pi]$. The derivative is:
         \begin{equation}
-            \vec{r}'(t) = 3\cos t \hat{i} - 3\sin t\hat{k} + 4\hat{k}
+            \vec{r'}(t) = 3\cos t \hat{i} - 3\sin t\hat{k} + 4\hat{k}
         \end{equation}
         This gives:
         \begin{equation}
-            \lVert \vec{r}'(t) \rVert = \sqrt{9\cos^2 t + 9\sin^2 t + 16} = 5
+            \lVert \vec{r'}(t) \rVert = \sqrt{9\cos^2 t + 9\sin^2 t + 16} = 5
         \end{equation}
         so:
         \begin{equation}
-            s = \int_0^{2\pi} \lVert \vec{r}'(t) \rVert \dd{t} = 5 \cdot 2\pi = 10\pi
+            s = \int_0^{2\pi} \lVert \vec{r'}(t) \rVert \dd{t} = 5 \cdot 2\pi = 10\pi
         \end{equation}
     \end{example}
+    \item We can define the \textbf{function} $s(t)$ has the arclength from a time $t_0$ to a time $t$
+    \begin{equation}
+        s(t) = \int_{t_0}^t \lVert F'(\tau) \rVert \dd{\tau}
+    \end{equation}
+    \item Sometimes it is helpful to parametrize a function in terms of $s$
+    \begin{example}
+        Suppose we have the curve $\vec{r}(t) = t^2 \hat{i} + t^2\hat{j} - t^2\hat{k}$ from $(0,0,0)$. The arclength is then:
+        \begin{equation}
+            s = \int_0^t \sqrt{4\tau^2+4\tau^2+4\tau^2} \dd{\tau} = \sqrt{3}t^2
+        \end{equation}
+        As a result, we can parametize it as:
+        \begin{equation}
+            t^2 = \frac{s}{\sqrt{3}}
+        \end{equation}
+        so:
+        \begin{equation}
+            \vec{r}(s) = \vec{r}(t(s)) = \frac{s}{\sqrt{3}}\hat{i} + \frac{s}{\sqrt{3}}\hat{j} - \frac{s}{\sqrt{3}}\hat{k}
+        \end{equation}
+    \end{example}
+    \begin{definition}
+        The curvature is defined as:
+        \begin{equation}
+            k = \left| \frac{d\phi}{ds} \right|
+        \end{equation}
+    \end{definition}
+    \item Suppose we have some arbitrary function $y(x)$. We can define $\phi$ such that:
+    \begin{equation}
+        \frac{dy}{dx} = y' = \tan \phi \implies \phi = \tan^{-1}(y')
+    \end{equation}
+    Recall that $\frac{ds}{dx} = \sqrt{1+y'^2}$ so that we have:
+    \begin{equation}
+        \frac{d\phi}{dx} = \frac{y''}{1+y'^2}
+    \end{equation}
+    We can also use the chain rule:
+    \begin{equation}
+        \frac{d\phi}{dx} = \frac{d\phi}{ds} \cdot \frac{ds}{dx} = \frac{d\phi}{ds}\sqrt{1+y'^2}
+    \end{equation}
+    We can set our two expressions for $\frac{d\phi}{ds}$ equal to each other:
+    \begin{equation}
+        k = \left|\frac{d\phi}{ds}\right| = \frac{|y''|}{(1+y'^2)^{3/2}}
+    \end{equation}
+    \item We can apply similar reasoning for a parametric curve. We have:
+    \begin{equation}
+        \frac{dy}{dx} = \frac{y'}{x'}
+    \end{equation}
+    and:
+    \begin{equation}
+        \frac{d^2y}{dx^2} = \frac{x'y''-y'x''}{x'^3}
+    \end{equation}
+    so the curvature is given as:
+    \begin{align}
+        k &= \frac{y''}{(1+y')^{3/2}} \\ 
+        &= \frac{\left|\frac{x'y''-y'x''}{x'^3}\right|}{1+\left(\frac{y'}{x'}\right)^2} \\ 
+        &= \frac{|x'y''-y'x''|}{(x'^2+y'^2)^{3/2}}
+    \end{align}
+    \begin{example}
+        For a straight line $y=mx+B$, we have $y'=m$ and $y''=0$. This directly leads to $k=0$.
+    \end{example}
+    \begin{example}
+        For a circle, the curve can be parametrized by:
+        \begin{equation}
+            \vec{r} = r\cos t \hat{i} + r\sin t \hat{j}
+        \end{equation}
+        This gives:
+        \begin{align}
+            k = \frac{|r^2\sin^2 t + r^2\cos^2 t|}{(r^2\sin^2 t + r^2\cos^2 t)^{3/2}} \implies = \frac{1}{r}
+        \end{align}
+    \end{example}
+    This leads to the following definition:
+    \begin{definition}
+        The radius of curvature is defined as $\rho = \frac{1}{k}$.
+    \end{definition}
+    \begin{example}
+        An ellipse can be parametrized via:
+        \begin{align}
+            x=a\cos t && y = b\sin t\\ 
+            x'=-a\sin t && y'=b\cos t \\ 
+            x'' = -a\cos t && y''=-b\sin t
+        \end{align}
+        and therefore:
+        \begin{equation}
+            k = \frac{|ab\sin^2 t + ab\cos^2 t|}{[a^2\sin^2 t + b^2\cos^2 t]^{3/2}} = \frac{ab}{[a^2\sin^2 t + b^2\cos^2 t]^{3/2}}
+        \end{equation}
+        At $t=0$ we have $x=a$ so the curvature reaches the maximum value of $k = \frac{a}{b^2}$. At $t=\frac{\pi}{2}$ we have $y=b$ and the curvature reaches the minimum value of $k = \frac{b}{a^2}$, assuming $a>b$.
+    \end{example}
+    \item In three dimensions, we can define:
+    \begin{equation}
+        \vec{T} = \cos \phi \hat{i} + \sin \phi \hat{j}
+    \end{equation}
+    such that:
+    \begin{equation}
+        \left\lVert \frac{d\vec{T}}{ds}\right\rVert = \left\lVert \frac{d\phi}{ds}\right\rVert \sqrt{\sin^2 \phi + \cos^2 \phi} = \left\lVert \frac{d\phi}{ds} \right\rVert = k
+    \end{equation}
+    \begin{definition}
+        For three dimensional curves, we have $k= \left\lVert \frac{d\vec{T}}{ds} \right\rVert$
+    \end{definition}
+    \item For a curve $\vec{r}(t) = x(t)\hat{i} + y(t)\hat{j} + z(t) \hat{k}$, we have:
+    \begin{equation}
+        k = \left\lVert \frac{d\vec{T}}{dt} \cdot \frac{dt}{ds}\right\rVert = \frac{\lVert \vec{T}' \rVert}{\lVert \vec{r'} \rVert}
+    \end{equation}
+    \begin{example}
+        Suppose we have a circular helix: $\vec{r}(t) = 3\sin t \hat{i} + 3\cos t\hat{j} + 4t\hat{k}$. We then have:
+        \begin{equation}
+            \frac{d\vec{r}}{dt} = 3\cos t \hat{i} - 3\sin t \hat{j} + 4\hat{k}
+        \end{equation}
+        We have $\lVert \vec{r'} \rVert = 5$ from earlier, and:
+        \begin{equation}
+            \vec{T} = \frac{\frac{d\vec{r}}{dt}}{\lVert \frac{d\vec{r}}{dt} \rVert} = \frac{3}{5}\cos t\hat{i} - \frac{3}{5}\sin t \hat{j} + \frac{4}{5}\hat{k}
+        \end{equation}
+        so:
+        \begin{equation}
+            \frac{d\vec{T}}{dt} = - \frac{3}{5}\sin t \hat{i} - \frac{3}{5}\cos t\hat{j} \implies \left\lVert \frac{d\vec{T}}{dt} \right\rVert = \frac{3}{5}
+        \end{equation}
+        Therefore, we have $k=\frac{3}{25}$ and $\rho = \frac{25}{3} = 8\frac{1}{3}$ so stretching it longitudinally drastically increases the radius of curvature.
+    \end{example}
+    \begin{idea}
+        Another method of calculating the curvature is given by:
+        \begin{equation}
+            k = \frac{\lVert \vec{r'}(t) \times \vec{r'}'(t)\rVert}{\lVert\vec{r'}(t)\rVert^3}
+        \end{equation}
+    \end{idea}
+    \item We can also introduce the idea of normal and binormal vectors. Let us define:
+    \begin{equation}
+        \vec{T} = \frac{\vec{r'}}{\lVert \vec{r} \rVert}
+    \end{equation}
+    such that:
+    \begin{equation}
+        \vec{T} \cdot \vec{T}' = 0
+    \end{equation}
+    and we can define the principal unit normal to be:
+    \begin{equation}
+        \vec{N}(t) \equiv \frac{\vec{T}'(t)}{\lVert \vec{T}'(t) \rVert}
+    \end{equation}
+    The osculating plane is then defined by $\vec{N}$ and $\vec{T}$. Intuitively, these two vectors define a plane that the curve is ``on'' at some time $t$.
 \end{itemize}
