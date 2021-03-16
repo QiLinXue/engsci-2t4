@@ -1,0 +1,138 @@
+\section{Polymers}
+\begin{itemize}
+    \item A useful analogy for polymers is to imagine a \textit{molecular hand}. A polymer is consisted of several twisted and tangled chains of molecules. This is known as \textit{entanglement}. This is due to the non-linear nature of the polymers and the fact that bonds can rotate.
+    \item To plastically deform a polymer, we can imagine a microscopic hand pulling a polymer. If you are able to do so, then it is seen as plastic deformation
+    \item The molecular chains are connected via weak intermolecular forces. Increasing the temperature increases the vibration, allowing the molecular hand to more easily separate them.
+    \begin{idea}
+        When a polymer undergoes a physical transformation (i.e. melting, dissolving, deforming), it is due to the intermolecular interactions, not the intramolecular interactions. 
+    \end{idea}
+    \begin{case}
+        Plastic exhibits very interesting behaviour when it is stretched. During plastic deformation, the molecules can line up, which can cause the following physical changes:
+        \begin{itemize}
+            \item Color change (lighter)
+            \item Strong in the direction of stretching
+            \item Weaker in the direction perpendicular to stretching
+        \end{itemize}
+        The polymers become \textit{oriented} (also known as \textit{conditioned}) with the loading axis. This is a great demonstration that shows how polymers can be thought of as an interconnected mix of long polymer chains.
+    \end{case}
+    \item We define the yield strength as the point in which necking occurs (first local maximum in the stress-strain curve)
+    \item To describe the polymers on a molecular level, we look at it from an organic chemistry perspective. Instead of unit cells, we look at \textit{mer} units (the suffix of \textit{polymer}), which is the starting molecule when building the polymer.
+    \begin{case}
+        Polyethylene (PE) is a polymer that is consisted of ethene (or more commonly known as ethylene), shown below:
+        \begin{center}
+            \chemfig{C(-[3]H)(-[5]H) =   C(-[1]H)(-[7]H)}
+        \end{center}
+        and polyethylene looks like:
+        \begin{center}
+            \chemfig{-C(-[2]H)(-[6]H)-[@{op,.75}]C(-[2]H)(-[6]H)-C(-[2]H)(-[6]H)-[@{cl,0.25}]C(-[2]H)(-[6]H)-}
+            \polymerdelim[height = 5pt, indice = \!\!]{op}{cl}
+        \end{center}
+        \vspace{2mm} % weird space, don't know why this is the case
+        Notice the absence of the double bond. This is due to the chemical reaction that is required to take the mer unit and add it to the polymer.
+    \end{case}
+    \item Here are some other examples:
+    \begin{itemize}
+        \item  Polypropylene (PP) is a very common polymer used in many areas (e.g. Starbucks reusable cups). It is a material that is generally stronger and has a higher elastic modulus than polyethylene. This is because it has an extra \ch{CH3} methyl group, as shown below:
+        \begin{center}
+            \chemfig{-[@{op,.75}]C(-[2]H)(-[6]H)-C(-[2]H)(-[6]CH_3)-[@{cl,0.25}]}
+            \polymerdelim[height = 5pt, indice = \!\!]{op}{cl}
+        \end{center}
+        \item Polyvinylchloride (PVC), along with PE and PP are the three most produced polymers in the world. The structure is similar, except with a chloride atom in the monomer unit:
+        \begin{center}
+            \chemfig{-[@{op,.75}]C(-[2]H)(-[6]H)-C(-[2]H)(-[6]Cl)-[@{cl,0.25}]}
+            \polymerdelim[height = 5pt, indice = \!\!]{op}{cl}
+        \end{center}
+        The term \textit{vinyl} describes two carbon atoms connected via double bond.
+    \begin{case}
+        PVC is very strong and has a high elastic modulus. We can explain this by looking at the chemical properties of the chloride atom. Chlorine is an extremely electronegative atom, meaning it tends to attract electrons. This allows it to attract electrons from the hydrogen of neighbouring polymers, forming a hydrogen bond\footnote{Hydrogen bonds are actually much more complicated than this, but this isn't a chemistry course.} This forms a dipole moment, which can be illustrated below via the following notation:
+        \vspace{4mm}
+        \begin{center}
+            \chemfig{
+                \chemabove[3pt]{H}{\scriptstyle\delta^+}(-[::270,0.5,,,draw=none]@{c})-
+                \chemabove[3pt]{Cl}{\scriptstyle\delta^-}(-[::270,0.5,,,draw=none]@{d})
+               }
+               \chemmove{
+                       \draw[|->] (c)--(d);
+               }
+        \end{center}
+        \vspace{2mm}
+        The $\delta^+$ and $\delta^-$ signify the \textit{partial charges} and the arrow is the shorthand notation for the direction of the dipole (which will always point in the direction a proton would move in)
+        \vspace{2mm}
+
+        Since this bond is so strong, it is harder for nearby polymers to move against each other due to stronger intermolecular forces. Similarly, PP is strong for similar chemical properties. However instead of hydrogen bonds, it is the extra methyl group increasing london dispersion forces between neighbouring gorups.
+    \end{case}
+    \item Polytetrafluoroethylene (PTFE) is used for non-stick surfaces. As a result, it is very non-reactive, and it is able to do so due to the large fluorine atoms bonded to each carbon:
+    \begin{center}
+        \chemfig{-[@{op,.75}]C(-[2]F)(-[6]F)-C(-[2]F)(-[6]F)-[@{cl,0.25}]}
+        \polymerdelim[height = 5pt, indice = \!\!]{op}{cl}
+    \end{center}
+    Their large size helps protect intramolecular bonds within PTFE from being broken and although they are highly electronegative, they are actually nonpolar due to its symmetry.
+    \item Polymethylmethacrylate (PMMA) are often used for windows because they can be made optically transparent. The reason they are transparent is because of a bulky side group in their monomer unit that prevents close packing of polymer chains, creating an \textit{amorphous} structure.
+    \begin{center}
+        \chemfig{-[@{op,.75}]C(-[2]F)(-[6]F)-C(-[2]F)(-[6]C(=[0]O)(-[6]O(-[6]CH_3)))-[@{cl,0.25}]}
+        \polymerdelim[height = 5pt, indice = \!\!]{op}{cl}
+    \end{center}
+    \begin{case}
+        We investigate what makes a material transparent, translucent, and opaque from a materials science perspective\footnote{The fundamental physics behind it is actually more complicated. Chances are if you search up a Youtube video about why glass is transparent, the video is probably false.}. Polymers can easily align with one another and become organized, which is known as crystallization. When it crystallizes, the index of refraction is different from when it is amorphous. Therefore, if it contains parts that are both amorphous and crystalline (known as \textit{semicrystalline}), the light will not follow a direct path and the polymer will become translucent or opaque.
+    \end{case}
+    \end{itemize}
+    \item We can characterize the length of a polymer with its linear mass density and the total mass.
+    \begin{case}
+        Ultrahigh Molecular Weight Polyethylene is often used in hip replacements. It often replaces part of the hip to prevent parts of it from wearing it away. It has high strength, high tolerance, and biocompatible. 
+    \end{case}
+    \item The \textbf{number average molecular weight} can be defined as:
+    \begin{equation}
+        \overline{M}_\text{number} = \sum_{n=1}^i M_nx_n
+    \end{equation}
+    for a polymer containing $i$ groups where $M_n$ is the molecular weight of the $n^\text{th}$ group and $x_n$ is the number fraction of the $n^\text{th}$ group.
+    \item Similarly, the \textbf{weight average molecular weight} can be defined as:
+    \begin{equation}
+        \overline{M}_\text{weight} = \sum_{n=1}^i M_nw_n
+    \end{equation}
+    where $w_n$ is the weight fraction of the $n^\text{th}$ group. The weight average will always be larger (and maintains equality) than the number average.
+    \begin{proof}
+        Suppose we have $i$ groups with molecular weights of $\{M_1, M_2, \dots, M_n\}$ and number fractions of $\{x_1, x_2, \dots \}$. We can calculate the weight fraction to be:
+        \begin{equation}
+            w_n = \frac{M_nx_n}{M_1x_1+M_2x_2 + \cdots +M_ix_i} = \frac{M_nx_n}{\overline{M}_\text{number}}
+        \end{equation}
+        so we have:
+        \begin{equation}
+            \overline{M}_\text{weight} = \frac{1}{\overline{M}_\text{number}}\sum_{n=1}^i  M^2_nx_n
+        \end{equation}
+        We propose that $\overline{M}_\text{number} \le \overline{M}_\text{weight}$ such that:
+        \begin{align}
+            \overline{M}_\text{number} & \le  \frac{1}{\overline{M}_\text{number}}\sum_{n=1}^i  M^2_nx_n \\ 
+            \overline{M}^2_\text{number} &\le \sum_{n=1}^iM^2_nx_n \\ 
+            \sum_{n=1}^i M_nx_n &\le \sqrt{\sum_{n=1}^i M^2_nx_n}
+        \end{align}
+        The right hand side gives the RMS average and the left hand side gives the arithmetic average. According to the \href{https://en.wikipedia.org/wiki/HM-GM-AM-QM\_inequalities}{RMS-AM inequality}, the RMS mean is always greater or equal to the arithmetic mean.
+    \end{proof}
+    This \textbf{disparity} is actually quite important, and is also known as the \textbf{polydisperity index} and is defined as:
+    \begin{equation}
+        \text{\DJ} = \frac{\overline{M}_\text{weight}}{\overline{M}_\text{number}}
+    \end{equation}
+
+
+    <break>
+    <skipped ahead>
+
+    \item It is possible to quantify viscoelasticity. Polymers are \textbf{viscoelastic}, which means that exhibit both viscous and elastic characteristics when undergoing deformation.
+    \item To do so, we apply a fixed strain $\varepsilon_0$ and we observe the stress relaxing with time $\sigma(t)$.
+    \begin{warning}
+        Note that we are not applying a fixed stress and look at the strain response (which is the more familiar everyday experience)
+    \end{warning}
+    \item We can define the \textbf{relaxation modulus} as
+    \begin{equation}
+        E_r = \frac{\sigma (t)}{\varepsilon_0} 
+    \end{equation}
+    We expect the stress (and therefore $E_r$) to decrease with time, and at higher temperatures, the stress decreases faster. We can examine how $E_r$ at a certain fixed point in time depends on the temperature.
+    \begin{figure}[ht]
+        \centering
+        \incfig{temp-vs-er}
+    \end{figure}
+    Before $T_g$, the material is mainly made up of an amorphous structure. However, increasing the temperature past this point, known as the glass transition temperature, the molecules have enough energy to overcome secondary bonds\footnote{Secondary bonds have smaller energies than primary bonds and are caused by permanent or temporary dipoles between different molecules} and form a crystalline shape.
+    \begin{idea}
+        At low temperature, polymers usually become glassy and brittle.
+    \end{idea}
+    $T_m$ refers to the melting point. At high temperatures, polymers will start to melt and start to undergo viscous flow (again overcoming secondary bonds). At cooler areas, there are both crystalline and amorphous regions.
+\end{itemize}

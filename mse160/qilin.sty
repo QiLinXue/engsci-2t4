@@ -65,7 +65,7 @@
 \definecolor{my-orange}{HTML}{FE5F55}
 \definecolor{background}{HTML}{f2f2f2}
 \definecolor{my-yellow}{HTML}{F6BD60}
-
+\definecolor{sapphire}{HTML}{086788}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% BOXES %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -156,6 +156,12 @@
     title=\textbf{Idea},
 }
 
+\newtcolorbox{case}{
+    one-sided-color=sapphire,
+    title=\textbf{Case Study},
+}
+
+
 \newtcolorbox{think}{
     one-sided-color=my-green,
     title=\textbf{Think},
@@ -200,3 +206,6 @@
     \def\svgwidth{\columnwidth}
     \import{./figures/}{#1.pdf_tex}
 }
+
+\usepackage{chemfig}
+\usepackage{chemformula}
