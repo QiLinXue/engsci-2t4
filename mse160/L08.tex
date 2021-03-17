@@ -16,6 +16,7 @@
         The polymers become \textit{oriented} (also known as \textit{conditioned}) with the loading axis. This is a great demonstration that shows how polymers can be thought of as an interconnected mix of long polymer chains.
     \end{case}
     \item We define the yield strength as the point in which necking occurs (first local maximum in the stress-strain curve)
+    \subsection{Chemical Basics}
     \item To describe the polymers on a molecular level, we look at it from an organic chemistry perspective. Instead of unit cells, we look at \textit{mer} units (the suffix of \textit{polymer}), which is the starting molecule when building the polymer.
     \begin{case}
         Polyethylene (PE) is a polymer that is consisted of ethene (or more commonly known as ethylene), shown below:
@@ -73,12 +74,27 @@
         \polymerdelim[height = 5pt, indice = \!\!]{op}{cl}
     \end{center}
     \begin{case}
-        We investigate what makes a material transparent, translucent, and opaque from a materials science perspective\footnote{The fundamental physics behind it is actually more complicated. Chances are if you search up a Youtube video about why glass is transparent, the video is probably false.}. Polymers can easily align with one another and become organized, which is known as crystallization. When it crystallizes, the index of refraction is different from when it is amorphous. Therefore, if it contains parts that are both amorphous and crystalline (known as \textit{semicrystalline}), the light will not follow a direct path and the polymer will become translucent or opaque.
+        We investigate what makes a material transparent, translucent, and opaque from a materials science perspective Polymers can easily align with one another and become organized, which is known as crystallization. When it crystallizes, the index of refraction is different from when it is amorphous. Therefore, if it contains parts that are both amorphous and crystalline (known as \textit{semicrystalline}), the light will not follow a direct path and the polymer will become translucent or opaque.
+        \vspace{2mm}
+
+        So how do we make a polymer transparent? If it is completely crystalline, then it would be transparent but polymers can never be 100\% crystalline. Instead, we want them to be 100\% amorphous.
+        \vspace{2mm}
+
+        Moving away from the domain of polymers, sapphire has a crystalline structure, made of $Al_2O_3$, and is clear and transparent. Window glass made from silica is amorphous and also clear and transparent. While polycrystalline metals are opaque, we can also have glassy metals, but they are also opaque. To get the full picture, we need a better understanding of how light works.
     \end{case}
     \end{itemize}
+    \item To draw bonds going out and in of the page, we use a shaded triangle and dashed triangle, respectively. For example, we would draw methane as:
+    \begin{center}
+        \chemfig{C(<:[-0.3]H)(<[-1.1]H)(-[2]H)(-[5]H)}
+    \end{center}
+    \item We often use the symbol $R$ to denote an arbitrary functional group.
+    \subsection{Length}
     \item We can characterize the length of a polymer with its linear mass density and the total mass.
     \begin{case}
-        Ultrahigh Molecular Weight Polyethylene is often used in hip replacements. It often replaces part of the hip to prevent parts of it from wearing it away. It has high strength, high tolerance, and biocompatible. 
+        Ultrahigh Molecular Weight Polyethylene is often used in hip replacements. It often replaces part of the hip to prevent parts of it from wearing it away. It has high strength, high tolerance, and biocompatible.
+        \vspace{2mm}
+
+        As we increase molecular weight in a polymer, we increase the strength and typically increase the strain to fracture due to the increased entanglement of the long molecules.
     \end{case}
     \item The \textbf{number average molecular weight} can be defined as:
     \begin{equation}
@@ -111,12 +127,38 @@
     \begin{equation}
         \text{\DJ} = \frac{\overline{M}_\text{weight}}{\overline{M}_\text{number}}
     \end{equation}
-
-
-    <break>
-    <skipped ahead>
-
-    \item It is possible to quantify viscoelasticity. Polymers are \textbf{viscoelastic}, which means that exhibit both viscous and elastic characteristics when undergoing deformation.
+    \subsection{Close Packing and Crystallization}
+    \item As polymer chains line up, the density can increase. Since the chains get closer together, the strength of the intermolecular interactions may also increase, increasing the elastic modulus.
+    \item When polymers line up, they form a crystalline structure (i.e. zigzag pattern). However, there will always still be some amorphous sections. As a result, there is an incentive to increase crystallinity and this can be accomplished by having simple mer units and regular repeating structures.
+    \item When functional groups are on the same side, such as shown below, it is easier for the polymer to have a close packing behaviour:
+    \begin{center}
+        \chemfig{[-0.3]-C(<[-1.6]R)(<:[5.6]H)-[0.3]C(<[-1.6]R)(<:[5.6]H)-[-0.3]C(<[-1.6]R)(<:[5.6]H)-[0.3]C(<[-1.6]R)(<:[5.6]H)-[-0.3]}
+    \end{center}
+    The \textbf{tacticity} describes how the functional groups line up. If they are all on the same side, it is known as \textbf{isotactic}.
+    \item If functional groups alternate, it is known as \textbf{syndiotactic}
+    \begin{center}
+        \chemfig{[-0.3]-C(<[-1.6]R)(<:[5.6]H)-[0.3]C(<[-1.6]H)(<:[5.6]R)-[-0.3]C(<[-1.6]R)(<:[5.6]H)-[0.3]C(<[-1.6]H)(<:[5.6]R)-[-0.3]}
+    \end{center}
+    \item If it is random, then it is known as \textbf{atactic}.
+    \begin{idea}
+        One model of crystallization is known as the \textbf{chain folded model}. Plate-like structures form in polymers and the molecules fold on itself in an organized pattern on a thin plate (i.e. with thickness $10\si{\nano\meter}$).
+    \end{idea}
+    \begin{case}
+        Let us examine high density polyethylene (HDPE) and low density polyethylene (LDPE). There are branched in polyethylene. HDPE is processed such that the branches are very short, allowing it to crystallize more easily. In LDPE, the branches are much longer, resulting in a lower percent crystallinity and a lower strength.
+    \end{case}
+    \subsection{Cross Linking and Network Polymers}
+    \item To prevent molecules from sliding past each other, we can cause them to ``lock up'' with each other. This is accomplished by creating strong covalent, intramolecular bonds between chains.
+    \begin{case}
+        Rubber is cross-linked, allowing it to have elastic behaviour without plastic deformation.
+    \end{case}
+    \item Cross-linking is important in elastomers.
+    \item If it is cross-linked too much, the material can become rigid and have very high strength, although they may be brittle. These are known as \textbf{networks} and occurs when mer units have multiple functional groups that form a three dimensional interconnected network (i.e. epoxy).
+    \subsection{Effects of Temperature and Viscoelasticity}
+    \begin{idea}
+        Polymers are very sensitive to temperature changes close to room temperature. This is due to the weaker secondary interactions between polymers.
+    \end{idea}
+    \item At higher temperature, the stress-strain curve flattens out and both the elastic modulus and yield strength will decrease.
+    \item Temperature creates a large effect on a polymer's viscoelasticity. Polymers are \textbf{viscoelastic}, which means that exhibit both viscous and elastic characteristics when undergoing deformation.
     \item To do so, we apply a fixed strain $\varepsilon_0$ and we observe the stress relaxing with time $\sigma(t)$.
     \begin{warning}
         Note that we are not applying a fixed stress and look at the strain response (which is the more familiar everyday experience)
@@ -135,4 +177,14 @@
         At low temperature, polymers usually become glassy and brittle.
     \end{idea}
     $T_m$ refers to the melting point. At high temperatures, polymers will start to melt and start to undergo viscous flow (again overcoming secondary bonds). At cooler areas, there are both crystalline and amorphous regions.
+    \subsection{Time Dependance}
+    \begin{case}
+        Silly Putty is an interesting material as it is extremely ductile if stretched slowly. However, when stretched extremely quickly it snaps and fractures without undergoing plastic deformation. This leads to the idea that time scales play an important part in polymer interactions.
+        \vspace{2mm}
+
+        This is because there isn't enough time for polymers to slide past each other.
+    \end{case}
+    \item Polymers are sensitive to strain rate.
+    \item If a load is applied for a very long time (i.e. heavy desk on carpet), the polymer will undergo plastic deformation. However, if the load is applied for a short time, the polymer will more likely go back to its original orientation.
+    \item This is known as \textbf{viscous deformation}, which is time dependent.
 \end{itemize}
