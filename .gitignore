@@ -12,7 +12,9 @@
 
 /putnam
 *.mp4
-/mse160/psets
+/mse160/psets/pset2.*
+/mse160/psets/figures/*
+
 tasks.json
 launch.json
 settings.json

@@ -4,7 +4,7 @@
 \author{QiLin Xue}
 \lhead{ECE159}
 \rhead{QiLin Xue}
-\renewcommand{\qedsymbol}{\includegraphics[height=3ex]{kalda.png}}
+% % \renewcommand{\qedsymbol}{\includegraphics[height=3ex]{kalda.png}}
 
 \newcommand{\equals}{=}
 
@@ -225,6 +225,8 @@ P_{\text{max}} = \frac{\mathcal{E}_{\text{eq}}^2}{4R_{\text{eq}}} &= \frac{1}{4}
 &= \frac{1}{4}\frac{R_2}{(r + R_1 + R_2)(R_1 + r)}\mathcal{E}^2
 \end{align*}
 \end{example}
+\subsection{Norton Equivalent Circuit}
+Similar to Thevenin, we can also perform a source transformation such that we can replace any subcircuit element with an independent current source connected to a resistor in parallel. Note that calculating the equivalent resistance is done in the same way.
 \section{Operational Amplifiers}
 An operational amplifier (op amp) is an active circuit element designed to perform mathematical operations of addition, subtraction, multiplication, division, differentiation, and integration.
 \begin{center}
@@ -278,5 +280,208 @@ For an ideal OP Amp, we have an infinite open-loop gain, infinite input resistan
     \end{equation*}
     This is known as an \textbf{inverting amplifier}.
 \end{example}
+\subsection{Types of Amplifiers}
+Here is a list of common amplifiers:
+\begin{itemize}
+    \item Inverting Amplifier:
+    \begin{equation}
+        v_0 = -\frac{R_2}{R_1} v_i
+    \end{equation}
+    \begin{center}
+        \begin{tikzpicture}[transform shape, thick]
+            \draw (0,3) node[left] {$v_i$} to [short, -o] (0,3) to [R, l=$R_1$] (3,3);
+
+            \draw
+            (5,2.5) node[op amp,yscale=1](opamp){} 
+            (opamp.+) to ++ (-0.5,0) to ++ (0, -2) node[ground]{}
+            (opamp.-) -- (3,3)
+            (opamp.out) to[short, -o] ++ (1,0) node[right] {$v_0$};
+            
+            \draw (3,3) -- (3,4) to [R, l=$R_2$] (6.5,4) -- (6.5,2.5);
+        \end{tikzpicture}
+    \end{center}
+    \item Noninverting amplifier:
+    \begin{equation}
+        v_0 = \left(1+\frac{R_2}{R_1}\right)v_i
+    \end{equation}
+    \begin{center}
+        \begin{tikzpicture}[transform shape, thick]
+            \draw (0,3) node[ground] {} to [R, l=$R_1$] (3,3);
+
+            \draw
+            (5,2.5) node[op amp,yscale=1](opamp){} 
+            (opamp.+) to[short,-o] ++ (-0.5,0) node[left] {$v_i$}
+            (opamp.-) -- (3,3)
+            (opamp.out) to[short, -o] ++ (1,0) node[right] {$v_0$};
+            
+            \draw (3,3) -- (3,4) to [R, l=$R_2$] (6.5,4) -- (6.5,2.5);
+        \end{tikzpicture}
+    \end{center}
+    \item Voltage follower:
+    \begin{equation}
+        v_0 = v_i
+    \end{equation}
+    \begin{center}
+        \begin{tikzpicture}[transform shape, thick]
+
+            \draw
+            (5,2.5) node[op amp,yscale=1](opamp){} 
+            (opamp.+) to[short,-o] ++ (-0.5,0) node[left] {$v_i$}
+            (opamp.-) -- (3,3)
+            (opamp.out) to[short, -o] ++ (1,0) node[right] {$v_0$};
+            
+            \draw (3,3) -- (3,4) -- (6.5,4) -- (6.5,2.5);
+        \end{tikzpicture}
+    \end{center}
+    \item Summer:
+    \begin{equation}
+        v_0 = -\left(\frac{R_f}{R_i}v_1 + \frac{R_f}{R_2}v_2 + \frac{R_f}{R_3}v_3\right)
+    \end{equation}
+    \begin{center}
+        \begin{tikzpicture}[transform shape, thick]
+            \draw (0,3) node[left] {$v_2$} to[short, -o] (0,3) to [R, l=$R_2$] (2,3) -- (3,3);
+            \draw (0,4) node[left] {$v_1$} to[short, -o] (0,4) to [R, l=$R_1$] (2,4) -- (2,3);
+            \draw (0,2) node[left] {$v_3$} to[short, -o] (0,2) to [R, l=$R_3$] (2,2) -- (2,3);
+
+            \draw
+            (5,2.5) node[op amp,yscale=1](opamp){} 
+            (opamp.+) to ++ (-0.5,0) to ++ (0, -2) node[ground]{}
+            (opamp.-) -- (3,3)
+            (opamp.out) to[short, -o] ++ (1,0) node[right] {$v_0$};
+            
+            \draw (3,3) -- (3,4) to [R, l=$R_f$] (6.5,4) -- (6.5,2.5);
+        \end{tikzpicture}
+    \end{center}
+    \item Difference Amplifier:
+    \begin{equation}
+        v_0 = \frac{R_2}{R_1}(v_2-v_1)
+    \end{equation}
+    \begin{center}
+        \begin{tikzpicture}[transform shape, thick]
+            % \draw (0,3) node[left] {$v_2$} to[short, -o] (0,3) to [R, l=$R_2$] (2,3) -- (3,3);
+            % \draw (0,4) node[left] {$v_1$} to[short, -o] (0,4) to [R, l=$R_1$] (2,4) -- (2,3);
+            % \draw (0,2) node[left] {$v_3$} to[short, -o] (0,2) to [R, l=$R_3$] (2,2) -- (2,3);
+
+            \draw
+            (5,2.5) node[op amp,yscale=1](opamp){} 
+            (opamp.+) to ++ (-0.5,0) to ++ (0, -1) to [R, l=$R_2$] (6.5, 1) node[ground] {}
+            (opamp.-) to ++ (-0.5,0) to ++ (0,1) to [R, l=$R_2$] (6.5,4) -- (6.5,2.5)
+            (opamp.out) to[short, -o] ++ (1,0) node[right] {$v_0$};
+            
+            \draw (0,4) node[left] {$v_1$} to [short, -o] (0,4) to [R, l=$R_1$] (3.29,4);
+            \draw (0,1) node[left] {$v_2$} to [short, -o] (0,1) to [R, l=$R_1$] (3.29,1);
+
+        \end{tikzpicture}
+    \end{center}
+\end{itemize}
+\section{First Order Circuits}
+\subsection{Capacitors and Inductors}
+A capacitor is able to store charge such that the voltage across it is:
+\begin{equation}
+    V = \frac{q}{C}
+\end{equation}
+where $C$ is the capacitance. Differentiating both sides, we have:
+\begin{equation}
+    \frac{dV}{dt} = \frac{i}{C} \implies i = C\frac{dV}{dt}
+\end{equation}
+Since the current cannot be infinite, the voltage across a capacitor must be differentiable (i.e. smooth). When multiple capacitors are in series, the equivalent capacitance is:
+\begin{equation}
+    C_\text{eq} = \left(\frac{1}{C_1}+\frac{1}{C_2} + \cdots\right)^{-1}
+\end{equation}
+For multiple capacitors in parallel, the equivalent capacitance is:
+\begin{equation}
+    C_\text{eq} = C_1+C_2+\cdots
+\end{equation}
+The energy stored in a capacitor is given by:
+\begin{equation}
+    U = \frac{q^2}{2C} = \frac{1}{2}CV^2 = \frac{q}{2V}
+\end{equation}
+An inductor maintains a voltage that resists a change in current (i.e. via Lenz's Law). This means the voltage across a resistor is:
+\begin{equation}
+    V = -L\frac{di}{dt}
+\end{equation}
+where $L$ is the inductance. Since the voltage across cannot be infinite, the current across it has to be differentiable. When inductors are added in series, the equivalent inductance is:
+\begin{equation}
+    L_\text{eq} = L_1 + L_2 + \cdots
+\end{equation}
+and in parallel:
+\begin{equation}
+    L_\text{eq} = \left(\frac{1}{L_1} + \frac{1}{L_2}+\cdots\right)^{-1}
+\end{equation}
+The energy stored in an inductor is:
+\begin{equation}
+    U = \frac{1}{2}Li^2
+\end{equation}
+\begin{idea}
+    For $RL$ and $RC$ circuits, at time scales much shorter than the characteristic times $\tau = RC$ or $\tau = L/R$ (i.e. right after a switch is opened), the capacitor's charge and inductor's current remain almost constant. In particular, if a capacitor was chargeless, its voltage remains almost zero (i.e. short circuit). If there was no current in an inductor, its current remains zero (i.e. inductor may be considered to be broken). If a capacitor had a charge $Q$ corresponding to a voltage $V_0$, its voltage remains essentially constant (i.e. it acts and can be substituted by a battery of voltage $V$). Similarly, if an inductor had a current $I_0$, it can be substituted by a respective constant current source. If we try to forcefully break the current through an inductor by switching it off, a rapid fall of current $I$ creates a huge voltage $-L\frac{dI}{dt}$ which usually leads to a spark at the switch.
+    \vspace{2mm}
+
+    At time scales much larger than the characteristic times, the situation is reversed: the inductor can be considered a short-circuiting wire, and capacitor as an insulator. This is because all the currents and voltages tend exponentially towards the equilibrium state so that the different from the equilibrium value $\Delta \propto e^{-t/\tau}$: the capacitor charge is almost constant, hence there is no current, and the inductor current is almost constant, hence no voltage.
+\end{idea}
+\subsection{Natural Response}
+Since resistors provide a ``decaying response'' (see the mechanical analogy section), it is expected that RC and RL circuits have a decaying exponential, when there are no voltage sources:
+\begin{equation}
+    x(t) = x(0)e^{-t/\tau}
+\end{equation}
+where $x(0)$ is the initial value of a quantity (current or voltage), and $\tau$ is the time constant. For RC circuits, we have $\tau = RC$ and for RL circuits, we have $\tau = L/R$. It is the characteristic time for which a certain quantity decreases by a factor of $\frac{1}{e}$. For an $RC$ circuit, we can derive this from the equation:
+\begin{equation}
+    i_c + i_r = 0 \implies C\frac{dV}{dt} + \frac{V}{r} = 0
+\end{equation}
+though I prefer working with Kirchoff's Voltage Law:
+\begin{equation}
+    -\frac{dq}{dt}R - \frac{q}{C} = 0
+\end{equation}
+This is because we see a similar structure for the inductor:
+\begin{equation}
+    -iR - L\frac{di}{dt} = 0
+\end{equation}
+Notice the connection between $q$, $i$, and $\frac{di}{dt}$. This is important when formulating the mathematics behind complex AC circuits later.
+\subsection{Step Responses}
+When we have a sudden change (i.e. a voltage or current source is added), the circuit may behave slightly differently. Since it is a first order circuit, we should still expect an exponential pattern. If we add a constant voltage or current term to the differential equation above, we can easily solve for it. Alternatively, we can abuse the fact that it is a linear differential equation so we can write the general solution as:
+\begin{equation}
+    \text{complete response} = \text{natural response} + \text{forced response} 
+\end{equation}
+or
+\begin{equation}
+    v = v_n + v_f
+\end{equation}
+or:
+\begin{equation}
+    v = v_t + v_{ss}
+\end{equation}
+Here, $v_t$ is the transient response, and it will die out with time. The steady state response $v_{ss}$ is the behaviour of the circuit a long time after an external excitation is applied. As a result, we can write out the voltage:
+\begin{equation}
+    v(t) = v(\infty) + [v(0)-v(\infty)]e^{-t/\tau}
+\end{equation}
+and similarly for an RL circuit:
+\begin{equation}
+    i(t) = i(\infty) + [i(0) -i(\infty)]e^{-t/\tau}
+\end{equation}
+\subsection{A Mechanical Analogy}
+Consider a very light mechanical ball. We can make the following analogies:
+\begin{itemize}
+    \item charge ($q$ - displacement ($\Delta x$)
+    \item voltage $V$ - force ($F$)
+    \item capacitance $C$ - inverse spring constant ($1/k$)
+    \item inductance $M$ - extra mass $M$
+    \item resistor $R$ - damping constant $b$
+    \item current $i$ - velocity $v$
+    \item change in current $\frac{di}{dt}$ - acceleration $a$
+\end{itemize}
+If the current is not changing, then we can view the ball to be in equilibrium (i.e. $\sum F = 0$). While this gives intuition for more difficult circuits, it is also important to note that this is \textit{exactly equivalent}. For example, Nikita Sopenko (who is currently a grad student at CalTech) used this principle to solve the \href{https://www.ipho2012.ee/physicscup/problem-no-5/solution/}{fifth problem} of Physics Cup back in 2012.
+\subsubsection*{Voltage Source + Resistor}
+For a voltage source and resistor, we have the mechanical relationship of a mechanism supplying a force $F$ to the ball, and there is an opposing force (that comes from air resistance) of $-bv$. Therefore:
+\begin{equation}
+    F = bv
+\end{equation}
+which is equivalent to Ohm's law.
+\subsubsection*{RC Circuit}
+Suppose we have a capacitor $C$ that is initially charged, connected to a resistor $R$. Our mechanical analogy then becomes a light object connected to a spring. The spring wishes to pull the object towards equilibrium, but air resistance slows it down. Since the mass is zero, the net force is zero, so we have $kx=bv$. This means that as $x\to 0$, we will also have $v\to 0$, which results in an exponential decay behaviour.
+\subsubsection*{RL Circuit}
+Suppose we have an inductor (that initially has a current passing through it) connected in series with a resistor. This is equivalent to throwing a mass $M$ (without gravity) with a speed $v$ in the presence of air resistance. Intuitively, we know that this will give an exponential decay behaviour.
+\subsubsection*{LC Circuits}
+Suppose we have an inductor (with a current through it) connected to a capacitor (that is initially charged). Without working out the math, we know that this is equivalent to a ball of mass $M$ connected to a spring. This gives rise to simple harmonic motion, so we should expect a similar pattern in the current and voltage.
+\subsubsection*{RLC Circuits}
+Similar to the LC circuit, we have a ball of mass $M$ on a spring. However, there is now air resistance, so we should expect a decaying sinusoidal pattern.
 \end{document}
 
