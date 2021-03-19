@@ -156,4 +156,48 @@
         \vec{N}(t) \equiv \frac{\vec{T}'(t)}{\lVert \vec{T}'(t) \rVert}
     \end{equation}
     The osculating plane is then defined by $\vec{N}$ and $\vec{T}$. Intuitively, these two vectors define a plane that the curve is ``on'' at some time $t$.
+    \begin{example}
+        For a straight line, we have $\vec{T'}(t)=0$, but there is no normal vector since there is no curvature.
+    \end{example}
+    \begin{definition}
+        The \textbf{binormal vector} is given by 
+        \begin{equation}
+            \vec{B}(t) = \vec{T} \times \vec{N}
+        \end{equation}
+        and gives the vector normal to the osculating plane.
+    \end{definition}
+    \begin{example}
+        Let us go back to the circular helix example, with:
+        \begin{equation}
+            \vec{r}(t) = 3\sin t \hat{i} + 3\cos t\hat{j} + 4t\hat{k}
+        \end{equation}
+        We have already worked through that:
+        \begin{equation}
+            \vec{T'} = - \frac{3}{5}\sin t \hat{i} - \frac{3}{5}\cos t\hat{j}
+        \end{equation}
+        and
+        \begin{equation}
+            \lVert \vec{T'}(t) \rVert = \frac{3}{5}
+        \end{equation}
+        and therefore the principal unit normal to be:
+        \begin{equation}
+            \vec{N'}(t) = -\sin t \hat{i} - \cos t \hat{j}
+        \end{equation}
+        The binormal vector is then:
+        \begin{equation}
+            \vec{B} = \left(\frac{3}{5}\cos t, -\frac{3}{5}\sin t, \frac{4}{5}\right) \times (-\sin t, -\cos t, 0) = \left(\frac{4}{5}\cos t, -\frac{4}{5}\sin t, -\frac{3}{5}\right)
+        \end{equation}
+        The equation of a plane is given by:
+        \begin{equation}
+            n_1(x-x_0)+n_2(y-y_0)+n_3(z-z_0) = 0
+        \end{equation}
+        Plugging in $(n_1,n_2,n_3)$ and $(x_0,y_0,z_0)$ gives:
+        \begin{equation}
+            4\cos t x - 4\sin t y - 3z = -12t
+        \end{equation}
+    \end{example}
+    \begin{idea}
+        Sometimes, questions will ask for the osculating plane at a specific point. This is usually easier to do by first substituting in numbers, rather than finding a general solution.
+    \end{idea}
+    \item $\vec{T}$, $\vec{N}$, and $\vec{B}$ form a set of orthogonal unit vectors that span $\mathbb{R}^3$. 
 \end{itemize}

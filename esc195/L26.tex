@@ -1,0 +1,98 @@
+\section{Motion in Space: Velocity and Acceleration}
+\begin{itemize}
+    \item If $\vec{r}(t)$ is used to describe a location in space, then we can define $\vec{r'}(t) = \vec{v}(t)$ is the velocity and $\vec{r''}=\vec{v'}(t) = \vec{a}(t)$ is the acceleration.
+    \item Let us examine circular motion about the origin. We have:
+    \begin{equation}
+        \vec{r}(t)  = a\cos(\theta) t \hat{i} + a\sin(theta)t \hat{j}
+    \end{equation}
+    Note that a positive $\theta'$ represents a counterclockwise rotation.
+    \begin{definition}
+        The angular velocity is written as $\theta'$ and has units $[\si{\radians\per\second}]$. The angular speed is the absolute value $|\theta'|$.
+    \end{definition}
+    Let the angular speed be written as $\omega$. Then:
+    \begin{align}
+        \vec{r} &= \cos \omega t \hat{i} + r\sin \omega t\hat{j} \\ 
+        \vec{v} &= -r\sin \omega t + r\omega \cos \omega t \hat{j} \\ 
+        \vec{a} &= -r\omega^2 \cos \omega t\hat{i} - r\omega^2 \sin \omega t\hat{j} \\ 
+        &= -\omega^2 \vec{r}
+    \end{align}
+    \begin{warning}
+        Note that we have to work with radians here. Using degrees, the math does not work out in the same way.
+    \end{warning}
+    \item We begin a look  at vector mechanics. Newton's second law of motion can be written as:
+    \begin{equation}
+        \vec{F}(t) = m\vec{r''}(t)
+    \end{equation}
+    Momentum is written as $\vec{p}=m\vec{v}$. In fact, Newton initially wrote out his law as:
+    \begin{equation}
+        \vec{F}(t) = \vec{p'}(t)
+    \end{equation}
+    which is true for relativistic speeds \textit{and} changing mass! (though Newton couldn't have possibly known this)
+    \item Conservation of momentum is equivalent to:
+    \begin{equation}
+        \vec{p}' = \vec{F} = 0
+    \end{equation}
+    This means that if there is no external force, then the momentum is conserved.
+    \begin{definition}
+        Let us define angular momentum as:
+        \begin{equation}
+            \vec{L} \equiv \vec{r} \times \vec{p} = m\vec{r} \times \vec{v}
+        \end{equation}
+    \end{definition}
+    \begin{example}
+        Let $\vec{r}(t) = r\cos \omega t \hat{i}  + r\sin \omega t \hat{j}$. LEt us calculate the angular momentum:
+        \begin{align}
+            \vec{L} &= m\vec{r}\times \vec{v} \\
+            &= m(0,0r^2\omega t + r^2\omega \sin^2 \omega t) \\ 
+            &= (0,0,mr^2\omega)
+        \end{align}
+        Therefore, the angular momentum here is actually constant. We often write $\lVert \vec{L} \rVert = mr^2 \omega = mrv$.
+    \end{example}
+    \begin{example}
+        Suppose we have uniform motion in a straight line. We have $\vec{r}=\vec{r}_0 + t\vec{v}$ and therefore the angular momentum is:
+        \begin{equation}
+            \vec{L} = m\vec{r}\times\vec{v} = m(\vec{r}_0+t\vec{v}) \times \vec{v} = m\vec{r}_0 \times \vec{v}
+        \end{equation}
+        which is a constant.
+    \end{example}
+    \begin{definition}
+        Torque is defined as the rate of change of the angular momentum:
+        \begin{equation}
+            \vec{\tau} \equiv \vec{L'} = \vec{r} \times \vec{F}
+        \end{equation}
+    \end{definition}
+    \begin{definition}
+        A force $\vec{F}$ is a central force if $\vec{F}(t)$ is always parallel to $\vec{r}$. As a result, $\vec{r} \times \vec{F} = 0$ and angular momentum is conserved (i.e. gravity)
+    \end{definition}
+    \item In general, the acceleration vector is composed of two components:
+    \begin{equation}
+        \vec{a} = \vec{a}_\text{normal} + \vec{a}_\text{tangential}
+    \end{equation}
+    Recall that $\vec{T} = \frac{\vec{v}}{\frac{ds}{dt}}$ so we can write the velocity as:
+    \begin{equation}
+        \vec{v} = \frac{ds}{dt} \vec{T}
+    \end{equation} 
+    where $\vec{T}$ is the unit vector in the direction of motion. Taking the derivative of both sides:
+    \begin{equation}
+        \vec{v}' = \vec{a} = \frac{d^2s}{dt^2}\vec{T} + \frac{ds}{dt} \frac{d\vec{T}}{dt}
+    \end{equation}
+    Recall that
+    \begin{equation}
+    \frac{dT}{dt} = \left\lVert \frac{d\vec{T}}{dt}\right\rVert \vec{N}
+    \end{equation}
+    and
+    \begin{equation}
+        k= \frac{\lVert \frac{d\vec{T}}{dt} \rVert}{|ds/dt|}
+    \end{equation}
+    and so the acceleration can be written as:
+    \begin{equation}
+        \vec{a} = \vec{a}_r + \vec{a}_N = \frac{d^2s}{dt^2}\vec{T} + k\left(\frac{ds}{dt}\right)^2 \vec{N}
+    \end{equation}
+    \begin{idea}
+        Note that:
+        \begin{equation}
+            k\left(\frac{ds}{dt}\right)^2 \vec{N} = kv^2 = \frac{v^2}{\rho}
+        \end{equation}
+        where $\rho$ is the radius of curvature. This is an equation that you should be familiar with.
+    \end{idea}
+\end{itemize}
