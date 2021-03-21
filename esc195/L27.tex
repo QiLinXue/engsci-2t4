@@ -1,0 +1,93 @@
+\section{Particle Motions in Electric and Magnetic Fields}
+\begin{itemize}
+    \item The Lorentz Force is given by:
+    \begin{equation}
+        \vec{F} = q\vec{v} \times \vec{B}
+    \end{equation}
+    and the electric field is given by:
+    \begin{equation}
+        \vec{F} = q\vec{E}
+    \end{equation}
+    where $\vec{E}$ and $\vec{B}$ is the electric and magnetic field, respectively.
+    \begin{example}
+        Let us analyze the confinement of hot plasma by a magnetic field (fusion energy). Matter above $10,000\si{\kelvin}$ is hot enough to be ionized and turn into a ``soup'' of positively charged nucleons and negatively charged electrons, which is known as \textbf{plasma}. There are other properties of plasma, but it is not important. They will be expanded on in PHY293 and PHY294.
+        \vspace{2mm}
+
+        For fusion, we need $q = \pm 1.6 \times 10^{-19} \si{\coulomb}$, $v_\text{electrons} = 3 \times 10^{7} \si{\meter\per\second}$, and $B_0 \approx 10\si{\tesla}$. Let:
+        \begin{equation}
+            \vec{B} = B_0 \hat{k}
+        \end{equation}
+        And suppose the electron is moving along the positive $x$ axis. From Newton's second law:
+        \begin{equation}
+            \vec{F} = m \vec{v}' = qB_0 \vec{v} \times \hat{k}
+        \end{equation}
+        or:
+        \begin{equation}
+            \vec{v'} = \omega_L  \vec{v} \times \vec{k}
+        \end{equation}
+        where $\omega_L  = \frac{qB_0}{m}$ is the Larmor frequency. The velocity can be written in its general form:
+        \begin{equation}
+            \vec{v})t_ = v_x(t)\hat{i} + v_y(t)\hat{j}+v_z(t)\hat{k}
+        \end{equation}
+        Differentiating:
+        \begin{equation}
+            v_x' \hat{i} + v_y'\hat{j} + v_z'\hat{k} = \omega_L  v_y \hat{i} - \omega_L  v_x \hat{j}
+        \end{equation}
+        Thus:
+        \begin{align}
+            v_x'(t) &= \omega_L  v_y(t) \\
+            v_y'(t) &= -\omega_L  v_x(t) \\ 
+            v_z'(t) &= 0
+        \end{align}
+        This is known as coupled equations. The third equation is the easiest to solve, and the solution is $v_z=\text{constant}$. To solve the other two equations, we can differentiate the first equation:
+        \begin{equation}
+            v_x'' = \omega_L  v_y'
+        \end{equation}
+        And substituting in $v_y$, we have:
+        \begin{equation}
+            v_x'' = -\omega_L ^2 v_x
+        \end{equation}
+        And the general solution is:
+        \begin{equation}
+            v_x(t) = A\sin(\omega_L  t + \phi)
+        \end{equation}
+        We can also solve for $v_y$:
+        \begin{equation}
+            v_y = \frac{1}{\omega_L }v_x' = A\cos(\omega_2 t+\phi)
+        \end{equation}
+        Thus:
+        \begin{equation}
+            \vec{v}(t) = A\sin(\omega_L  t + \phi)\hat{i} + A\cos(\omega_L  t+\phi)\hat{j} + c\hat{k}
+        \end{equation}
+        Integrating, we get:
+        \begin{equation}
+            \vec{r}(t) = \left[- \frac{A}{\omega_L t + \phi} + D_x \right]\hat{i} + \left[\frac{A}{\omega_L}\sin(\omega_L t+\phi) + D_y\right]\hat{j} + [ct+D_z]\hat{k}
+        \end{equation}
+        We can set $\phi=D_x=D_y=D_z=0$, and letting $r_L = \frac{A}{\omega_L}$, we get:
+        \begin{equation}
+            \vec{r}(t) = -r_L\cos(\omega_L t)\hat{i} + r_L\sin(\omega_L t)\hat{j}+ct\hat{k}
+        \end{equation}
+        which describes a helix. For an electron, $\omega_L=10^{13} \si{\hertz}$ and for a proton which corresponds to microwaves, $\omega_L=6 \times 10^9 \si{\hertz}$ which corresponds to radio frequencies. Depending on the initial conditions, we can have $D_x,D_y,D_z,\phi$ take on different values.
+    \end{example}
+    \item Suppose we have a magnetic field out of the page and an electric field pointing upwards, we have:
+    \begin{align}
+        \vec{B} &= (0,0,B_z) \\
+        \vec{E} &= (0,E_y,0) 
+    \end{align}
+    The differential equations then give us:
+    \begin{align}
+        v_x'(t) &= \frac{q}{m}v_y B_z \\ 
+        v_y'(t) &= -\frac{q}{m}v_yB_z + \frac{qE_y}{m} \\ 
+        v_z'(t) &= 0
+    \end{align}
+    The solution to this gives:
+    \begin{align}
+        v_x &= v_\perp \sin \omega t + \frac{E_x}{B_z} \\ 
+        v_y &= v_\perp \cos \omega t \\ 
+        v_z &= \text{constant}
+    \end{align}
+    where we can define the drift velocity to be $v_d = \frac{E_y}{B_z}$ or:
+    \begin{equation}
+        \vec{v}_D = \frac{\vec{E} \times \vec{B}}{B^2}
+    \end{equation}
+\end{itemize}
