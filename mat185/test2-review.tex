@@ -1,0 +1,691 @@
+\documentclass{article}
+\usepackage{qilin}
+\hfuzz=1000pt 
+\usepackage{amssymb}
+\newcommand{\bff}[1]{\mathbf{#1}}
+\newcommand{\image}[1]{\mathrm{im}\,#1}
+\newcommand{\spann}[1]{\mathrm{span}\{#1\}}
+\newcommand{\spannn}[1]{\mathrm{span}\,#1}
+% \newcommand{\rank}[1]{\mathrm{rank}\,#1}
+% \newcommand{\dim}[1]{\dim{rank}\,#1}
+\newcommand{\col}[1]{\mathrm{col}\,#1}
+\newcommand{\row}[1]{\mathrm{row}\,#1}
+\newcommand{\nullity}[1]{\mathrm{nullity}\,#1}
+\newcommand{\nulll}[1]{\mathrm{null}\,#1}
+\newcommand{\adj}[1]{\mathrm{adj}\,#1}
+\newcommand{\red}[1]{\widetilde{#1}}
+\hbadness=99999 % we're bad students
+\hfuzz=100pt % wide bois begone
+
+\usepackage{mathtools}
+\usepackage{arydshln}
+
+% \newcommand{\dim}[1]{\mathrm{dim}\,#1}
+
+\title{MAT185 Test 2 Review}
+\author{QiLin Xue}
+\lhead{MAT185}
+\rhead{QiLin Xue}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+    Note: Axiom propositions, names, theorems, etc. will be taken from two sources: Prof. Sean Uppal's notes and Prof. GDE's textbook: Medici. Work is taken to present the material such that differences between the two approaches can be clearly seen and important theorems that are presented in both approaches are put in blue.
+    \vspace{2mm}
+
+    Medici uses a different notation than Uppal, even up to the font for the math. I've tried to replicate both styles, though for commonly shared ideas, I do not stick to a single system.
+    \vspace{2mm}
+
+    Please let me know via discord (Qcumber\#4444) if I am missing anything, there exists any typos, and especially if something is horrendously wrong! Note that this is an unofficial resource and I am not responsible if the use of this study sheet causes you to fail the midterm, break up with your partner, find your house burned down, or be captured by the North Korean government to be forced to work on their nuclear missile project which leads to the destruction of the entire world.
+
+    \section{Rank}
+    \begin{minipage}[t]{.45\textwidth} %
+        \begin{center}
+            \textbf{Medici}
+        \end{center}
+        \textbf{Definition:} The \textit{row space} of $\bff{A} \in {^m}\mathbb{R}^n$, denoted $\row \bff{A}$ is:
+        \begin{equation*}
+            \row \triangleq \spann{\bff{r}_1,\bff{r}_2,\dots,\bff{r}_m}
+        \end{equation*}
+        where $\bff{r}_i \in \mathbb{R}^n$ are the rows of $A$. The \textit{column space}, denoted $\col \bff{A}$ is:
+        \begin{equation*}
+            \col \bf{A} \triangleq \spann{\bff{c}_1,\bff{c}_2,\dots,\bff{c}_n}
+        \end{equation*}
+        where $\bff{c}_j \in {^m}\mathbb{R}$ are the columns of $\bff{A}$.
+        \vspace{2mm}
+
+        \textbf{Proposition:} Let $\bff{A} \in {^m}\mathbb{R}^n$, $\bff{U} \in {^m}\mathbb{R}^m$ and $\bff{V} \in {^n}\mathbb{R}^n$. Then $\row \bff{UA} \subseteq \row \bff{A}$ with equality holding if $\bff{U}$ is invertible. Furthermore, $\col \bff{AV} \subseteq \col \bff{A}$ with equality holding if $\bff{V}$ is invertible.
+        \vspace{2mm}
+
+        \textbf{Proposition:} Ket $\{\bff{x}_1, \bff{x}_2, \dots, \bff{x}_r\} \subset {^m}\mathbb{R}$ and let $\bff{U} \in {^m}\mathbb{R}^m$ be invertible. Then $\{\bff{x}_1,\bff{x_2},\dots,\bff{x}_r\}$ is linearly independent if and only if $\{\bff{Ux}_1,\bff{Ux}_2,\dots,\bff{Ux}_r\}$ is linearly independent.
+        \vspace{2mm}
+
+        \textbf{Lemma:} Let $\bff{A} \in {^m}\mathbb{R}^n$. Then $\row \red{\bff{A}} = \row \bff{A}$ where $\red{\bff{A}}$ is the row-reduced echelon form of $\bff{A}$ and hence $\dim \row \red{\bff{A}} = \dim \row A$. Moreover, the nonzero rows of $\red{\bff{A}}$ constitute a basis for row $\bff{A}$.
+        \vspace{2mm}
+        
+        \textbf{Lemma:} Let $\bff{A} \in {^m}\mathbb{R}^n$. Then:
+        \begin{enumerate}
+            \item The set of columns with leading ``1''s $\{\red{\bff{c}}_{j1}, \red{\bff{c}}_{j2},\dots, \red{\bff{c}}_{jr}\}$ of $\red{\bff{A}}$, the row-reduced form of $\bff{A}$, constitutes a basis for $\col \red{\bff{A}}$
+            \item The set of corresponding columns $\{\bff{c}_{j1},\bff{c}_{j2},\dots,\bff{c}_{jr}\}$ of $\bff{A}$ constitutes a basis for $\col A$.
+        \end{enumerate}
+        As such, $\dim \col \red{\bff{A}} = \dim \col \bff{A}$.
+        \vspace{2mm}
+        
+        \textbf{Theorem:} Let $\bff{A} \in {^m}\mathbb{R}^n$. Then $\dim \row \bff{A} = \dim \col \bff{A}$.
+        \vspace{-2mm} % Latex Wack
+        
+        \textbf{Definition:} Let $\bff{A} \in {^m}\mathbb{R}^n$. The rank of $\bff{A}$, denoted $\rank \bff{A}$ is the common dimension of $\row A$ and $\col A$ or:
+        \begin{equation*}
+            \dim A = \dim \col A = \dim \row A
+        \end{equation*}
+        It has the following properties:
+        \vspace{1mm}
+        \begin{enumerate}[label=\textbf{Property \Roman*}, leftmargin=18mm]
+            \item If $\bff{A} \in {^m}\mathbb{R}^n$, then $\rank \bff{A} = \rank \red{\bff{A}}$.
+            \item If $\bff{A} \in {^m}\mathbb{R}^n$, then $\rank \bff{A} = \rank \bff{A}^T$.
+            \item If $\bff{A} \in {^m}\mathbb{R}^n$, $\bff{U} \in {^m}\mathbb{R}^m$ and $\bff{V} \in {^n}\mathbb{R}^n$, then $\rank \bff{UA} \le \rank \bff{A}$ and $\rank \bff{AV} \le \rank \bff{A}$ with equality holding if $\bff{U}$ and $\bff{V}$ are, respectively, invertible.
+        \end{enumerate}
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $\bff{A} \in {^m}\mathbb{R}^n$. Then:
+        \begin{equation*}
+            \dim \null \bff{A} = n - \rank \bff{A}
+        \end{equation*}
+        We can determine the number of solutions to $\bff{Ax}=\bff{b}$:
+        \begin{itemize}
+            \item No solution: $\rank\bff{A} < \rank[\bff{A}|\bff{b}]$.
+            \item Unique solution: $\rank \bff{A} = \rank[\bff{A}|\bff{b}] = n$.
+            \item Infinite solutions: $\rank \bff{A} = \rank[\bff{A}|\bff{b}]<n$.
+        \end{itemize}
+    \end{minipage} %
+    \hfill
+    \begin{minipage}[t]{.45\textwidth} %
+        \begin{center}
+            \textbf{Uppal}
+        \end{center}
+        \textbf{Definition:} Let $A \in {^k}\mathbb{R}^n$. The rank of $A$ is:
+        \begin{equation*}
+            \rank A = \dim \col A
+        \end{equation*}
+        where the \textbf{column space} is equal to:
+        \begin{align*}
+            \col A &= \{A\bff{x} | \bff{x} \in {^n}\mathbb{R}\} \\
+                   &= \{x_1\bff{a}_1 + x_2\bff{a}_2 + \cdots + x_n\bff{a}_n | x_1,x_2,\dots,x_n \in \mathbb{R}\} \\
+                   &= \spann{\bff{a}_1,\bff{a}_2,\dots,\bff{a}_3}  \subseteq {^k}\mathbb{R}
+        \end{align*}
+        In other words, $\rank A$ is the number of linearly independent columns in $A$. If we have $C=AB$, then we can write:
+        \begin{equation*}
+            \col AB \subseteq \col A
+        \end{equation*}
+        which directly leads to:
+        \begin{equation*}
+            \rank AB \le \rank B
+        \end{equation*}
+        \textbf{Lemma:} Each of the columns of $C \in {^m}\mathbb{R}^n$ is a linear combination of the columns of $A \in {^m}\mathbb{R}^k$ iff there exists a matrix $B \in ^k\mathbb{R}^n$ such that $C=AB$.
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $A \in {^n}\mathbb{R}^n$. Then:
+        \begin{enumerate}
+            \item $A$ is invertible iff $\col A = ^n\mathbb{R}$.
+            \item $A$ is invertible iff $\rank A = n$.
+        \end{enumerate}
+        \vspace{2mm}
+
+        Let $A \in {^k}\mathbb{R}^n$. The \textbf{row space} is defined to be:
+        \begin{equation*}
+            \row A = \col A^T \subseteq ^n\mathbb{R}
+        \end{equation*}
+        \textbf{Rank Theorem:} For any matrix $A$:
+        \begin{equation*}
+            \dim \col A = \dim \row A = \rank A
+        \end{equation*}
+        \textbf{Theorem:} Let $A \in {^k}\mathbb{R}^n$ and $B \in {^n}\mathbb{R}^r$. Then:
+        \begin{equation*}
+            \rank AB \le \min\{\rank A, \rank B\}
+        \end{equation*}
+        \textbf{Theorem:} Let $A \in {^k}\mathbb{R}^n$ and $B \in {^k}\mathbb{R}$. Then:
+        \begin{equation*}
+            \rank A \le \rank [A | \bff{b}].
+        \end{equation*}
+        Furthermore, the system $A\bff{x}=\bff{b}$ has a solution iff $\rank A = \rank [A | \bff{b}]$.
+        \vspace{2mm}
+
+        \textbf{Definition:} The \textbf{null space} of $A$ is:
+        \begin{equation*}
+            \nulll A = \{\bff{x} | A\bff{x} = \bff{0}\} \subseteq {^n}\mathbb{R}
+        \end{equation*}
+        and the nullity is the dimension of the null space:
+        \begin{equation*}
+            \nullity A = \dim \nulll A
+        \end{equation*}
+        \textbf{Rank-Nullity Theorem:} For any matrix $A$,
+        \begin{equation*}
+            \rank A + \nullity A = n
+        \end{equation*}
+        where $n$ is the number of columns in $A$.
+    \end{minipage}
+    \begin{minipage}[t]{.45\textwidth} %
+        \textbf{Theorem:} Let $\bff{A} \in {^n}\mathbb{R}^n$. Then the following statements are equivalent:
+        \begin{enumerate}
+            \item $\bff{A}$ is invertible.
+            \item $\bff{A}$ has full rank $n$
+            \item The rows of $\bff{A}$ are linearly independent.
+            \item The columns of $\bff{A}$ are linearly independent.
+            \item For $\bff{x} \in {^n}\mathbb{R}, \bff{Ax}=\bff{0}$ implies $\bff{x}=\bff{0}$.
+            \item For $\bff{z} \in {^n}\mathbb{R}$, $\bff{z}^T\bff{A} = \bff{0}$ implies $\bff{z}=\bff{0}$.
+        \end{enumerate}
+        \vspace{2mm}
+        
+        \textbf{Theorem:} Let $\bff{A} \in {^m}\mathbb{R}^n$. Then the following statements are equivalent:
+        \begin{enumerate}
+            \item $\rank \bff{A} = n$
+            \item The columns of $\bff{A}$ are linearly independent.
+            \item For $\bff{x} \in {^n}\mathbb{R}$, $\bff{Ax}=\bff{0}$ implies $\bff{x}=0$.
+            \item $\bff{A}^T\bff{A}$ is invertible.
+            \item $\bff{A}$ has a left inverse, i.e. $\bff{BA}=\bff{1}$ for some $\bff{B} \in {^n}\mathbb{R}^m$.
+        \end{enumerate}
+        \vspace{2mm}
+        \textbf{Theorem:} Let $\bff{A} \in {^m}\mathbb{R}^n.$ Then the following statements are equivalent:
+        \begin{enumerate}
+            \item $\rank \bff{A} = m$
+            \item The rows of $\bff{A}$ are linearly independent.
+            \item For $\bff{z} \in {^m}\mathbb{R}$, $\bff{z}^T\bff{A} = \bff{0}$ implies $\bff{z}=0$.
+            \item $\bff{AA}^T$ is invertible.
+            \item $\bff{a}$ has a right inverse, i.e., $\bff{AB}=\bff{1}$ for some $\bff{B} \in {^n}\mathbb{R}^m$.
+        \end{enumerate}
+        \textbf{Lemma:} Let $\bff{s} \in {^n}\mathbb{R}$. Then, if $\bff{s}^T\bff{s}=0$, $\bff{s}=0$.
+        \vspace{2mm}
+
+
+    \end{minipage} %
+    \hfill
+    \begin{minipage}[t]{.45\textwidth} %
+        \textbf{Definition:} Let $A \in {^k}\mathbb{R}^n$. If $\rank A = k$, then $A$ has \textit{full row rank}. If $\rank A = n$, then $A$ has \textit{full column rank}.
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $A\in {^k}\mathbb{R}^n$. If $B \in {^r}\mathbb{R}^k$ has full column rank, then $$\rank A = \rank BA.$$ If $C \in {^n}\mathbb{R}^m$ has full row rank, then $$\rank A = \rank AC.$$
+
+        \textbf{Lemma:} Let $A \in {^k}\mathbb{R}^n$. Then:
+        \begin{equation*}
+            \rank A = \rank A^T A
+        \end{equation*}
+        \textbf{Theorem:} Let $A \in {^k}\mathbb{R}^n$. Then:
+        \begin{enumerate}[label=(\alph*)]
+            \item $A$ has full column rank iff $A^TA$ is invertible.
+            \item $A$ has full row rank iff $AA^T$ is invertible.
+        \end{enumerate}
+    \end{minipage}
+    \newpage
+    \section{Coordinates}
+    \begin{minipage}[t]{.45\textwidth}
+    \begin{center}
+        \textbf{Medici}
+    \end{center}
+    \textbf{Proposition}: Let $E = \{\bff{e}_1, \dots, \bff{e}_n\}$ be the standard basis for ${^n}\mathbb{R}$. Then $\bff{Q}$ is the transformation matrix from $F$ to $E$ if and only if $\bff{Q} = \begin{bmatrix}
+        \bff{f}_1 & \bff{f}_2 & \cdots & \bff{f}_n
+    \end{bmatrix}.$ Morever, $\bff{Pf}_j = \bff{e}_j$, with $j=1,\dots,n$, where $\bff{P}$ is the transformation matrix from $E$ to $F$.
+    \vspace{2mm}
+
+    \textbf{Notation:} We can write the transformation matrix which turns coordinates in $F$ to those in $E$ as:
+    \begin{equation*}
+        \bff{v}_e = \bff{P}_{ef} \bff{v}_f
+    \end{equation*}
+    with:
+    \begin{equation*}
+        \bff{P}_{fe} = \bff{P}_{ef}^{-1}
+    \end{equation*}
+    \textbf{Proposition:} Let $\bm{\mathcal{E}} = \begin{bmatrix}
+        \bm{e}_1 & \bff{e}_2 & \cdots & \bff{e}_n
+    \end{bmatrix} \in \mathcal{V}^n$, where $E = \{\bm{e}_1, \cdots, \bm{e}_n\}$ is a basis for $\mathcal{V}$ and $\bm{\lambda} \in {^n}\mathbb{R}.$ If:
+    \begin{equation*}
+        \bm{\mathcal{E}\lambda}= \bm{0}
+    \end{equation*}
+    then $\bm{\lambda}=\bff{0}$. Furthermore, if:
+    \begin{equation*}
+        \bm{\mathcal{E}\lambda} = \bm{\mathcal{E}\mu}
+    \end{equation*}
+    where $\bm{\mu} \in {^n}\mathbb{R}$, then $\bm{\lambda}=\bm{\mu}.$
+    \vspace{2mm}
+
+    \textbf{Theorem:} Let $\mathcal{V}$ be a vector space with basis $E=\{\bm{e}_1, \dots, \bm{e}_n\}$ and let $\bm{v}_1 \cdots \bm{v}_m \in \mathcal{V}$ with coordinates $\bff{v}_1, \dots, \bff{v}_m \in {^n}\mathbb{R}$ using $E$. Then: $\{\bm{v}_1 \cdots \bm{v}_m\}$ is linearly independent in $\mathcal{V}$ if and only if $\{\bff{v}_1, \dots, \bff{v}_m\}$ is linearly independent in ${^n}\mathbb{R}$.
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{.45\textwidth}
+        \begin{center}
+            \textbf{Uppal}
+        \end{center}
+        \textbf{Definition:} Let $\alpha = \bff{v}_1, \bff{v}_2, \dots, \bff{v}_n$ be a basis for an $n$-dimensional vector space $V$. Write any $\bff{x} \in V$ as a unique linear combination:
+        \begin{equation*}
+            \bff{x}=c_1\bff{v}_1 + c_2\bff{v}_2 + \cdots + c_n\bff{v}_n
+        \end{equation*}
+        of the basis vectors $\bff{v}_1, \bff{v}_2, \dots, \bff{v}_n$. The scalars $c_1,c_2,\dots,c_n$ are the \textit{coordinates} of $\bff{x}$ with respect to the basis $\alpha$. The vector:
+        \begin{equation*}
+            [\bff{x}]_\alpha = \begin{bmatrix}
+                c_1\\c_2\\ \vdots \\ c_n
+            \end{bmatrix} \in {^n}\mathbb{R}
+        \end{equation*}
+        is the \textit{coordinate vector} of $\bff{x}$ with respect to the basis $\alpha$.
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $\alpha=\bff{v}_1,\bff{v}_2,\dots,\bff{v}_n$ be a basis for an $n$-dimensional vector space $V$. Then for any $\bff{x},\bff{y} \in V$ and $c \in \mathbb{R}$,:
+        \begin{equation*}
+            [c\bff{x}+\bff{y}]_\alpha = c[\bff{x}]_\alpha + [\bff{y}]_\alpha
+        \end{equation*}
+        \textbf{Theorem:} Let $\alpha=\bff{v}_1,\dots,\bff{v}_n$ be a basis for a vector space $V$, and let $\bff{x}_1,\dots,\bff{x}_n \in V.$ The list $[\bff{x}_1]_\alpha, \dots, [\bff{x}_n]_\alpha$ is linearly independent in${^n}\mathbb{R}$ if and only if the list $\bff{x}_1, \dots, \bff{x}_n$ is linearly independent in $V$.
+        \vspace{2mm}
+
+        \textbf{Definition:} Let $\alpha=\bff{v}_1,\bff{v}_2,\dots,\bff{v}_n$ and $\beta=\bff{w}_1,\bff{w}_2,\dots,\bff{w}_n$ be two bases for an $n$-dimensional vector space $V$. The $n\times n$ matrix $P_{\beta\alpha} = \begin{bmatrix}
+            [\bff{v}_1]_\beta & [\bff{v}_2]_\beta & \cdots & [\bff{v}_n]_\beta
+        \end{bmatrix}$ is called the change of basis matrix from $\alpha$ to $\beta$ (or the matrix of transition from $\alpha$ to $\beta$) and is the matrix such that:
+        \begin{equation*}
+            [\bff{x}]_\beta = \bff{P}_{\beta\alpha}[\bff{x}]_\alpha
+        \end{equation*}
+        for every $\bff{x} \in V$.
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $\alpha=\bff{v}_1,\bff{v}_2,\dots, \bff{v}_n$ be a basis for an $n$-dimensional vector space $V$. If $\beta=\bff{w}_1,\bff{w}_2,\dots,\bff{w}_n$ is another basis for $V$, then the change of basis matrix $P_{\beta\alpha}$ is invertible, and its inverse is $P_{\alpha\beta}$.
+    \end{minipage}
+    \newpage
+    \section{Determinants}
+    Prof. Uppal and GDE took two very different approaches here. Uppal started from the fundamental axioms that describes the determinant function and worked out the properties from there, while GDE showed how the determinant function naturally appears when solving systems of linear equations.
+    \vspace{2mm}
+
+    \begin{minipage}[t]{.45\linewidth}
+        \begin{center}
+            \textbf{Medici}
+        \end{center}
+        \textbf{Motivation:} When solving a linear equation $\bff{Ax}=\bff{b}$, the general solution for $x_i$ is in the form of:
+        \begin{equation*}
+            x_i = \frac{\text{hot mess}}{\Delta}
+        \end{equation*}
+        where the numerator is a function that depends on $A$, $b$, and changes for each $i$. However, the denominator $\Delta$ is constant and only depends on the entries in $\bff{A}$. We call $\Delta$ the \textit{determinant} of $\bff{A}$.
+        \vspace{2mm}
+
+        \textbf{Theorem:} For a $2\times 2$ matrix $A = \begin{bmatrix}
+            a&b\\c&d
+        \end{bmatrix}$, we have:
+        \begin{equation*}
+            \Delta = ad-bc
+        \end{equation*}
+        \textbf{Theorem:} For a $3 \times 3$ matrix $A = \begin{bmatrix}
+            a_{11} & a_{12} & a_{13} \\ 
+            a_{21} & a_{22} & a_{23} \\ 
+            a_{31} & a_{32} & a_{33}
+        \end{bmatrix}$, the determinant is:
+        \begin{align*}
+            \Delta &= a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32} \\ 
+            &-a_{11}a_{23}a_{32}-a_{13}a_{22}a_{31} - a_{12}a_{21}a_{33}
+        \end{align*}
+        We can remember this using Sarrus's rule:
+        \begin{equation*}
+            \begin{array}{|ccccc|cccc;{2pt/2pt}}
+                a_{11} & & a_{12} && a_{13} &&a_{11}&&a_{12} \\ 
+                &\mathrlap{\textcolor{blue}{\searrow}}\textcolor{red}{\nearrow} &&\mathrlap{\textcolor{blue}{\searrow}}\textcolor{red}{\nearrow}&&\mathrlap{\textcolor{blue}{\searrow}}\textcolor{red}{\nearrow}&&\mathrlap{\textcolor{blue}{\searrow}}\textcolor{red}{\nearrow}& \\ 
+                a_{21} & & a_{22} && a_{23} &&a_{21}&&a_{22} \\ 
+                &\mathrlap{\textcolor{blue}{\searrow}}\textcolor{red}{\nearrow} &&\mathrlap{\textcolor{blue}{\searrow}}\textcolor{red}{\nearrow}&&\mathrlap{\textcolor{blue}{\searrow}}\textcolor{red}{\nearrow}&&\mathrlap{\textcolor{blue}{\searrow}}\textcolor{red}{\nearrow}& \\ 
+                a_{31} & & a_{32} && a_{33} &&a_{31}&&a_{32} \\ 
+            \end{array}
+        \end{equation*}
+        If we multiply along the diagonals, we can sum up the blue diagonals and subtract from it the red diagonals to get the determinant. Note that this works for $2\times 2$ matrices as well.
+        \vspace{2mm}
+
+        \textbf{Definition:} Let $\bff{A} = \begin{bmatrix}
+            \bff{r}_1 \\ \vdots \\ \bff{r}_n
+        \end{bmatrix} \in {^n}\mathbb{R}^n$ where $\bff{r}_i$ are the rows of $\bff{A}$, be arbitrary. A determinant function is any function $\Delta_n: {^n}\mathbb{R}^n \mapsto \mathbb{R}$ that satisfies the following properties:
+        \vspace{2mm}
+
+        \begin{enumerate}[label=D\Roman*]
+            \item $\Delta[\bff{E}(1;i,j)\bff{A}]=\Delta_n(\bff{A})$ where $\bff{E}(1;i,j)$ is an elementary matrix of Type III. In other terms:
+            \begin{equation*}
+                \Delta_n\begin{bmatrix}
+                    \bff{r}_1 \\ \vdots \\ \bff{r}_{i-1} \\ \bff{r}_i+\bff{r}_j \\ \bff{r}_{i+1} \\ \vdots \\ \bff{r}_n
+                \end{bmatrix} = \Delta_n(\bff{A})
+            \end{equation*}
+            for $i,j=1,\dots, n$, $i\neq j$.
+        \end{enumerate}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{.45\linewidth}
+        \begin{center}
+            \textbf{Uppal}
+        \end{center}
+        \textbf{Definition:} The \textit{determinant} of a $2\times 2$ matrix $A$ is the unique function: $\det:\, M_{2\times 2}(\mathbb{R}) \to \mathbb{R}$ defined on the rows of $A$ that satisfies:
+        \vspace{1mm}
+        \begin{enumerate}[label=(\alph*)]
+            \item The determinant function is a linear function on each row of $A$ when the other row is held fixed. This is known as the \textit{multilinearity} property:
+            $$\det\begin{bmatrix}
+                \bff{a}_1+c\bff{a'}_1 \\ \bff{a}_2
+            \end{bmatrix} = b \det\begin{bmatrix}
+                \bff{a}_1 \\ \bff{a}_2
+            \end{bmatrix} + c \det\begin{bmatrix}
+                \bff{a'}_1 \\ \bff{a}_2
+            \end{bmatrix} $$
+            for all $b,c \in \mathbb{R}$.
+            \item The \textit{alternating} property: $$\det \begin{bmatrix}
+                \bff{a}_1 \\ \bff{a}_2
+            \end{bmatrix} = - \det\begin{bmatrix}
+                \bff{a}_2 \\ \bff{a}_1
+            \end{bmatrix}$$
+            \item $\det \begin{bmatrix}
+                \bff{e}_1 \\ \bff{e}_2
+            \end{bmatrix} = 1$. In other words, $\det I_2=1$ where $I_2$ is the $2\times 2 $ identity matrix.
+        \end{enumerate}
+        \vspace{2mm}
+        
+        \textbf{Property:} This leads to the following properties:
+        \begin{enumerate}[label=(\alph*)]
+            \item If $A$ has equal rows, then $\det A = 0$.
+            \item If $A$ has an entire row of zeros, then $\det A = 0$
+            \item If the rows of $A$ are linearly dependent, then $\det A = 0$.
+        \end{enumerate}
+        \vspace{2mm}
+
+        \textbf{Theorem:} For a $2\times 2$ matrix, the determinant is given by:
+        \begin{equation*}
+            \det \begin{bmatrix}
+                a_{11} & a_{12} \\ 
+                a_{21} & a_{22} 
+            \end{bmatrix} = a_{11}a_{22} - a_{12}a_{21}
+        \end{equation*}
+        \textbf{Theorem:} Any real-valued function $f$ defined on the rows of a $2\times 2$ matrix $A = \begin{bmatrix}
+            \bff{a}_1 \\ \bff{a}_2
+        \end{bmatrix}$ that satisfies the first two properties, satisfies:
+        \begin{equation*}
+            f(A) = (\det A)f(I)
+        \end{equation*}
+        \textbf{Definition:} A non-zero function $f$ that satisfies $(i)$ and $(ii)$ is called a determinant function. If $f(I)=1$, then $f$ is the determinant.
+    \end{minipage}
+    \newpage
+    \begin{minipage}[t]{0.45\linewidth}
+        \begin{enumerate}[label=D\Roman*]
+            \setcounter{enumi}{1}
+            \item $\Delta_n[\bff{E}(\lambda;i)\bff{A}] = \lambda \Delta_n(\bff{A})$ where $\bff{E}(\lambda;i)$ is an elementary matrix of type II. In other terms:
+            \begin{equation*}
+                \Delta_n\begin{bmatrix}
+                    \bff{r}_1 \\ \vdots \\ \lambda \bff{r}_i \\ \vdots \\ \bff{r}_n
+                \end{bmatrix} = \lambda \Delta_n(\bff{A})
+            \end{equation*}
+            for $\lambda \in \mathbb{R}$, $i=1,\dots, n$. That is, $\Delta_n$ is homogenous in each row.
+        \end{enumerate}
+        \vspace{2mm}
+
+        \textbf{Properties} Let $\bff{A} \in {^n}\mathbb{R}^n$ be arbitrary. A determinant function must satisfy:
+        \begin{enumerate}
+            \item If $\bff{A}$ has a zero row, then $\Delta_n(\bff{A})=0$.
+            \item $\Delta_n[\bff{E}(\lambda;i,j)\bff{A}] = \Delta_n(\bff{A})$, $i,j=1,\dots,n$, $i\neq j$. For example:
+            \begin{equation*}
+                \Delta_n \begin{bmatrix}
+                    \bff{r}_1 \\ \vdots \\ \bff{r}_i+\lambda \bff{r}_j \\ \vdots \\ \bff{r}_n
+                \end{bmatrix} = \Delta_n(\bff{A})
+            \end{equation*}
+            \item $\Delta_n[\bff{E}(i,j)\bff{A}]=-\Delta_n(\bff{A})$, $i,j=1,\dots, n$, $i\neq j$, where $\bff{E}(i,j)$ is an elementary matrix of the first type:
+            \begin{equation*}
+                \Delta_n \begin{bmatrix}
+                    \bff{r}_1\\\vdots \\ \bff{r}_i \\ \vdots \\ \bff{r}_j \\ \vdots \\ \bff{r}_m
+                \end{bmatrix} = -\Delta_n \begin{bmatrix}
+                    \bff{r}_1\\\vdots \\ \bff{r}_j \\ \vdots \\ \bff{r}_i \\ \vdots \\ \bff{r}_m
+                \end{bmatrix}
+            \end{equation*}
+            \item If the rows of $\bff{A}$ are linearly dependent, then $\Delta_n(\bff{A})=0$. In particular, if $\bff{A}$ has two identical rows, then $\Delta_n(\bff{A})=0$.
+            \item For any $\bff{p},\bff{q} \in \mathbb{R}^n$, any $\lambda,\mu \in \mathbb{R}$ and $i=1,\dots,n$,:
+            \begin{equation*}
+                \Delta_n \begin{bmatrix}
+                    \bff{r}_1 \\ \vdots \bff{r}_{i-1} \\ \lambda \bff{p}+\mu\bff{q} \\ \bff{r}_{i+1} \\ \vdots \\ \bff{r}_n
+                \end{bmatrix} = 
+                \lambda \Delta_n\begin{bmatrix}
+                    \bff{r}_1 \\ \vdots \bff{r}_{i-1} \\ \bff{p} \\ \bff{r}_{i+1} \\ \vdots \\ \bff{r}_n
+                \end{bmatrix} + \mu \Delta_n\begin{bmatrix}
+                    \bff{r}_1 \\ \vdots \bff{r}_{i-1} \\ \bff{q} \\ \bff{r}_{i+1} \\ \vdots \\ \bff{r}_n
+                \end{bmatrix}
+            \end{equation*}
+        \end{enumerate}
+        \textbf{Proposition:} Let $\Delta_n:\, {^n}\mathbb{R}^n \mapsto \mathbb{R}$ be a determinant function and $\bff{D} \in {^n}\mathbb{R}^n$ be a diagonal matrix whose diagonal components are $d_1,\dots, d_n.$ Then:
+        \begin{equation*}
+            \Delta_n(\bff{D}) = \Delta_n(\bff{1})\prod_{k=1}^n d_k
+        \end{equation*}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\linewidth}
+        \textbf{Definition:} A function $f$ on the rows of matrix $A$ is called \textit{multilinear} if, for each $j=1,2,\dots,n,$ and for all $b,c\in \mathbb{R}$:
+        \begin{equation*}
+            f\left(\begin{bmatrix}
+                \bff{a}_1 \\ \vdots \\ b\bff{a}_j + c\bff{a'}_j \\ \vdots \\ \bff{a}_n
+            \end{bmatrix}\right)=b\left(\begin{bmatrix}
+                \bff{a}_1 \\ \vdots \\ \bff{a}_j \\ \vdots \\ \bff{a}_n
+            \end{bmatrix}\right)+cf\left(\begin{bmatrix}
+                \bff{a}_1 \\ \vdots \\ \bff{a'}_j \\ \vdots \\ \bff{a}_n
+            \end{bmatrix}\right)
+        \end{equation*}
+        \textbf{Definition:} A function $f$ on the rows of matrix $A$ is called \textit{alternating} if for all $j \neq k$:
+        \begin{equation*}
+            f\left(\begin{bmatrix}
+                \bff{a}_1 \\ \vdots \bff{a}_j \\ \vdots \\ \bff{a}_k \\ \vdots \\ \bff{a}_n
+            \end{bmatrix}\right) = -f\left(\begin{bmatrix}
+                \bff{a}_1 \\ \vdots \bff{a}_k \\ \vdots \\ \bff{a}_j \\ \vdots \\ \bff{a}_n
+            \end{bmatrix}\right)
+        \end{equation*}
+        \textbf{Theorem:} If $f$ is an alternating real-valued function defined pon the rows of an $n\times n$ matrix $A$. If any two rows of $A$ are equal, then $f(A)=0$.
+        \vspace{2mm}
+
+        \textbf{Definition:} The $ij$ \textit{minor} of an $n\times n$ matrix $A$ is the $(n-1)\times (n-1)$ matrix obtained from $A$ by omitting or deleting the $i$th row and $j$th column of $A$. The $ij$ minor is denoted as $A_{ij}$.
+        \vspace{2mm}
+
+        \textbf{Theorem:} Any alternating, multilinear function $f$ defined on the rows of $A$ satisfies the equation:
+        \begin{equation*}
+            f\left(A\right) = (a_{11}\det A_{11} - a_{12}\det A_{12} + a_{13}\det A_{13})f(I)
+        \end{equation*}
+        \textbf{Definition:} The \textit{determinant} of a $3\times 3$ matrix $A$ is the unique alternating multilinear function on the rows of $A$ whose value on the identity matrix is $1$. We denote this function $\det A$.
+        \vspace{2mm}
+
+        \textbf{Theorem:} There exists a unique alternating multilinear function $f: M_{n\times n}(\mathbb{R}) \to \mathbb{R}$ satisfying $f(I_n)=1$ which is called the determinant function. We write $f(A) = \det A$ and:
+        \begin{equation*}
+            \det A = \sum_{j=1}^{n} (-1)^{i+j} a_{ij}\det A_{ij}
+        \end{equation*}
+        for $i=1,\dots,n$. In addition, \textit{any} alternating multilinear function $f$ satisfies $f(A) = (\det A)f(I)$. 
+        \vspace{2mm}
+        \textbf{Theorem:} If the rows of $A \in M_{n\times n}(\mathbb{R})$ are linearly dependent, then $\det A = 0.$
+        \vspace{2mm}
+
+        \textbf{Theorem:} If $A \in M_{n\times n}(\mathbb{R})$ is a diagonal matrix, then $$ \det A = \prod_{i=1}^n a_{ii}.$$
+    \end{minipage}
+    \newpage
+    \begin{minipage}[t]{0.45\linewidth}
+        \textbf{Proposition:} Let $\Delta_n:\, {^n}\mathbb{R}^n \mapsto \mathbb{R}$ be a determinant function and $\bff{U} = [u_{ij}] \in {^n}\mathbb{R}^n$ be an upper-triangular matrix. Then:
+        \begin{equation*}
+            \Delta_n(\bff{U}) = \Delta_n(\bff{1})\prod_{k=1}^{n}u_{kk}
+        \end{equation*}
+        \textbf{Lemma:} Let $\Delta_n:\, {^n}\mathbb{R}^n \mapsto \mathbb{R}$ be a determinant function and $\bff{A} \in {^n}\mathbb{R}^n$. Then:
+        \begin{equation*}
+            \Delta_n(\bff{A})=\kappa(\bff{A})\Delta_n(\bff{1})
+        \end{equation*}
+        where $\kappa(\bff{A})$ is a constant depending on $\bff{A}$.
+        \vspace{2mm}
+
+        \textbf{Theorem II:} Let $\Delta_n:\, {^n}\mathbb{R}^n \mapsto \mathbb{R}$ and $\hat{\Delta}_n:\, {^n}\mathbb{R}^n \mapsto  \mathbb{R}$ be determinant functions (i.e satisfies DI and DII) where $\hat{\Delta}_n$ also satisfies:
+        \begin{equation*}
+            \hat{\Delta}_n(\bff{1})=1
+        \end{equation*}
+        Then:
+        \begin{equation*}
+            \Delta_n(\bff{A})=\hat{\Delta}_n(\bff{A})\Delta_n(\bff{1})
+        \end{equation*}
+        Furthermore, if $\Delta_n(\bff{1})=1$, then $\Delta_n(\bff{A}) = \hat{\Delta_n}\bff{A}$. That is, the determinant function is unique.
+        \vspace{2mm}
+
+        \textbf{Definition:} The determinant of $\bff{A} \in {^n}\mathbb{R}^n$ is $\Delta_n(\bff{A})$ where $\Delta_n:\, {^n}\mathbb{R}^n \mapsto \mathbb{R}$ is the unique determinant function satisfying:
+        \begin{enumerate}[label=D\Roman*]
+            \item $\Delta_n[\bff{E}(1;i,j)\bff{A}] = \Delta_n(\bff{A}), i,j=1,\dots,n$, $i\neq j$
+            \item $\Delta_n[\bff{E}(\lambda;i)\bff{A}] = \lambda \Delta_n(\bff{A})$, $i=1,\dots, n$
+            \item $\Delta_n(\bff{1})=1$.
+        \end{enumerate}
+        provided the function exists.
+        \vspace{2mm}
+
+        \textbf{Definition:} The $(i,j)$-minor matrix of $\bff{A} \in {^n}\mathbb{R}^n$ is $\mathbf{M}_{ij}(\bff{A}) \in {^{n-1}}\mathbb{R}^{n-1}$ obtained from $\bff{A}$ by eliminating the $i$th row and $j$th column.
+        \vspace{2mm}
+
+        \textbf{Definition:} The function $\det_n:\, {^n}\mathbb{R}^n \mapsto \mathbb{R}$ of $\bff{A} = [a_{ij}] \in {^n}\mathbb{R}^n$ is:
+        \begin{equation*}
+            \det_n \bff{A} = \sum_{k=1}^n (-1)^{k+j}a_{kj}\det_{n-1}\bff{M}_{kj}
+        \end{equation*}
+        for any column $j=1,\dots,n$, $n>1$ and $\det_1[a]=a$.
+        \vspace{2mm}
+
+        \textbf{Theorem:} The function $\det_n: {^n}\mathbb{R}^n \mapsto \mathbb{R}$ is the determinant.
+        \vspace{2mm}
+
+        \textbf{Theorem:} The determinant of elementary matrices are:
+        \begin{align*}
+            \det \bff{E}(i,j) &= -1 \\ 
+            \det \bff{E}(\lambda;i) &= \lambda \\ 
+            \det \bff{E}(\lambda; i,j) &= 1 
+        \end{align*}
+        \textbf{Cauchy-Binet Product Theorem:} Let $\bff{A},\bff{B} \in {^n}\mathbb{R}^n$. Then:
+        \begin{equation*}
+            \det \bff{AB} = \det \bff{A} \det\bff{B}
+        \end{equation*}
+        \textbf{Transpose Theorem:}  Let $\bff{A},\bff{B} \in {^n}\mathbb{R}^n$. Then:
+        \begin{equation*}
+            \det \bff{A}^T = \det \bff{A}
+        \end{equation*}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.45\linewidth}
+        \textbf{Theorem:} Let $\bff{a}_1,\bff{a}_2,\dots,\bff{a}_n$ denote the rows of an $n\times n$ matrix $A$. Then:
+        \begin{equation*}
+            \det\begin{bmatrix}
+                \bff{a}_1 \\ \vdots \\ \bff{a}_i + c\bff{a}_j \\ \vdots \\ \bff{a}_n
+            \end{bmatrix} = \det \begin{bmatrix}
+                \bff{a}_1 \\ \bff{a}_2 \\ \vdots \\ \bff{a}_n
+            \end{bmatrix}
+        \end{equation*}
+        In other words, adding a multiple of one row to another does not change the value of $\det A$.
+        \vspace{2mm}
+
+        \textbf{Note:} We also know that:
+        \begin{itemize}
+            \item By the alternating property of the determinant, interchanging any two rows changes the sign of the determinant.
+            \item By the multilinear property of the determinant, multiplying any row by a scalar $c$ changes the value of the determinant by a factor of $c$.
+        \end{itemize}
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $R$ be the reduced echelon form of $A$. Then:
+        \begin{equation*}
+            \det A = c\det R
+        \end{equation*}
+        where $c\neq 0$.
+        \vspace{2mm}
+
+        \textbf{Theorem:} $A$ is invertible if and only if $\det A \neq 0$.
+        \vspace{2mm}
+
+        \textbf{Product Theorem:} Let $A$ and $B$ be $n\times n$ matrices. Then:
+        \begin{equation*}
+            \det AB = \det A \det B
+        \end{equation*}
+        \vspace{2mm}
+
+        \textbf{Theorem:} If $A \in M_{n\times n}(\mathbb{R})$ is invertible, then $\det A^{-1} = (\det A)^{-1}$.
+        \vspace{2mm}
+
+        \textbf{Definition:} Let $A$ be an $n\times n$ matrix. The \textit{adjoint} of $A$, denoted $\adj A$, is the $n\times n$ matrix whose $ij$ entry is $(-1)^{i+j}\det A_{ji}$.
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $A$ be an $n\times n$ matrix. Then:
+        \begin{enumerate}
+            \item $A(\adj A) = (\det A)I_n$
+            \item If $A$ is invertible, $A^{-1} = \frac{\adj A}{\det A}$.
+        \end{enumerate}
+        \vspace{2mm}
+
+        \textbf{Note:} The formula for $A^{-1}$ above is not an efficient way to compute the inverse for $n>3$. In general, it's much quicker to use the Gauss-Jordan algorithm. However, a consequence of the above theorem is that we can compute $\det A$ by expanding along columns instead of rows.
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $A$ be an $n\times n$ matrix. For any fixed $j=1,2,\dots,n$:
+        \begin{equation*}
+            \det A = \sum_{i=1}^n (-1)^{i+j} a_{ij}\det A_{ij}
+        \end{equation*}
+        \vspace{2mm}
+
+        \textbf{Corollary:} Let $A$ be an $n\times n$ matrix. Then:
+        \begin{equation*}
+            \det A^T = \det A
+        \end{equation*}
+    \end{minipage}
+    \newpage
+    \begin{minipage}[t]{0.45\linewidth}
+        This means we can write the determinant formula s:
+        \begin{equation*}
+            \det \bff{A} = \sum_{j=1}^n (-1)^{k+j}a_{kj} \det \bff{M}_{kj}
+        \end{equation*}
+        for any row $k=1,\dots,n$.
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $\bff{A} \in {^n}\mathbb{R}^n$. Then $\bff{A}$ is invertible if and only if $\det \bff{A} \neq 0$.
+        \vspace{2mm}
+
+        \textbf{Corollary:} Let $\bff{A} \in {^n}\mathbb{R}^n$ be invertible. Then: $$\det \bff{A}^{-1} = \frac{1}{\det \bff{A}}$$
+
+        \textbf{Maclaurin-Cramer Rule:} Let:
+        \begin{equation*}
+            \bff{A} = \begin{bmatrix}
+                
+                \bff{c}_1 & \cdots & \bff{c}_j & \cdots & \bff{c}_n
+            \end{bmatrix} \in {^n}\mathbb{R}^n
+        \end{equation*}
+        be invertible. Then the unique solution to $\bff{Ax}=\bff{b}$, where $\bff{x}=[x_i] \in {^n}\mathbb{R}$ is given by:
+        \begin{equation*}
+            x_i = \frac{\det \bff{A}_i}{\det \bff{A}}
+        \end{equation*}
+        where $\bff{A}_i$ is $\bff{A}$ with the $i$th column replaced by $\bff{b}$.
+        \vspace{2mm}
+
+        \textbf{Definition:} The $(i,j)$-cofactor of a matrix $\bff{A} \in {^n}\mathbb{R}^n$ is:
+        \begin{equation*}
+            c_{ij}(\bff{A}) = (-1)^{i+j}\det \bff{M}_{ij}(\bff{A})
+        \end{equation*}
+        such that we can write the determinant as:
+        \begin{equation*}
+            \det \bff{A} = \sum_{j=1}^n a_{kj}c_{kj}
+        \end{equation*}
+        \textbf{Theorem:} We have:
+        \begin{equation*}
+            \sum_{j=1}^n a_{ij}c_{kj} = \begin{cases}
+                \det \bff{A} & i=k \\ 
+                0 &= i\neq k
+            \end{cases}
+        \end{equation*}
+        \textbf{Definition:} The adjoint of a matrix $\bff{A} \in ^{n}\mathbb{R}^n$ is:
+        \begin{equation*}
+            \adj \bff{A} = \bff{C}^T \in {^n}\mathbb{R}^n
+        \end{equation*}
+        where $\bff{C}=[c_{ij}]\in {^n}\mathbb{R}^n$ and $c_{ij}\bf{(A)}$ is the $(i,j)$-cofactor of $\bff{A}$.
+        \vspace{2mm}
+
+        \textbf{Theorem:} Let $\bff{A} \in {^n}\mathbb{R}^n$. Then:
+        \begin{equation*}
+            \bff{A}\adj \bff{A} = (\adj \bff{A})\bff{A} = (\det \bff{A}) \bff{1}
+        \end{equation*}
+        If $\bff{A}$ is invertible:
+        \begin{equation*}
+            \bff{A}^{-1} = \frac{\adj \bff{A}}{\det \bff{A}}
+        \end{equation*}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.45\linewidth}
+        \textbf{Cramer's Rule:} Suppose $A$ is invertible. Then the unique solution to the system of equations $A\bff{x}=\bff{b}$ is:
+        \begin{align*}
+            \bff{x} &= A^{-1}\bff{b} \\ 
+            &= \frac{1}{\det A}(\adj A) \bff{b}
+        \end{align*}
+        but the $i$th entry of the product $(\adj A)\bff{b}$ is:
+        \begin{equation*}
+            \sum_{j=1}^n (-1)^{i+j}b_j \det A_{ji}
+        \end{equation*}
+        which is the determinant of the matrix $B_i$ whose columns are $\bff{a}_1,\bff{a}_2,\dots,\bff{a}_{i-1},\bff{b},\bff{a}_{i+1},\bff{a}_n$ where the $\bff{a}_1,\bff{a}_2,\dots,\hat{\bff{a}}_i,\dots,\bff{a}_n$ are the columns of $A$. In other words:
+        \begin{equation*}
+            x_i = \frac{\det B_i}{\det A}
+        \end{equation*}
+        for each $i=1,2,\dots,n$. See a beautiful \href{https://www.youtube.com/watch?v=jBsC34PxzoM}{visualization} by 3b1b.
+        \vspace{2mm}
+
+        \textbf{Theorem:} If all entries of a matrix are integers, its determinant is an integer.
+    \end{minipage}
+\end{document}
