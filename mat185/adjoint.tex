@@ -15,6 +15,8 @@
 \lhead{MAT185}
 \rhead{QiLin Xue}
 
+\renewcommand{\qedsymbol}{\includegraphics[height=2ex]{medici.png}}
+
 \begin{document}
     \maketitle
     \section{Definition}
@@ -99,6 +101,41 @@
             \item symmetric
         \end{itemize}
         then $\adj \bff{A}$ is as well.
-        \item If $\rank \bff{A} \le n-2$, then $\adj \bff{A}=\bff{0}$. If $\rank \bff{A}=n-1$, then $\rank \adj\bff{A} = 1$
+        \item If $\rank \bff{A} \le n-1$, then $\rank \adj \bff{A} \le 1$
+        \begin{proof}
+            Let $\rank \bff{A} = n-1$. Then:
+            \begin{equation*}
+                \nullity A = n - \rank A = 1
+            \end{equation*}
+            Since $\bff{A}$ is singular, we have $\det \bff{A}=0$. From Theorem VIII:
+            \begin{equation*}
+                \bff{A}\adj\bff{A} = 0 \implies \col \adj \bff{A} \in \nulll A
+            \end{equation*}
+            which implies
+            \begin{equation*}
+                \nullity \bff{A} \ge \rank \adj \bff{A} \implies 1 \ge \rank \adj \bff{A}
+            \end{equation*}
+            In fact, the rank will always be $1$, since there will be some non-zero minor. However, I don't know how to prove this last part.
+            \vspace{2mm}
+
+            If $\rank \bff{A} \le n-2$, then $\rank \adj \bff{A} = 0.$ This means that the minimum amount of rows that we need to remove such that all rows are linearly independent is $2$. All minors will have $n-1$ rows, so all minors are consisted of linearly dependent rows and as a result, the determinant of the minors will all be zero and thus $\adj \bff{A} = \bff{0}$. 
+        \end{proof}
+        \item $\adj \adj \bff{A} = \det(\bff{A})^{n-2}\bff{A}$
+        \begin{proof}
+            Applying Theorem VIII on $\adj\bff{A}$ gives:
+            \begin{equation*}
+                \adj \bff{A} \adj\adj\bff{A} = (\det \adj \bff{A})\bff{I}
+            \end{equation*}
+            From property $4$, we have:
+            \begin{equation*}
+                \adj\bff{A}\adj\adj\bff{A} = \det(\bff{A})^{n-1}
+            \end{equation*}
+            Multiplying both sides by $\bff{A}$ and applying Theorem VIII again gives:
+            \begin{align*}
+                (\bff{A} \adj \bff{A})\adj\adj \bff{A} &= \bff{A}\det(\bff{A})^{n-1} \\ 
+                \det(\bff{A})\adj\adj\bff{A} &= \det(\bff{A})^{n-1} \\
+                \adj\adj\bff{A} &= \bff{A}\det(\bff{A})^{n-2} 
+            \end{align*}
+        \end{proof}
     \end{enumerate}
 \end{document}
