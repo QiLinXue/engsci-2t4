@@ -2,18 +2,6 @@
 \usepackage{qilin}
 \hfuzz=1000pt 
 \usepackage{amssymb}
-\newcommand{\bff}[1]{\mathbf{#1}}
-\newcommand{\image}[1]{\mathrm{im}\,#1}
-\newcommand{\spann}[1]{\mathrm{span}\{#1\}}
-\newcommand{\spannn}[1]{\mathrm{span}\,#1}
-% \newcommand{\rank}[1]{\mathrm{rank}\,#1}
-% \newcommand{\dim}[1]{\dim{rank}\,#1}
-\newcommand{\col}[1]{\mathrm{col}\,#1}
-\newcommand{\row}[1]{\mathrm{row}\,#1}
-\newcommand{\nullity}[1]{\mathrm{nullity}\,#1}
-\newcommand{\nulll}[1]{\mathrm{null}\,#1}
-\newcommand{\adj}[1]{\mathrm{adj}\,#1}
-\newcommand{\red}[1]{\widetilde{#1}}
 \hbadness=99999 % we're bad students
 \hfuzz=100pt % wide bois begone
 
@@ -57,7 +45,7 @@
         \textbf{Proposition:} Let $\bff{A} \in {^m}\mathbb{R}^n$, $\bff{U} \in {^m}\mathbb{R}^m$ and $\bff{V} \in {^n}\mathbb{R}^n$. Then $\row \bff{UA} \subseteq \row \bff{A}$ with equality holding if $\bff{U}$ is invertible. Furthermore, $\col \bff{AV} \subseteq \col \bff{A}$ with equality holding if $\bff{V}$ is invertible.
         \vspace{2mm}
 
-        \textbf{Proposition:} Ket $\{\bff{x}_1, \bff{x}_2, \dots, \bff{x}_r\} \subset {^m}\mathbb{R}$ and let $\bff{U} \in {^m}\mathbb{R}^m$ be invertible. Then $\{\bff{x}_1,\bff{x_2},\dots,\bff{x}_r\}$ is linearly independent if and only if $\{\bff{Ux}_1,\bff{Ux}_2,\dots,\bff{Ux}_r\}$ is linearly independent.
+        \textbf{Proposition:} Let $\{\bff{x}_1, \bff{x}_2, \dots, \bff{x}_r\} \subset {^m}\mathbb{R}$ and let $\bff{U} \in {^m}\mathbb{R}^m$ be invertible. Then $\{\bff{x}_1,\bff{x_2},\dots,\bff{x}_r\}$ is linearly independent if and only if $\{\bff{Ux}_1,\bff{Ux}_2,\dots,\bff{Ux}_r\}$ is linearly independent.
         \vspace{2mm}
 
         \textbf{Lemma:} Let $\bff{A} \in {^m}\mathbb{R}^n$. Then $\row \red{\bff{A}} = \row \bff{A}$ where $\red{\bff{A}}$ is the row-reduced echelon form of $\bff{A}$ and hence $\dim \row \red{\bff{A}} = \dim \row A$. Moreover, the nonzero rows of $\red{\bff{A}}$ constitute a basis for row $\bff{A}$.
@@ -76,7 +64,7 @@
         
         \textbf{Definition:} Let $\bff{A} \in {^m}\mathbb{R}^n$. The rank of $\bff{A}$, denoted $\rank \bff{A}$ is the common dimension of $\row A$ and $\col A$ or:
         \begin{equation*}
-            \dim A = \dim \col A = \dim \row A
+            \rank A = \dim \col A = \dim \row A
         \end{equation*}
         It has the following properties:
         \vspace{1mm}
@@ -89,7 +77,7 @@
 
         \textbf{Theorem:} Let $\bff{A} \in {^m}\mathbb{R}^n$. Then:
         \begin{equation*}
-            \dim \null \bff{A} = n - \rank \bff{A}
+            \dim \nulll \bff{A} = n - \rank \bff{A}
         \end{equation*}
         We can determine the number of solutions to $\bff{Ax}=\bff{b}$:
         \begin{itemize}

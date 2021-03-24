@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage{qilin}
+\hfuzz=1000pt 
+\usepackage{amssymb}
+\hbadness=99999 % we're bad students
+\hfuzz=100pt % wide bois begone
+
+\usepackage{mathtools}
+\usepackage{arydshln}
+
+% \newcommand{\dim}[1]{\mathrm{dim}\,#1}
+
+\title{Adjoint Properties}
+\author{QiLin Xue}
+\lhead{MAT185}
+\rhead{QiLin Xue}
+
+\begin{document}
+    \maketitle
+    \section{Definition}
+    The adjoint, or adjugate of $\bff{A}$, is the transpose of the cofactor matrix $\bff{C}=[c_{ij}]$:
+    \begin{equation*}
+        \adj \bff{A} = \bff{C}^T
+    \end{equation*}
+    where:
+    \begin{equation*}
+        c_{ij}(\bff{A}) = (-1)^{i+j}\det \bff{M}_{ij}(\bff{A})
+    \end{equation*}
+    where $\bff{M}$ is the $(i,j)$-minor.
+    \section{Best Property}
+    The most important property is Theorem VIII in Medici:
+    \begin{equation*}
+        \bff{A}\adj \bff{A} = (\adj \bff{A})\bff{A} = (\det \bff{A})\bff{I}
+    \end{equation*}
+    which will turn out to be very useful.
+    \section{Other Properties}
+    For any $n\times n$ matrix:
+    \begin{enumerate}
+        \item $\adj \bff{0} = \bff{0}$ and $\adj \bff{I} = \bff{I}$
+        \begin{proof}
+            To prove the first part, apply the definition and note that all minors are the zero matrix and the determinant of the zero matrix is zero. For the second part, apply Theorem VIII.
+        \end{proof}
+        \item $\adj \lambda \bff{A} = \lambda^{n-1} \adj \bff{A}$
+        \begin{proof}
+            Using the definition, note that each entry of the cofactor is:
+            \begin{equation*}
+                c_{ij}(\lambda \bff{A}) = (-1)^{i+j} \det \bff{M}_{ij}(\lambda \bff{A}) = (-1)^{i+j} \lambda^{n-1}\det \bff{M}_{ij}(\bff{A})
+            \end{equation*}
+            Since each minor is an $(n-1)\times (n-1)$ matrix. We can factor this out such that:
+            \begin{equation*}
+                \bff{C}(\lambda \bff{A}) = \lambda \bff{C}(\bff{A}) \implies \adj(\lambda \bff{A}) = \lambda^{n-1}\adj \bff{A}
+            \end{equation*}
+        \end{proof}
+        \item $\adj(\bff{A}^T) = \adj(\bff{A})^T$
+        \begin{proof}
+            From Theorem VIII, taking the transpose of both sides:
+            \begin{equation*}
+                \bff{A}^T\adj(\bff{A})^T = \det (\bff{A})\bff{I}
+            \end{equation*}
+            Now, apply Theorem VIII to $\bff{A}^T$ to get:
+            \begin{equation*}
+                \bff{A}^T\adj(\bff{A}^T) = \det(\bff{A}^T)\bff{I}
+            \end{equation*}
+            Since we have:
+            \begin{equation*}
+                \det(\bff{A}^T)=\det(\bff{A}),
+            \end{equation*}
+            it means that:
+            \begin{equation*}
+                \bff{A}^T\adj(\bff{A})^T = \bff{A}^T\adj(\bff{A}^T)
+            \end{equation*}
+            If $\bff{A}$ is not the zero matrix, then this directly proves it. If $\bff{A}$ is the zero matrix, then from property $1$, we get: $\adj(\bff{A}^T)=\bff{0}$ and $\adj(\bff{A})^T = \bff{0}^T=\bff{0}$.
+        \end{proof}
+        \item $\det(\adj \bff{A})= \det(\bff{A})^{n-1}$
+        \begin{proof}
+            Taking the determinant of both sides in Theorem VIII:
+            \begin{align*}
+                \det(\bff{A}\adj\bff{A})&=\det((\det \bff{A})\bff{I}) \\ 
+                \det(\bff{A})\det{\adj\bff{A}}&=\det(\bff{A})^{n-1} \\ 
+                \det(\adj \bff{A}) &= \det(\bff{A})^{n-1}
+            \end{align*}
+        \end{proof}
+        \item $\adj(\bff{A}\bff{B})=\adj(\bff{B})\adj(\bff{A})$ where $\bff{B}$ is a $n\times n$ matrix.
+        \begin{proof}
+            Assume both matrices are invertible. Applying Theorem VIII to expand $\adj\bff{B}\adj\bff{A}$, we get:
+            \begin{align*}
+                \adj\bff{B}\adj\bff{A} &= (\det \bff{B})\bff{B}^{-1}(\det \bff{A})\bff{A}^{-1} \\ 
+                &= (\det \bff{AB})(AB)^{-1} \\ 
+                &= \adj(\bff{AB})
+            \end{align*}
+            If the matrices are non-invertible, then... idk you're fucked I guess. (but trust me, this still works)
+        \end{proof}
+        \item Using the above properties, we can show that if $\bff A$ is:
+        \begin{itemize}
+            \item upper triangular
+            \item lower triangular
+            \item diagonal
+            \item orthogonal
+            \item symmetric
+        \end{itemize}
+        then $\adj \bff{A}$ is as well.
+        \item If $\rank \bff{A} \le n-2$, then $\adj \bff{A}=\bff{0}$. If $\rank \bff{A}=n-1$, then $\rank \adj\bff{A} = 1$
+    \end{enumerate}
+\end{document}

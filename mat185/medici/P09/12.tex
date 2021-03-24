@@ -1,0 +1,13 @@
+\begin{sol}
+    Applying $\adj \bff{A} = \det \bff{A} \bff{A}^{-1}$, we have:
+    \begin{align}
+        (\det \bff{A})\adj\adj \bff{A} &= (\det \adj \bff{A})\bff{A} \\ 
+        (\det \bff{A})\adj(\det(\bff{A})\bff{A}^{-1}) &=(\det(\det(\bff{A})\bff{A}^{-1}))\bff{A} \\ 
+        (\det \bff{A})\det(\det(\bff{A})\bff{A}^{-1})\cdot \frac{\bff{A}}{\det \bff{A}} &=(\det(\det(\bff{A})\bff{A}^{-1}))\bff{A}
+    \end{align}
+    If $\bff{A}$ is non-invertible, we can use:
+    \begin{equation}
+        \bff{A} \adj \bff{A} = \det \bff{A} \bff{1}
+    \end{equation}
+    to show that $\det \adj \bff{A} = 0$.
+\end{sol}

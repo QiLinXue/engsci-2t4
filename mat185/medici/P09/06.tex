@@ -1,0 +1,42 @@
+\begin{sol}
+    First, we show that if $(x,y,z)$ lies on the plane, then the determinant is zero. The plane can be described with the basis $\bff{v}_1 = (x_2-x_1,y_2-x_1,z_2-z_1)$ and $\bff{v}_2 = (x_3-x_1,y_3-y_1,z_3-z_1)$. Since the point is on the plane, the point can be described with $\bff{v} = (x-x_1, y-y_1, z-z_1)$. Since:
+    \begin{equation}
+        \bff{v} \in \spann{\bff{v}_1, \bff{v}_2}
+    \end{equation}
+    , then $\bff{v}$ can be written as a linear combination of $\bff{v}_1$ and $\bff{v}_2$. As a result, we have:
+    \begin{equation}
+        \det \begin{bmatrix}
+            x & y & z & 1 \\ 
+            x_1 & y_1 & z_1 & 1 \\ 
+            x_2 & y_2 & z_2 & 1 \\ 
+            x_3 & y_3 & z_3 & 1 
+        \end{bmatrix}
+        = 
+        \det \begin{bmatrix}
+            x-x_1 & y-y_1 & z-z_1 & 0 \\ 
+            x_1 & y_1 & z_1 & 1 \\ 
+            x_2-x_1 & y_2-y_1 & z_2-z_1 & 0 \\ 
+            x_3-x_1 & y_3-y_1 & z_3-z_1 & 0
+        \end{bmatrix}
+    \end{equation}
+    Since the first row is a linear combination of the last two rows, the determinant is zero.
+    \vspace{2mm}
+
+    Next we show that if the determinant is zero, then the point $(x,y,z)$ lies on the plane. We can write the determinant as:
+    \begin{equation}
+        \det \begin{bmatrix}
+            x & y & z & 1 \\ 
+            x_1 & y_1 & z_1 & 1 \\ 
+            x_2 & y_2 & z_2 & 1 \\ 
+            x_3 & y_3 & z_3 & 1 
+        \end{bmatrix}
+        = 
+        \det \begin{bmatrix}
+            x-x_1 & y-y_1 & z-z_1 & 0 \\ 
+            x_1 & y_1 & z_1 & 1 \\ 
+            x_2-x_1 & y_2-y_1 & z_2-z_1 & 0 \\ 
+            x_3-x_1 & y_3-y_1 & z_3-z_1 & 0
+        \end{bmatrix} = 0
+    \end{equation}
+    Since $$\det \bff{A} = 0 \iff \text{rows are linearly dependent},$$ we know that the rows are linearly dependent. Since none of the points are colinear, the last two rows are linearly independent and therefore the last three rows are also linaerly independent (due to the trailing $1$ in the last column of the second row). As a result, including the first row makes the rows linaerly dependent. Since the last entry of the first row is a $0$, it means it can be written as a linear combination of the last two rows, which is represented geometrically as being on the defined plane.
+\end{sol}
