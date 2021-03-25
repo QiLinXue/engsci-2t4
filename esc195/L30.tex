@@ -1,0 +1,43 @@
+\section{Directional Derivatives and the Gradient Vector}
+\begin{itemize}
+    \item We can attempt to define differentiability if the directional derivative exists:
+    \begin{equation}
+        \lim_{\vec{h}\to\vec{0}}  \frac{f(\vec{x}_0+\vec{h})-f(\vec{x}_0)}{\vec{h}} = \lim_{\vec{h}\to\vec{0}} \frac{f(x_0+h_1, y_0+h+2, z_0+h_3) - f(x_0, y_0, z_0)}{\vec{h}}
+    \end{equation}
+    However, we cannot simply divide two vectors. We also can't let the denominator be $\lVert \vec{h} \rVert$ because we then lose information about the direction. Therefore, we need to re-define the derivative:
+    \begin{definition}
+        If $\lim_{h\to 0} \frac{g(h)}{|h|} = 0$, then we can say that $g(h) = o(h)$ where $o(h)$ is ```little-o''
+    \end{definition}
+    \item We can start with the one-dimensional case, and write:
+    \begin{align}
+        f'(x) &= \lim_{h\to 0} \frac{f(x+h)-f(x)}{h} \\
+        &\implies \lim_{h\to 0}\frac{f(x+h)-f(x)-f'(x)h}{h} = 0 
+    \end{align}
+    Therefore:
+    \begin{equation}
+        [f(x+h)-f(x)]-f'(x)h = o(h)
+    \end{equation}
+    We want to look for terms that approach zero faster than $h\to 0$, so we can let them be $o(h)$ and leave them out of the final definition.
+    \begin{example}
+        Let $f(x)=x^2$. Then: $f(x+h)-f(x)=(x+h)^2-x^2=2xh+h^2$. Note that:
+        \begin{equation}
+            \lim_{h\to 0} \frac{h^2}{h} = \lim_{h\to 0}h = 0
+        \end{equation}
+        so we can say that $h^2$ is $o(h)$, so from our re-definition, we look for the term:
+        \begin{equation}
+            \text{(term)} \cdot h
+        \end{equation}
+        where the term gives the derivative. Therefore, $f'(x)=2x$.
+    \end{example}
+    \begin{idea}
+        The overall idea is to write the derivative using only the numerator:
+        \begin{equation}
+            f(x+h)-f(x)
+        \end{equation}
+        and looking for only the \textit{important} terms and leaving out the unimportant terms. We can define the unimportant terms to be any terms that are $o(h)$. Once we have the important terms, they should (at least in the $1d$ case), be in the form of:
+        \begin{equation}
+            \text{(derivative)} \cdot h
+        \end{equation}
+        and we can read out the derivative without having to divide.
+    \end{idea}
+\end{itemize}

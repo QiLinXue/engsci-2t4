@@ -153,4 +153,19 @@
             \end{equation}            
         \end{enumerate}
     \end{example}
+    \item A multivariable function is continuous if:
+    \begin{equation}
+        \lim_{\vec{x}\to\vec{x}_0} f(\vec{x})=f(\vec{x}_0)
+    \end{equation}
+    \begin{theorem}
+        The continuity of composite functions: If $g$ is continuous at $\vec{x}_0$ and $f$ is continuous at the number $g(\vec{x}_0)$, then $f(g(\vec{x}))$ is continuous at $\vec{x}_0$.
+    \end{theorem}
+    \item If $f(\vec{x})$ is continuous at $\vec{x}_0$, then:
+    \begin{align}
+        \lim_{x\to x_0} f(x,y_0) &= f(x_0, y_0) \\ 
+        \lim_{y\to y_0} f(x_0, y) &= f(x_0,y_0)
+    \end{align}
+    \begin{warning}
+        This is not an if and only if statement. It's possible for the specific limit to exist when travelling across such paths but the overall limit doesn't exist.
+    \end{warning}
 \end{itemize}

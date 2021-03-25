@@ -1,0 +1,127 @@
+\section{Partial Derivatives}
+\begin{itemize}
+    \item Suppose we have the top half of a sphere with radius $5$, then:
+    \begin{equation}
+        f=\sqrt{25-x^2-y^2}
+    \end{equation}
+    Suppose we are interested in what happens if we move along the line $y=2$.
+    \begin{definition}
+        The partial derivative of $f(x,y)$ is given by:
+        \begin{equation}
+            f_x(x,y) = \frac{\partial}{\partial x} f(x,y) = \lim_{h\to 0} \frac{f(x+h,y)-f(x,y)}{h}
+        \end{equation}
+        or for the partial derivative with respect to $y$:
+        \begin{equation}
+            f_y(x,y) = \frac{\partial}{\partial y}f(x,y) = \lim_{h\to 0} \frac{f(x,y+h)-f(x,y)}{h}
+        \end{equation}
+        This can be extended to an arbitrary number of dimensions.
+    \end{definition}
+    \begin{example}
+        Suppose we have $f(x,y)=e^{x^2y^3}$, then we have:
+        \begin{equation}
+            f_x = 2xy^2e^{x^2y^3}
+        \end{equation}
+        and:
+        \begin{equation}
+            f_y=3y^2x^2e^{x^2y^3}
+        \end{equation}
+    \end{example}
+    \item We can visualize using the diagram below:
+    % https://tex.stackexchange.com/questions/479814/a-diagram-about-partial-derivatives-of-fx-y
+    \begin{center}
+        \begin{tikzpicture}[bullet/.style={circle,fill,inner sep=1pt},
+            declare function={f(\x,\y)=2-0.5*pow(\x-1.25,2)-0.5*pow(\y-1,2);}]
+            \begin{axis}[view={150}{45},colormap/blackwhite,axis lines=middle,%
+               zmax=2.2,zmin=0,xmin=-0.2,xmax=2.4,ymin=-0.2,ymax=2,%
+               xlabel=$x$,ylabel=$y$,zlabel=$z$,
+               xtick=\empty,ytick=\empty,ztick=\empty]
+             \addplot3[surf,shader=interp,domain=0.6:2,domain y=0.5:1.2,opacity=0.7] 
+              {f(x,y)};
+             \addplot3[thick,domain=0.6:2,samples y=1]  ({x},1.2,{f(x,1.2)}); 
+             \draw[dashed] (1.75,0,0) node[above left]{$x_0$} -- (1.75,1.2,0)
+             node[bullet] (b1) {}  -- (0,1.2,0) node[above right]{$y_0$}
+             (1.75,1.2,0) -- (1.75,1.2,{f(1.75,1.2)})node[bullet] {};
+             \draw (1.75,1.2,{f(1.75,1.2)}) -- (0.75,1.2,{f(1.75,1.2)+0.5})
+             coordinate[pos=0.5] (aux1);
+             \draw[opacity=0.5,upper left=gray!80!black,upper right=gray!60,
+           lower left=gray!60,lower right=gray!80!black] (2,1.2,0) -- (0.6,1.2,0)
+              -- (0.6,1.2,2.2) -- (2,1.2,2.2) -- cycle;
+             \addplot3[surf,shader=interp,domain=0.6:2,domain y=1.2:1.9,opacity=0.7] 
+              {f(x,y)};
+            \end{axis}
+            \draw (aux1) -- ++ (-1,1) node[above,align=center]{slope in $x$ direction\\
+             $f_x(x_0, y_0)$};
+            \node[anchor=north west] at (b1) {$(x_0,y_0)$}; 
+            %
+            \begin{axis}[xshift=6.5cm,view={150}{45},colormap/blackwhite,axis lines=middle,%
+               zmax=2.2,zmin=0,xmin=-0.2,xmax=2.4,ymin=-0.2,ymax=2,%
+               xlabel=$x$,ylabel=$y$,zlabel=$z$,
+               xtick=\empty,ytick=\empty,ztick=\empty]
+             \addplot3[surf,shader=interp,domain=0.6:1.75,domain y=0.5:1.9,opacity=0.7] 
+              {f(x,y)};
+              \addplot3[thick,domain=0.5:1.9,samples y=1]  (1.75,{x},{f(1.75,x)}); 
+             \draw[dashed] (1.75,0,0) node[above left]{$x_0$} -- (1.75,1.2,0)
+             node[bullet] (b2){}
+             -- (0,1.2,0) node[above right]{$y_0$}
+             (1.75,1.2,0) -- (1.75,1.2,{f(1.75,1.2)})node[bullet] {};
+             \draw (1.75,1.2,{f(1.75,1.2)}) -- (1.75,0.2,{f(1.75,1.2)+0.2})
+              coordinate[pos=0.5] (aux2);
+             \draw[opacity=0.5,upper left=gray!80!black,upper right=gray!60,
+           lower left=gray!60,lower right=gray!80!black] (1.75,0.5,0) -- (1.75,1.9,0)
+              -- (1.75,1.9,2.2) -- (1.75,0.5,2.2) -- cycle;
+             \addplot3[surf,shader=interp,domain=1.75:2,domain y=0.5:1.9,opacity=0.7] 
+              {f(x,y)};
+            \end{axis}
+            \draw (aux2) -- ++ (0.3,1) node[above,align=center]{slope in $y$ direction\\
+             $f_y(x_0,y_0)$};
+            \node[anchor=north east] at (b2) {$(x_0,y_0)$};
+           \end{tikzpicture}
+    \end{center}
+    \begin{example}
+        Suppose $f(x,y,z)=\ln\left(\frac{x}{y}\right) - ye^{xz}$. Then the partial derivatives are:
+        \begin{align}
+            f_x &= \frac{1}{x} - yze^{xz} \\ 
+            f_y &= -\frac{1}{y} - e^{xz} \\ 
+            f_z &= -xye^{xz}
+        \end{align}
+    \end{example}
+    \begin{example}
+        Suppose $f(r,\theta,\phi) = r^2\sin\theta \cos\phi$. Then:
+        \begin{align}
+            h_r &= 2r\sin\theta \cos\phi \\ 
+            h_\theta &= r^2\cos\theta\cos\phi \\ 
+            h_\phi &= -r^2\sin\theta\sin\phi
+        \end{align}
+    \end{example}
+    \item We can also have mixed partials, such as:
+    \begin{align}
+        \frac{\partial}{\partial x} \frac{\partial f}{\partial x} &\to \frac{\partial^2 f}{\partial x^2} \\ 
+        \frac{\partial}{\partial y} \frac{\partial f}{\partial x} &\to \frac{\partial^2 f}{\partial y\partial x}
+    \end{align}
+    \begin{theorem}
+        Clairaut's Theorem says that:
+        \begin{equation}
+            \frac{\partial^2 f}{\partial y\partial x} = \frac{\partial^2 f}{\partial x\partial y}
+        \end{equation}
+        on every open set on which $f$ and its partials $\frac{\partial f}{\partial x}$, $\frac{\partial f}{\partial y}$, $\frac{\partial^2 f}{\partial x\partial y}$, $\frac{\partial^2 f}{\partial y\partial x}$ are continuous.
+    \end{theorem}
+    \item This can be extended to multiple variables.
+    \begin{example}
+        Let $f(x,y)=\cos(xy^2)$, we have:
+        \begin{align}
+            \frac{\partial f}{\partial x} &= -\sin(xy^2)y^2 \\ 
+            \frac{\partial f}{\partial y} &= -\sin(xy^2)\cdot 2xy \\ 
+            \frac{\partial^2 f}{\partial y\partial x} &= -2y\sin(xy^2)-y^2\cos(xy^2)\cdot 2xy \\ 
+            \frac{\partial^2 f}{\partial x\partial y} &= -2y\sin(xy^2)-2xy\cos(xy^2)y^2 = \frac{\partial^2 f}{\partial y \partial x}
+        \end{align}
+    \end{example}
+    \item Partial differential equations describe differential equations with several variables. For example, Laplace's equation is given by:
+    \begin{equation}
+        \frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2} = 0
+    \end{equation}
+    The one-dimensional wave equation is given by:
+    \begin{equation}
+        \frac{\partial^2 f}{\partial t^2}=a^2\frac{\partial^2 f}{\partial x^2}
+    \end{equation}
+    where $a$ represents the speed of the wave.
+\end{itemize}
