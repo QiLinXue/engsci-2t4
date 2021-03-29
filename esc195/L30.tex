@@ -40,4 +40,156 @@
         \end{equation}
         and we can read out the derivative without having to divide.
     \end{idea}
+    \begin{definition}
+        We say that $f$ is differentiable at $\vec{x}$ if and only if there exists a vector $\vec{y}$ such that: $f(\vec{x}+\vec{h})-f(\vec{x})=\vec{y}\cdot\vec{h} + o(\vec{h})$ where:
+        \begin{equation}
+            \vec{y} = \nabla f(\vec{x})
+        \end{equation}
+        is known as the \textbf{gradient} of $f$.
+    \end{definition}
+    \begin{example}
+        For example, let $f(x,y)=x+y^2$ and let $\vec{h}=(h_1,h_2)$. Then:
+        \begin{align}
+            f(\vec{x}+\vec{h})-f(\vec{x}) &= f(x+h, y+h)-f(x,y) \\ 
+            &= x+h_1 + (y+h_2)^2 - x-y^2 \\ 
+            &= h_1 + 2yh_2 + h_2^2 \\ 
+            &= (1\hat{i} + 2y\hat{j})\cdot \vec{h}+h_2^2
+        \end{align}
+        To finish, we need to demonstrate the the excess term $h_2^2=o(h)$. To do this, let $g(\vec{h})=h_2^2=(h_2 \hat{j}) \cdot (h_1 \hat{i} + h_2\hat{j})$. We write it as a dot product because we wish to divide by the magnitude later. Therefore, we can write that $g(\vec{h}) = h_2\hat{j} \cdot \vec{h}$ and:
+        \begin{align}
+            \frac{|g(\vec{h})|}{\lVert \vec{h}\rVert} &= \frac{\lVert h_2\hat{j}\rVert \lVert \vec{h}\rVert \cos\theta}{\lVert \vec{h} \rVert} \\ 
+            &\le \frac{\lVert h_2\hat{j}\rVert \lVert \vec{h}\rVert}{\lVert \vec{h} \rVert} \\ 
+            &=|h_2|
+        \end{align}
+        We know that $h_2 \to 0$ as $\vec{h}\to\vec{0}$ so $g(\vec{h})=h_2^2$ is $o(\vec{h})$ and we can claim that:
+        \begin{equation}
+            \nabla f(\vec{x}) = 1\hat{i}+2y\hat{j}
+        \end{equation}
+    \end{example}
+    \begin{example}
+        Let $f(x,y,z)=xyz$ and let $\vec{h}=(h_1,h_2,h_3)$. Then:
+        \begin{align}
+            f(\vec{x}+\vec{h})-f(\vec{x}) &= (x+h_1)(y+h_2)(z+h_3)-xyz \\ 
+            &= xyz + xyh_3+xh_2z+xh_2h_3+h_1yz+h_1yh_3+h_1h_2z+h_1h_2h_3-xyz \\ 
+            &= (yz \hat{i} + xz\hat{j} + xy\hat{k}) \cdot \vec{h} + xh_2h_3 + yh_1h_3+zh_1h_2+h_1h_2h_3
+        \end{align}
+        Without loss of generality, we show that the first remainder term is $o(h)$. Consider $g(\vec{h})=xh_2h_3 = (xh_2 \hat{j})\cdot \vec{h}$. Therefore:
+        \begin{equation}
+            \frac{|g(\vec{h})|}{\lVert \vec{h}\rVert} = \frac{|x||h_2|\lVert \vec{h}\rVert \cos\theta}{\lVert \vec{h}\rVert} \le |xh_2|
+        \end{equation}
+        Now taking the limit:
+        \begin{equation}
+            \lim_{\vec{h}\to \vec{0}}|xh_2| = 0
+        \end{equation}
+        so $xh_2h_3$ is $o(\vec{h})$, and so are the other terms. Therefore, we have:
+        \begin{equation}
+            \nabla f(\vec{x}) = yz\hat{i}+xz\hat{j}+xy\hat{k}
+        \end{equation}
+        Note the symmetry.
+    \end{example}
+    \begin{theorem}
+        In cartesian coordinates:
+        \begin{equation}
+            \nabla f(x,y) = \frac{\partial f}{\partial x}\hat{i} + \frac{\partial f}{\partial y}\hat{j}
+        \end{equation}
+        or equivalently written as:
+        \begin{equation}
+            \nabla f(\vec{x})=f_x\hat{i} + f_y\hat{j}+f_z\hat{i}
+        \end{equation}
+    \end{theorem}
+    \item Note that $\vec{x}$ is a vector, $f(\vec{x})$ is not a vector, but $\nabla f(\vec{x})$ is a vector.
+    \begin{example}
+        Let $f(\vec{x})=xy^2z^3$. We have:
+        \begin{align}
+            \frac{\partial f}{\partial x} &= y^2z^3 \\
+            \frac{\partial f}{\partial y} &= 2xyz^3 \\ 
+            \frac{\partial f}{\partial z} &= 3xy^2z^2
+        \end{align}
+        so the gradient is:
+        \begin{equation}
+            \nabla f = (y^2z^3, 2xy^3, 3xy^2z^2)
+        \end{equation}
+    \end{example}
+    \begin{example}
+        Suppose we have a vector function $\vec{r}=x\hat{i} + y\hat{j} + z\hat{k}$. The magnitude is: $$r(x,y,z)=\sqrt{x^2+y^2+z^2}$$ and taking the gradient of this yields:
+        \begin{equation}
+            \nabla r = \frac{\vec{r}}{r}
+        \end{equation}
+    \end{example}
+    \item For a directional derivative, we can define it using:
+    \begin{align}
+        \frac{\partial f}{\partial x} &= \lim_{h\to 0}\frac{f(\vec{x}_0+h\vec{i})-f(\vec{x}_0)}{h} \\ 
+    \end{align}
+    and similar for the other partial derivatives.
+    \begin{definition}
+        The directional derivative of $f$ at $\vec{}_0$ in the direction $\hat{u}$ is given by:
+        \begin{equation}
+            f_{\hat{u}}(\vec{x}_0) = \lim_{h\to 0} \frac{f(\vec{x}_0+h\hat{u})-f(\vec{x}_0)}{h}
+        \end{equation}
+    \end{definition}
+    \item The directional derivative can also be expressed as:
+    \begin{equation}
+        f_{\hat{u}}(\vec{x}_0) = \nabla f(\vec{x}_0)\cdot \hat{u}
+    \end{equation}
+    \begin{proof}
+        We can write:
+        \begin{equation}
+            f(\vec{x}+\vec{h})-f(\vec{x})-\nabla f(\vec{x})\cdot\vec{h} + o(\vec{h})
+        \end{equation}
+        here: $\vec{h}=h\hat{u}$. Using this, the above is also equal to:
+        \begin{equation}
+            \nabla f(\vec{x})\cdot h\hat{u}+o(\vec{h})
+        \end{equation}
+        and therefore:
+        \begin{equation}
+            \frac{f(\vec{x}+h\hat{u})-f(\vec{x})}{h} = \nabla f \cdot \hat{u} + \frac{o(\vec{h})}{h}
+        \end{equation}
+        and taking the limit as $h\to 0$, we have the desired result.
+    \end{proof}
+    \begin{example}
+        Suppose we have some temperature gradient $T(x,y)$ where $\frac{\partial T}{\partial y}=4\si{\degree\celsius\per\meter}$ and $\frac{\partial T}{\partial x} = 3\si{\degree\celsius\per\meter}$. Suppose we move in the direction $\hat{u}=\cos\theta\hat{i} + \sin\theta\hat{j}$. Then:
+        \begin{equation}
+            T_{\hat{u}} = \left(\frac{\partial T}{\partial x}\hat{i} + \frac{\partial T}{\partial y}\hat{j}\right)(\cos\theta\hat{i}+\sin\theta\hat{j}) = 3\cos\theta + 4\sin\theta
+        \end{equation}
+    \end{example}
+    \begin{example}
+        Suppose we have a parabolic hill described by $z(x,y)=20-x^2-y^2$ and we move straight up, or $\hat{u}=(0,-1)$. Then:
+        \begin{align}
+            \frac{\partial f}{\partial x} &= -2x \\ 
+            \frac{\partial f}{\partial y} &= -2y
+        \end{align}
+        so:
+        \begin{equation}
+            z_{\hat{u}}=(-2x,-2y)\cdot (0,-1) = 2y
+        \end{equation}
+    \end{example}
+    \item Note that:
+    \begin{align}
+        |f_{\hat{k}}(\vec{x})| &= |\nabla f \cdot \hat{u} | \\ 
+        &= \lVert \nabla f\rVert \lVert \hat{u} \rVert |\cos\theta| \\ 
+        &\le \lVert \nabla f \rVert
+    \end{align}
+    \begin{example}
+        Suppose that $z=f(x,y) = A + x + 2y - x^2 -3y^2$ and we wish to find the steepest path down starting from $(0,0,A)$. We know that:
+        \begin{align}
+            \frac{\partial f}{\partial x} &= 1-2x \\ 
+            \frac{\partial f}{\partial y} &= 2- 6y
+        \end{align}
+        such that:
+        \begin{equation}
+            \nabla f = (1-2x)\hat{i} + (2-6y)\hat{j} \implies -\nabla f = (2x-1)\hat{i}+(6y-2)\hat{j}
+        \end{equation}
+        The curve is given by:
+        \begin{equation}
+            \vec{r}(t) = x(t) \hat{i} + y(t)\hat{j}
+        \end{equation}
+        where $x'(t) = 2x(t)-1$ and $y'(t) = 6y(t)-2$. This is in parametric form and we can convert to cartesian form by writing the derivative as:
+        \begin{equation}
+            \frac{dy}{dx}=\frac{6y-2}{2x-1}
+        \end{equation}
+        and solving this differential equation to get:
+        \begin{equation}
+            3y=(2x-1)^3+1
+        \end{equation}
+    \end{example}
 \end{itemize}

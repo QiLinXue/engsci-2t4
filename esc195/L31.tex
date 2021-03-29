@@ -1,0 +1,92 @@
+\section{The Chain Rule}
+\begin{itemize}
+    \item Suppose that we have a certain path $\vec{r}(t)=x(t)\hat{i} + y(t)\hat{j}$ travelling through a certain temperature field $T(x,y)$. How might we find:
+    \begin{equation}
+        \frac{d}{dt}T(\vec{r}(t))
+    \end{equation}
+    \begin{theorem}
+        The chain rule along a curve is given by:
+        \begin{align}
+            \frac{d}{dt}f(\vec{r}(t)) &= \nabla f(\vec{r}(t)) = \vec{r}'(t) \\ 
+            &= \frac{\partial f}{\partial x}\frac{dx}{dt} + \frac{\partial f}{\partial y}\frac{dy}{dt} + \frac{\partial f}{\partial z}\frac{dx}{dz} \\ 
+            &= \nabla f \cdot \vec{T} \cdot \left(\frac{ds}{dt}\right)
+        \end{align}
+    \end{theorem}
+    \begin{example}
+        Suppose that $\vec{r}(t)=t^3\hat{i}+\cos t\hat{j}$ and $T(x,y)=xy^2$. Then:
+        \begin{align}
+            \nabla T &= (y^2, 2xy) \\ 
+            \vec{r}' &= (3t^2, -\sin t)
+        \end{align}
+        such that:
+        \begin{align}
+            \frac{dT}{dt} &= \nabla T = F'  \\ 
+            &= y^2 \cdot 3t^2 - 2xy\sin t \\ 
+            &= 3t^2\cos^2 t-2t^3\cos t\sin t 
+        \end{align}
+        and:
+        \begin{align}
+            T &= xy^2 = t^3\cos^2 t \\ 
+            \frac{dT}{dt} &= 3t^2\cos^2 t - 2t^3\cos t\sin t
+        \end{align}
+    \end{example}
+    \begin{example}
+        Suppose we have a rectangular volume $V=\ell \cdot h \cdot d$. Say that $\ell$, $h$, and $d$ is increasing at $3\si{\meter\per\second}$ ,$2\si{\meter\per\second}$, and $5\si{\meter\per\second}$, respectively. At $(\ell,h,d)=(2,3,4)$, how fast is the volume changing?
+        \vspace{2mm}
+
+        Let $\vec{q}(t) = (\ell, h, d)$. Then from the chain rule:
+        \begin{align}
+            \frac{dV(t)}{dt} &= \nabla V(\vec{q}(t)) \cdot \vec{q}'(t) \\
+            \implies  \nabla V &= (hd, \ell d, h\ell) \\ 
+            \implies \vec{q}'(t) &= \left(\frac{d\ell}{dt}, \frac{dh}{dt}, \frac{dd}{dt}\right)=(3,-2,5) \\ 
+            \frac{dV}{dt} &= 3hd-2\ell d + 5\ell h = 50\si{\meter\per\second}
+        \end{align}
+        Note that we could also have solved this using single variable calculus by noting that:
+        \begin{equation}
+            V = (2+3t)(3-2t)(4+5t)
+        \end{equation}
+    \end{example}
+    \item We can take this idea even further. Say that:
+    \begin{align}
+        x &= x(t,s) \\ 
+        y &= y(t,s)
+    \end{align}
+    then:
+    \begin{align}
+        \frac{\partial f}{\partial t} &= \frac{\partial f}{\partial x}\cdot \frac{\partial x}{\partial t} + \frac{\partial f}{\partial y} \cdot \frac{\partial y}{\partial t} \\ 
+        \frac{\partial f}{\partial s} &= \frac{\partial f}{\partial x}\cdot \frac{\partial x}{\partial s} + \frac{\partial f}{\partial y}\cdot \frac{\partial y}{\partial s} 
+    \end{align}
+    and in three dimensions:
+    \begin{align}
+        \frac{\partial f}{\partial t} = \frac{\partial f}{\partial x}\cdot \frac{\partial x}{\partial t}+\frac{\partial f}{\partial y}\cdot\frac{\partial y}{\partial t} + \frac{\partial f}{\partial z}\cdot \frac{\partial z}{\partial t}
+    \end{align}
+    \item We can also revisit implicit differentiation. Suppose that we have a function:
+    \begin{equation}
+        u(x,y) = 0
+    \end{equation}
+    How might we find $\frac{dy}{dx}=?$. We can parametrize this with $x=t$ and $y=y(t)$ to get $u=u(t,y(t))$. Differentiating:
+    \begin{equation}
+        \frac{du}{dt} = \frac{\partial u}{\partial x} \cdot \frac{d x}{d t}
+        + \frac{\partial u}{\partial y}\cdot \frac{dy}{dt}
+    \end{equation}
+    Now, we use the fact that $u(t,y(t))=0$ to get that $\frac{du}{dt}=0$. Since $x=t$, we have $\frac{dx}{dt}=1$ and therefore $\frac{dy}{dt} = \frac{dx}{dt}$. This then gives us:
+    \begin{align}
+        0 &= \frac{\partial u}{\partial x} + \frac{\partial u}{\partial y} \cdot \frac{dy}{dx} \\ 
+        \implies \frac{dy}{dx} &= - \frac{\partial u/\partial x}{\partial u/\partial y}
+    \end{align}
+    \begin{example}
+        Suppose that we have $x^4+4x^3y+y^4=1$. We can write this as:
+        \begin{equation}
+            u=x^4+4x^3y+y^4-1 = 0
+        \end{equation}
+        The partial derivatives are:
+        \begin{align}
+            \frac{\partial u}{\partial x} &= 4x^3+12x^2y \\
+            \frac{\partial u}{\partial y} &= 4x^3 + 4y^3 
+        \end{align}
+        such that:
+        \begin{equation}
+            \frac{dy}{dx} = - \frac{4x^3+12x^2y}{4x^2+4y^3} = \frac{x^2(x+3y)}{x^3+y^3}
+        \end{equation}
+    \end{example}
+\end{itemize}
