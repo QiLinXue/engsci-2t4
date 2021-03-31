@@ -1,0 +1,332 @@
+\documentclass{article}
+\usepackage{qilin}
+\title{ESC195 Midterm 2 Review}
+\author{QiLin Xue}
+\lhead{ESC195}
+\rhead{QiLin Xue}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+    \section{Sequences and Series}
+    A sequence $\{a_n\}$ is:
+        \begin{itemize}
+            \item increasing iff $a_n < a_{n+1}$
+            \item non-decreasing iff $a_k \le a_{n+1}$
+            \item decreasing iff $a_n > a_{n+1}$
+            \item non-increasing iff $a_n \ge a_{n+1}$
+        \end{itemize}
+        \begin{definition}
+            We can define $\lim_{n\to\infty} a_n = L$ iff for every $\epsilon>0$, there exists an integer $k>0$ such that if $n \ge k$, then $|a_n - L| < \epsilon$.
+        \end{definition}
+        \begin{example}
+            Let us prove $\lim_{n\to\infty} \frac{n}{n+1}=1$. We  find $k$ such that $\left|\frac{n}{n+1}-1\right|<\epsilon$ for $n\ge k$. This can be rewritten as:
+            \begin{equation}
+                \left|\frac{1}{n+1}\right| < \epsilon 
+            \end{equation}
+            or $|n+1| > \frac{1}{\epsilon}$. Thus, if we choose $k = \frac{1}{\epsilon}$ such that if we choose $n>k=\frac{1}{\epsilon}$, then:
+            \begin{equation}
+                \left|\frac{n}{n+1}-1\right| = \left|\frac{1}{n+1}\right| < \left|\frac{1}{n}\right| < \frac{1}{k} = \epsilon
+            \end{equation}
+            Therefore, $\lim_{n\to\infty} \frac{n}{n+1}=1$.
+        \end{example}
+        \begin{theorem}
+            \textbf{Uniqueness of a Limit}: If $\lim_{n\to\infty} = L$ and $\lim_{n\to\infty}a_n = M$, then $L=M$.
+        \end{theorem}
+        \begin{theorem}
+            \textbf{Monotonic Sequence Theorem}: A bounded nondecreasing sequence converges to its least upper bound. A bounded non increasing sequence converges to its greatest lower bound.
+        \end{theorem}
+        \begin{theorem}
+            \textbf{Pinching Theorem for Sequences}: If for large $n$, $a_n \le b_n \le c_n$ and if $\lim_{n\to\infty}a_n = L$ and $\lim_{n\to\infty} = L$, then $\lim_{n\to\infty}b_n = L$.
+        \end{theorem}
+        If a sequence has a limit, it is said to be convergent. Otherwise, it is divergent.
+    This leads to the following:
+    \begin{enumerate}
+        \item If a sequence is convergent, it is bounded.
+        \item If a sequence is unbounded, it is divergent.
+        \item A bounded sequence is not necessarily convergent.
+    \end{enumerate}
+    The limit has a few properties. Let $\lim_{n\to\infty} a_n = L$ and $\lim_{n\to\infty}b_n = M$. Then:
+    \begin{enumerate}
+        \item $\lim_{n\to\infty}(a_n+b_n) = L+M$
+        \item $\lim_{n\to\infty} \alpha a_n = \alpha L$ for $\alpha \in \mathbb{R}$.
+        \item $\lim_{n\to\infty} a_nb_n = L \cdot M$
+        \item $\lim_{n\to\infty} \frac{1}{b_n} = \frac{1}{M}$ for $b_n \neq 0, M \neq 0$.
+        \item $\lim_{n\to\infty} \frac{a_n}{b_n} = \frac{L}{M}$ for $b_n \neq 0, M\neq 0$.
+    \end{enumerate}
+    \subsection{Important Limits}
+    \begin{itemize}
+        \item For $x>0$, $\lim_{n\to\infty} x^{1/n} = 1$.
+        \item If $|x| < 1$, then $\lim_{n\to \infty} x^n = 0$.
+        \item For $\alpha > 0$, $\lim_{n\to\infty} \frac{1}{n^\alpha}=0$.
+        \item $\lim_{n\to\infty} \frac{x^n}{n!}=0$ for $x\in \mathbb{R}$.
+        \item $\lim_{n\to\infty} \frac{n!}{n^n}=0$
+        \item $\lim_{n\to\infty} \frac{\ln n}{n} = 0$.
+        \item $\lim_{n\to\infty} n ^{1/n} = 1$.
+        \item $\lim_{n\to\infty}\left(1+\frac{x}{n}\right)^n=e^x$
+    \end{itemize}
+    \subsection{Series}
+    You can expect the limit laws to be familiar:
+    \begin{itemize}
+            \item If $\sum_{k=0}^\infty a_k = n$ and $\sum_{k=0}^\infty b_k = M$, then $\sum_{k=0}^\infty (a_k+b_k) = L+M$.
+            \item If $\sum_{k=0}^\infty a_k = L$, then $\sum_{k=0}^\infty \alpha a_k = \alpha L$ for $\alpha \in \mathbb{R}$.
+        \end{itemize}
+    Oftentimes, we wish to set the lower bound to a higher number to do a proof (i.e. to bound a function). Then:
+    \begin{theorem}
+        If $\sum_{k=0}^{\infty} a_k$ converges iff $\sum_{k=j}^\infty a_k$ converges where $j$ is a positive integer.
+    \end{theorem}
+    \begin{theorem}
+        If $\sum_{k=0}^\infty a_k$ converges, then $a_k \to 0$ as $k\to\infty$. Taking the contraposition, we have that if $a_k \not\to 0$ as $k\to \infty$, then $\sum_{k=0}^\infty a_k$ diverges.
+    \end{theorem}
+    Note that the inverse isn't necessarily true. If $a_k \to 0$ as $k\to 0$, the sum does not necessarily converge.
+    \subsection{Convergence Tests}
+    Here are the following convergence tests:
+    \begin{theorem}
+        \textbf{Integral Test:} If $f$ is continuous, decreasing, and positive on $[1,\infty)$, then: $\sum_{k=1}^\infty f(k)$ converges if and only if $\int_1^\infty f(x) \dd{x}$ converges.
+    \end{theorem}
+    \begin{theorem}
+        \textbf{P Series:} The $p$-series is:
+        \begin{equation}
+            \sum_{k=1}^\infty \frac{1}{k^p}
+        \end{equation}
+        which will converge if $p > 1$ since $\int_1^\infty \frac{\dd{x}}{x^p}$ converges iff $p>1$.
+    \end{theorem}
+    \begin{theorem}
+        \textbf{Direct Comparison Test:} Given $\sum a_k$ and $\sum b_k$ with $a_k > 0 $ and $b_k > 0$:
+        \begin{enumerate}
+            \item If $\sum b_k$ is convergent, and if $a_k \le b_k$ for all sufficiently large $k$, then $\sum a_k$ converges.
+            \item If $\sum b_k$ is diverge and $a_k > b_k$ for all $k$ sufficiently large, then $\sum a_k$ diverges.
+        \end{enumerate}
+    \end{theorem}
+    \begin{theorem}
+        \textbf{Limit Comparison Test:} Given $\sum a_k$, $\sum b_k$ where $a_k > 0 $ and $b_k > 0$:
+        \begin{enumerate}
+            \item If $\lim_{n\to\infty} \frac{a_n}{b_n} = c > 0$, then both series converge or diverge.
+            \item If $\lim_{n\to\infty} \frac{a_n}{b_n} = 0$ and if $\sum b_{n}$ converges, then $\sum {a_n}$ converges.
+            \item If $\lim_{n\to\infty} \frac{a_n}{b_n} = \infty$ and if $\sum b_n$ diverges, then $\sum a_n$ diverges.
+        \end{enumerate}
+    \end{theorem}
+    \begin{theorem}
+        \textbf{Alternating Series Test:} Let $\{a_k\}$ be a sequence of positive numbers. If and only if $a_{k+1}<a_k$ and $a_k \to 0$ as $k \to \infty$, then:
+        \begin{equation}
+            \sum_{k=1}^\infty (-1)^{k-1} a_k
+        \end{equation}
+        converges.
+    \end{theorem}
+    \begin{theorem}
+        \textbf{Absolute Convergence Test:} If $\sum |a_k|$ converges, then $\sum a_k$ converges.
+        \vspace{2mm}
+
+        If $\sum |a_k|$ converges, we say that $\sum a_{k}$ is absolutely convergent. If $\sum a_k$ converges, but $\sum |a_k|$ does not, we say $\sum a_k$ is conditionally convergent.
+    \end{theorem}
+    \begin{theorem}
+        \textbf{Root Test:} Given $\sum a_k$, $a_k \ge 0$. If $(a_k)^{1/k} \to p$ as $k\to\infty$, then:
+        \begin{enumerate}
+            \item If $p<1$, then $\sum a_k$ converges.
+            \item If $p>1$, then $\sum a_k$ diverges.
+            \item If $p=1$ the test is inconclusive.
+        \end{enumerate}
+    \end{theorem}
+    \begin{theorem}
+        \textbf{Ratio test:} Given $\sum a_k$, with $a_k>0$. If $\frac{a_{k+1}}{a_k}\to \lambda$ as $k\to\infty$, then:
+        \begin{enumerate}
+            \item If $\lambda < 1$, $\sum a_k$ converges.
+            \item If $\lambda >1$, $\sum a_k$ diverges.
+            \item If $\lambda = 1$, the test is inconclusive.
+        \end{enumerate}
+    \end{theorem}
+    If in doubt, follow this (incomplete) check-list:
+    \begin{enumerate}
+        \item Check if the \textit{sequence} diverges.
+        \item If it's a power series, use a ratio test.
+        \item Use comparison + p-series test to bound a sequence by $\frac{1}{n^p}$.
+        \item Factor?
+    \end{enumerate}
+    \section{Power Series}
+    A power series is a series in the form:
+        \begin{equation}
+            \sum_{n=0}^\infty c_n x^n = c_0 + c_1x+c_2x^2+c_3x^3 + \cdots
+        \end{equation}
+        The following gives the Taylor series. If $a=0$, we have a special case, known as the Maclaurin series.
+        \begin{theorem}
+            If $f(x)$ has a power series representation about $a$:
+            \begin{equation}
+                f(x)= \sum_{n=0}^\infty c_n (x-a)^n
+            \end{equation}
+            with $|x-a|<R$. Then the coefficients of the series are $c_n = \frac{f^{(n)}(a)}{n!}$.
+        \end{theorem}
+        The nth degree Taylor polynomial of $f$ about $a$ can be written as:
+        \begin{equation}
+            T_n(x) = \sum_{i=0}^n \frac{f^{(i)}(a)}{i!}(x-a)^i = f(a) + \frac{f'(a)}{1!}(x-a)+\cdots + \frac{f^{(n)}(a)}{n!}(x-a)^n
+        \end{equation}
+        This comes with some remainder, which can be calculated below:
+        \begin{theorem}
+            If $f(x)=T_n(x)+R_n(x)$ and $\lim_{n\to\infty} R_n(x)=0$ for $|x-a|<R$. Then $f$ is equal to the sum of its Taylor series.
+            \vspace{2mm}
+    
+            Given that $f$ has $n+1$ continuous derivatives on an open interval $I$ containing $a$, tyhen for all $x\in I$:
+            \begin{equation}
+                f(x) = f(a)+f'(a)(x-a)+\frac{f''(a)(x-a)^2}{2!}+\cdots + \frac{f^{(n)}(a)(x-a)^n}{n!}+R_n(x)
+            \end{equation}
+            where
+            \begin{equation}
+                R_n(x) = \frac{1}{n!}\int_a^x f^{(n+1)}(t)(x-t)^n \dd{t}
+            \end{equation}
+            This is often a difficult integral to calculate, but we can set the upper bound using the mean value theorem:
+            \begin{equation}
+                |R_n| \le \frac{f^{(n+1)(z)|x-a|^{n+1}}}{(n+1)!}
+            \end{equation}
+            where $a \le z \le x$ is chosen to maximize $f^{(n+1)}(z)$. For an alternating series, we have:
+            \begin{equation}
+                R_n < |a_{n+1}|
+            \end{equation}
+        \end{theorem}
+        \subsection{Binomial Theorem}
+        The binomial theorem tells us:
+    \begin{align}
+        (a+b)^k &= a^k + ka^{k-1}b + \frac{k(k-1)}{2!}a^{k-2}b^2 + \cdots + \frac{k(k-1)(k-2)\cdots (k-n+1)}{k!}a^{k-n}b^{n} \\ 
+        &= \sum_{n=0}^k \binom{k}{n}a^{k-n}b^n
+    \end{align}
+    \subsection{Important Series}
+    \begin{itemize}
+        \item $e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{3} + \cdots = \sum_{n=0}^\infty \frac{x^n}{n!}$ where $I=(-\infty,\infty)$
+        \item $\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^6}{7!} + \cdots = \sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{(2n+1)!}$ where $I=(-\infty, \infty)$.
+        \item $\cos x = 1 - \frac{x^2}{2!}+\frac{x^4}{4!} - \frac{x^6}{6!}+\cdots = \sum_{n=0}^\infty (-1)^n \frac{x^{2n}}{(2n)!}$ where $I=(-\infty, \infty)$.
+        \item $\ln(1+x) =  x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots = \sum_{n=1}^\infty (-1)^{n+1} \frac{x^n}{n}$ for $I=(-2,1]$.
+        \item $\frac{1}{1-x}=1+x+x^2+x^3+\cdots = \sum_{n=0}^\infty x^n$ for $I=(-1,1)$.
+        \item $\tan^{-1}(x) = \sum_{n=0}^\infty (-1)^n\frac{x^{2n+1}}{2n+1}$ for $[-1,1]$.
+    \end{itemize}
+    \newpage
+    \section{Fourier Series}
+    The big idea is to write a periodic function in terms of a trigonometric basis:
+    \begin{theorem}
+        For $f(t)$ periodic, with fundamental period $T$, continuous and piecewise differentiable, then:
+        \begin{equation}
+            f(t)=\frac{a_0}{2}+\sum_{n=1}^\infty a_n\cos (n\omega t) + b_n\sin(n\omega t)
+        \end{equation}
+        where $\omega = \frac{2\pi}{T}$ is known as the Fourier series of $f$. $a_n$ and $b_n$ are Fourier coefficients. The coefficients are given by:
+        \begin{align}
+            a_n &= \frac{2}{T}\int_{-T/2}^{T/2} f(t)\cos(n\omega t)\dd{t} \\ 
+            b_n &= \frac{2}{T}\int_{-T/2}^{T/2} f(t)\sin(n\omega t)\dd{t}
+        \end{align}
+        for $n=1,2,3,\dots$.
+    \end{theorem}
+    You can apply the following shortcuts:
+    \begin{itemize}
+        \item If $f(t)$ is odd, then $a_n=0$.
+        \item If $f(t)$ is even, then $b_n=0$.
+    \end{itemize}
+    \section{Vector Functions}
+    For a vector function $\vec{f}(t)$ which maps a scalar to a vector, the operate and differentiate the way you'll expect. We have the following differentiation rules:
+    \begin{itemize}
+        \item $(\vec{f}+\vec{g})'(t) = \vec{f}'(t) + \vec{g}'(t)$
+        \item $(\alpha\vec{f})'(t) = \alpha f'(t)$
+        \item $(u\vec{f})'(t) = u(t)\vec{f}'(t) + u'(t)\vec{f}(t)$
+        \item $(\vec{f}\cdot \vec{g})'(t) = \left[\vec{f}(t) \cdot \vec{g}(t)\right] + \left[\vec{f}'(t) \cdot \vec{g}(t)\right]$
+        \item $(\vec{f} \times \vec{g})'(t) = \left[\vec{f}(t) \times \vec{g}(t)\right] + \left[\vec{f}'(t) \times \vec{g}(t)\right]$
+        \item $(\vec{f}\circ u)'(t) = \vec{f}'(u(t))u'(t)$
+    \end{itemize}
+    \begin{definition}
+        Let $C$ be parametized by $\vec{r}(t) = x(t) \hat{i} + y(t)\hat{j} +z(t)\hat{k}$ and be diffferentiable. Then $\vec{r}'(t)= x'(t)\hat{i}+y'(t)\hat{j}+z'(t)\hat{k}$ if not $\vec{0}$, is tangent to the curve $C$ at the point $P(x(t), y(t), z(t))$ and $\vec{r}'(t)$ points in the direction of increasing $t$.
+    \end{definition}
+    The arclength is:
+        \begin{equation}
+            s = \int_a^b\sqrt{x'(t)^2+y'(t)^2+z'(t)^2}\dd{t}
+        \end{equation}
+    \subsection{Curvature}
+    In two dimensions, the curvature of a \textit{2-dimensional curve} is defined as:
+        \begin{equation}
+            \kappa = \left|\frac{\dd{\phi}}{\dd{s}}\right|
+        \end{equation}
+        where:
+        \begin{equation}
+            \frac{\dd{y}}{\dd{x}}=y'=\tan\phi \implies \phi = \tan^{-1}(y')
+        \end{equation}
+        and the radius of curvature is:
+        \begin{equation}
+            r = \frac{1}{\kappa}.
+        \end{equation}
+        In three dimensions, there are three ways of calculating curvature:
+        \begin{itemize}
+            \item Let $\vec{T}$ be the unit tangent $\vec{T}=\frac{r'(t)}{\lVert r'(t)\rVert}$ that points in the direction of the curve.
+            \begin{equation}
+                \kappa = \left\lVert \frac{\dd{\vec{T}}}{\dd{s}}\right\rVert
+            \end{equation}
+            \item For a curve $\vec{r}(t) = x(t)\hat{i} + y(t)\hat{j} + z(t) \hat{k}$, we have:
+            \begin{equation}
+                \kappa = \left\lVert \frac{d\vec{T}}{dt} \cdot \frac{dt}{ds}\right\rVert = \frac{\lVert \vec{T}' \rVert}{\lVert \vec{r'} \rVert}
+            \end{equation}
+            \item We can also define it using the cross product:
+            \begin{equation}
+                \kappa = \frac{\lVert \vec{r'}(t) \times \vec{r'}'(t)\rVert}{\lVert\vec{r'}(t)\rVert^3}
+            \end{equation}
+        \end{itemize}
+        The \textbf{binormal vector} is given by:
+        \begin{equation}
+            \vec{B}(t) = \vec{T} \times \vec{N}
+        \end{equation}
+        and gives the vector normal to the osculating plane. Here, the normal vector is:
+        \begin{equation}
+            \vec{N}(t) = \frac{\vec{T}'(t)}{\lVert \vec{T}'\rVert}
+        \end{equation}
+        \section{Limits of Multivariable Functions}
+        Suppose we have the limit:
+    \begin{equation}
+        \lim_{(x,y) \to (0,0)} \frac{f(x,y)}{g(x,y)}
+    \end{equation}
+    where $f(0,0)=g(0,0)=0$. Here are a few strategies to show if it exists or not:
+    \begin{itemize}
+        \item If in doubt, test if it doesn't exist first. Try the path $x=0$, $y=0$, and $y=mx$.
+        \item The limit will most likely not exist if the order of the denominator is higher than the numerator, and it will likely exist if the order of the numerator is higher than the denominator.
+        \item Use the squeeze theorem. One helpful strategy is to have the upper and lower bound be in terms of one variable.
+    \end{itemize}
+    \subsection{Delta-Epsilon Proofs}
+    Helpful tips:
+    \begin{itemize}
+        \item Use triangle inequality.
+        \item Write $\delta$ restriction as a scalar function (i.e. square root)
+        \item Attempt to bound functions of two variables in terms of a single variable.
+    \end{itemize}
+    \begin{example}
+        Suppose we wish to prove that:
+        \begin{equation}
+            \lim_{(x,y) \to (1,1)} (x+y) = 2
+        \end{equation}
+        For any $\epsilon > 0$ such that $\left|f(x,y) - f(1, 1)\right|<\epsilon$, we can pick a $\delta > 0$ where $\lVert (x,y) - (1, 1) \rVert < \delta$. We can write this last statement as:
+        \begin{equation}
+            \sqrt{(x-1)^2+(y-1)^2} < \delta
+        \end{equation}
+        Using the triangle inequality, we can write:
+        \begin{align}
+            |f(x,y) - f(1,1)| &= |x+y-2| \\ 
+            &= |(x-1) + (y-1)| \\  
+            &\le |x-1| + |y-1| \\ 
+            &= \sqrt{(x-1)^2}+\sqrt{(y-1)^2} \\ 
+            &\le \sqrt{(x-1)^2+(y-1)^2} + \sqrt{(y-1)^2+(x-1)^2} \\ 
+            &= 2\sqrt{(x-1)^2+(y-1)^2} \\ 
+            &< 2\delta =\epsilon
+        \end{align}
+        where we used our statement from earlier for the last line. Therefore, we need to pick $\delta = \frac{\epsilon}{2}$.
+    \end{example}
+    \section{Partial Derivatives}
+    The partial derivative of $f(x,y)$ is given by:
+    \begin{equation}
+        f_x(x,y) = \frac{\partial}{\partial x} f(x,y) = \lim_{h\to 0} \frac{f(x+h,y)-f(x,y)}{h}
+    \end{equation}
+    or for the partial derivative with respect to $y$:
+    \begin{equation}
+        f_y(x,y) = \frac{\partial}{\partial y}f(x,y) = \lim_{h\to 0} \frac{f(x,y+h)-f(x,y)}{h}
+    \end{equation}
+    This can be extended to an arbitrary number of dimensions. We can also have mixed partials, such as:
+    \begin{align}
+        \frac{\partial}{\partial x} \frac{\partial f}{\partial x} &\to \frac{\partial^2 f}{\partial x^2} \\ 
+        \frac{\partial}{\partial y} \frac{\partial f}{\partial x} &\to \frac{\partial^2 f}{\partial y\partial x}
+    \end{align}
+    \begin{theorem}
+        Clairaut's Theorem says that:
+        \begin{equation}
+            \frac{\partial^2 f}{\partial y\partial x} = \frac{\partial^2 f}{\partial x\partial y}
+        \end{equation}
+        on every open set on which $f$ and its partials $\frac{\partial f}{\partial x}$, $\frac{\partial f}{\partial y}$, $\frac{\partial^2 f}{\partial x\partial y}$, $\frac{\partial^2 f}{\partial y\partial x}$ are continuous.
+    \end{theorem}
+\end{document}
