@@ -50,4 +50,152 @@
     \begin{equation}
         (x-x_0)\frac{\partial f}{\partial y} (x_0,y_0) - (y-y_0)\frac{\partial f}{\partial x}(x_0,y_0)=0
     \end{equation}
+    \item We can also find the equation for the normal line to a curve $f(x,y)=C$ at $(x_0,y_0)$. We start with the two-dimensional case:
+    \begin{example}
+        Suppose we have a curve $x^2+y^2=9$. Then we have:
+        \begin{align}
+            \frac{\partial f}{\partial x} &= 2x \\ 
+            \frac{\partial f}{\partial y} &= 2y
+        \end{align}
+        The tangent line is given by:
+        \begin{equation}
+            (x-x_0)2x_0 + (y-y_0)2y_0 = 0
+        \end{equation}
+        Suppose that $(x_0,y_0)=\left(\frac{3}{\sqrt{2}}, \frac{3}{\sqrt{2}}\right)$. Then the tangent line is given by:
+        \begin{equation}
+            \left(x-\frac{3}{\sqrt{2}}\right)2\frac{3}{\sqrt{2}}+\left(y-\frac{3}{\sqrt{2}}\right)2\frac{3}{\sqrt{2}} = 0
+        \end{equation}
+        this gives:
+        \begin{equation}
+            x+y=\frac{6}{\sqrt{2}}
+        \end{equation}
+        Similarly, the normal line is given by:
+        \begin{equation}
+            \left(x-\frac{3}{\sqrt{2}}\right)2\frac{3}{\sqrt{2}}-\left(y-\frac{3}{\sqrt{2}}\right)2\frac{3}{\sqrt{2}} = 0 \implies y=x
+        \end{equation}
+    \end{example}
+    \item Extending it to three dimensions. A level surface is given by: $f(x,y,z)=C$. 
+    \item We know that the gradient $\nabla f(x_0,y_0,z_0)$ is perpendicular to the level surface curve $f(x,y,z)=C$.
+    \begin{proof}
+        Let $F(t)=x(t)\hat{i}+y(t)\hat{j}+z(t)\hat{k}$ be any curve on the surface such that:
+    \begin{equation}
+        f(x(t), y(t), z(t)) = f(\vec{r}(t)) = C
+    \end{equation}
+    Again:
+    \begin{equation}
+        \frac{d}{dt} f(\vec{r}(t)) = \frac{dc}{dt}=0
+    \end{equation}
+    Applying the chain rule, we get:
+    \begin{equation}
+        \nabla f(\vec{r}(t)) \cdot \vec{r'}(t)=0
+    \end{equation}
+    \end{proof}
+    \begin{example}
+        Suppose we have a sphere $x^2+y^2+z^2=25$. The gradient is then:
+        \begin{equation}
+            \nabla f = (2x,2y,2z)=2(x,y,z)
+        \end{equation}
+        The equation of the tangent plane to surface is:
+        \begin{equation}
+            (\vec{x}-\vec{x}_0)\cdot \nabla f = 0
+        \end{equation}
+        At $(0,5,0)$, we have:
+        \begin{equation}
+            (x-x_0)2x_0 + (y-y_0)2y_0+(z-z_0)2z_0 = 0 \implies y-5\cdot 10=0 \implies y=5
+        \end{equation}
+        The normal line is given by:
+        \begin{equation}
+            \vec{r}(q)=\vec{x}_0+q\nabla f(\vec{x}_0)
+        \end{equation}
+        and the equations for the normal line are:
+        \begin{align}
+            x &= x_0 + qf_x \\ 
+            y &= y_0 + qf_y \\ 
+            z &= z_0 + qf_z
+        \end{align}
+    \end{example}
+    \begin{example}
+        Find the normal line at $xy^2+2z^2=12$ at $(1,2,2)$. We have:
+        \begin{align}
+            f_x &= y^2 = 4 \\ 
+            f_y &= 2xy = 4 \\ 
+            f_z &= 4z = 8
+        \end{align}
+        and so:
+        \begin{align}
+            x &= 1 + 4a \\ 
+            y &= 2+4q \\ 
+            z &= 2+8q
+        \end{align}
+    \end{example}
+    \begin{example}
+        Suppose we have an offset sphere given by:
+        \begin{equation}
+            f = x^2+y^2+z^2-8x-8y-6z+24=0
+        \end{equation}
+        and an ellipsoid centered at the origin:
+        \begin{equation}
+            g = x^2+3y^2+2z^2=9
+        \end{equation}
+        and specifically at the point $(2,1,1)$. Let us attempt to show that the sphere is tangent to the ellipsoid at this specific point. We do this via:
+        \begin{equation}
+            \nabla f = (2x-8, 2y-8, 2z-6) \implies \nabla f(2,1,1)=(-4,-6,-4)
+        \end{equation}
+        and:
+        \begin{equation}
+            \nabla g = (2x,6y,4z) \implies \nabla f(2,1,1)=-\nabla f
+        \end{equation}
+        The gradient is the same at that point and we can verify that they also touch at that point by showing $g(2,1,1)=f(2,1,1)$. 
+    \end{example}
+    \begin{example}
+        Suppose we have another sphere and ellipsoid:
+        \begin{align}
+            f &= x^2+y^2+z^2-4y-2z+2 = 0 \\ 
+            g &= 3x^2+2y^2-2z = 1
+        \end{align}
+        at $P(1,1,2)$. To show that they are perpendicular at this point, we take their gradient vector and show that they are perpendicular (i.e. dot product is zero)
+        \begin{align}
+            \nabla f(1,1,2) &= (2,-2,2) \\
+            \nabla g(1,1,2) &= (6,4,-2)
+        \end{align}
+        and the dot product is $12-8-4=0$ so they are perpendicular.
+    \end{example}
+    \begin{example}
+        Suppose we have a curve and an ellipsoid:
+        \begin{align}
+            \vec{r}(t) &= (\frac{3}{2}(t^2+1), t^4+1, t^3) \\ 
+            x^2+2y^2+3z^2 &= 20
+        \end{align}
+        at $(3,2,1)$. Notice that they intersect at $(3,2,1)$. The gradient of the ellipsoid is:
+        \begin{equation}
+            \nabla f(3,2,1) = (6,8,6)
+        \end{equation}
+        and the tangent vector of the curve is: $\vec{r}(1)=(3,4,3) = \frac{1}{2}\nabla f$. The tangent to the curve is parallel to the gradient, so the normal vector must be perpendicular to the surface. 
+    \end{example}
+    \begin{example}
+        Suppose someone's head is described by the ellipsoid $x^2+y^2+2z^2=7$, and there is a bee at $P(1,2,1)$. There is a bee-swatter at $2x+3y+z=49$. The bee moves with a speed of $4$ along the normal. When does it hit the bee swatter?
+        \vspace{2mm}
+
+        The gradient is:
+        \begin{equation}
+            \nabla f=(2x,2y,4z) \implies \nabla f(1,2,1) = (2,4,4)
+        \end{equation}
+        and the normal line is:
+        \begin{equation}
+            (x,y,z)= (1+2q,2+4q,1+4q)
+        \end{equation}
+        such that:
+        \begin{equation}
+            \vec{r}(q) = (1+2q,2+4q,1+4q)
+        \end{equation}
+        We want: $\lVert \vec{r}'(t) \rVert = 4$. We can pick $q=\frac{2}{3}t$ to get this. Therefore:
+        \begin{equation}
+            \vec{r}(t) = \left(1+\frac{4}{3}t, 2+\frac{8}{3}t,1+\frac{8}{3}t\right)
+        \end{equation}
+        To find when it intersects with the plane $2x+3y+z=49$, we set:
+        \begin{equation}
+            2(1+4t/3)+3(2+8t/3)+(1+8t/3)=49 \implies t = 3
+        \end{equation}
+        So the location of the bee once it hits the bee-swatter at $t=3$ is $(5,10,9)$.
+    \end{example}
 \end{itemize}
