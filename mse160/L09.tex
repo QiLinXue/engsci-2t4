@@ -1,0 +1,99 @@
+\section{Model of the Atom}
+\begin{itemize}
+    \item Light can have a wavelength that ranges from $10^{-11}\si{\meter}$ to $10^3\si{\meter}.$ We can list some common ranges below, listed from shortest wavelength to highest wavelength:
+    \begin{itemize}
+        \item Gamma Rays
+        \item X-Ray
+        \item Ultraviolet
+        \item Visible (400-700 nm)
+        \item Infrared
+        \item Microwave
+        \item Radio wave
+    \end{itemize}
+    \item The energy is related to the wavelength via:
+    \begin{equation}
+        E = \frac{hc}{\lambda}
+    \end{equation}
+    where $h$ is Planck's constant and $c$ is the speed of light. Oftentimes, we use the electron-volt (eV) unit to characterize energy where:
+    \begin{equation}
+        1\text{ eV} = 1.602 \times 10^{-19}\si{\joule}
+    \end{equation}
+    \item In the Bohr-ing model of the atom, it is consisted of a nucleus (with protons + neutrons) and electrons. This model states the following:
+    \begin{itemize}
+        \item The orbitals are well defined and correspond to a specific energy. Therefore, energy is quantized.
+        \item Electrons are able to absorb a specific amount of energy to move into a higher energy state.
+    \end{itemize}
+    \item In the quantum-mechanical model of the atom, which describes electron orbitals using quantum numbers.
+    \begin{itemize}
+        \item The principal quantum number $n=1,2,3,4,\dots$ describe the orbital shell. This corresponds to the Bohr model.
+        \item The angular momentum quantum number $\ell = 0,1,2,\dots, (n-1)$ or $s,p,d,f$ and they describe the shape of the electron orbital.
+        \item The magnetic quantum number, which ranges from $-\ell \le m_\ell \le \ell$. They describe the orientation of the orbitals.
+        \item Spin quantum number: $m_s = \pm \frac{1}{2}$.
+    \end{itemize}
+    \item Subshells are described by the principal and angular momentum quantum numbers and have a very specific energy. Electrons fill these subshells from lowest to highest energy. It is ordered by:
+    \begin{equation}
+        1s \to 2s \to 2p \to 3s \to 3p \to 4s \to 3d \to 4p \to 5s \to \cdots
+    \end{equation}
+    For example, carbon has $Z=6$ protons and its electronic configuration is $1s^22s^22p^2$.
+    \item For iron with $Z=26$, we may be tempted to write the electronic configuration as:
+    \begin{equation}
+        1s^22s^22p^63s^23p^64s^23d^6
+    \end{equation}
+    However, the electronic configuration (due to quantum reasons) that has a lower energy is actually:
+    \begin{equation}
+        1s^22s^22p^63s^23p^63d^64s^2
+    \end{equation}
+    Since the last two electrons in the $4s$ orbital is what will be taken away during ionization.
+    \begin{idea}
+        In this course, we will write electron configurations in increasing principal numbers.
+    \end{idea}
+    \item Noble (inert) gases don't react easily. A general rule is that octets are stable, and this rule is sometimes written as:
+    \begin{equation}
+        ns^2np^6
+    \end{equation}
+    as many atoms want to achieve this configuration.
+    \item Covalent, ionic, and metallic bonds exist {\tiny{(sorry if this isn't high school review, i would write more but I still have 8 questions left and it's almost the deadline)}}
+    \item Ionization and crystallization energy exist. Salt forms a crystal. Electron affinity also exists. Planning on revisiting this part later so if you're that lone visitor google analytics told me about, please remind me.
+    \item In the \textbf{Band Theory}, it attempts to model electrons in a bond. One may naively say that the two electrons share the same state (i.e. same energy, orientation, etc.), but the Pauli exclusion principle forbids that. As a result, they separate out a tiny bit. If we have a large sample, they seem to form a band with a range of possible energies.
+    \item Alternatively, if we plot the energy against the intermolecular spacing, we notice that the range of energies separate out if we move from $r=\infty$ to the equilibrium radius $r=r_0$. If we plot it out for the energy of multiple subshells, we'll notice that sometimes there are certain energies in between the bands that no electron can have. This is known as a \textbf{band gap.}
+    \begin{idea}
+        Bonding creates three bands: The valence band, the band gap, and the conduction band, listed from lowest to highest energy. If the band gap is higher than $4\text{ eV}$, then it is an insulator and if it is less, than it is called a semi-conductor.
+    \end{idea}
+    \item The important distinction is that for a single atom, the energy of each electron is quantized but if bonding occurs, the energy no longer needs to be quantized.
+    \begin{idea}
+        We can explain conduction using this model by promoting electrons from the valence band to the conduction band. This reminds us of the ``continuous sea of electron'' analogy for metallic bonding. If there is a band gap, then it becomes a ``Bohr-model'' analogy with electrons jumping up and down between discrete states.
+    \end{idea}
+    \begin{case}
+        The electron configuration of silicon is:
+        \begin{equation}
+            1s^22s^22p^63s^23p^2
+        \end{equation}
+        The problem arises is that we know from experiments that silicon has four identical bonds. However, we have 4 electrons at two different energy levels. This shows a limitation in our model and introduces $sp3$ hybridization.
+    \end{case}
+    \item $sp3$ hybridization is caused by merging the $s$ and $p$ orbitals during bonding, such that the one $s$ orbital and the three $p$ orbitals form into four identical $sp^3$ orbitals. These are known as hybridized orbitals.
+    \item It is important to control the electrical conductivity of semiconductors. This is possible by introducing impurities into semiconductors to change their electrical conductivity. The general idea is to delocalize electrons such that they can conduct electricity. In the band theory, it results in a ``hole.'' Although the hole is neutral, since it is surrounded by negative electrons, it can be seen as positive.
+    \item This hole is unstable, and as a result electrons will fill it in, creating a new hole from where that electron came from. How quickly electrons can fill this hole characterizes the material's conductivity.
+    \item The conductivity $\sigma$ is given by:
+    \begin{equation}
+        \sigma = nq\mu+n
+    \end{equation}
+    where $n$ is the number of electrons, $q$ is the fundamental charge, $\mu_n$ is the electron mobility, $p$ is the number of holes, and $\mu_p$ is the hole mobility. For $n=p$, we have:
+    \begin{equation}
+        \sigma = nq(\mu_n+\mu_p)
+    \end{equation}
+    \item The conductivity follows the Boltzmann distribution (the textbook said it was the Arrhenius dependence, but that's just chemists trying to steal something physicists came up with):
+    \begin{equation}
+        \sigma = e^{-E_g/(2kT)}
+    \end{equation}
+    where $E_g$ is the band gap.
+    \item So far, this discussion has revolved around \textit{intrinsic} semi-conductors, which are un-doped. They are not very practical as they are very temperature dependant. If we dope them, the electric properties of the dopant has a large effect on the overall behaviour, and the semi-conductor becomes \textit{extrinsic}.
+    \item Extrinsic $n$ type semiconductors are created by adding in free electrons in it. For example, we can add in a \textit{pentravalent} atom (i.e. point defect), which has four electrons that bond with neighbouring carbon electrons, but it has an \textit{extra} free electron. The conductivity is given by:
+    \begin{equation}
+        \sigma = nq\mu_n
+    \end{equation}
+    Note that in the background, there is still effects from the instrinsic effects, though they are typically much smaller.
+    \item Instead of adding electrons, we can add extra holes in $p$-type extrinsic semiconductors. This is done in a similar way, by adding trivalent impurities such as Boron. The conductivity is then:
+    \begin{equation}
+        \sigma = pq\mu_p
+    \end{equation}
+\end{itemize}
