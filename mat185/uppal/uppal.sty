@@ -1,0 +1,93 @@
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=1in]{geometry} % Page Dimensions
+% \renewcommand{\familydefault}{\sfdefault}
+% \renewcommand\textbullet{\ensuremath{\bullet}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Logistics %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath, amsthm, amssymb} % must have math p
+\usepackage{cancel} % Allows for the use of \cancel{}
+\usepackage{enumitem} % Lists
+\usepackage{graphicx} % images
+\usepackage{xcolor} % more colors
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+
+\definecolor{my-green}{RGB}{26,102,77}
+\definecolor{my-red}{RGB}{204,13,13}
+
+\setlength\parindent{0pt} % No Indent
+\everymath{\displaystyle} % Default Display Math
+
+\pagestyle{fancy}
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\thepage\ of \pageref{LastPage}}
+
+\newcommand{\term}[1]{\textcolor{blue}{\textit{#1}}}
+\renewcommand{\b}[1]{\mathbf{#1}}
+
+\DeclareMathOperator{\diag}{diag}
+
+\newtheoremstyle{blue-env}
+{}
+{}
+{}
+{}
+{\color{blue}\bfseries}
+{:}
+{ }
+{}
+
+\newtheoremstyle{green-env}
+{}
+{}
+{}
+{}
+{\color{my-green}\bfseries}
+{:}
+{ }
+{}
+
+\newtheoremstyle{black-env}
+{}
+{}
+{}
+{}
+{\bfseries}
+{:}
+{ }
+{}
+
+\newtheoremstyle{red-env}
+{}
+{}
+{}
+{}
+{\color{my-red}\bfseries}
+{:}
+{ }
+{}
+
+\theoremstyle{blue-env}
+\newtheorem*{definition}{Definition}
+
+\theoremstyle{green-env}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{prooof}{Proof}
+
+\theoremstyle{black-env}
+\newtheorem*{example}{Example}
+
+\theoremstyle{red-env}
+\newtheorem*{exercise}{Exercise and Discussion}
+
+
+\newenvironment{sol}{
+    \color{blue}
+}{
+    
+}
