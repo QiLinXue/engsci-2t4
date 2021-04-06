@@ -1,0 +1,115 @@
+\section{Maximum and Minimum Values}
+\begin{itemize}
+    \item We can extend the idea of maximum and minimum values to multiple dimensions.
+    \begin{definition}
+        $f$ is said to have a local maximum at $\vec{x}_0$ iff $f(\vec{x}_0) \ge f(\vec{x})$ fir $\vec{x}$ in some neighbourhood of $\vec{x}_0$. $f$ is said to have a local minimum at $\vec{x}_0$ iff $f(\vec{x}_0) \le f(\vec{x})$ for $\vec{x}$ in some neighbourhood of $\vec{x}_0$.
+    \end{definition}
+    \begin{theorem}
+        If $f$ has a local extreme values at $\vec{x}_0$, then either $\nabla f(\vec{x}_0) = \vec{0}$ or $\nabla f(\vec{x}_0)$ DNE.
+    \end{theorem}
+    \begin{proof}
+        Let $g(x) = f(x,y)$. Then:
+        \begin{equation}
+            \frac{dg}{dx}(x_0) = 0 = \frac{\partial f}{\partial x}(x_0, y_0)
+        \end{equation}
+        Then if $z=f(x,y)$, we have:
+        \begin{equation}
+            g(x,y,z) = z \cdot f(x,y) = 0
+        \end{equation}
+        which implies $\nabla g = \hat{k}$ for $f_x=f_y=0$.
+    \end{proof}
+    \begin{definition}
+        Points where $\nabla f = \vec{0}$ or DNE called critical points.
+    \end{definition}
+    \begin{definition}
+        Points where $\nabla f = \vec{0}$ are called stationary points.
+    \end{definition}
+    \begin{definition}
+        Stationary points which are not local extremes are called saddle points.
+    \end{definition}
+    \begin{definition}
+        Let $f(x,y) = 20-x^2-y^2$. The gradient is:
+        \begin{equation}
+            \nabla f = (-2x, -2y)
+        \end{equation}
+        which exists everywhere, but is zero at $(0,0)$ which is a stationary point. To see what type of stationary point it is, set $x=h$ and $y=k$ where $h$ and $k$ are very small. Then:
+        \begin{align}
+            f(0,0) &= 20 \\ 
+            f(h,k) &= 20-k^2-h^2 \le 20
+        \end{align}
+        for all $h$, $k$. As a result, $f(0,0)$ is a local maximum.
+    \end{definition}
+    \begin{example}
+        Suppose we have $f(x,y) = xy$. The gradient is:
+        \begin{equation}
+            \nabla f = (y, x)
+        \end{equation}
+        If we set the gradient to $\vec{0}$, we find that it is equal to zero at $(0,0)$. Again, set $x=h$ and $y=k$. If both have the same sign, then it is positive. If they have opposite signs, then $f$ is negative. This results in a saddle point.
+    \end{example}
+    \begin{example}
+        Suppose we have a function $f(x,y) = 2x^2 + y^2 - xy - 7y$. The gradient is:
+        \begin{equation}
+            \nabla f = (4x-y, 2y-x-7)
+        \end{equation}
+        which is zero at $(1,-4)$. To test if it's a maximum/minimum/saddle point, we can test points. However, this would require four test cases and I don't feel like writing it out. But if you do have the patience, you'll find that it's a local minimum.
+    \end{example}
+    \begin{example}
+        Suppose we have a cone given by $f(x,y)=-\sqrt{x^2+y^2}$. The gradient is:
+        \begin{equation}
+            \nabla f = (-(x^2+y^2)^{-1/2} \cdot 2x, -(x^2+y^2)^{-1/2} \cdot 2y)
+        \end{equation}
+        which does not exist at $(0,0)$.
+    \end{example}
+    \begin{theorem}
+        \textbf{Second Derivatives Test:} For $f(x,y)$ with continuous second order partial derivatives, and $\nabla f(x_0, y_0) = \vec{0}$, set $A = \frac{\partial^2 f}{\partial x^2}(x_0, y_0)$, $B=\frac{\partial^2 f}{\partial x\partial y}(x_0,y_0)$, $C=\frac{\partial^2 f}{\partial y^2}(x_0,y_0)$. They form the discriminant\footnote{This comes from more advanced calculus, but here's the intuition from where it'll come from (credit to Nathan): You can take linear approximations and they're planes, you can also take ``quadric approximations'' of surfaces at a stationary point and you would only get either a quadratic paraboloid (which is a max or min) or a hyperbolic paraboloid (has a saddle) - and this test basically looks at the quadric approximation and tells you which case it is.
+        }:
+        \begin{equation}
+            D = AC - B^2
+        \end{equation}
+        \begin{enumerate}
+            \item If $D < 0 $, then $(x_0, y_0)$ is a saddle point.
+            \item If $D >0$, and $A,C > 0$, then $(x_0, y_0)$ is a local minimum.
+            \item If $D > 0$, and $A,C < 0$ then $(x_0, y_0)$ is a local maximum.
+        \end{enumerate}
+    \end{theorem}
+    \begin{example}
+        For $f(x,y) = xy$, at $(0,0)$ we have: $f_{xx} = A = 0$, $f_{yy} = C = 0$, and $f_{xy} = 1 = B$. Then:
+        \begin{equation}
+            D=AC-B^2 = -1 < 0
+        \end{equation}
+        so $(0,0)$ is a saddle point.
+    \end{example}
+    \begin{example}
+        For $f(X,y) = 2x^2+y^2-xy-7y$, we have $\nabla f = \vec{0}$ at $(1,4)$. Then:
+        \begin{align}
+            A &= 4 \\
+            B &= -1 \\ 
+            C &= 2
+        \end{align}
+        so $D = 8 -1 = 7 > 0$ and we have a local minimum.
+    \end{example}
+    \begin{theorem}
+        If $f$ is continuous on a bounded, closed set, then $f$ takes on both an absolute minimum and an absolute maximum on that set.
+    \end{theorem}
+    \begin{example}
+        Let $f(x,y) = (x-4)^2 + y^2$ on the set $\{(x,y):\, 0 \le x \le 2, x^3 \le y \le 4x\}$. The gradient is given by:
+        \begin{equation}
+            \nabla f = (2(x-4), 2y)
+        \end{equation}
+        and the gradient is zero at $(4,0)$. To find the extrema, we have to look at the boundaries. The first boundary is $y=x^3$ from $0 \le x \le 2$. We can parametrize this with $x=t$ such that $y=t^3$ from $0 \le t \le 2$, and we have the vector function:
+        \begin{equation}
+            \vec{r}_1(t) = (t, t^3)
+        \end{equation}
+        We then need to find when $f(\vec{r}_1(t)) = f_1(t)$ has an extrema. Using the chain rule:
+        \begin{align}
+            f_1'(t) &= \nabla f \cdot \vec{r}'(t) \\ 
+            &= (2(t-4), 2t^3) \cdot (1, 3t^2) \\ 
+            &= 2t-8+6t^5
+        \end{align}
+        Setting $f_1'(t)=0$, we get $t=1$ or $(1,1)$ where $f(1,1) = 10$. For this boundary, we can test the second derivative and get:
+        \begin{equation}
+            f_1''(t) = 2 + 30t^4 = 32 > 0
+        \end{equation}
+        so that \textit{in this boundary}, we have a local minimum.
+    \end{example}
+\end{itemize}
