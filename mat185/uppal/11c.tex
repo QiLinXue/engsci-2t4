@@ -130,6 +130,79 @@ There are two nice applications of the result from previous exercise. The first 
         \item Applyying the mapping defined by multiplication by $S$ to the path $\b{y}(t)$ and sketch solutions to $\b{x}'=A\b{x}$ for various $\b{x}(0)=\b{x}_0$.
     \end{enumerate}
 \end{exercise}
+\begin{sol}
+    \begin{enumerate}[label=(\alph*)]
+        \item Find the eigenvalues by finding the characteristic polynomial:
+        \begin{align*}
+            P_\lambda (A) = \det(\lambda I - A) &= \det \begin{bmatrix}
+                \lambda-2 & -1 \\ -1 & \lambda - 2
+            \end{bmatrix} 
+            = (\lambda-2)^2-1 
+            = (\lambda - 1)(\lambda - 3)
+        \end{align*}
+        The eigenvalues of $A$ are $\lambda=1,3$. We cana then find the eigenspace:
+        \begin{align*}
+            E_3 = \null \begin{bmatrix}
+                -1&1\\1 & -1
+            \end{bmatrix} = \spann \begin{bmatrix}
+                1 \\ 1
+            \end{bmatrix} 
+            ,\quad E_1 = \null \begin{bmatrix}
+                1&1\\ 1 &1
+            \end{bmatrix} = \spann \begin{bmatrix}
+                -1 \\ 1
+            \end{bmatrix}
+        \end{align*}
+        Therefore, $S = \begin{bmatrix}
+            1 & -1 \\ 1 & 1
+        \end{bmatrix}$, which is invertible and the diagonal matrix is $D = \begin{bmatrix}
+            3&0 \\ 0&1
+        \end{bmatrix}$.
+        \item We wish to find the solution to:
+        $
+            \begin{bmatrix}
+                y_1'(t) \\ y_2'(t)
+            \end{bmatrix} = \begin{bmatrix}
+                3 & 0 \\ 0 & 1
+            \end{bmatrix}\begin{bmatrix}
+                y_1(t) \\ y_2(t)
+            \end{bmatrix},\quad y(0) = \begin{bmatrix}
+                b_1 \\ b_2
+            \end{bmatrix}
+        $. From the previous theorem, the solution is:
+        \begin{equation}
+            y(t) = \begin{bmatrix}
+                y_1(t) \\ y_2(t)
+            \end{bmatrix} = \begin{bmatrix}
+                b_1e^{3t} \\ b_2e^{t}
+            \end{bmatrix}
+        \end{equation}
+        \item We can plot this out. If we start on one of the axes, we will move on that axis. Otherwise, we have $b_1, b_2 \neq 0 $ so $y = b_2e^t \implies t = \ln \frac{y}{b_2}$. We can then write a function in terms of $x$:
+        \begin{equation}
+            x = b_1e^{3t}=b_1\left(\frac{y}{b_2}\right)^3
+        \end{equation}
+        \begin{center}
+            \begin{tikzpicture}[scale=0.5]
+                \draw[help lines, color=gray!30, dashed] (-4.9,-4.9) grid (4.9,4.9);
+                \draw[->,thick] (-5,0)--(5,0) node[right]{$x$};
+                \draw[->,thick] (0,-5)--(0,5) node[above]{$y$};
+                
+                % Starts on axes
+                \draw[red,->, thick] (0,0) -- (3,0);
+                \draw[red,->, thick] (0,0) -- (-3,0);
+                \draw[red,->, thick] (0,0) -- (0,3);
+                \draw[red,->, thick] (0,0) -- (0,-3);
+                
+                % First Quadrant
+                \draw[domain=-5:5, smooth, samples = 100, variable=\x, red, thick, <->] plot ({\x}, {\x^(1/3)});
+                \draw[domain=-5:5, smooth, samples = 100, variable=\x, red, thick, <->] plot ({\x}, {2*\x^(1/3)});
+                \draw[domain=-5:5, smooth, samples = 100, variable=\x, red, thick, <->] plot ({\x}, {-\x^(1/3)});
+                \draw[domain=-5:5, smooth, samples = 100, variable=\x, red, thick, <->] plot ({\x}, {-2*\x^(1/3)});
+                \end{tikzpicture}
+        \end{center}
+    \end{enumerate}
+\end{sol}
+
 \newpage
 
 ...and the second is
@@ -140,4 +213,10 @@ There are two nice applications of the result from previous exercise. The first 
         \item Using part (a) show that if $\b{x}(t)$ and $\hat{\b{x}}(t)$ are two solutions to the system $\b{x}'=A\b{x},\, \b{x}(0)=\b{x}_0$, then $\b{x}(t)=\hat{\b{x}}(t)$.
     \end{enumerate}
 \end{exercise}
+\begin{sol}
+    \begin{enumerate}[label=(\alph*)]
+        \item $A$ is diagonalizable so we can write it as $A=SDS^{-1}$. If $y=S^{-1}x$, then it solves $y' = Dy$. If $x(0)=0)$, then $y(0) = S^{-1}x(0) = S^{-1}(0) = 0$ as well. However, $y' = Dy$ and since $y(0)=0$, this means that $y(t)=0$ for all $t$ (coefficients of general solution will all be zero).  
+        \item \textbf{(Uniqueness of Solutions)}
+    \end{enumerate}
+\end{sol}
 \end{document}
