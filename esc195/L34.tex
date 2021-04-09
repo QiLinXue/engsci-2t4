@@ -1,0 +1,90 @@
+\section{Lagrange Multipliers}
+\begin{itemize}
+    \item Let us develop the basis behind Lagrange Multipliers.
+    \item To maximize a function $f(x,y)$ subject to the boundary $g(x,y) = k$, we can draw in level curves $f(x,y) = C$. We want to find the largest value of $C$ such that the level curve touches $g(x,y)=k$ (i.e. they share a common tangent line).
+    \item Since the gradient vector points perpendicular to the tangent line, the gradient of $f(x,y)=C$ is parallel to the gradient of $g(x,y) = k$. This can be written as:
+    \begin{equation}
+        \nabla f = \lambda \nabla g
+    \end{equation}
+    where $\lambda$ is a constant, known as the \textbf{Lagrange Multiplier}. We have:
+    \begin{align}
+        g(x_0, y_0) &= k \\ 
+        f_x(x_0, y_0) &= \lambda g_x(x_0, y_0) \\ 
+        f_y(x_0, y_0) &= \lambda g_y(x_0, y_0)
+    \end{align}
+    which has three equations and three unknowns, so we can solve for $x_0, y_0, \lambda$. This can easily be extended to $n$ dimensions.
+    \begin{example}
+        Suppose we wish to maximize $f(x,y) = x^2 - y^2$ on the circle $x^2 + y^2 = 1$.
+        We have:
+        \begin{align}
+            f_y = 2x && g_x = 2x \\ 
+            f_y = -2y && g_y = 2y
+        \end{align}
+        and our three equations are:
+        \begin{align}
+            x_0^2 + y_0^2 &= 1 \\ 
+            2x_0 &= \lambda 2x_0 \\ 
+            -2y_0 &= \lambda 2y_0
+        \end{align}
+        We have two cases. First, if $\lambda=1$, then $y_0 = 0$ and $x_0 = \pm 1$. Second, if $\lambda = -1$, then $x_0 = 0$ and $y_0 = \pm 1$. We can substitute these in:
+        \begin{align}
+            f(1,0) &= 1 \\ 
+            f(-1, 0) &= 1 \\ 
+            f(0,-1) &= -1 \\ 
+            f(0, 1) &= -1
+        \end{align}
+        which gives us the minimum and maximum values \textit{at the boundary.}
+    \end{example}
+        \begin{example}
+        Let us revisit our example: $f(x,y) = xy^2-x$ constrained by the boundary $g=x^2+y^2=3$. We have:
+        \begin{align}
+            \nabla f = (y^2-1, 2xy) && \nabla g = (2x,2y)
+        \end{align}
+        Our three equations are:
+        \begin{align}
+            x^2 + y^2 &= 3 \\ 
+            y^2- 1 &= \lambda 2x \\ 
+            2xy &= \lambda 2y
+        \end{align}
+        We can start from the third equation and consider two possibilities:
+        \begin{itemize}
+            \item Case 1: $y=0 \implies x = \pm \sqrt{3}$. This gives $f(\pm \sqrt{3}, 0) = \mp \sqrt{3}$.
+            \item Case 2: $x_0 = \lambda$. This requires a little bit of work and gives:
+            \begin{equation}
+                x = \pm \sqrt{\frac{2}{3}},\quad y = \pm \sqrt{\frac{7}{3}}
+            \end{equation}
+            which gives the same result as earlier.
+        \end{itemize}
+    \end{example}
+    \item If there are two constraintsw, then we need to find the minimum and maximum of $f(x,y,z)$ with $g(x,y,z)=k$ and $h(x,y,z)=C$. We can define $\vec{T} = \nabla h \times \nabla g$ such that $\nabla f$ is perpendicular to $\vec{T}$. This leads to the relationship:
+    \begin{equation}
+        \nabla f(x_0) = \lambda \nabla g(\vec{x}_0) + \mu \nabla h(\vec{x}_0)
+    \end{equation}
+    which gives the following system of five equations:
+    \begin{align}
+        g(\vec{x}_0) &= k \\ 
+        h(\vec{x}_0) &= c \\ 
+        f_y(\vec{x}_0) &= \lambda g_x(\vec{x}_0) + \mu h_x(\vec{x}_0) \\ 
+        f_x(\vec{x}_0) &= \lambda g_y(\vec{x}_0) + \mu h_y(\vec{x}_0) \\ 
+        f_z(\vec{x}_0) &= \lambda g_z(\vec{x}_0) + \mu h_z(\vec{x}_0)
+    \end{align}
+    \begin{example}
+        Suppose we have a function $f(x,y,z) = xy + 2z$, constrained by a plane $x+y+z=0$ and a sphere $x^2+y^2+z^2-24$. Our five equations are then:
+        \begin{align}
+            x+y+z &= 0 \\ 
+            x^2+y^2+z^2 &= 24 \\ 
+            y &= \lambda + \mu \cdot 2x \\ 
+            x &= \lambda + \mu \cdot 2x \\ 
+            2 &= \lambda + \mu \cdot 2x \\ 
+        \end{align}
+        Combining, we get $(x-y)(1+3\mu) = 0$.
+        \begin{itemize}
+            \item Case 1: $x=y \implies z = -2x$. Solving for $x$, $y$, and $z$ leads to $f(2,2,-4)=-4$ and $f(-2,-2,4) = 12$.
+            \item Case 2: $\mu = - \frac{1}{2}$. This is harder to solve for and I would write out the whole solution if I woke up earlier, but solving it leads to:
+            \begin{align}
+                f\left(\frac{1+3\sqrt{5}}{2},\frac{1-3\sqrt{5}}{2}, -1 \right) &= - 13 \\ 
+                f\left(\frac{1-3\sqrt{5}}{2},\frac{1+3\sqrt{5}}{2}, -1\right) &= -13
+            \end{align}
+        \end{itemize}
+    \end{example}
+\end{itemize}

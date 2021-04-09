@@ -110,6 +110,48 @@
         \begin{equation}
             f_1''(t) = 2 + 30t^4 = 32 > 0
         \end{equation}
-        so that \textit{in this boundary}, we have a local minimum.
+        so that \textit{in this boundary}, we have a local minimum. For the second boundary, we have $y=4x$. We can parametize it by setting $x=t$, $y=4t$, $0 \le t \le 2$ such that:
+        \begin{equation}
+            f_2(t) = (t-4)^2 + (4t)^2 = 17t^2 - 8t + 16
+        \end{equation}
+        which is minimized at $t=\frac{4}{17}$, which corresponds to:
+        \begin{equation}
+            f\left(\frac{4}{17}, \frac{16}{17}\right) \approx 15.06
+        \end{equation}
+        Using the second derivative test, we see that this is indeed a local minimum. We also need to check the endpoints: $f(0,0) = 16$ and $f(2,8)=68$. Therefore, $f(1,1)=10$ is the absolute minimum and $f(2,8)$ is absolute maximum.
+    \end{example}
+    \item In general, there are four steps we need to take to find the extrema:
+    \begin{enumerate}
+        \item Check when $\nabla f$ does not exist.
+        \item Check when $\nabla f = 0$.
+        \item Check the boundaries.
+        \item Check the end points of the boundaries.
+    \end{enumerate}
+    \begin{example}
+        Let $f(x,y) = xy^2 - x$ in the region $\{(x,y) | x^2 +y ^2 \le 3\}$. We take partial derivatives to find that:
+        \begin{align}
+            f_x = y^2-1 && f_{xx} = 0 \\ 
+            f_y = 2xy && f_{yy} - 2x
+        \end{align}
+        and $f_{xy}=2y$. Setting $\nabla f = \vec{0}$ gives us the two critical points $(0,1)$ and $(0,-1)$. For $(0,1)$, we have $A=0, B=2, C=0$. The discriminant is $D=AC-B^2 = -4 < 0$, so this is a saddle point. For $(0,-1)$, we have $A=0, C=0, B=-2$. The discriminant is $D=AC-B^2-4 < 0$ which is also a saddle point.
+        \vspace{2mm}
+
+        We then look at the boundary $x^2+y^2=3 \implies y^2 = 3-x^2$. We can substitute this into the function to get:
+        \begin{equation}
+            f(x) = x(3-x^2)-x = 2x-x^3
+        \end{equation}
+        so we have:
+        \begin{align}
+            f_1'(x) &= 2-3x^2 \\
+            f_1'(x) &= 0 \implies x = \pm \sqrt{\frac{2}{3}}
+        \end{align}
+        Testing cases and using the second derivative $f_1''(x) = -6x$, we can see that at $+\sqrt{\frac{2}{3}}$, we have a local max and at $-\sqrt{\frac{2}{3}}$, we have a local minimum.
+        \vspace{2mm}
+
+        However, we also need to take into account the ``endpoints'' of a  (since we're going from $x=-\sqrt3$ to $x=\sqrt3$). At $f(-\sqrt{3}, 0)=\sqrt{3}$, we have the absolute max and at $f(\sqrt{3}, 0) = -\sqrt{3}$, we have the absolute minimum.
+
+        \tcbline 
+
+        There is another approach to this problem by parameterize the curve. Let $\vec{r}(t) = \sqrt{3} \cos t \hat{i} + \sqrt{3} \sin t \hat{j}$ for $0 \le t \le 2\pi$. Using this parametrization, we do not need to check endpoints.
     \end{example}
 \end{itemize}

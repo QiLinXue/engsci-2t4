@@ -1,0 +1,76 @@
+\section{Reconstructing a Function from its Gradient}
+\begin{itemize}
+    \item If we have the gradient, how can we go back to the original function?
+    \begin{example}
+        Suppose we have the gradient $\nabla f = (1+y^2+xy^2, x^2y+y+2xy+1)$. We can then recognize that:
+        \begin{align}
+            \frac{\partial f}{\partial x} &= 1 + y^2 + xy^2 \\ 
+            \implies f &= x+xy^2+\frac{1}{2}x^2y^2 + \phi(y)
+        \end{align}
+        where $\phi(y)$ is a function that does not depend on $x$. Similarly:
+        \begin{align}
+            \frac{\partial f}{\partial y} &= 2xy + x^2y + \phi'(y) \\ 
+            &= x^2y + y + 2xy + 1
+        \end{align}
+        Therefore: $\phi'(y) = y+1 \implies \phi(y) = \frac{1}{2}y^2 + y + C$. As a result, we have:
+        \begin{equation}
+            f(x,y) = x+ xy^2 + \frac{1}{2}x^2y^2 + \frac{1}{2}y^2 + y + C
+        \end{equation}
+    \end{example}
+    \begin{example}
+        In three dimensions, suppose that $\nabla f(x,y,z) = (\cos x - y\sin x)\hat{i} + (\cos x + z^2)\hat{j} + (2yz)\hat{k}$. It is possible to recover $f$ using the method from the previous example, but there is another method. We have:
+        \begin{align}
+            f_y &= \cos x - y\sin x \implies f = \sin x + y\cos x + \psi_1(y,z) \\ 
+            f_y &= \cos x + z^2 \implies f = y\cos x+ yz^2 + \phi_2(x,z) \\ 
+            f_z &= 2yz \implies f=yz^2 + \phi_3(x,y)
+        \end{align}
+        and the original function is:
+        \begin{equation}
+            f(x,y,z) = \sin x + y\cos x + yz^2 + C
+        \end{equation}
+    \end{example}
+    \begin{example}
+        Suppose we have $\nabla f(x,y) = y\hat{i} - x\hat{j}$. We have:
+        \begin{align}
+            f_x = y && f_y = -x \\ 
+            f_{xy} = 1 && f_{yx} = -1
+        \end{align}
+        We have:
+        \begin{equation}
+            \frac{\partial^2 f}{\partial y\partial x} \neq \frac{\partial^2 f}{\partial x\partial y}
+        \end{equation}
+        Since this contradicts Clairut's theorem, it cannot be a gradient!
+    \end{example}
+    \begin{theorem}
+        Let $P$ and $Q$ be functions of two variables, each continuously differentiable. The linear combination:
+        \begin{equation}
+            P(x,y) \hat{i} + Q(x,y)\hat{j}
+        \end{equation}
+        is a gradient if and only if:
+        \begin{equation}
+            \frac{\partial P(x,y)}{\partial y} = \frac{\partial Q(x,y)}{\partial x}
+        \end{equation}
+    \end{theorem}
+    \begin{example}
+        Suppose we have the function $(y^3+x, x^2 + y)$. We have:
+        \begin{equation}
+            \frac{\partial P}{\partial y} = 3y^2 \neq \frac{\partial Q}{\partial x}= 2x
+        \end{equation}
+        so it is not a gradient.
+    \end{example}
+    \begin{example}
+        Suppose we have $(2\ln(3y) + 1/x, 2x/y + y^2)$. We have:
+        \begin{equation}
+            \frac{\partial P}{\partial y} = 2y = \frac{\partial Q}{\partial x} = \frac{2}{y}
+        \end{equation}
+        so it is a gradient. We can recover the original function:
+        \begin{align}
+            f_x &= 2\ln(3y)+1/x \implies f = 2x\ln(3y)+\ln x + \phi(y) \\ 
+            f_y &= 2x/y + y^2 \implies f = 2x\ln(y) + \frac{y^3}{3}
+        \end{align}
+        which gives:
+        \begin{equation}
+            f = 2x\ln(3y) + \ln x + \frac{y^3}{3} + C
+        \end{equation}
+    \end{example}
+\end{itemize}

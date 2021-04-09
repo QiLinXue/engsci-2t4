@@ -1,0 +1,131 @@
+\documentclass{article}
+\usepackage{qilin}
+\title{MSE160 \\ Problem Set \# 1}
+\author{QiLin Xue}
+\lhead{MSE160}
+\rhead{QiLin Xue}
+
+\begin{document}
+    \maketitle
+    \section*{Problem One}
+    Refer to the following diagrams. For the first two, the origin is chosen to be at the tail of the vector. For the two planes, the origin is chosen to be at the intersection of the $x$, $y$, and $z$ axes.
+    \begin{figure}[ht]
+        \centering
+        \incfig{pset2q1}
+    \end{figure}
+    \section*{Problem Two}
+    For plane $A$, let us choose the origin to be $(0,1,0)$. We then travel $2/3$, $-1$, and $1/2$ in the $x$, $y$, $z$ directions. Taking the reciprocal gives $3/2, -1, 2$ and reducing gives $3, -2, 4$ for the plane:
+    \begin{equation}
+        P_A:\, (3,\bar{2},4)
+    \end{equation}
+    For plane $B$, we let $(0,0,0)$ be the origin. We travel $1/2$, $1/2$, $1$ in the $x$, $y$, $z$ directions. Taking the reciprocal gives $2,2,1$ for:
+    \begin{equation}
+        P_B:\, (2,2,1)
+    \end{equation}
+    \section*{Problem Three}
+    \textbf{(a)} For a first order reflection, we have $n=1$, or:
+    \begin{equation}
+        2d\sin \theta = \lambda \implies d = \frac{\lambda}{2\sin\theta} = \frac{0.1542 \si{\nano\meter}}{2\sin(69.22^\circ/2)} = \boxed{0.1357\si{\nano\meter}}
+    \end{equation}
+    where $d$ is the interplanar spacing.
+    
+    \textbf{(b)} We can calculate the lattice parameter to be:
+    \begin{equation}
+        a = d\sqrt{h^2+k^2+l^2}=d\sqrt{2^2+2^2+0^2}=2\sqrt{2}d
+    \end{equation}
+    Let us also make the assumption that the actual density is relatively close to the theoretical density. This means that we can calculate how many atoms are in a unit cell:
+    \begin{equation}
+        n = \frac{\rho a^3 N_A}{A} = \frac{(22.56 \cdot \si{\gram\per\centi\meter\cubed}) \cdot (2\sqrt{2} \cdot 1.357 \times 10^{-8} \si{\centi\meter})^3 \cdot 6.022 \times 10^{23}}{192.217} \simeq 4.00009
+    \end{equation}
+    Since this is $1.0000225$ times that of $4$, we will assume that there are $4$ atoms per unit cell. Therefore, it is likely that Iridium forms a FCC structure, though this is not relevant to solve the problem. Since density is directly proportional to $n$, we claim that the theoretical density is also off by a factor of $1.0000225$:
+    \begin{equation}
+        \rho_\text{theory} = \frac{\rho_\text{actual}}{1.0000225} = 22.559 \si{\gram\per\centi\meter\cubed}
+    \end{equation}
+    \section*{Problem Four}
+    \textbf{(a)} We can calculate the ratio $\frac{R_c}{R_a}=\frac{0.034}{0.132}=0.258$, which is closest to the ratio for tetrahedral interstitial sites which is $0.225$. Both FCC and BCC have interstitial sites that have a cation:anion radius ratio of more than this. As a result, \ch{BeO} forms an HCP structure. While HCP is a \textit{metallic} structure, it can also form a ceramic structure by filling in the interstitial sites. This structure is equivalent to the \textbf{ZnS} structure learned in Tophat, which I prove in part (c). 
+
+    \textbf{(b)} Refer to the image below. Beryllium forms a cation and is shown in magenta. Oxygen forms an anion and is shown in red. One such tetrahedral site is shown.
+    \begin{figure}[ht]
+        \centering
+        \incfig{BeO}
+    \end{figure}
+    In the middle layer, each of the three anions form two tetrahedral sites: one with the top layer and one with the bottom layer, resulting in six cations in the unit cell. This makes sense as there is also six anions in the unit cell so the stoichiometric ratio is preserved.
+
+    \textbf{(c)} This was actually shown in the Tophat textbook. Instead, I will provide an alternate derivation. Let the side length of the tetrahedron be $a$. For a given equilateral triangle, the distance from the vertex to the center is:
+    \begin{equation}
+        d = \frac{a}{2\cos(30^\circ)} = \frac{a}{\sqrt{3}}
+    \end{equation}
+    The height is then:
+    \begin{equation}
+        h = \sqrt{a^2-\frac{a^2}{3}} = \sqrt{\frac{2}{3}}a
+    \end{equation}
+    The height of the center of the tetrahedron is the same location as the center of mass, or:
+    \begin{equation}
+        \frac{0+0+0+h}{4}=\frac{a}{\sqrt{24}}
+    \end{equation}
+    Therefore, the distance from the vertex to the center is:
+    \begin{equation}
+        \sqrt{\frac{a^2}{3} + \frac{a^2}{24}} = \frac{a\sqrt{3}}{2\sqrt{2}}
+    \end{equation}
+    Since the cation and anion touch, this distance is equal to $R_c+R_a$. Therefore, we have:
+    \begin{equation}
+        R_c + R_a = \frac{a\sqrt{3}}{2\sqrt{2}}
+    \end{equation}
+    Note that this agrees with the value of $R_c/R_a = 0.225$ if we note that $a=2R_a$ and make the substitution.
+
+    \textbf{(d)} The height of the unit cell is $2h=\frac{2\sqrt{2}a}{\sqrt{3}}$ and the area of the regular hexagon is $\frac{3\sqrt{3}}{2}a^2$ such that the volume of the unit cell is:
+    \begin{equation}
+        V_c = 3\sqrt{2}a^3 \approx 4.24a^3
+    \end{equation}
+    From our earlier expression in part (c) we have $a=\frac{2\sqrt{2}}{\sqrt{3}}(0.034+0.132)=0.271\si{\nano\meter}$. The theoretical density is thus:
+    \begin{equation}
+        \rho = \frac{6\cdot 9.012 \si{\gram} + 6 \cdot 15.999 \si{\gram}}{4.24(2.71 \times 10^{-8} \si{\centi\meter})^3 (6.022 \times 10^{22})} = \boxed{2.95 \si{\gram\per\centi\meter\cubed}}
+    \end{equation}
+    \section*{Problem Five}
+    \textbf{(a)} Refer to the following diagram:
+    \begin{center}
+        \includegraphics[width=0.6\linewidth]{figures/pset2_q5.png}
+    \end{center}
+    Here, the red line shows the unloading stress strain curve if the final unloaded strain is $\epsilon=0.002$. Using Python, I was able to calculate the intersection (shown in blue) to represent a yield strength of $\sigma_\text{yield}=277 \si{\mega\pascal}$. Similarly, the ultimate tensile strength is $\sigma_\text{ult} = 369\si{\mega\pascal}$ and the fracture strength is $\sigma_\text{ult} = 283\si{\mega\pascal}$ (rounding everything to three significant digits).
+
+    \textbf{(b)} Again using Python, I determined the sample to potentially have a strain of $\epsilon = 0.0107$ or $\epsilon = 0.160$ at a stress value of $\sigma=300\si{\mega\pascal}$. When unloaded, the recovered elastic strain is:
+    \begin{equation}
+        \epsilon_\text{elastic} = \frac{300 \si{\mega\pascal}}{60 \times 10^3 \si{\mega\pascal}} = 0.005.
+    \end{equation}
+    And the plastic strain would then be:
+    \begin{equation}
+        \epsilon_\text{plastic,1} = 0.0057
+    \end{equation}
+    and:
+    \begin{equation}
+        \epsilon_\text{plastic,2} = 0.155
+    \end{equation}
+    \section*{Problem Six}
+    \begin{enumerate}[label=\textbf{(\alph*)}]
+        \item Zero-dimensional: Vacancy - An atom is missing from it's usual spot and as a result, neighbouring atoms cave inwards. This behaviour of ``caving in'' is most likely due to the system moving into a lower energy state. It is not unreasonable to believe that this decreases the energy in certain structures such as a metallic compound, where there are several cations with the same charge in close proximity to each other. Vacancy defects do not have a huge impact on the environment as the effect is quite localized and there are very few vacancies.
+        \item Zero-dimensional: substitution - an atom is substituted with another atom that is slightly larger, which forces neighbouring atoms to bulge outwards. Again, since the effect is quite localized, I would not expect there to be noticeable changes to the macroscopic material properties, unless these defects appear in several places.
+        \item Zero-dimensional: interstitial impurity - here, a particle is placed at the interstitial sites that attract neighbouring atoms. This could occur if the added impurity is an anion and neighbouring atoms are cations, or vice-versa. Again, I expect the overall effect to be very little as the induced lattice strain acts on a very small level. 
+        \item Zero-dimensional: interstitial impurity - the opposite happens here. The particle placed most likely has a charge identical to the neighbouring ions. Alternatively, this could behave even if everything was neutral. Just the size alone could push apart neighbouring atoms. Again, there is no significant lattice strain to suggest this has a major impact on the macroscopic details, at least without more information.
+    \end{enumerate}
+    \section*{Problem Seven}
+    A grain boundary is a two-dimensional imperfection that occurs at interfacial boundary between two grains or crystals. These boundaries can exist if the material started crystallization in different places. Since the crystals are not lined up at a grain boundary, it becomes difficult for them to slide past each other in a direction perpendicular to the boundary. If there are multiple boundaries, then it becomes difficult to create a strain in \textit{any} direction. This is why decreasing grain sizes, which increase the total size of grain boundaries is a popular method to strengthen a material.
+    \section*{Problem Eight}
+    Refer to the following diagram. The red curve corresponds to (a), blue corresponds to (b), and green corresponds to (c).
+    \begin{center}
+        \incfig{pset2q8}
+    \end{center}
+    I decided to draw (a) and (b) on the same axis is that they are very similar structures, just with different crystallinities. Since (a) is more crystalline than (b), it starts off less amorphous and thus there is very little transition from amorphous to crystalline, which is reflected in a much smaller change in slope. Near the melting point, both materials are very similar (they are both polyethylene), and both should be mostly crystalline at this point. As a result, their behaviour around the second transition point is very similar.
+    
+    For (c), PMMA is optically transparent because it is completely amorphous. As a result, when the temperature increases (e.g. outside the range of temperatures PMMA is designed for), it will start to form more ordered crystalline structures. Since PMMA is entirely amorphous, this drop is very sudden. Since PMMA is completely amorphous, it has an extremely high melting point so it doesn't reach the second transition point. Its melting point is much higher than other polymers that the physics behind it is likely going to result in something much different than what the current model we learned predicts. As a result, I have excluded it from the diagram.
+    \section*{Problem Nine}
+    \textbf{(a)} $\boxed{\text{Syndiotactic linear polyvinylchloride}}$ In their mer units, polyvinylchloride has a highly electronegative chloride group, that can form strong secondary hydrogen bonds. In isotactic polystyrene, the benzene functional groups are nonpolar, so the secondary bonds they form (i.e. via london dispersion) are weaker. They are also larger and therefore harder to stack.
+
+    We also need to look at their tacticity. Both isotactic and syndiotactic structures can lead to relatively crystalline structures and allow for uniform regular stacking patterns. Therefore, I believe any effects the tacticity might have is outweighed by the functional group. 
+
+    \textbf{(b)} $\boxed{\text{polyethylene}}$ Let us compare their functional groups first. Polyethylene has a hydrogen as the functional group, allowing it to be very compact. On the other hand, polypropylene has a methyl group, which is larger and makes it harder to be in a close-packing structure. While one may argue that the extra size can cause it to be more polarizable and hence increase the strength of secondary bonds, note that the difference will not be too prominent as they are still highly non-polar.
+
+    In terms of structure, polyethylene can also pack much nicely due to its linear pattern. However, atactic polypropylene has its methyl functional group being on different sides in a random pattern, which prevents uniform structure formations from being created.
+
+    \textbf{(c)} Trick question! Both polymers are made of the exact same chemical compound and have the same structure. This is because in the mer unit, the only functional groups are fluoride. As a result, there are no chiral carbons and orientation does not matter. For example, swapping two fluoride groups results in the exact same thing. 
+\end{document}
+
