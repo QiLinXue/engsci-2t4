@@ -1,0 +1,74 @@
+\section{Rocket Science}
+\begin{itemize}
+    \item The Tsiolkovsky's Rocket Equation says that the change in velocity of the rocket is given by:
+    \begin{equation}
+        \Delta V = I_\text{sp}  \ln \frac{m_i}{m_f}
+    \end{equation}
+    Typically, the needed $\Delta v$ (escape velocity) is around $11\si{\kilo\meter\per\second}$. The specific impulse (for liquid oxygen / kerosene) is typically around $I_\text{sp} = 3.2 \si{\kilo\meter\per\second}$. We can solve for the amount of fuel needed:
+    \begin{equation}
+        \frac{m_i}{m_f} = \exp\left(\frac{11}{3.2}\right) = 31.1 \implies \frac{m_i-m_f}{m_i} = 0.97
+    \end{equation}
+    This means that the mass of the fuel needs to be $97\%$ of the total mass, which is very unrealistic.
+    \item We can define $m_i = A + M_s + M_f$ where $A$ is the payload, $M_s$ is the mass of the rocket structure and $M_f$ is the fuel.
+    \item We can define:
+    \begin{equation}
+        S = \frac{M_s}{M_s+M_f} \approx 0.2
+    \end{equation}
+    be the structure factor, and the rocket mass is:
+    \begin{equation}
+        M_r = M_s + M_\text{fuel}
+    \end{equation}
+    We have:
+    \begin{equation}
+        \frac{m_i}{m_f} = \frac{A+M_r}{A+SM_r}
+    \end{equation}
+    so the change in velocity is:
+    \begin{equation}
+        \Delta v = I_\text{sp} \ln \frac{A+M_r}{A+SM_r}
+    \end{equation}
+    \item If we have three stages, then the total change in velocity is:
+    \begin{equation*}
+        \Delta v_\text{total} = \Delta v_1 + \Delta v_2 + \Delta v_3 = I_\text{sp,1} \ln\left(\frac{A+M_1+M_2+M_3}{A+SM_1+M_2+M_3} \right) + I_\text{sp,2} \ln\left(\frac{A+M_2+M_3}{A+SM_2+M_3} \right)  + I_\text{sp,3} \ln\left(\frac{A+M_3}{A+SM_3} \right) 
+    \end{equation*}
+    \item If we assume the structure factor and specific impulse are the same, then we have:
+    \begin{equation}
+        \Delta v = I_\text{sp} \left[\ln\left(\frac{A+M_1+M_2+M_3}{A+SM_1+M_2+M_3} \right) + \ln\left(\frac{A+M_2+M_3}{A+SM_2+M_3} \right)  + \ln\left(\frac{A+M_3}{A+SM_3} \right)\right]
+    \end{equation}
+    \item \textbf{Given} $A$, $\Delta v$, $I_\text{sp}$, and $S$, we want to \textbf{minimize} $f(M_1, M_2, M_3)=M_1+M_2+M_3$.
+    \item The \textbf{constraint} is given by:
+    \begin{equation}
+        g(M_1, M_2, M_3) = \ln\left(\frac{A+M_1+M_2+M_3}{A+SM_1+M_2+M_3} \right) + \ln\left(\frac{A+M_2+M_3}{A+SM_2+M_3} \right)  + \ln\left(\frac{A+M_3}{A+SM_3} \right)
+    \end{equation}
+    We have $\nabla f = (1,1,1)$, and we can re-write $g$ as:
+    \begin{align*}
+        g = \ln(A+M_1+M_2+M_3)-\ln(A+SM_1 + M_2 + M_3) \\ + \ln(A+M_2+M_3)-\ln(A+SM_2+M_3)+\ln(A+M_3)-\ln(A+SM_3)
+    \end{align*}
+    \item This gives the system of equations:
+    \begin{align}
+        \lambda &= \frac{1}{A+M_1+M_2+M_3} - \frac{S}{A+SM_1+M_2+M_3} \\ 
+        \lambda &= \frac{1}{A+M_1+M_2+M_3} - \frac{1}{A+SM_1+M_2+M_3} \\ 
+        \lambda &= \frac{1}{A+M_1+M_2+M_3} - \frac{1}{A+SM_1+M_2+M_3} + \frac{1}{A+M_2+M_3} - \frac{1}{A+SM_2+M_3} + \frac{1}{A+M_3} - \frac{S}{A+SM_3} \\ 
+        0 &= \frac{1}{A+SM+M_3} - \frac{S}{A+SM_2+M_3} + \frac{S}{A+SM_3} - \frac{1}{A+M_3}
+    \end{align}
+    \item The solution is when:
+    \begin{equation}
+        N \equiv \frac{A+M_3}{A+SM_3} = \frac{A+M_2+M_3}{A+SM_2+M_3} = \frac{A+M_1+M_2+M_3}{A+SM_1+M_2+M_3}
+    \end{equation}
+    and so:
+    \begin{equation}
+        \frac{\Delta v}{I_\text{sp}} = 3\ln N \implies N = e^{\Delta v/3I_\text{sp}}
+    \end{equation}
+    \item Doing a bit of rearranging, we get:
+    \begin{align}
+        M_3 &= A\left(\frac{N-1}{1-SN}\right) \\
+        M_2 &= (A+M_3)\left(\frac{N-1}{1-SN}\right) \\ 
+        M_1 &= (A+M_2+M_3) \left(\frac{N-1}{1-SN}\right) 
+    \end{align}
+    Given $\Delta v= 8\si{\kilo\meter\per\second}$, $S=0.2$, $I_\text{sp} = 3.2\si{\kilo\meter\per\second}$, and $A=10,000\si{\kilo\gram}$, we have $N=2.3$ and the scaling factor is around $\frac{N-1}{1-SN}=2.41$. This gives:
+    \begin{align}
+        M_3 &= 24,100 \si{\kilo\gram} \\ 
+        M_2 &= 82,100 \si{\kilo\gram} \\displaystyle\int_{}^{}
+        M_1 &= 280,000 \si{\kilo\gram}
+    \end{align}
+    and the total mass of the rocket is $386,200\si{\kilo\gram}$.
+\end{itemize}
