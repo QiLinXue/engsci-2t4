@@ -1,0 +1,95 @@
+\section{Thermodynamics}
+\begin{itemize}
+    \item The laws of physics are time symmetric, meaning on \textit{microscopic} scales, it is impossible to tell the difference between an event happening forwards and happening in reverse. However, on a \textit{macroscopic} scale, an ``arrow of time'' exists.
+    \begin{definition}
+        A reaction that proceeds without continued input of energy is spontaneous.
+    \end{definition}
+    \item This definition may create the misconception that exothermic reactions are spontaneous. This is not true, since there is an initial activation energy that is needed to kickstart the reaction, even though it gives off \textit{net} heat. \textit{One reason} is because reactions have multiple steps. Suppose we take the reaction:
+    
+    \begin{equation}
+        \ch{Na_{(s)} + 1/2 Cl_2_{(g)} -> NaCl_{(s)}}
+    \end{equation}
+    which consists of the following steps:
+    \begin{align}
+        \ch{Na_{(s)} &-> Na_{(g)}} & \text{Sublimation: } 2.5\si{\kilo\joule\per\mole}\\ 
+        \ch{Na_{(g)} &-> Na^{+}_{(g)} + e^{-}} & \text{Ionization: } 497 \si{\kilo\joule\per\mole}\\ 
+        \ch{1/2 Cl_2_{(g)} &-> Cl_{(g)}} & \text{Bond Dissociation: } 121 \si{\kilo\joule\per\mole} \\ 
+        \ch{Cl_{(g)} + e^{-} &-> Cl^{-}_{(g)}} & \text{Electron Affinity: } -364 \si{\kilo\joule\per\mole} \\ 
+        \ch{Na^+_{(g)} + Cl^{-}_{(g)} &-> NaCl_{(s)}} & \text{Formation of Crystal: } -717\si{\kilo\joule\per\mole}
+    \end{align}
+    And the total energy released is $-414\si{\kilo\joule\per\mole}$. However, note that endothermic reactions can also be spontaneous. We need to take a look at the second law of thermodynamics.
+    \item During a quasistatic (not sudden) process, the change in entropy is given by:
+    \begin{equation}
+        \Delta S = \frac{Q_\text{rev}}{T}
+    \end{equation}
+    where $Q$ is the transferred energy, and $T$ is the temperature.
+    \item The $\text{rev}$ subscript denotes that the heat transferred is reversible.
+    \item The Second Law of Thermodynamics says that a reaction is spontaneous if and only if:
+    \begin{equation}
+        \Delta S_\text{universe} = \Delta S_\text{system} + \Delta S_\text{surroundings} > 0
+    \end{equation}
+    \item The First Law of Thermodynamics states that in an isolated system, the change in energy of the system is zero (i.e. conserved)
+    \begin{equation}
+        \Delta U_\text{sys} = 0
+    \end{equation} 
+    \item For a closed system (where no matter travels in and out), we have:
+    \begin{equation}
+        \Delta U_\text{sys} = Q + W = 0
+    \end{equation}
+    where $W$ is the work done \textit{on} the system.
+    \begin{warning}
+        For some reason, some papers define $W$ to be the work done by the system, making the equation $U_\text{sys} = Q - W$.
+    \end{warning}
+    \item We will also examine the difference between the change in enthalpy $\Delta H$ against the change in energy $\Delta U$.
+    \item We can define the standard state to be the most stable form of an atom at $25^\circ \text{ C}$ and $1\text{ atm}$.
+    \item Enthalpy only depends on the current conditions; it is a \textbf{state function} (depends only on the current state, not how we get there)
+    \begin{itemize}
+        \item Other state functions are entropy, the Gibbs energy, and the potential energy.
+    \end{itemize}
+    \item We can quantify the enthalpy as: \begin{equation}H = U + PV\end{equation}, which gives the total energy needed to create a system out of nothing (i.e. the energy of the thing and the energy to make room for the thing)
+    \item Alternatively, an equivalent definition of enthalpy is the energy transferred at constant temperature.
+    \item At constant pressure, we have:
+    \begin{equation}
+        \Delta H = \Delta U + P\Delta V
+    \end{equation}
+    \item The first law of thermodynamics can be re-written as:
+    \begin{equation}
+        \Delta H = Q + W_\text{other}
+    \end{equation}
+    % \begin{case}
+    %     Suppose we have the reaction:
+    %     \begin{equation}
+    %         \ch{2 C8H18_{(l)} + 25O_2_{(g)} -> 18 H2O_{(g)} + 16 CO2_{(g)}}
+    %     \end{equation}
+    % \end{case}
+    \item The Gibbs energy is given by:
+    \begin{equation}
+        G = H - TS
+    \end{equation}
+    and at a constant temperature, we have:
+    \begin{equation}
+        \Delta G = \Delta H_\text{system} - T\Delta S_\text{system} =  -T\Delta S_\text{universe}
+    \end{equation}
+    A nice thing about this is that when the Gibbs energy decreases, the entropy of the universe increases. As a result, reactions are spontaneous when $\Delta G < 0$.
+    \item We can plot out $G = -ST + H$ for water at \textit{standard conditions}:
+    \begin{center}
+        \incfig{g-vs-t-standard}
+    \end{center}
+    Here, $S_s < S_p < S_g$ (from smallest slope to largest slope in magnitude, we have solid, liquid, gas). We can interpret the intersection as the shift from one phase being more thermodynamically favourable than another. 
+    \item If the pressure was higher, then the gas line could intersect the solid line before the liquid. This is represented by a larger $S_g$ and appears physically in \textbf{sublimation}.
+    \begin{case}
+        There's two interesting demonstrations we can do with freezing water:
+        \begin{itemize}
+            \item If we put water in a smooth plastic bottle overnight (see \href{https://www.youtube.com/watch?v=ph8xusY3GTM}{link}) at a temperature of around $-7^\circ$, it can remain liquid since there are no nucleation sites, known as a metastable state. In other words, it lacks activation energy to crystallize.
+            \item Sometimes, water which we would expect to freeze is actually slushy at $0^\circ\text{ C}$. The reason for this is because freezing is an exothermic reaction, so while the water freezes, it produces some heat that remelts part of it.
+        \end{itemize}
+    \end{case}
+    \item The change in temperature is related to the heat provided through:
+    \begin{equation}
+        q = nC_p\Delta T
+    \end{equation}
+    or\footnote{The heat capacity is almost always measured at constant pressure. In literature, values of $C_V$ may also be reported which is the heat capacity at constant volume. However, it turns out we need to provide tremendous amounts of pressure to ensure the object stays at constant volume for most things.}:
+    \begin{equation}
+        q = mc\Delta T
+    \end{equation}
+\end{itemize}
