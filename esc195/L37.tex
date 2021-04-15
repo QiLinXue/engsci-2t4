@@ -1,0 +1,109 @@
+\section{Differentiability of an Integral wrt its Parameter}
+\begin{itemize}
+    \item Suppose we wish to examine the integral:
+    \begin{equation}
+        F(x) = \int_c^d f(x,y) \dd{y}
+    \end{equation}
+    \begin{theorem}
+        If, in the closed rectangle $x\in [a,b]$ and $y\in [c,d]$, the function $f(x,y)$ has a continuous derivative with respect to $x$, then for $x\in[a,b]$:
+        \begin{equation}
+            \frac{dF}{dx} = \frac{d}{dx} \int_c^d f(x,y) \dd{y} = \int_c^d \frac{\partial f}{\partial x}\dd{y}
+        \end{equation}
+    \end{theorem}
+    \begin{proof}
+        Given $x$ and $x+h \in [a,b]$, then:
+        \begin{align}
+            \frac{F(x+h)-F(x)}{h} &= \frac{1}{h}\int_c^d f(x+h, y) \dd{y} - \frac{1}{h} \int_c^d f(x,y) \dd{y} \\ 
+            &= \int_c^d \frac{f(x+h,y)-f(x,y)}{h}\dd{y} \\ 
+            \frac{dF}{dx} &= \lim_{h\to 0}\int_c^d \frac{f(x+h,y)-f(x,y)}{h} \dd{y} \\ 
+            &= \int_c^d \lim_{h\to 0} \frac{f(x+h,y)-f(x,y)}{h} \dd{y} \\ 
+            &= \int_c^d \frac{\partial f}{\partial x}\dd{y}
+        \end{align}
+    \end{proof}
+    We can justify switching the integral and the limit is because the integral is essentially a sum, and the limit of a sum is equal to the sum of its limits.
+    \begin{example}
+        Suppose we have $F(x) = \int_2^4 e^{xy} \dd{y}$ and wish to find the derivative. We can do this in two ways. First:
+        \begin{align}
+            \frac{dF}{dx} &= \frac{d}{dx} \left[\frac{e^{xy}}{x}\right]^4_2 \\ 
+            &= \frac{d}{dx} \frac{e^{4x}-e^{2x}}{x} \\ 
+            &= e^{4x} \left(\frac{4x-1}{x^2}\right)-e^{2x} \left(\frac{2x-1}{x^2}\right)
+        \end{align}
+        We can also solve it using the new method:
+        \begin{align}
+            \frac{dF}{dx} &= \int_2^4 \frac{\partial}{\partial x}e^{xy} \dd{y} \\ 
+            &= \int_2^4 ye^{xy} \dd{y} \\ 
+            &= \left[\frac{y}{x}e^{xy}\right]^4_2 - \int_2^4 \frac{e^{xy}}{x}\dd{y} \\ 
+            &= \left[\left(\frac{y}{x}-\frac{1}{x^2}\right)e^{xy}\right]^4_2 \\ 
+            &= e^{4x} \left(\frac{4x-1}{x^2}\right)-e^{2x} \left(\frac{2x-1}{x^2}\right)
+        \end{align}
+    \end{example}
+    \item Let us look at a function in the form of:
+    \begin{equation}
+        A(t) = \int_{x_1(t)}^{x_2(t)} f(x) \dd{x},\quad f(x) \ge 0
+    \end{equation}
+    Note that $f(x) \ge 0$ is not a strict requirement, it just makes visualization easier. wE can define:
+    \begin{equation}
+        \Delta A = A(t+\Delta t) - A(t) = \int_{x_2(t)}^{x_2(t+\Delta t)} f(x) \dd{x} - \int_{x_1(t)}^{x_1(t+\Delta t)} f(x) \dd{x}
+    \end{equation}
+    \begin{theorem}
+        The Mean Value Theorem for Integrals says that:
+        \begin{equation}
+            \int_a^b f(x) \dd{x} = f(x*) (b-a)
+        \end{equation}
+        where $x* \in (a,b)$ or:
+        \begin{equation}
+            \int_z^{z+\Delta z} f(x) \dd{x} = f(z^*) \Delta z
+        \end{equation}
+        where $z* \in (z,z+\Delta z)$.
+    \end{theorem}
+    Using this theorem, we have:
+    \begin{equation}
+        \Delta A = f(x_2^*)\Delta x_2 p f(x_1^*)\Delta x_1
+    \end{equation}
+    where:
+    \begin{align}
+        x_2^* &\in (x_2, x_2 + \Delta x_2) \\ 
+        x_1^* &\in (x_1, x_1 + \Delta x_1) \\ 
+        \Delta x_2 = x_2(t+\Delta t) - x_2(t) \\ 
+        \Delta x_1 &= x_1(t+\Delta t) - x_1(t)
+    \end{align}
+    and:
+    \begin{align}
+        \frac{\Delta A}{\Delta t} = f(x_2&*)\frac{\Delta x_2}{\Delta t} - f(x_1^*) \frac{\Delta x_1}{\Delta t} \\ 
+        \frac{dA}{dt} &= f(x_2)\frac{dx_2}{dt} - f(x_1)\frac{dx_1}{dt}
+    \end{align}
+    This leads us to the next theorem:
+    \begin{theorem}
+        Leibnitz's Rule says that given a region $R$ in the $xy$ plane in which the functions $\phi_1(x)$ and $\phi_2(x)$ have continuous derivatives with respect to $x$, and in which $f(x,y)$ is continuously differentiable. If:
+        \begin{equation}
+            F(x) = \int_{y=\phi_1(x)}^{y=\phi_2(x)} f(x,y) \dd{y}
+        \end{equation}
+        then:
+        \begin{equation}
+            \frac{dF}{dx} = \int_{\phi_1(x)}^{\phi_2(x)} \frac{\partial f}{\partial x}\dd{y} + f(x,y=\phi_2(x))\frac{d\phi_2}{dx} - f(x,y=\phi_1(x))\frac{d\phi_1}{dx}
+        \end{equation}
+        This is illustrated in the following diagram.
+        \begin{center}
+            \incfig{best}
+        \end{center}
+    \end{theorem}
+    \begin{example}
+        As an example, let $F(x) = \int_0^1 \frac{y^x-1}{\ln y} \dd{y}$ for $x > -1$. Then the derivative is:
+        \begin{align}
+            F'(x) &= \frac{d}{dx}\int_0^1 \frac{y^x-1}{\ln y}\dd{y} \\ 
+            &= \int_0^1 \frac{\partial}{\partial x} \left(\frac{y^x-1}{\ln y}\right)\dd{y} \\ 
+            &= \int_0^1 \frac{y^x\ln y}{\ln y}\dd{y} \\ 
+            &= \int_0^1 y^2 \dd{y} \\ 
+            &= \frac{1}{x+1}
+        \end{align}
+        Therefore:
+        \begin{equation}
+            F(x) = \int \frac{\dd{x}}{x+1} = \ln|x+1| + C
+        \end{equation}
+        We also have:
+        \begin{equation}
+            F(0) = \int_0^1 \frac{y^2-1}{\ln y} \dd{y} = \int_0^1 \frac{1-1}{\ln y}\dd{y} = 0 
+        \end{equation}
+        therefore, the constant of integration $C=0$.
+    \end{example}
+\end{itemize}
