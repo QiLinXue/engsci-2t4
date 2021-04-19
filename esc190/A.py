@@ -55,7 +55,6 @@ def greedy(source, dest):
             heapq.heappush(pq, con["node"])
 
         S.append(cur)
-
     return d
 
 print(greedy(C, E)) # {'C': 0, 'B': 1.4, 'A': 2.4}
