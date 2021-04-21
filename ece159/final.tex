@@ -296,9 +296,13 @@ or:
 \begin{equation}
     v = v_t + v_{ss}
 \end{equation}
-Here, $v_t$ is the transient response, and it will die out with time. The steady state response $v_{ss}$ is the behaviour of the circuit a long time after an external excitation is applied. As a result, we can write out the voltage:
+Here, $v_t$ is the transient response, and it will die out with time. The steady state response $v_{ss}$ is the behaviour of the circuit a long time after an external excitation is applied. As a result, we can write out the voltage of a capacitor:
 \begin{equation}
     \boxed{v(t) = v(\infty) + [v(0)-v(\infty)]e^{-t/\tau}}
+\end{equation}
+Taking the derivative and rearranging:
+\begin{equation}
+    i_c(t) = \frac{V_\text{th}-V(t_0)}{R_\text{th}} e^{-t/\tau}
 \end{equation}
 and similarly for an RL circuit:
 \begin{equation}
@@ -355,64 +359,69 @@ In decibel scale, we define:
     H_\text{dB} = 20\log_{10}H
 \end{equation}
 \subsection{Power}
-\subsubsection{Average and Instantaneous Power}
-The instantaneous power is the power at any instant of time:
+\textbf{Notation:} I will use bolded variables to represent complex numbers: The most general power is the \textbf{complex power:}
+\begin{align}
+    \bm{S} &= P + jQ \\
+    &= \bm{V}_\text{rms}\left(\bm{I}_\text{rms}\right)^* \\ 
+    &= V_\text{rms}I_\text{rms} \angle (\theta_v-\theta_i) \\ 
+    &= \frac{1}{2}\bm{V_m}\bm{I_m}^* \\ 
+    &= \bm{Z}I_\text{rms}^2
+\end{align}
+We will define $\theta=\theta_v-\theta_i$. Here, $P$ is the \textbf{real power}:
 \begin{equation}
-    p(t) = i(t)v(t)
+    P = S\cos(\theta_v-\theta_i)
 \end{equation}
-The average power is the average of the instantaneous power over one period:
+and $S=\sqrt{P^2+Q^2}$ is the \textbf{apparent power}. The \textbf{reactive power} is:
 \begin{equation}
-    P = \frac{1}{T} \int_0^T p(t) \dd{t}
+    Q = S\sin(\theta_v-\theta_i)
 \end{equation}
-or:
+\subsubsection{Optimal Power}
+The optimal resistance and reactance of a load such that the maximum power is delivered to it in an AC circuit is given when:
+\begin{align}
+    R_L &= \sqrt{R_\text{th}^2 + (X_\text{th}+X_\text{L})^2} \\ 
+    X_\text{L} &= - X_\text{th}
+\end{align}
+If both these criteria are satisfied, then:
 \begin{equation}
-    P = \frac{1}{2}V_mI_m \cos(\theta_V-\theta_I)
+    P_\text{max} = \frac{|\bm{V}_\text{th}|^2}{8R_\text{eq}}
 \end{equation}
-where $\theta_V-\theta_I$ is the different in phase between voltage and current.
-\begin{idea}
-    A resistive load ($R$) abosrbs power at all times, while a reactive load ($L$ or $C$) absorbs zero average power.
-\end{idea}
-\subsubsection{Maximum Average Power Transfer}
-\begin{theorem}
-    The maximum average power transfer, the load impedance $Z_L$ must be equal to the complex conjugate of the Thevenin impedance $Z_\text{Th}$:
+In general, the average power delivered to the load is
+\begin{equation}
+    P = \frac{1}{2}|\bm{I}|^2 R_L = \frac{|\bm{V}_\text{th}|^2R_L/2}{(R_\text{th}+R_L)^2+(X_\text{Th}+X_L)^2}
+\end{equation}
+\begin{warning}
+    Do not confuse this with the power delivered to a load in a DC circuit:
     \begin{equation}
-        Z_L = Z_\text{th}^*
+        P = \frac{V_\text{th}^2}{4R_\text{th}}
     \end{equation}
-    and when this occurs, we say that the load is matched to the source.
-\end{theorem}
-From this, we can derive that the maximum average power transfer is
+    the reason for the extra factor of $\frac{1}{2}$ in the AC circuit case, is that the power is a sinusoidal wave and we are looking for only the \textit{average power}.
+\end{warning}
+\subsubsection{Power Factor}
+We can define the power factor to be:
 \begin{equation}
-    P_\text{max} = \frac{|V_\text{th}|^2}{8R_\text{th}}
+    \text{pf} = \cos\theta = \cos(\theta_v - \theta_i)
 \end{equation}
-\subsubsection{Apparent and Effective Value}
-The effective value of a periodic current is the DC current that delivers the same average power to a resistor as the periodic current:
+such that:
 \begin{equation}
-    I_\text{eff} = \sqrt{\frac{1}{T}\int_0^T i^2 \dd{t}}
+    P = S \cdot \text{bf}
 \end{equation}
-for an arbitrary periodic function $x(t)$, the effective (or \textbf{root mean square} value) is:
-\begin{equation}
-    X_\text{rms} = \sqrt{\frac{1}{T}\int_0^T x^2 \dd{t}}
-\end{equation}
-\subsubsection{Apparent Power and Power Factor}
-The \textbf{apparent power} $S$ is the product of the RMS values of voltage and current:
-\begin{equation}
-    S = V_\text{rms}I_\text{rms}
-\end{equation}
-The power factor is a dimensionless ratio that gives the ratio of average power to apparent power:
-\begin{equation}
-    \text{pf} = \frac{P}{S} = \cos(\theta_v - \theta_i)
-\end{equation}
-where $\theta_v-\theta_i$ is the \textbf{power factor angle}.
-\subsubsection{Complex Power}
-The complex power is given in the form of:
-\begin{equation}
-    S = P + jQ = V_\text{rms}I_\text{rms} \angle (\theta_v-\theta_i)
-\end{equation}
-where $P = \Re(S) = S\cos(\theta_v-\theta_i)$ is the real power and $Q=\Im(S)=S\sin(\theta_v-\theta_i)$ is the reactive power. The complex power contains \textit{all} relevant power information in a given load.
-\subsubsection{Conservation of AC Power}
-\begin{theorem}
-    The average power is conserved in AC circuits. In fact, all forms of AC power are conserved: Instantaneous, real, reactive, and complex.
-\end{theorem}
+However, note that for each power factor, there are two possible values of $\theta$ that satisfy it. As a result, we define:
+\begin{itemize}
+    \item \textbf{Leading pf:} $\theta<0$
+    \item \textbf{Lagging pf:} $\theta>0$
+\end{itemize}
+Special cases:
+\begin{itemize}
+    \item Resistor: $pf=1$
+    \item Inductor: $pf = 0$ lag
+    \item Capacitor $pf = 0$ lead
+    \item RL: $0<pf<1$ lag
+    \item RC: $0<pf<1$ lead
+    \item RLC: $0<pf<1$ lag or lead. Specifically, it depends on the sign of:
+    \begin{equation}
+        \omega L - \frac{1}{\omega C}
+    \end{equation}
+\end{itemize}
 \subsubsection{Power Factor Correction}
 The process of increasing the power factor without altering the voltage or current to the original load is known as power factor correction. It can be viewed as the addition of a reactive element (usually a capacitor) in parallel with an inductive load in order to make the power factor closer to unity.
 
@@ -422,11 +431,120 @@ The value of the required shunt capacitance $C$ is determine to be:
 \begin{equation}
     C = \frac{P(\tan\theta_1-\tan\theta_2)}{\omega V_\text{rms}^2}
 \end{equation}
-where $\theta_1$ is the initial power factor angle and $\theta_2$ is the final angle. The basic idea is:
+where $\theta_1$ is the initial power factor angle and $\theta_2$ is the final angle. This equation is derived from the following principles.
 \begin{itemize}
-    \item We want the real power $P$ to be the same.
-    \item We want to change the power factor, which depends solely on the power factor angle. As a result, we can only change the imaginary part.
-    \item To do so, we need to figure out how much of the imaginary power do we want to increase/decrease, and then perform phasor math (and using impedances) to figure out the capacitance $C$ necessary to do so.
+    \item We want the real power $P$ to be constant.
+    \item We want to change the power factor, which depends solely on the power factor angle. As a result, we can only change the imaginary part $Q$.
+    \item To do so, we need to figure out how much of the imaginary power do we want to increase/decrease, and then perform phasor math (and using impedances) to figure out the capacitance $C$ necessary to do so. Specifically, if we need to increase the reactance by $Q_C$ to achieve the desired $\text{pf}$, we select the capacitance:
+    \begin{equation}
+        X_c = \frac{V_\text{rms}^2}{Q_c} \quad \text{ or } \quad C = - \frac{Q_c}{\omega V_\text{rms}^2}
+    \end{equation}
 \end{itemize}
+We can draw a power triangle to illustrate this:
+\begin{center}
+    \begin{tikzpicture}
+        \node (O) at (0,0) {};
+        \node (A) at (3,0) {};
+        \node (B') at (3,4){}; 
+        \node (B) at (3,6) {};
+        \node (B2') at (3.1,4){}; 
+        \node (B2) at (3.1,6) {};
+    
+        \draw[thick, ->] (O) -- (B) node[midway,left] {$\bm{S}_\text{old}$};
+        \draw[thick, ->] (O) -- (B') node[midway,right] {$\bm{S}_\text{new}$};
+        \draw[thick, ->] (B2) -- (B2') node[midway,right] {$|\bm{S}_\text{C}|=-Q_c$};
+
+        \draw[thick, dotted] (O) -- (A) node[midway,below] {$P$};
+        \draw[thick, dotted] (A) -- (B) node[midway,right] {$Q_\text{old}$};
+    \end{tikzpicture}
+\end{center}
+From this, note that:
+\begin{equation}
+    \bm{S}_\text{old} + \bm{S}_C = \bm{S}_\text{new}
+\end{equation}
+so we can define (note that we defined $Q_C$ is a negative quantity here):
+\begin{equation}
+    Q_\text{new} = Q_\text{old} + Q_c
+\end{equation}
+which gives:
+\begin{equation}
+    \frac{Q}{P} = \tan \theta_\text{old}
+\end{equation}
+and:
+\begin{equation}
+    \frac{Q_\text{new}}{P} = \tan \theta_\text{new}
+\end{equation}
+To make the power factor unity, we set $Q_C = -Q_L$ where $Q_L$ is the reactance of the load.
+\subsubsection{Apparent and Effective Value}
+The effective value of a periodic current is the DC current that delivers the same average power to a resistor as the periodic current:
+\begin{equation}
+    I_\text{eff} = \sqrt{\frac{1}{T}\int_0^T i^2 \dd{t}}
+\end{equation}
+for an arbitrary periodic function $x(t)$, the effective (or \textbf{root mean square} value) is:
+\begin{equation}
+    X_\text{rms} = \sqrt{\frac{1}{T}\int_0^T x^2 \dd{t}}
+\end{equation}
+We can convert between the rms value and the peak values of a sinusoidal function:
+\begin{equation}
+    V_\text{rms} = \frac{V_m}{\sqrt{2}},\quad I_\text{rms} = \frac{I_m}{\sqrt{2}}
+\end{equation}
+\subsubsection{Random Things when Doing Practice}
+\begin{itemize}
+    \item $|\bm{S}|$ and $|\bm{Z}|$ are scalar multiples of each other. As a result, $\bm{S}$ has the same power factor angle as $\bm{Z}$: $\bm{S}=\bm{Z}I_\text{rms}^2$.
+    \item The angular frequency is not the same as frequency:
+    \begin{equation}
+        \omega = 2\pi f
+    \end{equation}
+\end{itemize}
+This conversion factor also works if we are working with complex voltages.
+% \subsubsection{Average and Instantaneous Power}
+% The instantaneous power is the power at any instant of time:
+% \begin{equation}
+%     p(t) = i(t)v(t)
+% \end{equation}
+% The average power is the average of the instantaneous power over one period:
+% \begin{equation}
+%     P = \frac{1}{T} \int_0^T p(t) \dd{t}
+% \end{equation}
+% or:
+% \begin{equation}
+%     P = \frac{1}{2}V_mI_m \cos(\theta_V-\theta_I)
+% \end{equation}
+% where $\theta_V-\theta_I$ is the different in phase between voltage and current.
+% \begin{idea}
+%     A resistive load ($R$) abosrbs power at all times, while a reactive load ($L$ or $C$) absorbs zero average power.
+% \end{idea}
+% \subsubsection{Maximum Average Power Transfer}
+% \begin{theorem}
+%     The maximum average power transfer, the load impedance $Z_L$ must be equal to the complex conjugate of the Thevenin impedance $Z_\text{Th}$:
+%     \begin{equation}
+%         Z_L = Z_\text{th}^*
+%     \end{equation}
+%     and when this occurs, we say that the load is matched to the source.
+% \end{theorem}
+% From this, we can derive that the maximum average power transfer is
+% \begin{equation}
+%     P_\text{max} = \frac{|V_\text{th}|^2}{8R_\text{th}}
+% \end{equation}
+% \subsubsection{Apparent Power and Power Factor}
+% The \textbf{apparent power} $S$ is the product of the RMS values of voltage and current:
+% \begin{equation}
+%     S = V_\text{rms}I_\text{rms}
+% \end{equation}
+% The power factor is a dimensionless ratio that gives the ratio of average power to apparent power:
+% \begin{equation}
+%     \text{pf} = \frac{P}{S} = \cos(\theta_v - \theta_i)
+% \end{equation}
+% where $\theta_v-\theta_i$ is the \textbf{power factor angle}.
+% \subsubsection{Complex Power}
+% The complex power is given in the form of:
+% \begin{equation}
+%     S = P + jQ = V_\text{rms}I_\text{rms} \angle (\theta_v-\theta_i)
+% \end{equation}
+% where $P = \Re(S) = S\cos(\theta_v-\theta_i)$ is the real power and $Q=\Im(S)=S\sin(\theta_v-\theta_i)$ is the reactive power. The complex power contains \textit{all} relevant power information in a given load.
+% \subsubsection{Conservation of AC Power}
+% \begin{theorem}
+%     The average power is conserved in AC circuits. In fact, all forms of AC power are conserved: Instantaneous, real, reactive, and complex.
+% \end{theorem}
 \end{document}
 
