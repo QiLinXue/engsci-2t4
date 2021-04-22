@@ -1,0 +1,142 @@
+\documentclass{article}
+\usepackage{qilin}
+\hfuzz=1000pt 
+\usepackage{amssymb}
+\hbadness=99999 % we're bad students
+\hfuzz=100pt % wide bois begone
+
+\usepackage{mathtools}
+\usepackage{arydshln}
+
+% \newcommand{\dim}[1]{\mathrm{dim}\,#1}
+
+\title{MAT185 Test 2 Review}
+\author{QiLin Xue}
+\lhead{MAT185}
+\rhead{QiLin Xue}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+    \section{Eigenvectors and Diagonalization}
+    \begin{definition}
+        Let $A$ be an $n\times n$ matrix. A vector $\bff{x}$ is an eigenvector of $A$ if $\bff{x} \neq \bff{0}$ and:
+        \begin{equation}
+            A\bff{x} = \lambda\bff{x}
+        \end{equation}
+        for some scalar $\lambda$, known as the \textbf{eigenvalue} of $A$ corresponding to $\bff{x}$. For a given eigenvalue $\lambda$, the \textbf{eigenspace} of $A$ corresponding to eigenvalue $\lambda$ is:
+        \begin{equation}
+            E_\lambda(A) = \{\bff{x} \in {^n}\mathbb{R} | A\bff{x} = \lambda \bff{x}\}
+        \end{equation}
+    \end{definition}
+    Note that we also have:
+    \begin{equation}
+        E_\lambda(A) = \nulll(\lambda I - A)
+    \end{equation}
+    It can be helpful to think about eigenvectors geometrically. If we interpret multiplying vectors by $A$ as a linear transformation, then the eigenvectors are vectors that undergo only a stretching under $A$. 
+    
+    Let $A$ be an $n\times n$ matrix. The following statements are equivalent:
+    \begin{align*}
+        \lambda\text{ is an eigenvalue of } A &\iff A\bff{x} = \lambda \bff{x}\text{ for some } \bff{x} \in {^n}\mathbb{R} \\ 
+        &\iff (\lambda I - A)\bff{x} = \bff{0} \text{ has infinitely many solutions} \\ 
+        &\iff \dim\nulll (\lambda I - A) \neq 0 \\ 
+        &\iff \lambda I - A \text{ is not invertible.}
+    \end{align*}
+    \begin{proposition}
+        Let $\lambda$ and $\mu$ be distinct eigenvalues of $\bff{A} \in {^n}\mathbb{R}^n$. Then:
+        \begin{equation}
+            E_\lambda \cap E_\mu = \{\bff{0}\}
+        \end{equation}
+    \end{proposition}
+    \begin{definition}
+        Let $A$ be an $n\times n$ matrix. The \textbf{characteristic polynomial} of $A$ is:
+        \begin{equation}
+            p_A(\lambda) = \det(\lambda I - A)
+        \end{equation}
+        The eigenvalues are the solutions to $p_A(\lambda)=0$.
+    \end{definition}
+    \begin{theorem}
+        Let $A$ be an $n\times n$ matrix. The characteristic polynomial of $A$ has the form:
+        \begin{equation}
+            p_A(\lambda) = \lambda^n + c_{n-1}\lambda^{n-1} + c_{n-2}\lambda^{n-2} + \cdots + c_1\lambda + c_0
+        \end{equation}
+        where $c_{n-1} = -\tr A$ and $c_0 = (-1)^n \det A$. Recall that the trace is the sum of the main diagonal.
+    \end{theorem}
+    \begin{definition}
+        The matrix $\bff{P} \in {^n}\mathbb{R}^n$ is said to diagonalize $\bff{A} \in {^n}\mathbb{R}^n$ if $\bff{P}$ is invertible such that:
+        \begin{equation}
+            \bff{P}^{-1}\bff{A}\bff{P} = \bff{\Lambda}
+        \end{equation}
+        where $\bff{\Lambda} = \diag\{\lambda_\alpha\}$ is the diagonal matrix of the eigenvalues of $\bff{A}$.
+    \end{definition}
+    \begin{theorem}
+        The matrix $\bff{P} \in {^n}\mathbb{R}^n$ diagonalizes $\bff{A} \in {^n}\mathbb{R}^n$ where:
+        \begin{equation}
+            \bff{P}^{-1}\bff{A}\bff{P} = \bff{\Lambda} = \begin{bmatrix}
+                \lambda_1 & \cdots & 0 \\ 
+                \vdots & \ddots & \vdots \\ 
+                0 & \cdots & \lambda_n
+            \end{bmatrix}
+        \end{equation}
+        if and only if the columns of $\bff{P}$ form a basis for ${^n}\mathbb{R}$ consisting of the eigenvectors $\bff{p}_\alpha$ of $\bff{A}$ where $\bff{A}\bff{p}_\alpha = \lambda_\alpha \bff{p}_\alpha$.
+    \end{theorem}
+    The corollary is that the matrix $\bff{A}\in{^n}\mathbb{R}^n$ is diagonalizable if and only if ${^n}\mathbb{R}$ has a basis consisting of eigenvectors of $\bff{A}$.
+    \begin{proposition}
+        Let $\bff{A} \in {^n}\mathbb{R}^n$ and let $\bff{T} \in {^n}\mathbb{R}^n$ be invertible. Then the characteristic polynomials of $\bff{A}$ and of $\bff{T}^{-1}\bff{A}\bff{T}$ are identical and so the eigenvalues of the two matrices are identical.
+    \end{proposition}
+    \begin{theorem}
+        Let $\bff{P} \in {^n}\mathbb{R}^n$ diagonalize $\bff{A} \in {^n}\mathbb{R}^n$ and let $\lambda_1 \cdots \lambda_n$ be the eigenvalues of $\bff{A}$. Then:
+        \begin{enumerate}[label=(\alph*)]
+            \item $c_\bff{A}(\lambda) = c_\Lambda(\lambda) = (\lambda-\lambda_1)(\lambda-\lambda_2)\cdots$
+            \item $\det \bff{A} = \det \bff{\Lambda} = \lambda_1\lambda_2\cdots\lambda_n$.
+            \item $\tr\bff{A} = \tr \Lambda = \lambda_1+\lambda_2+\cdots +\lambda_n$.
+        \end{enumerate}
+    \end{theorem}
+    Not all matrices are diagonalizable.
+    \begin{theorem}
+        Let $\bff{A}\in{^n}\mathbb{R}^n$ with distinct eigenvalues $\lambda_1\cdots\lambda_r$, $r\le n$. If $\bff{x}_\alpha \in E_{\lambda_\alpha} \backslash \{\bff{0}\},\alpha=1\cdots r$, then $\{\bff{x}_1,\bff{x}_2,\cdots,\bff{x}_r\}$ is linearly independent.
+    \end{theorem}
+    \begin{theorem}
+        If $\bff{A} \in {^n}\mathbb{R}^n$ has $n$ distinct eigenvalues, then $\bff{A}$ is diagonalizable.
+    \end{theorem}
+    \begin{theorem}
+        Let $\bff{A} \in {^n}\mathbb{R}^n$ with distinct eigenvalues $\lambda_1\cdots\lambda_r$, $r\le n$. If $\bff{x}_\alpha \in E_{\lambda_\alpha}$ and
+        \begin{equation}
+            \bff{x}_1+\bff{x}_2+\cdots+\bff{x}_r=\bff{0}
+        \end{equation}
+        then:
+        \begin{equation}
+            \bff{x}_\alpha = \bff{0},\quad /\alpha=1\cdots r
+        \end{equation}
+    \end{theorem}
+    \begin{theorem}
+        Let $\bff{A} \in {^n}\mathbb{R}^n$ with distinct eigenvalues $\lambda_1\cdots\lambda_r$, $r\le n$. If $H_{\lambda_\alpha}$ is a linearly independent set in $E_{\lambda_\alpha}$, then:
+        \begin{equation}
+            H = H_{\lambda_1} \cup H_{\lambda_2} \cup \cdots \cup H_{\lambda_r} \equiv \bigcup_{\alpha=1}^{r}H_{\lambda_\alpha}
+        \end{equation}
+        is linearly independent and:
+        \begin{equation}
+            m_1+m_2+\cdots+m_r \le n
+        \end{equation}
+        where $m_\alpha = \dim E_{\lambda_\alpha}$.
+    \end{theorem}
+    \begin{definition}
+        Let $\bff{A} \in {^n}\mathbb{R}^n$ with eigenvalues $\lambda_\alpha$. The highest power $n_\alpha$ of $\lambda-\lambda_\alpha$ that divides the characteristic polynomial $p(\lambda)$ such that $p(\lambda) = (\lambda-\lambda_\alpha)^{n_\alpha}g(\lambda)$ is the algebraic multiplicity of $\lambda_\alpha$. The dimension $m_\alpha$ of $E_{\lambda_\alpha}$ is the geometric multiplicity of $\lambda_\alpha$.
+    \end{definition}
+    \begin{proposition}
+        Let:
+        \begin{equation}
+            \bff{A} = \begin{bmatrix}
+                \bff{1} & \bff{B} \\ 
+                \bff{O} & \bff{C}
+            \end{bmatrix} \in {^n}\mathbb{R}^n
+        \end{equation}
+        where $\bff{B}\in {^r}\mathbb{R}^{n-r}$, $\bff{C} \in {^{n-r}}\mathbb{R}^{n-r}$, and $\bff{1}\in{^r}\mathbb{R}^n$ is the $r\times r$ identity matrix. Then: $\det \bff{A} = \det \bff{C}$.
+    \end{proposition}
+    \begin{theorem}
+        \textbf{Multiplicity Theorem:} Let $\lambda_\alpha$ be an eigenvalue of $\bff{A} \in {^n}\mathbb{R}^n$. Then $1\le m_\alpha \le n_\alpha$, where $m_\alpha$ and $n_\alpha$ are respectively, the geometric and algebraic multiplicities of $\lambda_\alpha$. In particular, if $n_\alpha = 1$, then $m_\alpha = n_\alpha = 1$.
+    \end{theorem}
+    \begin{theorem}
+        \textbf{Diagonalization Test:} Let $\bff{A} \in {^n}\mathbb{R}^n$ with distinct eigenvalues $\lambda_\alpha, \alpha=1\cdots r$. Then, $\bff{A}$ is diagonalizable if and only if $m_\alpha = n_\alpha$, $\alpha=1\cdots R$, i.e. the geometric and algebraic multiplicities of each eigenvalue are equal.
+    \end{theorem}
+\end{document}
