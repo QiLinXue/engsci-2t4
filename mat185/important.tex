@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage{qilin}
+\hfuzz=1000pt 
+\usepackage{amssymb}
+\hbadness=99999 % we're bad students
+\hfuzz=100pt % wide bois begone
+
+\usepackage{mathtools}
+\usepackage{arydshln}
+
+% \newcommand{\dim}[1]{\mathrm{dim}\,#1}
+
+\title{Important Things}
+\author{QiLin Xue}
+\lhead{MAT185}
+\rhead{QiLin Xue}
+
+\renewcommand{\qedsymbol}{\includegraphics[height=2ex]{medici.png}}
+
+\begin{document}
+    \maketitle
+    \section{Method of Nathan}
+    The row space is orthogonal to the null space, so for a $2\times 2$ matrix:
+    \begin{equation}
+        A = \begin{bmatrix}
+            a & b \\ 
+            c &d
+        \end{bmatrix}
+    \end{equation}
+    and if the nullity is $1$, then the null space is:
+    \begin{equation}
+        \text{span } \left\{\begin{bmatrix}
+            -b \\ a
+        \end{bmatrix}\right\}
+    \end{equation}
+    since:
+    \begin{equation}
+        \begin{bmatrix}
+            a & b
+        \end{bmatrix}\begin{bmatrix}
+            -b \\ a
+        \end{bmatrix} = \vec{0}
+    \end{equation}
+    \section{Eigenvalues}
+    \begin{itemize}
+        \item If $A$ has eigenvalue $\lambda$, then $A^k$ has eigenvalue $\lambda^k$.
+        \item $A$ is noninvertible if and only if at least one of its eigenvalues are zero. 
+        \item The geometric multiplicity $m_{\lambda_1}$ is equal to:
+        \begin{equation}
+            m = \dim\nulll(B-\lambda_1I) = n- \rank(B-\lambda_1 I)
+        \end{equation}
+        \item For a $n\times n$ matrix, the algebraic multiplicities sum up to $n$:
+        \begin{equation}
+            n_1+n_2+\cdots = n
+        \end{equation}
+        and for geometric multiplicities, it is \textit{bounded} by $n$
+        \begin{equation}
+            m_1+m_2+\cdots \le n
+        \end{equation}
+        \item Geometric multiplicities are smaller or equal to the algebraic multiplicites:
+        \begin{equation}
+            1 \le m_i \le n_i
+        \end{equation}
+        \item The trace of a matrix is the sum of its eigenvalues. (Medici)
+    \end{itemize}
+    \section{Diagonalization}
+    \begin{itemize}
+        \item If $A$ is diagonalizable, it can be written as $A=PDP^{-1}$ and:
+        \begin{equation}
+            A^k = PD^kP^{-1}
+        \end{equation}
+        \item If $D$ is a diagonal matrix, then we can calculate $D^k$ by taking each element to the power of $k$. 
+        \item In general, if $D_1$ and $D_2$ are diagonal matrices, $D_1D_2 = D_2D_1$ where each element is the element-wise product of the two.
+        \item If $D$ is a diagonal, then $AD$ is equivalent to scaling the columns of $A$ by the elements of $D$. Similarly, $DA$ scales the rows of $A$ be the elements of $D$.
+        \item A matrix $A$ is diagonalizable if the eigenvectors of $A$ form a basis for ${^n}\mathbb{R}$.
+        \item The eigenvectors of a diagonal matrix are the standard basis.
+        \item If two matrices have the same eigenvalues with the same linearly independent eigenvectors, then they are equal.
+
+    \end{itemize}
+    \section{Important Matrices}
+    Try these $2\times 2$ matrices when looking for counterexamples:
+    \begin{itemize}
+        \item Nilpotent Matrix: $\begin{bmatrix}
+            0&1\\0&0
+        \end{bmatrix}$
+        \item Rotation matrix $\begin{bmatrix}
+            0 & -1 \\ 
+            1 & 0
+        \end{bmatrix}$
+    \end{itemize}
+\end{document}
