@@ -19,6 +19,20 @@
 
 \begin{document}
     \maketitle
+    \section{Analogy of Nathan}
+    Let $E=\{\bm{e}_1,\dots,\bm{e}_n\}$ be the standard basis for ${^n}\mathbb{R}$ and let $F = \{\bm{f}_1,\dots,\bm{f}_n\}$ be another basis for ${^n}\mathbb{R}$. Then $\bm{Q}$ is the transformation matrix from $F$ to $E$ if and only if $\bm{Q} = \begin{bmatrix}
+        \bm{f}_1 & \bm{f}_2 & \cdots & \bm{f}_n 
+    \end{bmatrix}$.
+    
+    This might sounds confusing since $Q$ converts the standard basis $e_j$ to the other basis $f_j$ as
+    \begin{equation}
+        \bm{f}_j=\bm{Q}\bm{e}_j,
+    \end{equation}
+    but it takes a vector written in $F$ and converts it to a vector written in the standard basis $E$. Why is this the case?
+
+    We invoke the \textbf{Analogy of Nathan},\footnote{Yes, that Nathan.} where we look at using a ruler to measure a distance. Suppose the standard unit of measurement is the foot (i.e. the standard basis), and we want to convert it to another unit of measurement, the inch (i.e. the other basis), then the conversion factor (i.e. transformation matrix) would be $\frac{1}{12}$. The basis is getting smaller, so the final number we report (i.e. the coordinate in the other basis) would be larger, specifically by a factor of $12$.
+
+    In short, decreasing the size of the basis \textit{increases} the actual number we report at the end. As a result, if we want to convert a vector written in the $E$ basis to the $F$ basis, we need to multiply the coordinate of that vector by the inverse of the transformation matrix.
     \section{Method of Nathan}
     The row space is orthogonal to the null space, so for a $2\times 2$ matrix:
     \begin{equation}
@@ -74,7 +88,7 @@
         \item If $D$ is a diagonal, then $AD$ is equivalent to scaling the columns of $A$ by the elements of $D$. Similarly, $DA$ scales the rows of $A$ be the elements of $D$.
         \item A matrix $A$ is diagonalizable if the eigenvectors of $A$ form a basis for ${^n}\mathbb{R}$.
         \item The eigenvectors of a diagonal matrix are the standard basis.
-        \item If two matrices have the same eigenvalues with the same linearly independent eigenvectors, then they are equal.
+        \item If two matrices have the same eigenvalues with $n$ linearly independent eigenvectors, then they are equal.
 
     \end{itemize}
     \section{Important Matrices}
