@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage{report}
+\title{MSE160 Potential Report Outline}
+\author{QiLin Xue}
+\date{$\pi$.2021}
+\lhead{MSE160}
+\rhead{QiLin Xue}
+\hfuzz=100pt 
+
+% \usepackage{natbib}
+% \def\bibsection{\section*{\refname}} 
+% \bibliographystyle{unsrtnat}
+\usepackage[sorting=none]{biblatex}
+
+\addbibresource{p1.bib}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+    \newpage
+    \section{Dope Diamonds}
+    \subsection*{Personal Position (to the grader, not intended for report)}
+    In the summer, I will be participating in a research position at the National University of Singapore where we will be investigating this phenomenon. As it is a materials science field, picking this option would allow me to prepare for my research as well.
+    \subsection{Why Diamonds are Useful}
+    Diamonds are consisted of carbon atoms arranged in a diamond cubic structure, with $sp^3$ bonds. In this section, I will give an overview of how properties of diamond makes it a great candidate as a semiconductor for use in integrated optical circuits. This is an emerging area in quantum computing, where the mathematical theory has been worked out, but finding the right material is challenging as we want to minimize \textit{decoherence} effects.\footnote{This is a quantum mechanical phenomenon, one that I cannot do justice to. The important thing is that decoherence causes a loss of information.} Diamond makes for a great choice because\cite{test}:
+    \begin{enumerate}
+        \item Diamond has very little impurities, which are sources of decoherence.
+        \item Diamonds has a large band gap, which results in low electron concentrations.
+        \item Diamonds do not experience a lot of phonon scattering, due to the lack of point defects.\cite{phonon}\footnote{The process behind phonon scattering is complex, and not something I understand. In the actual report, I may have to skip the details and focus on the bigger picture.} 
+        
+        \item Diamonds can be doped to alter electrical properties. More on this in the next section.
+    \end{enumerate}
+    \subsection{Doping NV Centers}
+    A color center is a point defect where an anion is replaced by unpaired electrons. The $NV^{-1}$ is an extremely promising color center, consisting of a Nitrogen atom substituting for a carbon, and a vacancy filled by one extra electron. It turns out these centers are great at maintaining coherence, and the challenge becomes being able to reliable create these centers. There are two main methods:
+    \begin{itemize}
+        \item Annealing can cause vacancies to migrate to \textit{existing} nitrogen sites to form $NV^{-1}$ centers.
+
+        However, this method can cause residual damage (i.e. creating other defects).
+        \item Nitrogen ions can be directly implanted, and then annealed.
+        
+        In this method, existing nitrogen sites need to be very few, as they can be converted into an $NV$ center, instead of an $NV^{-1}$ center.
+        \cite{test}
+    \end{itemize}
+    I want to break this section into two parts, based off of the bullet points above and go into detail how these processes work, from a material science standpoint.
+    \section{Other Potential Areas}
+    I want to end off with some breadth, by briefly covering other methods of doping, such as using silicon centers instead, and/or using chemical vapor deposition.\cite{bettiol}
+
+    \newpage
+    \section{Nike Vaporflys}
+    \subsection{Introduction}
+    In recent years, Nike has developed a special type of shoe that has revolutionized the world of long-distance running with records for the half and full marathon immediately being set once they were released, leading to very controversial debates. However, this report will focus on the two main changes Nike added: the use of Polyether block amide foam (which NASA refers to as ZoomX) for the midsole.\cite{Hoogkamer2017}
+    \subsection{Polyether Block Amide}
+    In this section, I will describe in detail how the polymer is made, its structure, and introduce a concept known as $PA/PE$, which represents the mass ratio of the polyamide and the polyether structural units. Materials are generally classified in three categories: $PA/PE < 1$, $PA/PE \sim 1$, and $PA/PE > 1$. Due to how the polymer is created, this ratio can be easily adjusted during manufacturing to obtain desirable mechanical properties.\cite{Eustache2006}
+    \subsection{ZoomX}
+    While comfort is an important element, foam plays an important aspect in competitive running as it is able to store elastic energy during impact, and release it back into the kinetic energy of the runner. There are three major criteria for foam\cite{Hoogkamer2017}:
+    \begin{itemize}
+        \item Resilience (how much mechanical energy it can return)
+        \item Compliance (how easy is it to distort)
+        \item Weight
+    \end{itemize}
+    I will show how the polymer structure can affect all of these factors, with the help of stress-strain curves produced for various $PA/PE$ values in the laboratory.
+    \subsection{Comparison}
+    Finally, I will end off with a comparison to previous generation Nike shoes and why ZoomX is so special. Specifically, I will compare it to ethylene-vinyl acetate, an extremely popular material used in foam prior to the Vaporfly.\cite{Hoogkamer2017} Unfortunately, a lot of the research that Nike is behind closed doors, so I do not know how realistic a comparison would be, given that both are exceptional materials with very similar properties.
+
+    \subsection{Additional Advantages}
+    The Vaporfly is also waterproof. This is partially due to the help of introducing polyethylene glycol as structural units.\cite{Yen1997} In this section, I will explore how these structural units allow water vapour to pass through, but not water and other gases.
+
+    \newpage
+    \section{Pyrolytic Carbon}
+    Pyrolytic carbon is the trademark of classic physics demonstrations: It levitates (and stably!) over permanent magnets. The aim of this report will be to investigate this phenomenon (from a materials science perspective) by examining the microstructural components of what it is made of.
+    \subsection{Structure}
+    Pyrolytic carbon has an turbostratic structure, where the structural order is right between amorphous and crystalline. It is made of carbon atoms arranged in hexagonal lattices that are stacked, similar to graphite, but the layers are disordered.\cite{azom}
+    \subsection{How it's Made}
+    The term ``pyrolytic'' describes the process in which this material is made, known as pyrolysis. This describes the thermal decomposition of hydrocarbons without the presence of oxygen.\cite{pyro}
+    \subsection{Levitation}
+    Pyrolytic carbon is an extremely diamagnetic material. It is repelled by any magnetic field, and it does so the strongest out of any other material at room temperature!\cite{dia} One major contributing factor to this is the large crystal sizes. According to classical models of diamagnetism, the degree\footnote{This is Paul Langevin's theory of diamagnetism. Hence this is not a physics course, I will keep this short and to the point} at which an object can levitate is proportional to $r^2$ where $r$ is the average distance of electrons from the nucleus. Because of the larger crystal size, bond lengths are longer on average and thus $r$ increases.
+
+    \subsection{Anisotropic Properties}
+    Because of its turbostratic structure, it exhibits several anisotropic properties such as friction\cite{XIAO201353}, thermal conduction\cite{WANG2018476}, and reaction kinetics\cite{Horton1970}, which all vary significantly depending on the orientation. While these are all really interesting phenomenons, I will talk about the general picture and show why, given its structure, that we should \textit{expect} there to be anisotropic properties in the first place.
+
+    \newpage
+    \printbibliography
+
+
+\end{document}
+

@@ -6,14 +6,15 @@
 /esc190/labs/
 /esc190/midterm2020/
 /esc190/midterms/
-/mse160/report_outline.*
-/mse160/*.bib
-/mse160/report.sty
 
 /putnam
 *.mp4
 /mse160/psets/pset3.*
 /mse160/psets/figures/*
+
+## Ask me if you want to see my handbook
+/esc102/handbook/*
+/esc102/handbook.*
 
 tasks.json
 launch.json
