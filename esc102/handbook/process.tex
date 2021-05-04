@@ -1,0 +1,93 @@
+\section{Engineering Design Process}
+\frame[allowframebreaks]{\frametitle{Engineering Design Process}
+
+    \tikzstyle{decision} = [rectangle, draw, fill=red!20, 
+    text width=5em, text centered, rounded corners, minimum height=2em]
+    
+    \tikzstyle{major} = [rectangle, draw=yellow!90, thick, fill=yellow!20, 
+    text width=5.5em, text centered, rounded corners, minimum height=2em]
+    \tikzstyle{sub} = [rectangle, fill=red!20, 
+    text width=5em, text centered, rounded corners, minimum height=2em]
+
+    \tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5.5em, text centered, minimum height=2em]
+    \tikzstyle{line} = [draw, -latex', thick]
+    \tikzstyle{O} = [draw, -latex', thick]
+
+    \begin{center}
+        \begin{tikzpicture}[node distance = 3cm, auto, scale=0.5]
+            
+            % STAKEHOLDERS
+            \node [major] (Framing) {Framing};
+            \node [major, right of = Framing] (Diverging) {Diverging};
+            \node [major, right of = Diverging] (Converging) {Converging};
+            \node [major, right of = Converging] (Representing) {Representing};
+
+            \node [block, below of = Framing, node distance = 1.2cm, xshift=0.9cm, text width=10em] (Requirements) {\small Develop \\ Requirements Model};
+
+            \node [block, right of = Requirements, node distance = 3cm, yshift=-1.2cm, text width=10em] (Iteration) {\small Perform \\ Iterative Design};
+
+            \node [block, right of = Iteration, node distance = 3cm, yshift=-1.2cm, text width=8em] (Testing) {\small Execute \\ Rigorous Tests};
+
+            \node [block, right of = Testing, node distance = 2.2cm, yshift=-1.2cm, text width=6em] (Present) {\small Present to \\ Other People};
+
+            \node [sub, below of = Requirements, node distance = 5cm, xshift=-3em] (Bias) {Identify Bias}; 
+            \node [sub, right of = Bias, node distance = 2.7cm] (Research) {Research Informed}; 
+            \node [sub, right of = Research, node distance = 2.7cm] (Tools) {Brainstorm Ideas}; 
+            \node [sub, right of = Tools, node distance = 2.7cm] (Prototype) {Proto typing}; 
+
+            \path [line, blue] (Requirements) |- (Iteration);
+            \path [line, blue] (Iteration) |- (Testing);
+            \path [line, blue] (Testing) |- (Present);
+
+            \path [line, red] (Iteration) |- (Requirements);
+            \path [line, red] (Testing) |- (Iteration);
+            \path [line, red] (Present) |- (Testing);
+
+            \path [line, dotted] (Bias) -- (Requirements);
+            \path [line, dotted] (Research) -- (Requirements);
+
+            \path [line, dotted] (Bias) --       (Iteration);
+            \path [line, dotted] (Research) --   (Iteration);
+            \path [line, dotted] (Tools) --      (Iteration);
+            \path [line, dotted] (Prototype) --  (Iteration);
+
+            \path [line, dotted] (Bias) --       (Testing);
+            \path [line, dotted] (Research) --   (Testing);
+            \path [line, dotted] (Prototype) --  (Testing);
+
+            \path [line, dotted] (Research) --   (Present);
+            \path [line, dotted] (Prototype) --  (Present);
+        \end{tikzpicture}
+    \end{center}
+    \newpage
+    This is a high level overview of my engineering design process. Everything I do can be loosely categorized using the modified \textbf{FDCR} process:
+    \begin{itemize}
+        \item \textbf{Framing:} What are the requirements? How can we conduct quality research?
+        \item \textbf{Diverging:} What are some effective ways to brainstorm ideas? 
+        \item \textbf{Converging:} How can we build prototypes, test, narrow down our set of ideas, and re-diverge?
+        \item \textbf{Representing:} How can we present our ideas to other people in an effective manner?
+    \end{itemize}
+    In the above flowchart, note that I frequently move back and forth between the stages. 
+    \vspace{2mm}
+
+    The red boxes at the bottom represent the main engineering themes that will be present throughout each part of the process.
+    \newpage
+    I approach each stage from a different position:
+    \begin{itemize}
+        \item When developing a \textbf{requirements model}, I approach it from the position of an educator. One of the most important things in teaching is recognizing and addressing hidden assumptions, and that is exactly what I ask myself here:
+        \begin{itemize}
+            \item What assumptions am I making? When are they valid? How can I rigorously justify them?
+        \end{itemize}
+        This is often the most difficult part of physics problems, and also the hardest part about design. Being able to recognize my own biases and ensuring everything in the framing process is well justified is hard, but critical for success.
+        \item When I perform \textbf{iterative design} and performing \textbf{rigorous tests}, I do some from the perspective of an engineering student. What tools can I use to get more designs? How should I compare these two designs? I am still learning, so I try to use a variety of new tools for each project.
+        \item When \textbf{presenting} to other people, I again approach this from the perspective of an educator. I ask myself:
+        \begin{itemize}
+            \item How would I present the design to a young student? What about someone my age? What about an industry leader?
+        \end{itemize}
+        This sort of questioning allows me to holistically evaluate how confident I am that the design meets the requirements.
+        \begin{example}
+            After I was done the first stage of my aerodynamics project at UofT's \textbf{rocketry team}, I wanted to ensure I could defend my design. I gave a presentation to two groups: one to other people working in the aerodynamics subdivision of the team, and one at a general meeting. Being able to present the design to people who may not be familiar with aerodynamics forced me to make sure I wasn’t hiding behind jargon and presenting it to very knowledgeable people gave me valuable feedback that I am currently taking and improving on the design.
+        \end{example}
+    \end{itemize}
+}
