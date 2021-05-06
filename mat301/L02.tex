@@ -1,0 +1,321 @@
+\section{Lecture Two}
+\begin{itemize}
+    \item Let $X$ be a set with some \textbf{structures}. Then a symmetry of $X$ (w.r.t. the structures) is a bijection $\sigma:X\mapsto X$, such that $\sigma$ and $\sigma^{-1}$ preserve the structures.
+    \item The set of symmetries of $X$ is denoted as $\Sym(X)$.
+    \begin{example}
+        We can consider a square not only with the structure of its distance function but with additional structure of its orientations. There are two orientations of a square:
+        \begin{center}
+            \begin{tikzpicture}
+                \begin{scope}[thick, decoration={
+                    markings,
+                    mark=at position 0.5 with {\arrow{>}}}
+                    ] 
+                    \draw[postaction={decorate}] (0,0)--(0,2);
+                    \draw[postaction={decorate}] (0,2)--(2,2);
+                    \draw[postaction={decorate}] (2,2)--(2,0);
+                    \draw[postaction={decorate}] (2,0)--(0,0);
+                \end{scope}
+
+                \begin{scope}[thick, decoration={
+                    markings,
+                    mark=at position 0.5 with {\arrow{<}},
+                    }, xshift=4cm
+                    ] 
+                    \draw[postaction={decorate}] (0,0)--(0,2);
+                    \draw[postaction={decorate}] (0,2)--(2,2);
+                    \draw[postaction={decorate}] (2,2)--(2,0);
+                    \draw[postaction={decorate}] (2,0)--(0,0);
+                \end{scope}
+            \end{tikzpicture}
+        \end{center}
+        A symmetry of the square with respect to its orientation is a bijection from the square to itself that maps each orientation to itself.
+        \begin{itemize}
+            \item Rotations preserve orientations, but reflections don't.
+        \end{itemize}
+        Therefore, the symmetries preserving orientations are $\{I, R_1, R_2, R_3\}$.
+    \end{example}
+    \item In general:
+    \begin{enumerate}
+        \setcounter{enumi}{-1}
+        \item If $\sigma_1$, $\sigma_2$:$X\rightarrow X$ are symmetries, then:
+        \begin{equation}
+            \sigma_1 \circ \sigma_2:X\rightarrow X
+        \end{equation}
+        is also a symmetry. Consequently, composition of symmetries restrict a map:
+        \begin{equation}
+            \Sym(X) \times \Sym(X) \mapsto \Sym(X),\,\quad (\sigma_1,\sigma_2) \mapsto \sigma_1 \circ \sigma_2
+        \end{equation}
+        \textit{Remarks:} A map $m:S\times S \rightarrow S$ is called a binary operation on $S$.
+        \item Associativity: For all $\sigma_1,\sigma_2,\sigma_3 \in \Sym(X)$, we have:
+        \begin{equation}
+        (\sigma_1\circ\sigma_2)\circ\sigma_3 = \sigma_1 \circ (\sigma_2\circ \sigma_3)
+        \end{equation}
+        \item The identity $\text{id}: X\mapsto X$ is a symmetry and $\text{id} \in \Sym(X)$.
+        \item Immediately from the ``definition,'' we have: $\sigma \in \Sym(X) \implies \sigma^{-1} \in \Sym(X)$
+    \end{enumerate}
+    \item The notion of a group is an abstraction of $\Sym(X)$ and its properties.
+    \begin{definition}
+        A group is an ordered pair $(G,*)$ consisting of a set $G$ and a binary operation $*:G\times G \rightarrow G$ such that:
+        \begin{enumerate}
+            \setcounter{enumi}{0}
+            \item $*$ is associative, $\forall g_1,g_2,g_3 \in G$, we have:
+            \begin{equation}
+                (g_1 * g_2)*g_3 = g_1*(g_2*g_3)
+            \end{equation}
+            \item There exists an element $e \in G$ such that for all $g\in G$, we have $g*e=g=e*g$.
+            \item For all $g\in G$, there exists an element $h\in G$ such that $g\star h = e = h\star g$.
+        \end{enumerate}
+        These numberings are abstractions of the properties listed above.
+    \end{definition}
+    \item The binary operator $*$ is called the \textbf{group law} or \textbf{group operation}. It is often denoted by a dot $\cdot$ or by juxtaposition ($gh$ instead of $g*h$).
+    \item The \textit{cardinality} of $G$, $|G|$, is called the \textbf{order} of $G$.
+    \item It is common to denote $e$ by $1$ or $I$.
+    \begin{warning}
+        A common \textit{misconceptions} is saying ``$G$ is a group'' instead of ``$(G,*)$ is a group.'' 
+    \end{warning}
+    \item These are equivalent statements:
+    \begin{align}
+        & (G,*) \text{ is a group} \\ 
+        \iff & G \text{ is a group under }*
+    \end{align}
+    \begin{definition}
+        A group $(G,*)$ is \textbf{abelian} (or commutative) if for all $g,h \in G$, we have:
+        \begin{equation}
+            g*h = h*g
+        \end{equation}
+    \end{definition}
+    \item Here are some examples of groups:
+    \begin{itemize}
+        \item $(\Sym(X), \circ)$
+        \item $(\mathbb{Z}, +)$
+        \item $(\mathbb{R}^x, \cdot)$ where:
+        \begin{equation}
+            F^x = \{x\in F: \exists y\in F \text{ with } xy=1=yx\} 
+        \end{equation}
+        \item $(\mathbb{Q}_{>0}, \cdot)$, $(\mathbb{R}_{>0}, \cdot)$.
+        \item $(\mu_n, \cdot)$ where for $n \in \mathbb{Z}_{>0}$, let \begin{equation}
+            \mu_n = \{z \in \mathbb{C} | z^n = 1\} = \{e^{2\pi k i/n} | k = 0,1,\dots,n-1\}
+        \end{equation}
+        \item $(\mathbb{R}^n, +)$
+        \item $(\text{GL}_n(F), \cdot)$ where $\text{GL}_n(F) = \{A\in \text{Mat}_{n\times n}(F) | A\text{ invertible}\}$, $F=\mathbb{Q},\mathbb{R}, \mathbb{C}$.
+        For all $n\ge 2$, $\text{GL}_n(F)$ is non-abelian. Note that $\text{GL}$ stands for \textit{general linear}
+        \item $(\text{SL}_n(F), \cdot)$ where $\text{SL}_n(F) = \{A \in \text{GL}_n(F) | \det A = 1\}$.
+        Note that $\text{SL}$ stands for special linear.
+        \item $(\text{Mat}_{n\times n}(F), +)$
+    \end{itemize}
+    and non-groups:
+    \begin{itemize}
+        \item $(\mathbb{Z}, \cdot)$
+        \item $(\mathbb{Z}_{> 0}, +)$
+        \item $(\mathbb{Z}, -)$, $(\mathbb{Q}^x, \divisionsymbol)$.
+        \item $(\text{Mat}_{n\times n}(F), \cdot)$
+    \end{itemize}
+    \begin{proposition}
+        Let $(G,*)$ be a group. If $e, e' \in G$ such that $\forall g\in G$ we have
+        \begin{equation}
+            g*e = g = e*g
+            \label{eq:prop1a}
+        \end{equation}
+        and
+        \begin{equation}
+            g*e' = g = e' * g,
+            \label{eq:prop1b}
+        \end{equation}
+        then $e=e'$.
+        \begin{proof}
+            Consider $e*e'$. By \ref{eq:prop1a}, we have:
+            \begin{equation}
+                e*e'= e'
+            \end{equation}
+            Similarly, by \ref{eq:prop1b}, we have:
+            \begin{equation}
+                e*e' = e
+            \end{equation}
+            Therefore, $e=e*e'=e'$.
+        \end{proof}
+    \end{proposition}
+    \item We call the unique element $e\in G$ satisfying the second property in the definition of a group, the identity element of $G$.
+    \item The \textbf{trivial group:} For any singleton $\{e\}$, there exists a unique binary operation $\cdot$ such that:
+    \begin{equation}
+        \{e\} \times \{e\} \mapsto \{e\},\quad (e,e) \mapsto e
+    \end{equation}
+    and $(\{e\},\cdot)$ is a group, called a trivial group.
+    \begin{proposition}
+        Let $(G,*)$ be a group and let $g\in G$. If $h,h' \in G$ satisfies:
+        \begin{equation}
+            g*h = e = h*g
+            \label{eq:prop2a}
+        \end{equation}
+        and
+        \begin{equation}
+            g*h' = e = h'*g
+            \label{eq:prop2b}
+        \end{equation}
+        then $h=h'$. By \ref{eq:prop2a}, we have:
+        \begin{equation}
+            h*g = e.
+            \label{eq:prop2c}
+        \end{equation}
+        By \ref{eq:prop2b}, we have:
+        \begin{equation}
+            g*h' = e.
+            \label{eq:prop2d}
+        \end{equation}
+        Therefore:
+        \begin{align}
+            h &= h*e & \text{(property 2)}\\ 
+            &= h*(g*h') & \text{(\ref{eq:prop2d})} \\ 
+            &= (h*g)*h' & \text{(property 1)} \\ 
+            &= e*h' & \text{(\ref{eq:prop2c})} \\ 
+            &= h' & \text{(property 2)}
+        \end{align}
+    \end{proposition}
+    \item For each $g\in G$, the unique element $h\in G$ such that $g*h=e=h*g$ is called the inverse of $g$ and denoted by $g^{-1}$.
+    \begin{lemma}
+        Let $(G,*)$ be a group and let $x,y,z \in G$. Then, right cancellation tells us:
+        \begin{equation}
+            x*z = y*z \implies x = y
+        \end{equation}
+        and left cancellation tells us:
+        \begin{equation}
+            z*x = z*y \implies x=y
+        \end{equation}
+        \begin{proof}
+            If $z*x=z*y$, then:
+            \begin{align}
+                & z^{-1}*(z*x) = z^{-1}*(z*y) \\ 
+                \implies & (z^{-1} * z) * x = (z^{-1} * z) * y \\ 
+                \implies & e * x = e * y \\ 
+                \implies & x = y
+            \end{align}
+            The other implication is similar.
+        \end{proof}
+    \end{lemma}
+    \begin{warning}
+        The notation $\frac{a}{b}$ is ambiguous. Does it mean $a*b^{-1}$ or $b^{-1}*a$? These can be different in a non-abelian group.
+    \end{warning}
+    \begin{lemma}
+        Let $(G,*)$ be a group and let $g_1,\dots,g_n\in G$. Every way of way inserting parentheses into $g_1*g_2*\cdots*g_n$ to determine a well defined product in $G$ results in the same element of $G$.
+        \begin{proof}
+            Proved in tutorial worksheet.
+        \end{proof}
+    \end{lemma}
+    \item The consequence of the above lemma is that the notation $g_1*g_2*\cdots*g_n$ is unambiguous.
+    \begin{definition}
+        Let $(G,*)$ be a group and let $n\in \mathbb{Z}$. We define:
+        \begin{equation}
+            g^n = \begin{cases}
+                \underbrace{g*g*\cdots*g}_{n \text{ copies}},& n >0 \\ 
+                e,& n = 0 \\ 
+                \underbrace{g^{-1}*\cdots*g^{-1}}_{n \text{ copies}} = (g^{-1})^{-n},& n<0
+            \end{cases}
+        \end{equation}
+    \end{definition}
+    \begin{lemma}
+        Let $(G,*)$ be a group. For all $g\in G$ and $m,n \in \mathbb{Z}$, we have:
+        \begin{equation}
+            g^m*g^n = g^{m+n}
+        \end{equation}
+        and:
+        \begin{equation}
+            (g^m)^n = g^{mn}
+        \end{equation}
+    \end{lemma}
+    \item To prove the above lemma, we can use induction.
+    \begin{warning}
+        If $G$ is a non-abelian group and $a,b\in G$ and $n\in Z$, then it can happen that:
+        \begin{equation}
+            (ab)^n \neq a^nb^n
+        \end{equation}
+    \end{warning}
+    \begin{lemma}
+        Let $G$ be a group and let $a,b\in G$. Then:
+        \begin{equation}
+            (ab)^{-1} = b^{-1}a^{-1}
+        \end{equation}
+        \begin{proof}
+            We just need to check the two conditions:
+            \begin{equation}
+                (ab)(b^{-1}a^{-1})=aea^{-1}=aa^{-1}=e
+            \end{equation}
+            and:
+            \begin{equation}
+                (b^{-1}a^{-1})(ab) = b^{-1}eb = b^{-1}b = e
+            \end{equation}
+            Therefore, it is the inverse.
+        \end{proof}
+    \end{lemma}
+    \item \textbf{Dihedral Groups}. Let $n\in \mathbb{Z}$, $n\ge 3$. Let $P_n$ be a regular $n-$gon.
+    \begin{definition}
+        The group of symmetries of the regular $n$-gon $P_n$ is called the dihedral group of order $2n$ and is denoted by $D_n$.
+    \end{definition}
+    \begin{warning}
+        Some people use $D_{2n}$ instead of $D_{n}$.
+    \end{warning}
+    \begin{lemma}
+        The order of $D_n$ is $2n$.
+        \begin{proof}
+            Label the vertices of $P_n$ by $v_1,v_2,\dots,v_n$ in some clockwise order. By the same reasoning from the case $n=4$ when we were considering a square, we have a bijection:
+            \begin{equation}
+                D_n = \Sym(P_n) \rightarrow \{(v_i,v_j)|v_i\text{ adjacent to } v_j\}
+            \end{equation}
+            \begin{equation}
+                \sigma \mapsto (\sigma(v_1), \sigma(v_2))
+            \end{equation}
+            Note that $\{(v_i,v_j | v_i \text{ adjacent to } v_j)\} = \{(v_i,v_j)| j \equiv i \pm 1 \pmod{n}\}$. We have:
+            \begin{equation}
+                |D_n| = |\{(v_i,v_j)| j \equiv i \pm 1 \pmod{n}\}| = n\cdot 2
+            \end{equation}
+        \end{proof}
+    \end{lemma}
+    \item For example, consider $D_5$. There are $5$ lines of reflection, $4$ rotational symmetries, and the identity. We can further compose transformations, for example:
+    \begin{equation}
+        rs=sr^4,\quad r^2s=sr^3,\quad r^3s=sr^2,\quad r^4s=sr,\quad r^5s = sr
+    \end{equation}
+    where $s$ represents a reflection and $r$ is a $72^\circ$ clockwise rotation.
+    \begin{center}
+        \newdimen\R
+        \R=1.5cm
+        \begin{tikzpicture}
+            \draw (90:\R) \foreach \x in {90,162,...,450} {
+            -- (\x:\R)
+
+            };
+            \draw[dotted] (0,-1.5\R) -- (0,1.5\R) node[right] {$s$};
+        \end{tikzpicture}
+    \end{center}
+    \begin{lemma}
+        Let $P_n$ be a regular $n$-gon. Let $r$ be either a clockwise or counterclockwise rotation about the center of $P_n$ by $\frac{2\pi}{n}$, and let $s$ be any reflectional symmetry of $P_n$. Then:
+        \begin{enumerate}
+            \item $r^n=1$, $s^2=1$
+            \item For all $k=0,1,\dots,n-1$, $sr^k$ is a reflection and:
+            \begin{equation}
+                sr^k = r^{-k}s=r^{n-k}s
+            \end{equation}
+            \item $1,r,\dots,r^{n-1},s,sr,\dots,sr^{n-1}$ are all distinct.
+            \item $D_n = \{1,r,\dots,r^{n-1},s,sr,\dots,sr^{n-1}\}$.
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        We will prove all four:
+        \begin{enumerate}
+            \item $r$ is a rotation by $2\pi/n$ CW or CCW so $r^n=1$. Since $s$ is a reflection, $s^2=1$.
+            \item The composition of a reflection and a rotation in the plane is a reflection. Therefore, $\forall k = 0,1,\dots,n-1,$ $sr^k$ is a reflection (orientation is not preserved). Therefore:
+            \begin{align}
+                (sr^k)^2 &= 1 \\ 
+                sr^ksr^k &= 1 \\ 
+                sr^ks = r^{-k} \\ 
+                sr^k = r^{-k}s^{-1}
+            \end{align}
+            Since $s^2=1$, $s^{-1}=s$, this is proved. Furthermore, since $r^n=1$, we must also have:
+            \begin{equation}
+                sr^k = r^{n-k}s
+            \end{equation}
+            \item Since $r^k$ is a rotation CW or CCW by $2\pi k/n$, then $1,r,\dots,r^{n-1}$ are all distinct. Since rotations preserve orientation and reflections do not, then $r^i \neq sr^{j}$ for all $i,j$. If $sr^i = sr^j$, then $r^i=r^j$ so $i=j$ if $i,j \in \{0,\dots,n-1\}$.
+            \vspace{2mm}
+
+            Therefore, $1,r,\dots,r^{n-1},s,sr,\dots,sr^{n-1}$ are distinct.
+            \item This follows directly from the previous property and the order of the dihedral group is $|D_n|=2n$.
+        \end{enumerate}
+    \end{proof}
+\end{itemize}

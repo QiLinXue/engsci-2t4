@@ -7,11 +7,11 @@
     \end{itemize}
     \item We will call a subset $F \subseteq \mathbb{R}^n$ a \textbf{figure} in $\mathbb{R}^n$ when we consider $F$ not just as a set, but as a set together with the structure of its distance functions:
     \begin{equation}
-        d: F \times F \mapsto \mathbb{R}_{\ge 0},\quad d(x,y) = \lVert x-y \rVert
+        d: F \times F \rightarrow \mathbb{R}_{\ge 0},\quad d(x,y) = \lVert x-y \rVert
     \end{equation}
     A figure is then defined as the pair $(F,d)$.
     \begin{definition}
-        A \textbf{symmetry} of a figure $F \subseteq \mathbb{R}^n$ is a bijection $\sigma: F \mapsto F$ such that $\sigma$ and $\sigma^{-1}$ preserve distances:
+        A \textbf{symmetry} of a figure $F \subseteq \mathbb{R}^n$ is a bijection $\sigma: F \rightarrow F$ such that $\sigma$ and $\sigma^{-1}$ preserve distances:
         \begin{align}
             \forall x,y, \in F,\quad& d(\sigma(x),\sigma(y))=d(x,y) \\ 
             \iff & d(\sigma^{-1}(x), \sigma^{-1}(y)) = d(x,y)
