@@ -1,0 +1,144 @@
+\newpage
+\section{Lecture Three}
+\begin{itemize}
+    \item \textbf{Notation:} Sometimes the group operation for an \textbf{abelian} group is denoted by $+$.
+    
+    If $(A,+)$ is an abelian group, then:
+    \begin{itemize}
+        \item The identity is denoted by $0$
+        \item $a^{-1}$ is denoted by $-a$
+        \item $a^n$ is denoted by $na$
+        \item $a+(-b)$ is denoted by $a-b$.
+    \end{itemize}
+    \item One way to get a better understanding of a group $G$ is to find a group ``inside of'' $G$ that you understand better.
+    \begin{definition}
+        Let $(G, *_G)$ be a group. A subset $H \subseteq G$ is a subgroup if:
+        \begin{enumerate}
+            \item For all $h_1,h_2 \in H$, $h_1*_G h_2 \in H$, and therefore the operation of $G$:
+            \begin{equation}
+                *_G: G\times G \rightarrow G
+            \end{equation}
+            restricts to a binary operation on $H$:
+            \begin{equation}
+                *_H : H \times H \to H,\quad (h_1,h_2) \mapsto h_1 *_H h_2 := h_1 *_G h_2
+            \end{equation}
+            \item $(H, *_H)$ is a group.
+        \end{enumerate}
+    \end{definition}
+    \item We write $H \leq G$ as a shorthand for ``H is a subgroup of G.'' If $(G, *)$ is a group and $H \subseteq G$, we often denote the group operator for $H$ by $*$ as well.
+    \begin{example}
+        Let $G$ be a group. Then $G \leq G$ and $\{e\} \leq G$. We call $\{e\}$ the trivial subgroup of $G$.
+    \end{example}
+    \begin{itemize}
+        \item If $H \leq G$ and $H\neq G$, we write $H < G$ and call $H$ a \textbf{proper subgroup} of $G$.
+    \end{itemize}
+    \begin{example}
+        Let $D_n$ be the symmetric group of the regular $n$-gon with vertices $\{(\cos (2\pi k/n), \sin (2\pi k/n)) | k=0,\dots,n-1\}$.
+        \vspace{2mm}
+
+        From last lecture, we have $D_n = \{1,r,\dots,r^{n-1},s,rs,\dots,r^{n-1}s$. Then: $H := \{1,r,\dots,r^{n-1}\} \leq D_n$.
+    \end{example}
+    \begin{proposition}
+        Let $G$ be a group and $H \leq G$.
+        \begin{enumerate}
+            \item The identity of $H$ is the identity of $G$.
+            \item For all $h\in H$, the inverse of $h$ in $H$ is the inverse of $h$ in $G$.
+        \end{enumerate}
+    \end{proposition}
+    \begin{proof}
+        \begin{enumerate}
+            \item Let $e_H$ be the identity of $H$ and $e_g$ is that of $G$. Since $e_H$ is the identity of $H$, we have:
+            \begin{equation}
+                e_He_H = e_H
+            \end{equation}
+            Let $x$ be the inverse of $e_H$ in $G$, then:
+            \begin{align}
+                e_He_Hx &= e_H x \\ 
+                \implies e_He_G &= e_G \\ 
+                \implies e_H &= e_G
+            \end{align}
+            The first implication follows since $x$ is the inverse of $e_H$ in $G$ and the second follows since $e_G$ is the identity in $G$.
+            \item Let $h \in H$, let $x$ be the inverse of $h$ in $H$, and let $y$ be the inverse of $h$ in $G$. Then:
+            \begin{equation}
+                hx = e_H = e_G
+            \end{equation}
+            and
+            \begin{equation}
+                xh = e_H = e_G
+            \end{equation}
+            so $x$ is the inverse of $h$ in $G$.
+        \end{enumerate}
+    \end{proof}
+    \begin{theorem}
+        \textbf{Two-step subgroup test:} Let $H$ be a nonempty subset of a group $G$. If:
+        \begin{enumerate}
+            \item $a,b \in H \implies ab \in H$ ($H$ is closed under the group operator)
+            \item $a\in H \implies a^{-1} \in H$ ($H$ is closed under taking inverses)
+        \end{enumerate}
+        then $H$ is a subgroup of $G$.
+    \end{theorem}
+    \begin{proof}
+        Assume that $H$ is as in the theorem. We will prove that $(H, *_H)$ is a group.
+        \begin{itemize}
+            \item Associative: Let $h_1, h_2, h_3 \in H$
+            \begin{align}
+                h_1 *_H (h_2 *_H h_3) &= h_1 *_G (h_2 *_G h_3) \\
+                &= (h_1 *_G h_2) *_G h_3 \\ 
+                &= (h_1 *_H h_2) *_H h_3
+            \end{align}
+            \item $H$ has an identity: Since $H \neq \phi$, there exists $x\in H$. By (2), we have $x^{-1} \in H$. By (1), we have $e_G = xx^{-1} \in H$ since $x,x^{-1} \in H$.
+            
+            For all $h\in H$, we have:
+            \begin{equation}
+                he_G = h = e_G h
+            \end{equation}
+            since $e_G$ is the identity of $G$. Therefore $e_G$ is an identity of $H$.
+            \item $H$ has inverses: Let $h \in H$. By (2), we have that $h^{-1} \in H$. Since $h^{-1}$ is the inverse of $h$ in $G$, we have $hh^{-1}=e_G = h^{-1}h$. Therefore $h^{-1}$ is an inverse of $h$ in $H$.
+        \end{itemize}
+    \end{proof}
+    \begin{theorem}
+        \textbf{One-step subgroup test:} Let $G$ be a group and let $H$ be a nonempty subset of $G$.  Suppose that:
+        \begin{enumerate}
+            \item $a,b\in H \implies ab^{-1} \in H$
+        \end{enumerate}
+        then $H \leq G$.
+    \end{theorem}
+    \begin{proof}
+        Let $H$ be as in the theorem statement. Since $H \neq \phi$, $\exists h \in H$. Taking $a=b=h$ in (1) gives $e=hh^{-1} \in H$. Taking $a=e$, $b=h$ in (1) gives $h^{-1}=eh^{-1}=ab^{-1} \in H$. Therefore, $h\in H \rightarrow h^{-1} \in H$.
+
+        Let $h_1,h_2 \in H$. Then $h_2^{-1} \in H$. Taking $a=h$, $b=h_2^{-1}$ in (1) gives $h_1,h_2 = ab^{-1} \in H$. Therefore, $h_1,h_2 \in H \implies h_1h_2 \in H$. By the two-step subgroup test, $H \leq G$.
+    \end{proof}
+    \begin{example}
+        Let $G$ be an abelian group. Prove that $H=\{x \in G | x^2 = e\}$ is a subgroup of $G$.
+        \begin{proof}
+            Let $a,b \in H$. Then $a^2=b^2=e$. Since $G$ is abelian:
+            \begin{equation}
+                (ab^{-1})^2 = a^2b^{-2} = a^2(b^2)^{-1} = ee^{-1} = e
+            \end{equation}
+            Therefore, $ab^{-1} \in H$ by the one-step subgroup test, $H \leq G$.
+        \end{proof}
+    \end{example}
+    \begin{example}
+        Prove that matrices in the form  of $\begin{pmatrix}
+            1&x&y \\ 0 & 1 & z \\ 0 & 0 & 1
+        \end{pmatrix}$ where $x,y,z \in \mathbb{R}$ is a subgroup of $\text{SL}_3(\mathbb{R})$ using either subgroup test.
+        \begin{proof}
+            Using the one-step subgroup test. Let $g_1 = \begin{pmatrix}
+                1&x_1&y_1 \\ 0 & 1 & z_1 \\ 0 & 0 & 1 \end{pmatrix}$ and $g_2 = \begin{pmatrix}
+            1&x_2&y_2 \\ 0 & 1 & z_2 \\ 0 & 0 & 1
+        \end{pmatrix}$. The inverse of $g_2$ is:
+        \begin{equation}
+            g_2^{-1} = \begin{pmatrix}
+                1 & -x &  xz-y \\ 
+                0 & 1 & -z \\ 
+                0 & 0 & 1
+            \end{pmatrix}
+        \end{equation}
+        and carrying out the computation:
+        \begin{equation}
+            g_1g_2^{-1} = I
+        \end{equation}
+        Since $I$ is in the given group, we are done.
+        \end{proof}
+    \end{example}
+\end{itemize}
