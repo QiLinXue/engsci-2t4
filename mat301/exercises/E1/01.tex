@@ -1,0 +1,26 @@
+\begin{sol}
+    There are only two possible reflections, one rotation, and one identity. Denote the two reflections as $H$ and $V$ and denote the $180^\circ$ rotation about the center as $R$ and the identity as $I$. WLOG we can draw the diagram as:
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[] (0.2,0.2) -- (2.8,0.2) -- (2.8,1.8) -- (0.2,1.8) -- cycle;
+            \draw[dotted] (1.5,0) -- (1.5,2) node[right] {$V$};
+            \draw[dotted] (0,1) -- (3,1) node[right] {$H$};
+        \end{tikzpicture}
+    \end{center}
+    Then the Cayley table is:
+    \begin{center}
+        \begin{tabular}{c|cccc}
+            \cline{2-5}
+            & \multicolumn{1}{c|}{I} & \multicolumn{1}{c|}{H} & \multicolumn{1}{c|}{V} & \multicolumn{1}{c|}{R} \\ \hline
+            \multicolumn{1}{|c|}{I} &I&H&V&R\\ \cline{1-1}
+            \multicolumn{1}{|c|}{H} &H&I&R&H\\ \cline{1-1}
+            \multicolumn{1}{|c|}{V} &V&R&I&V\\ \cline{1-1}
+            \multicolumn{1}{|c|}{R} &R&V&H&I\\ \cline{1-1}
+        \end{tabular}
+    \end{center}
+    The proof that there are only four symmetries is similar to that of the dihedral group of a square. Label the vertices as $1,2,3,4$ where $1,2$ are the top two adjacent vertices. Then for all $x,y \in \{1,2,3,4\}$, there exists only one symmetry $\sigma$ of the proper rectangle such that:
+    \begin{equation}
+        (\sigma(1), \sigma(2)) = (x,y)
+    \end{equation}
+    There are four choices for $x$ but for each $x$, there is only one choice for $y$. The reason is because we also wish to preserve the position of the side lengths (i.e. shorter sides are always vertical). Since each vertex is only connected to a single ``long horizontal side,'' then there is only one choice for $y$. Therefore: $4\times 1=4$.
+\end{sol}

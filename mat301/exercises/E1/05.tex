@@ -1,0 +1,32 @@
+\begin{sol}
+    Since $G=\{e,a,b\}$ is a set, $e,a,b$ must be distinct. We first propose that $a^{-1}=b$.
+    \begin{proof}
+        Suppose for the sake of contradiction that $ab \neq e$. Then if $ab=a$, left cancellation shows that $b=e$ and if $ab=b$, right cancellation shows that $a=e$, both of which are not allowed. As a result, we must have $ab=e \implies a^{-1}=b$.
+    \end{proof}
+    Next we will show that $a^2 = b$.
+    \begin{proof}
+        We have already shown that $a^2 \neq a$. Suppose for the sake of contradiction that $a^2 = e$. Then since $a = b^{-1}$, we have:
+        \begin{equation}
+            ab^{-1} = e \implies a=b
+        \end{equation}
+        which is not allowed.
+    \end{proof}
+    A corollary of this is $a^3=e$.
+    \begin{proof}
+        This follows directly:
+        \begin{equation}
+            a^2b^{-1} = bb^{-1} \implies a^3=e
+        \end{equation}
+    \end{proof}
+    Finally, since $ab=e=ba$, the group is abelian and any group operation can be represented as:
+    \begin{align}
+        a^xb^y &= (ab)^{x}b^{y-x} \\ 
+        &= b^{y-x} \\ 
+        &= (b^3)^kb^{\ell} \\ 
+        &= b^\ell 
+    \end{align}
+    where $k$ and $\ell$ are chosen such that $k+\ell = y-x$ and $0 \le \ell \le 2$ (division algorithm). We've already shown that this is only equal to the identity $e$ iff $\ell=0$. This occurs iff:
+    \begin{equation}
+        y-x \equiv 0 \pmod{3}
+    \end{equation}
+\end{sol}

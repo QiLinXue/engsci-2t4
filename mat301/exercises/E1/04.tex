@@ -1,0 +1,26 @@
+\begin{sol}
+    \begin{enumerate}
+        \item \begin{proof}
+            We have:
+            \begin{align}
+                & 1 =aa^{-1} \\
+                \implies & (a^{-1})^{-1}(a^{-1}) = aa^{-1} \\ 
+                \implies & (a^{-1})^{-1} = a
+            \end{align}
+            where the first implication is possible since $a^{-1} \in G$ and from the existence of the inverse. The second implication is possible due to right cancellation.
+        \end{proof}
+        \item \begin{proof}
+            We propose that:
+            \begin{equation}
+                (a_1\cdots a_n)^{-1} = a_n^{-1}\cdots a_1^{-1}
+            \end{equation}
+            The base case $n=2$ was already proved in lecture, so we can skip to the inductive step. Suppose this is true for some $n=k$. Let us denote $a_1\cdots a_k = \alpha_k$. Then for $n=k+1$, we have:
+            \begin{align}
+                (a_1\cdots a_{k} a_{k+1})^{-1} &= (\alpha_k a_{k+1})^{-1} \\ 
+                &= a_{k+1}^{-1} \alpha_k^{-1} & \text{(base case)} \\ 
+                &= a_{k+1}^{-1}a_{k}^{-1}\cdots a_1^{-1} & \text{(inductive assumption)}
+            \end{align}
+            and we are done.
+        \end{proof}
+    \end{enumerate}
+\end{sol}

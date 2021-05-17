@@ -1,0 +1,21 @@
+\begin{sol}
+    We propose that if $x \neq e$, then $x \neq x^2$ and $x^2 \neq e$.
+    \begin{proof}
+        Suppose for the sake of contradiction that $x=x^2$. Then it immediately follows from cancellation that $x=e$.
+        \vspace{2mm}
+
+        For the second claim, if $x^2 = e$, then this would imply that $x^3 = x$. But since $x^3=e$, this means that $x=e$ as well.
+    \end{proof}
+    We wish to partition $G$ into disjoint sets:
+    \begin{equation}
+        G = \left(\bigcup_{x \in G, x\neq e} \{x,x^2\}\right) \cup \{e\}
+    \end{equation}
+    For any two sets $\{x,x^2\}$ and $\{y,y^2\}$ where $x,y\in G$, we have:
+    \begin{equation}
+        \{x,x^2\} \cap \{y,y^2\} = \begin{cases}
+            \{x,x^2\} & x=y \text{ or } x=y^2 \\ 
+            \varnothing & \text{otherwise}
+        \end{cases}
+    \end{equation}
+    This shows that $|G|=2k+1$ for some integer $k$, which is odd.
+\end{sol}
