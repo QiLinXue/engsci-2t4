@@ -1,0 +1,191 @@
+\section{Permutation Groups}
+\begin{itemize}
+    \item Let $X$ be a set. $A$ is a symmetry of $X$ as a set is just a bijection $\sigma: X\to X$ because there is no structure that $\sigma$ should preserve.
+    \item We call bijections $\sigma: X \to X$ permutations of $X$.
+    \begin{definition}
+        The \textbf{symmetric group} on $X$ is the group of all permutations of $X$ with group operation given by composition. It is denoted by $S_x$.
+    \end{definition}
+    \begin{example}
+        Let $X=\{a,b,c\}$, where $a,b,c$ distinct. The map $\sigma: X\to X$ defined by $\sigma(a)=b$, $\sigma(b)=a$, $\sigma(c)=c$ is a permutation of $X$, so $\sigma \in S_x$.
+
+        Similarly, the map $\tau: X\to X$ defined by $\tau(a)=c$, $\tau(b)=a$, $\tau(c)=b$ is a permutation of $X$, so $\tau \in S_X$ also.
+    \end{example}
+    \begin{proposition}
+        For every finite set $X$, $|S_x| = |X|!$.
+    \end{proposition}
+    \item To prove this proposition rigorously, we can prove this via induction on $n\in \mathbb{Z}_{\ge 0}$ with $|X|=|Y|=n$, the set $\{\sigma:X\to Y|\sigma\text{ is a bijection}\}$ has cardinality $n!$. Then apply that in the case $X=Y$.
+    \begin{definition}
+        A subgroup of $S_x$ is called a permutation group on $X$.
+    \end{definition}
+    \item We are most interest in the case when $0<|X|<\infty$.
+    \item By choosing a linear ordering $x_1,\dots,x_n$ of the elements of $X$, then we can regard $X$ as the set $\{1,\dots,n\}$.
+    \item We may as well, and we will, assume that $X=\{1,\dots, n\}$.
+    \item We denote $S_{\{1,\dots,n\}}$ by $S_n$ and we call it the symmetric group on $n$ letters.
+    \item The identity of $S_n$ is something denoted by $id$, $1$, $e$, or $\epsilon$. 
+    \item If $\sigma \in S_n$, we write:
+    \begin{equation}
+        \sigma = \begin{pmatrix}
+            1 & 2 & \dots & n \\ 
+            \sigma(1) & \sigma(2) & \dots & \sigma(n)
+        \end{pmatrix}
+    \end{equation}
+    \begin{example}
+        Let $\sigma = \begin{pmatrix}
+            1&2&3&4 \\ 
+            2&1&4&3
+        \end{pmatrix}$ and $\tau = \begin{pmatrix}
+            1&2&3&4\\ 2& 3& 4&1
+        \end{pmatrix}$. Then:
+        \begin{equation}
+            \sigma\tau = \begin{pmatrix}
+                1&2&3&4\\ 2&1&4&3
+            \end{pmatrix}\begin{pmatrix}
+                1&2&3&4\\ 2&3&4&1
+            \end{pmatrix} = \begin{pmatrix}
+                1&2&3&4 \\ 1&4&3&2
+            \end{pmatrix}
+            and
+            \begin{pmatrix}
+                1&2&3&4 \\ 
+                4&1&2&3
+            \end{pmatrix}
+        \end{equation}
+    \end{example}
+    \item For $n\ge 3$, $S_n$ is non-abelian.
+    \begin{proof}
+        Let $\sigma = \begin{pmatrix}
+            1&2&3&\cdots&n\\ 2&1&3&\cdots&n
+        \end{pmatrix}$ and $\tau = \begin{pmatrix}
+            1&2&3&\cdots & n \\ 
+            1&3&2&\cdots & n
+        \end{pmatrix}$. Then:
+        \begin{equation}
+            \sigma\tau = \begin{pmatrix}
+                1&2&3&\cdots&n \\ 
+                2&3&1 \cdots &n
+            \end{pmatrix}
+        \end{equation}
+        but
+        \begin{equation}
+            \tau\sigma = \begin{pmatrix}
+                1&2&3&\cdots & n \\ 
+                3&1&2 & \cdots & n
+            \end{pmatrix}
+        \end{equation}
+        so $\sigma\tau \neq \tau \sigma$.
+    \end{proof}
+    \item We will now introduce the notion of a cycle
+    \begin{definition}
+        Let $r\in \mathbb{Z}$, $r\ge 2$. An \textbf{r-cycle} in $S_n$ is a permutation $\gamma \in S_n$ with the following property: There exist $r$ distinct elements $c_1,\dots,c_r \in \{1,\dots,n\}$ such that:
+        \begin{enumerate}[label=(\alph*)]
+            \item $\gamma(c_i)=c_i+1$ for $1\le i \le r-1$, and $\gamma(c_r)=c_1$.
+            \item $\gamma(k)=k$ for all $k \in \{1,\dots,n\} \setminus \{c_1,\dots,c_r\}$.
+        \end{enumerate}
+        In this case, we write the r-cycle $\gamma$ as:
+        \begin{equation}
+            \gamma=\begin{pmatrix}
+                c_1&c_2&\dots & c_r
+            \end{pmatrix}
+        \end{equation}
+        That is, $\gamma$ is an r-cycle if it moves precisely $r$ elements of $\{1,\dots,n\}$ in a cyclic pattern (and leaves every other element fixed).
+    \end{definition}
+    \begin{example}
+        Let $\gamma = \begin{pmatrix}
+            1&2&3&4&5&6&7&8&9 \\ 
+            1&5&3&2&6&9&7&4&8
+        \end{pmatrix} \in S_9$. We claim that $\gamma$ is a 6-cycle.
+        
+        Note that $\gamma$ fixes $1,3,7$. We then need to show that the remaining elements are mapped by $\gamma$ in a cyclic pattern:
+        \begin{equation}
+            2\mapsto 5\mapsto 6\mapsto 9 \mapsto 8 \mapsto 4\mapsto 2
+        \end{equation}
+        Therefore, $\gamma=\begin{pmatrix}
+            2&5&6&9&8&4
+        \end{pmatrix}$. Note that this is also equivalent to:
+        \begin{equation}
+            \gamma=\begin{pmatrix}
+                5&6&9&8&4&2
+            \end{pmatrix}.
+        \end{equation}
+    \end{example}
+        \begin{proposition}
+            Let $r \ge 2$ and let $\gamma = \begin{pmatrix}
+                c_1&c_2&\cdots & c_r
+            \end{pmatrix}$ be an r-cycle in $S_n$.
+            \begin{enumerate}
+                \item For all $2\le i \le r$ we have:
+                \begin{equation}
+                    \gamma = \begin{pmatrix}
+                        c_i & c_{i+1} & \dots & c_r & c_1 & c_2 & \dots & c_{i-1}
+                    \end{pmatrix}
+                \end{equation}
+                \item The inverse $\gamma^{-1}$ is given by:
+                \begin{equation}
+                    \gamma^{-1} = \begin{pmatrix}
+                        c_r & c_{r-1} & \dots c_1
+                    \end{pmatrix}
+                \end{equation}
+            \end{enumerate}
+        \end{proposition}
+        \begin{proof} We prove both parts of the above proposition.
+            \begin{enumerate}
+                \item Exercise left to reader.
+                \item Let $\delta = \begin{pmatrix}
+                    c_r & c_{r-1} & \dots c_1
+                \end{pmatrix}$. To show that $\delta = \gamma^{-1}$, it suffices to show that $\delta \gamma = \id$. (since $S_n$ is a group). To do so, we must prove that $\forall i \in \{1,\dots,n\}$, we have $\delta\gamma(i)=i$.
+
+                By definition of cycles, we have:
+                \begin{equation}
+                    \gamma(k) = \begin{cases}
+                        k & k\notin \{c_1,\dots,c_r\} \\ 
+                        c_{i+1} & k=c_i,1\le i \le r-1 \\ 
+                        c_1 & k=c_r
+                    \end{cases}
+                \end{equation}
+                and:
+                \begin{equation}
+                    \delta(k) = \begin{cases}
+                        k & k\notin \{c_1,\dots,c_r\} \\ 
+                        c_{i-1} & k=c_i,2\le i \le r \\ 
+                        c_r & k=c_1
+                    \end{cases}
+                \end{equation}
+                We can then check for $k\notin \{c_1,\dots,c_r\}$, we have:
+                \begin{equation}
+                    \delta \gamma(k) = \gamma(k)=k
+                \end{equation}
+                For $k=c_i$, $1\le i\le r-1$, we have:
+                \begin{equation}
+                    \delta \gamma (k) = \delta \gamma(c_i) = \delta(c_{i+1}) = c_i = k
+                \end{equation}
+                For $k=c_r$, we have:
+                \begin{equation}
+                    \delta \gamma(k) = \delta(c_1) = c_r = k.
+                \end{equation}
+            \end{enumerate}
+        \end{proof}
+        \item Let us investigate the product of two cycles.
+        \begin{example}
+            Let $\gamma=\begin{pmatrix}
+                1&3&2&4
+            \end{pmatrix}$ and $\delta = \begin{pmatrix}
+                2&6&3
+            \end{pmatrix}$ where $\gamma,\delta \in S_8$. Then:
+            \begin{align}
+                \delta \gamma &= \begin{pmatrix}
+                    1&3&2&4
+                \end{pmatrix}\begin{bmatrix}
+                    2&6&3
+                \end{bmatrix} \\ 
+                &= \begin{pmatrix}
+                    1&2&3&4&5&6&7&8 \\ 
+                    3&6&4&1&5&2&7&8
+                \end{pmatrix}
+            \end{align}
+            Notice that:
+            \begin{equation}
+                1\mapsto 3\mapsto 4 \mapsto 1
+            \end{equation}
+            However, the other elements are not fixed since $6\mapsto 2$. Therefore, $\gamma\delta$ is not a cycle.
+        \end{example}
+\end{itemize}
