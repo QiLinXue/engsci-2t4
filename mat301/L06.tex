@@ -1,0 +1,285 @@
+\section{Lecture Six}
+\begin{itemize}
+    \item We continue our investigation of permutations.
+    \begin{definition}
+        Let $\sigma \in S_n$. Define:
+        \begin{equation}
+            \fix(\sigma)=\{k\in\{1,\dots,n\}|\sigma(k)=k\}
+        \end{equation}
+    \end{definition}
+    \begin{definition}
+        Let $\sigma, \tau \in S_n$. We say that $\sigma$ and $\tau$ are disjoint if for all $k\in \{1,\dots,n\}$,
+        \begin{equation}
+            \sigma(k) \neq k \implies \tau(k) = k
+        \end{equation}
+        which means that $k\in \fix(\tau)$. Similarly:
+        \begin{equation}
+            \tau(k)\neq k \implies \sigma(k) = k
+        \end{equation}
+        which means that $k \in \fix(\sigma)$.
+    \end{definition}
+    \item Note that two cycles $\gamma=\begin{pmatrix}
+        c_1 & \cdots & c_r
+    \end{pmatrix}$ and $\delta = \begin{pmatrix}
+        d_1 & \cdots & d_s
+    \end{pmatrix}$ are disjoint if and only if:
+    \begin{equation}
+        \{c_1,\dots,c_r\} \cap \{d_1,\dots,d_s\} = \emptyset
+    \end{equation}
+    \item This is because
+    \begin{equation}
+        \fix \begin{pmatrix}
+            c_1 & \cdots & c_r
+        \end{pmatrix} = \{1,\dots,n\} \setminus \{c_1,\dots,c_r\}
+    \end{equation}
+    and:
+    \begin{equation}
+        \fix \begin{pmatrix}
+            d_1 & \cdots & d_s
+        \end{pmatrix} = \{1,\dots, n\} \setminus \{d_1,\dots,d_s\}.
+    \end{equation}
+    \begin{lemma}
+        Let $\sigma \in S_n$. Then:
+        \begin{enumerate}
+            \item If $k\in \fix(\sigma)$, then $k\in \fix(\sigma^m)$ for all $m\in \mathbb{Z}$.
+            \item If $k\notin \fix(\sigma)$, then $\sigma^m (k) \notin \fix(\sigma)$ for all $m\in \mathbb{Z}$.
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        We will prove both of the above:
+        \begin{enumerate}
+            \item Let $k\in \fix(\sigma)$, i.e. $\sigma(k)=k$. Then $k=\sigma^{-1}(\sigma(k))=\sigma^{-1}(k)$. Therefore, we have $k\in \fix(\sigma^{-1})$. It follows by a simple induction argument that $k \in \fix(\sigma^m)$ for all $m\in \mathbb{Z}_{\ge 0}$ and $k\in \fix(\sigma^m)$ for all $m\in \mathbb{Z}_{\le 0}$.
+            
+            The induction argument involves the fact that $\sigma(\sigma(k))=\sigma(k)=k$.
+            \item Let $k\notin \fix(\sigma)$. It suffices to prove that $\sigma(k) \notin \fix \sigma$. It suffices to prove that:
+            \begin{equation}
+                \sigma(k),\sigma^{-1}(k) \notin \fix(\sigma)
+            \end{equation}
+            To show why, suppose that $\sigma(k), \sigma^{-1}(k) \notin \fix(\sigma)$. Then, the idea is that we cannot have $\sigma^2(k) \in \fix(\sigma)$ since $\sigma(\sigma(k))=\sigma(k) \notin \fix(\sigma)$.
+
+            Alternatively, we can have a direct proof. Let $k \notin \fix(\sigma)$. Let $m\in \mathbb{Z}$. Suppose for the sake of contradiction that $\sigma^m(k) \in \fix(\sigma)$. Then:
+            \begin{equation}
+                \sigma(\sigma^m(k)) = \sigma^m(k)
+            \end{equation}
+            Therefore, applying $\sigma^{-m}$ on both sides gives $\sigma(k)=k$. This contradicts $k\notin \fix(\sigma)$. Therefore, $\sigma^m(k) \notin \fix(\sigma)$.
+        \end{enumerate}
+    \end{proof}
+    \begin{theorem}
+        (Disjoint permutations commute) Let $\sigma,\tau \in S_n$ be disjoint. Then $\sigma\tau = \tau\sigma$.
+    \end{theorem}
+    \begin{proof}
+        Let $k\in \{1,\dots,n\}$, and let $\sigma, \tau \in S_n$ be disjoint.
+
+        For the first case, suppose $k\in \fix(\sigma) \cap \fix(\tau)$. Then $\sigma(k)=k=\tau(k).$ Therefore:
+        \begin{equation}
+            \sigma\tau(k)=\sigma(k)=k
+        \end{equation}
+        and:
+        \begin{equation}
+            \tau\sigma(k)=\tau(k)=k
+        \end{equation}
+        so $\sigma\tau(k)=\tau\sigma(k)$.
+        
+        For the second case, suppose $k\notin \fix(\sigma)$. Since $\sigma$ and $\tau$ are disjoint, we have $k\in \fix(\tau)$. Therefore $\tau(k)=k$ and $\sigma\tau(k)=\sigma(k)$. Since $k\notin \fix(\sigma)$, we have $\sigma(k)\notin \fix(\sigma)$ by part (2) of the above lemma. Since $\sigma$ and $\tau$ are disjoint and $\sigma(k) \notin \fix(\sigma)$, we have $\sigma \in \fix(\tau)$.
+
+        Therefore, $\tau\sigma(k)=\sigma(k)$. As a result:
+        \begin{equation}
+            \tau\sigma(k)=\sigma\tau(k)
+        \end{equation}
+
+        For the last case, we consider $k\notin \fix(\tau)$. It can be handled in the same way as the second case.
+    \end{proof}
+    \item We now introduce the notion of an orbit.
+    \begin{definition}
+        Let $\sigma\in S_n$. For each $k\in\{1,\dots,n\}$, the set:
+        \begin{align}
+            O_{\sigma}(k) &= \{\sigma^m(k) | m \in \mathbb{Z}\} \\
+            &= \{\dots,\sigma^{-2},\sigma^{-1},k,\sigma(k),\dots 
+        \end{align}
+        is called the \textbf{orbit} of $k$ under the set $\sigma$.
+    \end{definition}
+    \item Note that $|O_\sigma(k)|=1$ if and only if $O_{\sigma}(k) = \{k\}$ if and only if $k\in \fix(\sigma)$.
+    \begin{proposition}
+        Let $\sigma\in S_n$. For all $k\in \{1,\dots,n\}$, there exists $\ell \in \mathbb{Z}_{>0}$ such that $\sigma^{\ell}(k)=k$.
+        \vspace{2mm}
+        
+        If $\ell$ is the smallest positive integer such that $\sigma^{\ell}=k$, then $k,\sigma(k),\sigma^2(k),\dots,\sigma^{\ell-1}(k)$ are distinct and:
+        \begin{equation}
+            O_{\sigma}(k) = \{k,\sigma(k),\dots,\sigma^{\ell-1}(k)\}.
+        \end{equation}
+    \end{proposition}
+    \begin{warning}
+        The smallest $\ell \in \mathbb{Z}_{>0}$ such that $\sigma^\ell(k)=k$ is not necessarily the order of $\sigma$, which is the smallest $m\in \mathbb{Z}_{>0}$ such that:
+        \begin{equation}
+            \sigma^{m}(j) = j
+        \end{equation}
+        \textit{for all} $j\in \{1,\dots,n\}$.
+    \end{warning}
+    \begin{proof}
+        The subset $\{\sigma^m(k) | m\in \mathbb{Z}\}$ of $\{1,\dots,n\}$ is finite.
+
+        Therefore, there exist $m_1,m_2 \in \mathbb{Z}$ with $m_1 < m_2$ such that $\sigma^{m_1}(k)=\sigma^{m_2}(k)$. Then $\sigma^{m_2-m_1}(k)=k$ and $m_2-m_1 \in \mathbb{Z}_{>0}$.
+        \vspace{2mm}
+
+        Let $\ell \in \mathbb{Z}_{>0}$ be the smallest positive integer such that $\sigma^{\ell}(k)=k$. This exists by the well ordering principle.
+
+        If $m_1,m_2\in \{0,1,\dots,\ell-1\}$, $m_1<m_2$, and $\sigma^{m_1}(k) = \sigma^{m_2}(k)$, then $0<m_2-m_1<\ell$ and $\sigma^{m_2-m_1}(k)=k$, contradicting the definition of $\ell$.
+
+        Thus, $k, \sigma(k), \dots, \sigma^{\ell-1}(k)$ are distinct. All we have to do now is to prove all the element sin the orbit of $k$ is one of these.
+
+        Let $m\in \mathbb{Z}$. While $m=q\ell + r$ for unique $q,\ell \in \mathbb{Z}$ with $0\le r < \ell$ by the division algorithm. Now,
+        \begin{align}
+            \sigma^{m}(k) &= \sigma^{q\ell + r}(k) \\ 
+            &= (\sigma^\ell)^q \sigma^{r}(k) \\ 
+            &= \sigma^r(\sigma^\ell)^q(k) \\ 
+            &= \sigma^r(k)
+        \end{align}
+        We are able to go through these steps by noting $\sigma^\ell(k) = k\implies (\sigma^\ell)^q(k)=k$. Therefore $\sigma^m(k) = \sigma^r(k)=\{k,\sigma(k),\dots,\sigma^{\ell-1}(k)\}$ and:
+        \begin{equation}
+            O_{\sigma}(k) = \{k,\sigma(k),\dots, \sigma^{\ell-1}(k)\}.
+        \end{equation}
+    \end{proof}
+    \begin{proposition}
+        Let $\sigma \in S_n$.
+        \begin{enumerate}
+            \item For all $k\in \{1,\dots,n\}$, then $j\in O_\sigma(k)$, if and only if $O_\sigma(j) = O_\sigma(k)$.
+            \item Distinct orbits of $\sigma$ are disjoint. If $O_{\sigma}(j) \neq O_\sigma(k)$, then:
+            \begin{equation}
+                O_{\sigma}(j) \cap O_{\sigma}(k) = \emptyset.
+            \end{equation}
+            Consequently, the orbits of $\sigma$ partition $\{1,\dots,n\}$.
+        \end{enumerate}
+    \end{proposition}
+    \begin{proof}
+        Again, we prove both parts.
+        \begin{enumerate}
+            \item Let $k\in \{1,\dots, n\}$. Suppose $j\in O_{\sigma}(k)$. Then there exists $m\in \mathbb{Z}$ such that $\sigma^{m}(k)=j$. Therefore, for all $r\in \mathbb{Z}$, $\sigma^{r}(j)=\sigma^{m+r}(k) \in O_{\sigma}(k)$. Thus, we have proved that:
+            \begin{equation}
+                j\in O_{\sigma}(k) \implies O_{\sigma(k)} \subseteq O_{\sigma}(j).
+            \end{equation}
+            Now since $j = \sigma^{m}(k)$, we have $k = \sigma^{-m}(j) \in O_{\sigma}(j)$. Therefore, $O_\sigma(k) \subseteq O_{\sigma}(j)$ by the same argument. Thus, $O_\sigma(j) = O_\sigma(k).$
+            
+            Note that we also have to prove the reverse direction. We know that $j\in O_{\sigma}(k)$ since $j\in O_{\sigma}(j)$.
+            \item We will prove the contrapositive. Suppose $O_{\sigma}(j) \cap O_\sigma(k) \neq \emptyset$. Then, there exist $m_1,m_2 \in \mathbb{Z}$ such that:
+            \begin{equation}
+                \sigma^{m_1}(j) = \sigma^{m_2}(k).
+            \end{equation}
+            Therefore, $j=\sigma^{m_2-m_1}(k) \in O_{\sigma}(k)$. By part (1), we have $O_\sigma(j)=O_\sigma(k)$.
+        \end{enumerate}
+    \end{proof}
+    \item We introduce the cycle \textit{attached} to an orbit of $\sigma \in S_n$.
+    \item Let $\sigma \in S_n$ and let $O$ be an orbit of $\sigma$. Let $\ell = |O|$. Assume $\ell \ge 2$.
+    \item Choose a $k \in O$. Then $O=O_{\sigma}(k)$ (by part (1) in the proposition.) By an earlier proposition:
+    \begin{equation}
+        O = O_{\sigma}(k) = \{k,\sigma(k),\dots,\sigma^{\ell-1}(k) \}.
+    \end{equation}
+    \item We can define a cycle $\gamma_O = \begin{pmatrix}
+        k & \sigma(k) & \cdots & \sigma^{\ell-1}(k)
+    \end{pmatrix}$ which is an $\ell$-cycle in $S_n$.
+    \item The $\ell$-cycle $\gamma_O$ does not depend on the choice of $k\in O$. Proof is left as an exercise.
+    \item\textbf{Note:} If $O, O'$ are distinct orbits of $\sigma$, then they are disjoint so the cycles $\gamma_O$ and $\gamma_{O'}$ are disjoint as well. Therefore, these two cycles commute.
+    \begin{theorem}
+        (Cycle Decomposition Theorem) Every non-identity permutation can be written as a product of mutually disjoint cycles, i.e. there exist cycles $\gamma_1,\dots,\gamma_r$ such that $\gamma_i$ and $\gamma_j$ are disjoint if $i\neq j$ and $\sigma = \gamma_1 \cdots \gamma_r$.
+
+        Moreover, if $\gamma_1,\dots,\gamma_r$ are as above,
+
+        then $\{\gamma_1,\dots,\gamma_r\} = \{\gamma_0:O\text{ is an orbit of } \sigma \text{ and } |O|\ge 2$. In particular, the set $\{\gamma_1,\dots,\gamma_r\}$ is unique.
+    \end{theorem}
+    \item \textbf{Remarks:} We can extend the theorem to the case where $\sigma = \id$ if we define an empty product (or a product of $0$ elements of $S_n$) to be $\id$.
+    \begin{proof}
+        Let $\sigma \in S_n$ and $\sigma \neq \id$. Let $O_1,\dots, O_s$ be the distinct orbits of $\sigma$ of size at least $2$. The cycles $\gamma_O, \dots, \gamma_{O_s}$ are mutually disjoint because the orbits $O_1,\dots, O_s$ are mutually disjoint.
+
+        Define $\tau=\sigma_{O_1}\cdots \sigma_{O_S}$. We will prove that $\sigma = \tau$. Let $O_{s+1},\dots, O_t$ be the distinct orbits of $\sigma$ of size $1$. Then:
+        \begin{equation}
+            \{1, \dots, n\} = \left(\dot{\bigcup}_{i=1}^{s}O_i\right)\,\dot\bigcup\,\left(\dot{\bigcup}_{j=s+1}^{t}O_j\right).
+        \end{equation}
+
+        Let $k\in \{1,\dots, n\}$. We must show that $\sigma(k)=\tau(k)$. If $k\notin O_1 \dot\cup \cdots \dot\cup O_s$. Then $k\in O_j$ for some $j\in \{s+1,\dots,t\}$. Since $O_j$ is an orbit of size $1$, we must have $\sigma(k)=k$.
+
+        For each $i=\{1,\dots,s\}$, $k\notin O_i$, so $\gamma_{O_i}(k)=k$. Therefore:
+        \begin{equation}
+            \tau(k)=\gamma_{O_1}\dots\gamma_{O_s}(k) = k = \sigma(k)
+        \end{equation}
+        If $k\in O_i$ for some $i \in \{1,\dots,s\}$, then by the definition of $\gamma_{O_i}$, we have:
+        \begin{equation}
+            \gamma_{O_i}(k)=\sigma(k)
+        \end{equation}
+        for all $j \neq i$. Since
+        $\tau = \gamma_{O_i}\dots \gamma_{O_s} = \gamma_{O_i}\prod_{j\neq i} \gamma o_j$.
+
+        We have:
+        \begin{align}
+            \tau(k) &= \gamma_{O_i}\prod_{j\neq i}\gamma_{O_j}(k) \\
+            &= \gamma_{O_i}(k) \\ 
+            &= \sigma(k). 
+        \end{align}
+
+        Therefore, $\sigma(k)=\tau(k)$ for all $k\in \{1,\dots,n\}$, i.e. $\sigma=\tau$.
+
+        Now suppose that $\sigma=\gamma_1\cdots \gamma_r$ where $\gamma_1,\dots,\gamma_r$ are mutually disjoint cycles. We will prove that:
+        \begin{equation}
+            \{\gamma_1,\dots,\gamma_r\} = \{\gamma_O: O\text{ is an orbit of } \sigma \text{ and } |O|\ge 2\}.
+        \end{equation}
+        \textit{Proof of $\subseteq$} Let $i \in \{1,\dots, r\}$ and write $\gamma_i = \begin{pmatrix}
+            c_1&\dots & c_\ell
+        \end{pmatrix}$. Since $\gamma_1,\dots,\gamma_r$ are mutually disjoint, if $j\neq i$, then $\gamma_j(c_k) = c_k$ for all $k \in \{1,\dots,\ell\}$. Therefore,
+        \begin{align}
+            \sigma(c_k) &= \gamma_i \prod_{j\neq i} \gamma_{j}(c_k) \\ 
+            &=  \gamma_i c_k \\ 
+            &= \begin{cases}
+                c_{k+1} & k < \ell \\ 
+                c_1 & k=\ell
+            \end{cases}
+        \end{align}
+        for all $k \in \{1,\dots,\ell\}$. Consequently, $\sigma(c_1)=c_2, \sigma^2(c_1)=c_3$, \dots, $\sigma^{\ell-1}(c_1)=c_\ell, \sigma^\ell(c_1)=c_1$.
+
+        Therefore, $O_\sigma(c_1)=\{c_1,c_2,\dots,c_\ell\}$ and $\gamma_i = \gamma_{O_\sigma(c_1)}$.
+
+        \textit{Proof of $\supseteq$:} Let $O$ be an orbit of $\sigma$ with $|O|\ge 2$. Let $k \in O$. Then as we have seen before, $O=O_\sigma(k)$. Since $|O|\ge 2$, we have $\sigma(k)\neq k$. Since $\sigma = \gamma_1\cdots \gamma_r$ and $\sigma(k) \neq k$, there exists $i\in \{1,\dots,r\}$ such that:
+        \begin{equation}
+            \gamma_i(k) \neq k.
+        \end{equation}
+        Let us write $\gamma_i = \begin{pmatrix}
+            c_1 & \dots & c_\ell
+        \end{pmatrix}$. Since $\gamma_i(k) \neq k$, we have $k=c_j$ for some $j\in \{1,\dots,\ell\}$. By relabelling $c_1,\dots,c_\ell$, we may assume that $k=c_1$. We showed above that $\gamma_i=\gamma_{O_\sigma(c_1)}$.
+
+        Since $c_1=k$, $O_{\sigma})c_1)=O_{\sigma}(k)=O$. Therefore, $\gamma_i=\gamma_O$.
+    \end{proof}
+    \begin{lemma}
+        If $\sigma, \tau \in S_n$ are disjoint, then so are $\sigma^{m_1}, \tau^{m_2}$ for all $m_1,m_2 \in \mathbb{Z}$.
+    \end{lemma}
+    \begin{proof}
+        Suppose $\sigma,\tau \in S_n$ are disjoint Let $m_1,m_2 \in \mathbb{Z}$.
+
+        If $k\in\{1,\dots,n\}$ and $\sigma^{m_1}(k)\neq k$, then $\sigma(k)\neq k$. Therefore, $\tau(k)=k$ (since $\sigma$ and $\tau$ are disjoint), and therefore $\tau^{m_2}(k)=k$.
+
+        Similarly, if $k \in {1,\dots,n}$ and $\tau^{m_2}(k) \neq k$, then $\sigma^{m_1}(k)=k$.
+    \end{proof}
+    \begin{theorem}
+        (Order of a Permutation) Let $\sigma \in S_n$. Let $\sigma = \gamma_1 \cdots \gamma_r$ be the cycle decomposition of $\sigma$. (When $\sigma=\id$, $r=0$ and $\sigma$ is an empty product of mutually disjoint cycles.)
+        \vspace{2mm}
+
+        Then $o(\sigma) = \lcm(o(\gamma_1),\dots,o(\gamma_r))$. (If $\sigma=\id$, then $o(\sigma)=1=\lcm(o(\emptyset))$.)
+    \end{theorem}
+    \begin{proof}
+        Since $\gamma_1,\dots,\gamma_r$ commute, for all $m\in \mathbb{Z}$, we have:
+        \begin{equation}
+            \sigma^m = \gamma_1^m \cdots \gamma_r^m.
+        \end{equation}
+        Let $m_i= o(\gamma_i)$ for each $i$ and let $M=\lcm(m_1,\dots,)$. Since $m_i | M$ for each $i$, we have $\sigma^M = \sigma_1^M \cdots \sigma_r^M = \id \cdots \id = \id$.
+
+        Let $m\in \mathbb{Z}$ and suppose $\sigma^m=\id$. Then $\gamma_1^m \cdots \gamma_r^m=\id$. Since $\gamma_1,\dots,\gamma_r$ are mutually disjoint, so are $\gamma_1^{m},\dots,\gamma_r^{m}$ by the above lemma.
+
+        If $\gamma_i^m(k) \neq k$, then $\gamma_j^m(k)=k$ for all $j\neq i$, so:
+        \begin{equation}
+            \gamma_1^m\cdots \gamma_r^m(k) = \gamma_i^m(k) \neq k,
+        \end{equation}
+        contradicting the fact that:
+        \begin{equation}
+            \gamma_1^m \cdots \gamma_r^m = \id.
+        \end{equation}
+        Therefore, $\gamma_i^m(k)=k$ for all $i,k$. So, $\gamma_i^m=\id$ for all $i$. Therefore $m_i=o(\gamma_i) | m$ for all $i$, Thus, $M=\lcm(m_1,\dots,m_r) | m$.
+
+        We proved that $\sigma^M=1$ and $\sigma^m=1 \implies M|m$. Since $M \in \mathbb{Z}_{>0}$, it follows that $M=o(\sigma)$.
+    \end{proof}
+\end{itemize}
