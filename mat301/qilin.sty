@@ -15,10 +15,6 @@
 \usepackage{bbm} % bold blackboard math
 \usepackage{physics} % various physics related changes
 \usepackage{xcolor} % more colors
-\DeclareMathOperator{\lcm}{lcm}
-\DeclareMathOperator{\fix}{Fix}
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% STYLE %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -41,8 +37,8 @@
 \hypersetup{
     colorlinks=true,
     linkcolor=magenta,
-}
-
+    }
+    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%% GRAPHICS %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -50,10 +46,11 @@
 \usetikzlibrary{shapes,arrows}
 \usepackage{pgfplots} % Plotting capabilities
 \pgfplotsset{compat=1.14}
-
-
-
-
+    
+    
+    
+    
+    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% COLORS %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -236,3 +233,6 @@
 \newcommand{\red}[1]{\widetilde{#1}}
 \newcommand{\Sym}[1]{\mathrm{Sym}\,#1}
 \newcommand{\id}{\text{id}}
+\DeclareMathOperator{\lcm}{lcm}
+    \DeclareMathOperator{\fix}{Fix}
+    \DeclareMathOperator{\inv}{inv}

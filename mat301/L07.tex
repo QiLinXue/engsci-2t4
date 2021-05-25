@@ -1,0 +1,148 @@
+\section{Transpositions}
+\begin{itemize}
+    \item We start with the definition:
+    \begin{definition}
+        A transposition is just a 2-cycle
+    \end{definition}
+    \begin{lemma}
+        Let $\begin{pmatrix}
+            c_1 & \cdots & c_r
+        \end{pmatrix} \in S_n$ be an $r-$cycle. Then:
+        \begin{equation}
+            \begin{pmatrix}
+                c_1 & \cdots & c_r
+            \end{pmatrix} = (c_1\,c_2)(c_2\,c_3)\cdots (c_{r-1}\, c_r),
+        \end{equation}
+        a product of $r-1$ transpositions.
+    \end{lemma}
+    \begin{proof}
+        We can prove by induction that for all $i\in \{1,\dots,r\}$, we have:
+        \begin{equation}
+            (c_1\,c_2)(c_2\,c_3)\cdots (c_{i-1}\, c_i)c_i = c_1.
+        \end{equation}
+        Then, let $i\in \{1,\dots,r-1\}$, and it remains to be shown that:
+        \begin{equation}
+            (c_1\,c_2)(c_2\,c_3)\cdots (c_{r-1}\, c_r)c_i = c_{i+1}.
+        \end{equation}
+        For $j\in\{i+1,\dots,r-1\}$, we have:
+        \begin{equation}
+            (c_j\, c_{j+1})c_i = c_i
+        \end{equation}
+        Therefore:
+        \begin{align}
+            & (c_1\,c_2)\cdots (c_{r-1}\, c_r)c_i \\ 
+            &= (c_1\,c_2)\cdots (c_{i-1}c_i)(c_i\,c_{i+1})c_i \\ 
+            &= (c_1\,c_2)\cdots (c_{i-1}\,c_i)c_{i+1}
+        \end{align}
+        For $j\in \{1,\dots,i-1\}$ we have:
+        \begin{equation}
+            (c_j\,c_{j+1})c_{i+1}=c_{i+1}
+        \end{equation}
+        Therefore:
+        \begin{equation}
+            (c_1\,c_2)\cdots (c_{r-1}\,c_r)c_i = c_{i+1}
+        \end{equation}
+    \end{proof}
+    \begin{corollary}
+        If $\sigma \in S_n$, then $\sigma$ is a (possibly empty) product of transpositions.
+    \end{corollary}
+    \begin{definition}
+        Let $\sigma \in S_n$. An \textbf{inversion} of $\sigma$ is an ordered pair:
+        \begin{equation}
+            (i,j) \in \{1,\dots,n\}^2
+        \end{equation}
+        s.t. $i<j$ and $\sigma(j) < \sigma(i)$.
+        \vspace{2mm}
+
+        Let $\inv(\sigma) = \{(i,j) \in \{1,\dots,n\}^2 | i<j, \sigma(j)<\sigma(i)\}$.
+    \end{definition}
+    \begin{example}
+        Let $\sigma = \begin{pmatrix}
+            1 & 2 & 3& 4 \\ 2&4&1 &3
+        \end{pmatrix} \in S_4$. Then:
+        \begin{equation}
+            \inv(\sigma) = \{(1,3), (2,3), (2,4)\}
+        \end{equation}
+    \end{example}
+    \begin{lemma}
+        Let $\tau \in S_n$ be a transposition with $n \ge 2$. Write $\tau = (k\, \ell)$ with $1\le k < \ell \le n$. Then:
+        \begin{equation}
+            \inv(\tau) = \{ (k,k+1), (k,k+2), \dots, (k,\ell-1), (k,\ell),(k+1,\ell),(k+2,\ell),\dots,(\ell-1,\ell)
+        \end{equation}
+        Thus:
+        \begin{equation}
+            |\inv(\tau)| = 2(\ell-k-1)+1
+        \end{equation}
+    \end{lemma}
+    \begin{theorem}
+        (Parity Theorem) Let $\sigma \in S_n$. If $\sigma = \tau_1 \cdots \tau_r$, where $\tau_1,\dots,\tau_r$ are transpositions, then:
+        \begin{equation}
+            r \equiv |\inv(\sigma)| \pmod{2}
+        \end{equation}
+        Consequently, if $\sigma=\tau_1\cdots \tau_r = \tau_1'\cdots \tau_s'$, where $\tau_1,\dots,\tau_r,\tau_1',\dots,\tau_s'$ are transpositions, then $r\equiv s \pmod{2}$.
+    \end{theorem}
+    \begin{definition}
+        If $\sigma \in S_n$ can be written as a product of an even (resp. odd) number of transpositions, we say that $\sigma$ is even (respectively odd).
+    \end{definition}
+    \begin{corollary}
+        A permutation is either even or odd, but not both. And, the parity of $\sigma \in S_n$ is equal to the parity of the number $|\inv(\sigma)|$.
+    \end{corollary}
+    \item Note that $\inv(\sigma) = \emptyset \iff \sigma = \id$.
+    \item Therefore, $|\inv(\id)|=0$, so $\id$ is an even permutation, i.e. $\id$ can only be written as a product of an even number of transpositions.
+    \item Let $\mathbb{C}[x_1,\dots,x_n]$ denote the set of polynomials in the variables $X_1,\dots,X_n$ with complex coefficients. That is,
+        \begin{equation}
+            \mathbb{C}[x_1,\dots,x_r] = \left\{ \sum_{i_1,\dots,i_n \ge 0} a_{i_1,\dots, i_n} X_1^{i_1}\cdots X_n^{i_n}\right\}
+        \end{equation}
+        where $a_{i_1,\dots,i_n} \in \mathbb{C}$ and all but finitely many of $a_{i_1,\dots , i_n}$ are zero.
+        \vspace{2mm}
+
+    \item For each $\sigma \in S_n$. Define:
+        \begin{equation}
+            A_\sigma: \mathbb{C}[X_1,\dots,X_n] \rightarrow \mathbb{C} [x_1,\dots,X_n]
+        \end{equation}
+    by:
+    \begin{align}
+        & A_\sigma \left(\sum_{i_1,\dots,i_n \ge 0} a_{i_1,\dots,i_n} X_1^{i_1}\cdots X_n^{i_n}\right) \\ 
+        &= \sum_{i_1,\dots, i_n \ge 0} a_{i_1,\dots,i_n} X_{\sigma(1)}^{i_1} \cdots  X_{\sigma(n)}^{i_n} 
+    \end{align}
+    \begin{example}
+        Let $\sigma = (1\,3\,2)$. Then:
+        \begin{equation}
+            A_\sigma (3X_1X_2 + 2X_3^5) = 3X_3X_1 + 2X_2^5
+        \end{equation}
+    \end{example}
+    \item It has the following properties:
+    \begin{enumerate}
+        \item For all $\sigma \in S_n$, we have:
+        \begin{enumerate}
+            \item For all $P,Q \in \mathbb{C}[x+1,\dots, x_n]$, we have 
+            $$A_\sigma(P+Q) = A_\sigma(P) + A_\sigma(Q)$$
+            \item and:
+            \begin{equation}
+                A_\sigma(PQ) = A_\sigma(P)A_\sigma(Q)
+            \end{equation}
+        \end{enumerate}
+
+            \item For all $\sigma,\tau \in S_n$, we have:
+            \begin{equation}
+                A_{\sigma\tau} = A_\sigma \circ A_\tau
+            \end{equation}
+            \begin{proof}
+                Let $P = \sum_{i_1,\dots,i_n} a_{i_1,\dots,i_n} X_1^{i_1}\cdots X_n^{i_n}$ be an arbitrary element of $\mathbb{C}[x_1,\dots,x_n]$. Then:
+                \begin{align}
+                    A_\sigma(A_\tau(P)) &= A_\sigma \left(\sum_{i_1,\dots, i_n \ge 0} a_{i_1,\dots,i_n} X_{\tau(1)}^{i_1}\cdots X_{\tau(n)}^{i_n}\right) \\ 
+                    &= \sum_{i_1,\dots,i_n}\ge 0 a_{i_1,\dots, i_n \ge 0}a_{i_1,\dots,i_n} A_\sigma(X_\tau(1)^{i_1}) \cdots A_\sigma(X_{\tau(n)}^{i_n}) \\ 
+                    &= A_{\sigma\tau}(P)
+                \end{align}
+            \end{proof}
+    \end{enumerate}
+    \begin{definition}
+        The Vandermonde polynomial in $\mathbb{C}[X_1,\dots,X_n]$ is the polynomial $V_n = \prod {1\le i < j \le n} (X_j - X_i)$.
+    \end{definition}
+    \item A key observation is that for all $\sigma \in S_n$, we have:
+    \begin{align}
+        A_\sigma(V_n) &= \prod (X_{\sigma(j)} - X_{\sigma(i)}) \\ 
+        &= (-1)^{|\inv(\sigma)|} \prod_{1\le i < j \le n} (X_j-X_i) \\ 
+        &= (-1)^{|\inv(\sigma)|} V_n
+    \end{align}
+\end{itemize}
