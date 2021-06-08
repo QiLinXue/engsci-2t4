@@ -1,0 +1,296 @@
+\section{Lecture Eight}
+\begin{itemize}
+    \item Recall that for all $\sigma \in S_n$, if we apply it to the Vandermonde polynomial, we have:
+    \begin{align}
+        A_\sigma (V_n) &= A_\sigma \left(\prod_{1\le i < j \le n} (X_j-X_i) \right) \\ 
+        &= \prod_{1\le i < j\le n} \left(X_{\sigma(j)}-X_{\sigma(i)}\right)
+    \end{align}
+    Now, for all $1\le i < j \le n$ we have:
+    \begin{align}
+        X_{\sigma(j)}-X_{\sigma(i)} &= \begin{cases}
+            X_{\sigma(j)}-X_{\sigma(i)} ,& \text{if } \sigma(i)<\sigma(j) \\ 
+            -(X_{\sigma(j)}-X_{\sigma(i)}) ,& \text{if } \sigma(j)<\sigma(i)
+        \end{cases} \\ 
+        &=\begin{cases}
+            X_{\sigma(j)}-X_{\sigma(i)} ,& \text{if } (i,j) \notin \inv(\sigma) \\ 
+            -(X_{\sigma(j)}-X_{\sigma(i)}) ,& \text{if } (i,j) \in \inv(\sigma)
+        \end{cases}
+    \end{align}
+    Therefore:
+    \begin{align}
+        A_\sigma (V_n) &= (-1)^{|\inv(\sigma)} \prod_{1\le i < j \le n}(X_j-X_i) \\ 
+        &= (-1)^{|\inv(\sigma)|}V_n
+    \end{align}
+    \begin{definition}
+        The \textbf{sign} of $\sigma \in S_n$ is given by:
+        \begin{equation}
+            \sgn(\sigma) = (-1)^{|\inv(\sigma)|}
+        \end{equation}
+        and therefore:
+        \begin{equation}
+            A_\sigma(V_n) = \sgn(\sigma)V_n
+        \end{equation}
+    \end{definition}
+    \begin{lemma}
+        We have the following properties:
+        \begin{enumerate}
+            \item For all $\sigma,\tau \in S_n$, we have:
+            \begin{equation}
+                \sgn(\sigma\tau) = \sgn(\sigma)\sgn(\tau)
+            \end{equation}
+            \item If $\tau\in S_n$ is a transposition, then $\sgn(\tau)=-1$.
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        We prove both parts:
+        \begin{enumerate}
+            \item Let $\sigma,\tau \in S_n$. Then:
+            \begin{align}
+                \sgn(\sigma\tau)V_n &= A_{\sigma\tau}(V_n) \\ 
+                &= A_\sigma(A_\tau(V_n)) \\ 
+                &= A_\sigma(\sgn(\tau)V_n) \\ 
+                &= A_\sigma(\sgn\tau)A_\sigma(V_n) \\ 
+                &= \sgn(\tau)A_\sigma(V_n) \\ 
+                &= \sgn(\tau)\sgn(\sigma)V_n \\ 
+                &= \sgn(\sigma)\sgn(\tau)V_n
+            \end{align}
+            \item Let $\tau \in S_n$ be a transposition. By an earlier lemma, we have $|\inv\tau|$ is odd. Therefore:
+            \begin{equation}
+                \sgn(\tau) = (-1)^{|\inv\tau|} = -1
+            \end{equation}
+        \end{enumerate}
+    \end{proof}
+    \item We can now prove the Parity Theorem.
+    \begin{proof}
+        Let $\sigma\in S_n$ and write $\sigma = \tau_1\cdots \tau_r$, where $\tau_1,\dots,\tau_r$ are transpositions. Then:
+        \begin{equation}
+            (-1)^{|\inv(\sigma)|} = \sgn(\sigma)=\sgn(\tau_1)\cdots \sgn(\tau_r) = (-1)^r
+        \end{equation}
+        Therefore $(-1)^{|\inv(\sigma)|-r}=1$, so:
+        \begin{equation}
+            |\inv(\sigma)| \equiv r \pmod{2}
+        \end{equation}
+    \end{proof}
+    \begin{corollary}
+        For all $\sigma \in S_n$, $\sigma$ is even (respectively odd) if and only if $\sgn(\sigma) = 1$ (respectively $\sgn(\sigma)=-1$).
+    \end{corollary}
+    \item We introduce the notion of alternating groups.
+    \begin{definition}
+        The set
+        \begin{align}
+            A_n &= \{\sigma \in S_n | \sigma\text{ is even}\} \\ 
+            &= \{\sigma \in S_n | \sgn(\sigma) = 1\}
+        \end{align}
+        is a subgroup of $S_n$ called the alternating group on $n$ letters.
+    \end{definition}
+    \begin{proof}
+        Since $A_n$ is finite, it suffices to show that $A_n$ is closed under the group operation and $A_n$ is nonempty, by the finite subgroup test.
+
+        Since $\id$ is even, $\id \in A_n$ so $A_n \neq \emptyset$. Let $\sigma_1,\sigma_2 \in A_n$. We will prove that $\sigma_1\sigma_2 \in A_n$. There are a few methods to do so:
+        \begin{itemize}
+            \item First method: Since $\sigma_1,\sigma_2$ are even, there exist transpositions $\tau_1,\dots,\tau_r,\tau_1',\dots,\tau_s'$ such that:
+            \begin{equation}
+                \sigma_1=\tau_1\cdots\tau_r,\quad \sigma_2 = \tau_1'\cdots \tau_s'
+            \end{equation}
+            and $r$ and $s$ are even. Then:
+            \begin{equation}
+                \sigma_1\sigma_2 = \tau_1\cdots\tau_r\tau_1'\cdots\tau_s'
+            \end{equation}
+            so it is a product of $r+s$ transpositions. Since $r+s$ is even, the permutation $\sigma_1\sigma_2$ is even, i.e. $\sigma_1\sigma_2 \in A_n$.
+            \item We have:
+            \begin{equation}
+                \sgn(\sigma_1\sigma_2)=\sgn(\sigma_1)\sgn(\sigma_2) = 1
+            \end{equation}
+            so $\sigma_1\sigma_2\in A_n$.
+        \end{itemize}
+    \end{proof}
+    \begin{proposition}
+        For $n>1$, we have:
+        \begin{equation}
+            |A_n| = \frac{|S_n|}{2} = \frac{n!}{2}
+        \end{equation}
+        Note that $A_1=S_1=\{\id\}$ so $|A_1|=1$.
+    \end{proposition}
+    \begin{proof}
+        Since $n>1$, $(1\,2)\in S_n$. Let $\tau=(1\,2)$. Then, the map
+        \begin{equation}
+            g:S_n \rightarrow S_n
+        \end{equation}
+        defined by $g(\sigma)=\tau\sigma$, restricts to a bijection
+        \begin{equation}
+            g:A_n \rightarrow S_n \setminus A_n
+        \end{equation}
+        The map $g$ is well-defined since for all $\sigma \in S_n$, we have:
+        \begin{equation}
+            \sgn(\tau\sigma)=\sgn(\tau)\sgn(\sigma)=-\sgn(\sigma)
+        \end{equation}
+        and $g$ is a bijection because
+        \begin{align}
+            h:S_n \setminus A_n \rightarrow A_n \\ 
+            \sigma \mapsto \tau\sigma
+        \end{align}
+        is its inverse. Therefore:
+        \begin{equation}
+            |A_n| = |S_n \setminus A_n|.
+        \end{equation}
+        Since $S_n = A_n \sqcup (S_n \setminus A_n)$, we have:
+        \begin{align}
+            |S_n| &= |A_n| + |S_n \setminus A_n| \\ 
+            &= 2|A_n|
+        \end{align}
+    \end{proof}
+    \item We begin a look at isomorphisms. Let $A=\begin{pmatrix}
+        1&0\\0&-1
+    \end{pmatrix}$, $B=\begin{pmatrix}
+        -1&0\\ 0&1
+    \end{pmatrix}$, $C=\begin{pmatrix}
+        -1&0\\0&-1
+    \end{pmatrix}$, and define $G=\{I,A,B,C\}$. Then $G$ is a group under matrix multiplication.
+    \item The Cayley table of $G$ is:
+    \begin{center}
+        \begin{tabular}{c|cccc}
+            \cline{2-5}
+                                    & \multicolumn{1}{c|}{I} & \multicolumn{1}{c|}{A} & \multicolumn{1}{c|}{B} & \multicolumn{1}{c|}{C} \\ \hline
+            \multicolumn{1}{|c|}{I} & I                      & A                      & B                      & C                      \\ \cline{1-1}
+            \multicolumn{1}{|c|}{A} & A                      & I                      & C                      & B                      \\ \cline{1-1}
+            \multicolumn{1}{|c|}{B} & B                      & C                      & I                      & A                      \\ \cline{1-1}
+            \multicolumn{1}{|c|}{C} & C                      & B                      & A                      & I                      \\ \cline{1-1}
+            \end{tabular}
+    \end{center}
+    Notice that this is an abelian group.
+    \item Let $\alpha=(12)(34)$, $\beta=(13)(24)$, and $\gamma=(14)(23)$. Define $H=\{\id,\alpha,\beta,\gamma\}$. Then $H$ is a subgroup of $A_4$. 
+    \item The Cayley Table of $H$ is:
+    \begin{center}
+        \begin{tabular}{c|cccc}
+            \cline{2-5}
+                                                        & \multicolumn{1}{c|}{$\id$} & \multicolumn{1}{c|}{$\alpha$} & \multicolumn{1}{c|}{$\beta$} & \multicolumn{1}{c|}{$\gamma$} \\ \hline
+            \multicolumn{1}{|c|}{$\id$}                 & $\id$                      & $\alpha$                      & $\beta$                      & $\gamma$                      \\ \cline{1-1}
+            \multicolumn{1}{|c|}{$\alpha$}              & $\alpha$                   & $\id$                         & $\gamma$                     & $\beta$                       \\ \cline{1-1}
+            \multicolumn{1}{|c|}{$\beta$}  & $\beta$                    & $\gamma$                      & $\id$                        & $\alpha$                      \\ \cline{1-1}
+            \multicolumn{1}{|c|}{$\gamma$} & $\gamma$                   & $\beta$                       & $\alpha$                     & $\id$                         \\ \cline{1-1}
+            \end{tabular}
+    \end{center}
+    \item A key observation is that the two Cayley tables are the same. Specifically, if we define $\phi:G\rightarrow H$ by:
+    \begin{equation}
+        \phi(I)=id,\, \phi(A)=\alpha,\,\phi(B)=\beta,\,\phi(C)=\gamma
+    \end{equation}
+    then $\phi$ is a bijection and the entry of the Cayley table of $H$ corresponding to row $x$ and the Cayley table of $H$ is:
+    \begin{center}
+        \begin{tabular}{c|cccc}
+            \cline{2-5}
+                                            & \multicolumn{1}{c|}{$\phi(I)$} & \multicolumn{1}{c|}{$\phi(A)$} & \multicolumn{1}{c|}{$\phi(B)$} & \multicolumn{1}{c|}{$\phi(C)$} \\ \hline
+            \multicolumn{1}{|c|}{$\phi(I)$} &                                &                                &                                &                                \\ \cline{1-1}
+            \multicolumn{1}{|c|}{$\phi(A)$} &                                &                                & $\phi(C)$                      &                                \\ \cline{1-1}
+            \multicolumn{1}{|c|}{$\phi(B)$} &                                &                                &                                &                                \\ \cline{1-1}
+            \multicolumn{1}{|c|}{$\phi(C)$} &                                &                                &                                &                                \\ \cline{1-1}
+            \end{tabular}
+    \end{center}
+    where we have only written down one entry. 
+    \item Note that $\phi(A)\phi(B)=\phi(C)=\phi(AB)$.
+    \item In general, we have:
+    \begin{equation}
+        \phi(XY) = \phi(X)\phi(Y)
+    \end{equation}
+    for all $X,Y \in G$.
+    \begin{definition}
+        Let $G$ and $H$ be groups. An isomorphism from $G$ to $H$ is a map $\phi:G \to H$ such that:
+        \begin{enumerate}
+            \item $\phi$ respects the group operations, i,e, for all $g_1,g_2 \in G$ we have
+            \begin{equation}
+                \phi(g_1g_2)=\phi(g_1)\phi(g_2)
+            \end{equation}
+            \item $\phi$ is a bijection.
+        \end{enumerate}
+        If there exists an isomorphism from $G$ to $H$, we say that $G$ is isomorphic to $H$ and we write:
+        \begin{equation}
+            G \simeq H
+        \end{equation}
+    \end{definition}
+    \item \textbf{Etymology:} \textit{isos} is ancient greek for ``equal'' and \textit{morphe} is ancient greek for form/shape/appearance.
+    \begin{example}
+        Define $\phi: \mathbb{R} \rightarrow \mathbb{R}_{>0}$ by $\phi(x)=e^x$. Then $\phi$ is a bijection and for all $x,y\in \mathbb{R}$, we have:
+        \begin{equation}
+            \phi(x+y)=e^{x+y}=e^xe^y = \phi(x)\phi(y)
+        \end{equation}
+        Thus, $\phi$ is an isomorphism from $(\mathbb{R},+)$ to $(\mathbb{R}_{>0},\cdot)$.
+        \vspace{2mm}
+
+        More generally, for any $a>0$, $a\neq 1$, the map $\phi:\mathbb{R} \rightarrow \mathbb{R}_{>0}$ defined by $\phi(x)=a^x$ is an isomorphism from $(\mathbb{R},+)$ to $(\mathbb{R}_{>0},\cdot)$.
+        \vspace{2mm}
+
+        The inverse $\Psi: \mathbb{R}_{>0}\rightarrow \mathbb{R}$ is given by $\Psi(x)  \log_a(x)$ and is also an isomorphism.
+    \end{example}
+    \begin{example}
+        Let $X$ and $Y$ be sets with $|X|=|Y|$. Choose a bijection $f:X\rightarrow Y$. Then, the map:
+        \begin{equation}
+            \Phi: S_X \rightarrow S_Y
+        \end{equation}
+        defined by $\phi(\sigma) = f \circ \sigma \circ f^{-1}$ for all $\sigma \in S_X$ is an isomorphism.
+        \vspace{2mm}
+
+        Recall that $S_x = \{\sigma:X\rightarrow X| \sigma\text{ is a bijection}\}$.
+    \end{example}
+    \begin{lemma}
+        \begin{enumerate}
+            \item For every group $G$, $\id:G\rightarrow G$ is an isomorphism.
+            \item For every isomorphism $\phi: G \rightarrow H$, its inverse $\phi^{-1}$ is an isomorphism.
+            \item If $\phi: G\rightarrow H$ and $\psi: H\to K$ are isomorphisms, then so is $\psi \circ \phi: G \rightarrow K$.
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        We prove each individually
+        \begin{enumerate}
+            \item This is immediate.
+            \item Let $\phi:G\rightarrow H$ be an isomorphism. Then $\phi^{-1}:H\rightarrow G$ exists and is a bijection, since $\phi$ is a bijection. All we have to do now is to show it respects the group operation.
+            
+            Let $h_1,h_2 \in H$ and let $g_1 = \phi^{-1}(h_1)$ and $g_2= \phi^{-1}(h_2)$. Then:
+            \begin{equation}
+                \phi(g_1g_2)=\phi(g_1)\phi(g_2)
+            \end{equation}
+            since $\phi$ is an isomorphism. Therefore:
+            \begin{equation}
+                g_1g_2 = \phi^{-1}(\phi(g_1g_2))=\phi^{-1}(h_1h_2).
+            \end{equation}
+            Since $g_1 = \phi^{-1}(h_1)$ and $g_2=\phi^{-1}(h_2)$, we get:
+            \begin{equation}
+                \phi^{-1}(h_1h_2) = \phi^{-1}(h_1)\phi^{-1}(h_2)
+            \end{equation}
+            \item Let $\phi: G\rightarrow H$, $\psi: H\rightarrow K$ be isomorphisms. Then $\psi\phi:G\rightarrow K$ is a bijection since it is a composition of bijections.
+            
+            And for all $g_1,g_2 \in G$, we have:
+            \begin{align}
+                (\psi \circ \phi)(g_1g_2) &= \psi(\phi(g_1g_2)) \\ 
+                &= \psi(\phi(g_1)\phi(g_2)) \\ 
+                &= \psi(\phi(g_1)\psi(\phi(g_2)) \\ 
+                &= (\psi \circ \phi)(g_1) (\psi \circ \phi)(g_2) 
+            \end{align}
+            Therefore $\psi \circ \phi$ is an isomorphism.
+        \end{enumerate}
+    \end{proof}
+    \item This is an important result because it means:
+    \begin{enumerate}
+        \item For all groups $G$, we have $G \simeq G$.
+        \item If $G \simeq H$, then $H \simeq G$.
+        \item If $G \simeq H$ and $H\simeq K$, then $G \simeq K$.
+    \end{enumerate} 
+    So, $\simeq$ is an equivalence relation on the class of all groups.
+    \begin{definition}
+        An automorphism of a group $G$ is an isomorphism from $G$ to itself.
+    \end{definition}
+    \begin{example}
+        Let $p>0$. Define $\phi:R_{>0}\rightarrow R_{>0}$ by $\phi(x)=x^p$ for all $x\in \mathbb{R}_{>0}$. This is an automorphism of $(\mathbb{R}_{>0}, \cdot)$.
+        \vspace{2mm}
+
+        This is true because for all $x,y\in \mathbb{R}_{>0}$, $\phi(xy)=(xy)^p=x^py^p=\phi(x)\phi(y)$ and $\psi:R_{>0}\rightarrow R_{>0}$ is defined by $\psi(x)=x^{1/p}$ for all $x\ in \mathbb{R}_{>0}$ is the inverse of $\phi$.
+    \end{example}
+    \begin{example}
+        For every $c\in \mathbb{R}^x$, the map $\phi:\mathbb{R} \rightarrow \mathbb{R}$ defined by $\phi(x)=cx$ is an automorphism of $(\mathbb{R},+)$.
+    \end{example}
+    \begin{example}
+        If $G$ is an abelian group, then $\phi:G\rightarrow G$ defined by $\phi(g)=g^{-1}$ for all $g\in G$ is an automorphism of $G$.
+    \end{example}
+    \begin{definition}
+        For each group $G$, define $\aut(G)$ to be the set of automorphisms of $G$. Then $\aut(G)$ is a group under composition and is called the automorphism group of $G$.
+    \end{definition}
+    \item The automorphisms of a group $G$ are the ``symmetries'' of $G$ and $\aut(G)$ is the symmetry group of $G$.
+\end{itemize}

@@ -1,0 +1,123 @@
+\section{Lecture Nine}
+\begin{itemize}
+    \item Recall that for a group $G$, $\aut(G)$ is the set of all automorphisms of $G$, i.e. isomorphisms from $G$ to itself, and $\aut(G)$ is a group under composition. $\aut(G)$ is called the automorphism group.
+          \begin{proposition}
+              Let $G$ be a group and $a\in G$. The map
+              \begin{equation}
+                  \Int(a):G \rightarrow G
+              \end{equation}
+              defined by $\Int(a)(g)=aga^{-1}$ for all $g \in G$ is an automorphism of $G$, called an \textbf{inner automorphism} of $G$. We define:
+              \begin{equation}
+                  \Int(G) = \Inn(G) = \{\Int(a): a \in G\}
+              \end{equation}
+              We have $\Int(G) \le \Aut(G)$, called the group of inner automorphisms.
+          \end{proposition}
+          \begin{proof}
+              Let $a\in G$. Note that $\Int(a^{-1})$ is the inverse of $\Int(a)$ since for all $g\in G$ we have:
+              \begin{equation}
+                  \Int(a)(\Int(a^{-1})(g))=a(a^{-1}ga)a^{-1}=g
+              \end{equation}
+              and:
+              \begin{equation}
+                  \Int(a^{-1})(\Int(a)(g))=a^{-1}(aga^{-1})a = g
+              \end{equation}
+              Therefore, $\Int(a)$ is a bijection from $G$ to itself.
+
+              Let $g_1,g_2 \in G$. Then:
+              \begin{align}
+                  \Int(a)(g_1g_2) & = a(g_1g_2)a^{-1}          \\
+                                  & = ag_1a^{-1}ag_2a^{-1}     \\
+                                  & = \Int(a)(g_1)\Int(a)(g_2)
+              \end{align}
+              Therefore, $\Int(a) \in \aut(G)$. For each $a\in G$, $\Int(a) \in \Int(G)$ by definition. Therefore: $\Int(G) \neq \emptyset$. Let $a,b \in G$. Then we claim that:
+              \begin{equation}
+                  \Int(a)^{-1} = \Int(a^{-1})
+              \end{equation}
+              and $\Int(a)\Int(b) = \Int(ab)$. We already proved (1). Let $g\in G$. Then:
+              \begin{align}
+                  \Int(a)(\Int(b)(g)) & = a(bgb^{-1})a^{-1} \\
+                                      & = abgb^{-1}a^{-1}   \\
+                                      & = (ab)g(ab)^{-1}    \\
+                                      & = \Int(ab)g
+              \end{align}
+              This proves part (2) of the 2-step subgroup test. By the $2$ step subgroup test, $\Int(G) \le \Aut(G)$.
+          \end{proof}
+    \item In general, $\Int(G) \neq \Aut(G)$.
+    \item We introduce the notion of homomorphisms.
+          \begin{definition}
+              Let $G$ and $H$ be groups. A homomorphism from $G$ to $H$ is a map $\phi:G\rightarrow H$ that respects the group operations, i.e. for all $g_1,g_2 \in G$, we have:
+              \begin{equation}
+                  \phi(g_1g_2) = \phi(g_1)\phi(g_2)
+              \end{equation}
+              The difference between a homomorphism and an isomorphism is that $\phi$ does not have to be bijective.
+          \end{definition}
+    \item Here are a few examples:
+          \begin{enumerate}
+              \item Every isomorphism is a homomorphism.
+              \item $\det: GL_n(F) \rightarrow F^\times$ is a homomorphism for any field $F$ (i.e. $F=\mathbb{Q}, \mathbb{R}, \mathbb{C}, \mathbb{F}_p = \left(\mathbb{Z}/p\mathbb{Z}\right)^\times$)
+              \item $\sgn: S_n \rightarrow \{\pm 1\}$ is a homomorphism.
+              \item $|\cdot|: \mathbb{R}^\times \rightarrow \mathbb{R}_{>0}$ and $|\cdot|: \mathbb{C}^\times \rightarrow \mathbb{R}_{>0}$ are homomorphisms.
+              \item If $G$ is an abelian group and $k\in \mathbb{Z}$, then the map
+                    \begin{equation}
+                        \phi:G\rightarrow G
+                    \end{equation}
+                    defined by $\phi(a)=a^k$ for all $a\in G$ is a homomorphism.
+                    \begin{proof}
+                        If $a,b\in G$, then $\phi(ab)=(ab)^k=a^kb^k = \phi(a)\phi(b)$.
+                    \end{proof}
+                    Remarks: Note that if $G$ is written additively, then $\phi(a)=ka$.
+              \item If $H \le G$, then the map $i:H\rightarrow G$ defined by $i(h)=h$ for all $h\in H$ is an injective homomorphism.
+              \item $\phi:\mathbb{Z} \rightarrow \mathbb{Z}/n\mathbb{Z}$ defined by $\phi(x) = [x]$ for all $x\in \mathbb{Z}$ is a surjective homomorphism.
+              \item $\phi:\mathbb{C}\rightarrow \mathbb{C}^\times$ defined by $\phi(z)=e^z$ is a surjective homomorphism.
+          \end{enumerate}
+          \begin{proposition}
+              If $\phi:G\rightarrow H$ and $\phi:H\rightarrow K$ are homomorphisms, then $\phi \circ \phi:G\rightarrow K$ is a homomorphism.
+          \end{proposition}
+          \begin{proposition}
+              Let $\phi:G\rightarrow H$ be a homomorphism. Then:
+              \begin{enumerate}
+                  \item $\phi(e)=e$ (note that the $e$ belongs to different groups)
+                  \item For all $n\in \mathbb{Z}$ and for all $g\in G$, we have
+                        \begin{equation}
+                            \phi(g^n)=\phi(g)^n
+                        \end{equation}
+              \end{enumerate}
+          \end{proposition}
+          \begin{proof}
+              We prove both parts:
+              \begin{enumerate}
+                  \item Since $\phi(e)=\phi(ee)=\phi(e)\phi(e)$, we have $e=\phi(e)$ by multiply on both sides by $\phi(e)^{-1}$.
+                  \item For all $g\in G$ and for all $n\in \mathbb{Z}_{\ge 0}$, we have $\phi(g^n)=\phi(g)^n$ by a simple induction argument. Now,
+                        \begin{equation}
+                            e = \phi(e) = \phi(gg^{-1})=\phi(g)\phi(g^{-1})
+                        \end{equation}
+                        MMultiplying both sides by $\phi(g)^{-1}$ on the left gives $\phi(g)^{-1} = \phi(g^{-1})$. For all $g\in G$ and all $n\in \mathbb{Z}_{>0}$, we have:
+                        \begin{align}
+                            \phi(g^{-n}) & =\phi((g^{-1})^n)  \\
+                                         & = \phi(g^{-1})^n   \\
+                                         & = (\phi(g)^{-1})^n \\
+                                         & = \phi(g)^{-n}
+                        \end{align}
+              \end{enumerate}
+          \end{proof}
+          \begin{corollary}
+              Let $\phi:G\rightarrow H$ be a homomorphism. If $g\in G$ and $o(g) < \infty$, then $o(\phi(g))|o(g)$.
+          \end{corollary}
+          \item Let $k_1,\dots,k_r,\ell_1,\dots,\ell_s \in \mathbb{Z}$ and consider the equation which we denote as (*):
+          \begin{equation}
+              x_1^{k_1}\cdots x_r^{k_r}=y_1^{\ell_1}\cdots y_s^{\ell_s}
+          \end{equation}
+          For $(a_1,\dots,a_r,b_1,\dots,b_s)\in G$, we say that $(a_1,\dots,a_r,b_1,\dots,b_s)$ is a solution to the above equation if:
+          \begin{equation}
+              a_1^{k_1}\cdots a_r^{k_r} = b_1^{\ell_1}\cdots b_s^{\ell_s}
+          \end{equation}
+          \item Let $\phi:G\rightarrow H$ be a homomorphism. Then:
+          \begin{enumerate}
+              \item For all $(a_1,\dots,a_r,b_1,\dots,b_s) \in G^{r+s}$, then $(a_1,\dots, a_r,b_1,\dots,b_s)$ is a solution to (8) in $G$, which implies:
+              \begin{equation}
+                  (\phi(a_1),\dots,\phi(a_r),\phi(b_1),\dots,\phi(b_s))
+              \end{equation}
+              is a solution to $(*)$ in $H$.
+              \item If $\phi$ is an isomorphism, then for all $(a_1,\dots,a_r,b_1,\dots,b_s)\in G^{r+s}$, then the converse of the above holds.
+          \end{enumerate}
+\end{itemize}

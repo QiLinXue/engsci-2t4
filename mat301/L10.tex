@@ -1,0 +1,198 @@
+\section{Lecture Ten}
+\begin{itemize}
+    \item As a consequence of the result from last lecture, we have the following proposition:
+    \begin{proposition}
+        Let $\phi:G\rightarrow H$ be a homomorphism.
+        \begin{enumerate}
+            \item For all $a,b \in G$, $a$ and $b$ commute if and only if $\phi(a)$ and $\phi(b)$ commute.
+            \item $G$ is abelian if and only if $H$ is abelian.
+            \item For all $n\in \mathbb{Z}_{>0} \cap \{\infty\}$ and for all $a\in G$, $o(a)=n$ if and only if $o(\phi(a))=n$.
+            \item $G$ is cyclic if and only if $H$ is cyclic.
+            \item For all $S \subseteq G$ and $a \in G$, $a\in C_G(S)$ if and only if $\phi(a) \in C_H(\phi(S))$ (i.e. $a$ commutes with every element of $S$ if and only if $\phi(a)$ commutes with every element of $\phi(S)$).
+            
+            In particular, $\phi(C_G(S))=C_H(\phi(S))$. Taking $S=G$ gives $\phi(Z(G))=Z(H)$. Recall that:
+            \begin{equation}
+                C_G(S) = \{g\in G|gs=sg, \forall s \in S\}
+            \end{equation}
+            This is a subgroup of $G$ called the centralizer of $S$ in $G$. And:
+            \begin{equation}
+                Z(G) = C_G(G) = \{g\in G|gx=xg,\forall x\in G\}
+            \end{equation}
+            and is called the center of $G$.
+        \end{enumerate}
+    \end{proposition}
+    \item Next, we relate homomorphisms and subgroups.
+    \begin{proposition}
+        Let $\phi:G\rightarrow H$ be a homomorphism.
+        \begin{enumerate}
+            \item If $K\le G$, then $\phi(K) := \{\phi(k):k \in K\} \le H$.
+            \item If $K \le H$, then:
+            \begin{equation}
+                \phi^{-1}(K) := \{g\in G| \phi(g) \in K\} \le G.
+            \end{equation}
+        \end{enumerate}
+    \end{proposition}
+    This can be proved via the one-step subgroup test.
+    \begin{definition}
+        Let $\phi:G\rightarrow H$ be a homomorphism. The image of $\phi$ is the subgroup:
+        \begin{equation}
+            \image(\phi):= \phi(G)
+        \end{equation}
+        of $H$. The kernel of $\phi$ is the subgroup:
+        \begin{equation}
+            \ker(\phi):= \phi^{-1}(\{e\})
+        \end{equation}
+        of $G$.
+    \end{definition}
+    \item Note that if we let $\phi:G\rightarrow H$ be a homomorphism.
+    \begin{enumerate}
+        \item If $K \le G$, then $\phi|_K : K \rightarrow H$ is a homomorphism.
+        \item If $K \le H$ and $\im(\phi) \subseteq K$, then the map $\phi|^K: G \rightarrow K$ defined by restricting the codomain of $\phi$ is a homomorphism.
+    \end{enumerate}
+    \item Remark: If $G$ is a group, $K_1,K_2 \le G$, and $K_1 \subseteq K_2$, then $K_1 \le K_2$.
+    \item Note that a homomorphism $\phi:G\rightarrow H$ is surjective iff $\im \phi = H$ and is injective iff the map $\phi|^K:G\rightarrow \im\phi$ is an isomorphism.
+    \begin{proposition}
+        Let $\phi:G\rightarrow H$ be a homomorphism.
+        \begin{enumerate}
+            \item For all $a,b\ in G$, the following are equivalent:
+            \begin{enumerate}
+                \item $\phi(a) = \phi(b)$
+                \item $ab^{-1} \in \ker(\phi) (\iff ba^{-1} \in \ker\phi)$
+                \item $b^{-1}a \in \ker\phi$
+            \end{enumerate}
+            \item $\phi$ is injective iff $\ker\phi = \{e\}$
+        \end{enumerate}
+    \end{proposition}
+    \begin{proof}
+        We prove both parts:
+        \begin{enumerate}
+            \item Let $a,b\in G$. Then:
+            \begin{align}
+                \phi(a) = \phi(b) &\iff \phi(a)\phi(b)^{-1} = e\\ 
+                &\iff \phi(ab^{-1}) = e \\ 
+                &\iff ab^{-1} \in \ker\phi 
+            \end{align}
+            Similarly, $\phi(a)=\phi(b) \iff b^{-1}a \in \ker\phi$.
+            \item Suppose $\phi$ is injective. Then for all $a\in G$ with $a\neq e$, we have $\phi(a) \neq \phi(e)=e$, so $a \notin \ker \phi$. Therefore $\ker\phi \subseteq \{e\}$. Since $e \in \ker\phi$, $\ker\phi = \{e\}$.
+            
+            Suppose $\ker\phi = \{e\}$. Let $a,b\in G$ and assume $\phi(a)=\phi(b)$. By (1), we have $ab^{-1} \in \ker\phi = \{e\}$. Therefore, $ab^{-1}=e$, i.e. $a=b$.
+        \end{enumerate}
+    \end{proof}
+    \begin{proposition}
+        Let $\phi: G\rightarrow H$ be a homomorphism and let $K \le G$.
+        \begin{enumerate}
+            \item If $K$ is abelian, then $\phi(K)$ is abelian.
+            \item If $K$ is cyclic, then $\phi(K)$ is cyclic. In fact, if $a\in G$, then:
+            \begin{equation}
+                \phi(\langle a\rangle) = \langle \phi(a) \rangle.
+            \end{equation}
+        \end{enumerate}
+    \end{proposition}
+    \begin{proof}
+        \begin{enumerate}
+            \item Suppose $K$ is abelian. Let $h_1,h_2 \in \phi(K)$. There exists $k_1,k_2\in K$ s.t. $h_1 = \phi(k_1)$ and $h_2 = \phi(k_2)$. Then:
+            \begin{equation}
+                h_1h_2 = \phi(k_1)\phi(k_2)=\phi(k_1k_2)
+            \end{equation}
+            and:
+            \begin{equation}
+                h_2h_1=\phi(k_2)\phi(k_1)=\phi(k_2k_1)
+            \end{equation}
+            Since $K$ is abelian, $k_1k_2 = k_2k_1$. Therefore, $h_1h_2 = h_2h_1$. Thus, $\phi(K)$ is abelian.
+            \item Let $K$ be a cyclic subgroup of $G$ and let $a$ be a generator of $K$. Then:
+            \begin{align}
+                \phi(K) &= \phi(\langle a\rangle) \\ 
+                &= \phi(\{a^k : k\in \mathbb{Z}\}) \\ 
+                &= \{\phi(a^k): k\in \mathbb{Z}\} \\ 
+                &= \{\phi(a)^k: k\in \mathbb{Z}\} \\ 
+                &= \langle \phi(a) \rangle.
+            \end{align}
+        \end{enumerate}
+    \end{proof}
+    \begin{warning}
+        The converse is not necessarily true. Note that if $G$ is non-abelian, $H$ is any group, and $\phi:G\rightarrow H$ is the trivial homomorphism, then $\phi(G) = \{e\}$, which is cyclic (hence abelian), but $G$ is non-abelian (hence non-cyclic).
+    \end{warning}
+    \item Define $L_g : G\rightarrow G$ by $L_g(x)=gx$. For all $g_1,g_2 \in  G$, we have:
+    \begin{equation}
+        L_{g_1g_2}=L_{g_1} \circ L_{g_2}
+    \end{equation}
+    \begin{proof}
+        Let $g_1,g_2 \in G$. For all $x\in G$, we have:
+        \begin{align}
+            L_{g_1g_2}(x) &= (g_1g_2)x \\ 
+            &= g_1(g_2x) \\ 
+            &= g_1 L_{g_2}(x) \\ 
+            &= L_{g_1}(L_{g_2}(x))
+        \end{align}
+    \end{proof}
+    Therefore, $L_{g_1g_2}=L_{g_1}\circ L_{g_2}$.
+    \item Notice that $L_e = \id_{G}$. Indeed, for all $x\in G$, we have $L_e(x)=ex=x$.
+    \item For all $g\in G$, we have $(L_g)^{-1}=L_{g^{-1}}$.
+    \begin{proof}
+        Let $g\in G$. Then:
+        \begin{equation}
+            L_{g^{-1}}\circ L_g = L_{g^{-1}g} = L_e = \id 
+        \end{equation}
+        and:
+        \begin{equation}
+            L_{g} \circ L_{g^{-1}} = L_{gg^{-1}} = L_e = \id
+        \end{equation}
+        Therefore, for all $g\in G$ the map $L_g:G\rightarrow G$ is a permutation.
+    \end{proof}
+    \item We have a map $L:G \rightarrow L_g$, $g\mapsto L_g$. Recall that $S_g=\{f:G\to G|f\text{ is a bijection}\}$.
+    \begin{theorem}
+        Cayley's Theorem: The map $L:G\rightarrow S_G$ is an injective homomorphism. Therefore $L:G\rightarrow \im L$ is an isomorphism from $G$ to the permutation group $\im L$.
+    \end{theorem}
+    \begin{proof}
+        We already proved that $L$ is a homomorphism. To prove that $L$ is injective, we must prove that $\ker L = \{e\}$. Let $g\in \ker L$, i.e. $L_g = \id_G$. Therefore $g=ge=L_g(e)=\id_G(e)=e$. Thus $\ker L \subseteq \{e\}$. Since $e\in \ker L$, we have $\ker L = \{e\}$.
+    \end{proof}
+    \item The map $L:G \rightarrow S_G$ is called the Cayley permutation representation of $G$ and the left regular permutation representation of $G$.
+    \item Let us study homomorphisms from cyclic groups..
+    \begin{theorem}
+        Let $G$ be an infinite cyclic group, let $a$ be a generator of $G$, and let $H$ be a group.
+        \begin{enumerate}
+            \item For every $b\in H$, the map:
+            \begin{equation}
+                \phi_b = \phi_{a,b} : G\rightarrow H
+            \end{equation}
+            defined by $\phi_b(a^k)=b^k$ for all $k\in\mathbb{Z}$ is well defined and is a homomorphism.
+            \item Every homomorphism $\phi:G\rightarrow H$ is of the form $\phi_b$ for a unique $b\in H$.
+            \item For all $b\in H$, $\phi_b$ is injective iff $o(b)=\infty$ and $\phi_b$ is surjective iff $H=\langle b\rangle$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        \begin{enumerate}
+            \item Let $b \in H$. The map $\phi_b$ is well defined since every element of $G$ is of the form $a^k$ for a unique $k \in \mathbb{Z}$. It is a homomorphism since for all $k_1,k_2 \in \mathbb{Z}$,
+            \begin{align}
+                \phi_b(a^{k_1}a^{k_2}) &= \phi_b(a^{k_1+k_2}) \\ 
+                &= b^{k_1+k_2} \\ 
+                &= b^{k_1}b^{k_2} \\ 
+                &= \phi_b(a^{k_1})\phi_b(a^{k_2})
+            \end{align}
+            \item Let $\phi:G\rightarrow H$ be a homomorphism. Define $b=\phi(a)$ for all $k\in \mathbb{Z}$, we have $\phi(a^k)=\phi(a)^k = b^k$, so $\phi=\phi_b$.
+            \item Let $b\in H$. We know $\phi_b$ is injective if and only if for all $k\in \mathbb{Z} \setminus \{0\}$, $\phi(a^k)\neq e$.
+            This is true if and only if $o(b)=\infty$.
+
+            since:
+            \begin{align}
+                \im \phi_b &= \phi_b(G) \\ 
+                &= \phi_b(\langle a\rangle) \\ 
+                &= \langle \phi_b(a)\rangle \\ 
+                &= \langle b\rangle
+            \end{align}
+            $\phi_b$ is surjective iff $H=\langle b\rangle$.
+        \end{enumerate}
+    \end{proof}
+    \begin{theorem}
+        Let $G$ be a finite cyclic group of order $n$, let $a$ be a generator of $G$, and let $H$ be a group.
+        \begin{enumerate}
+            \item For every $b\in H$ with $b^n=e$, the map:
+            \begin{equation}
+                \phi_b = \phi_{a,b} : G\rightarrow H
+            \end{equation}
+            defined by $\phi_b(a^k)=b^k$ for all $k\in \mathbb{Z}$ is a well defined homomorphism.
+            \item Every homomorphism $\phi:G\rightarrow H$ is of the form $\phi_b$ for a unique $b\in H$ with $b^n=e$.
+            \item For all $b\in H$ with $b^n=e$, $\phi_b$ is injective if and only if $o(b)=n$ and $\phi_b$ is surjective if and only iff  $H=\langle b\rangle$.
+        \end{enumerate}
+    \end{theorem}
+\end{itemize}
