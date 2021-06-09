@@ -1,0 +1,128 @@
+\section{Lecture Eleven}
+\begin{itemize}
+    \item We begin by proving the theorem from last lecture:
+    \begin{proof}
+        \begin{enumerate}
+            \item Let $b\in H$ with $b^n = e$. To prove that $\phi_b$ is well defined, we must prove that for all $k_1,k_2 \in \mathbb{Z}$, if $a^{k_1}=a^{k_2}$, then $b^{k_1}=b^{k_2}$.
+            
+            Let $k_1,k_2 \in \mathbb{Z}$ with $a^{k_1}=a^{k_2}$. Then $n | k_1- k_2$. Since $b^n=e$, we have $b^{k_1-k_2}=e$ so $b^{k_1}=b^{k_2}$. Therefore the map $\phi_b: G\rightarrow H$ is well defined.
+
+            For all $k_1,k_2 \in \mathbb{Z}$, we have:
+            \begin{equation}
+                \phi_b(a^{k_1}a^{k_2})=\phi_b(a^{k_1+k_2})=b^{k_1+k_2}=b^{k_1}b^{k_2}=\phi_b(a^{k_1})\phi_b(a^{k_2})
+            \end{equation}
+            Therefore, $\phi_b$ is a homomorphism.
+            \item Let $\phi:G\rightarrow H$ be a homomorphism. Let $b=\phi(a)$. Then for all $k\in \mathbb{Z}$, we have:
+            \begin{equation}
+                b^k = \phi(a)^k = \phi(a^k).
+            \end{equation}
+            and if $k=n$, we get:
+            \begin{equation}
+                b^n = \phi(a^n) = \phi(e) = e
+            \end{equation}
+            \item Since the non-identity element of $G=\langle a\rangle$ are $a,a^2,\dots,a^{n-1}$,
+            \begin{align}
+                \phi_b\text{ is injective} &\iff \ker\phi_b = \{e\} \\ 
+                &\iff \forall k=1,\dots,n-1,\;\phi_b(a^k)\neq e\\ 
+                &\iff \forall k=1,\dots,n-1,\; b^k \neq e
+            \end{align}
+            Since $b^n=e$, this statement holds if and only if $o(b)=n$. Since
+            \begin{equation}
+                \im\phi_b = \phi_b(\langle a\rangle) = \langle \phi_b(a) \rangle = \langle b\rangle,
+            \end{equation}
+            we have that $\phi_b$ is surjective if and only if $H=\langle b\rangle$. 
+        \end{enumerate}
+    \end{proof}
+    \begin{corollary}
+        Let $G$ and $H$ be cyclic groups:
+        \begin{enumerate}
+            \item $G \simeq H$ iff $|G|=|H|$
+            \item If $|G| = |H|$, an $a$ is a generator of $G$ then the distinct isomorphisms from $G$ to $H$ are the maps $\phi_{a,b}:G\rightarrow H$ for $b$ a generator of $H$.
+            
+            If we then show the converse in a similar manner, then we are done.
+        \end{enumerate}
+    \end{corollary}
+    \begin{corollary}
+        Let $G$ be a cyclic group.
+        \begin{enumerate}
+            \item If $|G|=\infty$, then the map:
+            \begin{equation}
+                \theta_a: \{\pm 1\} \rightarrow \aut(G)
+            \end{equation}
+            defined by $\theta_a(k)=\phi_{a,a^k}$ is an isomorphism. Thus:
+            \begin{equation}
+                \aut(G) \simeq \{\pm 1\}
+            \end{equation}
+            \item If $|G| = n<\infty$, then the map \begin{equation}
+                \theta_a: (\mathbb{Z}/n\mathbb{Z})^\times \rightarrow \aut(G)
+            \end{equation}
+            defined by $\theta_a([k])=\phi_{a,a^k}$ is a well-defined isomorphism. Thus:
+            \begin{equation}
+                \aut(G) \simeq (\mathbb{Z}/n\mathbb{Z})^\times
+            \end{equation}
+        \end{enumerate}
+    \end{corollary}
+    \item We introduce cosets and Lagrange's theorem. We start this by defining some notation.
+    \item Let $G$ be a group:
+    \begin{enumerate}
+        \item For $S \subseteq G$, define $S^{-1} = \{s^{-1}:s\in S\}$.
+        \item For $S_1,\dots,S_r \subseteq G$, define:
+        \begin{equation}
+            S_1\cdots S_r = \{s_1\dots s_r:s_1\in S_1,\dots,s_r\in S_r\}.
+        \end{equation}
+        For $a \in G$, we write:
+        \begin{align}
+            aS &= \{a\}S = \{as:s\in S\} \\ 
+            Sa &= S\{a\} = \{sa: s\in S\}
+        \end{align}
+        and:
+        \begin{equation}
+            aSa^{-1} = \{a\}S\{a\}^{-1} = \{asa^{-1}:s\in S\}
+        \end{equation}
+    \end{enumerate}
+    \item Note that:
+    \begin{enumerate}
+        \item $(S^{-1})^{-1}=S$ for all $S \subseteq G$.
+        \item If $S_1,\dots,S_r \subseteq G$, then:
+        \begin{equation}
+            (S_1\cdots S_r)^{-1} = S_r^{-1}\cdots S_1^{-1}
+        \end{equation}
+        \item If $S_1,S_2,S_3 \subseteq G$, then:
+        \begin{equation}
+            (S_1S_2)S_3 = S_1(S_2S_3)
+        \end{equation}
+        \item If $S \subseteq G$ and $a,b \in S$, then $(aS)^{-1}=S^{-1}a^{-1}$ and $(Sa)^{-1}=a^{-1}S^{-1}$, $(ab)S=a(bS)$, and $S(ab)=(Sa)b$.
+    \end{enumerate}
+    \begin{definition}
+        Let $G$ be a group and $H\le G$. Sets of the form $aH$ for $a\in G$ are called \textbf{left corsets of $H$ in $G$}, and sets of the form $Ha$ for $a\in G$ are called right corsets of $H$ in $G$.
+        
+        We say that $a\in G$ is a representation of the left coset $aH$ and a representative of the right coset $Ha$.
+    \end{definition}
+    \begin{proposition}
+        If $G$ is a group and $H \le G$, then for all $a\in G$ we have $aHa^{-1} \le G$.
+    \end{proposition}
+    \begin{example}
+        Let $G = D_3 = \{e, r,r^2,s,rs,r^2s\}$. Let $H = \langle s\rangle = \{1,s\} \le G$. Let us find all the left cosets:
+        \begin{align}
+            eH &= \{e^2, es\} = \{e,s\} = H \\ 
+            rH &= \{re,rs\} = \{r,s\} \\ 
+            r^2H &= \{r^2e,r^2s\} = \{r^2,r^2s\} \\ 
+            sH &= \{se,s^2\} = \{e,s\} \\ 
+            (rs)H &= r(sH) = rH \\ 
+            r^2sH &= r^2(sH) = r^2H
+        \end{align}
+        Note that $r^2s$ and $r^2$ are not equal, but they represent the same coset. For the right cosets:
+        \begin{align}
+            He &= H \\
+            Hr &= \{r,sr\} = \{r,r^2s\}\\ 
+            Hr^2 &= \{r^2,sr^2\} = \{r^2,rs\} \\ 
+            Hs &= H \\ 
+            H(rs)=H(sr^2)=(Hs)r^2 = Hr^2 \\ 
+            H(r^2s)=H(sr)=(Hs)r=Hr
+        \end{align}
+        Notice that the only left coset of $H$ that is also a right coset is $\id H = H = H\id$.
+        \vspace{2mm}
+
+        This isn't always the case. If $G$ is abelian and $H\le G$, then $aH=Ha$ for all $a\in G$. Actually, you only need $a$ to commute with every element of $H$, i.e. the center.
+    \end{example}
+\end{itemize}
