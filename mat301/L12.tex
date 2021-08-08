@@ -1,0 +1,61 @@
+\section{Lecture Twelve}
+\begin{itemize}
+    \item From now on, let $G$ be a group and let $H \le G$.
+    \item Note that for all $a\in G$ and $h_0 \in H$, we have:
+    \begin{equation}
+        (ah_0)H=a(h_0H)=a\{h_0h:h \in H\} = aH
+    \end{equation}
+    The last equality follows since for a;; $h' \in H$, we have $h'=h_0(h_0^{-1}h')$ and this is in $\{h_0h:h\in H\}$.
+    \item Similarly, for right cosets:
+    \begin{equation}
+        H(h_0a)=Ha
+    \end{equation}
+    \item Later, we will see that $a,b\in G$ represent the same left (resp. right) coset $H$, i.e. $aH=bH$ (respectively $Ha=Hb$.) iff $b=ah$ (respectively $b=ha$) for some $h\in H$.
+    \begin{proposition}
+        For all $a\in G$, we have:
+        \begin{enumerate}
+            \item $a\in aH$ and likewise $a\in Ha$.
+            \item $|aH|=|H|=|Ha|$.
+            \item $aH=Ha$ if and only if $aHa^{-1}=H$.
+            \item $(aH)^{-1}=Ha^{-1}$ and $(Ha)^{-1}=a^{-1}H$. Therefore, the bijection
+            \begin{align}
+                2^G &\rightarrow 2^G \\ 
+                S \mapsto S^{-1}
+            \end{align}
+            restricts to a bijection
+            \begin{align}
+                \{\text{left cosets of H}\}\rightarrow \{\text{right cosets of H}\}
+            \end{align}
+            Note that $2^G = P(G)$ is the power set of $G$.
+        \end{enumerate}
+    \end{proposition}
+    \begin{proof}
+        Let $a\in H$.
+        \begin{enumerate}
+            \item Since $e\in H$, $a=ae \in aH$. Similarly, $a\in Ha$.
+            \item The map $L_a:H\rightarrow aH$ defined by $L_a(h)=ah$ for all $h\in H$ is a bijection with inverse $L_{a^{-1}}:aH\rightarrow H$ defined by
+            \begin{equation}
+                L_{a^{-1}}:aH\rightarrow H
+            \end{equation}
+            defined by $L_{a^{-1}}(x)=a^{-1}x$ for all $x\in aH$. Therefore $|aH|=|H|$. similarly, $|H|=|Ha|$.
+            \item We have:
+            \begin{align}
+                aH=Ha & \iff (aH)a^{-1}=(Ha)a^{-1} \\ 
+                & \iff aHa^{-1} = H(aa^{-1}) \\ 
+                & \iff aHa^{-1} = H
+            \end{align}
+            \item tba
+        \end{enumerate}
+    \end{proof}
+    \begin{corollary}
+        A corollary of (4) is that the number of left cosets of $H$ in $G$ is equal to the number of right cosets of $H$ in $G$.
+    \end{corollary}
+    \begin{definition}
+        The index of $H$ in $G$ is the number
+        \begin{equation}
+            [G:H]=(G:H)=|G:H|
+        \end{equation}
+        of left cosets of $H$ in $G$, which is equal to the number of right cosets of $H$ in $G$.
+    \end{definition}
+    \item We introduce a different perspective on cosets.
+\end{itemize}
