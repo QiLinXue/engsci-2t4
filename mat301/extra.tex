@@ -695,4 +695,340 @@ Define $d_i = p_1^{e_{1,n-i+1}\cdots p_n^{e_{n,n-i+1}}}$ for $i=1,\dots, n$. The
 \begin{equation*}
     A \cong \mathbb{Z}^r \times \mathbb{Z}/d_1\mathbb{Z} \times \cdots \times \mathbb{Z}/d_n\mathbb{Z}
 \end{equation*}
+
+\section{Group Actions}
+\subsection{Permutation Representations}
+Let $G$ be a gruop and let $X$ be a set.
+\begin{definition}{Permutation Representation of $G$ on $X$}
+    A permutation of $G$ on $X$ is a homomorphism $\phi:G\rightarrow S_X$.
+\end{definition}
+\begin{example}
+    If $G$ is a permutation group on $X$, i.e. $G \le S_x$, then the inclusion $i:G\rightarrow S_x$ and $g\mapsto g$ is a permutation representation.
+\end{example}
+If $\phi:G\rightarrow S_x$ is a permutation representation, we define
+\begin{align*}
+    \alpha = \alpha_\phi: G \times X &\rightarrow X \\ 
+    (g,x) \mapsto \phi(g)(x)
+\end{align*}
+\subsection{Properties of Permutation Representations}
+\begin{enumerate}
+    \item For all $x\in X$, we have
+    \begin{equation*}
+        \alpha(e,x)=\phi(e)(x)=\id_x(x)=x
+    \end{equation*}
+    \item For all $g_1,g_2\in G$ and $x\in X$, we have
+    \begin{align*}
+        \alpha(g_1g_2,x) &= \phi(g_1g_2)(x) \\ 
+        &= (\phi(g_1)\circ\phi(g_2))(x) \\ 
+        &= \phi(g_1)(\phi(g_2)(x)) \\ 
+        &= \phi(g_1)(\alpha(g_2,x)) \\
+        &=\alpha(g_1,\alpha(g_2,x)) 
+    \end{align*}
+\end{enumerate}
+If we write $g \cdot x$ instead of $\alpha(g,x)$ for all $g\in G, x\in X$, then the above becomes:
+\begin{enumerate}
+    \item For all $x\in X$, $e\cdot x = x$.
+    \item For all $g_1,g_2\in G$ and $x\in X$ we have $(g_1g_2)\cdot x = g_1 \cdot (g_2 \cdot x)$
+\end{enumerate}
+\subsection{Definition of Group Action}
+\begin{definition}{Group Action}
+    A group action of $G$ on $X$ is a map $\alpha: G\times X \rightarrow X$ such that
+    \begin{enumerate}
+        \item For all $x\in X$, $\alpha(e,x)=x$.
+        \item For all $g_1,g_2 \in G$ and $x\in X$,
+        \begin{equation*}
+            \alpha(g_1g_2,x)=\alpha(g_1,\alpha(g_2,x))
+        \end{equation*}
+    \end{enumerate}
+\end{definition}
+Note that we often use other notation to denote group actions, such as $g\cdot x$, $g*x$, ${}^gx$, or $gx$ instead of $\alpha(g,x)$.
+\subsubsection{Proposition 3.1: Permutation Representations are Group Actions}
+\begin{idea}
+    If $\phi:G\rightarrow S_x$ is a permutation representation, then
+    \begin{align*}
+        \alpha_\phi:G\times X &\rightarrow X \\ 
+        (g,x) \mapsto \phi(g)(x)
+    \end{align*}
+    is a group action.
+\end{idea}
+\subsubsection{Proposition 3.2: Permutation Representation from Group Actions}
+\begin{idea}
+    If $\alpha:G\times X \rightarrow X$ is a group action, then for all $g\in G$ the map
+    \begin{align*}
+        \phi_\alpha(g) = \alpha(g,\cdot): X&\rightarrow X \\
+        x &\mapsto \alpha(g,x)
+    \end{align*}
+    is an element of $S_x$ and the map $\phi_a:G\rightarrow S_x$ is a permutation representation.
+\end{idea}
+\subsection{Theorem 3.1: Relating Permutation Representations and Group Actions}
+\begin{idea}
+    The maps 
+    \begin{align*}
+        \{\text{permutation representations of $G$ on $X$}\} \leftrightarrow \{\text{group actions of $G$ on $X$}\} \\ 
+        \phi \mapsto \alpha_\phi \\ 
+        \phi_\alpha \mapsfrom \alpha
+    \end{align*}
+    are inverses of each other.
+\end{idea}
+Thus, we can switch back and forth between permutation representations and group actions of $G$ on $X$.
+\subsection{Right Group Action}
+What we have called a group action is more precisely called a left group action.
+
+We can similarly define right group actions.
+\begin{definition}{Right Group Actions}
+    A right group action of $G$ on $X$ is a map $\alpha: X \times G \rightarrow X$, $(x,g)\mapsto x\cdot g$ such that
+    \begin{enumerate}
+        \item For all $x\in X$, $x\cdot e=x$
+        \item For all $g_1,g_2\in G$ and $x\in X$, $x\cdot (g_1g_2) = (x\cdot g_1)\cdot g_2$.
+    \end{enumerate}
+\end{definition}
+\subsubsection{Proposition 3.3:}
+\begin{idea}
+    If $\alpha: G\times X\rightarrow X$ is a left group action, then $\alpha_R: X\times G \rightarrow X$ defined by
+    \begin{equation*}
+        \alpha_R(x,g)=\alpha(g^{-1},x)
+    \end{equation*}
+    for all $x\in X$, $g\in G$, is a right group action.
+    \vspace{2mm}
+
+    Similarly, if $\alpha: X\times G\rightarrow X$ is a right group action, then the map $\alpha_L : G\times X\rightarrow X$ defined by
+    \begin{equation*}
+        \alpha_L(g,x)=\alpha(x,g^{-1})
+    \end{equation*}
+    for all $g\in G$, $x\in X$, is a left group action.
+    \vspace{2mm}
+
+    The maps 
+    \begin{align*}
+        \{\text{left actions of $G$ on $X$}\} \leftrightarrow \{\text{right actions of $G$ on $X$}\} \\ 
+        \alpha \mapsto \alpha_R \\ 
+        \alpha_L \mapsfrom \alpha
+    \end{align*}
+    are inverses of each other.
+\end{idea}
+\subsection{Terminology}
+Let $\alpha: G \times X\rightarrow X$ be a group action and $(g,x)\mapsto g\cdot x$ and let $\phi: G\rightarrow S_x$ be the corresponding permutation representation.
+\begin{definition}{Faithfulness}
+    $\phi$ and $\alpha$ are faithful if $\phi$ is injective, or equivalently for all $g\in G \setminus \{e\}$, there exists $x\in X$ such that $g\cdot x \neq x$.
+\end{definition}
+\begin{definition}{Fixed Points and Stabilisers}
+    For all $g\in G$, $\fix(g)=X^g:=\{x\in X: g\cdot x=x\}$ is the set of fixed points of $g$.
+    \vspace{2mm}
+
+    For all $x\in X$, $\stab(x)=G_x:=\{g\in G: g\cdot x=x\}$ is the stabiliser of $x$ (or isotropy group of $x$).
+\end{definition}
+\begin{idea}
+    For all $x\in X$, $\stab(x) \le G$.
+\end{idea}
+\begin{definition}{Freeness}
+    $\alpha$ is free if for all $g\in G \setminus \{e\}$, we have $\fix(g) = \phi$.
+\end{definition}
+\begin{idea}
+    If $\alpha$ is free, it implies that $\alpha$ is faithful.  
+\end{idea}
+\begin{definition}{Invariants (noun)}
+    The set of invariants of $G$ is:
+    \begin{align*}
+        X^G :&= \{x\in X: g\cdot x=x \text{ for all }g\in G\} \\ 
+        &= \bigcap_{g\in G}\fix(g)
+    \end{align*}
+\end{definition}
+\begin{definition}{Invariant/stable (adj) and Fixed}
+    Let $S \subseteq X$.
+    \begin{itemize}
+        \item $S$ is invariant/stable under $g\in G$ if $g\cdot S = S$ where $g\cdot S := \{g\cdot s: s\in S\}$.
+        \item $S$ is invariant/stable under $G$ if $g\cdot S = S$ for all $g\in G$.
+        \item $S$ is fixed by $g\in G$ if $S\subseteq \fix(g)$.
+        \item $S$ is fixed by $G$ if $S\subseteq X^G$.
+    \end{itemize}
+\end{definition}
+\begin{definition}{Orbits}
+    For $x\in X$, $G\cdot x = \orb(x):=\{g\cdot x:g\in G\}$ is the orbit of $x$ under $\alpha$.
+    \vspace{2mm}
+
+    The set of orbits of $\alpha$ is
+    \begin{equation*}
+        G\bs X = \{G\cdot x:x\in X\}
+    \end{equation*}
+\end{definition}
+\begin{definition}{Transitivity}
+    $\alpha$ is transitive if one of the following equivalent conditions hold:
+    \begin{enumerate}
+        \item For all $x,y\in X$, there exists $g\in G$ such that $g\cdot x=g$.
+        \item (If $X \neq \phi$) there exists $x\in X$ such that $X=G\cdot x$.
+    \end{enumerate}
+    $\alpha$ is simply transitive if $\alpha$ is transitive and free, or equivalently for all $x,y\in X$, there exists a unique $g\in G$ such that $g\cdot x = y$.
+\end{definition}
+\begin{example}
+    If $G\le S_x$, then $g\cdot x:= g(x)$ is an action of $G$ on $X$.
+\end{example}
+\begin{example}
+    If $X$ is a geometric object and $G=\sym(X)$, then $G \subseteq S_x$, so we have an action of $G$ on $X$.
+    \vspace{2mm}
+
+    For example, if $X=P_n=\{(\cos(2\pi k/n),\sin(2\pi k/n)):k=0,\dots,n-1\}$, $G=D_n=\sym(P_n)$, then $G$ acts on $X$.
+    \vspace{2mm}
+
+    If $F$ is a field, $X=F^n$, $G=\text{GL}_n(F)$.
+\end{example}
+\begin{example}
+    If $F$ is a field,
+    \begin{align*}
+        X &= P^{n-1}(F) := \{\ell : \ell \text{ is a line in $F^n$ through $0$}, \\ 
+        G &= \text{GL}_n(F),
+    \end{align*}
+    then
+    \begin{equation*}
+        g\cdot \ell := g\ell = \{gv:v\in \ell\}
+    \end{equation*}
+    defines an action of $\text{GL}_n(F)$ on $X$.
+\end{example}
+\begin{example}
+    $G=\text{SL}_2(\mathbb{R})$, $X=\{z\in \mathbb{C}|\Im(z)>0\}$, then
+    \begin{equation*}
+        \begin{pmatrix}
+            a&b\\c&d
+        \end{pmatrix} \cdot z := \frac{az+b}{cd+d}
+    \end{equation*}
+    defines an action of $\text{SL}_2(\mathbb{R})$ on $X$.
+\end{example}
+\begin{example}
+    $G=S_n$, $X=\mathbb{C}[x_1,\dots,x_n]$, then
+    \begin{equation*}
+        \sigma\cdot p(x_1,\dots,x_n):=p(x_{\sigma(1)},\dots,x_{\sigma(n)})
+    \end{equation*}
+    defines an action of $S_n$ on $\mathbb{C}[x_1,\dots,x_n]$.
+    \begin{equation*}
+        \mathbb{C}[x_1,\dots,x_n]^{S_n} =\{\text{invariant polynomials in $n$-variables}\}
+    \end{equation*}
+\end{example}
+\begin{example}
+    $X=G$, $g\cdot x:= gx$ defines a left action of $G$ on itself (The left regular action of $G$ on itself).
+
+    The corresponding permutation representation $\phi:G\rightarrow S_G$ is the left regular permutation representation of $G$.
+\end{example}
+\begin{idea}
+    Cauchy's Theorem tells us that the action in the previous example is faithful. The action is simply transitive.
+\end{idea}
+\begin{example}
+    $X=G$, then $g\cdot x=gxg^{-1}$ defines a left action of $G$ on itself.
+    \begin{itemize}
+        \item The permutation representation: $G\rightarrow \text{Int}(G) \le \text{Aut}(G) \subseteq S_G$
+        \item For every $x\in X=G$, $\stab(x)=C_G(x)$.
+        \item For $g\in G$, $\fix(g)=C_G(g)$.
+        \item $X^G=Z(G)$.
+        \item $H\le G$, then $H$ is invertible/stable under $G$ if and only if $H \trianglelefteq G$
+        \item $H \le G$, then $H$ is fixed by $G$ if and only if $H \subseteq Z(G)$.
+        \item For $x\in X=G$, $G\cdot x = \{gxg^{-1}:g\in G\}$, which is the conjugacy class of $x$.
+    \end{itemize}
+\end{example}
+\begin{example}
+    Let $H\subseteq G$. THen $H\times G\rightarrow G$, $(h,g)\mapsto hg$ is an action of $H$ on $G$.
+    \begin{itemize}
+        \item The action is free.
+        \item For $g\in G$, its orbit is $H\cdot g=Hg$.
+        \item The set of orbits $H \bs G$ is the set of right cosets of $H$ in $G$ (also denoted by $H\bs G$),
+    \end{itemize}
+\end{example}
+\begin{example}
+    $H\subseteq G$, $X=G/h$. For all $g\in G$ and $g_o H\in X = G/H$, $g\cdot g_o H := gg_oH$ defines an action of $G$ on $G/H$
+    \begin{itemize}
+        \item If $\phi:G\rightarrow S_X$ is the corresponding permutation representation then $\ker\phi \le H$. 
+    \end{itemize}
+\end{example}
+\begin{example}
+    Let $X=\{H:H\le G\}$, $g\cdot H=gHg^{-1}$.
+    \begin{itemize}
+        \item $\stab(H)=N_G(H)$
+        \item $X^G=\{H:H\triangleright G\}$
+        \item $G\cdot H =\text{Orb}(H) = \{gHg^{-1}:g\in G\}$
+    \end{itemize}
+\end{example}
+\subsection{Fundamental Results}
+Let $\alpha:G\times X\rightarrow X$, $g\mapsto g\cdot x$ be a group action.
+\subsubsection{Orbit Stabiliser Theorem}
+\begin{idea}
+    For all $x\in X$, the map
+    \begin{align*}
+        G/\stab(x) &\rightarrow G\cdot x \\ 
+        g\stab(x) \mapsto g\cdot x
+    \end{align*}
+    is a well=defined bijection. Thus,
+    \begin{equation*}
+        |G\cdot x| = [G:\stab(x)],
+    \end{equation*}
+    and if $|G|<\infty$, then
+    \begin{equation*}
+        |G\cdot x| = |G|/|\stab(x)|
+    \end{equation*}
+\end{idea}
+\begin{proof}
+    Let $g,g'\in G$. THen
+    \begin{align*}
+        g'\cdot x = g\cdot x &\iff (g^{-1}g')\cdot x = x \\ 
+        \iff g^{-1}g' \in \stab(x) \\ 
+        \iff g'\stab(x) = g\stab(x).
+    \end{align*}
+    Thus, the map is well defined and injective. It is clearly surjective.
+\end{proof}
+\subsubsection{Proposition 3.4}
+\begin{idea}
+    For all $x,y\in X$, we have
+    \begin{equation*}
+        G\cdot x \cap G\cdot y \neq \phi \implies G\cdot x = G\cdot y
+    \end{equation*}
+\end{idea}
+\subsubsection{Corollary}
+\begin{idea}
+    Let $X=\coprod_{g\cdot x \in G \bs X} G\cdot x$. Therefore:
+    \begin{equation*}
+        |X|=\sum_{G\cdot x\in G\bs X}|G\cdot x| = \sum_{G\cdot x\in G\bs X}[G:\stab(x)]
+    \end{equation*}
+\end{idea}
+\subsubsection{Proposition 3.5}
+\begin{idea}
+    For all $x\in X$ and $g\in G$
+    \begin{equation*}
+        \stab(g\cdot x)=g\stab(x)g^{-1}
+    \end{equation*}
+\end{idea}
+\begin{proof}
+    For $g'\in G$, $g'\cdot (g\cdot x)=g\cdot x$ if and only if $(g^{-1}g'g)\cdot x = x$ if and only if $g^{-1}g'g\in \stab(x)$ which is true if and only if $g'\in g\stab(x)g^{-1}$.
+\end{proof}
+\subsubsection{Burnside's Lemma}
+Also known as Cauchy-Frobenius Lemma/Not Burnside's Lemma/ORbit-Counting Theorem:
+\begin{idea}
+    Let $|G||G\bs X|=\sum_{g\in G}|\fix(G)|$. If $|G|<\infty$, we have
+    \begin{equation*}
+        |G\bs X| = \frac{1}{|G|}\sum_{g\in G}|\fix(g)|
+    \end{equation*}
+    i.e. the number of orbits is the average number of fixed points of an element of $G$.
+\end{idea}
+\begin{proof}
+    We have
+    \begin{equation*}
+        \coprod_{g\in G}\{g\}\times \fix(g) = \{(g,x)\in G\times X:g\cdot x=x\} = \coprod_{x\in X}\stab(x) \times \{x\}.
+    \end{equation*}
+    Therefore:
+    \begin{equation*}
+        \sum_{g\in G}|\fix(g)|=\left|\{(g,x)\in G\times X:g\cdot x=x\}\right|=\sum_{x\in X}|\stab(x)|.
+    \end{equation*}
+    Since $X=\coprod_{G\cdot y \in G\bs X} G\cdot y$, we have
+    \begin{equation*}
+        \sum_{x\in X}|\stab(x)| = \sum_{G\cdot y\in G\bs X}\sum_{x\in G\cdot y}|\stab(x)|.
+    \end{equation*}
+    For all $y\in X$ and $x\in G\cdot y$, $x=g\cdot y$ for some $g\in G$ and $\stab(x)=g\stab(y)g^{-1}$, so
+    \begin{equation*}
+        |\stab(x)|=|\stab(y)|.
+    \end{equation*}
+    Thus,
+    \begin{align*}
+        \sum_{x\in X} &= \sum_{G\cdot y\in G\bs X}\sum_{x\in G\cdot y}|\stab(x)| \\ 
+        &= \sum_{G\cdot y\in G\bs X}|G\cdot y| |\stab(y)| \\
+        &= \sum_{G\cdot y\in G\bs X}[G:\stab(y)]|\stab(y)| \\
+        &= \sum_{G\cdot y\in G\bs X} |G| \\ 
+        &= |G||G\bs X|
+    \end{align*}
+    where the antepenultimate and penultimate equalities follow from the Orbit-Stabilizer Theorem and Lagrange's Theorem, respectively. 
+\end{proof}
 \end{document}

@@ -166,7 +166,7 @@
     sharp corners,
     attach title to upper
 }
-
+\usepackage{stmaryrd}
 \sectionfont{\color{blue1}}
 \subsubsectionfont{\color{blue1}}
 
@@ -204,13 +204,20 @@
 \newcommand{\nulll}[1]{\mathrm{null}\,#1}
 \newcommand{\adj}[1]{\mathrm{adj}\,#1}
 \newcommand{\red}[1]{\widetilde{#1}}
-\newcommand{\Sym}[1]{\mathrm{Sym}\,#1}
+\newcommand{\Sym}{\mathrm{Sym}}
+\newcommand{\sym}{\mathrm{Sym}}
+
 \newcommand{\id}{\text{id}}
 \newcommand{\Oplus}[1]{
     \underset{#1}{\mathlarger{\mathlarger{\mathlarger{\oplus}}}}
 }
+\newcommand{\bs}{\text{\textbackslash}}
+
 \DeclareMathOperator{\lcm}{lcm}
     \DeclareMathOperator{\fix}{Fix}
+    \DeclareMathOperator{\stab}{Stab}
+    \DeclareMathOperator{\orb}{Orb}
+
     \DeclareMathOperator{\inv}{inv}
     \DeclareMathOperator{\sgn}{sgn}
     \DeclareMathOperator{\aut}{Aut}
