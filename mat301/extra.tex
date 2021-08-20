@@ -91,8 +91,8 @@ Note that free abelian groups are like vector spaces over $\mathbb{Z}$.
 
     Conversely, if $A$ is a free abelian group of finite rank and $\{a_1,\dots,a_n\}$ is a basis of $A$, then
     \begin{align*}
-        \phi: \mathbb{Z}^m &\rightarrow A \\ 
-        (k_1,\dots,k_m) & \mapsto k_1a_1 + \cdots + k_ma_m
+        \phi: \mathbb{Z}^m & \rightarrow A                    \\
+        (k_1,\dots,k_m)    & \mapsto k_1a_1 + \cdots + k_ma_m
     \end{align*}
     is an isomorphism.
 \end{proof}
@@ -102,7 +102,7 @@ Note that free abelian groups are like vector spaces over $\mathbb{Z}$.
 \end{idea}
 \begin{proof}
     Let $\{a_1,\dots,a_m\}$ be a basis of $A$.
-    
+
     Let $\{a'_j\}_{j\in J}$ be a basis of $A$. For each $i=1,\dots,m$, there exists a finite subset $S_i \subseteq \{a_j'\}_{j\in J}$ such that $a_i$ is a linear combination of the elements of $S_i$. Let $S=S_1 \cup \cdots \cup S_m$.
 
     Then $a_1,\dots,a_m$ are all linear combinations of the elements of $S$. Since $\{a_1,\dots,a_m\}$ spans $A$, it follows that every element of $A$ is a linear combination of the elements of $S$, i.e. $S$ spans $A$. Let $a_{j_1},\dots,a_{j_n}$ be the elements of $S$.
@@ -113,7 +113,7 @@ Note that free abelian groups are like vector spaces over $\mathbb{Z}$.
     \end{equation}
     but this contradicts linearly independence of $\{a_j'\}_{j\in J}$.
 
-    Therefore $\{a_j'\}_{j\in J}$ is finite. Let $a_1',\dots,a_n'$ be the elements of $\{a_j'\}_{j\in J}$. Since $\{a_1,\dots,a_m\}$ spans $A$, for all $i=1,\dots,n$ we can write 
+    Therefore $\{a_j'\}_{j\in J}$ is finite. Let $a_1',\dots,a_n'$ be the elements of $\{a_j'\}_{j\in J}$. Since $\{a_1,\dots,a_m\}$ spans $A$, for all $i=1,\dots,n$ we can write
     \begin{equation}
         a_i' = \sum_{j=1}^m M_{ij}a_j
     \end{equation}
@@ -127,13 +127,13 @@ Note that free abelian groups are like vector spaces over $\mathbb{Z}$.
 
     For all $i=1,\dots,n$, we have
     \begin{align*}
-        a_i' &= \sum_{j=1}^m M_{ij}a_j \\ 
-        &= \sum_{j=1}^m M_{ij} \sum_{k=1}^n N_{jk}a_k' \\ 
-        &= \sum_{j=1}^m\sum_{k=1}^n M_{ij}N_{jk}a_k' \\ 
-        &= \sum_{k=1}^n \sum_{j=1}^m M_{ij}N_{jk}a_k' \\ 
-        &= \sum_{k=1}^n\left( \sum_{j=1}^m M_{ij}N_{jk}\right)a_k'
+        a_i' & = \sum_{j=1}^m M_{ij}a_j                                  \\
+             & = \sum_{j=1}^m M_{ij} \sum_{k=1}^n N_{jk}a_k'             \\
+             & = \sum_{j=1}^m\sum_{k=1}^n M_{ij}N_{jk}a_k'               \\
+             & = \sum_{k=1}^n \sum_{j=1}^m M_{ij}N_{jk}a_k'              \\
+             & = \sum_{k=1}^n\left( \sum_{j=1}^m M_{ij}N_{jk}\right)a_k'
     \end{align*}
-    Since $\{a_1',\dots,a_n'\}$ is linearly independent, it follows that 
+    Since $\{a_1',\dots,a_n'\}$ is linearly independent, it follows that
     \begin{equation}
         \left( \sum_{j=1}^m M_{ij}N_{jk}\right) = \delta_{ik}
     \end{equation}
@@ -147,13 +147,13 @@ Note that free abelian groups are like vector spaces over $\mathbb{Z}$.
 
     Then $MN=I_n$ and $NM=I_m$. Therefore, the $\mathbb{Q}$-linear transformations
     \begin{align*}
-        \mathbb{Q}^m &\rightarrow \mathbb{Q}^n \\ 
-        x &\mapsto Mx
+        \mathbb{Q}^m & \rightarrow \mathbb{Q}^n \\
+        x            & \mapsto Mx
     \end{align*}
-    and 
+    and
     \begin{align*}
-        \mathbb{Q}^n &\rightarrow \mathbb{Q}^m \\ 
-        x &\mapsto Nx
+        \mathbb{Q}^n & \rightarrow \mathbb{Q}^m \\
+        x            & \mapsto Nx
     \end{align*}
     are inverses of each other. Therefore $\mathbb{Q}^m$ and $\mathbb{Q}^n$ are isomorphic vector spaces over $\mathbb{Q}$, so $m=n$.
 \end{proof}
@@ -230,7 +230,7 @@ such that $\theta(a_i)=e_i$ for all $i=1,\dots,n$. Note that:
     The rest is straightforward.
 \end{proof}
 
-In words, this says that we can take any element $a \in A$ to $b \in B$ using the homomorphism $T$ and write it as a vector using the basis of $B$. This is equivalent to first writing $a$ as a vector using the basis of $A$, and multiplying it by some matrix $[T]^\alpha_\beta$ that transforms the vector from an $\alpha$ basis to a $\beta$ basis. Essentially, this is a change of basis matrix. 
+In words, this says that we can take any element $a \in A$ to $b \in B$ using the homomorphism $T$ and write it as a vector using the basis of $B$. This is equivalent to first writing $a$ as a vector using the basis of $A$, and multiplying it by some matrix $[T]^\alpha_\beta$ that transforms the vector from an $\alpha$ basis to a $\beta$ basis. Essentially, this is a change of basis matrix.
 \subsubsection{Corollary}
 \begin{idea}
     A homomorphism $T:A\rightarrow B$ is an isomorphism if and only if there exists $N\in \text{Mat}_{n\times m}(\mathbb{Z})$ such that
@@ -292,16 +292,16 @@ Note that $M \in \text{Mat}_{n\times n}(\mathbb{Z})$ is invertible if and only i
     Let $M \in \text{Mat}_{m\times n}(\mathbb{Z})$. There exist a sequence of integral elementary row and column operations that transform $M$ to a matrix of the form
     \begin{equation*}
         \left[
-        \begin{array}{c|c}
-            \begin{array}{ccc}
-                d_1 &        & 0   \\
-                    & \ddots &     \\
-                0   &        & d_r
-            \end{array} & 0 \\
-            \hline
-            0                          & 0
-        \end{array}
-        \right],
+            \begin{array}{c|c}
+                \begin{array}{ccc}
+                    d_1 &        & 0   \\
+                        & \ddots &     \\
+                    0   &        & d_r
+                \end{array} & 0 \\
+                \hline
+                0                          & 0
+            \end{array}
+            \right],
     \end{equation*}
     where $d_1|\cdots|d_n$ are positive integers. Moreover, $r=\rk(M)$ and for all $i=1,\dots,r$, $d_i=d_i(M)/d_{i-1}(M)$. In particular, $r,d_1,\dots,r_r$ are unique.
 \end{idea}
@@ -334,20 +334,20 @@ If $M=0$, we are done. Assume $M \neq 0$.
     \item If $M_{ij}$ divides every entry in its row and column, we can clear the other entries in row $i$ and column $j$ using $M_{ij}$ (i.e. all the other entries are $0$). Let $M$ denote the resulting matrix.
     \item If $M_{ij}$ divides every entry in $M$, skip this step. Otherwise, choose $M_{k\ell}$ such that $M_{ij} \nmid M_{k\ell}.$ Then replace row $i$ with $\text{row}_i+\text{row}_j$. Let $M$ denote the new matrix. Go to the first step.
     \item $M_{ij}$ divides every entry of $M$. Swap row 1 and row $i$ and swap column 1 and column $j$. If $M_{ij} < 0$, multiply row by $-1$.
-    
-    We look at the resulting matrix $M'$ in the bottom right corner inside the larger matrix. Let $M$ denote $M'$.
+
+          We look at the resulting matrix $M'$ in the bottom right corner inside the larger matrix. Let $M$ denote $M'$.
     \item Repeat steps 1 to 6 until $M'$ in the previous step is the empty matrix.
 \end{enumerate}
 
 
-\newpage 
+\newpage
 \section{Finitely Generated Abelian Groups}
 \subsection{Definition of Finitely Generated Abelian Groups}
 \begin{definition}{Finitely Generated Groups}
     A group $G$ is finitely generated (FG) if there exists $g_1,\dots,g_n \in G$ such that
     \begin{align*}
-        G &= \langle g_1,\dots, g_n\rangle \\ 
-        &:= \bigcap_{H \le G,\quad g_1,\dots,g_n \in H} H
+        G & = \langle g_1,\dots, g_n\rangle                  \\
+          & := \bigcap_{H \le G,\quad g_1,\dots,g_n \in H} H
     \end{align*}
     or equivalently, every element of $G$ can be written as the product of integer powers of $g_i$.
 \end{definition}
@@ -366,31 +366,31 @@ If $M=0$, we are done. Assume $M \neq 0$.
 \begin{idea}
     Let $A$ be a finitely generated abelian group. Then it can be classified in either of the two (perfectly equivalent) ways:
     \begin{enumerate}
-        \item There exists $r,n\in \mathbb{Z}_{\ge 0}$ and positive integers $d_1|\cdots |d_n$ such that 
-        \begin{equation}
-            A \cong \mathbb{Z}^r \times \mathbb{Z}/d_1\mathbb{Z} \times \cdots \times \mathbb{Z}/d_n\mathbb{Z}.
-        \end{equation}
-        Moreover, $r,n,d_1,\dots,d_n$ are unique and the $d_i$ are called the \textbf{invariant factors of $A$}
+        \item There exists $r,n\in \mathbb{Z}_{\ge 0}$ and positive integers $d_1|\cdots |d_n$ such that
+              \begin{equation}
+                  A \cong \mathbb{Z}^r \times \mathbb{Z}/d_1\mathbb{Z} \times \cdots \times \mathbb{Z}/d_n\mathbb{Z}.
+              \end{equation}
+              Moreover, $r,n,d_1,\dots,d_n$ are unique and the $d_i$ are called the \textbf{invariant factors of $A$}
         \item There exist $r,s \in \mathbb{Z}_{\ge 0}$, prime numbers $p_1 < \cdots <p_s$, positive integers $n_1,\cdots, n_s$, and positive integers
-        \begin{align*}
-            e_{1,1} \ge &\cdots \ge e_{1,n_1} \\ 
-            e_{2,1} \ge &\cdots \ge e_{2,n_2} \\ 
-            &\,\,\,\,\vdots \\ 
-            e_{s,1} \ge &\cdots \ge e_{s,n_s}
-        \end{align*}
-        such that 
-        \begin{align*}
-            A &\cong \mathbb{Z}^r \times \mathbb{Z}/p_1^{e_{1,1}}\mathbb{Z} \times \cdots \times \mathbb{Z}/p_1^{e_{1,n_1}}\mathbb{Z} \times \cdots \times \mathbb{Z}/p_s^{e_{s,1}}\mathbb{Z} \times \cdots \times \mathbb{Z}/p_s^{e_{s,n_s}}\mathbb{Z} \\ 
-            &\cong \mathbb{Z}^r \times \prod_{j=1}^{n_1}\mathbb{Z}/p_1^{e_{i,j}}\mathbb{Z} \times \cdots \times \prod_{j=1}^{n_s}\mathbb{Z}/p_s^{e_{s,j}}\mathbb{Z}.
-        \end{align*}
-        Moreover, $r$ and $s$, and the $p_i,n_i$ and $e_{i,j}$ are all unique.
-        \vspace{2mm}
+              \begin{align*}
+                  e_{1,1} \ge & \cdots \ge e_{1,n_1} \\
+                  e_{2,1} \ge & \cdots \ge e_{2,n_2} \\
+                              & \,\,\,\,\vdots       \\
+                  e_{s,1} \ge & \cdots \ge e_{s,n_s}
+              \end{align*}
+              such that
+              \begin{align*}
+                  A & \cong \mathbb{Z}^r \times \mathbb{Z}/p_1^{e_{1,1}}\mathbb{Z} \times \cdots \times \mathbb{Z}/p_1^{e_{1,n_1}}\mathbb{Z} \times \cdots \times \mathbb{Z}/p_s^{e_{s,1}}\mathbb{Z} \times \cdots \times \mathbb{Z}/p_s^{e_{s,n_s}}\mathbb{Z} \\
+                    & \cong \mathbb{Z}^r \times \prod_{j=1}^{n_1}\mathbb{Z}/p_1^{e_{i,j}}\mathbb{Z} \times \cdots \times \prod_{j=1}^{n_s}\mathbb{Z}/p_s^{e_{s,j}}\mathbb{Z}.
+              \end{align*}
+              Moreover, $r$ and $s$, and the $p_i,n_i$ and $e_{i,j}$ are all unique.
+              \vspace{2mm}
 
-        More concisely, there exist $r,t\in \mathbb{Z}_{>0}$ and prime powers $q_1\le \cdots \le q_t$ such that 
-        \begin{equation}
-            A \cong \mathbb{Z}^r \times \mathbb{Z}/q_1\mathbb{Z} \times \cdots \times \mathbb{Z}/q_t\mathbb{Z}
-        \end{equation}
-        and $r,t,q_i$ are unique. Note the $q_i$ are known as the \textbf{elementary divisors of $A$.}
+              More concisely, there exist $r,t\in \mathbb{Z}_{>0}$ and prime powers $q_1\le \cdots \le q_t$ such that
+              \begin{equation}
+                  A \cong \mathbb{Z}^r \times \mathbb{Z}/q_1\mathbb{Z} \times \cdots \times \mathbb{Z}/q_t\mathbb{Z}
+              \end{equation}
+              and $r,t,q_i$ are unique. Note the $q_i$ are known as the \textbf{elementary divisors of $A$.}
     \end{enumerate}
 \end{idea}
 Note that $A$ is finite if and only if $r=0$. Therefore, the theorem specializes to the classification of finite abelian groups. To prove this, we will do the following:
@@ -415,7 +415,7 @@ Note that $A$ is finite if and only if $r=0$. Therefore, the theorem specializes
     \end{equation}
     Therefore $A = \langle \phi(e_1),\dots,\phi(e_n)\rangle$, so $A$ is finitely generated.
 
-    To show the converse, suppose $A$ is finitely generated and let $a_1,\dots,a_m\in A$ such that $A = \langle a_1,\dots, a_m\rangle$. Define 
+    To show the converse, suppose $A$ is finitely generated and let $a_1,\dots,a_m\in A$ such that $A = \langle a_1,\dots, a_m\rangle$. Define
     \begin{equation}
         \phi: \mathbb{Z}^m \rightarrow A
     \end{equation}
@@ -424,17 +424,17 @@ Note that $A$ is finite if and only if $r=0$. Therefore, the theorem specializes
 \subsection{First Reduction}
 Let $A$ be a finitely generated abelian group and let $\phi: \mathbb{Z}^m \rightarrow A$ be a surjective homomorphism. Let $B = \ker\phi \le \mathbb{Z}^m$. By the $1^\text{st}$ isomorphism theorem, we have $A \cong \mathbb{Z}^m/B$. If:
 \begin{align*}
-    B &= d_1\mathbb{Z}\times \cdots \times d_n\mathbb{Z} \times \{0\} \times \cdots \times \{0\} \\ 
-    &\le \underbrace{\mathbb{Z} \times \cdots \times \mathbb{Z}}_{n} \times \underbrace{\mathbb{Z} \times \mathbb{Z} \times \mathbb{Z}}_{r:=m-n} = \mathbb{Z}^m
+    B & = d_1\mathbb{Z}\times \cdots \times d_n\mathbb{Z} \times \{0\} \times \cdots \times \{0\}                                                                  \\
+      & \le \underbrace{\mathbb{Z} \times \cdots \times \mathbb{Z}}_{n} \times \underbrace{\mathbb{Z} \times \mathbb{Z} \times \mathbb{Z}}_{r:=m-n} = \mathbb{Z}^m
 \end{align*}
 then
 \begin{align*}
-    A &\cong \mathbb{Z}^m/B \\ 
-    &\cong \frac{{\mathbb{Z} \times \cdots \times \mathbb{Z}} \times {\mathbb{Z} \times \mathbb{Z} \times \mathbb{Z}}}{d_1\mathbb{Z}\times \cdots \times d_n\mathbb{Z} \times \{0\} \times \cdots \times \{0\}} \\ 
-    &\cong \mathbb{Z}/d_1\mathbb{Z} \times \cdots \times \mathbb{Z}/d_n\mathbb{Z} \times \mathbb{Z}/\{0\} \times \mathbb{Z}/\{0\} \\ 
-    &\cong \mathbb{Z}/d_1\mathbb{Z} \times \cdots \times \mathbb{Z}/d_n\mathbb{Z} \times \mathbb{Z} \times \cdots \times \mathbb{Z} \\ 
-    &= \mathbb{Z}d_1\mathbb{Z} \times \cdots \times \mathbb{Z}/d_n\mathbb{Z} \times \mathbb{Z}^r \\ 
-    &\cong \mathbb{Z}^r \times \mathbb{Z}/d_1\mathbb{Z} \times \cdots \times \mathbb{Z}/d_n \mathbb{Z}
+    A & \cong \mathbb{Z}^m/B                                                                                                                                                                                       \\
+      & \cong \frac{{\mathbb{Z} \times \cdots \times \mathbb{Z}} \times {\mathbb{Z} \times \mathbb{Z} \times \mathbb{Z}}}{d_1\mathbb{Z}\times \cdots \times d_n\mathbb{Z} \times \{0\} \times \cdots \times \{0\}} \\
+      & \cong \mathbb{Z}/d_1\mathbb{Z} \times \cdots \times \mathbb{Z}/d_n\mathbb{Z} \times \mathbb{Z}/\{0\} \times \mathbb{Z}/\{0\}                                                                               \\
+      & \cong \mathbb{Z}/d_1\mathbb{Z} \times \cdots \times \mathbb{Z}/d_n\mathbb{Z} \times \mathbb{Z} \times \cdots \times \mathbb{Z}                                                                             \\
+      & = \mathbb{Z}d_1\mathbb{Z} \times \cdots \times \mathbb{Z}/d_n\mathbb{Z} \times \mathbb{Z}^r                                                                                                                \\
+      & \cong \mathbb{Z}^r \times \mathbb{Z}/d_1\mathbb{Z} \times \cdots \times \mathbb{Z}/d_n \mathbb{Z}
 \end{align*}
 where the third line is a result in the exercise sheet. However, $B$ might not have this form.
 
@@ -442,7 +442,7 @@ where the third line is a result in the exercise sheet. However, $B$ might not h
 \begin{idea}
     If $\phi: G_1\rightarrow G_2$ is an isomorphism, $N_1 \trianglelefteq G_1$, $N_2 \trianglelefteq G_2$, and $\phi(N_1)=N_2$, then
     \begin{align*}
-        G_1/N_1 \rightarrow G_2/N_2 \\ 
+        G_1/N_1 \rightarrow G_2/N_2 \\
         g_1N_1 \mapsto \phi(g_1)N_2
     \end{align*}
     is a well defined isomorphism.
@@ -450,9 +450,9 @@ where the third line is a result in the exercise sheet. However, $B$ might not h
 We can actually make this result more general:
 
 \begin{idea}
-    Let $\phi: G_1\rightarrow G_2$ be a homomorphism and $N_2 \trianglelefteq G_2$. Then $\phi^{-1}(N_2) \trianglelefteq G_1$ and the map 
+    Let $\phi: G_1\rightarrow G_2$ be a homomorphism and $N_2 \trianglelefteq G_2$. Then $\phi^{-1}(N_2) \trianglelefteq G_1$ and the map
     \begin{align*}
-        G_1/\phi^{-1}(N_1) \rightarrow G_2/N_2 \\ 
+        G_1/\phi^{-1}(N_1) \rightarrow G_2/N_2 \\
         g_1\phi^{-1}(N_1) \mapsto \phi(g_1)N_2
     \end{align*}
     is a well defined injective homomorphism with $\im{\phi}=\phi(G_1)N_2/N_2$.
@@ -486,32 +486,32 @@ maps $b_i = d_ic_i$ to $d_ie_i$ for all $i=1,\dots, n$. Therefore, the isomorphi
 
 We will prove a more general theorem.
 \begin{idea}
-Let $B$ and $C$ be free abelian groups of finite ranks $n$ and $m$, respectively. Let $\Psi: B\rightarrow C$ be a homomorphism.
-\vspace{2mm}
+    Let $B$ and $C$ be free abelian groups of finite ranks $n$ and $m$, respectively. Let $\Psi: B\rightarrow C$ be a homomorphism.
+    \vspace{2mm}
 
-Then there exists bases $\beta=\{b_1,\dots,b_n\}$ of $B$ and $\gamma=\{c_1,\dots,c_m\}$ of $C$, there exists a positive integer $r \le m,n$ and there exists positive integers $d_1|\cdots | d_r$ such that
-\begin{equation*}
-    \Psi(b_i) = \begin{cases}
-        d_ic_i & 1\le i \le r \\
-        0 & r < i \le n
-    \end{cases}
-\end{equation*}
-or equivalently
-\begin{equation*}
-    [\Psi]^\beta_\gamma =
-    \left[
-        \begin{array}{c|c}
-            \begin{array}{ccc}
-                d_1 &        & 0   \\
-                    & \ddots &     \\
-                0   &        & d_r
-            \end{array} & 0 \\
-            \hline
-            0                          & 0
-        \end{array}
-        \right]
-\end{equation*}
-Moreover, $r,d_1,\dots,d_r$ are unique.
+    Then there exists bases $\beta=\{b_1,\dots,b_n\}$ of $B$ and $\gamma=\{c_1,\dots,c_m\}$ of $C$, there exists a positive integer $r \le m,n$ and there exists positive integers $d_1|\cdots | d_r$ such that
+    \begin{equation*}
+        \Psi(b_i) = \begin{cases}
+            d_ic_i & 1\le i \le r \\
+            0      & r < i \le n
+        \end{cases}
+    \end{equation*}
+    or equivalently
+    \begin{equation*}
+        [\Psi]^\beta_\gamma =
+        \left[
+            \begin{array}{c|c}
+                \begin{array}{ccc}
+                    d_1 &        & 0   \\
+                        & \ddots &     \\
+                    0   &        & d_r
+                \end{array} & 0 \\
+                \hline
+                0                          & 0
+            \end{array}
+            \right]
+    \end{equation*}
+    Moreover, $r,d_1,\dots,d_r$ are unique.
 \end{idea}
 Let $\beta_0,\gamma_0$ be bases of $B,C$, respectively. The theorem is equivalent to the assertion that there exists matrices $P\in \text{GL}_m(\mathbb{Z})$, $Q\in \text{GL}_n(\mathbb{Z})$ such that
 \begin{equation*}
@@ -540,7 +540,7 @@ Now that we have shown it is possible to create an invariant factor decompositio
     \begin{equation*}
         A[n^\infty] := \left\{a\in A: n^k a = 0 \text{ for some } k \in \mathbb{Z}_{\ge 0}\right\}
     \end{equation*}
-    and we define the torsion subgroup of $A$ to be 
+    and we define the torsion subgroup of $A$ to be
     \begin{equation*}
         \text{Tor}(A) := \left\{a\in A: ma=0 \text{ for some } m\in \mathbb{Z}_{>0}\right\} = \bigcup_{n\in \mathbb{Z}_{>0}}A[n].
     \end{equation*}
@@ -555,21 +555,21 @@ Now that we have shown it is possible to create an invariant factor decompositio
 \begin{proof}
     First, note that if $\phi: B\rightarrow C$ is an isomorphism between abelian groups, then $\phi(\text{Tor}B)=\text{Tor}C$, so $\phi$ restricts to an isomorphism $\phi: \Tor B \rightarrow \Tor C$.
 
-    Let $\phi: A\rightarrow \mathbb{Z}^r \times T$ be an isomorphism as in the proposition statement. 
+    Let $\phi: A\rightarrow \mathbb{Z}^r \times T$ be an isomorphism as in the proposition statement.
 
     Since $\Tor(\mathbb{Z}^r \times T) = \{(0,\dots,0)\} \times T \cong T$, we have $\Tor(A) \cong \{0\} \times T \cong T$.
 
     Also since $\phi(\Tor A)= \{0\} \times T$, the map
     \begin{align*}
-        A/\Tor A &\rightarrow \mathbb{Z}^r \times T/(\{0\} \times T) \\ 
-        a + \Tor A &\mapsto \phi(a) + (\{0\} \times T)
+        A/\Tor A   & \rightarrow \mathbb{Z}^r \times T/(\{0\} \times T) \\
+        a + \Tor A & \mapsto \phi(a) + (\{0\} \times T)
     \end{align*}
     is a well defined isomorphism. Therefore,
     \begin{align*}
-        A/\Tor A & \cong \mathbb{Z}^r \times T/(\{0\} \times T) \\ 
-        &\cong \mathbb{Z}^r/\{0\} \times T/T \\ 
-        &\cong \mathbb{Z}^r \times \{0\} \\ 
-        &\cong \mathbb{Z}^r
+        A/\Tor A & \cong \mathbb{Z}^r \times T/(\{0\} \times T) \\
+                 & \cong \mathbb{Z}^r/\{0\} \times T/T          \\
+                 & \cong \mathbb{Z}^r \times \{0\}              \\
+                 & \cong \mathbb{Z}^r
     \end{align*}
 \end{proof}
 \subsubsection{Proposition 2.2: Isomorphisms of $n$-power Torsion Groups}
@@ -594,12 +594,12 @@ To prove this, we make use of the following lemma:
 \begin{proof}
     We have
     \begin{align*}
-        a(\mathbb{Z}/b\mathbb{Z}) &= \{a(n+b\mathbb{Z}): n\in \mathbb{Z} \} \\ 
-        &= \{an+b\mathbb{Z} : n \in \mathbb{Z}\}
-        &= \{x+b\mathbb{Z} : x\in a\mathbb{Z}\} \\ 
-        &= \text{ image of $a\mathbb{Z}$ under the quotient homomorphism }\mathbb{Z} \rightarrow \mathbb{Z}/b\mathbb{Z} \\ 
-        &= (a\mathbb{Z}+b\mathbb{Z})/b\mathbb{Z} \\ 
-        &= \gcd(a,b)\mathbb{Z}/b\mathbb{Z}
+        a(\mathbb{Z}/b\mathbb{Z}) & = \{a(n+b\mathbb{Z}): n\in \mathbb{Z} \}                                                                       \\
+                                  & = \{an+b\mathbb{Z} : n \in \mathbb{Z}\}
+                                  & = \{x+b\mathbb{Z} : x\in a\mathbb{Z}\}                                                                         \\
+                                  & = \text{ image of $a\mathbb{Z}$ under the quotient homomorphism }\mathbb{Z} \rightarrow \mathbb{Z}/b\mathbb{Z} \\
+                                  & = (a\mathbb{Z}+b\mathbb{Z})/b\mathbb{Z}                                                                        \\
+                                  & = \gcd(a,b)\mathbb{Z}/b\mathbb{Z}
     \end{align*}
     where the last line follows from Bezout's Lemma.
 \end{proof}
@@ -609,7 +609,7 @@ and another lemma:
     Let $p$ be a prime and let $b\in \mathbb{Z}_{>0}$, for all $e\in \mathbb{Z}_{>0}$, we have
     \begin{equation*}
         \frac{p^{e-1}(\mathbb{Z}/b\mathbb{Z})}{p^e(\mathbb{Z}/b\mathbb{Z})} \cong \begin{cases}
-            \{0\} & p^e \nmid b \\ 
+            \{0\}                  & p^e \nmid b \\
             \mathbb{Z}/p\mathbb{Z} & p^e | b
         \end{cases}
     \end{equation*}
@@ -630,17 +630,17 @@ and another lemma:
     \end{equation*}
     Suppose $p^e \mid b$. Then $\gcd(p^e,b)=p^e$ and $\gcd(p^{e-1},b)=p^{e-1}$. Therefore:
     \begin{align*}
-        \frac{p^{e-1}(\mathbb{Z}/b\mathbb{Z})}{p^e(\mathbb{Z}/b\mathbb{Z})} &= \frac{p^{e-1}\mathbb{Z}/b\mathbb{Z}}{p^e\mathbb{Z}/b\mathbb{Z}} \\ 
-        &\cong p^{e-1}\mathbb{Z}/p^e\mathbb{Z} 
+        \frac{p^{e-1}(\mathbb{Z}/b\mathbb{Z})}{p^e(\mathbb{Z}/b\mathbb{Z})} & = \frac{p^{e-1}\mathbb{Z}/b\mathbb{Z}}{p^e\mathbb{Z}/b\mathbb{Z}} \\
+                                                                            & \cong p^{e-1}\mathbb{Z}/p^e\mathbb{Z}
     \end{align*}
-    where we have used the third isomorphism theorem. The map 
+    where we have used the third isomorphism theorem. The map
     \begin{align*}
-        \mathbb{Z}/p\mathbb{Z} &\rightarrow p^{e-1}\mathbb{Z}/p^e\mathbb{Z} \\ 
+        \mathbb{Z}/p\mathbb{Z} & \rightarrow p^{e-1}\mathbb{Z}/p^e\mathbb{Z} \\
         n+p\mathbb{Z} \mapsto p^{e-1}n+p^e\mathbb{Z}
     \end{align*}
     is a well defined isomorphism (consider $\mathbb{Z} \rightarrow p^{e-1}\mathbb{Z}/p^e\mathbb{Z}$ and $n \mapsto p^{e-1}n+p^e\mathbb{Z}$ and apply the first isomorphism theorem).
 
-    Therefore, 
+    Therefore,
     \begin{equation*}
         p^{e-1}\mathbb{Z}/p^e\mathbb{Z}  \cong \mathbb{Z}/p\mathbb{Z}
     \end{equation*}
@@ -651,22 +651,22 @@ Let $\phi: A \rightarrow \mathbb{Z}/a_1\mathbb{Z} \times \cdots \times \mathbb{Z
 
 Let $p$ be a prime and $e\in \mathbb{Z}_{>0}$. Then $\phi(p^{e-1}A)=p^{e-1}B$ and $\phi(p^eA)=p^eB$. Therefore, the map
 \begin{align*}
-    p^{e-1}A/p^eA &\rightarrow p^{e-1}B/p^eB \\ 
-    x+p^eA &\mapsto \phi(x) + p^eB
+    p^{e-1}A/p^eA & \rightarrow p^{e-1}B/p^eB \\
+    x+p^eA        & \mapsto \phi(x) + p^eB
 \end{align*}
 is an isomorphism. We have
 \begin{align*}
-    \frac{p^{e-1}A}{p^eA} &\cong \frac{p^{e-1}B}{p^eB} \\ 
-    &= \frac{p^{e-1}(\mathbb{Z}/a_1\mathbb{Z} \times \cdots \times \mathbb{Z}/a_n\mathbb{Z})}{p^e(\mathbb{Z}/a_1\mathbb{Z} \times \cdots \times \mathbb{Z}/a_n \mathbb{Z})} \\ 
-    &= \frac{p^{e-1}(\mathbb{Z}/a_1\mathbb{Z})\times \cdots \times p^{e-1}(\mathbb{Z}/a_n\mathbb{Z})}{p^e(\mathbb{Z}/a_1\mathbb{Z})\times \cdots \times p^e(\mathbb{Z}/a_n\mathbb{Z})} \\ 
-    &\cong \frac{p^{e-1}(\mathbb{Z}/a_1\mathbb{Z})}{p^e(\mathbb{Z}/a_1\mathbb{Z})} \times \cdots \times \frac{p^{e-1}(\mathbb{Z}/a_n\mathbb{Z})}{p^e(\mathbb{Z}/a_n\mathbb{Z})} \\ 
-    &\cong (\mathbb{Z}/p\mathbb{Z})^r
+    \frac{p^{e-1}A}{p^eA} & \cong \frac{p^{e-1}B}{p^eB}                                                                                                                                                       \\
+                          & = \frac{p^{e-1}(\mathbb{Z}/a_1\mathbb{Z} \times \cdots \times \mathbb{Z}/a_n\mathbb{Z})}{p^e(\mathbb{Z}/a_1\mathbb{Z} \times \cdots \times \mathbb{Z}/a_n \mathbb{Z})}            \\
+                          & = \frac{p^{e-1}(\mathbb{Z}/a_1\mathbb{Z})\times \cdots \times p^{e-1}(\mathbb{Z}/a_n\mathbb{Z})}{p^e(\mathbb{Z}/a_1\mathbb{Z})\times \cdots \times p^e(\mathbb{Z}/a_n\mathbb{Z})} \\
+                          & \cong \frac{p^{e-1}(\mathbb{Z}/a_1\mathbb{Z})}{p^e(\mathbb{Z}/a_1\mathbb{Z})} \times \cdots \times \frac{p^{e-1}(\mathbb{Z}/a_n\mathbb{Z})}{p^e(\mathbb{Z}/a_n\mathbb{Z})}        \\
+                          & \cong (\mathbb{Z}/p\mathbb{Z})^r
 \end{align*}
 where $r$ is the number of $i\in \{1,\dots,n\}$ such that $p^e | a_i$.
 
 Let $i\in \{1,\dots,n\}$.
 
-If $p^e | a_i$, then $p^e | a_i, a_{i+1},\dots, a_n$, so there are at least $n-(i-1)$ elements $j\in \{1,\dots,n\}$ such that $p^e | a_j$ and therefore 
+If $p^e | a_i$, then $p^e | a_i, a_{i+1},\dots, a_n$, so there are at least $n-(i-1)$ elements $j\in \{1,\dots,n\}$ such that $p^e | a_j$ and therefore
 
 $$r \ge n - (i-1).$$
 
@@ -682,8 +682,8 @@ Suppose that $A \cong \mathbb{Z}^r \times \prod_{i=1}^s \prod_{j=1}^{n_i} \mathb
 
 Let $n=\underset{1\le i \le s}{\max}(n_i)$. For each $i\in \{1,\dots, s\},$ if $n_i < n$, define $e_{ij}=0$ for all $n_i < j \le n$. Then
 \begin{align*}
-    A &\cong \mathbb{Z}^r \times \prod_{i=1}^s \prod_{j=1}^n \mathbb{Z}/(p_i^{e_{i,j}}\mathbb{Z}) \\ 
-    &\cong \mathbb{Z}^r \times \prod_{j=1}^n \prod_{i=1}^s \mathbb{Z}/(p_i^{e_{i,j}}\mathbb{Z}). 
+    A & \cong \mathbb{Z}^r \times \prod_{i=1}^s \prod_{j=1}^n \mathbb{Z}/(p_i^{e_{i,j}}\mathbb{Z})  \\
+      & \cong \mathbb{Z}^r \times \prod_{j=1}^n \prod_{i=1}^s \mathbb{Z}/(p_i^{e_{i,j}}\mathbb{Z}).
 \end{align*}
 Now,
 \begin{equation*}
@@ -707,23 +707,23 @@ Let $G$ be a gruop and let $X$ be a set.
 \end{example}
 If $\phi:G\rightarrow S_x$ is a permutation representation, we define
 \begin{align*}
-    \alpha = \alpha_\phi: G \times X &\rightarrow X \\ 
+    \alpha = \alpha_\phi: G \times X & \rightarrow X \\
     (g,x) \mapsto \phi(g)(x)
 \end{align*}
 \subsection{Properties of Permutation Representations}
 \begin{enumerate}
     \item For all $x\in X$, we have
-    \begin{equation*}
-        \alpha(e,x)=\phi(e)(x)=\id_x(x)=x
-    \end{equation*}
+          \begin{equation*}
+              \alpha(e,x)=\phi(e)(x)=\id_x(x)=x
+          \end{equation*}
     \item For all $g_1,g_2\in G$ and $x\in X$, we have
-    \begin{align*}
-        \alpha(g_1g_2,x) &= \phi(g_1g_2)(x) \\ 
-        &= (\phi(g_1)\circ\phi(g_2))(x) \\ 
-        &= \phi(g_1)(\phi(g_2)(x)) \\ 
-        &= \phi(g_1)(\alpha(g_2,x)) \\
-        &=\alpha(g_1,\alpha(g_2,x)) 
-    \end{align*}
+          \begin{align*}
+              \alpha(g_1g_2,x) & = \phi(g_1g_2)(x)              \\
+                               & = (\phi(g_1)\circ\phi(g_2))(x) \\
+                               & = \phi(g_1)(\phi(g_2)(x))      \\
+                               & = \phi(g_1)(\alpha(g_2,x))     \\
+                               & =\alpha(g_1,\alpha(g_2,x))
+          \end{align*}
 \end{enumerate}
 If we write $g \cdot x$ instead of $\alpha(g,x)$ for all $g\in G, x\in X$, then the above becomes:
 \begin{enumerate}
@@ -736,9 +736,9 @@ If we write $g \cdot x$ instead of $\alpha(g,x)$ for all $g\in G, x\in X$, then 
     \begin{enumerate}
         \item For all $x\in X$, $\alpha(e,x)=x$.
         \item For all $g_1,g_2 \in G$ and $x\in X$,
-        \begin{equation*}
-            \alpha(g_1g_2,x)=\alpha(g_1,\alpha(g_2,x))
-        \end{equation*}
+              \begin{equation*}
+                  \alpha(g_1g_2,x)=\alpha(g_1,\alpha(g_2,x))
+              \end{equation*}
     \end{enumerate}
 \end{definition}
 Note that we often use other notation to denote group actions, such as $g\cdot x$, $g*x$, ${}^gx$, or $gx$ instead of $\alpha(g,x)$.
@@ -746,7 +746,7 @@ Note that we often use other notation to denote group actions, such as $g\cdot x
 \begin{idea}
     If $\phi:G\rightarrow S_x$ is a permutation representation, then
     \begin{align*}
-        \alpha_\phi:G\times X &\rightarrow X \\ 
+        \alpha_\phi:G\times X & \rightarrow X \\
         (g,x) \mapsto \phi(g)(x)
     \end{align*}
     is a group action.
@@ -755,17 +755,17 @@ Note that we often use other notation to denote group actions, such as $g\cdot x
 \begin{idea}
     If $\alpha:G\times X \rightarrow X$ is a group action, then for all $g\in G$ the map
     \begin{align*}
-        \phi_\alpha(g) = \alpha(g,\cdot): X&\rightarrow X \\
-        x &\mapsto \alpha(g,x)
+        \phi_\alpha(g) = \alpha(g,\cdot): X & \rightarrow X       \\
+        x                                   & \mapsto \alpha(g,x)
     \end{align*}
     is an element of $S_x$ and the map $\phi_a:G\rightarrow S_x$ is a permutation representation.
 \end{idea}
 \subsection{Theorem 3.1: Relating Permutation Representations and Group Actions}
 \begin{idea}
-    The maps 
+    The maps
     \begin{align*}
-        \{\text{permutation representations of $G$ on $X$}\} \leftrightarrow \{\text{group actions of $G$ on $X$}\} \\ 
-        \phi \mapsto \alpha_\phi \\ 
+        \{\text{permutation representations of $G$ on $X$}\} \leftrightarrow \{\text{group actions of $G$ on $X$}\} \\
+        \phi \mapsto \alpha_\phi                                                                                    \\
         \phi_\alpha \mapsfrom \alpha
     \end{align*}
     are inverses of each other.
@@ -798,10 +798,10 @@ We can similarly define right group actions.
     for all $g\in G$, $x\in X$, is a left group action.
     \vspace{2mm}
 
-    The maps 
+    The maps
     \begin{align*}
-        \{\text{left actions of $G$ on $X$}\} \leftrightarrow \{\text{right actions of $G$ on $X$}\} \\ 
-        \alpha \mapsto \alpha_R \\ 
+        \{\text{left actions of $G$ on $X$}\} \leftrightarrow \{\text{right actions of $G$ on $X$}\} \\
+        \alpha \mapsto \alpha_R                                                                      \\
         \alpha_L \mapsfrom \alpha
     \end{align*}
     are inverses of each other.
@@ -824,13 +824,13 @@ Let $\alpha: G \times X\rightarrow X$ be a group action and $(g,x)\mapsto g\cdot
     $\alpha$ is free if for all $g\in G \setminus \{e\}$, we have $\fix(g) = \phi$.
 \end{definition}
 \begin{idea}
-    If $\alpha$ is free, it implies that $\alpha$ is faithful.  
+    If $\alpha$ is free, it implies that $\alpha$ is faithful.
 \end{idea}
 \begin{definition}{Invariants (noun)}
     The set of invariants of $G$ is:
     \begin{align*}
-        X^G :&= \{x\in X: g\cdot x=x \text{ for all }g\in G\} \\ 
-        &= \bigcap_{g\in G}\fix(g)
+        X^G : & = \{x\in X: g\cdot x=x \text{ for all }g\in G\} \\
+              & = \bigcap_{g\in G}\fix(g)
     \end{align*}
 \end{definition}
 \begin{definition}{Invariant/stable (adj) and Fixed}
@@ -874,8 +874,8 @@ Let $\alpha: G \times X\rightarrow X$ be a group action and $(g,x)\mapsto g\cdot
 \begin{example}
     If $F$ is a field,
     \begin{align*}
-        X &= P^{n-1}(F) := \{\ell : \ell \text{ is a line in $F^n$ through $0$}, \\ 
-        G &= \text{GL}_n(F),
+        X & = P^{n-1}(F) := \{\ell : \ell \text{ is a line in $F^n$ through $0$}, \\
+        G & = \text{GL}_n(F),
     \end{align*}
     then
     \begin{equation*}
@@ -887,7 +887,7 @@ Let $\alpha: G \times X\rightarrow X$ be a group action and $(g,x)\mapsto g\cdot
     $G=\text{SL}_2(\mathbb{R})$, $X=\{z\in \mathbb{C}|\Im(z)>0\}$, then
     \begin{equation*}
         \begin{pmatrix}
-            a&b\\c&d
+            a & b \\c&d
         \end{pmatrix} \cdot z := \frac{az+b}{cd+d}
     \end{equation*}
     defines an action of $\text{SL}_2(\mathbb{R})$ on $X$.
@@ -933,7 +933,7 @@ Let $\alpha: G \times X\rightarrow X$ be a group action and $(g,x)\mapsto g\cdot
 \begin{example}
     $H\subseteq G$, $X=G/h$. For all $g\in G$ and $g_o H\in X = G/H$, $g\cdot g_o H := gg_oH$ defines an action of $G$ on $G/H$
     \begin{itemize}
-        \item If $\phi:G\rightarrow S_X$ is the corresponding permutation representation then $\ker\phi \le H$. 
+        \item If $\phi:G\rightarrow S_X$ is the corresponding permutation representation then $\ker\phi \le H$.
     \end{itemize}
 \end{example}
 \begin{example}
@@ -950,7 +950,7 @@ Let $\alpha:G\times X\rightarrow X$, $g\mapsto g\cdot x$ be a group action.
 \begin{idea}
     For all $x\in X$, the map
     \begin{align*}
-        G/\stab(x) &\rightarrow G\cdot x \\ 
+        G/\stab(x) & \rightarrow G\cdot x \\
         g\stab(x) \mapsto g\cdot x
     \end{align*}
     is a well=defined bijection. Thus,
@@ -965,8 +965,8 @@ Let $\alpha:G\times X\rightarrow X$, $g\mapsto g\cdot x$ be a group action.
 \begin{proof}
     Let $g,g'\in G$. THen
     \begin{align*}
-        g'\cdot x = g\cdot x &\iff (g^{-1}g')\cdot x = x \\ 
-        \iff g^{-1}g' \in \stab(x) \\ 
+        g'\cdot x = g\cdot x & \iff (g^{-1}g')\cdot x = x \\
+        \iff g^{-1}g' \in \stab(x)                        \\
         \iff g'\stab(x) = g\stab(x).
     \end{align*}
     Thus, the map is well defined and injective. It is clearly surjective.
@@ -1023,12 +1023,151 @@ Also known as Cauchy-Frobenius Lemma/Not Burnside's Lemma/ORbit-Counting Theorem
     \end{equation*}
     Thus,
     \begin{align*}
-        \sum_{x\in X} &= \sum_{G\cdot y\in G\bs X}\sum_{x\in G\cdot y}|\stab(x)| \\ 
-        &= \sum_{G\cdot y\in G\bs X}|G\cdot y| |\stab(y)| \\
-        &= \sum_{G\cdot y\in G\bs X}[G:\stab(y)]|\stab(y)| \\
-        &= \sum_{G\cdot y\in G\bs X} |G| \\ 
-        &= |G||G\bs X|
+        \sum_{x\in X} & = \sum_{G\cdot y\in G\bs X}\sum_{x\in G\cdot y}|\stab(x)| \\
+                      & = \sum_{G\cdot y\in G\bs X}|G\cdot y| |\stab(y)|          \\
+                      & = \sum_{G\cdot y\in G\bs X}[G:\stab(y)]|\stab(y)|         \\
+                      & = \sum_{G\cdot y\in G\bs X} |G|                           \\
+                      & = |G||G\bs X|
     \end{align*}
-    where the antepenultimate and penultimate equalities follow from the Orbit-Stabilizer Theorem and Lagrange's Theorem, respectively. 
+    where the antepenultimate and penultimate equalities follow from the Orbit-Stabilizer Theorem and Lagrange's Theorem, respectively.
 \end{proof}
+\subsection{Class Equation Revisited}
+Let $G$ be a group, $X$ is a set, so $G\times X\rightarrow X$ is a group action. Recall that:
+\begin{equation*}
+    X = \coprod_{G\cdot x \in G \bs X}G\cdot x
+\end{equation*}
+so
+\begin{equation*}
+    |X|=\sum_{G\cdot x \in G\bs X}|G\cdot x| = \sum_{G\cdot x \in G\bs X}[G:\stab(x)]
+\end{equation*}
+However, there is another way to re-write this:
+\subsubsection{Lemma}
+\begin{idea}
+    For all $x\in X$,
+    \begin{align*}
+        |G\cdot x| = 1 & \iff \stab(x) = G     \\
+                       & \iff x \in X^G        \\
+                       & \iff G\cdot x = \{x\}
+    \end{align*}
+\end{idea}
+\begin{proof}
+    By the orbit-stabilizer theorem,
+    \begin{equation*}
+        |G\cdot x| = [G:\stab(x)]
+    \end{equation*}
+    It follows that the $|G\cdot x|=1$ if and only if $\stab(x) = G$.
+
+    We also know that $\stab(x)=G\iff g\cdot x=x$ for all $g\in G$. This by definition is equivalent to $x\in X^G$.
+
+    Lastly, if $x\in X^G$, that happens if and only if $g\cdot x=x$ for all $g\in G$ which happens if and only if $G\cdot x:=\{g\cdot x: g\in G\}=\{x\}$
+\end{proof}
+
+Therefore,
+\begin{align*}
+    |X| & = \sum_{G\cdot x\in G \bs X \text{(s.t. $|G\cdot x|=1$)}} |G\cdot x| +\sum_{G\cdot x\in G \bs X \text{(s.t. $|G\cdot x|\neq1$)}} |G\cdot x| \\
+        & = \sum_{\{x\}\text{ s.t. $x\in X^G$}} 1 + \sum_{G\cdot x\in G \bs X \text{(s.t. $|G\cdot x|\neq1$)}} [G:\stab(x)]                           \\
+        & = |X^G| + \sum_{G\cdot x\in G \bs X \text{(s.t. $|G\cdot x|\neq1$)}} [G:\stab(x)]
+\end{align*}
+We also call this the class equation of this action. It is a bit more useful in this form.
+\subsection{The Class Equation of a Group}
+Let $G$ be a group, $X=G$, and $G\times X\rightarrow X$ and $(g,x) \mapsto gxg^{-1}$ is the action of $G$ on itself by conjugation.
+
+Then for all $x\in X=G$, $$G\cdot x = \{gxg^{-1}:g\in G\}=: \text{cl}(x)$$
+and
+\begin{equation*}
+    G\bs X = \{\text{cl}(x):x\in G\} =: \text{cl}(G).
+\end{equation*}
+Note that
+\begin{itemize}
+    \item $X^G = Z(G)$
+    \item For all $x\in X=G$, $\stab(x)=C_G(x)$.
+\end{itemize}
+The class equation for this action is
+\begin{equation*}
+    |G| = |Z(G)| + \sum_{\text{cl}(x)\in\text{cl}(G) \text{ s.t. } |\text{cl}(x)| \neq 1} [G:C_G(x)]
+\end{equation*}
+and is known as the class equation of $G$.
+% \section{Sylow Theorems}
+\subsection{p-groups}
+Let $p$ be a prime.
+\begin{definition}{p-group}
+    A finite group $G$ is a p-group if $|G|=p^n$ for some $n\in \mathbb{Z}_{\ge 0}$.
+\end{definition}
+\subsubsection{Fundamental Theorem for $p$-groups (Invariants of a $p$-group)}
+\begin{idea}
+    Let $G$ be a $p$-group and let $X$ be a finite set, and let $\cdot$ be an action of $G$ on $X$: $G\times X \rightarrow X$. Then
+    \begin{equation*}
+        |X^G| \equiv |X| \pmod{p}.
+    \end{equation*}
+    Consequently, if $p \nmid |X|,$ then $X^G \neq \emptyset$.
+\end{idea}
+\begin{proof}
+    If $G=\{e\},$ then $X^G=X,$ and the result follows.
+
+    Assume $G\neq \{e\}$. The class equation is
+    \begin{equation*}
+        |X| = |X^G| + \sum_{G\cdot x \in G\bs x, |G\cdot x|\neq 1} [G:\stab(x)].
+    \end{equation*}
+    It suffices to show that the second term on the right is divisible by $p$. To do that, note that if $x\in X$ and $|G\cdot x| \neq 1$, then
+    \begin{equation*}
+        p \mid [G:\stab(x)]
+    \end{equation*}
+    by Lagrange's Theorem, since $|G\cdot x| \neq 1$.
+\end{proof}
+\subsubsection{Theorem 3.2}
+\begin{idea}
+    If $G$ is a non-trivial $p$-group, then $Z(G) \neq \{e\}$.
+\end{idea}
+\begin{proof}
+    Applying the preceding lemma to the action of $G$ on itself by conjugation gives
+    \begin{equation*}
+        |Z(G)| \equiv |G| \pmod{p}
+    \end{equation*}
+    Since $G$ is a non-trivial $p$ group, $p \mid |G|$. Therefore $|Z(G)|\equiv 0 \pmod{p}$, i.e. $p \mid |Z(G)|$. Since $e\in Z(G)$, $|Z(G)|>0$. Therefore, $|Z(G)|\ge p > 1$, so $Z(G) \neq \{e\}$.
+\end{proof}
+\subsubsection{Corollary}
+\begin{idea}
+    Every group of order $p^2$ is abelian.
+\end{idea}
+\begin{proof}
+    Let $G$ be a group of order $p^2$. Then it has a non-trivial center, we have $|Z(G)|=p\text{ or }p^2$ by Lagrange's Theorem. In tha ltter case, $Z(G)=G$ and we're done.
+
+    Suppose $|Z(g)|=p$. Then $G/Z(G)$ is a group of order $p$, so it is cyclic, and thus $G$ is abelian by an earlier result.
+\end{proof}
+\newpage
+\section{Sylow's Theorems}
+\subsection{Sylow p-subgroups}
+Let $G$ be a finite group.
+\begin{definition}{Sylow $p$-subgroup of $G$}
+    Let $p$ be a prime. Let $n$ be the unique positive non-negative integer such that $p^n \bigg| |G|$ and $p^{n+1}\nmid |G|$, i.e. $p^n$ is the largest power of $p$ that divides $|G|$.
+    \vspace{2mm}
+
+    A subgroup of $G$ of order $p^n$ is called a Sylow $p$-subgroup of $G$.
+    \vspace{2mm}
+
+    The set of Sylow $p$-subgroups of $G$ is denoted by $\text{Sylp}(G)$. And define
+    \begin{equation*}
+        n_p = |\text{Sylp}(G)|.
+    \end{equation*}
+\end{definition}
+Note that if $p \nmid |G|$, then $\text{Sylp}(G) = \{\{e\}\}$. If $p \mid |G|$, then Sylow $p$-subgroups are non-trivial if they exist.
+\subsection{Sylow's Theorems, 1872}
+\begin{idea}
+    Let $p$ be a finite group and let $p$ be a prime.
+    \begin{enumerate}
+        \item For each $k\in \mathbb{Z}_{\ge 0}$ such that $p^k \mid |G|$, there exists a subgroup of $G$ of order $p^k$. In particular, there exists a sylow $p$-subgroup of $G$.
+              \vspace{2mm}
+
+              Note that this is a partial converse to Lagrange's Theorem.
+        \item If $H$ is a $p$-group of $G$ and if $P\in\text{Sylp}(G)$, then there exists $g\in G$ such that $H \le gPg^{-1}$. In particular, every $p$-subgroup of $G$ is contained in a sylow $p$-subgroup.
+
+              Furthermore, if $H$ is a sylow $p$-subgroup of $G$, then it follows that $H=gPg^{-1}$, i.e. any two sylow $p$-subgroups are conjugate to each other.
+        \item For any $p\in\text{Sylp}(G)$, we have
+              \begin{equation*}
+                  n_p := |\text{Sylp}(G)| = [G:N_G(P)] \bigg| |G|.
+              \end{equation*}
+              Also, $n_p \equiv 1 \pmod{p}.$
+    \end{enumerate}
+\end{idea}
+
 \end{document}

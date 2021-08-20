@@ -1,0 +1,17 @@
+\begin{sol}
+    Let $G=\langle a\rangle$ such that $|G|=n$. Then we claim we can construct an isomorphism $\phi$:
+    \begin{align*}
+        \phi: G &\rightarrow \mathbb{Z}_n \\ 
+        a^k &\mapsto k
+    \end{align*}
+    We show this is well defined by showing that if $a^k=a^j$ (which is true if and only if $k\equiv j \pmod{n}$), then $k=j$. Since the codomain is in $\mathbb{Z}_n$ where each element is taken to be modulo $n$, then we have $k\equiv j \pmod{n} \iff k=j$. These steps are all reversible, so reversing these show that $\phi$ is injective as well. To show that $\phi$ is surjective, note that $k \in \mathbb{Z}_n$ is mapped to by $a^k$.
+    \vspace{2mm}
+
+    We then show this is a homomorphism. Note that
+    \begin{align*}
+        \phi(a^ka^j)&=\phi(a^{k+j}) \\ 
+        &= k + j \\ 
+        &= \phi(a^k) + \phi(a^j)
+    \end{align*}
+    and we're done: $\phi$ is an isomorphism.
+\end{sol}

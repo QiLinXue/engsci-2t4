@@ -1,0 +1,22 @@
+\begin{sol}
+\begin{enumerate}[label=(\alph*)]
+    \item The action is $G\times X\rightarrow X$. Then $\text{orb}(1) = \{\rho(g)(1): g\in G\}$. Note that
+    \begin{itemize}
+        \item $\rho(a) = (1\,4\,6)(2\,7)$
+        \item $\rho(a^2) = (1\,6\,4)$
+        \item $\rho(a^3) = (2\,7)$
+        \item $\rho(a^4) = (1\,4\,6)$
+        \item $\rho(a^5) = (1\,6\,4)(2\,7)$
+        \item $\rho(a^6) = e$.
+    \end{itemize}
+    Therefore,
+    $$
+    \text{orb}(1) = \{1,4,6\}.
+    $$
+    \item We have
+    $$
+    \text{stab}(1) = \{e,a^6\}.
+    $$
+    \item For all $g\in G$, we know that $3,5$ are fixed. We can count the total number of other fixed points to be $0+2+3+2+0+5=12$ (corresponding to $a,a^2,\dots,a^6$ respectively) giving a total of $12+6(2)=24$ fixed points. Therefore, on average there are $24/6=4$ fixed points so there are $4$ distinct orbits.
+\end{enumerate}
+\end{sol}

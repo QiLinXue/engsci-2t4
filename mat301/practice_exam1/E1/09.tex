@@ -1,0 +1,26 @@
+\begin{sol}
+\begin{enumerate}[label=(\alph*)]
+    \item Pick $H=\{e,s\}$, where $s$ is an arbitrary reflection and pick $a=r$ where $r$ is the smallest nonzero rotation. Then:
+    $$
+        aH = rH = \{r,rs\}
+    $$
+    and
+    $$
+        Ha = Hr = \{r,sr\}
+    $$
+    We know that $rs = sr^5 \neq sr$, and we are done.
+    \item All the left cosets are
+    \begin{itemize}
+        \item $rH=\{r,rs\}$
+        \item $r^2H = \{r^2,r^2s\}$
+        \item $r^3H = \{r^3, r^3s\}$
+        \item $r^4H = \{r^4, r^4s\}$
+        \item $r^5H = \{r^5, r^5s\}$
+        \item $eH = \{e,s\}$
+    \end{itemize}
+    Note that the coset $r^ksH$, where $r^ks$ is a reflection, is already contained above since $sH=H$ so $r^ksH = r^kH$. The index is $6$ as we should expect, since
+    $$
+    \frac{|D_6|}{|H|} = \frac{6\cdot 2}{2}=6.
+    $$
+\end{enumerate}
+\end{sol}

@@ -1,0 +1,16 @@
+\begin{sol}
+    \begin{enumerate}
+        \item
+              Note that by definition, we must have $\phi(0)=\phi(30)=0.$ Therefore, we must have $\phi(5\cdot 6)=5\phi(6)=0$ where we can take out the $5$ as exponentiation respects the group operation. Therefore, $5\phi(6)$ is a multiple of $30$, i.e. there exists an integer $k$ such that $5\phi(6)=30k \implies \phi(6)=6k$. In other words $\phi(6)$ is a multiple of $6$.
+              \vspace{2mm}
+
+              We also know that isomorphisms preserve order. The generating element of $\mathbb{Z}_{30}$ is $1$ and has order $30$. We use the theorem that an element $k$ has order $30$ if and only if $k$ and $30$ are relatively prime.
+              \vspace{2mm}
+
+              Since $\phi(1)$ must also have order $30$, we can conclude that $\phi(1)$ is relatively prime to $30$, so the candidates are $1,7,11,13,17,19,23,29$. Using properties of isomorphisms, we can write: $\phi(7-6)=\phi(7)-\phi(6)=23-\phi(6)$, and therefore $\phi(6)=23-\phi(1)$. Using the candidates of $\phi(1)$, the candidates of $\phi(6)$ are then
+              $$\phi(6) \in \{22,16,12,10,6,4,0,24\}.$$
+              The only possible candidates are thus $\phi(6)=0,6,24$. We also know that the order of $6$ is $5$, so $|\phi(6)=5|$ also. This eliminates $0$ as a candidate. Note that if $\phi(6)=6$, then $\phi(1)=23$. But we are already told that $\phi(7)=23$. Since $\phi$ is injective, we must have $\phi(1) \neq 23$ and therefore $\phi(6)=24$.
+        \item It corresponds to $\phi(k) = 30-k.$
+    \end{enumerate}
+
+\end{sol}
