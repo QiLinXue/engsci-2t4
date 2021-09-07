@@ -1,0 +1,107 @@
+\section{Thermodynamics Systems}
+\subsection{Definitions}
+\begin{itemize}
+    \item \textbf{System:} any piece of matter or region of space that we identify for purposes of analysis.
+    \item \textbf{Surroundings:} everything outside the system
+    \item \textbf{System boundary:} surface that separates the system from the surroundings (denoted by dotted line)
+    \item \textbf{Closed System:} a system where the mass is fixed. Also known as \textit{control mass}.
+    \begin{itemize}
+        \item Energy can enter or leave the system.
+        \item The system boundary may move.
+        \item The system boundary may be imaginary.
+        \item The system boundary may change its shape and size.
+    \end{itemize}
+    \item \textbf{Open System:} A system where both energy and mass can cross boundaries. Also known as \textit{control volume}.
+    \begin{itemize}
+        \item Control volumes may move.
+    \end{itemize}
+    \item \textbf{Isolated System:} A system where no mass or energy can cross the system boundary. It therefore does not interact with surroundings.
+\end{itemize}
+\subsection{Thermodynamic Properties}
+\begin{itemize}
+    \item A property of a system is any attribute that can be measured without knowing the history of the system.
+    \begin{itemize}
+        \item i.e. mass, volume, temperature, energy
+    \end{itemize}
+    \item To represent infinitesimal amounts, we use $\dd$ to represent quantities that are properties (i.e. $\dd{x}$) and  $\delta$ to represent quantities that aren't properties (i.e. $\delta x$).
+    \item \textbf{Point Function:} Value depends only on the state of the system. All properties are point functions.
+    \item \textbf{Path Function:} Value depends on the start and end state and the path followed to get from one to the other.
+    \item \textbf{Intensive Properties:} Properties can be specified at a point within the system and are independent of system mass.
+    \item \textbf{Extensive Properties:} properties that depend on the mass of the system.
+    \begin{idea}
+        For any extensive property, we can define a corresponding intensive property.
+    \end{idea}
+\end{itemize}
+\subsection{Steady State and Equilibrium}
+\begin{itemize}
+    \item A system is at \textbf{steady state} if its properties do not change with time, even though it is exchanging energy or mass with its surroundings.
+    \begin{idea}
+        All systems that are left isolated eventually reach a state of equilibrium where their properties do not change with time.
+    \end{idea}
+    \item Systems at equilibrium do not interact with surroundings so they cannot do work. A system does work only when it is not in equilibrium.
+    \item \textbf{Mechanical Equilibrium:} Pressure within system is the same.
+    \item \textbf{Thermal Equilibrium:} Temperature within system is the same.
+    \item \textbf{Phase Equilibrium:} Pressure and temperature within system is the same. Amounts of the phases remain constant.
+\end{itemize}
+\subsection{State and Process}
+\begin{itemize}
+    \item The \textbf{state of a system} is described by a complete list of its properties. 
+    \item \textbf{Process:} The change of a system from one state to another.
+    \item We can show a thermodynamic process by selecting two properties and show how they vary on a 2D graph. The properties chosen depend on the process.
+    \begin{center}
+        \begin{tikzpicture}[
+            > = latex,
+            dot/.style = {draw,fill,circle,inner sep=1pt}
+            ]
+            \draw[<->] (0,4.3) node[above right] {$p$} |- (4.3,0) node[right] {$V$};
+
+            \node[dot, ,label={above right:$1$}] (1) at (4,2) {};
+            \node[dot, label={above right:$2$}] (2) at (2,4) {};
+            \draw[->, red] (1) to[out = 180, in=-90] (2);
+          \end{tikzpicture}
+    \end{center}
+    The line is known as the \textbf{process path}.
+    \item \textbf{Isothermal Process:} The temperature of the system is constant.
+    \begin{itemize}
+        \item This can be accomplished by surrounding a piston with a constant temperature path.
+    \end{itemize}
+    \item \textbf{Adiabatic Process:} There is no heat transfer to or from the system.
+    \begin{itemize}
+        \item This is achieved by surrounding the piston with perfect insulation.
+    \end{itemize}
+    \item \textbf{Isobaric Process:} The pressure of the system is constant.
+    \begin{itemize}
+        \item This can be accomplished by heating up a piston/chamber with a heat source.
+    \end{itemize}
+    \begin{idea}
+        Suppose a piston rapidly compresses a gas confined in a cylinder. can we measure the gas pressure $(P)$ as a function of volume $(V)$?
+        \vspace{2mm}
+
+        The answer is no, as the system will not be in equilibrium during the process. Therefore, properties are only well defined at \textit{equilibrium.}
+    \end{idea}
+    \item Therefore, when we define a process path, we assume the process is \textbf{quasi-equilibrium} (very slowly).
+    \item \textbf{Thermal Reservoir:} A system whose temperature remains constant despite heat transfer to or from it (i.e. atmosphere, lake).
+    \begin{example}
+        Suppose we have three thermal reservoirs at $T_1, T_1+\Delta T, T_1+2\Delta T, \dots, T_2$. We can put a system in contact with thermal reservoir $T_1$. We can then move it to the next thermal reservoir, until we get to $T_2$. This represents a quasi-equilibrium heating process when we take the limit where $\Delta T \rightarrow 0$.
+    \end{example}
+    \begin{center}
+        \begin{tikzpicture}[
+            > = latex,
+            dot/.style = {draw,fill,circle,inner sep=1pt}
+            ]
+            \draw[<->] (0,4.3) node[above right] {$p$} |- (4.3,0) node[right] {$V$};
+
+            \node[dot, ,label={right:$1$}] (1) at (4,1) {};
+            \node[dot, label={above:$2$}] (2) at (1,3) {};
+            \node[dot, label={above:$3$}] (3) at (2,3) {};
+            \node[dot, label={right:$4$}] (4) at (4,2) {};
+
+            \draw[->, red] (1) to[out = 180, in=-90] (2);
+            \draw[->, red] (2) to (3);
+            \draw[->, red] (3) to[out = -90, in=180] (4);
+            \draw[->, red] (4) to (1);
+          \end{tikzpicture}
+    \end{center}
+    \item \textbf{Cycle:} Any process, or series of processes, that result in the system in the same state it starts from. For example, the above is an example of a cycle:
+    \item Going from $2\rightarrow 3$ is an isocharic process (constant volume) and going from $4\rightarrow 1$ is an isobaric process.
+\end{itemize}
