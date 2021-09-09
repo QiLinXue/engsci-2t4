@@ -1,0 +1,67 @@
+\section{Introduction}
+\textit{Covers 1.1: Mathematical Models and Solutions}
+\begin{itemize}
+    \item Big Idea: Differential equations model physical situations:
+          \begin{itemize}
+              \item Take a physical situation and ODE-ify it (How do we model a cooling coffee cup?)
+              \item Understand an ODE without solving it (What can we deduce directly from $y'=y^2$?)
+              \item Study, categories, typecast ODEs and solve them
+                    \begin{example}
+                        Suppose we have $y'=y/t+\ln t$ and $y'=y^2+t$. Which of these are harder to solve (without actually solving them)?
+                        \vspace{2mm}
+
+                        It turns out that the second one is harder as it is \textit{non-linear}.
+                    \end{example}
+              \item Handle ODEs numerically (What do we do when we cannot solve an ODE that models a real life phenomenon?)
+              \item The art of problem solving (How do I work with no strings attached?)
+          \end{itemize}
+          \item What is a differential equation?
+          \begin{definition}
+              A differential equation relates a function and its derivatives.
+          \end{definition}
+          \item We can understand ODEs without solving it:
+          \begin{example}
+              Let's consider a cup of coffee in a room. We want to model its change in temperature over time. How do we do this?
+              \vspace{2mm}
+
+              There are a lot of variables, so we have to simplify our model. The things we care about
+              \begin{itemize}
+                  \item The temperature of the coffee cup $y(t)$.
+                  \item $t$ is in minutes.
+                  \item $y(t)$ is in Celsius.
+                  \item The temperature in the room $T$ (in Celsius).
+              \end{itemize}
+              The things we ignore / simplify:
+              \begin{itemize}
+                  \item Temperature variation within the cup
+                  \item Temperature variation in the room
+              \end{itemize}
+              \textbf{Exercise:} Let's consider some suggestions for an ODE describing the temperature of a coffee cup in a room. Each of the following suggested ODEs contradicts our intuition in some way. How?
+
+              \begin{itemize}
+                  \item $y'=y^2$
+                        \begin{itemize}
+                            \item $T$ isn't in there
+                            \item Temperature would always increase except if $y=0$.
+                            \item The hotter the coffee, the faster it heats up.
+                        \end{itemize}
+                  \item $y'=\frac{T}{y}$
+                        \begin{itemize}
+                            \item If $T>0, y>0$, then $y'>0$
+                            \item The model doesn't work for coffee at $0^\circ \text{C}$.
+                        \end{itemize}
+                  \item $y'=y[e^{y-T}+y^3]$
+                  \item $y'=y-T$
+                  \item $y'=T-y$
+                        \begin{itemize}
+                            \item There should be a parameter that describes the physical properties (rate of heating/cooling will be different for different materials)
+                        \end{itemize}
+              \end{itemize}
+          \end{example}
+          \begin{idea}
+            Without solving an ODE, you can already make many predictions about its solution
+            \vspace{2mm}
+
+            (and then, for example, judge your model)
+          \end{idea}
+\end{itemize}
