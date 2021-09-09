@@ -1,4 +1,4 @@
-\section{Introduction}
+\section{Double Integrals}
 \begin{itemize}
     \item \textbf{Integrals Involving a Parameter}
           \begin{example}
@@ -247,9 +247,9 @@
               \end{tikzpicture}
           \end{center}
     \item Let's think about the case where $f(x,y)\ge 0$ on a type-1 region. Suppose we have the following illustration
-        %   \begin{center}
-        %       \includegraphics[width=0.6\linewidth]{L01_c.png}
-        %   \end{center}
+          %   \begin{center}
+          %       \includegraphics[width=0.6\linewidth]{L01_c.png}
+          %   \end{center}
           \begin{center}
               \begin{tikzpicture}
                   \begin{axis}[
@@ -320,7 +320,38 @@
           \end{equation}
     \item Type-3 regions are neither type-1 nor type-2. It is possible to break up the region into parts that can be classified as either type-1 or type-2:
           \begin{center}
-              \includegraphics[width=0.6\linewidth]{L01_d.png}
+              \begin{tikzpicture}
+                  \begin{axis}[
+                          legend pos=outer north east,
+                          title=Neither Type-1 or Type-2,
+                          axis lines = box,
+                          xlabel = $x$,
+                          ylabel = $y$,
+                          xmin = 0,
+                          xmax = 8,
+                          ymin = 0,
+                          ymax = 30,
+                          variable = t,
+                          trig format plots = rad,
+                      ]
+                      \addplot [
+                          domain=2:4,
+                          samples=70,
+                      ]
+                      {x^2+5};
+                      \addplot [
+                          domain=2:6,
+                          samples=70,
+                      ]
+                      {(x-4)^2+5};
+                      \addplot [
+                          domain=4:6,
+                          samples=70,
+                      ]
+                      {(x-8)^2+5};
+                      \draw[dotted] (4,21) -- (4,5) node[midway,left] {$R_1$} node[midway, right] {$R_2$};
+                  \end{axis}
+              \end{tikzpicture}
           \end{center}
           \begin{idea}
               While these formulas are derived by assuming a positive volume (and thus cannot work if $f < 0$), they still work in general.
