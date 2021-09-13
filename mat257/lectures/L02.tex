@@ -1,0 +1,50 @@
+\section{Continuity: Distance}
+\textit{Lecture 2 (Sept 13)}
+\begin{itemize}
+    \item The properties in the previous section will be important when giving a formal definition of continuity.
+    \begin{definition}
+        If $x,y\in \mathbb{R}^n$, then:
+        \begin{equation}
+            d(x,y) = \text{``Distance between $x$ and $y$''} = |x-y|
+        \end{equation}
+    \end{definition}
+    \begin{theorem}
+        \begin{enumerate}
+            \item $d$ is \textbf{symmetric}, i.e. $d(x,y)=d(y,x)$.
+            \item $d$ is \textbf{positive definite}, i.e. $d(x,y) \ge 0$ and $d(x,y)=0 \iff x=y$.
+            \item Triangle Inequality: $d(x,z) \le d(x,y) + d(y,z).$
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        We prove each separately:
+        \begin{enumerate}
+            \item $d(x,y) = |x-y| = |-(y-x)| = |-1| \cdot |y-x| = |y-x| = d(y,x)$
+            \item $d(x,y) = 0 \iff |x-y| = 0 \iff x-y = 0 \iff x=y$
+            \item We need to check that
+            \begin{align}
+                d(x,z) &\stackrel{?}{\le} d(x,y) + d(y,z) \\ 
+                |x-z| &\stackrel{?}{\le} |x-y| + |y-z| \\ 
+                |x-z| &\stackrel{?}{\le} |x-z|
+            \end{align}
+            where the third line comes from the previous triangle inequality. The last statement is true, and the steps are reversible, so we are done.
+        \end{enumerate}
+    \end{proof}
+    \item This theorem is significant as these are the only properties that we need to know about distances to formally define continuity.
+
+    \textit{Note:} In a future section, we will use these properties to \textit{define} a distance function (formally a metric), which is anything that satisfies these properties. This will allow us to generalize continuity to more abstract spaces.
+    \item A note on notation. Our definition of a norm is known as the $L^2$ or \textit{Euclidean norm,} i.e.
+    \begin{equation}
+        |x|_{L^2} = \sqrt{\sum x_i^2}
+    \end{equation}
+    The $L^1$ norm can be defined as
+    \begin{equation}
+        |x|_{L^1} = \sum |x_i|
+    \end{equation}
+    and the infinity norm: 
+    \begin{equation}
+        |x|_\infty = \max|x_i|.
+    \end{equation}
+    \item Similarly, distances for $L^1$ and the infinity norms can be defined as $d_1(x,y)=|x-y|_1$ and $d_\infty(x,y)=|x-y|_\infty$.
+    
+    \textbf{Exercise:} Show that $d_1$ and $d_\infty$ also satisfy the properties of a distance.
+\end{itemize}
