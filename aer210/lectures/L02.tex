@@ -1,0 +1,96 @@
+\section{Formal Definition of Double Integrals}
+\begin{itemize}
+    \item We will see two ways of defining double integrals.
+    \item First, let us review the formal definition of definite integrals for functions of a single variable.
+    
+    To determine the area under a curve in the region $x\in [a,b]$, we can break the region up into intervals $\Delta x_i$, so the Riemann sum is
+    \begin{equation}
+        A \approx \sum_{i=1}^n f(x_i^*)\Delta x_i
+    \end{equation}
+    Let $m_i \le f(x_i^*) \le M_i$ for $x_i^* \in \Delta x_i$. Then: 
+    \begin{equation}
+        \sum_{i=1}^n m_i \Delta x_i \le \underbrace{\sum_{i=1}^n f(x_i^*)\Delta x_i}{Estimate of the entire area calculated by Riemann Sum} \le \sum_{i=1}^n M_i \Delta x_i
+    \end{equation}
+    If the $\Delta x_i$ are of equal length and we take the limit, we can define: 
+    \begin{equation}
+        A = \lim_{n\to\infty} \sum_{i=1}^n f(x_i^*)\Delta x_i = \int_a^b f(x) \dd{x}
+    \end{equation}
+    If they are not of equal length, we need to define the norm of the partition $\lVert P \rVert = (\Delta x_i)_\text{max}$ for $i=1,2,\dots,n$. This way, the integral can be alternatively defined as 
+    \begin{equation}
+        A = \lim_{\lVert P \rVert \rightarrow 0} \sum_{i=1}^n f(x_i^*)\Delta x_i = \int_a^b f(x) \dd{x}
+    \end{equation}
+    \item Consider a double integral over rectangular region. Let $z=f(x,y)$ be defined on $R=\{(x,y)|a\le x\le b, c\le y \le d\}$. Assume $f(x,y) \ge 0$ over $R$.
+    \item \textbf{Formal Definition 1:} We can approximate the volume as
+    \begin{equation}
+        \Delta v_i \approx f(x_i^*,y_i^*)\Delta A_i
+    \end{equation}
+    where $\Delta A_i = \Delta x_i \cdot \Delta y_i$. The Riemann sum is then 
+    \begin{equation}
+        V \approx \sum_{i=1}^N f(x_i^*,y_i^*)\Delta A_i
+    \end{equation}
+    We can pick $x_i^*,y_i^*$ such that $f(x_i^*,y_i^*)$ is the smallest and largest value in the region, we can bound the Riemann sum by: 
+    \begin{equation}
+        \sum_{i=1}^N m_i \Delta x_i \Delta y_i \le \sum_{i=1}^N f(x_i^*,y_i^*)\Delta x_i\Delta y_i \le \sum_{i=1}^N M_i \Delta x_i \Delta y_i
+    \end{equation}
+    \begin{warning}
+        Taking the limit where $N\rightarrow \infty$ is not sufficient, as it does not necessarily mean the size of all partitions approach zero.
+    \end{warning}
+    We define the norm of the partition to be
+    \begin{equation}
+        \lVert P \rVert = \max(\Delta d_i)
+    \end{equation}
+    for $i=1,2,\dots,N$. Therefore: 
+    \begin{equation}
+        V = \lim_{\lVert P \rVert \rightarrow 0} \sum_{i=1}^N f(x_i^*,y_i^*)\Delta A_i = \iint\limits_{R}f(x,y)\dd{A} = \iint\limits_{R}f(x,y)\dd{x}\dd{y}.
+    \end{equation}
+    \begin{idea}
+        Functions that are continuous are integrable over that region.
+    \end{idea}
+    \item \textbf{Formal Definition 2:} We are free to divide the region $R$ into any tiling, we can use uniform divisions.
+    
+    As a result, the area of each tile is 
+    \begin{equation}
+        \Delta A_{ij}=\Delta x_i\Delta y_j
+    \end{equation}
+    where the $(i,j)$ represent the coordinate of the tile. The double Riemann sum is then:
+    \begin{equation}
+        V \approx \sum_{j=1}^m \sum_{i=1}^n f(x_{ij}^*,y_{ij}^*)\Delta x_i \Delta y_j
+    \end{equation}
+    Again, we can define $m_{ij}$ and $M_{ij}$ such that 
+    \begin{equation}
+        \sum_{j=1}^m \sum_{i=1}^n m_{ij}\Delta x_i \Delta y_j \le \sum_{j=1}^m \sum_{i=1}^n f(x_{ij}^*,y_{ij}^*)\Delta x_i \Delta y_j \le \sum_{j=1}^m \sum_{i=1}^n M_{ij}\Delta x_i \Delta y_j
+    \end{equation}
+    Since these intervals are equally partitioned, we can define
+    \begin{equation}
+        V = \lim_{m,n\rightarrow \infty} \sum_{j=1}^m \sum_{i=1}^n f(x_{ij}^*, y_{ij}^*)\Delta A_{ij} = \iint\limits_{R} f(x,y)\dd{A}.
+    \end{equation}
+    If they were not, we would have to define the norm again.
+    \begin{example}
+        Estimate the volume of the solid that lies above the square $R=[0,2]\times [0,2]$ and below the elliptic paraboloid $z=16-x^2-2y^2$. Divide $R$ into four equal squares \& choose the sample point to be the upper corner of each square.
+        \vspace{2mm}
+
+        We would then have: 
+        \begin{align}
+            V & \approx \sum_{i=1}^2\sum_{j=1}^2 f(x_{ij}^*,y_{ij}^*)\Delta A \\ 
+            &\approx f(1,1)\Delta A + f(1,2)\Delta A + f(2,1)\Delta A + f(2,2) \Delta A \\ 
+            &\approx 34
+        \end{align}
+        Note that the actual answer is $48$. The approximation will improve as the number of regions increase.
+    \end{example}
+    \item We can also define double integrals over non-rectangular regions. 
+    \item \textbf{Definition 1:} We can again tile a region using rectangular regions in two ways: 
+    \begin{itemize}
+        \item Each tile is contained within $R$ and there are some space.
+        \item Some tiles extend past the boundary of $R$, which is completely covered.
+    \end{itemize}
+    When we take the limit as $\lVert P\rVert\rightarrow 0$, both of these tiling methods will approach the actual area, so using any of these tilings will cause the double integral to approach the actual volume.
+
+    If $f(x,y)$ is a continuous function over $R$, then 
+    \begin{equation}
+        V=\lim_{\lVert P\rVert} \sum f(x_i^*,y_i^*)\Delta A_i = \lim_{\lVert P\rVert \rightarrow 0} \sum_{j=1}^N f(x_j^*,y_j^*)\Delta A_j = \iint\limits_{R} f(x,y)\dd{x}\dd{y}
+    \end{equation}
+    \item \textbf{Definition 2:} Similarly, we can use uniform partitions that either leave gaps or extend past the region. We can again define $m_{ij}$ and $M_{ij}$ for each tile $R_{ij}$ such that 
+    \begin{equation}
+        V = \iint\limits_{R} f(x,y)\dd{x}\dd{y} = \lim_{\lVert P\rVert \rightarrow 0} \sum_{j=1}^M \sum_{i=1}^N f(x_{ij}^*,y_{ij}^*)\Delta x_i\Delta y_j
+    \end{equation}
+\end{itemize}

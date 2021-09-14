@@ -1,0 +1,120 @@
+\section{Double Integrals in Polar Coordinates}
+\begin{itemize}
+    \item Using polar coordinates is helpful when integrating over circular regions.
+    \item Recall that we can convert between rectangular and polar coordinates via 
+    \begin{equation}
+        x = r\cos\theta,\qquad y=r\sin\theta
+    \end{equation}
+    and that the area of a sector is 
+    \begin{equation}
+        A = \frac{1}{2}r^2\theta
+    \end{equation}
+    \item Suppose we have some function $f(x,y)$ defined on $R=\{(r,\theta)|a\le r \le b, \alpha\le \theta\le \beta\}.$ We can then define: 
+    \begin{equation}
+        f(x,y)=f(r\cos\theta,r\sin\theta)=g(r,\theta).
+    \end{equation}
+    Assume $f(x,y)=g(r,\theta) \ge 0$ on $R$. Then we can approximate the volume as 
+    \begin{equation}
+        \Delta V_i \approx g(r_i^*,\theta_i^*)\cdot \Delta A_i = f(r_i^*\cos\theta^*_i,r_i^*\sin\theta^*_i) \cdot r_i\Delta r_i \Delta \theta_i \left(1+\frac{\Delta r_i}{2r_i}\right).
+    \end{equation}
+    Taking the limit, we have 
+    \begin{align}
+        V &= \lim_{\lVert P\rVert \rightarrow 0} \sum_{i=1}^n f(r_i^*\cos\theta_i^*, r_i^* \sin\theta^*_i)r_i\Delta r_i \Delta \theta_i \\ 
+        *= \int_\alpha^\beta \int_a^b f(r\cos\theta,r\sin\theta)r \dd{r}\dd{\theta}.
+    \end{align}
+    We can generalize this finding regardless of whether the function is positive or negative over $R$.
+    \begin{idea}
+        In a region bounded by $\alpha \le \theta \le \beta$, $a\le r\le b$, we have 
+        \begin{equation}
+            \iint\limits_{R} f(x,y)\dd{A}  =\int_\alpha^\beta \int_a^b f(r\cos\theta,r\sin\theta)r\dd{r}\dd{\theta}.
+        \end{equation}
+    \end{idea}
+    \item We can extend this to more complicated regions. Suppose $R$ is bounded by $\alpha \le \theta \le \beta$ and $g(\theta) \le r \le g_2(\theta)$. Then the volume would be 
+    \begin{equation}
+        \iint\limits_{R} f(x,y) \dd{A} = \int_\alpha^\beta \int_{g_1(\theta)}^{g_2(\theta)}f(r\cos\theta,r\sin\theta)r\dd{r}\dd{\theta}
+    \end{equation}
+    \item Similarly, if $R$ is bounded by $a\le r\le b$ and $h_1(r)\le \theta \le h_2(r)$, we have 
+    \begin{equation}
+        \iint\limits_{R} f(x,y)\dd{A} = \int_a^b \int_{h_1(r)}^{h_2(r)}f(r\cos\theta,r\sin\theta)r\dd{r}\dd{\theta}.
+    \end{equation}
+    \begin{example}
+        Evaluate $\iint\limits_{R} (3x+4y^2)\dd{A}$ where $R$ is the region in the upper half-plane bounded by the circles $x^2+y^2=1$ and $x^2+y^2=4$. 
+        \vspace{2mm}
+
+        This leads to the region $R=\{(r,\theta)|1\le r\le 2, 0\le \theta \le \pi\}$. Then:
+
+        \begin{align}
+            I &= \iint\limits_{R} (3x+4y^2)\dd{A} \\ 
+            &= \int_0^\pi \int_1^2 (3r\cos\theta + 4r^2\sin^2 \theta)r\dd{r}\dd{\theta}
+        \end{align}
+        Solving this integral gives $\frac{15}{2}\pi$.
+    \end{example}
+    \begin{example}
+        Find the volume of the solid bounded by the $z=0$ plane and the parabaloid $z=1-x^2-y^2$.
+        \vspace{2mm}
+
+        Note that at $z=0$, we get $0=1-x^2-y^2 \implies x^2+y^2=1$. We can write our region as $R=\{(r,\theta)|0\le r\le 1, 0\le \theta \le 2\pi\}$. Our double integral is then 
+        \begin{equation}
+            V = \iint\limits_{R} (1-x^2-y^2)\dd{A} = \int_{0}^{2\pi}\int_{0}^1 (1-r^2)r\dd{r}\dd{\theta}
+        \end{equation}
+        Solving this gives $V=\pi/2$.
+    \end{example}
+    \begin{example}
+        Find the area enclosed by one petal of the rose given by $r=\cos3\theta$.
+        \begin{center}
+            \begin{tikzpicture}
+                \draw[thick,->,>=latex] (-3,0)--(3,0) node[above] {$x$};
+                \draw[thick,->,>=latex] (0,-3)--(0,3) node[left] {$y$};
+                \draw[domain=0:360,scale=1.5,samples=500] plot (\x:{cos(3*\x)});
+            \end{tikzpicture}
+            The area is
+            \begin{equation}
+                A = \int_{-\pi/6}^{\pi/6}\int_0^{\cos3\theta} 1 \cdot r\dd{r}\dd{\theta}
+            \end{equation}
+            which evaluates to $\frac{1}{12}$.
+        \end{center}
+    \end{example}
+    \begin{example}
+        Find the volume trapped between the cone $z=\sqrt{x^2+y^2}$ and the sphere $x^2+y^2+z^2=1$.
+        \vspace{2mm}
+
+        First, let us find the intersection using cartesian coordinates. We have 
+        \begin{equation}
+            \sqrt{x^2+y^2}=\sqrt{1-x^2-y^2}\implies x^2+y^2 = \frac{1}{2}.
+        \end{equation}
+        This can be written as $r=\frac{1}{\sqrt{2}}$ in polar coordinates. The volume is thus 
+        \begin{equation}
+            \int_0^{2\pi} \int_0^{1/\sqrt{2}}f(x,y) r\dd{r}\dd{\theta}
+        \end{equation}
+        where $f(x,y)=\sqrt{1-x^2-y^2}-\sqrt{x^2+y^2}$. This gives $\frac{2\pi}{3}\left(1-\frac{1}{\sqrt{2}}\right).$
+    \end{example}
+    \item \textbf{Applications of Double Integrals}
+    \item We can determine the mass of a plate with nonuniform density $\rho = \rho(x,y)$. The mass is then 
+    \begin{equation}
+        \iint\limits_{R} \rho(x,y)\dd{A}.
+    \end{equation}
+    \item We can find the center of mass of a particle. Imagine we break a plate into small pieces. Each small piece has a moment about the $x$ axis: 
+    \begin{equation}
+        (M_x)_i = m_iy_i^* \approx \rho(x_i^*,y_i^*)\Delta A_i \cdot y_i^*
+    \end{equation}
+    The total $x$ and $y$ moments are thus 
+    \begin{align}
+        M_x &= \iint\limits_{R}y \rho(x,y)\dd{A} \\ 
+        M_y &= \iint\limits_{R} x\rho(x,y)\dd{A}
+    \end{align}
+    These are equal to the moment $\bar{y}m$ and $\bar{x}m$, respectively, where $m$ is the mass of the object. Thus: 
+    \begin{equation}
+        \bar{x} = \frac{\iint\limits_{R} x\rho(x,y)\dd{A}}{\iint_{R}\rho(x,y)\dd{A}}
+    \end{equation}
+    and similarly for $\bar{y}$.
+    \item Consider a rotating object. A point mass has a kinetic energy $K=\frac{1}{2}mr^2\omega^2$. However, $mr^2$ would be different for different points on a solid object.
+    
+    We can consider: 
+    \begin{equation}
+        K = \frac{1}{2}\left(\sum_{i=1}^n m_ir_i^2\right)\omega^2.
+    \end{equation}
+    The quantity inside the parentheses is known as the moment of inertia $I$. While this may be true for a series of point masses, for a continuous distribution we need to take the limit:
+    \begin{equation}
+        I = \iint\limits_{R} \rho(x,y) [r(x,y)]^2 \dd{x}\dd{y}.
+    \end{equation}
+\end{itemize}
