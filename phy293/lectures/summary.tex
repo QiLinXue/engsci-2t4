@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY293: Waves and Modern Physics \\ \textbf{Summary}}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\maketitle
+\textit{Disclaimer: A large portion of this document is and will be stolen from David Morin's \href{https://scholar.harvard.edu/david-morin/waves}{Waves} book, which is currently still a draft.}
+\section{Dampened Harmonic Motion}
+\subsection{Introduction}
+\textbf{The Setup:} An object undergoing dampened harmonic motion experiences a restoring force $-kx$ and a resistive force $-b \frac{dx}{dt}$. The differential equation is: 
+\begin{equation}
+    \frac{d^2x}{dt^2} + \gamma \frac{dx}{dt} + \omega_0^2 x
+\end{equation}
+where $\gamma = \frac{b}{m}$ and $\omega_0^2 = \frac{k}{m}.$
+\begin{warning}
+    Most authors prefer to write the differential equation as 
+    \begin{equation*}
+        \frac{d^2x}{dt^2} + \mathbf{2}\gamma \frac{dx}{dt} + \omega_0^2 x
+    \end{equation*}
+    as it makes the solution less complicated (i.e. less fractions). Therefore, be very careful when trying to find equations online as we may not all be defining variables the same way.
+\end{warning}
+\textbf{Motivation for Solution:} In general, a solution to a second order linear differential equation is a sum of exponentials, i.e. it is in the form of 
+\begin{equation*}
+    x(t) = Ae^{\alpha_1 t} + Be^{\alpha_2 t}
+\end{equation*}
+where $\alpha_1,\alpha_2$ are solutions to a particular quadratic equation (see Appendix for details), where there are three options: 
+\begin{itemize}
+    \item Quadratic equation has $2$ solutions $\implies$ Then $x(t)$ is a sum of 2 exponential decays.
+    \item Quadratic equation has $1$ solution $\implies$ Then $x(t)$ is a single exponential decay.
+    \item Quadratic equation has $0$ solutions $\implies$ Then the roots are complex. Recall from ESC194 that complex exponents lead to sinusoidal functions, so $x(t)$ will have a sinusoidal component. 
+\end{itemize}
+\subsection{Underdamping ($\gamma < 2\omega_0$)}
+We can define
+\begin{equation}
+    \omega^2 = \omega_0^2 - \frac{\gamma^2}{4},
+\end{equation}
+which will be the new angular frequency. \textit{Damping reduces the frequency.\footnote{However, this is mostly irrelevant, because if $\gamma$ is large enough to make $\omega$ differ appreciably from $\omega_0$, then the motion becomes negligible after a few cycles anyways. For example, if $\omega$ differs from $\omega_0$ be even $20\%$, then after just $2$ cycles, the amplitude would have decrease to $0.01\%$ of the initial.}} The equation of motion is given by
+\begin{equation}
+    x_\text{underdamped}(t) = Ae^{-\gamma t/2}\cos(\omega t + \phi)
+\end{equation}
+where $A$ and $\phi$ are determined by initial conditions.
+\subsection{Overdamping ($\gamma > 2\omega_0$)}
+If $\gamma > 2\omega_0$, then the equation of motion is given by
+\begin{equation}
+    x_\text{overdamped}(t) = C_1e^{-\mu_1 t} + C_2 e^{-\mu_2 t}
+\end{equation}
+where we have\footnote{This shows why most physicists choose to use the $2\gamma$ factor, as it reduces a lot of fractions.} 
+\begin{align}
+    \mu_1 &= \frac{\gamma}{2} + \sqrt{\frac{\gamma^2}{4} - \omega_0^2} \\ 
+    \mu_2 &= \frac{\gamma}{2} - \sqrt{\frac{\gamma^2}{4} - \omega_0^2}
+\end{align}
+and $C_1,C_2$ are determined by initial conditions.
+\subsection{Critical Damping ($\gamma=2\omega_0$)}
+Critical damping occurs at $\gamma=2\omega_0$, then the equation of motion is given by 
+\begin{equation}
+    x_\text{critical}(t) = (A+Bt)e^{-\omega_0t}
+\end{equation}
+where $A$ and $B$ are determined by initial conditions.
+
+\textbf{Importance of Critical Damping:} Critically damped motion has the property that it \textit{converges} to the origin in the quickest manner, that is, quicker than both the overdamped and underdamped motions.
+
+\newpage
+\section{Appendix}
+\subsection{Derivations}
+Guessing a solution of the form $x(t)=Ce^{\alpha t}$, and substituting it into the ODE gives the characteristic equation 
+\begin{equation}
+    \alpha^2 + \gamma \alpha + \omega_0^2 = 0
+\end{equation}
+which has the solution 
+\begin{equation}
+    \alpha = \frac{-\gamma + \sqrt{\gamma^2 - 4\omega_0^2}}{2}
+\end{equation}
+The three cases for what the discriminant $\gamma^2-4\omega_0^2$ can be gives us the three cases of motion.
+
+\textbf{Underdamping:} In this case, $\sqrt{\gamma^2-4\omega_0^2}$ is an imaginary number, so let us write: $\alpha = -\gamma/2 + i\sqrt{4\omega_0^2-\gamma^2}$. We can define $\omega$ such that 
+\begin{equation}
+    \alpha = -\gamma/2 + i\omega.
+\end{equation}
+Substituting this back into our original guess (and using a linear combination), we get: 
+\begin{align}
+    x_\text{underdamped}(t) &= C_1e^{(-\gamma/2 + i\omega)t}+C_2e^{(-\gamma/2 - i\omega)t} \\ 
+    &= e^{-\gamma t/2}\left(C_1e^{i\omega t} + C_2e^{-i\omega t}\right)
+\end{align}
+Since $x(t)$ has to be real, the part inside the parentheses has to be real, which means the two terms are complex conjugates of each other. This means that if $C_1=Ce^{i\phi}$, then we must have $C_2 =Ce^{-i\phi}$. Making this substitution leads to 
+\begin{equation}
+    x_\text{underdamped}(t) = 2Ce^{-\gamma t/2}\cos(\omega t+\phi)
+\end{equation}
+\textbf{Overdamping:} Note that $\mu_1$ and $\mu_2$ are simply the two solutions to the characteristic equation, so we are left with a simple sum of exponentials: 
+\begin{equation}
+    C_1e^{-\mu_1 t} + C_2e^{-\mu_2 t},
+\end{equation}
+obtained by straightforward substitution.
+
+\textbf{Critical Damping:} There is only one root, so a naive guess may be that $x(t) = Ce^{-\gamma/2 t},$ but this cannot be the case as there is only one parameter, $C$, which cannot satisfy two freely chosen initial conditions (i.e. initial position and velocity). It turns out (covered in ESC194) that another solution is $te^{-\gamma/2 t},$ so the full solution is the linear combination 
+\begin{align}
+    x_\text{critically damped}(t) &= C_1e^{-\gamma/2 t} + C_2te^{-\gamma/2 t} \\ 
+    &= (C_1+C_2t)e^{-\gamma/2 t}
+\end{align} 
+\end{document}

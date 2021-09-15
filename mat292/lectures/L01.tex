@@ -15,11 +15,11 @@
               \item Handle ODEs numerically (What do we do when we cannot solve an ODE that models a real life phenomenon?)
               \item The art of problem solving (How do I work with no strings attached?)
           \end{itemize}
-          \item What is a differential equation?
+    \item What is a differential equation?
           \begin{definition}
               A differential equation relates a function and its derivatives.
           \end{definition}
-          \item We can understand ODEs without solving it:
+    \item We can understand ODEs without solving it:
           \begin{example}
               Let's consider a cup of coffee in a room. We want to model its change in temperature over time. How do we do this?
               \vspace{2mm}
@@ -59,24 +59,112 @@
               \end{itemize}
           \end{example}
           \begin{idea}
-            Without solving an ODE, you can already make many predictions about its solution
-            \vspace{2mm}
+              Without solving an ODE, you can already make many predictions about its solution
+              \vspace{2mm}
 
-            (and then, for example, judge your model)
+              (and then, for example, judge your model)
           \end{idea}
-          \item We introduce a few definitions
+    \item We introduce a few definitions
           \begin{definition}
               An \textbf{ordinary differential equation} (ODE) only considers a function of $1$ variable and its derivatives
           \end{definition}
           \begin{definition}
               A \textbf{partial differential equation} considers a function of several variables and its derivatives.
           \end{definition}
-          \item The most general ODE for a function $y(t)$ is:
+    \item The most general ODE for a function $y(t)$ is:
           \begin{enumerate}[label=(\alph*)]
               \item $F[t,y,y'',\dots,y^{(n)}]$ for $n\in \mathbb{N}$.
-              \item Any function that satisfies this equation is called \textit{a solution} 
+              \item Any function that satisfies this equation is called \textit{a solution}
           \end{enumerate}
           \begin{definition}
               The order of an ODE is the highest derivative of an ODE.
           \end{definition}
+    \item An autonomous ODE is if the independent variable doesn't appear in the ODE.
+    \item Systems of ODEs arise if we study several quantities depending on the same variable and how their changes interact.
+          \begin{example}
+              Assume that $p(t)$ and $o(t)$ describe the number of twitter followers of two accounts. If there is no interaction, what are reasonable ODEs for these two quantities?
+              \begin{align}
+                  p'(t) = kp(t) \\
+                  o'(t) = \ell o(t)
+              \end{align}
+              Suppose that if in addition to ``word of mouth,'' we consider the effects that these two tweets have, what are reasonable ODEs for the number of followers?
+              \begin{align}
+                  p'(t) = k \cdot p(t) - m \cdot o(t) \\
+                  o'(t) = \ell \cdot o(t) - n \cdot p(t)
+              \end{align}
+              where all constant are positive. However, this is oversimplified as it assumes the people who follow \textit{O} also follow \textit{P.}
+          \end{example}
+    \item Suppose a differential equation is given by
+          \begin{equation}
+              y'(t) = -1.5(y(t)-1)
+          \end{equation}
+          \begin{definition}
+              Consider the ODE $y'=f(t,y)$. We can draw a \textbf{direction field} as follows:
+              \begin{enumerate}
+                  \item Draw a $t-y$ coordinate system.
+                  \item Evaluate $f(t,y)$ over a rectangular grid of points.
+                  \item Draw a line at each point $(t,y)$ of the grid with slope $f(t,y)$.
+              \end{enumerate}
+          \end{definition}
+          \begin{center}
+              \begin{tikzpicture}[declare function={f(\x,\y)=-1.5*(\y-1);}]
+                  \def\xmax{3} \def\xmin{-3}
+                  \def\ymax{-3} \def\ymin{3}
+                  \def\nx{15}  \def\ny{15}
+
+                  \pgfmathsetmacro{\hx}{(\xmax-\xmin)/\nx}
+                  \pgfmathsetmacro{\hy}{(\ymax-\ymin)/\ny}
+                  \foreach \i in {0,...,\nx}
+                  \foreach \j in {0,...,\ny}{
+                          \pgfmathsetmacro{\yprime}{f({\xmin+\i*\hx},{\ymin+\j*\hy})}
+                          \draw[teal,-stealth,shift={({\xmin+\i*\hx},{\ymin+\j*\hy})}] (0,0)--(.1,.1*\yprime);
+                      }
+
+                  % a solution y=(yo+1)e^x-x-1
+                  \def\yo{0.01}
+                  \def\yoo{-0.03}
+                  \draw[magenta] plot[domain=\xmin:\xmax] (\x,{(\yo)*exp(-1.5*\x)+1});
+                  \draw[magenta] plot[domain=\xmin:\xmax] (\x,{(\yoo)*exp(-1.5*\x)+1});
+
+                  \draw[->] (\xmin-.5,0)--(\xmax+.5,0) node[below right] {$x$};
+                  \draw[->] (0,\ymin-.5)--(0,\ymax+.5) node[above left] {$y$};
+                  \draw (current bounding box.north) node[above]
+                  {Slope field of \quad $y'=-1.5(y-1)$.};
+              \end{tikzpicture}
+          \end{center}
+    \item Consider an autonomous first order ODE $y'=f(y)$. If $f(c)=0$ for some specific value $c$, we call $c$ an equilibrium of the ODE. We say it is
+          \begin{enumerate}
+              \item A \textbf{stable equilibrium,} if a solution starting at a value close to $c$ approaches $y=c$ as $t\rightarrow\infty$
+              \item An \textbf{equilibrium,} if a solution starting at a value close to $c$ moves away from $y=c$ as $t\rightarrow\infty$.
+              \item A \textbf{semistable equilibrium,} if we observe either behaviour, depending on if the solution starts just above or just below $c$.
+          \end{enumerate}
+          \begin{example}
+              Consider the differential equation $y'=3\cos y$. We can construct the phase plot:
+              \begin{center}
+                  \begin{tikzpicture}
+                      \begin{axis}[
+                              legend pos=outer north east,
+                              title=Phase Plot,
+                              axis lines = middle,
+                              xlabel = $y$,
+                              ylabel = $y'$,
+                              variable = t,
+                              trig format plots = rad,
+                          ]
+                          \addplot [
+                              domain=0:10,
+                              samples=70,
+                              color=blue,
+                          ]
+                          {3*cos(x)};
+                          \addlegendentry{$3\cos(x)$};
+                        %   \draw (axis cs:1.57,0) circle [black, radius=1];
+                        \end{axis}
+                  \end{tikzpicture}
+              \end{center}
+              Equilibrium occurs when $y'=0$ The first equilibrium occurs at $y=\frac{\pi}{2}$. This is stable as if we move a bit to the left, $y'$ is positive so that we move back to the right. If we move to the right instead, $y'$ is negative and we move back to the left.
+              \vspace{2mm}
+
+              We can also determine this by looking at the second derivative $y''=-3\sin(y)$. A negative second derivative means that it is stable. A positive second derivative means that it is unstable.
+          \end{example}
 \end{itemize}

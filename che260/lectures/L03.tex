@@ -1,0 +1,143 @@
+\section{Energy}
+\begin{itemize}
+    \item Energy can be stored in microscopic forms at the molecular level. These do not require a change in position or velocity of the system, known as \textbf{internal energy.}
+    \item Changes in internal energy typically correspond to changes in temperature and pressure.
+          \subsection{Ideal Gas Equation}
+    \item The Ideal Gas Law tells us that
+          \begin{equation}
+              PV = nR_uT
+          \end{equation}
+          or
+          \begin{equation}
+              PM = \rho R_uT
+          \end{equation}
+          where
+          \begin{equation}
+              R_u = 8.\pi \frac{\text{kJ}}{\text{kmol K}}
+          \end{equation}
+    \item This makes the following assumptions:
+          \begin{itemize}
+              \item Gas molecules are in constant random motion.
+              \item All molecules have equal mass.
+              \item The number of molecules is very large.
+              \item Molecules collide perfectly elastically.
+              \item No forces acts on molecules except during collisions.
+              \item Molecules are point masses with negligible volume.
+          \end{itemize}
+    \item The \textbf{gram-mole} is the molar mass in $g$ and contains $N_A$ molecules.
+    \item The \textbf{kilogram-mole} is the molar mass in kilograms.
+          \subsection{Internal Energy Mean Square Speed}
+    \item The mean square speed is given by
+          \begin{equation}
+              c_\text{rms}^2 = \frac{3k_BT}{m}
+          \end{equation}
+          The average kinetic energy of a single monoatomic molecule is
+          \begin{equation}
+              \frac{1}{2}mc_\text{rms}^2 = \frac{3}{2}\frac{k_BT}{m}
+          \end{equation}
+          \begin{warning}
+              The above formula is only an approximation, and only applies for monoatomic molecules!
+          \end{warning}
+    \item The internal energy of a gas is given by
+          \begin{equation}
+              U = \frac{3}{2}NR_uT
+          \end{equation}
+          and is a function of temperature alone. For ideal gases which are not monoatomic, we can write
+          \begin{equation}
+              \Delta U = c_V(T_2-T_1)
+          \end{equation}
+          where $c_V$ is the specific heat\footnote{To be more precise, the specific heat at constant volume.}
+
+          \subsection{First Law of Thermodynamics}
+
+    \item The first law of thermodynamics is
+          \begin{equation}
+              \Delta U = Q + W
+          \end{equation}
+          \textbf{Sign convention:} Energy transferred to a system is positive and energy transferred from a system is negative.
+    \item $Q_\text{net}$ represents the net heat added, and $W_\text{net}$ represents the net work done.
+    \item We define power as
+          \begin{equation}
+              P = \frac{\delta W}{\dd{t}}.
+          \end{equation}
+    \item The heat transfer per unit mass of the system is
+          \begin{equation}
+              q = \frac{Q}{m}.
+          \end{equation}
+    \item Boundary work refers to the work a force does on a system by acting on its boundary. It is given by
+          \begin{equation}
+              W_\text{boundary} = -\int_{V_1}^{V_2}P\dd{V}.
+          \end{equation}
+          \begin{idea}
+              Freely moving pistons result in constant pressure.
+          \end{idea}
+    \item For an isobaric process, we have
+          \begin{equation}
+              W_{12} = -P(V_2-V_1)
+          \end{equation}
+    \item For an isothermal process, we have
+          \begin{equation}
+              W_{12}  =-\int_{V_1}^{V_2} P \dd{V}  = -\int_{V_1}^{V_2} \frac{mRT}{V}\dd{V} =  -mRT \ln\frac{V_2}{V_1}
+          \end{equation}
+    \item For a polytropic process, we can write $PV^N = \text{constant}$. For $n\neq 1$, the work done is
+          \begin{equation}
+              W_{12} = \frac{CV_{2}^{1-n}-CV_1^{1-n}}{n-1}
+          \end{equation}
+    \item Flow work refers to the force that pushes a fluid element into a control volume. The work done in pushing fluid element is
+          \begin{equation}
+              W_\text{flow} = FL = PV.
+          \end{equation}
+    \item The shaft work (i.e. windmills), or more importantly the power associated with it, is
+          \begin{equation}
+              \dot{W}_\text{shaft} = 2\pi\omega\tau
+          \end{equation}
+          \subsection{Enthalpy}
+    \item We can define enthalpy to be
+          \begin{equation}
+              H = U + PV
+          \end{equation}
+          \begin{idea}
+              A good analogy is to think about a wizard creating a system out of nowhere. He/she/it needs to generate the internal energy $U$ of the system, but also move space for it, which requires an energy $PV$.
+              \vspace{2mm}
+
+              Alternatively, it measures the capacity of a fluid to do work.
+          \end{idea}
+    \item Enthalpy is not a fundamental property because it is defined as a function of other properties. It is useful as it make keeping track of flow work easier when analyzing control volume systems.
+          \begin{idea}
+              Heat transfer to a constant pressure system equals change in enthalpy.
+          \end{idea}
+          \subsection{Specific Heats}
+    \item The specific heat at constant volume is 
+    \begin{equation}
+        c_V(T) = \left(\frac{\partial u}{\partial T}\right)_{v}
+    \end{equation}
+    At constant pressure, we have 
+    \begin{equation}
+        c_p(T) = \left(\frac{\partial h}{\partial T}\right)_{p}
+    \end{equation}
+    \item The molar specific heat is: 
+    \begin{equation}
+        \bar{c_v} = c_vM
+    \end{equation}
+    and similarly at constant pressure: 
+    \begin{equation}
+        \bar{c_p} = c_pM
+    \end{equation}
+    \item Note that for an ideal gas, $h=u+RT$, so the enthalpy of an ideal gas depends only on temperature. Therefore, we can write 
+    \begin{equation}
+        c_p(T) = \frac{\dd{h}}{\dd{T}}
+    \end{equation}
+    \item If we assume $c_v$ and $c_p$ don't depend on temperature, we get 
+    \begin{equation}
+        c_p - c_v = R
+    \end{equation}
+    \item We can define a new property (known as the adiabatic constant), as the specific heat ratio: 
+    \begin{equation}
+        \gamma = \frac{c_p}{c_v}
+    \end{equation}
+    \item Liquids and solids are mainly incompressible, so we cannot do boundary work. The only way to change internal energy is thus by heating it.
+    \item For liquids and solids, we have
+    \begin{equation}
+        c_p = c_v = c
+    \end{equation}
+\end{itemize}
