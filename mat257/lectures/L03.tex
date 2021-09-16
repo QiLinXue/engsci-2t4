@@ -1,0 +1,50 @@
+\section{Intervals and Regions in Higher Dimensions}
+\textit{Lecture 3 (Sept 15)}
+\begin{itemize}
+    \item In single-variable calculus, we typically focused on an interval $[a,b]$ on the real number line. Similarly, we can talk about intervals in $\mathbb{R}^2$ which can be represented as a rectangle: 
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (0,0) -- (6,0) node[right] {$x_1$};
+            \draw[->] (0,0) -- (0,5) node[right] {$x_2$};
+
+            \draw[draw=black] (2,2) rectangle ++(3,2);
+            \draw[dotted] (2,2) -- (2,0) node[below] {$a_1$};
+            \draw[dotted] (5,2) -- (5,0) node[below] {$b_1$};
+            \draw[dotted] (2,2) -- (0,2) node[left] {$a_2$};
+            \draw[dotted] (2,4) -- (0,4) node[left] {$b_2$};
+
+        \end{tikzpicture}
+    \end{center}
+    \item We can generalize to $\mathbb{R}^n$. Given $a_i \le b_i$ for $i=1,\dots,n$, we can define the \textbf{closed rectangle} corresponding to $a_i,b_i$:
+    \begin{equation}
+        R = \prod_{i=1}^n [a_i,b_i] = \{x\in \mathbb{R}^n: \forall i\, a_i \le x_i \le b_i\}
+    \end{equation}
+    \item Recall from set theory, if $X$ and $Y$ are sets, then $X \times Y = \{(x,y): x\in X, y\in Y\}$ (also referred to as direct product in group theory). This is associative (up to isomorphism), so 
+    \begin{equation}
+        (X\times Y) \times Z \neq X \times (Y\times Z)
+    \end{equation}
+    but 
+    \begin{equation}
+        (X\times Y) \times Z \cong X \times (Y\times Z).
+    \end{equation}
+    As a result, while they are not equal strictly speaking, we can view them as the same.
+    \item We can then view $\mathbb{R}^n$ as
+    \begin{equation}
+        \mathbb{R}^n = \mathbb{R} \times \mathbb{R} \times \cdots \times \mathbb{R} = \{(x_1\,\dots\, x_n):x_i \in \mathbb{R}\}
+    \end{equation}
+    \item Products of intervals can be written as 
+    \begin{equation}
+        \prod_{i=1}^n [a_i,b_i] = \{(x_1,\dots,x_n): \forall i\, x_i \in [a_i,b_i]\}
+    \end{equation}
+    \item Likewise, there are also \textbf{open rectangles.} Specifically, the open rectangle defined by $a_i,b_i$ is 
+    \begin{equation}
+        \prod_{i=1}^n (a_i,b_i) = \{ (x_1,\dots,x_n) \forall i\, x_i \in (a_i,b_i)\}
+    \end{equation}
+    \item There is a way to define continuity using open sets.
+    \begin{definition}
+        The subset $A \subset \mathbb{R}^n$ is called ``open'' if: 
+        \vspace{2mm}
+        
+        For every $a\in A$, there exists an open rectangle $R$, such that $x\in R \subset A$.
+    \end{definition}
+\end{itemize}

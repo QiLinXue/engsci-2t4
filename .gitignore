@@ -19,6 +19,7 @@
 *.mp4
 /mse160/psets/pset3.*
 /mse160/psets/figures/*
+/aps360/*
 
 tasks.json
 launch.json

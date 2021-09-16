@@ -1,5 +1,5 @@
-\section{Continuity: Distance}
-\textit{Lecture 2 (Sept 13)}
+\section{Review: Continuity, Distance, and Linear Algebra Review}
+\textit{Lecture 2 and 3 (Sept 13 and 15)}
 \begin{itemize}
     \item The properties in the previous section will be important when giving a formal definition of continuity.
     \begin{definition}
@@ -47,4 +47,42 @@
     \item Similarly, distances for $L^1$ and the infinity norms can be defined as $d_1(x,y)=|x-y|_1$ and $d_\infty(x,y)=|x-y|_\infty$.
     
     \textbf{Exercise:} Show that $d_1$ and $d_\infty$ also satisfy the properties of a distance.
+
+    \item There is a bijection from the linear map $\mathbb{R}^n \to \mathbb{R}^m$ and a $m\times n$ matrix:
+    \begin{equation}
+        \left\{T:\mathbb{R}^n \to \mathbb{R}^m\right\} \longleftrightarrow M_{m\times n}(\mathbb{R})
+    \end{equation}
+    which is also a homomorphism. We can associate a matrix with any linear transformation, and any linear transformation is associated with a matrix. Here, the standard basis is used.
+    \item Specifically, we have the map:
+    \begin{equation}
+        A \in M_{m\times n} \mapsto     L_A(x)= Ax
+    \end{equation}
+    where $x\in \mathbb{R}^n$, and 
+    \begin{equation}
+        T \mapsto M_T = \begin{pmatrix}
+            Te_1 & Te_2 & \cdots & Te_n
+        \end{pmatrix}
+    \end{equation}
+    \item We also need to show that this map is bijective, i.e both 
+    \begin{equation}
+        L_{M_T}=T,\quad M_{L_A}=A
+    \end{equation}
+    are both satisfied.
+    \item Furthermore, we can also show that this map is a homomorphism. Note that the set of linear transformations is itself a vector space. Both $A\mapsto L_A$ and $T\mapsto M_T$ is linear, so 
+    \begin{align}
+        L_{aA+bB} &= aL_A + bL_b \\ 
+        M_{aT+bS} &= aM_T+bM_s.
+    \end{align}
+    \item Furthermore, suppose we have two maps $T:\mathbb{R}^n \rightarrow \mathbb{R}^m$ and $S:\mathbb{R}^m \rightarrow \mathbb{R}^p$. To go from $\mathbb{R}^n$ to $\mathbb{R}^p$, we can take the composition 
+    \begin{equation}
+        S \circ T
+    \end{equation}
+    or
+    \begin{equation}
+        S \sslash T
+    \end{equation}
+    The bijection is a homomorphism, so we have 
+    \begin{equation}
+        M_S M_T = M_{S \circ T}
+    \end{equation}
 \end{itemize}
