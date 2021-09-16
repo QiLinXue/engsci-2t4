@@ -1,2 +1,64 @@
-\section{to be added}
+\section{First Order ODEs}
+\textit{Note: This section will skip over separable ODEs} 
+\begin{itemize}
+    \item \textbf{Linear Equations and the Integrating Factor} 
+    \begin{example}
+        We want to find the general solution of $y' + 2ty = t$.
+        \vspace{2mm}
 
+        To do so, let's multiply the equation with $\mu = e^{t^2}$. Then: 
+        \begin{align}
+            e^{t^2}y' + e^{t^2}2ty &= e^{t^2}t \\ 
+            \frac{\dd}{\dd{t}} (e^{t^2}y) &= e^{t^2}t \\ 
+            e^{t^2}y &= \int e^{t^2}t \dd{t} \\
+            e^{t^2}y &= \frac{1}{2}e^{t^2} + C \\ 
+            y &= \frac{1}{2} + C e^{-t^2}
+        \end{align}
+        where $C$ depends on the initial value.
+    \end{example}
+    \item The most general first order linear ODE is given by 
+    \begin{equation}
+        a_0(t)y + a_1(t)y' = h(t),
+    \end{equation}
+    which we can always turn into the form 
+    \begin{equation}
+        y' + p(t)y = g(t)
+    \end{equation}
+    if $a_1(t) \neq 0$ (if it was $0$, then we can separate).
+    \item We wish to find an integrating factor $\mu(t) > 0,$ to solve $y'+p(t)y=g(t).$ We wish to multiply this by a factor of $\mu$, to get 
+    \begin{equation}
+        \mu y' + \mu p y = \mu y \iff \frac{\dd}{\dd{t}}\left(\quad\dot\quad\right) = \mu g(t)
+    \end{equation}
+    In order to write it like this, we want: 
+    \begin{equation}
+        \frac{\dd}{\dd t}(\mu y) = \mu y' + \mu' y \implies \mu' = \mu p.
+    \end{equation}
+    We can solve this to get 
+    \begin{equation}
+        \mu(t) = \exp\left(\int p(t) \dd{t}\right),
+    \end{equation}
+    and get the general solution to be 
+    \begin{equation}
+        y = \frac{1}{\mu} \int \mu g \dd{t} + \frac{C}{\mu}
+    \end{equation}
+    \begin{example}
+        We want to solve $ty'+2y=4t^2$, $y(1)=2$. We can rearrange it to 
+        \begin{equation}
+            y'+\frac{2}{t}y = 4t.
+        \end{equation}
+        The integrating factor is $\mu(t) = \exp\left(\int 2/t \dd{t}\right)=t^2$. We can use this to solve 
+        \begin{align}
+            \mu y' + \mu \frac{2}{t}y = \mu 4t &\iff  t^2y' + 2ty = 4t^3 \\ 
+            &\iff  (t^2y)' = 4t^3 \\ 
+            &\iff  t^2y = \int 4t^3 \dd{t} \\ 
+            &\iff y(t) = t^2 + \frac{C}{t^2} 
+        \end{align}
+        Using the initial value $y(1)=2$, we get $\boxed{y=t^2 + \frac{1}{t^2}}.$.
+        \vspace{2mm}
+
+        Note that we can't say anything about $y(-1).$ For example, the solution $t^2 + \frac{1}{t^2}$ for $t<0$ is a \textit{different} solution. Therefore, the particular solution is actually 
+        \begin{equation}
+            y(t) = t^2 + \frac{1}{t^2} \quad t>0.
+        \end{equation}
+    \end{example}
+\end{itemize}

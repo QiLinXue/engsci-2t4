@@ -132,12 +132,15 @@
                   {Slope field of \quad $y'=-1.5(y-1)$.};
               \end{tikzpicture}
           \end{center}
-    \item Consider an autonomous first order ODE $y'=f(y)$. If $f(c)=0$ for some specific value $c$, we call $c$ an equilibrium of the ODE. We say it is
+    \item Consider an \textbf{autonomous} first order ODE $y'=f(y)$. If $f(c)=0$ for some specific value $c$, we call $c$ an equilibrium of the ODE. We say it is
           \begin{enumerate}
               \item A \textbf{stable equilibrium,} if a solution starting at a value close to $c$ approaches $y=c$ as $t\rightarrow\infty$
-              \item An \textbf{equilibrium,} if a solution starting at a value close to $c$ moves away from $y=c$ as $t\rightarrow\infty$.
+              \item An \textbf{unstable equilibrium,} if a solution starting at a value close to $c$ moves away from $y=c$ as $t\rightarrow\infty$.
               \item A \textbf{semistable equilibrium,} if we observe either behaviour, depending on if the solution starts just above or just below $c$.
           \end{enumerate}
+          \begin{warning}
+            Stable, unstable, and semistable equilibrium are only well-defined for \textbf{autonomous} ODEs.
+          \end{warning}
           \begin{example}
               Consider the differential equation $y'=3\cos y$. We can construct the phase plot:
               \begin{center}
