@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY293: Waves and Modern Physics \\ \textbf{Summary}}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\textbf{Brief overview of issue:} During lecture, we showed that
+\begin{equation}
+    \frac{dE}{dt} = -bv^2
+\end{equation}
+and 
+\begin{equation}
+    \frac{dE}{dt} = -\gamma E.
+\end{equation}
+However, by setting these two equal to each other and using the substitution $\gamma = \frac{b}{m}$, we get $E = mv^2$ which is clearly a contradiction.
+
+\textbf{Resolution:} If we talk about the actual energy, it turns out that equation (2) is incorrect, even after making the approximation that $\gamma \ll \omega_0.$ To be more precise, substituting $x(t)$ and $v(t)$ into $E=\frac{1}{2}mv^2+\frac{1}{2}kx^2,$ we get (with no approximations):
+\begin{equation}
+    E(t) = \frac{1}{2}mA_0^2\exp\left(-\gamma t\right)\left(\frac{\gamma^2}{4}\sin(2\omega_0t)+\frac{\gamma \omega}{2}\cos(2\omega_0t)+\omega_0^2\right).
+\end{equation} 
+While $E(t) = E_0\exp(-\gamma t)$ is valid for $\gamma \ll \omega,$ it's not necessarily true that we can determine $E'(t)$ by taking the derivative of this approximation. If we start with equation (3) and take the derivative, it turns out that
+\begin{equation}
+    \frac{dE}{dt} = -\gamma E(t) - \gamma E(t)\cos(\omega t)
+\end{equation}
+where I have ignored higher order $\gamma$ terms. The maximum value occurs at $t=0$, and setting this equal to $-bv^2$ gives 
+\begin{equation}
+    E = \frac{1}{2}mv^2
+\end{equation}
+as expected. To fix this equation, we can write 
+\begin{equation}
+    \boxed{\frac{d\langle E \rangle}{dt} = -\gamma \langle E\rangle}
+\end{equation}
+where $\langle E\rangle$ is the time average energy (across one period). This is true since the time average values of the sinusoidal terms will go to zero.
+
+\textit{Reference:} \href{https://scholar.harvard.edu/files/david-morin/files/waves_oscillations.pdf}{Morin}
+\end{document}
