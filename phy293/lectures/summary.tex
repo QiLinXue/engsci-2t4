@@ -10,9 +10,13 @@
 
 \maketitle
 \textit{Disclaimer: A large portion of this document is and will be stolen from David Morin's \href{https://scholar.harvard.edu/david-morin/waves}{Waves} book, which is currently still a draft.}
-\section{Dampened Harmonic Motion}
+
+\tableofcontents
+\newpage
+
+\section{Damped Harmonic Motion}
 \subsection{Introduction}
-\textbf{The Setup:} An object undergoing dampened harmonic motion experiences a restoring force $-kx$ and a resistive force $-b \frac{dx}{dt}$. The differential equation is: 
+\textbf{The Setup:} An object undergoing Damped harmonic motion experiences a restoring force $-kx$ and a resistive force $-b \frac{dx}{dt}$. The differential equation is: 
 \begin{equation}
     \frac{d^2x}{dt^2} + \gamma \frac{dx}{dt} + \omega_0^2 x
 \end{equation}
@@ -64,6 +68,52 @@ where $A$ and $B$ are determined by initial conditions.
 
 \textbf{Importance of Critical Damping:} Critically damped motion has the property that it \textit{converges} to the origin in the quickest manner, that is, quicker than both the overdamped and underdamped motions.
 
+\subsection{Energy of Underdamped Oscillations}
+\textit{Note: We will only focus on very underdamped oscillations.}
+
+\textbf{Underdamped:} For simplicity, let us assume $\phi=0.$ The energy of a damped harmonic oscillator is: 
+\begin{equation}
+    E = \frac{1}{2}m\dot{x}^2 + \frac{1}{2}kx^2.
+\end{equation}
+Substituting in $x(t)$ gives 
+\begin{equation}
+    E = \frac{1}{2}mA_0^2\exp\left(-\gamma t\right)(m\omega_0^2\sin^2(\omega_0t)+k\cos^2(\omega_0t)+\omega_0^2)
+\end{equation}
+This is very messy, so we want to make approximations.
+
+\textbf{Very Underdamped:} If we look at the case where $\gamma \ll \omega_0$, we can reduce this to
+\begin{equation}
+    \boxed{E = \frac{1}{2}mA_0^2\omega_0^2\exp\left(-\gamma t\right) = E_0\exp(-\gamma t)}
+\end{equation}
+as the $\gamma,\gamma^2$ terms approach zero. We can double check that when $\gamma = 0$, this reduces to $E = \frac{1}{2}kA_0^2.$
+
+\subsubsection{Rate of Energy Loss}
+The rate of energy loss in a \textbf{very underdamped} system is given by 
+\begin{equation}
+    \frac{dE}{dt} = -\gamma E
+\end{equation}
+Note that this is not true for systems where $\gamma$ is not much smaller than $\omega_0.$
+\subsubsection{$Q$-Factor}
+We can define the $Q$-factor to be 
+\begin{equation}
+    \boxed{Q = \frac{\omega_0}{\gamma}}.
+\end{equation}
+If we consider a very underdamped oscillator (where $\gamma \ll \omega_0$), then 
+\begin{equation}
+    \frac{E(t_1)-E(t_1+T)}{E(t_1)} \approx \gamma T \approx \frac{2\pi \gamma}{\omega} = \frac{2\pi}{Q}.
+\end{equation}
+Therefore, we have $Q = \frac{E(t_0)}{(E(t_1)-E(t_1+T))/2\pi}$, which is equivalent to the ratio of the initial energy divided by the energy loss per radian: 
+\begin{equation}
+    \boxed{Q = \frac{\text{initial energy stored}}{\text{energy loss per radian}}}
+\end{equation}
+We can also use the $Q$-factor to write the differential equation as 
+\begin{equation}
+    \frac{d^2x}{dt^2}+\frac{\omega_0}{Q}\frac{dx}{dt}+\omega_0^2 x = 0
+\end{equation}
+and 
+\begin{equation}
+    \omega = \omega_0\left(1-\frac{1}{4}Q\right)^{1/2}
+\end{equation}
 \newpage
 \section{Appendix}
 \subsection{Derivations}
