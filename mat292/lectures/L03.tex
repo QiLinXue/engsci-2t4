@@ -1,0 +1,122 @@
+\section{The Initial Value Problem (IVP)}
+\begin{itemize}
+    \item How many initial conditions do we need, such that we only have one solution?
+    \begin{theorem}
+        Consider the IVP for the most general ODE $y'+p(t)y=g(t)$ with initial value $y(t_0)=y_0$ and an interval $I=(\alpha,\beta)$.
+        \vspace{2mm}
+
+        If: 
+        \begin{itemize}
+            \item $t_0 \in I$
+            \item $p(t)$ continuous on $I$
+            \item $g(t)$ continuous on $I$,
+        \end{itemize}
+        then this IVP has a solution and this solution is unique, and this solution exists for all $t\in I.$
+        \vspace{2mm}
+
+        Also, the ODE has a general solution that depends on only one constant $C$.
+    \end{theorem}
+    \begin{example}
+        Suppose we have the IVP 
+        \begin{equation}
+            ty'+2y'=4t^2 \iff y'+2\frac{y}{t}+4t
+        \end{equation}
+        with $y(1)=2$ and let $t\neq 0.$ By the above theorem, this has the \textbf{unique} solution 
+        \begin{equation}
+            y = t^2 + \frac{1}{t^2}
+        \end{equation}
+    \end{example}
+    \begin{theorem}
+        Consider the IVP $y'=f(t,y)$ and $y(t_0)=y_0.$ Consider a rectangle $\alpha < t <\beta$, $\gamma < y < \delta$. If: 
+        \begin{itemize}
+            \item the point $(t_0,y_0)$ is in the rectangle: 
+            \begin{center}
+                \begin{tikzpicture}
+                    \draw[->] (0,0) -- (6,0) node[right] {$t$};
+                    \draw[->] (0,0) -- (0,5) node[right] {$y$};
+  
+                    \draw[draw=black] (2,2) rectangle ++(3,2);
+                    \draw[dotted] (2,2) -- (2,0) node[below] {$\alpha$};
+                    \draw[dotted] (5,2) -- (5,0) node[below] {$\beta$};
+                    \draw[dotted] (2,2) -- (0,2) node[left] {$\gamma$};
+                    \draw[dotted] (2,4) -- (0,4) node[left] {$\delta$};
+  
+                \end{tikzpicture}
+            \end{center}
+            \item $f$ is continuous in the rectangle
+            \item $f_y$ is continuous in the rectangle 
+        \end{itemize}
+        Then the IVP has a unique solution. The solution exists for $\alpha < t<\beta$ for some interval $t_0 - h < t < t_0 + h$ where $h\neq 0$.
+    \end{theorem}
+    \item Remarks: 
+    \begin{enumerate}
+        \item Non-linear ODEs don't necessarily have a general solution that depend on a single constant.
+        \item The solution we get might be implicit, i.e. $\sqrt{y^2+\ln(y)}=5t.$
+    \end{enumerate}
+    \begin{example}
+        Consider the ODE
+        \begin{equation}
+            (y+t^2y)y' = 2t.
+        \end{equation}
+        We can write 
+        \begin{equation}
+            y'=f(t,y) = \frac{2t}{y+t^2y}
+        \end{equation}
+        and
+        \begin{equation*}
+            f_y(t,y) = - \frac{2t}{y^2+y^2t^2}.
+        \end{equation*}
+        The IVP is given by $f(0)=1$. The rectangle for which $y'$ and $f_y$ is continuous is
+        \begin{equation}
+            R = (-\infty, \infty) \times (0,\infty).
+        \end{equation}
+        We can solve this by separation of variables and get the curve $y(t)=\sqrt{2\ln(t^2+1)+1}$. We get
+        \begin{center}
+            \begin{tikzpicture}
+            \begin{axis}[
+            legend pos=outer north east,
+            title=Solution to IVP,
+            axis lines = middle,
+            xlabel = $t$,
+            ylabel = $y$,
+            variable = t,
+            trig format plots = rad,
+            ymin = -1,
+            ]
+            \addplot [
+                domain=-10:10,
+                samples=70,
+                color=blue,
+                ]
+                {ln(x^2+1)*2+1};            
+            \end{axis}
+            \end{tikzpicture}
+        \end{center}
+        It turns out that the solution exists for all $t$, but we could not predict this!
+    \end{example}
+    \begin{example}
+        Now consider the same ODE but with the initial value $y(-2)=1.$ The solution is $y(t) = \sqrt{2\ln\left(\frac{t^2+1}{5}\right)+1}$, then 
+        \begin{center}
+            \begin{tikzpicture}
+            \begin{axis}[
+            legend pos=outer north east,
+            title=Solution to IVP,
+            axis lines = middle,
+            xlabel = $t$,
+            ylabel = $y$,
+            variable = t,
+            trig format plots = rad,
+            ymin = -1,
+            xmax = 3,
+            ]
+            \addplot [
+                domain=-10:1,
+                samples=200,
+                color=blue,
+                ]
+                {sqrt(2*ln((x^2+1)/5)+1)};            
+            \end{axis}
+            \end{tikzpicture}
+        \end{center}
+    \end{example}
+\end{itemize}

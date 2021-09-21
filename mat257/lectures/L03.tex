@@ -1,5 +1,5 @@
 \section{Intervals, Regions, Open and Closed Sets}
-\textit{Lecture 3 (Sept 15)}
+\textit{Lecture 3 and 4 (Sept 15, 20)}
 \begin{itemize}
     \item In single-variable calculus, we typically focused on an interval $[a,b]$ on the real number line. Similarly, we can talk about intervals in $\mathbb{R}^2$ which can be represented as a rectangle:
           \begin{center}
@@ -153,4 +153,48 @@
               \bigcap_{n>0} \left(-\frac{1}{n},1+\frac{1}{n}\right) = [0,1]
           \end{equation}
           Again by De-Morgan, we can use this to construct an example of an infinite union of closed sets that is not closed.
+          \item Given $A \subset \mathbb{R}^n$ and $x\in \mathbb{R}^n$, exactly one of the three things hold, i.e. a \textit{trichotomy}:
+          \begin{enumerate}
+              \item $\exists$ open rectangle $R$ such that $x\in R \subset A.$
+              \item $\exists$ open rectangle $R$ such that $x\in R \subset A^C$
+              \item Every open rectangle $R$ s.t. $x\in R$, has $R \cap A^C \neq \emptyset$ and $R \cap A  \neq \emptyset.$
+          \end{enumerate}
+          For example: 1,2,3 can be represented below:
+          \begin{center}
+              \begin{tikzpicture}[scale=2]
+                  \draw[line width=1pt, dotted]
+                  (0, 0) to [out=20, in=70]   (3,0)
+                  to [out=250, in=200] (0,0) ;
+                  \fill[red] (3,0) circle(1pt) node[right] {$3$};
+                  \fill[red] (1,0.5) circle(1pt) node[right] {$2$};
+                  \fill[red] (2,0.2) circle(1pt) node[right] {$1$};
+              \end{tikzpicture}
+          \end{center}
+        \begin{definition}
+            Points that satisfy the trichotomy are known as: 
+            \begin{enumerate}
+                \item Interior: $x\in \text{int}(A) = \mathring{A}$
+                \item Exterior: $x\in \text{ext}(A)$. The closure can be defined as $\text{cl}A=\bar{A}=(\text{ext} A)^C.$
+                \item Boundary: $x\in \text{Bd}(A).$
+            \end{enumerate}
+        \end{definition}
+        \item The closure of $A$ can be defined as $\text{cl}(A) = \bar{A} =(\text{ext} A)^C$ and has the following property:
+        \begin{theorem}
+            We have $x\in \text{cl}(A)$ if and only if every open rectangle $R\ni x$ satisfies $R\cap A \neq \emptyset$.
+        \end{theorem}
+        \item We also make the following claims:
+        \begin{enumerate}
+            \item $\text{int}(A) \dot{\bigcup} \text{ext}(A) \dot{\bigcup} \text{Bd}(A) = \mathbb{R}^n$.
+            \item $\text{cl}(A) = A \cup \text{Bd}(A)$
+            \item $\text{int}(A) = A \setminus \text{Bd}(a)$ 
+        \end{enumerate}
+        \begin{example}
+            Consider the set $[0,1] \subset \mathbb{R}$. Then: 
+            \begin{itemize}
+                \item $\text{int}(A) = (0,1)$
+                \item $\text{ext}(A) = (-\infty,0)\cup (1,\infty)$
+                \item $\text{cl}(A) = [0,1]$
+                \item $\text{Bd}(A) = \{0,1\}$
+            \end{itemize}
+        \end{example}
 \end{itemize}

@@ -1,0 +1,45 @@
+\section{Compactness}
+\begin{itemize}
+    \item We start with an open cover
+    \begin{definition}
+        An open cover of a set $A$ is a collection $\{U_\alpha\}$ of open sets in $\mathbb{R}^n$ such that 
+        \begin{equation}
+            \bigcup_\alpha U_\alpha \supset A
+        \end{equation}
+        A subcover of $\{U_\alpha\}_{\alpha \in I}$ is a collection where $\alpha$ runs over $I' \subset I$ such that
+        \begin{equation}
+            \bigcup_{\alpha \subset I'} U_\alpha \supset A
+        \end{equation}
+    \end{definition}
+    \begin{definition}
+        $A$ is called compact if every open cover of $A$ has a finite sub-cover.
+    \end{definition}
+    \begin{example}
+        If $F \subset \mathbb{R}^n$ is finite, then it is compact.
+    \end{example}
+    \begin{example}
+        $\mathbb{R}$ is not compact.
+        \begin{proof}
+            We just need to find a counterexample. Let $\mathbb{R} = \bigcup_{n\in \mathbb{Z}} (n-1,n+1).$
+            \vspace{2mm}
+
+            Alternatively, we can write $\mathbb{R} = \bigcup_{n\in \mathbb{Z}} (-n,n).$
+        \end{proof}
+    \end{example}
+    \item We want to eventually classify all compact subsets of $\mathbb{R}^n$.
+    \begin{theorem}
+        The \textbf{Heine-Bored Theorem} tells us that $[0,1]$ is compact.
+        \begin{proof}
+            Let $\{U_\alpha\}_{\alpha \in J}$ be an open cover of $I=[0,1].$ To find a finite subcover, we will look for a point $g$ such that we can find a finite subcover that covers $[0,g],$ and we want to push $g$ as far to the right as possible.
+            \vspace{2mm}
+
+            Let us define $G=\{g\in [0,1]:\exists J' \subset J \text{ s.t. } \bigcup_{\alpha\in J'} \supset [0,g]\}$ where $J'$ is finite. We want to show that $1\in G.$
+            \vspace{2mm}
+
+            Let $\gamma$ be the furthest we can ``push'' $g$. Specifically, let $\gamma = \text{sup} (G)$. This is well defined since $G$ is clearly bounded $G \subset [0,1]$ and is nonempty since $0\in G.$
+            \vspace{2mm}
+
+            We claim that $\gamma = 1$. Suppose this is not true, i.e. $\gamma < 1$. If this is true, then there exists some open set $U_\beta$ with $\beta \in J$ such that $\gamma \in U_\beta.$ Since $U_\beta$ is open, there exists $g'$ and $g''$ such that $\gamma \in [g',g''] \subset U_\beta.$ Therefore, $[0,g''] = [0,g']\bigcup [g',g''].$ Since $[0,g']$ has a finite cover, and $[g',g'']$ is covered by $U_\beta$. This has a finite cover, so $g'' \in G$. However, $\text{sup}(G) \ge g'' > \gamma$, which leads to a contradiction. 
+        \end{proof}
+    \end{theorem}
+\end{itemize}

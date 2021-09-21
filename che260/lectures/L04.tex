@@ -1,0 +1,106 @@
+\section{Specific Heat, Steady Flow, Entropy}
+\begin{itemize}
+    \item We use $c_v$ to calculate change in internal energy for any process.
+    \item We use $c_p$ to calculate change in enthalpy for any process.
+    \item The mass flow rate into the control volume is given by 
+    \begin{equation}
+        \dot{m} = \rho A \bm{V}
+    \end{equation}
+    where $\bm{V}$ is the flow velocity.
+    \item At steady state, we have 
+    \begin{equation}
+        \dot{m}_\text{in} = \dot{m}_\text{out} = \dot{m}
+    \end{equation}
+    \item The flow work is $Pv$.
+    \item The kinetic energy is $\frac{1}{2}\bm{V}^2$
+    \item and the specific potential energy is $gz$. The total energy transported per unit mass of fluid is given by (Bernoulli's Equation):
+    \begin{equation}
+        e = h + \frac{1}{2}\bm{V}^2 + gz
+    \end{equation}
+    \item The rate of energy transfer into the control volume is 
+    \begin{equation}
+        \dot{m}\left(h + \frac{1}{2}\bm{V}^2 + gz\right)
+    \end{equation}
+    \item Using the fact that the rate of energy entering CV is the rate of energy leaving CV, we can write out
+    \begin{equation}
+        \dot{Q} + \dot{W} + \dot{m}(h_1+\frac{1}{2}v_1^2+gz_1)=\dot{m}(h_2+\frac{1}{2}v_2^2+gz_2)
+    \end{equation}
+    Dividing this by $\dot{m}$, we can rewrite it as 
+    \begin{equation}
+        q+w = \Delta h + \frac{v_2^2-v_1^2}{2}+g\Delta z
+    \end{equation}
+    where $q=\dot{Q}/\dot{m}$ and $w=\dot{W}/\dot{m}$.
+    \begin{example}
+        In a turbine, the flow enters with higher $P_1,T_1,h_1$ and exits with low $P_2,T_2,h_2$.  Let us neglect heat loss to surroundings and changes in kinetic and potential energy. We have 
+        \begin{equation}
+            \cancel{\dot{Q}} + \dot{W} + \dot{m}\left(h_1+\cancel{\frac{1}{2}V_1^2}+\cancel{gz_1}\right)=\dot{m}(h_2+\cancel{\frac{1}{2}v_2^2}+\cancel{gz_2})
+        \end{equation}
+        which gives 
+        \begin{equation}
+            \dot{W}_\text{shaft} = \dot{m}(h_2-h_1)
+        \end{equation}
+        since $h_2<h_1$, we have $\dot{W}_\text{shaft}$, so turbine does work on surroundings.
+    \end{example}
+    \item For a compressor, we have something similar to the above, but $h_2>h_1$, so the surroundings does work on the compressor.
+    \begin{example}
+        For a pump, we enter with $P_1,h_1$ and exit with $P_2,h_2$ after increasing a distance of $\Delta z$. Let us neglect heat loss to the surroundings, changes in kinetic energy, and the temperature remains constant.
+        \vspace{2mm}
+
+        We get 
+        \begin{equation}
+            \dot{W}_\text{shaft} = \dot{m}[(h_2-h_1)+g(z_2-z_1)]
+        \end{equation}
+        and for an incompressible liquid, we have 
+        \begin{equation}
+            h_2-h_1=\cancel{c_v\Delta T}+v\Delta P.
+        \end{equation}
+        Using this, we get 
+        \begin{equation}
+            \dot{W}_\text{shaft} = \dot{m}[v\Delta P + g\Delta z]
+        \end{equation}
+    \end{example}
+    \item Let us define a new extensive property known as entropy, defined as 
+    \begin{equation}
+        \text{entropy change} = \frac{\text{heat transferred}}{\text{temperature}}.
+    \end{equation}
+    The lower the entropy change associated with any heat transfer, the more work can be done with it.
+    \item Let entropy be denoted as $S$. Then 
+    \begin{equation}
+        \dd{S} = \frac{\delta Q}{T}
+    \end{equation}
+    where $T$ is the temperature of the system boundary where the heat crosses.
+    \item The entropy of a thermal reservoir is 
+    \begin{equation}
+        \Delta S = \int_1^2 \frac{\delta Q}{T} = \frac{1}{T}\int_1^2 \delta Q = \frac{Q_{12}}{T}
+    \end{equation}
+    \item Suppose we have two thermal reservoirs. The one at $A$ has temperature $T+\Delta T$ and the one at $B$ has temperature $T$. Then: 
+    \begin{equation}
+        \Delta S_A = \frac{Q}{T+\Delta T}
+    \end{equation}
+    and 
+    \begin{equation}
+        \Delta S_b = \frac{Q}{T}.
+    \end{equation}
+    The entropy reaching $B$ is greater than that leaving $A$, so we have generated entropy. Specifically,
+    \begin{equation}
+        S_\text{gen} =\Delta S_b - \Delta S_a
+    \end{equation}
+    \item In the limit as $\Delta T\rightarrow 0$, we have $\Delta S_b=\Delta S_A$, so $S_\text{gen}=0$.
+    \begin{idea}
+        There is no entropy generated between two thermal reservoirs whose temperatures differ by an infinitesimal amount.
+    \end{idea}
+    \item Entropy can be created, but not destroyed.
+    \begin{theorem}
+        The entropy of an isolated system will increase until the system reaches a state of equilibrium. The entropy of an isolated system remains constant.
+    \end{theorem}
+    \item A reversible process is a process that can be reversed by an infinitesimal change in the surroundings so that both the system and surroundings are restored to their initial conditions.
+    \item No entropy is generated during a reversible process.
+    \item A reversible process gives the least amount of work required for a process.
+    \item If entropy is generated, the surroundings and system cannot be restored to their original state.
+    \item Suppose we want to increase a system's temperature from $T_1$ to $T_2$ in a reversible matter. We can do this by placing it in contact with thermal reservoirs of temperatures $T_1+\Delta T,T_1+2\Delta T,\dots$ where $\Delta T \rightarrow 0$.
+    \item In general, for any system 
+    \begin{equation}
+        \dd{S} = \frac{\delta Q}{T} + dS_\text{gen}.
+    \end{equation}
+    When the process is reversible and adiabatic, we have $\dd{S}=0$, i.e. the entropy is constant. This is known as \textbf{isentropic}.
+\end{itemize}

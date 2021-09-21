@@ -1,0 +1,74 @@
+\section{Surface Area and Triple Integrals}
+\begin{itemize}
+    \item Suppose we wish to find the surface area. 
+    \item Method 1: Given $z=f(x,y)$ we can estimate the area as 
+    \begin{equation}
+        S \iint\limits_{S}\dd{T}
+    \end{equation}
+    where $\dd{T}$ gives the area of the tangent plane and $S$ is the region of the curve. The projection of $\dd{T}$ is given by 
+    \begin{equation}
+        \Delta A = \Delta T |\cos\alpha | \implies \frac{\Delta A}{|\cos\alpha|}
+    \end{equation}
+    where $\alpha$ is the angle between $\vec{n}$ (normal to plane) and $\vec{k}$ (normal to $xy$ plane), such that 
+    \begin{equation}
+        S = \iint\limits_R \frac{\dd{A}}{|\cos\alpha|}
+    \end{equation}
+    where $R$ is the projection of $S$. To determine $\cos\alpha$, we can write $z=f(x,y)$ in explicit form as 
+    \begin{equation}
+        F(x,y,z) = z-f(x,y) = 0,
+    \end{equation}
+    which is the $0^\text{th}$ level surface. Since $\vec{\nabla}$ is perpendicular to it, we have 
+    \begin{equation}
+        \vec{n} = \frac{\vec{\nabla} F}{\lVert \vec{\nabla} F \rVert}.
+    \end{equation}
+    Recall that 
+    \begin{equation}
+        \vec{\nabla} F \cdot \vec{k} = \left(\frac{\partial F}{\partial x}\hat{i} + \frac{\partial F}{\partial y}\hat{j}+\frac{\partial F}{\partial z}\hat{k}\right)\cdot \vec{k}
+    \end{equation}
+    so 
+    \begin{equation}
+        \boxed{|\cos \alpha| = |\vec{n}\cdot \vec{k}| = \frac{|\vec{\nabla} F \cdot \vec{k}|}{\lVert \vec{\nabla} F\rVert} = \frac{\left|\frac{\partial F}{\partial z}\right|}{\lVert \vec{\nabla} F\rVert}}.
+    \end{equation}
+    Therefore, we have 
+    \begin{equation}
+        S = \iint_R \frac{\sqrt{\left(\frac{\partial F}{\partial x}\right)^2+\left(\frac{\partial F}{\partial y}\right)^2+\left(\frac{\partial F}{\partial z}\right)^2}}{\left|\frac{\partial F}{\partial z}\right|}\dd{A}
+    \end{equation}
+    which can be simplified to 
+    \begin{equation}
+        \boxed{S = \iint_R \sqrt{\left(\frac{\partial F}{\partial x}\right)^2+\left(\frac{\partial F}{\partial y}\right)^2+1}\dd{A}}
+    \end{equation}
+    \item Method 2: Consider a rectangular subregion $R_i$ with area $\Delta A_i = \Delta y_i \times \Delta x_i$. Projecting this onto $z=f(x,y)$ gives a parallelogram. This parallelogram has sides 
+    \begin{align}
+        \vec{a}_i &= \Delta x_i \cdot \hat{i} + 0\hat{j} + f_x(x_i,y_i)\Delta x_i \hat{k} \\ 
+        \vec{b}_i = 0\hat{i} + \Delta y_i \cdot \hat{j} + f_y(x_i,y_i)\Delta x_i \hat{k}.
+    \end{align} 
+    The area of the parallelogram is $\Delta T_i = \lVert \vec{a}_i \times \vec{b}_i \rVert.$ Taking the cross product, we get 
+    \begin{equation}
+        \boxed{S=\iint\limits_R\sqrt{f_x^2(x,y)+f_y^2(x,y)+1}}
+    \end{equation} 
+    \item All the ideas for double integrals carry over for \textbf{triple Integrals.} Formally, we can break it up into sub-volumes, gain an estimate by finding the largest and smallest value in each $\Delta V_i$, which bound the triple integral and approach to it after taking the limit.
+    \begin{example}
+        Suppose $f(x,y,z)$ is a continuous function defined on the box region $Q$, given by 
+        \begin{equation}
+            Q = \{(x,y,z)|a\le x\le b, c\le y\le d, r\le z\le s\}.
+        \end{equation}
+        We then have 
+        \begin{equation}
+            \iiint\limits_Q f(x,y,z)\dd{V} = \int_r^s\int_c^d\int_a^b f(x,y,z) \dd{x}\dd{y}\dd{z}.
+        \end{equation}
+    \end{example}
+    \item Suppose we have something more complicated like $Q = \{(x,y,z) | (x,y) \in R\text{ and } g_1(x,y) \le z\le (x,y).$ We will then have 
+    \begin{equation}
+        \iint\limits_R \int_{g_1(x,y)}^{g_2(x,y)} f(x,y,z)\dd{z}\dd{A}
+    \end{equation}
+    \begin{example}
+        Evaluate $\iiint\limits_Q 6xy \dd{V}$ where $Q$ is the tetrahedron bounded by the planes $x=0$, $y=0$, $z=0$ and $2x+y+z=4$. We then have 
+        \begin{equation}
+            \int_{x=0}^{x=2}\int_{y=0}^{y=4-2x}\int_{z=0}^{z=4-2x-y} 6xy \dd{z}\dd{y}\dd{x}.
+        \end{equation}
+        If we want to first integrate with respect to $x$, we have 
+        \begin{equation}
+            \int_{y=0}^{y=4}\int_{z=0}^{z=4-y}\int_{x=0}^{x=1/2(4-y-z)}
+        \end{equation}
+    \end{example}
+\end{itemize}

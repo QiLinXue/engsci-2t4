@@ -93,7 +93,7 @@ The rate of energy loss in a \textbf{very underdamped} system is given by
 \begin{equation}
     \frac{dE}{dt} = -\gamma E
 \end{equation}
-Note that this is not true for systems where $\gamma$ is not much smaller than $\omega_0.$
+Note that $E$ here represents the average energy over a period $T$.
 \subsubsection{$Q$-Factor}
 We can define the $Q$-factor to be 
 \begin{equation}
@@ -113,9 +113,37 @@ We can also use the $Q$-factor to write the differential equation as
 \end{equation}
 and 
 \begin{equation}
-    \omega = \omega_0\left(1-\frac{1}{4}Q\right)^{1/2}
+    \omega = \omega_0\left(1-\frac{1}{4}Q^2\right)^{1/2}
 \end{equation}
 \newpage
+\section{Driven Harmonic Motion}
+Suppose there is a driving force of the form $F=F_0\cos(\omega_d t).$ Our differential equation becomes 
+\begin{equation}
+    F_0\cos(\omega_d t) = \frac{d^2x}{dt^2}+\gamma \frac{dx}{dt} + \omega_0^2 
+\end{equation}
+\subsection{Undamped Forced Oscillations}
+The solution is in the form of 
+\begin{equation}
+    x(t) = A(\omega_d)\cos(\omega_d t - \delta)
+\end{equation}
+where 
+\begin{equation}
+    \tan\delta = 0
+\end{equation}
+so $\delta = 0$ (if $\omega_d < \omega_0$) or $\delta = \pi$ (if $\omega_d > \omega_0$). We have
+\begin{equation}
+    A(\omega) = \left|\frac{a}{1-\omega^2/\omega_0^2}\right|
+\end{equation}
+where $a \equiv \frac{F_0}{k}.$
+\subsection{Damped Forced Oscillations}
+Similarly, the equation is in the same form, except 
+\begin{equation}
+    \tan\delta = \frac{\omega y}{\omega_0^2-\omega^2}
+\end{equation}
+and 
+\begin{equation}
+    A(\omega) = \frac{\omega_0^2 a}{\sqrt{(\omega_0^2-\omega^2)^2 + (\omega \gamma)^2}}
+\end{equation}
 \section{Appendix}
 \subsection{Derivations}
 Guessing a solution of the form $x(t)=Ce^{\alpha t}$, and substituting it into the ODE gives the characteristic equation 
