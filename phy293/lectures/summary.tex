@@ -116,21 +116,21 @@ and
     \omega = \omega_0\left(1-\frac{1}{4}Q^2\right)^{1/2}
 \end{equation}
 \newpage
-\section{Driven Harmonic Motion}
-Suppose there is a driving force of the form $F=F_0\cos(\omega_d t).$ Our differential equation becomes 
+\section{Driven Harmonic Motion}x`
+Suppose there is a driving force of the form $F=F_0\cos(\omega t).$ Our differential equation becomes 
 \begin{equation}
-    F_0\cos(\omega_d t) = \frac{d^2x}{dt^2}+\gamma \frac{dx}{dt} + \omega_0^2 
+    F_0\cos(\omega t) = \frac{d^2x}{dt^2}+\gamma \frac{dx}{dt} + \omega_0^2 
 \end{equation}
 \subsection{Undamped Forced Oscillations}
 The solution is in the form of 
 \begin{equation}
-    x(t) = A(\omega_d)\cos(\omega_d t - \delta)
+    x(t) = A(\omega )\cos(\omega t - \delta)
 \end{equation}
 where 
 \begin{equation}
     \tan\delta = 0
 \end{equation}
-so $\delta = 0$ (if $\omega_d < \omega_0$) or $\delta = \pi$ (if $\omega_d > \omega_0$). We have
+so $\delta = 0$ (if $\omega < \omega_0$) or $\delta = \pi$ (if $\omega > \omega_0$). We have
 \begin{equation}
     A(\omega) = \left|\frac{a}{1-\omega^2/\omega_0^2}\right|
 \end{equation}
@@ -144,6 +144,43 @@ and
 \begin{equation}
     A(\omega) = \frac{\omega_0^2 a}{\sqrt{(\omega_0^2-\omega^2)^2 + (\omega \gamma)^2}}
 \end{equation}
+There are three important regimes: 
+\begin{itemize}
+    \item $\omega \to 0$ gives $A(\omega) \rightarrow a = \frac{F_0}{k}$
+    \item $\omega \to \omega_0$ gives $A(\omega) \to \frac{a\omega_0}{\gamma}$
+    \item $\omega\to\infty$ gives $A(\omega)\to 0$
+\end{itemize}
+The phase shift is separated into three regimes as well: 
+\begin{itemize}
+    \item $\omega \to 0$ gives $\delta \to 0$
+    \item $\omega \to \omega_0$ gives $\delta \to \frac{\pi}{2}$
+    \item $\omega\to\infty$ gives $\delta \to \pi$.
+\end{itemize}
+
+\subsection{Power}
+The power of the damping force is
+\begin{equation}
+    \bar{P}_\text{damping}=-\frac{1}{2}b(\omega A)^2
+\end{equation}
+and 
+\begin{equation}
+    \bar{P}_\text{driving}=\frac{1}{2}F_0\omega A\sin\delta = \frac{1}{2}b(\omega A)^2 
+\end{equation}
+after making the substitution $\sin\delta = \frac{\gamma \omega m A}{F_0}.$ We can also write $\bar{P}_\text{driving}$ in terms of the frequency: 
+\begin{equation}
+    \bar{P}_\text{driving} = \frac{F_0^2}{2\gamma m}\cdot \frac{\gamma^2\omega^2}{(\omega_0^2-\omega^2)^2+\gamma^2\omega^2}
+\end{equation}
+\subsubsection{The $\bar{P}(\omega)$ Curve}
+If the driving frequency is close to the natural frequency, we can write 
+\begin{equation}
+    \omega^2-\omega_0^2 \approx -2\omega_0\Delta \omega,
+\end{equation}
+such that 
+\begin{equation}
+    \bar{P}(\omega) = \frac{F_0^2}{2m\gamma} \frac{\omega_0^2\gamma^2}{4\omega_0^2(\Delta \omega)^2+\gamma^2\omega_0^2}
+\end{equation}
+
+\newpage
 \section{Appendix}
 \subsection{Derivations}
 Guessing a solution of the form $x(t)=Ce^{\alpha t}$, and substituting it into the ODE gives the characteristic equation 
@@ -179,5 +216,6 @@ obtained by straightforward substitution.
 \begin{align}
     x_\text{critically damped}(t) &= C_1e^{-\gamma/2 t} + C_2te^{-\gamma/2 t} \\ 
     &= (C_1+C_2t)e^{-\gamma/2 t}
-\end{align} 
+\end{align}
+
 \end{document}
