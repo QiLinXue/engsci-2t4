@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY293: Tutorial Problems \\ \textbf{Tutorial 2 Solutions}}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+    \item We want critical damping, so $\omega = 2\gamma$ where $\omega=\sqrt{k/m}$ and $\gamma=b/m$. This gives 
+    \begin{equation}
+        \frac{k}{m} = 4 \frac{b^2}{m^2} \implies b = \frac{1}{2}\sqrt{mk}
+    \end{equation}
+    We can determine the spring constant $k$ by looking at the equilibrium location, which occurs at $mg=k\Delta l \implies k = \frac{mg}{\Delta l}$. This gives 
+    \begin{equation}
+        b = \frac{1}{2}m\sqrt{\frac{g}{\Delta l}} = \boxed{\text{18 kg/s}}
+    \end{equation}
+    \item Since the spring is damped lightly, we will assume that $\omega \approx \omega_0$. We will check this at the end. Therefore, the period is $T = \frac{28}{20} = 1.4\text{ s}$. The amplitude (envelope function) is given by $A(t) = A_0 e^{-\gamma t/2}.$ We want this to be $0.9$ of the initial value at $t=T$: 
+    \begin{equation}
+        0.9 = e^{-\gamma T/2} \implies \gamma = -\frac{2}{T}\ln(0.9) = 0.151\text{ s}^{-1}.
+    \end{equation} 
+    We have $b=m\gamma = 0.075\text{ kg/s}$, $k = m\omega^2 = m\left(\frac{4\pi^2}{T^2}\right) = 10.1 \text{ N/m}$, and $Q=\frac{\omega_0}{\gamma} = 29.7,$ which is sufficiently large.
+    \item In the first period, the amplitude is $4.6/5=92\%$ of the initial, so the energy decreases to $84.64\%.$ Therefore, we have 
+    \begin{equation}
+        Q = \frac{E_0}{E_0(1-0.8464)/2\pi} \approx 41.
+    \end{equation}
+    \item \begin{enumerate}
+        \item Every $20$ cycles, it reduces by a factor of $3$. So if we have five $20$ cycles (i.e. $100$ cycles,) then it reduces by a factor of $3^5.$
+        \item Every $20$ cycles, it reduces the amplitude by a factor of $\frac{1}{\sqrt{3}}$. Therefore, after $40$ cycles, it would reduce the amplitude by $\frac{1}{3}$.
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item We have 
+        \begin{equation}
+            \frac{1}{Q} = 2\sqrt{1-\left(\frac{\omega}{\omega_0}\right)^2}
+        \end{equation}
+        Substituting in the numbers, we get $Q=500$.
+        \item We have $\omega_0^2 = \frac{k}{m}$. Solving for $k$ gives $k=100\text{ N/m}.$ We have 
+        \begin{equation}
+            \gamma = \frac{\omega_0}{Q} = 2000\text{ s}^{-1},
+        \end{equation}
+        but this is also equal to $\gamma = \frac{b}{m}$. solving for $b$ gives $b=2\times 10^{-7} \text{ kg/s}.$
+        \item The initial energy is $\frac{1}{2}mA_0^2 = 5\times 10^{-15} \text{ J}.$
+        \item The lifetime is defined by $\tau = \frac{1}{\gamma} = 0.5\text{ ms}.$
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item We have 
+        \begin{align}
+            V_C &= \frac{q}{C} = \frac{q_0(\omega)}{C}\cos(\omega t-\delta) \\ 
+            V_R &= R\frac{dq}{dt} = -R\omega q_0(\omega)\sin(\omega t-\delta) \\ 
+            V_L &= L\frac{d^2q}{dt^2} = -L\omega^2 q_0(\omega)\cos(\omega t-\delta)
+        \end{align}
+        \item When $\omega=\omega_0$, we have $\delta=\frac{\pi}{2}.$ Therefore, $\frac{dq}{dt} = -\omega q_0(\omega)\sin(\omega t- \delta).$ Since $\sin(x-\pi/2)=-\cos(x)$, we can substitute this in to get 
+        \begin{equation}
+            \frac{dq}{dt} = \omega q_0(\omega)\cos(\omega t)
+        \end{equation}
+        which has no phase shift. $\varepsilon(t)$ also doesn't have a phase shift, so the source voltage and the current are in phase when $\omega=\omega_0$.
+    \end{enumerate}
+\end{enumerate}
+\end{document}
