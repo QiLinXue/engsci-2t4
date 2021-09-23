@@ -95,7 +95,7 @@
         It turns out that the solution exists for all $t$, but we could not predict this!
     \end{example}
     \begin{example}
-        Now consider the same ODE but with the initial value $y(-2)=1.$ The solution is $y(t) = \sqrt{2\ln\left(\frac{t^2+1}{5}\right)+1}$, then 
+        Now consider the same ODE but with the initial value $y(-2)=1.$ The solution is $y(t) = \sqrt{2\ln\left(\frac{t^2+1}{5}\right)+1}$, then the solution is in the following interval:
         \begin{center}
             \begin{tikzpicture}
             \begin{axis}[
@@ -114,9 +114,30 @@
                 samples=200,
                 color=blue,
                 ]
-                {sqrt(2*ln((x^2+1)/5)+1)};            
+                {sqrt(2*ln((x^2+1)/5)+1)};
             \end{axis}
             \end{tikzpicture}
         \end{center}
+        If instead the initial condition was $y(0)=0$, note that we cannot surround the box such that $f$ and $f_Y$ is not continuous in that rectangle (i.e. at $y=0$).
     \end{example}
+    \begin{warning}
+        Note that the $E-U$ theorem is not an if and only if statement, i.e. 
+        \begin{equation}
+            \text{condition fulfilled} \implies \text{solution exists}
+        \end{equation}
+        but 
+        \begin{equation}
+            \text{solution exists} \centernot\implies \text{condition fulfilled}
+        \end{equation}
+    \end{warning}
+    \item Some clarifications about the Picard–Lindelöf (E \& U) theorem:
+    \begin{itemize}
+        \item We need $f(t,y)$ continuous in the rectangle to guarantee existence.
+        \item We need $f_y(t,y)$ continuous in the rectangle to get uniqueness.
+    \end{itemize}
+    \item There are no general solution for nonlinear ODEs, for example, take $y'y=^2$, then using separation of variables, we get 
+    \begin{equation}
+        y = -\frac{1}{t+C},
+    \end{equation}
+    there is no $C$ such that $y(0)=y_0=0.$
 \end{itemize}

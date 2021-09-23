@@ -1,0 +1,68 @@
+\section{Multiplying like Bunnies}
+\begin{itemize}
+    \item Exponential growth is as follows: 
+    \begin{equation}
+        y' = ky \implies y = Ce^{kt}
+    \end{equation}
+    \item \textbf{Logistic Growth} If uninhibited, we assume exponential growth. However, in the long run, population is limited to $k$. We generally have 
+    \begin{equation}
+        y' = rh(y)y
+    \end{equation}
+    where $h(y)$ is a limiting factor. If $h(y)=1$, we have exponential growth, if $h(y)=0$ we have no growth.
+    \item We want $h(y)\approx 1$ if $y$ is small: 
+    \begin{itemize}
+        \item $0<h(y)<1$ if $y<k$
+        \item $h(y) = 0$ if $y=k$
+        \item $h(y) < 0$ if $y > k$
+    \end{itemize}
+    The simplest function that satisfies these is
+    \begin{equation}
+        y = 1 - \frac{y}{k}
+    \end{equation}
+    so we have the equation 
+    \begin{equation}
+        \frac{dy}{dt} = r\left(1-\frac{y}{k}\right)y,
+    \end{equation}
+    which is an autonomous ODE. This allows us to draw a phase plot:
+    \begin{center}
+        \begin{tikzpicture}
+        \begin{axis}[
+        legend pos=outer north east,
+        title=Phase Plot for r\equals k\equals 1,
+        axis lines = middle,
+        xlabel = $y$,
+        ylabel = $y'$,
+        variable = t,
+        trig format plots = rad,
+        ymax = 2,
+        ymin=-2,
+        xmax = 2,
+        xmin = -1,
+        ]
+        \addplot [
+            domain=-1:2,
+            samples=70,
+            color=blue,
+            ]
+            {3*x*(1-x)};
+        \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    which is unstable at $x=0$ and stable at $x=k$.
+    \begin{example}
+        Refer to the previous example. For what values of $y$ does a solution have an inflection point? We have 
+        \begin{equation}
+            y' = r(1-y/k)y
+        \end{equation}
+        and differentiating 
+        \begin{align}
+            y'' &= \frac{d}{dt}y' = \frac{d}{dt}(r(1-y/k)y) \\ 
+                &= r\frac{d}{dt}\left(y-\frac{y^2}{k}\right) \\ 
+                &= r\left(1-\frac{2y}{k}\right)\frac{dy}{dt}
+        \end{align}
+        and inflection points occur at $y=0,k,k/2.$
+    \end{example}
+    \begin{warning}
+        The definition of inflection point we will use in this course is simply $y''=0$, which is a weaker version of what we learned in ESC194.
+    \end{warning}
+\end{itemize}
