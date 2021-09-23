@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{MAT292 \\ Tutorial 2 Solution}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+% \setlength\extrarowheight{20pt}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+\maketitle
+\begin{enumerate}
+    \item \begin{enumerate}
+        \item $(x,y) = (0, vt)$
+        \item $(x,y) = (0,-b + ut)$
+        
+        Alternatively, we can write $y_\text{lion}'(t) = u$. Integrating and using the initial position gives the same result as above.
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item It will be a concave up curve, $dx/dt > 0.$
+        \item It will pass the vertical line test.
+        \item $u=\sqrt{x'^2+y'^2}$
+        \item We have $\frac{dy}{dx} = \frac{vt-y}{0-x}$
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item Using the chain rule, we have 
+        \begin{equation}
+            \frac{d}{dt}y(x(t)) = \frac{dy}{dx} \frac{dx}{dt}
+        \end{equation}
+        Using this, we have
+        \begin{equation}
+            u^2 = \left(\frac{dy}{dx}\frac{dx}{dt}\right)^2+\left(\frac{dx}{dt}\right)^2
+        \end{equation}
+        and isolating for $\frac{dx}{dt}$ gives 
+        \begin{equation}
+            \boxed{\frac{dx}{dt} = \frac{u}{\sqrt{1+\left(\frac{dy}{dt}\right)^2}}}
+        \end{equation}
+        \item Taking $\frac{dy}{dx}=\frac{y-vt}{x}$ and differentiating, we get
+        \begin{align}
+            \frac{d^2y}{dx^2} &= \frac{1}{x}\left(\frac{dy}{dx}-v\frac{dt}{dx}\right) + \frac{vt-y}{x^2} \\ 
+            &= \frac{1}{x}\left(y'-v\frac{dt}{dx}\right) - \frac{y'}{x} \\ 
+            &= -\frac{v}{x}\frac{dt}{dx}
+        \end{align}
+        which gives 
+        \begin{equation}
+            \boxed{\frac{dx}{dt} = -\frac{\frac{v}{x}}{\frac{d^2y}{dx^2}}}
+        \end{equation}
+        \item See the boxed equations. Equating these, we have 
+        \begin{equation}
+            \frac{u}{\sqrt{1+y'^2}}=-\frac{\frac{v}{x}}{\frac{d^2y}{dx^2}}
+        \end{equation}
+        We can make the substitution $w = y' = \frac{dy}{dx}$. Then the equation becomes 
+        \begin{equation}
+            \frac{dw}{dx} = \frac{-v}{ux}\sqrt{1+w^2}.
+        \end{equation}
+        Separating variables, we get 
+        \begin{align}
+            \int \frac{1}{\sqrt{1+w^2}}\dd{w} &= -\frac{v}{u} \int \frac{1}{x} \dd{x}  \\ 
+            \sinh^{-1}(w) &= - \frac{v}{u}\ln|x| + C 
+        \end{align}
+        We have $w=0$ when $x=-a$, so 
+        \begin{equation}
+            C = \frac{v}{u}\ln(a)
+        \end{equation}
+        and so 
+        \begin{equation}
+            w = \sinh\left(\frac{v}{u}\ln\left(-\frac{a}{x}\right)\right)
+        \end{equation}
+        Letting $\frac{dy}{dx}$, we get the desired differential equation: 
+        \begin{equation}
+            \frac{dy}{dx} = \sinh\left(\frac{v}{u}\ln\left(-\frac{a}{x}\right)\right)
+        \end{equation}
+        \textbf{Bonus:} Using an integral calculator, I get 
+        \begin{equation}
+            y = -\dfrac{ux^{\frac{v}{u}+1}}{2\left(v+u\right)\left(-1\right)^\frac{v}{u}a^\frac{v}{u}}-\dfrac{u\left(-1\right)^\frac{v}{u}a^\frac{v}{u}x^{1-\frac{v}{u}}}{2\left(v-u\right)} + C
+        \end{equation}
+        At $x=-a$, we have $y=0$, so we can solve for the constant of integration. To avoid writing fractions, let $f=v/u$. 
+        \begin{align}
+            0 &= - \frac{u(-a)^{f+1}}{2(v+u)(-1)^{f}a^f} - \frac{u(-1)^fa^f(-a)^{1-f}}{2(v-u)}+C \\ 
+            0 &= - \frac{u(-a)}{2(v+u)} - \frac{u(-a)}{2(v-u)}+C \\
+            C &= -\frac{ua}{2}\left(\frac{1}{v+u}+\frac{1}{v-u}\right) \\ 
+            C &= -\frac{ua}{2}\left(\frac{2v}{v^2-u^2}\right) \\ 
+            C &= \frac{uv}{u^2-v^2}a
+        \end{align}
+        This gives
+        \begin{equation}
+            \boxed{y(x) = \frac{u(-x)}{2(v+u)}\left(-\frac{x}{a}\right)^{v/u} + \frac{u(-x)}{2(v-u)}\left(-\frac{a}{x}\right)^{v/u} + \frac{uv}{u^2-v^2}a}
+        \end{equation}
+        where we skipped some steps factoring.
+    \end{enumerate}
+\end{enumerate}
+\end{document}
