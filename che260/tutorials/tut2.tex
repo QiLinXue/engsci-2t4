@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{CHE260: Tutorial Problems \\ \textbf{Tutorial 2 Solutions}}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+    \item We have 
+    \begin{align}
+        W &= -\int_{V_1}^{V_2} A/V+B \dd{V} \\ 
+        &= \left[A\ln(V_1)+BV_1\right] - \left[A\ln(V_2)+BV_2\right]  \\ 
+        &= A\ln(V_1/V_2) + B(V_1-V_2) = -12.59\text{ kJ}
+    \end{align}
+    \item We first find the final pressure: 
+    \begin{equation}
+        P_2 = P_1\left(\frac{V_1}{V_2}\right)^{1.35} = 2.00\text{ bar.}
+    \end{equation}
+    \begin{equation}
+        W = \frac{P_2V_2-P_1V_1}{n-1} = -1284\text{ kJ.}
+    \end{equation}
+    \item The initial volume is given by $V_1$ such that 
+    \begin{equation}
+        P_1V_1 = mRT \implies V_1 = \frac{mRT}{P_1} = 0.1259 \text{ m}^3. 
+    \end{equation}
+    so $PV^{1.2} = 49.91.$ 
+    and the final gas pressure is given by 
+    \begin{equation}
+        P_2V_2 = mRT \implies P_2\left(\frac{85.87}{P_2}\right)^{0.833} = mRT
+    \end{equation}
+    or 
+    \begin{equation}
+        25.67P_2^{0.167}=mRT \implies P_2 = 1.10\text{ bar}
+    \end{equation}
+    where the error comes from lazy rounding.
+\end{enumerate}
+\end{document}
