@@ -1,0 +1,68 @@
+\section{Continuity}
+\begin{itemize}
+    \item Review: Recall that if $C \subseteq \mathbb{R}^n$, then we can map $C$ to its codomain via
+          \begin{equation}
+              F(C) = \{F(\gamma):\gamma \in C\}.
+          \end{equation}
+          Similarly, we can take the inverse image. For $D\in \mathbb{R}^m$:
+          \begin{equation}
+              F^{-1}(D) = \{\gamma \in \mathbb{R}^n: F(\gamma)\in D\}
+          \end{equation}
+          \begin{idea}
+              It turns out that the inverse mapping is better behaved. For example,
+              \begin{align}
+                  F^{-1}(D_1 \cup D_2) & = F^{-1}(D_1) \cup F^{-1}(D_2) \\
+                  F^{-1}(D_1 \cap D_2) & = F^{-1}(D) \cap F^{-1}(D_2)   \\
+                  F^{-1}(D^C)          & = F^{-1}(D)^C
+              \end{align}
+              However, only the following is true for the regular mapping:
+              \begin{align}
+                  F(C_1 \cup C_2) = F(C_1) \cup F(C_2)
+              \end{align}
+          \end{idea}
+    \item Consider the map $F: \mathbb{R}^n \rightarrow \mathbb{R}^m$, we have the following map
+          \begin{equation}
+              \begin{pmatrix}
+                  x_1 \\ \vdots \\ x_n
+              \end{pmatrix}\rightarrow \begin{pmatrix}
+                  y_1 \\ \vdots \\ y_m
+              \end{pmatrix} = \begin{pmatrix}
+                  F_1(x_1\,\cdots\,x_n) \\
+                  \vdots                \\
+                  F_m(x_1\,\cdots\,x_n)
+              \end{pmatrix}
+          \end{equation}
+          so we always get $F_i:\mathbb{R}^n\rightarrow \mathbb{R}$ for $i=1,\dots,m$, where $F_i$ is known as a coordinate function of $f.$ We can similarly write:
+          \begin{equation}
+              F_i = \pi_i \circ F = F \sslash \pi_i
+          \end{equation}
+          where $\pi_i$ is the projection onto the $i^\text{th}$ coordinate and $\circ$ denotes composition.
+    \item Recall in one-dimensional calculus, the graph of a function $F:\mathbb{R}\rightarrow \mathbb{R}$ is given by $\Gamma_F = \{(x,f(x)):x\in \mathbb{R}\} \subset \mathbb{R}^2.$ We can generalize this to say that the graph of a function $F:\mathbb{R}^n\rightarrow \mathbb{R}^m$ lives in $\mathbb{R}^{n+m}.$
+    \item We can also generalize limits.
+          \begin{theorem}
+              Suppose we have a function $F:\mathbb{R}^n \rightarrow \mathbb{R}^m$ and let $a\in A \subset \mathbb{R}^n.$ Then
+              \begin{equation}
+                  \lim_{x\to a}f(x) = b
+              \end{equation}
+              means that $\forall \epsilon>0, \exists \delta > 0$ s.t. $x\neq a \in B_\delta(a)\cap A \implies F(x) \in B_\epsilon(b).$ IF the limit exists, then it is unique.
+          \end{theorem}
+    \item Note that we don't necessarily require $a\in A$. However in the case, then the limit may not be unique: in fact, the limit can be anything.
+    \item As a result, it makes more sense to talk about the limit as $x$ approaches $a\in\bar{A}$.
+          \begin{definition}
+              The function $F:A\subset \mathbb{R}^n \rightarrow \mathbb{R}^m$ is continuous at $a\in A$ if $\lim_{x\to a}f(x)=f(a).$
+              \vspace{2mm}
+
+              $F$ is continuous on $A$ if and only if it is continuous at every $a\in A$. This is equivalent to saying that for all $a$ and $\epsilon >0$, ther exists a $\delta > 0$ for all $x \in A$ such that $|x-a|<\delta \implies |f(x)-f(a)|<\epsilon.$
+          \end{definition}
+    \item There is another definition of continuity, which is equivalent to the above, but easier to work with.
+          \begin{theorem}
+              $F:\mathbb{R}^n\rightarrow \mathbb{R}^m$ is continuous if and only if for every open $V\subset \mathbb{R}^m$, the pre-image $F^{-1}(V)$ is also open.
+          \end{theorem}
+          \begin{theorem}
+              $F:A\subset \mathbb{R}^n \rightarrow \mathbb{R}^m$ is continuous if and only if for every open $V \subset \mathbb{R}^m$, there is an open $U \subset \mathbb{R}^n$ such that
+              \begin{equation}
+                  F^{-1}(U) = U \cap A
+              \end{equation}
+          \end{theorem}
+          \item Aside: We can define that $B\subset A$ is \textbf{open in $A$} if there exists a $U$ (that is open in $\mathbb{R}^n$) such that $B=U\cap A$. Note that being open in $A$ has the same nice properties as open sets in general. 
+\end{itemize}
