@@ -40,23 +40,8 @@
               Let $\gamma$ be the furthest we can ``push'' $g$. Specifically, let $\gamma = \text{sup} (G)$. This is well defined since $G$ is clearly bounded $G \subset [0,1]$ and is nonempty since $0\in G.$
               \vspace{2mm}
 
-              We claim that $\gamma = 1$. Suppose this is not true, i.e. $\gamma < 1$. If this is true, then there exists some open set $U_\beta$ with $\beta \in J$ such that $\gamma \in U_\beta.$ Since $U_\beta$ is open, there exists $g'$ and $g''$ such that $\gamma \in [g',g''] \subset U_\beta.$ Therefore, $[0,g''] = [0,g']\bigcup [g',g''].$ Since $[0,g']$ has a finite cover, and $[g',g'']$ is covered by $U_\beta$. This has a finite cover, so $g'' \in G$. However, $\text{sup}(G) \ge g'' > \gamma$, which leads to a contradiction.
-              \vspace{2mm}
+              We claim that $\gamma = 1$. Suppose this is not true, i.e. $\gamma < 1$. If this is true, then there exists some open set $U_\beta$ with $\beta \in J$ such that $\gamma \in U_\beta.$ Since $U_\beta$ is open, there exists $g'$ and $g''$ such that $\gamma \in [g',g''] \subset U_\beta.$ Therefore, $[0,g''] = [0,g']\bigcup [g',g''].$ Since $[0,g']$ has a finite cover, and $[g',g'']$ is covered by $U_\beta$, then this has a finite cover, so $g'' \in G$. However, $\text{sup}(G) \ge g'' > \gamma$, which leads to a contradiction.
 
-              Finally, we claim that $b=\gamma \in G$.
-              \begin{proof}
-                  $b$ is covered by $\mathcal{U}=\{U_\alpha\}$ hence some interval $(b^-,b^+)\ni b$ is covered by one set $U_\alpha \in \mathcal{U}.$
-
-                  As $\text{sup}(G)=b>b^-$, there exists $g'\in G$ such that
-                  \begin{equation}
-                      b^= < g' \le b
-                  \end{equation}
-                  so:
-                  \begin{equation}
-                      [a,b]=[a,g']\cup (b^-,b].
-                  \end{equation}
-                  Note that $[a,g']$ can be covered with a finite subcover and $(b^-, b]$ is covered by just one $U_\alpha$. Therefore, $[a,b]$ has a finite cover.
-              \end{proof}
           \end{proof}
           \begin{theorem}
               If $A\subset \mathbb{R}^n$ is compact and $B\subset \mathbb{R}^n$ is compact. Then:
@@ -68,7 +53,7 @@
           \begin{proof}
               Suppose $\mathcal{U}=\{U_\alpha\}$ is an open cover of $A\times B$.
 
-              WLOG, each $U_\alpha$ is itself an open rectangle. The idea behind is that if we draw $A\times B$ as a rectangle, then every vertical line is a copy of $B$, which can be covered with finitely many covers.
+              WLOG, each $U_\alpha$ is itself an open rectangle. The idea behind is that if we draw $A\times B$ as a rectangle, then every vertical line is a copy of $B$, which can be covered with finitely many covers. We then state and prove the following lemma.
               \begin{lemma}
                   For every $x\in A$, we can find an open set $N_x \ni x$ such that $N_x\times B$ can be covered with finitely many of the $U_\alpha$'s.
                   \begin{proof}
@@ -86,11 +71,12 @@
                       \begin{align}
                           N_x \times B & \subset \bigcup_{i=1}^p N_x \times W_{\alpha_i}         \\
                                        & \subset \bigcup_{i=1}^p V_{\alpha_i}\times W_{\alpha_i} \\
-                                       & = \bigcup_{i=1}^p U_{\alpha_i}
+                                       & = \bigcup_{i=1}^p U_{\alpha_i},
                       \end{align}
+                      which is a finite open cover of $N_x\times B$.
                   \end{proof}
               \end{lemma}
-              Now, $\{N_x\}_{x\in A}$ is an open cover of $A$. By compactness, we can find $x_1,\dots,x_q$ such that 
+              We know that $\{N_x\}_{x\in A}$ is an open cover of $A$. By compactness, we can find $x_1,\dots,x_q$ such that
               \begin{equation}
                   \bigcup_{j=1}^q N_{x_j} \supset A,
               \end{equation}
@@ -120,11 +106,11 @@
           \end{proposition}
           \begin{proof}
               Suppose $C$ is compact and $B \subset C$ is closed.
-              
+
               This means that $B^C$ is open. Suppose $\{U_\alpha\}$ is an open cover of $B$. Then
               \begin{equation}
                   \{U_\alpha\} \cup \{B^C\}
-              \end{equation} 
+              \end{equation}
               is an open cover of $C,$ so it has a finite subcover, which contains $U_{\alpha_1},\dots,U_{\alpha_p}$ and maybe $B^C$. If we just consider $U_{\alpha_1},\dots,U_{\alpha_p}$, and this is a finite cover of $B\subset C$.
           \end{proof}
           \begin{corollary}
@@ -133,4 +119,65 @@
           \begin{definition}
               Bounded means that there exists $M\in \mathbb{R}$ such that for all $b\in B$, $|b|<M$. This is equivalent to saying that $B$ is contained in some closed rectangle.
           \end{definition}
+          \subsection{Extra Notes from Tutorial}
+    \item We can make the above corollary stronger (in $\mathbb{R}^n$):
+          \begin{theorem}
+              $S$ is compact if and only if $S$ is compact and bounded.
+          \end{theorem}
+          \begin{proof}
+              We have already shown that if $S$ is compact and bounded, then $S$ is compact. We now show the other direction.
+              \begin{itemize}
+                  \item To show that $S$ is bounded, note that by compactness there exists a finite subcover of $S$. Since these subcovers are finite, we can draw a ball or rectangle around this subcover, so it's bounded.
+                  \item To show that $S$ is closed, we can show $S^C$ is open. Let $x\in S^C$ and let $y\in S$ be the closest point to $x$ contained in $S$. We can create an open ball centered at $x$ with radius $\frac{1}{3}|x-y|.$ This doesn't intersect $S$, so $S^C$ is open and $S$ is closed.
+              \end{itemize}
+          \end{proof}
+    \item This allows us to create three equivalent definitions of compactness. A set $S$ is compact if and only if:
+          \begin{itemize}
+              \item Every open cover has a finite subcover.
+              \item It is closed and bounded (only true for $\mathbb{R}^n$)
+              \item Every sequence of points in $S$ has a convergent subsequence converging to a point $S$.
+          \end{itemize}
+    \item Similarly, there are also three definitions of continuity.
+          \begin{itemize}
+              \item We can define continuity using $\epsilon-\delta.$
+              \item A function is continuous if and only if pre-image of all open sets are open.
+              \item A function is continuous at a point $p$ if whenever $\{a_n\}$ is a real sequence converging to $p$, the sequence $\{f(a_n)\}$ converges to $f(p).$
+          \end{itemize}
+    \item Finally, we can examine other ways of looking at the interior, boundary, exterior, and closure:
+          \begin{itemize}
+              \item $\text{Int}(S)$ is the largest open set in $S$
+              \item The closure, $\bar{S}=\text{cl}(S)$ is the smallest closed set containing $S$.
+          \end{itemize}
+          \begin{example}
+              \begin{enumerate}
+                  \item If $C$ is closed:
+                        \begin{enumerate}
+                            \item Is $C \subseteq \cl(\Int C)$? {\color{red} False, consider the empty set.}
+                            \item Is $C \supseteq \cl(\Int C)$? {\color{red} True, the closure of a subset of $S$ cannot contain points outside of $S$.}
+                        \end{enumerate}
+                  \item if $U$ is open:
+                        \begin{enumerate}
+                            \item Is $U\subseteq \Int\cl U$? {\color{red} True, since $\cl U \subseteq \Int \cl U$ and $U\subseteq \cl U$. }
+                            \item Is $U\supseteq \Int\cl U$? {\color{red} False, consider $(1,2)\cup (2,3)$. }
+                        \end{enumerate}
+                  \item \begin{enumerate}
+                            \item Is $\Bd S \subseteq \Bd \cl S$? {\color{red} False, consider $(1,2)\cup (2,3)$. }
+                            \item Is $\Bd S \supseteq \Bd \cl S$? {\color{red} True, $\Bd S = \bar{S} \setminus \Int S$ and $\Bd \bar{S} = \bar{S} \setminus \Int \bar{S}$. We have $\Int U \subseteq \Int\bar{U}$, so this is true.}
+                        \end{enumerate}
+              \end{enumerate}
+          \end{example}
+          \newpage
+    \item Given that $f$ is a continuous function from $\mathbb{R}^n$ to $\mathbb{R}^m$, the following statements are true:
+          \begin{enumerate}
+              \item $f(\text{open})=\text{open}$ {\color{red} Consider $f(x)=c$}
+              \item $f(\text{closed})=\text{closed}$ {\color{red} Consider $f(x)=\arctan(x)$}
+              \item $f(\text{bounded})=\text{bounded}$  {\color{red} Consider $f(x)=\tan(x)$}
+              \item $f(\Int S)=\Int(f(S))$  {\color{red} Consider $f(x)=c$}
+              \item $f(\Bd S)=\Bd f(S)$  {\color{red} Consider $f(x)=c$}
+          \end{enumerate}
+          but these two are true:
+          \begin{enumerate}
+              \item $f(\cl S)=\cl f(S)$
+              \item $F(\text{compact})=\text{compact}$
+          \end{enumerate}
 \end{itemize}
