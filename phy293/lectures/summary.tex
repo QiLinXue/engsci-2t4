@@ -177,10 +177,16 @@ If the driving frequency is close to the natural frequency, we can write
 \end{equation}
 such that 
 \begin{equation}
-    \bar{P}(\omega) = \frac{F_0^2}{2m\gamma} \frac{\omega_0^2\gamma^2}{4\omega_0^2(\Delta \omega)^2+\gamma^2\omega_0^2}
+    \bar{P}(\omega) = \frac{F_0^2}{2m\gamma} \frac{\gamma^2}{4(\Delta \omega)^2+\gamma^2}
+\end{equation}
+\subsection{Transient Phenomena}
+Recall that there are actually two solutions to the differential equation. One is the steady state forced oscillations, however there is another solution known as the transient response: 
+\begin{equation}
+    x_1(t)+x_2(t) = A(\omega)\cos(\omega_d t- \delta) + B\exp\left(-\frac{\gamma t}{2}\right)\cos\left(\omega_\text{damped} t + \phi\right)
 \end{equation}
 
 \newpage
+
 \section{Appendix}
 \subsection{Derivations}
 Guessing a solution of the form $x(t)=Ce^{\alpha t}$, and substituting it into the ODE gives the characteristic equation 

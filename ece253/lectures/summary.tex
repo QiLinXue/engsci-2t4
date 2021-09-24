@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{ECE253: Computer and Digital Systems \\ \textbf{Summary}}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Boolean Algebra}
+We write multiplication for AND gates and addition for OR gates. This forms an algebraic structure with the following properties. The obvious ones:
+\begin{itemize}
+    \item $xy=yx$
+    \item $x+y=y+x$
+    \item $x(yz)=xy(z)$
+    \item $x+(y+z)=(x+y)+z$
+    \item $x(y+z)=xy+xz$
+\end{itemize}
+and the less obvious ones: 
+\begin{itemize}
+    \item $x + yz = (x+y)(x+z)$
+    \item $x+xy = x$ (Absorption)
+    \item $xy+x\bar{y}=x$ (Combining)
+    \item $(x+y)(x+\bar{y})=x$
+    \item $\overline{xy}=\bar{x}+\bar{y}$ (De Morgan's Theorem)
+    \item $\overline{x+y}=\bar{x}\bar{y}$ 
+    \item $x+\bar{x}y=x+y$
+    \item $x(\bar{x}+y)=xy$
+    \item $xy+tz+\bar{x}z=xy+\bar{x}z$
+    \item $(x+y)(y+z)(\bar{x}+z)=(x+y)(\bar{x}+z)$
+\end{itemize}
+which can be proven using \textbf{perfect induction} (i.e. look at all cases) or algebraic manipulation.
+\subsection{Sum of PRoducts and Product of Sums}
+Given a truth table, the \textbf{minterm} that corresponds to each row is given by something like 
+\begin{equation}
+    m_3 = \bar{x}_1x_2x_3
+\end{equation}
+such that when $3=0b011$ is substituted in, $m_3=1$, and $m_3=0$ otherwise.
+
+The \textbf{maxterm} corresponds to a sum, and $M_i=0$ if and only if the input is $i$. For example, 
+\begin{equation}
+    M_3 = x_1 + \bar{x_2} + \bar{x_3}
+\end{equation}
+\end{document}

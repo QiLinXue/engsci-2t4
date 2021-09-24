@@ -10,13 +10,13 @@
 
 \maketitle
 \begin{enumerate}
-    \item We want critical damping, so $\omega = 2\gamma$ where $\omega=\sqrt{k/m}$ and $\gamma=b/m$. This gives 
+    \item We want critical damping, so $2\omega = \gamma$ where $\omega=\sqrt{k/m}$ and $\gamma=b/m$. This gives 
     \begin{equation}
-        \frac{k}{m} = 4 \frac{b^2}{m^2} \implies b = \frac{1}{2}\sqrt{mk}
+        4\frac{k}{m} =  \frac{b^2}{m^2} \implies b = 4\sqrt{mk}
     \end{equation}
     We can determine the spring constant $k$ by looking at the equilibrium location, which occurs at $mg=k\Delta l \implies k = \frac{mg}{\Delta l}$. This gives 
     \begin{equation}
-        b = \frac{1}{2}m\sqrt{\frac{g}{\Delta l}} = \boxed{\text{18 kg/s}}
+        b = 4m\sqrt{\frac{g}{\Delta l}} = \boxed{\text{72 kg/s}}
     \end{equation}
     \item Since the spring is damped lightly, we will assume that $\omega \approx \omega_0$. We will check this at the end. Therefore, the period is $T = \frac{28}{20} = 1.4\text{ s}$. The amplitude (envelope function) is given by $A(t) = A_0 e^{-\gamma t/2}.$ We want this to be $0.9$ of the initial value at $t=T$: 
     \begin{equation}
