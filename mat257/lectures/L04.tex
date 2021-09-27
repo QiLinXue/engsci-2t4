@@ -122,10 +122,10 @@
           \subsection{Extra Notes from Tutorial}
     \item We can make the above corollary stronger (in $\mathbb{R}^n$):
           \begin{theorem}
-              $S$ is compact if and only if $S$ is compact and bounded.
+              $S$ is compact if and only if $S$ is closed and bounded.
           \end{theorem}
           \begin{proof}
-              We have already shown that if $S$ is compact and bounded, then $S$ is compact. We now show the other direction.
+              We have already shown that if $S$ is closed and bounded, then $S$ is compact. We now show the other direction.
               \begin{itemize}
                   \item To show that $S$ is bounded, note that by compactness there exists a finite subcover of $S$. Since these subcovers are finite, we can draw a ball or rectangle around this subcover, so it's bounded.
                   \item To show that $S$ is closed, we can show $S^C$ is open. Let $x\in S^C$ and let $y\in S$ be the closest point to $x$ contained in $S$. We can create an open ball centered at $x$ with radius $\frac{1}{3}|x-y|.$ This doesn't intersect $S$, so $S^C$ is open and $S$ is closed.

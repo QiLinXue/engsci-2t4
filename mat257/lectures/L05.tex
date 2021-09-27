@@ -64,5 +64,39 @@
                   F^{-1}(U) = U \cap A
               \end{equation}
           \end{theorem}
-          \item Aside: We can define that $B\subset A$ is \textbf{open in $A$} if there exists a $U$ (that is open in $\mathbb{R}^n$) such that $B=U\cap A$. Note that being open in $A$ has the same nice properties as open sets in general. 
+    \item Aside: We can define that $B\subset A$ is \textbf{open in $A$} if there exists a $U$ (that is open in $\mathbb{R}^n$) such that $B=U\cap A$. Note that being open in $A$ has the same nice properties as open sets in general.
+          \begin{theorem}
+              A function $F:A\subset \mathbb{R}^n \rightarrow \mathbb{R}^m$ is continuous if and only if whenever $U\subset \mathbb{R}^m$ is open, there exists an open $V\in \mathbb{R}^n$ such that $F^{-1}(U) = V \cap A$.
+          \end{theorem}
+          \begin{proof}
+              We will only prove this theorem where $A=\mathbb{R}^n$, however the proof can easily extend to arbitrary $A$.
+
+              $\implies$ Assume $U\subset \mathbb{R}^m$ is open, we need to show that $F^{-1}(U)$ is open. Pick $a\in F^{-1}(U)$, then $F(a) \in U$. We pick $\epsilon >0$ such that $B_\epsilon(F(a)) \subset U$, by continuity, we can find $\delta > 0$ such that $F(B_\delta(a)) \subset B_\epsilon(F(a)) \subset U,$ which is equivalent to saying $a\in B_\delta(a) \subset F^{-1}(U).$
+
+              $\impliedby$ Given $a\in \mathbb{R}^n$ and $\epsilon >0$, consider $B_\epsilon(F(a))$ (which is open), so $F^{-1}(B_\epsilon(F(a))) \ni a$ is open. Since this is open, there exists $\delta > 0$ such that $a\in B_\delta(a) \subset F^{-1}(B_\epsilon(F(a))),$ so $F$ is continuous.
+          \end{proof}
+          \begin{theorem}
+              Suppose we have a function $F:\mathbb{R}^n\rightarrow \mathbb{R}^m$ and $G: \mathbb{R}^m \rightarrow \mathbb{R}^p.$ Given that $F,G$ are continuous, then $G \circ F$ is continuous.
+              \vspace{2mm}
+
+              \begin{proof}
+                  Given $U\subset \mathbb{R}^p$ is open, then
+                  \begin{equation}
+                      (G\circ F)^{-1}(U) = F^{-1}(G^{-1}(U)) = F^{-1}(\text{open}) = \text{open.}
+                  \end{equation}
+              \end{proof}
+          \end{theorem}
+          \begin{theorem}
+              If $F:\mathbb{R}^n\rightarrow \mathbb{R}^m$ is continuous and $C\subset \mathbb{R}^n$ is compact, then $F(C)$ is compact.
+              \vspace{2mm}
+
+              Alternatively, a continuous image of a compact set is compact.
+          \end{theorem}
+          \begin{proof}
+              Given an open cover $\{U_\alpha\}$ of $f(C)$, then $\{F^{-1}(U_\alpha)\}$ is an open cover of $C$, hence it has a finite subcover. This finite subcover in $\mathbb{R}^n$ corresponds to a finite subcover in $\mathbb{R}^m$.
+          \end{proof}
+          \begin{corollary}
+              A continuous function on a compact set is bounded.
+          \end{corollary}
+          
 \end{itemize}

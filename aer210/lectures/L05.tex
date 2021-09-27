@@ -1,0 +1,205 @@
+\section{Cylindrical, Spherical Coordinates, Taylor Series, Jacobian}
+\begin{itemize}
+    \item In \textbf{cylindrical coordinates}, we can represent a point in $\mathbb{R}^3$ as 
+    \begin{equation}
+        P(x,y,z) = P(r,\theta,z).
+    \end{equation}
+    We can describe a region as 
+    \begin{equation}
+        Q = \{(x,y,z) | (x,y)\in R, u_1(x,y)\le z\le u_2 (x,y)\}
+    \end{equation}
+    where
+    \begin{equation}
+        R= \{(r,\theta)|\alpha\le \theta\le \beta, h_1(\theta)\le r\le h_2(\theta)\}
+    \end{equation}
+    and the integral can be written as 
+    \begin{align}
+        \iiint\limits_Q f(x,y,z)\dd{V} &=\iint\limits_R \left[\int_{u_1(x,y)}^{u_2(x,y)}\right]\dd{A} \\ 
+        &= \int_\alpha^\beta \int_{h_1(\theta)}^{h_2(\theta)}\int_{u_1(r\cos\theta,r\sin\theta)}^{u_2(r\cos\theta,r\sin\theta)}f(r\cos\theta,r\sin\theta,z)r\dd{z}\dd{r}\dd{\theta.} 
+    \end{align}
+    \item In spherical coordinates, a point can be represented by 
+    \begin{equation}
+        P(x,y,z)=P(\rho,\theta,\phi)
+    \end{equation}
+    where $\theta$ is the same as the one in cylindrical coordinates\footnote{This is the common convention in physics. However, many mathematics texts mix up $\theta$ and $\phi$}. We have 
+    \begin{align}
+        x &= \rho\sin\phi\cos\theta \\ 
+        y &= \rho\sin\phi\sin\theta \\ 
+        z &= \rho \cos\phi 
+    \end{align}
+    and 
+    \begin{equation}
+        \rho^2 = x^2+y^2+z^2.
+    \end{equation}
+    \item The volume in spherical coordinates is given by 
+    \begin{equation}
+        \dd{V} = \rho^2 \sin\phi \dd{\rho}\dd{\phi}\dd{\theta}
+    \end{equation}
+    \item \textbf{Taylor Series for Two-Variable Functions:} Suppose we are given $f(x_0,y_0)$ and want to approximate $f(x_0+\Delta x,y_0+\Delta y).$ Suppose there projections on the $xy$ plane is $P$ and $Q$. We can parametrize the line segment $PQ$ as 
+    \begin{align}
+        x(t) = x_0 + t\Delta x \\ 
+        y(t) = y_0 + t\Delta y
+    \end{align}
+    where $0 \le t \le 1$. We can then define 
+    \begin{equation}
+        F(t) = f(x_0+t\Delta x,y_0+t\Delta y)
+    \end{equation}
+    which is a one-variable function, which we can approximate using the one dimensional Taylor Series: 
+    \begin{equation}
+        F'(t) = \frac{\partial f}{\partial x}\Delta x + \frac{\partial f}{\partial y}\Delta y
+    \end{equation}
+    The second derivative is 
+    \begin{equation}
+        F''(t)  = \frac{\partial^2 f}{\partial x^2}\Delta x^2 + 2\frac{\partial^2 f}{\partial x\partial y}\Delta x\Delta y + \frac{\partial^2 f}{\partial y^2}\Delta y^2
+    \end{equation}
+    The third derivative is
+    \begin{equation}
+        F'''(t) = \frac{\partial^3f}{\partial x^3}\Delta x^3 + 3\frac{\partial^3 f}{\partial x^2\partial y}\Delta x^2\Delta y + 3\frac{\partial^3 f}{\partial x\partial y^2}\Delta x\Delta y^2 + \frac{\partial^3f}{\partial y^3}\Delta y^3 .
+    \end{equation}
+    Therefore: 
+    \begin{equation}
+        F(t_0+\Delta t)\approx F(t_0) + F'(t_0)\Delta t + \frac{1}{2!}F''(t_0)\Delta t^2 + \cdots + \frac{F^{(n)}(t_0)\Delta t}{n!}
+    \end{equation}
+    % \item Alternatively, we can write 
+    % \begin{equation}
+    %     f(x_0,y_0) \approx f(x_0,y_0) + \frac{\partial f}{\partial x}\Bigg|_{(x_0,y_0)}(x-x_0) + \frac{\partial f}{\partial y}\Bigg|_{(x_0,y_0)}(y-y_0) + \frac{1}{2!}\left(\frac{\partial^2 f}{\partial x}\Bigg|_{(x_0,y_0)}(x-x_0)^2\right)
+    % \end{equation}
+    \item \textbf{Change of Variables in Multiple Integrals:} Consider a bijective mapping between a region $S$ in the $uv$ plane to a region $R$ in the $xy$ plane. We can partition both regions into $N$ regions.
+    
+    Specifically, let us partition $S$ into square regions. Consider an arbitrary region with vertices $\bar{A}(u_0,v_0)$, $\bar{B}(u_0+\Delta u, v_0)$, $\bar{C}(u_0,v_0+\Delta v)$, and $\bar{D}$. Let the subregion be denoted as $S_i$ with area $\Delta A_S$.
+
+    Suppose we have the mapping 
+    \begin{align}
+        x &= g(u,v) \\ 
+        y &= h(u,v)
+    \end{align}
+    such that $\bar{X}\mapsto X$. If $\Delta u$ and $\Delta v$ are sufficiently small, then $R_i=ABCD$ is a parallelogram. Therefore: 
+    \begin{equation}
+        \Delta A_R \approx \text{area of the parallelogram} = \lVert \vec{AB} \times \vec{AC}\rVert.
+    \end{equation} 
+    Note that $\vec{AB}=\Delta x_1 \hat{i}+\Delta y_1 \hat{j}$ and $\vec{AC} = \Delta x_2\hat{i}+\Delta y_2 \hat{j},$ so their cross product is 
+    \begin{equation}
+        \lVert \vec{AB}\times \vec{AC} \rVert = |\Delta x_1\Delta y_2 - \Delta x_2\Delta y_1| 
+    \end{equation}
+    From our linear approximation, we can write 
+    \begin{align}
+        \Delta x_1 &\approx g_u(u_0,v_0)\Delta u \\ 
+        \Delta x_2 &\approx g_v(u_0,v_0)\Delta v \\ 
+        \Delta y_1 &\approx h_u(u_0,v_0)\Delta u \\ 
+        \Delta y_2 &\approx h_v(u_0,v_0)\Delta v
+    \end{align}
+    To sum it up, we have 
+    \begin{equation}
+        \Delta A_R = \left|\det \begin{bmatrix}
+            g_u(u_0,v_0) & g_v(u_0,v_0) \\ 
+            h_u(u_0,v_0) & h_v(u_0,v_0)
+        \end{bmatrix}\right| \Delta u\Delta v
+    \end{equation}
+    \begin{definition}
+        The determinant of the derivative matrix is called the Jacobian ($J$) of the transformation. 
+        \begin{equation}
+            J = \det \begin{bmatrix}
+                g_u & g_v \\ 
+                h_u & h_v
+            \end{bmatrix} = \det\begin{bmatrix}
+                x_u & x_v \\ 
+                y_u & y_v
+            \end{bmatrix} \equiv \frac{\partial(x,y)}{\partial(u,v)}
+        \end{equation}
+        given 
+        \begin{align}
+            x &= g(u,v) \\ 
+            y &= h(u,v)
+        \end{align}
+        Therefore, 
+        \begin{equation}
+            \Delta A_R \approx |J|\Delta A_S
+        \end{equation}
+    \end{definition}
+    \begin{theorem}
+        Assuming that 
+        \begin{itemize}
+            \item $f$ is continuous
+            \item $g$ and $h$ are functions that have continuous first derivatives
+            \item The transformation is $1-1$.
+            \item The Jacobian $J$ is nonzero
+        \end{itemize}
+        we can write 
+        \begin{equation}
+            \iint\limits_R f(x,y)\dd{A} = \iint_S f(g(u,v),h(u,v))\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\dd{u}\dd{v}.
+        \end{equation}
+        Note the similarity between this and the single variable case 
+        \begin{equation}
+            \int_a^b f(x) \dd{x} = \int_c^d f(x(u)) \frac{\dd{x}}{\dd{u}} \dd{u}
+        \end{equation}
+    \end{theorem}
+    \begin{example}
+        Suppose we wish to evaluate the integral $\iint\limits_R (x^2+2xy)\dd{A}$ where $R$ is the region bounded by the lines 
+        \begin{align}
+            y &= 2x+3 \\ 
+            y &= 2x+1 \\ 
+            y &= 5-x \\ 
+            y &= 2-x
+        \end{align}
+        Notice that this is a rotated rectangle, so let's try to switch this into a non-rotated rectangle with the bounds: 
+        \begin{align}
+            u &= 3 \\ 
+            u &= 1 \\ 
+            v &= 5 \\ 
+            v &= 2
+        \end{align}
+        by the transformation 
+        \begin{align}
+            x &= \frac{1}{3}(v-u) \\ 
+            y &= \frac{1}{3}(2v+u).
+        \end{align}
+        The Jacobian is 
+        \begin{equation}
+            J = \det \begin{bmatrix}
+                \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\ 
+                \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v}
+            \end{bmatrix} = \det\begin{bmatrix}
+                -1/3 & 1/3 \\ 
+                1/3 & 2/3
+            \end{bmatrix} = -\frac{1}{3}
+        \end{equation}
+        which gives 
+        \begin{equation}
+            \iint\limits_R (x^2+2xy)\dd{A} = \iint_S \left[\frac{1}{3}(v-u)^2+\frac{2}{3}(v-u)(2v+u)\right]|J| \dd{u}\dd{v}
+        \end{equation}
+        where $S=\{(u,v)| 1 \le u \le 3, 2 \le v\le 5\}$
+    \end{example}
+    \item For triple integrals, the Jacobian is 
+    \begin{equation}
+        \frac{\partial (x,y,z)}{\partial (u,v,w)} = \det \begin{bmatrix}
+            \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} & \frac{\partial x}{\partial w} \\ 
+            \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} & \frac{\partial y}{\partial w} \\ 
+            \frac{\partial z}{\partial u} & \frac{\partial z}{\partial v} & \frac{\partial z}{\partial w}
+        \end{bmatrix}
+    \end{equation}
+    \item \textbf{Successive Transformations:} Suppose we have $x=x(u,v), y=y(u,v)$ and $u=u(s,t)$ and $v=v(s,t).$ Then
+    \begin{equation}
+        \frac{\partial(x,y)}{\partial(s,t)} = \frac{\partial(x,y)}{\partial(u,v)}\cdot \frac{\partial (u,v)}{\partial (s,t)}
+    \end{equation}
+    \item \textbf{Back Transformations:} Recall that when we transform a region $R$ to a region $S$ with some transformation $T$, then 
+    \begin{equation}
+        \dd{A}_R = \left|\frac{\partial (x,y)}{\partial (u,v)}\right|\dd{A}_S
+    \end{equation}
+    and 
+    \begin{equation}
+        \dd{A}_S = \left|\frac{\partial (u,v)}{\partial (x,y)}\right|\dd{A}_R
+    \end{equation}
+    \begin{theorem}
+        Jacobians satisfy the property: 
+        \begin{equation}
+            \frac{\partial(x,y)}{\partial(u,v)} = \left(\frac{\partial(u,v)}{\partial (x,y)}\right)^{-1}
+        \end{equation}
+        or 
+        \begin{equation}
+            J_{S\rightarrow R} = \frac{1}{J_{R\rightarrow S}}
+        \end{equation}
+    \end{theorem}
+    \begin{idea}
+        This is important since if we know $u=f(x,y)$ and $v=g(x,y)$, then we can calculate the Jacobian without finding the inverse. 
+    \end{idea}
+\end{itemize}
