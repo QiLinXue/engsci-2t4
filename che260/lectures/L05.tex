@@ -1,0 +1,81 @@
+\section{Chad (Real) Thermodynamics}
+\begin{itemize}
+    \item The \textbf{microstate} refers to a specific configuration (permutation) while a \textbf{macrostate} describes the overall state (combination). The number of microstates that correspond to a particular macrostate is called the \textbf{multiplicity} of that
+    macrostate.
+    \item The \textbf{fundamental assumption of statistical mechanics} is that in an isolated system in thermal equilibrium, all accessible
+    microstates are equally probable
+    \item We can define the entropy of a system as
+    \begin{equation}
+        S = k_B \ln (\Omega)
+    \end{equation}
+    where $\Omega$ is the multiplicity. We show that entropy is an extensive property. When two systems with multiplicities $\Omega_A$ and $\Omega_B$ are put together, the
+    total multiplicity becomes $\Omega_A\Omega_B$ and the total entropy becomes $S_A+S_B.$
+    \item The \textbf{Third Law of Thermodynamics} states that the entropy of a pure substance in thermodynamic equilibrium at $T=0$ has zero entropy.
+    \item The entropy of an ideal gas is dependent on the internal energy, volume, and mass.
+    \begin{idea}
+        In classical thermodynamics, this is a postulate: it cannot be proven. However, the proof is pretty cool, so I will derive it below.
+        \vspace{2mm}
+
+        The energy of a given particle is: 
+        \begin{equation}
+            U = \frac{p^2}{2m} = \frac{p_x^2 + p_y^2 + p_z^2}{2m}
+        \end{equation}
+        where $p$ is the momentum. Let us examine the \textit{momentum hyperspace}, the space where the three coordinate axes correspond to $p_x,p_y,p_z.$ For example, the coordinate $(0,3,4)$ will correspond to a particle with a momentum of $p=\sqrt{0^2+3^2+4^2}=5.$ As a result, we can correspond the momentum of any particle as a point in this hyperspace.
+        \vspace{2mm}
+        
+        When we plot the equation for energy, we get a sphere with radius $r=\sqrt{2mU}.$ Any point on the surface of this sphere will have the same magnitude of momentum, and thus the same energy. The surface area is $V_p = 4\pi r^2 = 8\pi mU,$ so the number of particles with a momentum of $p$ is proportional to $\boxed{V_p = 8\pi mU}.$
+        \vspace{2mm}
+        
+        From quantum mechanics, Heisenberg's Uncertainty Principle tells us that 
+        \begin{equation}
+            \Delta x\Delta p_x \approx h
+        \end{equation}
+        where $h$ is Planck's constant and $\Delta x$ and $\Delta p_x$ correspond to the uncertainties in position and momentum. Suppose we have a cube. We can now count the number of states with a well-defined position by partitioning the cube of volume $V=L^3$ into smaller cubes of length $\Delta x$.
+        \begin{equation}
+            \Omega_\text{well defined position} = \frac{L^3}{(\Delta x)^3}
+        \end{equation}
+        Similarly, we can count the number of states with a well-defined momentum by partitioning the hyperspace of volume $V_p$ into cubes of volume $(\Delta p_x)^3$: 
+        \begin{equation}
+            \Omega_\text{well defined momentum} = \frac{V_p}{(\Delta p)^3}
+        \end{equation}
+        such that the total multiplicity of a \textit{single particle} is: 
+        \begin{equation}
+            \Omega = \Omega_\text{well defined position}\Omega_\text{well defined momentum} = \frac{VV_p}{(\Delta x\Delta p)^3} = \frac{V(8\pi m U)}{h^3}.
+        \end{equation}
+        We see that $\Omega$ is a function of the volume, mass, and internal energy. If we have $N$ indistinguishable particles, we can extend this to:
+        \begin{equation}
+            \Omega_N = \frac{1}{N!}\left(\frac{V}{h^3}\right)^NV_p.
+        \end{equation}
+        However, $V_p$ is no longer proportional to $r^2$ since each particle isn't constrained to only the surface of the hypersphere (since there can be multiple particles with different energies). With many particles, each particle can exist anywhere inside the hypersphere, so for a single particle, $V_p \propto r^3 \propto (mU)^{3/2},$ so for $N$ particles, $V_p \propto r^{3N} \propto (mU)^{3N/2}$
+        \vspace{2mm}
+
+        Finally, the extra factor of $\frac{1}{N!}$ comes from the fact that we are overcounting. Combining everything together, the multiplicity is related to 
+        \begin{equation}
+            \boxed{\Omega(U,V,N) = f(N)V^NU^{3N/2}
+            }.
+        \end{equation}
+        which is what we postulated!
+        \vspace{2mm}
+
+        Note that there's a few factors of $N!$ that we missed in $V_p$, and this derivation is far from rigorous, but if we carefully derive the volume of the momentum hyperspace, we can apply a large number approximation (Stirling's Approximation) to arrive at an equation for the entropy for an ideal gas: 
+        \begin{equation}
+            \frac{S}{k_BN}=\ln\left[\frac{V}{N}\left(\frac{4\pi m U}{3h^2 N}\right)^{3/2}\right] + \frac{5}{2}
+        \end{equation}
+        An interesting observation is the existence of the factor of $3/2,$ which we saw was the same factor for the heat capacity: 
+        \begin{equation}
+            C_V = \frac{3}{2}nR.
+        \end{equation}
+        This is no coincidence, and it comes from the fact that there are \textit{three} degrees of freedom for the momentum of each particle, and that the momentum is proportional to $p \propto U^{1/2}.$ It turns out that we can extend this further if there are additional degrees of freedom (i.e. rotation), which is referred to as the equipartition theorem. 
+    \end{idea}
+    \item As temperature increases, particles shift to higher energy states. 
+    \begin{idea}
+        The Boltzmann factor is 
+        \begin{equation}
+            e^{-E/k_BT}
+        \end{equation}
+        and is proportional to the probability of finding a microstate at an energy of $E$. For example, if we view the atmosphere as an ideal gas, then the energy of a given particle would be $E=mgh$, so finding a particle at a height $h$ is proportional to $e^{-mgh/k_BT}.$ This actually gives the pressure change in the atmosphere, 
+        \begin{equation}
+            P = P_0 e^{-mgh/k_BT}
+        \end{equation}
+    \end{idea}
+\end{itemize}

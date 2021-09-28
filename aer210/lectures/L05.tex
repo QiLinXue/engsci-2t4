@@ -35,6 +35,31 @@
     \begin{equation}
         \dd{V} = \rho^2 \sin\phi \dd{\rho}\dd{\phi}\dd{\theta}
     \end{equation}
+    \begin{idea}
+        We can create a change of basis from $\hat{i},\hat{j},\hat{k}$ to $e_\rho$, $e_\theta$, and $e_\phi$ as follows: 
+        \begin{align}
+            e_\rho &= \sin\phi\cos\theta \hat{i} +\sin\phi\cos\theta\hat{j} +\cos\phi \hat{k} \\ 
+            e_\theta &= -\sin\theta \hat{i} + \cos\theta\hat{j} + 0\hat{k} \\ 
+            e_\phi &= \cos\phi\cos\theta \hat{i} + \cos\phi\sin\theta \hat{j} - \sin\theta \hat{k} 
+        \end{align}
+        which can be represented in the following transformation: 
+        \begin{equation}
+            [v]_\text{cartesian} = \begin{bmatrix}
+                \cos\theta\sin\phi & -\sin\theta & \cos\theta\cos\phi \\ 
+                \sin\theta\sin\phi & \cos\theta & \sin\theta\cos\phi \\ 
+                \cos\phi & 0 & -\sin\phi
+            \end{bmatrix}[v]_\text{spherical}
+        \end{equation}
+        That is, if you coordinates in the spherical basis, then you can use this transformation to get the coordinates in the cartesian basis. This means that at a particular $\theta$ and $\phi$, the unit vector $e_\rho = (1,0,0)$ maps to $(\cos\theta\sin\phi, \sin\theta\sin\phi, \cos\phi),$ which is what we expect. Let this transformation matrix be $M$. Since $M$ is composed of only unit vectors, the inverse is the transpose: 
+        \begin{equation}
+            [v]_\text{spherical} = \begin{bmatrix}
+                \cos\theta\sin\phi & \sin\theta\sin\phi & \cos\phi \\ 
+                -\sin\theta & \cos\theta & 0 \\ 
+                \cos\theta\cos\phi & \sin\theta\cos\phi & -\sin\phi 
+            \end{bmatrix}[v]_\text{cartesian}
+        \end{equation}
+        So any vector written in the cartesian basis can be written in terms of the spherical basis vectors via this transformation.
+    \end{idea}
     \item \textbf{Taylor Series for Two-Variable Functions:} Suppose we are given $f(x_0,y_0)$ and want to approximate $f(x_0+\Delta x,y_0+\Delta y).$ Suppose there projections on the $xy$ plane is $P$ and $Q$. We can parametrize the line segment $PQ$ as 
     \begin{align}
         x(t) = x_0 + t\Delta x \\ 
