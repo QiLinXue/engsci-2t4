@@ -45,7 +45,17 @@
 \usepackage{tikz} % Drawing capabilities
 \usetikzlibrary{shapes,arrows}
 \usepackage{pgfplots} % Plotting capabilities
-\pgfplotsset{compat=1.8}
+\pgfplotsset{compat=newest}
+
+\tikzset{decorated arrows/.style={
+ postaction={
+  decorate,
+  decoration={
+   markings,
+   mark=between positions 0 and 1 step 50mm with {\arrow[black]{stealth};}
+  }
+ },
+}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% COLORS %%%%%%%%%%%%%%%%%%%%%%%%%%%
