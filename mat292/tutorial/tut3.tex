@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{MAT292 \\ Tutorial 3 Solution}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+% \setlength\extrarowheight{20pt}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+\maketitle
+\begin{enumerate}
+    \item \begin{enumerate}
+              \item We have
+                    \begin{equation}
+                        \frac{dy}{dt}=r\left(1-\frac{y}{K}\right)y
+                    \end{equation}
+              \item Equilibrium occurs at $y=K.$
+              \item We have
+                    \begin{equation}
+                        \frac{dy}{dt} = r\left(1-\frac{y}{K}\right)y - H(y,t)
+                    \end{equation}
+          \end{enumerate}
+    \item \begin{enumerate}
+              \item The new ODE is
+                    \begin{equation}
+                        \frac{dy}{dt} = r\left(1-\frac{y}{K}\right)y - Ey
+                    \end{equation}
+              \item The dimensions of $H$ is fish/time and the units of $E$ is $[T]^{-1}.$
+              \item Equilibrium occurs when $\frac{dy}{dt}=0$, which occurs at
+                    \begin{equation}
+                        r - \frac{ry}{K} -E = 0 \implies y = \frac{r-E}{r/K}
+                    \end{equation}
+                    and $y=0.$
+                \item We can rewrite the derivative as $\frac{dy}{dt} = r-(r/K+E)y,$ such that the phase plot is a line. If $y$ decreases, then $dy/dt$ is positive which causes $y$ to increase. If $y$ increases, then $dy/dt$ is negative which causes $y$ to decrease. Therefore, it is stable.
+                
+                On the other hand, $y=0$ is unstable.
+                \item When the fish population stays constant, we want $y'=0$, so rearranging, we have 
+                \begin{equation}
+                    E = r-\frac{ry}{K}
+                \end{equation}
+                
+                % and $y''=0,$ so 
+                % \begin{equation}
+                %     \frac{d^2y}{dt^2} = r - \frac{2y}{K} - E = 0 
+                % \end{equation}
+                % so 
+                % \begin{equation}
+                %     E = r - \frac{2y}{K}
+                % \end{equation}
+                % \item Substituting in $y=\frac{r-E}{r/K}$, we get 
+                % \begin{equation}
+                %     E = r - 2\left(r-E\right) \implies E = r-2r+2E
+                % \end{equation}
+                % so 
+                % \begin{equation}
+                %     E = r.
+                % \end{equation}
+                \item We have $H(y,t)=Ey = E\left(\frac{r-E}{r/K}\right)$
+                \item We have $E=\frac{r}{2}$. This is a quadratic. 
+            \end{enumerate}
+            \item \begin{enumerate}
+                \item We have 
+                \begin{equation}
+                    \frac{dy}{dt} = r\left(1-\frac{y}{K}\right)y - h
+                \end{equation}
+                \item We use the quadratic equation 
+                \begin{equation}
+                    y = \frac{-r \pm \sqrt{r^2-4\left(-\frac{r}{K}\right)(-h)}}{-2r/K} = K\cdot\frac{r \pm \sqrt{r^2-4rh/K}}{2r}
+                \end{equation}
+                since $h<rK/4$, real solutions exist.
+                \item The quadratic is concave down so the first equilibrium is unstable and the second equilibrium is stable.
+                \item Same thing as above.
+            \end{enumerate}
+            \item \begin{enumerate}
+                \item If $h>rK/4$, then there are no equilibrium. The fish population will monotonically decrease.
+                \item At $h=rK/4$, there is only one rate of fishing such that the fish population will remain constant. There is no way for it to increase.
+                \item If we let $H(E) = \frac{rK}{4}$, then 
+                \begin{equation}
+                    E\left(\frac{r-E}{r/K}\right) = \frac{4K}{4}.
+                \end{equation}
+                We can solve for $E$ in terms of $r$ and $K$ to figure out the effort that represents the transition from sustainable to unsustainable fishing.
+                \item Trivially obvious.
+            \end{enumerate}
+\end{enumerate}
+
+\end{document}

@@ -1,4 +1,94 @@
 \section{Differentiability}
 \begin{itemize}
-    \item x
+    \item We look at how we can define derivatives in multi-variable functions, specifically in $\mathbb{R}^n$.
+    \begin{definition}
+        $f:\mathbb{R}^n\rightarrow \mathbb{R}^m$ is differentiable at $a$ if and only if
+        \begin{equation}
+            f(a+h) = f(a) + Lh + o(h)
+        \end{equation}
+        where $o(h) = \{e:\mathbb{R}^n\rightarrow \mathbb{R}^m : e(0)=0, \lim_{h\to 0} \frac{e(h)}{|h|} = 0\}$ and $L$ is a linear transformation, which can be written as a matrix. We have abused some notation here.
+    \end{definition}
+    \item Some facts: 
+    \begin{itemize}
+        \item If $f$ is constant, $f(x)=c$ for all $x$, then $F$ is differentiable anywhere in its domain, and $f'=0.$
+        \begin{proof}
+            We want to write
+            \begin{equation}
+                f(a+h) = f(a) + Lh + o(h). 
+            \end{equation}
+            If we let $L=0$ and $o(h)=0$, then we are just left with $C=C.$
+        \end{proof}
+        \item If $F$ is linear, say $F=L:\mathbb{R}^n\rightarrow \mathbb{R}^m,$ then $F$ is differentiable and $Df(a)=f.$
+        \begin{proof}
+            Since $f$ is linear, we have 
+            \begin{equation}
+                f(a+h) = f(a) + f(h) + 0
+            \end{equation}
+            Therefore, $Df(a)=f.$
+        \end{proof}
+        ]item Consider $s:\mathbb{R}^2 \rightarrow \mathbb{R}$ such that $s(x,y)=x+y.$ We have that $s$ is differentiable and $s'=s.$
+        
+        Note that the common name for this function is $+$, therefore $+'=+=\begin{pmatrix}
+            1 & 1
+        \end{pmatrix}$
+    \end{itemize}
+    \item \textbf{Claim:} If $f:\mathbb{R}^n\rightarrow \mathbb{R}^m$ and $g:\mathbb{R}^n\rightarrow \mathbb{R}^m$ are differentiable at $a$, then so is $f+g$ and $(f+g)'=f'+g'.$
+    \begin{proof}
+        Since $f$ and $g$ are differentiable, 
+        \begin{align}
+            f(a+h)&=f(a)+f'(a)h+e_1(h) \\ 
+            g(a+h)&=g(a)+g'(a)h+e_2(h)
+        \end{align}
+        Therefore, 
+        \begin{align}
+            (f+g)(a+h) &= f(a+h)+g(a+h) \\
+            &= f(a)+g(h)+(f'(a)+g'(a))h + e_1(h) + e_2(h) \\ 
+            &= (f+g)(h) + (f'(a)+g'(a))h + e_1(h)+e_2(h)
+        \end{align}
+        Since $o(h)$ is a vector space, we have $e_1(h)+e_2(h) \in o(h).$
+    \end{proof}
+    \begin{theorem}
+        Suppose $F:\mathbb{R}^n\rightarrow \mathbb{R}^m$ is differentiable at $a$ and $g:\mathbb{R}^m\rightarrow \mathbb{R}^p$ is differentiable at $\bar{a}=f(a)$, then $(g\circ f):\mathbb{R}^n\rightarrow \mathbb{R}^p$ is differentiable at $a$ and 
+        \begin{equation}
+            D(g\circ f)(a) = (Dg)(f(a)) \cdot (Df)(a).
+        \end{equation}
+        Alternatively, 
+        \begin{equation}
+            (g\circ f)'(a) = g'(f(a)) \cdot f'(a)
+        \end{equation}
+        where $\cdot$ denotes matrix multiplication. Note that we could restrict $f$ to some open $A \ni a$ and $g$ to some open $B \supset f(A).$
+    \end{theorem}
+    \begin{proof}
+        We know that $f(a+h)=f(a)+f'(a)h+e_1(h)$ and $g(\bar{a}+\bar{h})=g(\bar{a})+g'(\bar{a})\bar{h} + e_2(\bar{h}).$ Now, 
+        \begin{align}
+            (g\circ f)(a+h) &= g(f(a+h)) \\ 
+            &= g(\underbrace{f(a)}_{\bar{a}}+\underbrace{f'(a)h+e_1(h)}_{\bar{h}}) \\ 
+            &=g(\bar{a}) + g'(\bar{a})\bar{h} + e_2(\bar{h})
+        \end{align}
+        so the derivative is 
+        \begin{equation}
+            g'(f(a))f'(a)h.
+        \end{equation}
+        It is easy to check that $g'(\bar{a})e_1(h)+e_2(f'(a)h+e_1(h)) \in o(h).$ We can do this with a few lemmas.
+    \end{proof}
+    \begin{lemma}
+        If $A$ is a matrix and $e\in o(h)$ then $Ae \in o(h).$ Note that the two $o(h)$ are different since they may live in different dimensions.        
+    \end{lemma}
+    \begin{lemma}
+        If for small $h,$ there exists some $C$ such that $|\lambda(h)| < C|h|$ where $\lambda(h) = Lh + e(h).$ Then $e\circ \lambda$ is $o(h)$.
+    \end{lemma}
+    Showing these two lemmas are true will allow us to finish the proof.
+    \begin{proof}
+        Note that the first lemma is true since we can find constant $C_1$ such that $|Ah| \le C_1|h|.$ This is true for all $h$ and this is proven in assignment 1.
+        \vspace{2mm}
+
+        First, we show that $(e\circ \lambda)(0) = 0$ and it remains to show that 
+        \begin{equation}
+            \lim_{h\to 0} \frac{e(\lambda(h))}{|h|} = 0,
+        \end{equation}
+        which is equivalent to saying that $\forall \epsilon > 0, \exists \delta > 0$ s.t. $|h| <\delta \implies |e(\lambda(h))| \le \epsilon |h|.$ To do this, suppose $|\lambda(h)| \le C|h|$ on $B_{\delta_2}(0)$ and $|e(y)| \le \frac{\epsilon}{C}|y|$ on $B_{\delta_1}(0).$ Set $\delta=\min\left\{\frac{\delta_1}{C},\delta_2\right\}$ and get for $|h| < \delta$, 
+        \begin{equation}
+            e(\lambda(h)) \le \frac{e}{c}|\lambda(h)| \le c|h|
+        \end{equation}
+    \end{proof}
 \end{itemize}

@@ -65,7 +65,7 @@
               \end{equation}
               For example, the phase portrait looks like
               \begin{center}
-                \def\length{sqrt((2*x-2*y+300)^2+(-1*x+3*y+300)^2)}
+                  \def\length{sqrt((2*x-2*y+300)^2+(-1*x+3*y+300)^2)}
 
                   \begin{tikzpicture}
 
@@ -133,30 +133,96 @@
               solves this equation as well. However, what is more interesting is that any linear combination of these two solutions is also a solution: and thus it is more general.
           \end{example}
           \begin{theorem}
-              Suppose $\bm{\phi_1}$ and $\bm{\phi_2}$ are solutions to $\bm{x}'=A\bm{x}$. Then for any coefficients $c_1$ and $c_2$, this is also a solution: 
+              \textbf{Superposition Principle:} Suppose $\bm{\phi_1}$ and $\bm{\phi_2}$ are solutions to $\bm{x}'=A\bm{x}$. Then for any coefficients $c_1$ and $c_2$, this is also a solution:
               \begin{equation}
                   \bm{\phi}(t) = c_1\bm{\phi_1}(t) + c_2\bm{\phi_2}(t)
               \end{equation}
+              Alternatively, the set of solutions to $\bm{x}'=A\bm{x}$ is a subspace of functions.
           \end{theorem}
+    \item It turns out that the subspace of solutions to $\bm{x}'=A\bm{X}$ is always two-dimensional if it is a system of two equations.
           \begin{definition}
-              Two functions $\bm{\phi_1}$ and $\bm{\phi_2}$ are linearly independent if and only if 
+              Two functions $\bm{\phi_1}$ and $\bm{\phi_2}$ are linearly independent if and only if
               \begin{equation}
                   c_1\bm{\phi_1}+c_2\bm{\phi_2} = 0 \implies c_1=c_2 = 0.
               \end{equation}
           \end{definition}
           \begin{example}
               We can show that $\bm{\phi_1}=\begin{bmatrix}
-                  e^t \\ e^{-t}
-              \end{bmatrix}$ and $\bm{\phi_2} = \begin{bmatrix}
-                  \sin t \\ e^{-t}
-              \end{bmatrix}$ are linearly independent because 
+                      e^t \\ e^{-t}
+                  \end{bmatrix}$ and $\bm{\phi_2} = \begin{bmatrix}
+                      \sin t \\ e^{-t}
+                  \end{bmatrix}$ are linearly independent because
               \begin{equation}
                   c_1\bm{\phi_1}+c_2\bm{\phi_2} = 0 \implies \begin{cases}
-                      c_1e^t + c_2\sin t = 0 \\ 
+                      c_1e^t + c_2\sin t = 0 \\
                       c_1e^{-t} + c_2e^{-t} = 0
                   \end{cases}
               \end{equation}
-              This linear system gives 
+              This linear system gives
               $c_1=c_2=0.$
           \end{example}
+          \begin{theorem}
+              The solutions $\bm{\phi_1}(t) =\begin{bmatrix}
+                      x_{11}(t) \\ x_{21}(t)
+                  \end{bmatrix}$ and $\bm{\phi_2}(t) =\begin{bmatrix}
+                      x_{12}(t) \\ x_{22}(t)
+                  \end{bmatrix}$  of $\bm{x}'=A\bm{x}$ are linearly independent if and only if the Wronskian is nonzero:
+              \begin{equation}
+                  W[\bm{\phi_1},\bm{\phi_2}] = \det\begin{bmatrix}
+                      x_{11}(t) & x_{12}(t) \\
+                      x_{21}(t) & x_{22}(t)
+                  \end{bmatrix} \neq 0
+              \end{equation}
+              for all $t\in I$.
+          \end{theorem}
+          \begin{example}
+              Let's solve $\bm{\phi}'=A\bm{\phi}$ where $A=\begin{bmatrix}
+                      -1/2 & 1/4 \\
+                      1/2        \\ -3/4
+                  \end{bmatrix}.$ We can use an educated guess: $\bm{\phi} = e^{\lambda t}\bm{v}$ for some vector $\bm{v}$. If we substitute this in, we get
+              \begin{equation}
+                  A\bm{\phi} = \lambda \bm{\phi}
+              \end{equation}
+              We can solve for the eigenvalue and eigenvectors to get 
+              \begin{align}
+                  \bm{\phi_1} &= e^{-(1/4) t} \begin{bmatrix}
+                      1 \\ 1
+                  \end{bmatrix} \\ 
+                  \bm{\phi_2} &= e^{-t}\begin{bmatrix}
+                      -1/2 \\ 1
+                  \end{bmatrix}
+              \end{align}
+              Finally, we need to check the Wronskian is nonzero (it is). The general solution is thus: 
+              \begin{equation}
+                  x(t) = \begin{bmatrix}
+                      1200 \\ 1200
+                  \end{bmatrix} + c_1e^{-(1/4)t}\begin{bmatrix}
+                      1\\ 1
+                  \end{bmatrix} + c_2e^{-t}\begin{bmatrix}
+                      -1/2 \\ 1
+                  \end{bmatrix}
+              \end{equation} 
+          \end{example}
+          \item We can look at some casework where we have two distinct eigenvalues: 
+          \begin{itemize}
+              \item $\lambda_1,\lambda_2 < 0$
+              \begin{itemize}
+                  \item Critical Point(s): $(0,0)$ only.
+                  \item Stable equilibrium 
+              \end{itemize}
+              \item $\lambda_1,\lambda_2 > 0$
+              \begin{itemize}
+                  \item Critical Point(s): $(0,0)$ only.
+                  \item Unstable Equilibrium
+              \end{itemize}
+              \item $\lambda_1 > 0 > \lambda_2$
+              \begin{itemize}
+                  \item 
+              \end{itemize}
+              \item $\lambda_1 = 0$, $\lambda_2 < 0$
+              \begin{itemize}
+                  \item Equilibrium: The line associated with $\lambda_1=0.$
+              \end{itemize}
+          \end{itemize}
+          Note that the $\lambda_1 =0, \lambda_2>0$ case is not covered, but it is similar to the fourth case.
 \end{itemize}
