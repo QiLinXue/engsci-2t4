@@ -91,4 +91,125 @@
             e(\lambda(h)) \le \frac{e}{c}|\lambda(h)| \le c|h|
         \end{equation}
     \end{proof}
+    \begin{example}
+        Suppose we wish to compute the differential of $x/y$ using the chain rule. Let $g(x,y) = \frac{x}{y}$ where $g:\mathbb{R}^2_{y\neq 0} \rightarrow \mathbb{R}$. We can then write:
+        \begin{equation}
+            \frac{x}{y} = e^{\ln x - \ln y}
+        \end{equation}
+        so this is the mapping 
+        \begin{equation}
+            \mathbb{R}^2_{x,y\neq 0} \xrightarrow[f_1]{\begin{pmatrix}
+                x \\ y
+            \end{pmatrix}\mapsto \begin{pmatrix}
+                \ln x \\ \ln y
+            \end{pmatrix}} \mathbb{R}^2_{\xi,\eta} \xrightarrow[f_2]{\begin{pmatrix}
+                \xi \\ \eta
+            \end{pmatrix}\mapsto \begin{pmatrix}
+                \xi - \gamma
+            \end{pmatrix}}\mathbb{R}_{\gamma} \xrightarrow[f_3]{\gamma \mapsto e^\gamma}\mathbb{R}.
+        \end{equation}
+        We can then write $g = f_3 \circ (f_2 \circ f_1).$ Therefore: 
+        \begin{equation}
+            g' = f_3'(f_2(f_1(x,y))) \cdot f_2'(f_1(x,y)) \cdot f_1'(x,y)
+        \end{equation}
+        We can start computing the derivatives. We have
+        \begin{equation}
+            f_3' = \begin{pmatrix}
+                e^\gamma
+            \end{pmatrix} = \begin{pmatrix}
+                e^{\ln x-\ln y}
+            \end{pmatrix} = \begin{pmatrix}
+                x/y
+            \end{pmatrix}
+        \end{equation}
+        and 
+        \begin{equation}
+            f_2' = (-)' = (-) = \begin{pmatrix}
+                1 & -1
+            \end{pmatrix}
+        \end{equation}
+        and using the claim from directly after,
+        \begin{equation}
+            f_1' = \begin{pmatrix}
+                \left[f_{11}(x,y)=\ln x\right]' \\ 
+                \left[f_{12}(x,y)=\ln y\right]'
+            \end{pmatrix} = \begin{pmatrix}
+                1/x & 0 \\ 
+                0 & 1/y
+            \end{pmatrix}
+        \end{equation}
+        Note that $f_{11}$ is itself a composition: 
+        \begin{equation}
+            f_{11}: \mathbb{R}_{x,y}^2 \xrightarrow[\pi_1]{\begin{pmatrix}
+                x \\ y
+            \end{pmatrix}\mapsto \begin{pmatrix}
+                x
+            \end{pmatrix}} \mathbb{R}_x \xrightarrow[\ln]{x \mapsto \ln x} \mathbb{R}.
+        \end{equation}
+        Therefore: 
+        \begin{equation}
+            f_11' = \pi_1'(\ln x) \cdot \ln'(x) = \pi_1 \cdot \frac{1}{x} = \begin{pmatrix}
+                \frac{1}{x} & 0.
+            \end{pmatrix}
+        \end{equation}
+        Putting it altogether,
+        \begin{equation}
+            g' = \begin{pmatrix}
+                x/y
+            \end{pmatrix}\begin{pmatrix}
+                1 & -1
+            \end{pmatrix}\begin{pmatrix}
+                1/x & 0 \\ 
+                0 & 1/y
+            \end{pmatrix} = \begin{pmatrix}
+                x/y
+            \end{pmatrix}\begin{pmatrix}
+                1/x - 1/y
+            \end{pmatrix} = \begin{pmatrix}
+                \frac{1}{y} - \frac{x}{y^2}
+            \end{pmatrix}
+        \end{equation}
+    \end{example}
+    \item \textbf{Claim 1:} Suppose $F=\begin{pmatrix}
+        F_1 \\ \vdots \\\ F_m
+    \end{pmatrix}$ so each $F_i:\mathbb{R}^n \rightarrow \mathbb{R}$ and $a = \begin{pmatrix}
+        a_1 \\ \vdots \\ a_n
+    \end{pmatrix}.$ $F$ is differentiable if and only if each of $F_i$ is differentiable, and then
+    \begin{equation}
+        F'(a) = \begin{pmatrix}
+            F_1'(a) \\ 
+            \vdots \\ 
+            F_m'(a)
+        \end{pmatrix}
+    \end{equation} 
+    \begin{proof}
+        $\impliedby:$ Look at: 
+        \begin{align}
+            f(a+h)-f(a) &= \begin{pmatrix}
+                f_1(a+h)-f_1(a) \\ \vdots \\ f_m(a+h) - f_m(a)
+            \end{pmatrix} \\ 
+            &= \begin{pmatrix}
+                f_1'(a)\cdot h + e_1(h) \\ 
+                \vdots \\ 
+                f_m'(a) \cdot h + e_m(h)
+            \end{pmatrix} \\ 
+            &= \begin{pmatrix}
+                f_1'(a) \\ \vdots \\ f_m'(a)
+            \end{pmatrix}\cdot h + \begin{pmatrix}
+                e_1(h) \\ \vdots \\ e_m(h)
+            \end{pmatrix}
+        \end{align}
+        All that remains to show is that a column vector consisting of tiny functions is itself a tiny function. Finally, the other implication is easy.
+    \end{proof}
+    \item Some exercises: 
+    \begin{itemize}
+        \item Compute $P(x,y) = x\cdot y$ using chain rule and directly.
+        \item Show that 
+        \begin{equation}
+            \left(\frac{f(t)}{g(t)}\right)' = \frac{f'g-g'f}{g^2}
+        \end{equation}
+    \end{itemize}
+    \begin{definition}
+        Suppose $f:\mathbb{R}^n_{x_i}\rightarrow \mathbb{R}.$ Define $D_if = \partial_i f = \partial_{x_i} = \frac{\partial f}{\partial x_i} = f_i = f_{x_i}.$
+    \end{definition}
 \end{itemize}

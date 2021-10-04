@@ -1,0 +1,173 @@
+\section{Line Integrals, Fundamental Theorem, Green's Theorem, and Parametric Surfaces}
+\begin{itemize}
+    \item Suppose we have a line in $\mathbb{R}^3$ and we wish to evaluate a function along this line.
+    \item We can break this line into segments $\Delta s_i$ and sum up 
+    \begin{equation}
+        f(x_i^*,y_i^*)\Delta s_i
+    \end{equation}
+    Taking the limit, we get
+    \begin{equation}
+        \int\limits_C f(x,y) \dd{s}
+    \end{equation}
+    \item Taking $f(x,y)=1$ gives the length of the line segment $C$. 
+    \item We need to assume that
+    \begin{itemize}
+        \item $f$ is continuous
+        \item $C$ is smooth ($\vec{r}(t)$ is continuous and $\vec{r}'(t) \neq 0$ except at endpoints)
+    \end{itemize}
+    and have the curve be parametrized 
+    \begin{equation}
+        \vec{r}(t) = x(t)\hat{i}+y(t)\hat{j}
+    \end{equation}
+    so we can write 
+    \begin{equation}
+        \dd{s} = \sqrt{x'(t)^2 + y'(t)^2}\dd{t}.
+    \end{equation}
+    \begin{example}
+        Suppose we wish to find the center of mass of a semi-circular length of wire. The length density is to be taken as constant. Note that $\bar{x}=0$ by symmetry. The moment about the $x$ axis is then: 
+        \begin{equation}
+            m\bar{y} = \int\limits_C y\rho \dd{s}.
+        \end{equation}
+        We can parametrize $\vec{r}(t) = a\cos t \hat{i} + a\sin t\hat{j}$ and $\dd{s} = a\dd{t}.$ Therefore: 
+        \begin{equation}
+            \bar{y} = \frac{1}{m}\int\limits_C y\rho \dd{s} = \frac{1}{m}\int_0^\pi a\sin t\rho a \dd{t} = \frac{2a}{\pi}.
+        \end{equation}
+    \end{example}
+    \item In the special case where $C$ is parallel to the $x$ axis, then we can reduce it to the familiar single-variable integral.
+    \item \textbf{Three-Dimensions:} We can easily extend it to three dimensions: 
+    \begin{equation}
+        \int_C f(x,y,z) \dd{s} = \int_a^b f(\vec{r}(t)) \cdot \lVert \vec{r}'(t)\rVert \dd{t} 
+    \end{equation}
+    \item For a piecewise smooth curve, we need to break up the line integral into several smaller ones.
+    \begin{idea}
+        Let $f(x,y)$ be a scalar. Then $\int_C f(x,y) \dd{s} = \int_{-C}f(x,y) \dd{s}$. This is because $\dd{s}$ is always positive.
+    \end{idea}
+    \item Suppose we have a vector field 
+    \begin{equation}
+        \vec{F}(x,y,z) = P(x,y,z)\hat{i} + Q(x,y,z)\hat{j} + R(x,y,z)\hat{k} = \vec{F}(\vec{r})
+    \end{equation}
+    \item The work done along a curve $C$ is given by 
+    \begin{equation}
+        \int\limits_C \vec{F}(x,y,z)\cdot \vec{T}(x,y,z)\dd{s} = \int_a^b \vec{F}(\vec{r}(t)) \cdot \vec{r}'(t) \dd{t} = \int\limits_C \vec{F}\cdot \vec{r}
+    \end{equation}
+    \item NOte that if we have $\vec{r}(t)=x(t)\hat{i}+y(t)\hat{j} + z(t)\hat{k}$ where $a\le t\le b$, then 
+    \begin{equation}
+        \frac{d\vec{r}(t)}{dt} = \frac{dx}{dt}\hat{i} + \frac{dy}{dt}\hat{j} + \frac{dz}{dt} \hat{k}
+    \end{equation}
+    so 
+    \begin{align}
+        \int\limits_C \vec{F}\cdot \dd{\vec{r}} &= \vec{F}(\vec{r}(t))\cdot \vec{r}'(t) \dd{t} \\ 
+        &= \int_a^b (P\hat{i}+Q\hat{j}+R\hat{k})\cdot \left(\frac{dx}{dt}\hat{i} + \frac{dy}{dt}\hat{j} + \frac{dz}{dt}\hat{k}\right)\dd{t} \\ 
+        &= \int\limits_C P \dd{x} + \int\limits_C Q \dd{y} + \int\limits_C R \dd{z}
+    \end{align}
+    \begin{definition}
+        A vector field $\vec{F}$ is called a conservative vector field if it is the gradient of some scalar function $\vec{\nabla} f.$ In this situation, the scalar function is called a potential function of $\vec{F}$.
+    \end{definition}
+    \item Suppose that $\vec{F}(x,y,z)=\vec{\nabla}f(x,y,z)$ and let $C$ be a smooth curve given by $\vec{r}(t) = x(t)\hat{i} + y(t)\hat{j} + z(t)\hat{k}$ where $a\le t\le b.$ Then 
+    \begin{align}
+        \vec{\nabla}f(\vec{r(t)})\cdot \vec{r}'(t) &= \left(\frac{\partial f}{\partial x}\hat{i} + \frac{\partial f}{\partial y}\hat{j} + \frac{\partial f}{\partial z}\hat{k}\right)\cdot \left(\frac{dx}{dt}\hat{i} + \frac{dy}{dt}\hat{j} + \frac{dz}{dt}\hat{k}\right) \\ 
+        &= \frac{\partial f}{\partial x}\frac{dx}{dt} + \frac{\partial f}{\partial y}\frac{dy}{dt} + \frac{\partial f}{\partial z}\frac{dz}{dt} \\ 
+        &= \frac{df}{dt}.
+    \end{align}
+    Therefore, the line integral becomes 
+    \begin{equation}
+        \int_a^b \vec{\nabla}f(\vec{r}(t))\cdot \vec{r}'(t) \dd{t} = \int_a^b \frac{d}{dt} (f(\vec{r}(t)))\dd{t} = f(\vec{r}(b))-f(\vec{r}(a))
+    \end{equation}
+    \begin{theorem}
+        The \textbf{fundamental theorem of line integrals} tells us that
+        \begin{equation}
+            \int\limits_C \vec{\nabla}f\cdot \dd{\vec{r}} = f(\vec{r}(b))-f(\vec{r}(a))
+        \end{equation}
+    \end{theorem}
+    \item The reverse is also true. If $\oint\limits_C \vec{F} \cdot \dd{r} = 0$ for every piecewise smooth closed curve $C$ over a domain $D$, then $\int\limits_{C_1}\vec{F}\cdot \dd{\vec{r}}$ is path independent for any piecewise smooth path $C_1$ in $D$: 
+    \begin{equation}
+        \oint\limits_C \vec{F} \cdot \dd{\vec{r}} = 0 \implies \int\limits_{C_1}\vec{F}\cdot{\vec{r}} + \int\limits_{C_2}\vec{F}\cdot \dd{\vec{r}} = 0
+    \end{equation}
+    where 
+    $C=C_1\cup C_2$.
+    \begin{theorem}
+        Given a vector field $\vec{F}$, if $\int\limits_C \vec{F}\cdot \dd{\vec{r}}$ is path independent for every piecewise smooth curve $C$ in the domain of $\vec{F}$, then $\vec{F}$ is a conservative vector field and therefore there exists a scalar function $f$ such that $\vec{\nabla}f=\vec{F}$.
+    \end{theorem}
+    \item If one of the following is true, then the other two are also true: 
+    \begin{itemize}
+        \item $\vec{F}$ is conservative ($\vec{F}=\vec{\nabla}F$)
+        \item $\oint\limits_C \vec{F}\cdot \dd{\vec{r}} = 0$ for every piecewise smooth closed curve.
+        \item $\int\limits_C \vec{F}\cdot \dd{\vec{r}}$ is path independent for all piecewise smooth $C$ between any two fixed points.
+    \end{itemize}
+    \item Suppose we have $\vec{F}(x,y)=P(x,y)\hat{i} + Q(x,y)\hat{j}.$ We know $\vec{F}$ is conservative if and only if 
+    \begin{align}
+        \vec{F} &= \vec{\nabla}f \\ 
+        P\hat{i}+Q\hat{j} &= \frac{\partial f}{\partial x}\hat{i} + \frac{\partial f}{\partial y}\hat{j}
+    \end{align}
+    This gives $P=\frac{\partial f}{\partial x}$ and $Q =\frac{\partial f}{\partial y}$. Note that \begin{equation}
+        \frac{\partial P}{\partial y}=\frac{\partial ^2 f}{\partial y\partial x}=\frac{\partial^2 f}{\partial x\partial y}=\frac{\partial Q}{\partial x.}
+    \end{equation}
+    This leads to our next theorem: 
+    \begin{theorem}
+        If $\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x},$ then $\vec{F}=\vec{\nabla} f$.
+    \end{theorem}
+    \item We introduce some terminology to prelude \textbf{Green's Theorem}
+    \begin{definition}
+        A simple curve is a curve that does not intersect itself, except at its endpoints. 
+    \end{definition}
+    \begin{definition}
+        A curve has positive orientation if it traverses counterclockwise, and negative if you traverse it clockwise.
+    \end{definition}
+    \begin{definition}
+        Let $C$ be a positively oriented, piecewise-smooth simple closed curve in the plane and let $R$ be the region bounded by $C$. IF $P(x,y)$ and $Q(x,y)$ are continuous and have continuous first partial derivatives throughout the region $R$, then 
+        \begin{equation}
+            \oint\limits_C P(x,y)\dd{x} + Q(x,y)\dd{y} = \iint\limits_R \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right) \dd{x}\dd{y}
+        \end{equation}
+    \end{definition}
+    \begin{example}
+        Let's verify Green's Theorem for the integral $\oint\limits_C y\dd{x}-x\dd{y}$ where $C$ is the curve $C:x^2+y^2+1$ traversed counterclockwise.
+        \vspace{2mm}
+
+        \textit{Method 1:} Let us first check if $\vec{F}=y\hat{i}-x\hat{j}$ is conservative. However, $P_y=1$ and $Q_x=-1$ so it is not conservative.
+        \vspace{2mm}
+        
+        \textit{Method 2:} We have $\vec{r}(t)=\cos t\hat{i}+\sin t\hat{j}$ and 
+        \begin{equation}
+            \oint \vec{F}\cdot \dd{\vec{r}} = \int_{t=0}^{2\pi}\vec{F}(\vec{r}(t)) \cdot \vec{r}'(t) \dd{t} = \int_0^{2\pi} (\sin t\hat{i}-\cos t\hat{j})\cdot (-\sin t\hat{i}+\cos t\hat{j}) \dd{t} = -2\pi 
+        \end{equation}
+        \vspace{2mm}
+
+        \textit{Method 3:} Using Green's Theorem, we have 
+        \begin{equation}
+            \oint\limits_C P\dd{x} + Q\dd{y} = \iint\limits_R (Q_x-P_y)\dd{A} = \iint\limits_R (-1-1) \dd{A} = -2\iint\limits_R\dd{A} = -2(\pi \cdot 1^2)
+        \end{equation}
+    \end{example}
+    \begin{warning}
+        Green's Theorem is only true for curves with positive orientations. If the curve has a negative orientation, then we need to include a factor of $-1$.
+    \end{warning}
+    \item Curves can be parametrized by a single parameter. Similarly, surfaces can be parametrized by two parameters: 
+    \begin{equation}
+        \vec{r}(u,v) = x(u,v)\hat{i} + y(u,v)\hat{j} + z(u,v)\hat{k}
+    \end{equation}
+    \item The easiest way to parametrize a surface $S:z=f(x,y)$ is to let $x=u,y=v,z=f(u,v)$ to get 
+    \begin{equation}
+        \vec{r}(u,v)=u\hat{i}+v\hat{j}+f(u,v)\hat{k}
+    \end{equation}
+    \begin{example}
+        We can parametrize an upper hemisphere given by the equation $x^2+y^2+z^2=a^2$. We get 
+        \begin{equation}
+            \vec{r}(u,v) = u\hat{i}+v\hat{j} + \sqrt{a^2-u^2-v^2}\hat{k}
+        \end{equation}
+        Similarly in spherical coordinates, we can parametrize it as $\rho= a$, $0\le \theta \le 2\pi$, and $0\le \phi \le \pi/2$.
+    \end{example}
+    \item \textbf{Tangent Planes:} Let $S$ be a surface parametrized by the differentiable vector function $\vec{r}=\vec{r}(u,v)=x(u,v)\hat{i}+y(u,v)\hat{j} + z(u,v)\hat{k}$ where $(u,v) \in D.$ Then: 
+    \begin{align}
+        \vec{r}_v(u_0,v_0) &= \frac{\partial \vec{r}(u,v)}{\partial v}\bigg|_{(u_0,v_0)} \\ 
+        \vec{r}_u(u_0,v_0) &= \frac{\partial \vec{r}(u,v)}{\partial u}\bigg|_{(u_0,v_0)}
+    \end{align}
+    are the tangent vector to $C_1 = \vec{r}(u_0,v)$ and $C_2=\vec{r}(u,v_0)$, respectively.
+    \begin{definition}
+        For every point on a surface $S$, if $\vec{r}_u\times \vec{r}_v \neq \vec{0}$, then such a surface is called a smooth surface. Then $\vec{r}_u(u_0,v_0)\times \vec{r}_v(u_0,v_0)$ is perpendicular to the surface at point $P$.
+    \end{definition}
+    \begin{theorem}
+        The surface area is given by 
+        \begin{equation}
+            S = \iint\limits_D \lVert \vec{r}_u \times \vec{r}_v \rVert \dd{u}\dd{v}
+        \end{equation}
+    \end{theorem}
+\end{itemize}
