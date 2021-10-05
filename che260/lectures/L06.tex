@@ -1,0 +1,244 @@
+\section{Isentropic Processes, Bernoulli's Equation, and Phase Change}
+\begin{itemize}
+    \item For an ideal gas with constant specific heats, 
+    \begin{equation}
+        \Delta s = s_2- s_1 = c_v\ln\frac{T_2}{T_1} + R\ln\frac{v_2}{v_1}
+    \end{equation}
+    \item For an isentropic process $\Delta s=0$, we get 
+    \begin{equation}
+        \frac{T_2}{T_1} = \left(\frac{v_1}{v_2}\right)^{R/c_v}
+    \end{equation}
+    Since $c_p-c_v=R$ and $\gamma = \frac{c_p}{c_v}$, so 
+    \begin{equation}
+        \boxed{\frac{T_2}{T_1} = \left(\frac{v_1}{v_2}\right)^{\gamma-1}}
+    \end{equation}
+    Similarly, we have 
+    \begin{equation}
+        \boxed{\frac{T_2}{T_1} = \left(\frac{P_2}{P_1}\right)^{\frac{\gamma-1}{\gamma}}}
+    \end{equation}
+    and finally 
+    \begin{equation}
+    \boxed{\frac{P_2}{P_1}=\left(\frac{v_1}{v_2}\right)^\gamma}
+    \end{equation}
+    and gives $Pv^\gamma = \text{constant}.$
+    \item If specific heats are not constant, then 
+    \begin{equation}
+        \Delta s = s^0(T_2)-S^0(T_1)-R\ln\frac{P_2}{P_1}
+    \end{equation}
+    where 
+    \begin{equation}
+        s^0(T) = \int_{T_\text{ref}}^T c_p(T) \frac{\dd{T}}{T}.
+    \end{equation}
+    For an isentropic process $\Delta s=0$, we get 
+    \begin{equation}
+        s^0(T_2)=s^0(T_1)+R\ln\frac{P_2}{P_1}
+    \end{equation}
+    \item We can define relative pressure as
+    \begin{equation}
+        P_r(T) = \exp\left(\frac{s^0(T)}{R}\right)
+    \end{equation}
+    Similarly, we can also define 
+    \begin{equation}
+        v_r = \frac{RT}{P_r}
+    \end{equation}
+    \item For a reversible compression or expansion, we have 
+    \begin{equation}
+        \delta w = -P \dd{v}.
+    \end{equation}
+    For an internally reversible process, we then have 
+    \begin{equation}
+        \delta q = \dd{u} + P \dd{v}.
+    \end{equation}
+    From Gibb's Equation, we have 
+    \begin{equation}
+        \dd{s} = \frac{1}{T}\dd{u} + \frac{P}{T}\dd{v} = \frac{1}{T}(\dd{u}+P\dd{v}) = \left(\frac{\delta q}{T}\right)_\text{int rev}
+    \end{equation}
+    \item Multiplying by the system mass, we have 
+    \begin{equation}
+        \dd{S} = \left(\frac{\delta Q}{T}\right)_\text{int rev}
+    \end{equation}
+    so the change in entropy is 
+    \begin{equation}
+        \Delta S = \int_1^2 \frac{\delta Q}{T}.
+    \end{equation}
+    For a thermal reservoir with $T$ constant, this becomes $\Delta S = \frac{Q_{12}}{T}$ and the rate becomes 
+    \begin{equation}
+        \frac{dS}{dt} = \frac{\dot{Q}_\text{int rev}}{T}
+    \end{equation}
+    \item For an irreversible process, we can write 
+    \begin{equation}
+        \Delta S = \int_1^2 \frac{\delta Q}{T} + S_\text{gen}
+    \end{equation}
+    Entropy can only be generated, not destroyed, so $S_\text{gen} >0$.
+    \begin{idea}
+        The area under a T-S curve gives the heat added for a reversible process.
+    \end{idea}
+    \item \textbf{Entropy Balances:} Note that entropy can be transferred to or from a control mass. It can also be generated within the system due to irreversibilities. 
+    \item The rate of entropy transfer is 
+    \begin{equation}
+        \frac{dS}{dt} = \dot{S}_\text{in} - \dot{S}_\text{out} + \dot{S}_\text{gen}
+    \end{equation}
+    At steady state, $\frac{dS}{dt}=0$, and for an internally reversible system, $\dot{S}_\text{gen}=0$.
+    \item For a control mass, the only way to transfer entropy is with heat. Therefore 
+    \begin{equation}
+        \dot{S}_\text{heat} = \frac{\dot{Q}_j}{T_j}
+    \end{equation}
+    and 
+    \begin{equation}
+        \frac{dS}{dt} = \sum_j \frac{\dot{Q}_j}{T_j}+\dot{S}_\text{gen}
+    \end{equation}
+    \item The entropy entering is 
+    \begin{equation}
+        \dot{S}_\text{mass,in}=\dot{m}_is_i
+    \end{equation}
+    and the entropy exiting is 
+    \begin{equation}
+        \dot{S}_\text{mass,out}=\dot{m}_es_e.
+    \end{equation} 
+    This then becomes 
+    \begin{equation}
+        \frac{dS}{dt} = \sum_j\frac{\dot{Q}_j}{T_j}+\sum_i \dot{m}_is_i - \sum_i \dot{m}_es_e + \dot{S}_\text{gen}
+    \end{equation}
+    \begin{idea}
+        We can simplify this with various assumptions
+        \begin{itemize}
+            \item At steady state, we have $\frac{dS}{dt}.$
+            \item If we only have one inlet and outlet, we have $\dot{m}_i=\dot{m}_e=\dot{m}$.
+            \item If adiabatic, we have $\dot{Q}_j=0$.
+            \item If reversible, we have $s_i=s_e$.
+        \end{itemize}
+    \end{idea}
+    \item \textbf{Analyzing Steady Flow Devices:} When asked for the \textit{maximum work,} we should assume 
+    \begin{itemize}
+        \item heat losses are low, so \textbf{adiabatic}
+        \item all other losses, so \textbf{reversible}
+    \end{itemize}
+    Therefore, maximum work occurs when the process is isentropic.
+    \item If we know $P,T$ of the input and output. We can then calculate $s_1(P_1,T_1)$, $s_2(P_2,T_2)$, and set $s_1=s_2$.
+    \item \textbf{Isobars:} It is helpful to draw isobars on a T-S diagram, which are lines where pressure is constant. We get: 
+    \begin{equation}
+        \frac{T_2}{T_1} = \exp\left(\frac{\Delta s}{c_p}\right)
+    \end{equation}
+    Note that temperature increases exponentially with increase in entropy. Therefore, isobars are exponential lines.
+    \item We can then draw a line on the $S-T$ diagram representing our process between two isobars. 
+    \item The work done by an isentropic turbine is thus 
+    \begin{equation}
+        \dot{W}_\text{t,s} = \dot{m}(h_{2s}-h_1) = \dot{m}c_p(T_{2s}-T_1)
+    \end{equation}
+    Note that the $2s$ represents the final temperature given an isentropic process.
+    \item If the process was irreversible, the final entropy would be higher since entropy is generated. 
+    \item The work done by an irreversible turbine is
+    \begin{equation}
+        \dot{W}_t = \dot{m}c_p(T_2-T_1)
+    \end{equation}
+    where $\dot{W}_t$ is the actual work output, which will always be less.
+    \item The turbine efficiency is
+    \begin{equation}
+        \eta = \frac{\text{actual work output}}{\text{ideal work output}} = \frac{\dot{W}_t}{\dot{W}_{t,s}}=\frac{h_2-h_1}{h_{2s}-h_1}
+    \end{equation}
+    and is typically around $70-90\%$.
+    \begin{example}
+        Suppose we have a nozzle. Assume that $v_2 \gg v_1$. For an isentropic nozzle, exit velocity is $v_{2s}$ and for a real nozzle, exit velocity is $v_s$.  The nozzle efficiency is written in terms of kinetic energy: 
+        \begin{equation}
+            \eta_n = \frac{v_2^2}{v_{2s}^2}
+        \end{equation}
+    \end{example}
+    \item For a compressor, we have 
+    \begin{equation}
+        \eta_c = \frac{h_{2s}-h_1}{h_2-h_1}.
+    \end{equation}
+    Remember that an ideal compressor needs less work.
+    \item Let's look at flow. Incompressible flow tells us that $\Delta s= c_\text{avg} \ln\frac{T_2}{T_1}$ and isentropic flow tells us that $\Delta s=0$.
+    \begin{idea}
+        Isentropic and incompressible flow is isothermal.
+    \end{idea}
+    \item For incompressible substances, we have $\Delta h= c(T_2-T_1)+v(P_2-P_1)$. For an isothermal process, we have 
+    \begin{equation}
+        h_2-h_1 = v(P_2-P_1) = \frac{P_2-P_1}{\rho}.
+    \end{equation}
+    We can then write an energy balance: 
+    \begin{equation}
+        \dot{Q} + \dot{W} + \dot{m}(h_1+\frac{1}{2}v_1^2+gz_1)=\dot{m}(h_2+\frac{1}{2}v_2^2+gz_2).
+    \end{equation}
+    Assuming no work or energy transfer (isentropic and incompressible), we get 
+    \begin{equation}
+        \frac{P_1}{\rho}+\frac{v_1^2}{2}+gz_2 = \frac{P_2}{\rho}+\frac{v_2^2}{2}+gz_2
+    \end{equation}
+    \item \textbf{Phase Change:} High energy molecules escape from liquid and become vapour. Low energy molecules are recaptured by the liquid surface. Phase equilibrium is reached when the two rates are equal.
+    \item Molecules leaving the liquid have higher energy than average so the liquid is cooled when evaporation occurs.
+    \item The energy carried away is known as latent heat.
+    \begin{idea}
+        We have energy balance 
+        \begin{equation}
+            \dd{U} = h\dd{m} + \delta Q + \delta W
+        \end{equation}
+        entropy balance 
+        \begin{equation}
+            \delta Q = T\dd{s} - Ts\dd{m}.
+        \end{equation}
+        Combining, we get
+        \begin{equation}
+            \dd{U} = T\dd{S}-P\dd{V} + (h-Ts)\dd{m}
+        \end{equation}
+    \end{idea}
+    \begin{definition}
+        Let us define the Gibbs Energy 
+        \begin{equation}
+            G = H - TS
+        \end{equation}
+        which is an extensive property.
+    \end{definition}
+    \item Energy balance then becomes 
+    \begin{equation}
+        \dd{U} = T\dd{S} - P\dd{V} + g\dd{m}
+    \end{equation}
+    which is equivalent to 
+    \begin{equation}
+        \dd{S} = \frac{\dd{U}}{T} + \frac{P}{T}\dd{V}-\frac{g}{T}\dd{m}
+    \end{equation}
+    \item Notation: 
+    \begin{itemize}
+        \item $f$: saturated liquid (stands for $flussigkeit$ which is liquid in German)
+        \item $g$: saturated vapour (Gas)
+    \end{itemize}
+    \item We use the following properties and postulates
+    \begin{itemize}
+        \item State Postulate: $S_f=S_f(U_f,V_f,m_f)$ and $S_g=S_g(U_g,V_g,m_g)$
+        \item Entropy is extensive: $S=S_f+S_g$
+        \item Second Law: At equilibrium, $\dd{S}=0$
+        \item Isolated System: Total mass, volume, energy are fixed.
+    \end{itemize}
+    Starting from the Gibbs Equation for liquid and vapour and combining gives 
+    \begin{equation}
+        \dd{S}_g = -\frac{\dd U_f}{T_g}-\frac{P_g}{T_g}\dd{V}_f + \frac{g_g}{T_g}\dd{m}_f
+    \end{equation}
+    \item We can use $\dd{S}+\dd{S}_f+\dd{S}_g=0$ to derive that at equilibrium 
+    \begin{itemize}
+        \item $T_f=T_g$
+        \item $P_f=P_g$
+        \item $g_f=g_g$
+    \end{itemize}
+    The first two are known, but the third one is new. It is also known as the \textbf{chemical potential}. This tells us there is no exchange of mass between two phases whose chemical potentials are the same.
+    \item Assume system is not at equilibrium and uniform pressure and temperature is everywhere. Then we must have $g_f>g_g.$
+    \begin{idea}
+        Mass transfer takes place from the phase with higher chemical potential to the phase with lower chemical potential.
+    \end{idea}
+    \item We can write 
+    \begin{equation}
+        \dd{G} = \dd{U} + P\dd{V} + V\dd{P} - T\dd{S} - S\dd{T}
+    \end{equation}
+    substituting $\dd{S}$ using the Gibbs equation, we get 
+    \begin{equation}
+        \dd{G} = g\dd{m} + V\dd{P} - S\dd{T}
+    \end{equation}
+    Gibbs Energy can change because of changes in mass, pressure, or temperature of the system.
+    \item The total Gibbs energy is $G=gm$. Taking the differential, we have 
+    \begin{equation}
+        \dd{G}=g\dd{m}+m\dd{g}
+    \end{equation}
+    Simplifying, we get the Gibbs-Duhem Equation, which tells us that 
+    \begin{equation}
+        \dd{g} = v\dd{P} - s\dd{T}
+    \end{equation}
+    The chemical potential varies with pressure and temperature.
+\end{itemize}
