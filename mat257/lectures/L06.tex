@@ -212,4 +212,51 @@
     \begin{definition}
         Suppose $f:\mathbb{R}^n_{x_i}\rightarrow \mathbb{R}.$ Define $D_if = \partial_i f = \partial_{x_i} = \frac{\partial f}{\partial x_i} = f_i = f_{x_i}.$
     \end{definition}
+    \begin{theorem}
+        $f:\mathbb{R}^n\rightarrow \mathbb{R}$, $a\in \mathbb{R}^n$, $(D_if)(x)$ exists and are continuous near $a$, implies that $f$ is differentiable at $a$ and 
+        \begin{equation}
+            f'(a) = (\partial_1 f(a), \dots, \partial_n f(a))
+        \end{equation}
+    \end{theorem}
+    \begin{proof}
+        Set $b_1=(a_1+h_1,\dots,a_i+h_i,\dots,a_n)$ so $b_0=a,b_n=a+h$. Then 
+        \begin{align}
+            e(h) &= f(a+h)-f(a) - \sum (\partial_i f)(a) \cdot h_i \\ 
+            &= f(b_n)-f(b_0)-\sum (\partial_i f)(a) \cdot h_i \\ 
+            &= \sum f(b_i)-f(b_{i-1})-\sum (\partial_i f)(a) \cdot h_i
+        \end{align}
+        which by the mean value theorem, there exists $c_i$ in between $b_{i-1}$ and $b_{i}$ such that 
+        \begin{equation}
+            c_i = (a_1+h_1, a_{i-1}+h_{hi-1},\gamma_i, a_{i+1},a_n)
+        \end{equation}
+        where $\gamma_i \in (a_i, a_i + h_i)$. Then:
+        \begin{equation}
+            \sum (D_i F)(c_i)h_i - (D_if)(a)h_i = \sum_{i=1}^n ((D_if)(c_i)-(D_if)(a))h_i = e(h)
+        \end{equation} 
+        We want to now compute 
+        \begin{align}
+            \lim_{h\to 0} \frac{|e(h)|}{|h|} &= \lim_{h\to 0} \frac{\left|\sum (D_i F)(c_i)h_i - (D_if)(a)h_i = \sum_{i=1}^n ((D_if)(c_i)-(D_if)(a))h_i\right|}{|h|} 
+        \end{align}
+        and we need to show that 
+        \begin{equation}
+            0 = \lim_{h\to 0} \sum |D_if(c_i)-(D_if)(a)| \cdot \frac{|h_i|}{h}
+        \end{equation}
+        As $h\to 0$, $c_i\to a$. By continuity of $\partial_i f$, we know $D_if(c_i)-D_i(f_a)\to 0$, so the above limit is zero.
+    \end{proof}
+    \item Aside: Let $R\subset \mathbb{R}^n$ be a rectangle, $f:R \to \mathbb{R}^m$ and is differentiable, assume there is some $M$ such that for all $i,j$, and $x\in \Int R$. $|D_i F_j(x)| \le M$. Then $\forall x,y,\in R$,
+    \begin{equation}
+        |f(x)-f(y)| \le nmM|x-y|
+    \end{equation}
+    \subsection{Second Derivative}
+    \item These notations are equivalent:
+    \begin{equation}
+        D_j(D_if)=D_{i,j}f = \partial_{i,j}f = \frac{\partial^2}{\partial x_i \partial x_j}f
+    \end{equation}
+    \begin{theorem}
+        If $D_{i,j}f$ and $D_{j,i}f$ exist and are continuous near $a$, then they are equal.
+    \end{theorem}
+    \item We can generalize this theorem to higher dimensions as well.
+    \begin{definition}
+        If $A \subset \mathbb{R}^n$, then $C^\infty (A) = \{F: A \rightarrow \mathbb{R}^m:\text{ all partial derivatives of all orders exist}\}$
+    \end{definition}
 \end{itemize}
