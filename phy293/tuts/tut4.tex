@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY293: Tutorial Problems \\ \textbf{Tutorial 4 Solutions}}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+    \item \begin{enumerate}
+        \item All the arrows are pointed in the opposite direction of displacement.
+        \item We have 
+        \begin{align}
+            m_A:&\quad m\ddot{x}_A = -3kx_A + kx_B \\ 
+            m_B:&\quad m\ddot{x}_B = -\frac{3}{2}kx_B +kx_A
+        \end{align}
+        \item Let $\omega_0^2 = k/m$. The matrix is 
+        \begin{equation}
+            \begin{bmatrix}
+                \ddot{x}_A \\ 
+                \ddot{x}_B
+            \end{bmatrix} = -\omega_0^2\begin{bmatrix}
+                3 & -1 \\ 
+                -1 & 3/2    
+            \end{bmatrix}\begin{bmatrix}
+                x_A \\ x_B
+            \end{bmatrix}
+        \end{equation}
+        \item By Wolfram Alpha, the eigenvalues are $1,7/2$, so the fundamental frequencies are $\omega = \omega_0$ and $\omega = \sqrt{7/2}\omega_0$.
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item Again, arrows are opposite of displacement.
+        \item We have 
+        \begin{align}
+            m_A:&\quad 3m\ddot{x}_A = -5kx_A + kx_B - mg\\ 
+            m_B:&\quad m\ddot{x}_B = -kx_B +kx_A - mg,
+        \end{align}
+        \item The matrix representation is
+        \begin{equation}
+            \begin{bmatrix}
+                \ddot{x}_A \\ \ddot{x}_B
+            \end{bmatrix} = -\omega_0^2\begin{bmatrix}
+                5/3 & -1/3  \\ 
+                -1 & 1
+            \end{bmatrix}\begin{bmatrix}
+                x_A \\ x_B
+            \end{bmatrix} - mg\begin{bmatrix}
+                1 \\ 1
+            \end{bmatrix}
+        \end{equation}
+        % and the equilibrium solutions are 
+        % \begin{equation}
+        %     \begin{bmatrix}
+        %         x_A \\ x_B
+        %     \end{bmatrix}_\text{eq} = \frac{mg}{2\omega_0^2}\begin{bmatrix}
+        %         -1 \\ 1
+        %     \end{bmatrix}
+        % \end{equation}
+        \item The eigenvalues are $\omega = \sqrt{2/3}\omega_0$ and $\omega = \sqrt{2}\omega_0$.
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item We have $\lambda_n \propto \frac{1}{n}$ so 
+        \begin{equation}
+            \frac{\lambda_n}{\lambda_{n+1}}=\frac{n+1}{n}=\frac{5}{4}
+        \end{equation}
+        so $n=4$.
+        \item We have $v=\sqrt{\frac{T}{\mu}}=205\text{ m/s}$ and $f=v/\lambda$ gives $f_n=373\text{ Hz}$ and $f_{n+1}=466\text{ Hz}.$
+        \item The length is $\frac{n\lambda_n}{2} = 1.1\text{ m}.$
+    \end{enumerate}
+    \item We have $L=\frac{\lambda}{2}\left(2n+1\right) = \frac{v}{2f}\left(2n+1\right)$
+    so 
+    \begin{equation}
+        f = \frac{v}{2L}\left(2n+1\right)
+    \end{equation}
+\end{enumerate}
+\end{document}
