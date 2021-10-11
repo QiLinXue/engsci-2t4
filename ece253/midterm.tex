@@ -267,7 +267,60 @@ Sequential circuits depend on sequence of inputs. A \textbf{SR Latch} are cross-
 }
 
 % \end{center}
+\subsection{Flip Flops}
+Consists of two gated D latches, connected in series and both connected to the same clock. However, clock input for the first D latch is inverted.
+\begin{itemize}
+    \item When the clock rises up, $Q_1$ stores value of $D$. When the clock rises down, $Q_2$ stores value of $D$.
+\end{itemize}
+\subsection{Verilog}
+\textbf{Minimal Example}
+\begin{verbatim}
+module mux(MuxSelect, Input, Out);
+    input [7:0] Input;
+    input [2:0] MuxSelect;
+    output Out;
+	
+    reg Out; // declare output for always block
 
+    always @(*) // declare always block
+    	begin
+    	case (MuxSelect[2:0]) // start case statement
+    	3'b000: Out = Input[0]; // case 0
+    	3'b001: Out = Input[1]; // case 1
+    	3'b010: Out = Input[2]; // case 2
+    	3'b011: Out = Input[3]; // case 3
+    	3'b100: Out = Input[4]; // case 4
+    	3'b101: Out = Input[5]; // case 5
+    	3'b110: Out = Input[6]; // case 6
+    	default: Out = 1'bx; // default case
+    	endcase
+    end
+endmodule
+\end{verbatim}
+\subsubsection{D Latch}
+\begin{verbatim}
+module D-latch(D, clk, Q);
+    input D, clk;
+    output reg Q;
+
+    always@(D, clk)
+    begin
+        if (clk == 1'b1)
+    	    Q = D;
+    end
+endmodule
+\end{verbatim}
+\subsection{Flip Flop}
+\begin{verbatim}
+module D-ff(D, clk, Q);
+    input D, clk;
+    output reg Q;   
+    always@(posedge clk)
+        begin
+            Q <= D; // use <= operator
+        end
+endmodule
+\end{verbatim}
 \subsection{TBA}
 \lipsum[2-9]
 \end{multicols}
