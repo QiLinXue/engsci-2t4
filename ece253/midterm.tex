@@ -334,9 +334,9 @@ endmodule
 \end{verbatim}
 \subsubsection{Full Adder}
 \begin{verbatim}
-module FA(a, b, c_in, s, c_out);
+module FA(a, b, c_in, s_out, c_out);
     input a, b, c_in;
-    output s, c_out;
+    output s_out, c_out;
     wire w1, w2, w3;
 
     HA u0(.x(a), .y(b), .s(w1), .c(w2));
@@ -390,6 +390,12 @@ module reg8(D, clk, Q);
         Q <= D;
     endmodule
 \end{verbatim}
+\subsection{Frequency Dividers}
+\begin{itemize}
+    \item To half the frequency, connect $\overline{Q}$ to $D$ on the same gated D latch.
+    \item To quarter the frequency, connect $\overline{Q}$ to the clock of the next gated D latch (which is set up the same as the half frequency case).
+    \item To reduce frequency by $2k$, connect $k$ D latches connected in series ($D$ to $Q$) and to the same clock. First $D$ is connected to last $\bar{Q}$. The last $Q$ will have a reduced frequency of $2k$.
+\end{itemize}
 \subsection{Other Things}
 \begin{itemize}
     \item Use minterms when you have to use \verb!NAND! gates and maxterms when you have to use \verb!NOR! gates.
