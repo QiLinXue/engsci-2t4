@@ -73,7 +73,7 @@
 \section{Boolean Algebra}
 \textbf{De Morgan's Theorem} tells us
 \begin{equation}
-    \overline{xy}=\overline{x}+\overline{y}, \quad\quad\quad \overline{x+y}=\overline{xy}
+    \overline{x\cdot y}=\overline{x}+\overline{y}, \quad\quad\quad \overline{x+y}=\overline{x}\cdot\overline{y}
 \end{equation}
 Inverting the inputs to an \verb!or! gate is the same as inverting the outputs to an \verb!and! gate, and the other way around. We also have: 
 \begin{itemize}
@@ -140,7 +140,7 @@ Method of finding a minimum cost expression: We can map out truth table on a gri
     \end{karnaugh-map}
 \end{center}
 \vspace{-8mm}
-and the representation is $\overline{x_2}\cdot\overline{x_4}+x_2 \cdot x_1+\overline{x_4} \cdot x_2.$ Some \textit{rules}: 
+and the representation is $\overline{x_2}\cdot\overline{x_4}+x_2 \cdot x_1+\overline{x_4} \cdot x_2$ when using \textit{minterms}. To use \textit{maxterms}, we take the intersection of sets that don't include blocks of $0$s. For example, $(\overline{x_2}\cdot \overline{x_1})(\overline{x_2}+x_1+x_4).$ Some \textit{rules}: 
 \begin{itemize}
     \item Side lengths should be powers of $2$ and be as large as possible.
     \item Use \textbf{graycoding}: adjacent rows/columns should share one bit.
@@ -166,7 +166,7 @@ To save space, boolean expressions will be written instead of drawing diagrams. 
 \begin{itemize}
     \item \textbf{Mux 2$\rightarrow$1:} $\verb#mux2to1#(s,x_0,x_1) = \overline{s}x_0+sx_1$
     \item \textbf{Mux 4$\rightarrow$1:} $\verb#mux4to1#(s,x) = \verb#mux2to1#\left(s1,\verb#mux2to1#(s0,x0,x1),\verb#mux2to1#(s0,x2,x3)\right)$
-    \item \textcolor{red}{TO BE ADDED}
+    \item \textbf{Not:} \verb#not(x)=nand(x,x)=nor(x,x)#
 \end{itemize}
 \subsection{RS Latch}
 Sequential circuits depend on sequence of inputs. A \textbf{SR Latch} are cross-coupled \verb!NOR! gates.
@@ -267,13 +267,38 @@ Sequential circuits depend on sequence of inputs. A \textbf{SR Latch} are cross-
 }
 
 % \end{center}
-\subsection{Flip Flops}
+\subsection{D Flip Flops}
 Consists of two gated D latches, connected in series and both connected to the same clock. However, clock input for the first D latch is inverted.
 \begin{itemize}
-    \item When the clock rises up, $Q_1$ stores value of $D$. When the clock rises down, $Q_2$ stores value of $D$.
+    \item When the clock rises up, $Q$ stores value of $D$.
 \end{itemize}
+\textbf{Registers:} Multiple flip flops connected together.
+\end{multicols}
+\begin{multicols*}{3}
 \subsection{Verilog}
-\textbf{Minimal Example}
+\subsubsection{Logic Operators}
+\begin{center}
+    \begin{tabular}{c|c||c|c}
+        \verb!bitwise AND! & \verb!&! &
+        \verb!bitwise OR! & \verb!|! \\ \hline
+        \verb!bitwise NAND! & \verb!~&! &
+        \verb!bitwise NOR! & \verb!~!!  \\ \hline
+        \verb!bitwise XOR! & \verb!^! &
+        \verb!bitwise XNOR! & \verb!~^! \\ \hline
+        \verb!logical negation! & \verb!!! &
+        \verb!bitwise negation! & \verb!~! \\ \hline 
+        \verb!concatenation! & \verb!{}! &
+        \verb!replication! & \verb!{{}}! 
+    \end{tabular}
+\end{center}
+\begin{itemize}
+    \item \verb!reduction! operators are put at the start and output a scalar.
+    \item \verb!bitwise! operators 
+    \item \verb!blocking assignment =!: executed in the order they are specified.
+    \item\verb!Nonblock assignments <=! executed in parallel.
+\end{itemize}
+
+\subsubsection{Minimal Example}
 \begin{verbatim}
 module mux(MuxSelect, Input, Out);
     input [7:0] Input;
@@ -295,6 +320,29 @@ module mux(MuxSelect, Input, Out);
     	default: Out = 1'bx; // default case
     	endcase
     end
+endmodule
+\end{verbatim}
+\subsubsection{Half Adder}
+\begin{verbatim}
+module HA(x, y, s, c);
+    input x, y;
+    output s, c;
+    
+    assign s = x^y;
+    assign c = x&y;
+endmodule
+\end{verbatim}
+\subsubsection{Full Adder}
+\begin{verbatim}
+module FA(a, b, c_in, s, c_out);
+    input a, b, c_in;
+    output s, c_out;
+    wire w1, w2, w3;
+
+    HA u0(.x(a), .y(b), .s(w1), .c(w2));
+    HA u1(.x(c_in), .y(w1), .s(s_out), .c(w3));
+
+    assign c_out = w2|w3;
 endmodule
 \end{verbatim}
 \subsubsection{D Latch}
@@ -321,7 +369,35 @@ module D-ff(D, clk, Q);
         end
 endmodule
 \end{verbatim}
-\subsection{TBA}
-\lipsum[2-9]
-\end{multicols}
+\subsection{Flip Flop (stores on both edges)}
+\begin{verbatim}
+module DDR (input c, input D, output Q) ;
+    reg p, n;
+    always @ (posedge c)
+        p <= D;
+    always @ (negedge c)
+        n <= D;
+    assign Q <= c ? p : n;
+endmodule
+\end{verbatim}
+\subsection{Registers}
+\begin{verbatim}
+module reg8(D, clk, Q);
+    input clock;
+    input [7:0] D;
+    output reg[7:0] Q;
+    always@(posedge clock)
+        Q <= D;
+    endmodule
+\end{verbatim}
+\subsection{Other Things}
+\begin{itemize}
+    \item Use minterms when you have to use \verb!NAND! gates and maxterms when you have to use \verb!NOR! gates.
+    \item When converting expressions to its dual, it's often helpful to negate expressions twice, or draw out the logic circuit.
+    \item \verb!XOR! acts as modular arithmetic.
+    \item On the \verb!DE1-SoC! board, hex thing is red if $0$ and white if $1$.
+\end{itemize}
+\subsection{Add Extra Things Below}
+
+\end{multicols*}
 \end{document}
