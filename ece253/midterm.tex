@@ -120,6 +120,10 @@ We can create boolean algebra expressions for truth tables.
 \textbf{Maxterm:} They give $M_i=0$ if and only if the input is $i$. For example, $M_3=x_2+\overline{x_1}+\overline{x_0}.$
 
 \textbf{SOP and POS:} Truth tables can be represented as a sum of minterms, or product of maxterms.
+\begin{itemize}
+    \item Use minterms when you have to use \verb!NAND! gates and maxterms when you have to use \verb!NOR! gates.
+    \item When converting expressions to its dual, it's often helpful to negate expressions twice, or draw out the logic circuit.
+\end{itemize}
 \subsection{Cost}
 The cost of a logic circuit is given by
 \begin{equation}
@@ -159,7 +163,7 @@ In the above example, $\overline{x_2}\cdot \overline{x_4}+x_2x_1+\overline{x_4}x
 \begin{enumerate}
     \item Generate all prime implicants for given function $f$
     \item Find the set of essential prime implicants
-    \item If the set of essential prime implicants cover all valuations for which $f=1$, then this set is the desired cover. Otherwise, determine the nonessential prime implicants that should be added.
+    \item Determine the nonessential prime implicants that should be added.
 \end{enumerate}
 \subsection{Common Logic Gates}
 To save space, boolean expressions will be written instead of drawing diagrams. You should be familiar with how to construct diagrams from expressions.
@@ -167,6 +171,8 @@ To save space, boolean expressions will be written instead of drawing diagrams. 
     \item \textbf{Mux 2$\rightarrow$1:} $\verb#mux2to1#(s,x_0,x_1) = \overline{s}x_0+sx_1$
     \item \textbf{Mux 4$\rightarrow$1:} $\verb#mux4to1#(s,x) = \verb#mux2to1#\left(s1,\verb#mux2to1#(s0,x0,x1),\verb#mux2to1#(s0,x2,x3)\right)$
     \item \textbf{Not:} \verb#not(x)=nand(x,x)=nor(x,x)#
+    \item \verb!XOR! acts as modular arithmetic.
+    \item Multiplexers are functionally complete. $\verb!AND!=mux(x,y,1)$, $\verb!OR!=mux(x,0,y).$
 \end{itemize}
 \subsection{RS Latch}
 Sequential circuits depend on sequence of inputs. A \textbf{SR Latch} are cross-coupled \verb!NOR! gates.
@@ -252,13 +258,10 @@ Sequential circuits depend on sequence of inputs. A \textbf{SR Latch} are cross-
 
 
         \begin{center}
-            \begin{tabular}{c|c|c|c}
-                Clk & S & R & $Q(t+1)$ \\ \hline
-                0 & x & x & Q(t) \\
-                1 & 0 & 0 & Q(t) \\ 
-                1 & 0 & 1 & 0 \\ 
-                1 & 1 & 0 & 1 \\ 
-                1 & 1 & 1 & 1
+            \begin{tabular}{c|c|c}
+                Clk & D & $Q(t+1)$ \\ \hline
+                0 & x & Q(t) \\
+                1 & 0 & D
            \end{tabular}
         \end{center}
         \vspace{-3mm}
@@ -301,12 +304,9 @@ Consists of two gated D latches, connected in series and both connected to the s
 \subsubsection{Minimal Example}
 \begin{verbatim}
 module mux(MuxSelect, Input, Out);
-    input [7:0] Input;
-    input [2:0] MuxSelect;
+    input [4:0] Input; input [2:0] MuxSelect;
     output Out;
-	
     reg Out; // declare output for always block
-
     always @(*) // declare always block
     	begin
     	case (MuxSelect[2:0]) // start case statement
@@ -315,8 +315,6 @@ module mux(MuxSelect, Input, Out);
     	3'b010: Out = Input[2]; // case 2
     	3'b011: Out = Input[3]; // case 3
     	3'b100: Out = Input[4]; // case 4
-    	3'b101: Out = Input[5]; // case 5
-    	3'b110: Out = Input[6]; // case 6
     	default: Out = 1'bx; // default case
     	endcase
     end
@@ -325,9 +323,7 @@ endmodule
 \subsubsection{Half Adder}
 \begin{verbatim}
 module HA(x, y, s, c);
-    input x, y;
-    output s, c;
-    
+    input x, y; output s, c;
     assign s = x^y;
     assign c = x&y;
 endmodule
@@ -335,13 +331,10 @@ endmodule
 \subsubsection{Full Adder}
 \begin{verbatim}
 module FA(a, b, c_in, s_out, c_out);
-    input a, b, c_in;
-    output s_out, c_out;
+    input a, b, c_in; output s_out, c_out;
     wire w1, w2, w3;
-
     HA u0(.x(a), .y(b), .s(w1), .c(w2));
     HA u1(.x(c_in), .y(w1), .s(s_out), .c(w3));
-
     assign c_out = w2|w3;
 endmodule
 \end{verbatim}
@@ -350,11 +343,9 @@ endmodule
 module D-latch(D, clk, Q);
     input D, clk;
     output reg Q;
-
     always@(D, clk)
     begin
-        if (clk == 1'b1)
-    	    Q = D;
+        if (clk == 1'b1) Q = D;
     end
 endmodule
 \end{verbatim}
@@ -363,20 +354,15 @@ endmodule
 module D-ff(D, clk, Q);
     input D, clk;
     output reg Q;   
-    always@(posedge clk)
-        begin
-            Q <= D; // use <= operator
-        end
+    always@(posedge clk) Q <= D; // use <= operator
 endmodule
 \end{verbatim}
 \subsection{Flip Flop (stores on both edges)}
 \begin{verbatim}
 module DDR (input c, input D, output Q) ;
     reg p, n;
-    always @ (posedge c)
-        p <= D;
-    always @ (negedge c)
-        n <= D;
+    always @ (posedge c) p <= D;
+    always @ (negedge c) n <= D;
     assign Q <= c ? p : n;
 endmodule
 \end{verbatim}
@@ -390,18 +376,46 @@ module reg8(D, clk, Q);
         Q <= D;
     endmodule
 \end{verbatim}
+\subsection{ModelSim Do Files}
+\begin{verbatim}
+# set working dir, where compiled verilog goes
+vlib work
+# compile all verilog modules in mux.v to working
+# dir could also have multiple verilog files
+vlog mux.v
+#load simulation using mux as the
+# top level simulation module
+vsim mux
+#log all signals and add some signals to
+# waveform window
+log {/*}
+# add wave {/*} would add all items in
+# top level simulation module
+add wave {/*}
+# first test case
+#set input values using the force command
+# signal names need to be in {} brackets
+force {SW[0]} 0
+force {SW[1]} 0
+force {SW[9]} 0
+run 10ns
+\end{verbatim}
+\textbf{ModelSim and Other Lab Things}
+\begin{itemize}
+    \item FGPA: Field Programmable Gate Array
+    \item To repeat signals, use this syntax: 
+    \begin{verbatim}
+    force {MuxSelect[2]} 0 0ns, 1 {4ns} -r 8ns
+    \end{verbatim}
+    \vspace{-4mm}
+    which starts at $0$ at 0ns, $1$ at 4ns, and repeats every $8$ ns.
+    \item On the \verb!DE1-SoC! board, hex thing is red if $0$ and white if $1$.
+\end{itemize}
 \subsection{Frequency Dividers}
 \begin{itemize}
     \item To half the frequency, connect $\overline{Q}$ to $D$ on the same gated D latch.
     \item To quarter the frequency, connect $\overline{Q}$ to the clock of the next gated D latch (which is set up the same as the half frequency case).
     \item To reduce frequency by $2k$, connect $k$ D latches connected in series ($D$ to $Q$) and to the same clock. First $D$ is connected to last $\bar{Q}$. The last $Q$ will have a reduced frequency of $2k$.
-\end{itemize}
-\subsection{Other Things}
-\begin{itemize}
-    \item Use minterms when you have to use \verb!NAND! gates and maxterms when you have to use \verb!NOR! gates.
-    \item When converting expressions to its dual, it's often helpful to negate expressions twice, or draw out the logic circuit.
-    \item \verb!XOR! acts as modular arithmetic.
-    \item On the \verb!DE1-SoC! board, hex thing is red if $0$ and white if $1$.
 \end{itemize}
 \subsection{Add Extra Things Below}
 
