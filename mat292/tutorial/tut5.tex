@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{MAT292 \\ Tutorial 5 Solution}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+% \setlength\extrarowheight{20pt}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+\maketitle
+\begin{enumerate}
+    \item See tutorial 4.
+    \item \begin{enumerate}
+        \item We have 
+        $$\begin{bmatrix}
+            x' \\ y'
+        \end{bmatrix} = \begin{bmatrix}
+        -a & b \\ 
+        c & -d   
+        \end{bmatrix}\begin{bmatrix}
+            x\\ y
+        \end{bmatrix} + \begin{bmatrix}
+            \beta \\ \delta
+        \end{bmatrix}$$
+        \item $x'(t)=0$ occurs at 
+        $$0=-ax+by+\beta \implies ax-by=\beta$$
+        which is a straight line.
+        \item The direction field will be strictly vertical since $x'=0$.
+        \item We have $0=cx+-dy+\delta \implies -cd+dy = \delta$.
+        \item The intersection is equilibrium
+        \item This occurs at 
+        $$\begin{bmatrix}
+            x \\ y
+        \end{bmatrix} = \frac{1}{ad-bc}\begin{bmatrix}
+            b\delta + d\beta \\ 
+            a\delta + c\beta
+        \end{bmatrix}$$
+        \item 
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}

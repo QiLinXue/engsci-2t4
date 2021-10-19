@@ -1,0 +1,146 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{CHE260: Thermodynamics Midterm}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\maketitle
+\section{Basic Thermodynamics}
+\begin{itemize}
+    \item The ideal gas law 
+    \begin{equation}
+        PV = mRT
+    \end{equation}
+    \item The first law of thermodynamics applies to \textbf{closed systems only}:
+    \begin{equation}
+        U = Q + W
+    \end{equation}
+    \item For an ideal gas,
+    \begin{align}
+        c_p &= c_v + R \\ 
+        \Delta u &= c_v\Delta T \\ 
+        \Delta h &= c_p\Delta T 
+    \end{align}
+    \item For a liquid or solid 
+    \begin{equation}
+        \Delta h = c\Delta T + v\Delta P
+    \end{equation}
+    \item For a control volume 
+    \begin{align}
+        \dot{m} &= \rho A V \\ 
+        \dot{Q} + \dot{W} &= \dot{m}
+    \end{align}
+    and we get the energy rate balance 
+    \begin{align}
+        \left(\Delta h + \frac{V_2^2-V_1^2}{2}+g\Delta z\right)
+    \end{align}
+    \item At steady state, we have
+    \begin{equation}
+        \dot{m}_\text{in} = \dot{m}_\text{out}
+    \end{equation}
+    \item The work done in a polytropic process $(PV)^n=\text{constant}$ is 
+    \begin{equation}
+        W_{12} = \begin{cases}
+            P_1V_1\ln\frac{V_1}{V_2} & n=1 \\ \\
+            \frac{P_2V_2-P_1V_1}{n-1} & \neq 1
+        \end{cases}
+    \end{equation}
+\end{itemize}
+\section{Entropy}
+\begin{itemize}
+    \item Entropy can be defined as 
+    \begin{equation}
+        \dd{S} = \frac{\dd{Q}}{T} + \dd{S}_\text{gen}
+    \end{equation}
+    \item Entropy can also be defined statistically to be 
+    \begin{eqnarray}
+        S = k_B \ln \Omega 
+    \end{eqnarray}
+    where $k_B$ is Boltzmann's constant and $\Omega$ is the number of microstates.
+    \item The change in entropy of an ideal gas with constant specific is given by (all three are equivalent): 
+    \begin{align}
+        \Delta s &= c_v\ln\frac{T_2}{T_1} +R\ln \frac{v_1}{v_2} \\ 
+        \Delta s &= c_v \ln\frac{P_2}{P_1} + c_p\ln\frac{v_2}{v_1} \\ 
+        \Delta s &= c_p \ln\frac{T_2}{T_1} - R\ln\frac{P_2}{P_1} \\
+        \Delta s &= s_2^\circ - s_1^\circ - R\ln\frac{P_2}{P_1}
+    \end{align}
+    where $s_2^\circ,s_1^\circ$ are standard specific enthalpy values that can be searched up using a table.
+    \item For an adiabatic and isentropic process, the quantity $Pv^\gamma$ is constant.
+    \item We can perform an entropy rate balance. We have, 
+    \begin{align}
+        \frac{dS}{dt} &= \dot{S}_\text{in} - \dot{S}_\text{out} = \dot{S}_\text{gen} \\ 
+        \frac{dS}{dt} &= \sum \frac{\dot{Q}}{T} + \sum \dot{m}_\text{in}s_\text{in} - \sum \dot{m}_\text{out}s_\text{out} + \dot{S}_\text{gen}.
+    \end{align}
+    At steady state, $\frac{dS}{dt} =0 $.
+    \item We can write Gibb's Equation in the following forms 
+    \begin{align}
+        T\dd{s}&=\dd{u} + P\dd{v} \\ 
+        T\dd{s}&=\dd{h} - v\dd{P}
+    \end{align}
+    \item Turbine efficiency: 
+    \begin{equation}
+        \eta_\text{turbine} = \frac{h_2-h_1}{h_{2s}-h_1}
+    \end{equation}
+    and compressor efficiency:
+    \begin{equation}
+        \eta_\text{compressor} = \frac{h_{2s}-h_1}{h_{s}-h_1}
+    \end{equation}
+    Remember that turbines create energy so they want to maximize work. Compressors focus on compression using the least amount of work.
+    \item For an isentropic and incompressible process (isothermal), we get Bernoulli's equation: 
+    \begin{equation}
+        \frac{P}{\rho}+\frac{v^2}{2}+gz = \text{constant}
+    \end{equation}
+\end{itemize}
+\section{Phase Change}
+\begin{itemize}
+    \item The Clapeyron Equation gives 
+    \begin{equation}
+        \frac{dP}{dT} = \frac{h_{fg}}{T(v_g-v_f)}
+    \end{equation}
+    where $h_{fg} \equiv h_g-h_f$. Assuming an ideal gas, we get the Clausius-Clapeyron equation: 
+    \begin{equation}
+        \frac{dP}{dT} = \frac{h_{fg}P}{RT^2}
+    \end{equation}
+    \item For phase equilibrium, Gibb's equation becomes 
+    \begin{equation}
+        s_g-s_f=\frac{h_g-h_f}{T}
+    \end{equation}
+    since pressure and temperature are constant for a system in equilibrium.
+    \item The saturation pressure can be written as 
+    \begin{equation}
+        P_\text{sat} = C\exp\left(-\frac{h_{fg}}{RT_\text{sat}}\right)
+    \end{equation}
+    \item The quality of a mixture is defined aS 
+    \begin{equation}
+        x = \frac{\text{mass of vapour}}{\text{mass of mixture}} = \frac{m_g}{m}
+    \end{equation}
+    \item Suppose $\xi$ is an intensive quantity. The intensive quantity $\xi$ of a mixture is 
+    \begin{equation}
+        \xi = \xi_f + x(\xi_g-\xi_f) 
+    \end{equation}
+\end{itemize}
+\section{Heat Engines}
+\begin{itemize}
+    \item The thermal efficiency of a heat engine is 
+    \begin{equation}
+        \eta_\text{th} = \frac{W_\text{net}}{Q_\text{in}}
+    \end{equation}
+    \item The thermal efficiency of a carnot engine is 
+    \begin{equation}
+        \eta_\text{th,carnot} = 1-\frac{Q_C}{Q_H}-1-\frac{T_C}{T_H}
+    \end{equation}
+    \item The coefficient of performance of a refrigerator is 
+    \begin{equation}
+        COP_R = \frac{Q_C}{W_\text{net}} = \frac{1}{T_H/T_C-1}
+    \end{equation}
+    and the coefficient of performance of a heat pump is 
+    \begin{equation}
+        COP_{HP} = \frac{Q_H}{W_\text{net}} = \frac{1}{1-T_C/T_H}
+    \end{equation}
+    \item For cyclic cycles, $\Delta U=0,$ so the work that an engine does is $W=Q_h-Q_c$.
+\end{itemize}
+\end{document}
