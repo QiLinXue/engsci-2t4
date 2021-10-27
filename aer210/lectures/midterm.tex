@@ -1,0 +1,180 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{AER210: Vector Calc \\ Midterm Review}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\maketitle
+\textit{Disclaimer:} I am skipping over a lot of the formalities. A lot of the theorems cited rely on certain conditions (i.e. continuity, differentiable). However, they should all work on ``nice'' looking functions, so I left them out.
+\section{Multiple Integrals}
+Multiple integrals are used when integrating over regions or volumes. Just like Clairut's Theorem, we can swap the order:
+\begin{equation}
+    \int_a^b\int_c^d f(x,y) \dd{y}\dd{x} = \int_c^d\int_a^b f(x,y)\dd{x}\dd{y}
+\end{equation}
+This is not the case for general regions. In general (if we look at 3D case), we can write
+\begin{equation}
+    \iiint\limits_{E} f(x,y,z)\dd{V} = \int_a^b\int_{g_1(x)}^{g_2(x)}\int_{u_1(x,y)}^{u_2(x,y)} f(x,y,z) \dd{z}\dd{y}\dd{x}
+\end{equation}
+where the region $E$ can be defined as
+\begin{equation}
+    E = \left\{(x,y,z) |a \le x \le b,\, g_1(x) \le y \le g_2(x),\, u_1(x,y) \le z \le u_2(x,y)\right\}.
+\end{equation}
+Other region types involve just permutations.
+\subsection{Coordinate Systems}
+\subsubsection*{Cylindrical Coordinates}
+We can convert from cylindrical to rectangular coordinates
+\begin{equation}
+    x = r\cos\theta,\, y=r\sin\theta,\, z=z
+\end{equation}
+And triple integral is given by
+\begin{equation}
+    \iiint f(x,y,z)r\dd{z}\dd{r}\dd\theta
+\end{equation}
+\subsubsection*{Spherical Coordinates}
+We can convert from spherical to rectangular coordinates (should be polar when $\phi=\pi/2$)
+\begin{equation}
+    x=\rho \cos\theta\sin\phi,\, y=\rho\sin\theta\sin\phi,\, z=\rho\cos\phi
+\end{equation}
+and the integral is given by
+\begin{equation}
+    \iiint f(x,y,z) \rho^2 \sin\phi \dd{\rho}\dd{\theta}\dd{\phi}
+\end{equation}
+\subsection{Change of Basis}
+In 1D calculus, we performed $u$-substitutions as follows. If $x=f(u)$. Then $\dd{x} = f'(u) \dd{u}$ and
+\begin{equation}
+    \int_{u(a)}^{u(b)} f(x(u)) \left(f'(u)\dd{u}\right)
+\end{equation}
+The same formula applies in multiple dimensions if we treat $x$ and $u$ as vectors, such that $f'(x)$ is the determinant of a \textit{matrix of partial derivatives}, known as the \textbf{Jacobian}, where given $x=g(u,v)$ and $y=h(u,v)$, we have:
+\begin{equation}
+    J = 
+    \det \begin{bmatrix}
+        \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\ 
+        \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v}
+    \end{bmatrix}
+\end{equation}
+and thus 
+\begin{equation}
+    \iiint\limits_{R} f(x,y,z) \dd{x}\dd{y}\dd{z} = \iiint\limits_{E} f(x,y,z) J \dd{u}\dd{v}\dd{w}
+\end{equation}
+where $S$ is the same region as $R$ but written in terms of $u,v,w$.
+\subsection{Surface Area}
+The surface area of a region $D$ is given by
+\begin{equation}
+    A = \iint\limits_{D} \sqrt{1+\left(\frac{\partial z}{\partial x}\right)^2+\left(\frac{\partial z}{\partial y}\right)^2} \dd{A}
+\end{equation}
+\section{Div Grad Curl and All That}
+\subsection{Line Integral}
+Suppose we define a line using the parametric equations $x(t),y(t)$ and there is a function $f$ that acts on this line $C$, then:
+\begin{equation}
+    \int_C f(x,y) \dd{s} = \int_a^b f(x(t),y(t)) \sqrt{x'^2+y'^2}\dd{t}
+\end{equation}
+Alternatively, we can write
+\begin{equation}
+    \int_C f(x,y)\dd{x} = \int_a^b f(x(t),y(t))x'(t) \dd{t}
+\end{equation}
+The line integral of a vector field $F$ that acts on a curve $C$ is given by
+\begin{equation}
+    \int_C F \cdot \dd{r} = \int_a^b F(r(t))\cdot r'(t) \dd{t} = \int_C F \cdot T \dd{s}
+\end{equation}
+where $T$ is the unit tangent vector.
+\subsubsection*{Fundamental }
+The fundamental theorem says that 
+\begin{equation}
+    \int_C \nabla f \cdot \dd{r} = f(r(b)-r(a))
+\end{equation}
+Therefore, if we are given a line integral and the vector field can be written as the gradient of a function, then it is \textbf{conservative} and we can apply this theorem.
+
+When is a vector field conservative? If $F(x,y) = (P(x,y), Q(x,y))$ is conservative, then
+\begin{equation}
+    \frac{\partial P}{\partial y}= \frac{\partial Q}{\partial x}
+\end{equation}
+and the converse holds for open simply-connected regions (i.e. no weird stuff happening). It is also conservative if $\nabla \times F = 0$.
+\subsection{Green's Theorem}
+We have another shortcut to calculate closed line integrals:
+\begin{equation}
+    \oint_C P \dd{x} + Q \dd{y} = \iint\limits_D \left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\dd{A}
+\end{equation}
+Note that this is zero when the field is conservative. We can write Green's Theorem in vector form. Given $F = (P,Q)$ as before, we can write 
+\begin{equation}
+    \oint_C F\cdot \dd{r} = \iint\limits_D (\nabla \times F) \cdot \hat{k} \dd{A}
+\end{equation}
+\subsection{Divergence and Curl}
+Define the operator $\nabla = \begin{bmatrix}
+    \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z}
+\end{bmatrix}^T$ such that 
+\begin{equation}
+    \text{div}F = \nabla \cdot F
+\end{equation}
+and
+\begin{equation}
+    \text{curl} F = \nabla \times F
+\end{equation}
+Note that $\text{div curl } \nabla \cdot (\nabla \times F)= 0$ (we had a similar expression in linear algebra) and $\text{curl grad} F = 0$ (a block placed on a mountainous hill will slide down without rotating)
+\section{Parametric Surfaces}
+We can represent a 1D using a single parameter $t$. Similarly, we can represent a 2D surface using two parameters $u,v$. The overall idea is that we can define a surface as
+\begin{equation}
+    r(u,v) = (x(u,v), y(u,v), z(u,v))
+\end{equation}
+\subsection{Surfaces of Revolution}
+We can parametrize a surface which was a result of revolution via: 
+\begin{equation}
+    x=x\quad\quad y=f(x)\cos\theta \quad\quad z=f(x)\sin\theta
+\end{equation}
+\subsection{Tangent Planes}
+The unit vector $r_v$, which points in the direction we move in if we \textit{only} vary the parameter $v$ is given by
+\begin{equation}
+    r_v = \left(\frac{\partial x}{\partial v},\frac{\partial y}{\partial v},\frac{\partial z}{\partial v}\right)
+\end{equation}
+and similarly for $r_u$. The plane can then be represented by the normal vector 
+\begin{equation}
+    r_u \times r_v
+\end{equation}
+which should be nonzero for smooth surfaces.
+\subsection{Surface Area}
+The surface area is given by 
+\begin{equation}
+    A(S) = \iint_D |r_u \times r_v | \dd{A}
+\end{equation}
+\subsection{Surface Integrals}
+We can generalize the previous result to the general case (i.e. a function $f$ acts on a region $S$): 
+\begin{equation}
+    \iint\limits_S f(x,y,z) \dd{S} = \iint\limits_D f(r(u,v)) |r_u \times r_v| \dd{A}
+\end{equation}
+Note the similarity between this form and the similar form when we consider a function $z=g(x,y)$. We have 
+\begin{equation}
+    r_x\times r_y = \left(-\frac{\partial g}{\partial x}, -\frac{\partial g}{\partial y}, 1\right)
+\end{equation}
+and
+\begin{equation}
+    |r_x\times r_y| = \sqrt{\left(\frac{\partial z}{\partial x}\right)^2+\left(\frac{\partial z}{\partial y}\right)^2+1}
+\end{equation}
+so we can easily convert between the two forms.
+\subsection{Oriented Surfaces}
+Similar to the above discussion, we can write the oriented normal surface in two ways: 
+\begin{equation}
+    n =\frac{r_u \times r_v}{|r_u \times r_v|} = \frac{-\frac{\partial g}{\partial x} \hat{i} - \frac{\partial g}{\partial y}\hat{j} + \hat{k}}{\sqrt{\left(\frac{\partial z}{\partial x}\right)^2+\left(\frac{\partial z}{\partial y}\right)^2+1}}
+\end{equation}
+\subsection{Surface Integrals of Vector Fields}
+The flux of $\bm{F}$ across $S$ is given by
+\begin{equation}
+    \iint\limits_S \bm{F} \cdot \dd{\bm{S}} = \iint\limits_S \bm{F} \cdot \bm{n} \dd{S} = \iint\limits_D \bm{F} \cdot (\bm{r}_u \times \bm{r}_v)\dd{A}
+\end{equation}
+\section{Adolescent Level Calculus}
+\subsection{Stoke's Theorem}
+If $F$ is a vector field, then 
+\begin{equation}
+    \oint_C \bm{F} \cdot \dd{\bm{r}} = \iint\limits_S \left(\nabla \times \bm{F} \right) \cdot \dd{\bm{S}}
+\end{equation}
+This is just a three-dimensional version of Green's Theorem.
+\subsection{Divergence Theorem}
+Stoke's Theorem tells us that the curl of a function $\bm{F}$ on a surface $\bm{S}$ can be represented by how $\bm{F}$ interacts with the boundary of the surface.
+
+Divergence Theorem tells us the same thing, but going from 3D to 2D: 
+\begin{equation}
+    \iint\limits_S \bm{F} \cdot \dd{\bm{S}} = \iiint\limits_E \nabla \cdot \bm{F} \dd{V}
+\end{equation}
+\end{document}

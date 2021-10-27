@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{CHE260: Heat Transfer}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\maketitle
+\section{Mechanisms of Heat Transfer}
+\begin{itemize}
+        \item Mechanisms involve:
+        \begin{itemize}
+            \item Conduction: Transfer of heat through a medium that is stationary.
+            \item Convection: Transfer of heat from a solid surface and an adjacent fluid that is moving.
+            \item Radiation: Energy emitted by matter in the form of electromagnetic waves.
+        \end{itemize}
+        \item Conduction follows \textbf{Fourier's Law:}
+        \begin{equation}
+            \dot{Q} = - k A \nabla T
+        \end{equation}
+        \item The rate of heat transfer from the surface of a blackbody is given by the Stefan-Boltzmann Law 
+        \begin{equation}
+            \dot{Q}_\text{emit,max} = \sigma A T_s^4
+        \end{equation}
+        where $\sigma$ is the Boltzmann constant $\sigma = 5.67 \times 10^{-8} \frac{W}{m^2 K^4}$
+        \item For an ideal body, we have
+        \begin{equation}
+            \dot{Q}_\text{emit} = \epsilon \sigma AT_s^4
+        \end{equation}
+        where $0 \le \epsilon \le 1$ is the emissivity.
+        \item When radiation is incident on a surface, some will be absorbed and some reflected. The \textbf{absorptivity} $\alpha$ is defined such that
+        \begin{align}
+            \dot{Q}_\text{absorbed} &= \alpha \dot{Q}_\text{incident} \\ 
+            \dot{Q}_\text{reflected} &= (1-\alpha)\dot{Q}_\text{incident}
+        \end{align}
+        \item Kirchoff's Law says that
+        \begin{equation}
+            \alpha = \epsilon
+        \end{equation}
+        \item For a small surface completed surrounded by a much larger surface net radiation is 
+        \begin{equation}
+            \dot{Q}_\text{net} = \epsilon \sigma A (T_s^4 - T_\text{surrounding}^4)
+        \end{equation}
+        \item Natural convection tells us the heat transfer coefficient is
+        \begin{equation}
+            h = c(T_S-T_\infty)^{1/4}
+        \end{equation}
+        where $c=4.2 \text{W}{m^2 K^{5/4}}$ and 
+        \begin{equation}
+            q_\text{conv}  = hA(T_S-T_\infty)
+        \end{equation}
+        \item Forced convection gives a constant $h = 250 W/m^2 K$
+        \item Let's look at the \textbf{one-dimensional case:} If we look at a segment of length $\Delta x$, the rate of the increase of enthalpy is
+        \begin{align}
+            \dot{H} &= mc_p \frac{\partial T}{\partial t} \\ 
+            &= \rho c_p A \Delta x \frac{\partial T}{\partial t}
+        \end{align}
+        The energy balance in this small segment gives
+        \begin{align}
+            \rho c_p A\Delta x\frac{\partial T}{\partial t} &= \dot{Q}_x - \dot{Q}_{x+\Delta x} \\ 
+            &= (\dot{q}A)_x - (\dot{q}A)_{x+\Delta x}
+        \end{align}
+        Dividing by $\Delta x$ and taking the limit gives 
+        \begin{equation}
+            \rho c_p \frac{\partial T}{\partial t} = -\frac{1}{A} \frac{\partial(\dot{q}A)}{\partial x}
+        \end{equation}
+        Note that $A$ depends on the coordinate system, $\dot{q}$ depends on Fourier's Law $\dot{q} = -k\frac{dT}{dx}$. This gives us the heat equation.
+    \end{itemize}
+\end{document}

@@ -1,0 +1,30 @@
+\section{Integration}
+\begin{itemize}
+    \item Let $R=\prod_{i=1}^n [a_i,b_i]$ be a rectangle in $\mathbb{R}^n$ and let $f:\mathbb{R}\rightarrow \mathbb{R}$ be a bounded function.
+    \item A partition $\mathcal{P}$ of $R$ is a sequence $(P_i)^n$ where each $P_i$ is a partition of $[a_i,b_i]$, i.e. $P:a_i = t_{i0} < t_{i1} < t_{i2} < \cdots \le t_{iN_i}=b_i.$
+    \item A subrectangle $S$ relative to a partition $\mathcal{P}$, you choose integers $1 \le j_i \le N_i$ for $i=1,\dots, n$ with $j=(j_1\, \cdots\, j_n)$, we have 
+    \begin{equation}
+        S_j = \prod_{i=1}^n [t_{i,j_{i-1}}, t_{ij_i}] \ni x
+    \end{equation}
+    (note: could be wrong)
+    \item Notation: We say $S \in P$
+    \item If $S \neq S' \in P$ then $S$ intersects $S'$ at most on boundaries.
+    \item $\bigcup_{S\in P}S = R$.
+    \item $\left|\{S:S\in P\}\right|=\prod N_i$
+    \begin{definition}
+        The volume of $R$ is given by
+        \begin{equation}
+            V(R) = |R| = \prod (b_i-a_i)
+        \end{equation}
+    \end{definition}
+    \begin{proposition}
+        If $P$ is a partition of $R$,
+        \begin{equation}
+            \sum_{S\in P}V(S) = V(R)
+        \end{equation}
+    \end{proposition}
+    \item Normally,
+    \begin{equation}
+        \sum \prod_{i=1}^n (t_{ij_i}-t_{i,j_{i-1}})
+    \end{equation}
+\end{itemize}
