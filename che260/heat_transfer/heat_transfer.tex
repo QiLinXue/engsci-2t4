@@ -67,6 +67,41 @@
         \begin{equation}
             \rho c_p \frac{\partial T}{\partial t} = -\frac{1}{A} \frac{\partial(\dot{q}A)}{\partial x}
         \end{equation}
-        Note that $A$ depends on the coordinate system, $\dot{q}$ depends on Fourier's Law $\dot{q} = -k\frac{dT}{dx}$. This gives us the heat equation.
+        Note that $A$ depends on the coordinate system, $\dot{q}$ depends on Fourier's Law $\dot{q} = -k\frac{dT}{dx}$.
+        \item This gives us the heat conduction equation 
+        \begin{equation}
+            \frac{\partial^2 T}{\partial x^2} = \frac{1}{\alpha}\frac{\partial T}{\partial t}  
+        \end{equation}
+        where $\alpha=\frac{k}{\rho c_p}$ is the thermal diffusivity.
+        \item At constant state, $\frac{\partial T}{\partial t} = 0$, so 
+        \begin{equation}
+            \frac{d^2 T}{dx^2} = 0
+        \end{equation}
+        \item In cylindrical coordinates, we have
+        \begin{equation}
+            \frac{1}{\alpha}\frac{\partial T}{\partial t} = \frac{1}{r}\frac{\partial}{\partial r}\left(r\frac{\partial T}{\partial r}\right)
+        \end{equation}
+        \item In spherical coordinates 
+        \begin{equation}
+            \frac{1}{\alpha}\frac{\partial T}{\partial t} = \frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2 \frac{\partial T}{\partial r}\right)
+        \end{equation}
+        \item In general, we have 
+        \begin{equation}
+            \frac{1}{r^n}\frac{\partial}{\partial r}\left(r^n \frac{\partial T}{\partial r}\right) = \frac{1}{\alpha}\frac{\partial T}{\partial t}
+        \end{equation}
+        where 
+        \begin{itemize}
+            \item $n=0$ for cartesian
+            \item $n=1$ for cylindrical 
+            \item $n=2$ for spherical
+        \end{itemize}
+        \begin{idea}
+            These equations can alternatively derived by applying the divergence formula in different coordinate systems. In particular, it is done by considering the heat equation 
+            \begin{equation}
+                \frac{1}{\alpha}\frac{\partial T}{\partial t} = \nabla \cdot T
+            \end{equation}
+            and applying spherical / cylindrical symmetry.
+        \end{idea}
+        \item To solve problems, we also need boundary conditions, and we often make the steady state assumption.
     \end{itemize}
 \end{document}
