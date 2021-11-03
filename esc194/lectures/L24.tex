@@ -39,6 +39,42 @@
             \label{eq:}
         \end{equation}
     \end{prooof}
+    \begin{theorem}
+        \textbf{Second Mean Value Theorem for Integrals:} Given $f,g$ continuous on $[a,b]$ and $g$ is non-negative, there exists $c\in [a,b]$ such that 
+        \begin{equation}
+            \int_a^bf(x) g(x) \dd{x} = f(c)\int_a^b g(x) \dd{x}
+        \end{equation}
+    \end{theorem}
+    \begin{prooof}
+        From the extreme value theorem (applies since $[a,b]$ is closed and bounded), there exists $m,M$ such that 
+        \begin{equation}
+            m \le f(x) \le M 
+        \end{equation}
+        and so 
+        \begin{align}
+            mg(x) \le g(x)f(x) \le Mg(x) \\ 
+            \int_a^b mg(x) \dd{x} \int_a^b g(x)f(x) \dd{x} \le \int_a^b M(g)x\dd{x}
+        \end{align}
+        with $x \in [a,b].$ This gives us 
+        \begin{align}
+            m\int_a^b g(x) \dd{x} \le \int_a^b g(x) f(x) \dd{x} \le M\int_a^b g(x) \dd{x}
+        \end{align}
+        and dividing through, we can bound
+        \begin{equation}
+            m \le \frac{\int_a^b f(x)g(x) \dd{x}}{\int_a^b g(x) \dd{x}} \le M
+        \end{equation}
+        Since we also know that $m\le f(x) \le M$ when $x\in[a,b]$, we can apply the intermediate value theorem to show that there exists $x\in [a,b]$ such that 
+        \begin{equation}
+            f(c) = \frac{\int_a^b f(x)g(x) \dd{x}}{\int_a^b g(x) \dd{x}}
+        \end{equation}
+    \end{prooof}
+    \begin{warning}
+        Note that $f(c) \neq f_\text{avg}.$ It is not the average value of $f(x)$, but instead the \textit{weighted} average of $f(x).$ This has applications in statistics, physics (i.e. center of mass), and other areas.
+    \end{warning}
+    \item Note that a direct corollary is that we can use the second mean value theorem to prove the first mean value theorem by setting $g(x)=1.$ Specifically, we get
+    \begin{equation}
+        \int_a^b f(x) \dd{x} = f(c) (b-a)
+    \end{equation}
     \item We can also introduce \textbf{inverse functions}.
     \begin{definition}
         A function $f(x)$ is said to be one-to-one if $f(x_1)=f(x_2)$ implies $x_1=x_2$. Alternatively, we can say that $f(x_1)\neq f(x_2)$ whenever $x_1 \neq x_2$.
