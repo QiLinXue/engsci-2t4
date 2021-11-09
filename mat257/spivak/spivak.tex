@@ -7,7 +7,8 @@
 \usepackage{mathrsfs}
 \usetikzlibrary{arrows}
 \usepackage{stmaryrd}
-
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
 \begin{document}
 
 \maketitle
@@ -278,4 +279,140 @@ Therefore, $C$ is measure-$0$. As an aside, each $C_k$ is compact, so $\mathcal{
     $A\subset \mathbb{R}^n$ is said to be of content-$0$ if $\forall \epsilon > 0$ it is contained in a finite union of rectangles whose sum of volumes is smaller than $\epsilon$.
 \end{definition}
 Note that $\mathbb{Z} \in \mathbb{R}$ is not of content-$0$.
+
+\section{Fubini's Theorem}
+Currently, we have the tools to define the integral, but we don't have the tools to compute the integral yet. We will start off with a loose example.
+\begin{example}
+    Integrate $xy$ on $[0,1]_x \times [0,1]_y.$ Fubini's theorem loosely tells us that we can fix $x$, and then fix $y$. Namely,
+    \begin{equation}
+        \int\limits_{[0,1]\times [0,1]}xy \dd{x}\dd{y} = \int_0^1 x \int_0^1 y \dd{y}\dd{x} = \frac{1}{4}
+    \end{equation}
+\end{example}
+We will now formally state it.
+\begin{theorem}
+    \textbf{(Tempting but Incorrect)} Let $A\subset \mathbb{R}_x^n$ and $B\subset \mathbb{R}_y^m$ be rectangles, set $R=A\times B \subset \mathbb{R}^{n+m}.$ Let
+    \begin{equation}
+        F:R \rightarrow \mathbb{R}
+    \end{equation}
+    be an integrable function. Let
+    \begin{equation}
+        g(x) = \int\limits_{B} f(x,y) \dd{y}.
+    \end{equation}
+    Then
+    \begin{equation}
+        \int\limits_R F =  \int\limits_A g \dd{x}
+    \end{equation}
+    Note that this is incorrect for general functions $f$, but is true if $f$ is continuous.
+\end{theorem}
+\begin{warning}
+    Note that we cannot define $g(x) = \int\limits_{B} f(x,y) \dd{y}$ and $\int\limits_A f = \int\limits_A g \dd{x}$ since while $f$ is integrable over $A\times B$, it is not necessarily integrable over $B$. For example, suppose we have a function defined as 
+    \begin{equation}
+        f(x,y) = \begin{cases}
+            0 & x < 0.5 \\ 
+            1 & x > 0.5 \\ 
+            1_{\mathbb{Q}}
+        \end{cases}
+    \end{equation}
+    where $1_{\mathbb{Q}}$ is the Dirichlet function, defined to be $1$ if rational and $0$ otherwise. $f$ will be integrable in the region $[0,1]\times [0,1]$ but is not integrable if we restrict it to the line $x=0.5.$ This is because the set of discontinuities is of measure $0$ in $\mathbb{R}^2$ but is of measure $1$ in $\mathbb{R}$.
+\end{warning}
+While it may be tempting to write the theorem as
+\begin{equation}
+    g(x) = \begin{cases}
+        \int\limits_B f(x,y) \dd{y} & \text{ f(x,-) is integrable} \\ 
+        17 & \text{ otherwise}.
+    \end{cases}
+\end{equation}
+and define 
+\begin{equation}
+    \int\limits_R f = \int\limits_A g
+\end{equation}
+which might solve the problem of discontinuities. However, this is still wrong. Here is a counter example.
+
+Consider $h(x) = \begin{cases}
+    \frac{1}{q} & x = \frac{p}{q} \\ 
+    0 & \text{otherwise}
+\end{cases}$ defined on $[0,1]$, known as Thomae's function, which looks like the below 
+\begin{center}
+    % Draw Thomae's Function in Tikzpicture
+    \begin{tikzpicture}[scale=8]
+        \draw [-stealth] (-0.1,0) -- (1.1,0);
+        \draw [-stealth] (0,-0.1) -- (0,0.6);
+        \foreach \X in {1,...,7}
+        {\ifnum\X=1
+        \else
+        \draw (0.02,1/\X) -- (-0.02,1/\X) node[left,xshift={(-(1+pow(-1,\X)))*3pt}]{};
+        \fi
+        }
+        \foreach \X [evaluate=\X as \Ymax using {int(\X-1)}]in {25,24,...,2}
+        {\foreach \Y in {1,...,\Ymax}
+         {\ifnum\X<6
+         \draw (\Y/\X,0.02) -- (\Y/\X,-0.02) node[below,fill=white]{$\frac{\Y}{\X}$};
+         \else
+         \draw[ultra thin] (\Y/\X,0.01) -- (\Y/\X,-0.01);
+         \fi
+         \pgfmathtruncatemacro{\TST}{gcd(\X,\Y)}
+         \ifnum\TST=1
+         \fill ({\Y/\X},1/\X) circle(0.2pt); 
+         \fi
+         }
+        }
+        \foreach \X in {0,1,...,80}
+        {\fill (\X/80,0) circle(0.2pt); }
+        \end{tikzpicture}
+\end{center}
+Note that $h(x)$ is discontinuous on $\mathbb{Q}$ but continuous on $\mathbb{Q}^C$. Since $\mathbb{Q}$ is of measure $0$, $h$ is integrable. The integral is
+\begin{equation}
+    \int_0^1 h(x) = 0
+\end{equation}
+and we can prove this by cropping the function about some arbitrary $y=c.$ Since there are only a finite amount of points above this line, we can ``chop'' them off. Now we extend this to two variables. Consider 
+\begin{equation}
+    f(x,y) = \begin{cases}
+        \frac{1}{q} & x,y\in \mathbb{Q}, x=\frac{p}{q} \\ 
+        0 & \text{otherwise}
+    \end{cases}
+\end{equation}
+defined on the set $[0,1]\times [0,1]$. If we try to compute $g$ using the second incorrect attempt, we get
+\begin{equation}
+    g(x) = \begin{cases}
+        0 & x \notin \mathbb{Q} \\ 
+        17 & x \notin \mathbb{Q}
+    \end{cases}
+\end{equation}
+but this is a ``bed of nails'' function with respect to $x$, and is not integrable, and thus we cannot expect an equality.
+
+Note that the choice for $g(x)$ might sound stupid. After all, we can choose $0$ instead of $17$, to remove the problematic values. However, we can just shift $f(x,y)$ to create another counterexample.
+
+Let us now state the correct theorem,
+\begin{theorem}
+    (Correct Fubini's Theorem) Let $A \subset \mathbb{R}_x^n$ and $B \subset \mathbb{R}_y^n$ be rectangles, set $R=A\times B \subset \mathbb{R}^{n+m}$. Let $f:R\rightarrow \mathbb{R}$ be an integrable function and let
+    \begin{align}
+        \ubar{g}(x) &= \int\limits_L f(x,y) \dd{y} = L(f(x,-)) = \sup \text{ lower sums for } f(x,-)\\ 
+        \bar{g}(x) &= \int\limits_U f(x,y) \dd{y} = U(f(x,-)) = \inf \text{ upper sums}
+    \end{align}
+    Then $\ubar{g}$ and $\bar{g}$ are integrable and 
+    \begin{equation}
+        \int\limits_R f = \int\limits_A \ubar{g} = \int\limits_A \bar{g}
+    \end{equation}
+\end{theorem}
+Let us go back to our previous counterexample. Now,
+\begin{align}
+    \ubar{g}(x) &= \begin{cases}
+        0 & x\notin \mathbb{Q} \\ 
+        0 & x\in \mathbb{Q}
+    \end{cases}
+\end{align}
+so $\ubar{g}(x)=0$ and $\int \ubar{g} = \int 0 = 0.$ On the other hand,
+\begin{equation}
+    \bar{g}(x) = \begin{cases}
+        0 & x\not\in Q \\ 
+        \frac{1}{q} & x \in Q
+    \end{cases}
+\end{equation}
+which is just $h(x)$ from earlier, which we have computed the integral already to be $0$. Now that we have worked through examples, but we have not yet proved the theorem yet.
+
+Before we do so, note that if $f$ is continuous, all that is a non-issue
+\begin{equation}
+    g(x) = \int\limits_B f(x,y) \dd{y} = \bar{g}(x)=\ubar{g}(x)
+\end{equation}
+for all $x$, so the naive Fubini's Theorem holds. Likewise, if $f(x,-)$ is integrable except for finitely many $x$'s, then the second attempt we made holds.
 \end{document}

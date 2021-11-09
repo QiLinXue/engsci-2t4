@@ -2,7 +2,7 @@
 \usepackage{qilin}
 \tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
 \title{CHE260: Heat Transfer}
-\author{QiLin Xue}
+\author{QiLin Xue and John Zhang}
 \date{Fall 2021}
 \usepackage{mathrsfs}
 \usetikzlibrary{arrows}
@@ -104,4 +104,120 @@
         \end{idea}
         \item To solve problems, we also need boundary conditions, and we often make the steady state assumption.
     \end{itemize}
+
+
+\section{Thermal resistance Networks and Contact resistance}
+read Chapter 17.2, 17.3
+
+We can think of a wall with a temperature difference across the two sides as a \textbf{thermal resistor} with a thermal resistance of $r_1 = \frac{T_1 - T_2}{\dot{Q}}$.
+
+In this way, we can put thermal resistors in series and get the equivalent thermal resistance as:
+
+$r_{equivalent} = \sum_{i} {r_i}$
+
+What about the situation where there are three materials stacked up on top of each other bridging two different temperatures, each with their own cross-sectional area?
+
+If we call the amount of heat transfer in each of these $\dot{Q}_1$, $\dot{Q}_2$, $\dot{Q}_3$, then the total heat transfer is
+
+$\dot{Q} = \dot{Q}_1 + \dot{Q}_2 + \dot{Q}_3$
+
+$\dot{Q} = \frac{T_1 - T_2}{\dot{r}_1} + \frac{T_1 - T_2}{\dot{r}_2} + \frac{T_1 - T_2}{\dot{r}_3}$
+
+= $(T_1 - T_2)[\frac{1}{r_1} + \frac{1}{r_2} + \frac{1}{r_3}]$
+
+= $\frac{T_1 - T_2}{r_{total}}$
+
+So our electrical analogy fits thermal resistance completely. Now we can apply this analogy on networks of thermal resistance.
+
+% \makebox[\textwidth]{\includegraphics[width=\paperwidth]{images/Thermal - electrical network.png}}
+
+However, a surface in real life is never completely smooth so never has a perfect contact. Between two rough surfaces, air is trapped and affects the heat conduction.
+
+Heat flux $\dot{q}$ $[\frac{w}{m^2}]$
+
+Define a thermal contact resistance
+$r_c = \frac{\delta T}{\dot{q}}$ $[\frac{m^2 * C}{W}]$
+
+Which is the resistance per unit area.
+
+reciprocal of $r_c$ is the $h_c$, the "thermal contact conductance".
+
+$h = \frac{1}{r_c} = \frac{\dot{q}}{\delta T}$
+
+$\dot{q} = h_c \delta T$
+
+Typical values of $h_c$:
+
+\begin{center}
+\begin{tabular}{||c c||} 
+ \hline
+ Metal Pairs & $h_c$ ($\frac{w}{m^2 * C}$) \\ [0.5ex] 
+ \hline\hline
+ Steel/Steel & ~$10^3$ \\ 
+ \hline
+ Al/Al & ~$10^4$ \\
+ \hline
+ Cu/Cu & ~$10^5$ \\
+ \hline
+\end{tabular}
+\end{center}
+
+\section{Contact resistance in Cylinders and Spheres}
+
+
+% \makebox[\textwidth]{\includegraphics[width=\paperwidth]{images/Cylinder.png}}
+
+For a long pipe, $\frac{dT}{dZ} << \frac{dT}{dr}$.
+So we approximate by assuming 1-dimensional conduction in the Z direction.
+
+$\frac{\partial}{\partial r}(r\frac{\partial T}{\partial r}) = 0$
+
+Boundary conditions:\\
+$r = r_1, T = T_1$ \\
+$r = r_2, T = T_2$
+\\
+\\
+
+Integrate:
+
+$r \frac{dT}{dr} = c_1$\\
+
+$\rightarrow \frac{dT}{dr} = \frac{c_1}{r}$\\
+$T(r) = c_1 ln(r) + c_2$\\
+\\
+
+Applying boundary conditions:
+
+$ T_1 = c_1 ln(r_1) + c_2$\\
+$ T_2 = c_1 ln(r_2) + c_2$\\
+\\
+
+$\rightarrow T_1 - T_2 = c_1[ln(r_1) - ln(r_2)]$ \\
+$\rightarrow c_1 = \frac{T_1 - T_2}{ln(\frac{r_1}{r_2})}$ \\
+$T_2 = \frac{T_1 - T_2}{ln(\frac{r_1}{r_2})}ln(r_2) + c_2$ \\
+$c_2 = T_2 - \frac{(T_1 - T_2}{ln(\frac{r_1}{r_2})} ln(r_2)$ \\
+
+
+$T(r) = \frac{T_1 - T_2}{ln(\frac{r_1}{r_2})} ln(r) - \frac{T_1 - T_2}{ln(\frac{r_1}{r_2})} ln(r_2) + T_2$ \\
+
+$T(r) = \frac{T_1 - T_2}{ln(\frac{r_1}{r_2})} ln(\frac{r}{r_2}) + T_2$ \\
+
+$\dot{Q}_{conduction} = -kA_1 \frac{dT}{dr}|_{(r = r_2)}$ \\
+$A_1 = 2\pi r_1 L$
+
+$\frac{dT}{dr}|_{(r = r_2)} = \frac{T_1 - T_2}{ln(\frac{r_1}{r_2})} ln(\frac{r_2}{r} - \frac{1}{r_2})|_{r = r_1}$
+
+Finally:
+$\dot{Q}_{conduction} = 2\pi L k \frac{T_1 - T_2}{ln(\frac{r_1}{r_2})})$
+
+Define thermal resistance of a cylinder:
+$r_{cylinder} = \frac{T_1 - T_2}{\dot{Q}_{conduction}}$
+$r_{cylinder} = \frac{ln(r_2/r_1)}{2\pi Lk}$
+
+For a sphere:
+$r_{sphere} = \frac{r_2 - r_1}{4\pi r_1 r_2 k}$
+
+\section{Conduction in Cylinders and Spheres}
+Let $h_1$ be the thermal contact conductance between the outer surface of the cylinder and the outer surface of the sphere. 
+
 \end{document}
