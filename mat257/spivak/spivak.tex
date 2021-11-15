@@ -28,8 +28,8 @@ We will motivate our proof with the following steps
 \begin{enumerate}
     \item Prove the last step, as it is the easiest.
     \item WLOG, make the simplifying assumption that $f'(a) = I$.
-    \item Define ``all-scale fidelity'' to describe how vectors in an open neighbourhood around $a$ are \textit{nearly} preserved. Then show that $f$ has all-scale fidelity on some neighbourhood $U$ around $a$. 
-    \item Given $y\in W$. We can construct a sequence $(x_i)$ such that $\{f(x_i)\}$ is a Cauchy sequence which converges to $y.$ 
+    \item Define ``all-scale fidelity'' to describe how vectors in an open neighbourhood around $a$ are \textit{nearly} preserved. Then show that $f$ has all-scale fidelity on some neighbourhood $U$ around $a$.
+    \item Given $y\in W$. We can construct a sequence $(x_i)$ such that $\{f(x_i)\}$ is a Cauchy sequence which converges to $y.$
     \item Show that there exists an $x\in V$ such that $f(x)=y,$ by invoking continuity. Said differently, $f|_V: V\rightarrow W$ is onto.
     \item Show that $f|_V: V\rightarrow W$ is injective (1-1).
     \item We have shown that $f^{-1}$ exists. We now need to show that $f^{-1}$ is continuous.
@@ -40,156 +40,156 @@ We will motivate our proof with the following steps
 Let us perform these steps:
 \begin{enumerate}
     \item Consider the following setup
-    \begin{center}
-        \begin{tikzpicture}
-            
-            \draw[] (0,0) rectangle (2,2);
-            \draw[->] (2.1, 1.3) -- (3.9, 1.3) node[above, midway] {$f$}; 
-            \draw[<-] (2.1, 0.3) -- (3.9, 0.3) node[below, midway] {$f^{-1}$}; 
+          \begin{center}
+              \begin{tikzpicture}
 
-            \draw[] (4,0) rectangle (6,2);
+                  \draw[] (0,0) rectangle (2,2);
+                  \draw[->] (2.1, 1.3) -- (3.9, 1.3) node[above, midway] {$f$};
+                  \draw[<-] (2.1, 0.3) -- (3.9, 0.3) node[below, midway] {$f^{-1}$};
 
-            
-            \filldraw[black] (1,1.3) circle (1pt) node[anchor=south]{$a$};
-            \filldraw[black] (5,1.3) circle (1pt) node[anchor=south]{$f(a)$};
-            \filldraw[black] (1,0.7) circle (1pt) node[anchor=north]{$f^{-1}(y)$};
-            \filldraw[black] (5,0.7) circle (1pt) node[anchor=north]{$y$};
+                  \draw[] (4,0) rectangle (6,2);
 
-        \end{tikzpicture}
-    \end{center}
-    Recall that $f \circ f^{-1} = I$, so differentiating and applying the chain rule we can write 
-    \begin{equation}
-        f'(f^{-1}(y)) \cdot (f^{-1})'(y) = I \implies (f^{-1})'(y) = [f'(f^{-1}(y))]^{-1}
-    \end{equation}
+
+                  \filldraw[black] (1,1.3) circle (1pt) node[anchor=south]{$a$};
+                  \filldraw[black] (5,1.3) circle (1pt) node[anchor=south]{$f(a)$};
+                  \filldraw[black] (1,0.7) circle (1pt) node[anchor=north]{$f^{-1}(y)$};
+                  \filldraw[black] (5,0.7) circle (1pt) node[anchor=north]{$y$};
+
+              \end{tikzpicture}
+          \end{center}
+          Recall that $f \circ f^{-1} = I$, so differentiating and applying the chain rule we can write
+          \begin{equation}
+              f'(f^{-1}(y)) \cdot (f^{-1})'(y) = I \implies (f^{-1})'(y) = [f'(f^{-1}(y))]^{-1}
+          \end{equation}
     \item We are allowed to write $f'(a) = I$ since every invertible matrix is just the identity with a change of basis. More concretely, consider another composition represented below, where $L=f'(a):$
-    \begin{center}
-        \begin{tikzpicture}
-            
-            \draw[] (0,0) rectangle (2,2);
-            \draw[->] (2.1, 1) -- (3.9, 1) node[above, midway] {$f$}; 
-            \draw[->] (6.1, 1) -- (7.9, 1) node[above, midway] {$L^{-1}$}; 
+          \begin{center}
+              \begin{tikzpicture}
 
-            \draw[] (4,0) rectangle (6,2);
-            \draw[] (8,0) rectangle (10,2);
+                  \draw[] (0,0) rectangle (2,2);
+                  \draw[->] (2.1, 1) -- (3.9, 1) node[above, midway] {$f$};
+                  \draw[->] (6.1, 1) -- (7.9, 1) node[above, midway] {$L^{-1}$};
 
-            
-            \filldraw[black] (1,1.1) circle (1pt) node[anchor=south]{$a$};
-            \filldraw[black] (5,1.1) circle (1pt) node[anchor=south]{$b=f(a)$};
-            \filldraw[black] (9,1.1) circle (1pt) node[anchor=south]{$c=L^{-1}(b)$};
+                  \draw[] (4,0) rectangle (6,2);
+                  \draw[] (8,0) rectangle (10,2);
 
-            \draw [->,black] (1,-0.1) to [out=-10,in=190] node[below, midway] {$g$} (9,-0.1);
 
-        \end{tikzpicture}
-    \end{center}
-    By the chain rule, we have $g'(a) = L^{-1} \circ f'(a)$ since $L^{-1}$ is a linear transformation. Note that $f'(a) = L$, so $g'(a) = I$ is the identity.
+                  \filldraw[black] (1,1.1) circle (1pt) node[anchor=south]{$a$};
+                  \filldraw[black] (5,1.1) circle (1pt) node[anchor=south]{$b=f(a)$};
+                  \filldraw[black] (9,1.1) circle (1pt) node[anchor=south]{$c=L^{-1}(b)$};
 
-    If the IFT was true for functions whose differential is $I$, then it's true for $g$, so there exists $g^{-1}$. Also, $f^{-1} = g^{-1} \circ L^{-1}.$ Therefore, if $g^{-1}$ is continuously differentiable, then $f^{-1}$ would also be continuously differentiable. Thus, it is sufficient to only look at the case where the differential is the identity.
+                  \draw [->,black] (1,-0.1) to [out=-10,in=190] node[below, midway] {$g$} (9,-0.1);
+
+              \end{tikzpicture}
+          \end{center}
+          By the chain rule, we have $g'(a) = L^{-1} \circ f'(a)$ since $L^{-1}$ is a linear transformation. Note that $f'(a) = L$, so $g'(a) = I$ is the identity.
+
+          If the IFT was true for functions whose differential is $I$, then it's true for $g$, so there exists $g^{-1}$. Also, $f^{-1} = g^{-1} \circ L^{-1}.$ Therefore, if $g^{-1}$ is continuously differentiable, then $f^{-1}$ would also be continuously differentiable. Thus, it is sufficient to only look at the case where the differential is the identity.
 
     \item Consider a small neighbourhood around $a$. Intuitively, we should expect vectors and the image of the vectors (which need not start at $a$) to look roughly the same.
-    
-    Specifically, $f$ has \textbf{all-scale-fidelity} on some neighbourhood $U$ of $a$ with \textit{fidelity factor} $\frac{1}{257}.$ This means for all $x_1,x_2 \in U$, we have
-    \begin{equation}
-        |(x_2-x_1) - (f(x_2)-f(x_1))| \le \frac{1}{257}|x_2-x_1|
-    \end{equation}
-    \begin{proof}
-        From a previous theorem, if we have a function $g:\mathbb{R}^n\rightarrow\mathbb{R}^n$ whose derivative $|g'| < M$ is bounded in some open set, then we can write 
-        \begin{equation}
-            |g(x_1)-g(x_2)| < n^2M|x_1-x_2|.
-        \end{equation} 
-        Now consider $g(x) = f(x) - x$. The derivative is $g'=f'-I$ so $g'(a)=0.$ Therefore, there exists an open rectangle $U$ of $a$ where we can say $|g'(x)| \le \frac{1}{257n^2}.$
 
-        By the previous theorem, for any $x_1,x_2 \in U$, we have
-        \begin{equation}
-            |g(x_1)-g(x_2)| \le \frac{1}{257}|x_1-x_2|
-        \end{equation}
-        However, the LHS is just 
-        \begin{align*}
-            |g(x_1)-g(x_2)| &= |f(x_1)-x_1-(f(x_2)-x_2)| \\ 
-            &= |(x_2-x_1)-(f(x_2)-f(x_1))|
-        \end{align*}
-    \end{proof}
+          Specifically, $f$ has \textbf{all-scale-fidelity} on some neighbourhood $U$ of $a$ with \textit{fidelity factor} $\frac{1}{257}.$ This means for all $x_1,x_2 \in U$, we have
+          \begin{equation}
+              |(x_2-x_1) - (f(x_2)-f(x_1))| \le \frac{1}{257}|x_2-x_1|
+          \end{equation}
+          \begin{proof}
+              From a previous theorem, if we have a function $g:\mathbb{R}^n\rightarrow\mathbb{R}^n$ whose derivative $|g'| < M$ is bounded in some open set, then we can write
+              \begin{equation}
+                  |g(x_1)-g(x_2)| < n^2M|x_1-x_2|.
+              \end{equation}
+              Now consider $g(x) = f(x) - x$. The derivative is $g'=f'-I$ so $g'(a)=0.$ Therefore, there exists an open rectangle $U$ of $a$ where we can say $|g'(x)| \le \frac{1}{257n^2}.$
+
+              By the previous theorem, for any $x_1,x_2 \in U$, we have
+              \begin{equation}
+                  |g(x_1)-g(x_2)| \le \frac{1}{257}|x_1-x_2|
+              \end{equation}
+              However, the LHS is just
+              \begin{align*}
+                  |g(x_1)-g(x_2)| & = |f(x_1)-x_1-(f(x_2)-x_2)|   \\
+                                  & = |(x_2-x_1)-(f(x_2)-f(x_1))|
+              \end{align*}
+          \end{proof}
     \item Given $y\in W$, we wish to find an $x \in V$ such that $f(x)=y$. We will travel this direction in $W$, but we may ``miss'' by a bit. We can then repeat this process, with each step we travel in the direction of $y$.
-    
-    Put this formally, let $W=B_{r/2}(b).$ Given $y\in W$, we claim that there exists an $x\in B_r(a)$ such that $f(x)=y.$ Indeed,
-    \begin{align}
-        x_1 &= a+(y-b) \\ 
-        x_2 &= x_1+(y-f(x_1)) \\ 
-        x_3 &= x_2+(y-f(x_2)) \\ 
-        x_n &= x_{n-1} + (y-f(x_{n-1}))
-    \end{align}
-    But the difference between any two consecutive terms is just the LHS of the all-scale fidelity
-    \begin{align}
-        |x_n-x_{n-1}| &= |(x_{n-1}-x_{n-2})-(f(x_{n-1}-f(x_{n-2}))| \\ 
-        &\le \frac{1}{257}|x_{n-1}-x_{n-2}| \\ 
-        &\le \frac{1}{257^{n-1}} |x_1-x_0| \\ 
-        &\le \frac{1}{257^{n-1}} | y-b| \\ 
-        &\le \frac{1}{257^{n-1}} \frac{r}{2}
-    \end{align}
-    We now need to show that each $x_i$ is within the ball of radius $r$ around $a$ (since this is only when all-scale fidelity is defined). It can be shown via induction that $|x_n-a| \le r.$
 
-    Finally, we show that $(x_n)$ is a Cauchy-Sequence. We can immediately show this by noting that
-    \begin{equation}
-        |x_n-x_m| \le \frac{1}{257^m}r
-    \end{equation}
-    so $(x_n)$ is cauchy.
+          Put this formally, let $W=B_{r/2}(b).$ Given $y\in W$, we claim that there exists an $x\in B_r(a)$ such that $f(x)=y.$ Indeed,
+          \begin{align}
+              x_1 & = a+(y-b)                  \\
+              x_2 & = x_1+(y-f(x_1))           \\
+              x_3 & = x_2+(y-f(x_2))           \\
+              x_n & = x_{n-1} + (y-f(x_{n-1}))
+          \end{align}
+          But the difference between any two consecutive terms is just the LHS of the all-scale fidelity
+          \begin{align}
+              |x_n-x_{n-1}| & = |(x_{n-1}-x_{n-2})-(f(x_{n-1}-f(x_{n-2}))| \\
+                            & \le \frac{1}{257}|x_{n-1}-x_{n-2}|           \\
+                            & \le \frac{1}{257^{n-1}} |x_1-x_0|            \\
+                            & \le \frac{1}{257^{n-1}} | y-b|               \\
+                            & \le \frac{1}{257^{n-1}} \frac{r}{2}
+          \end{align}
+          We now need to show that each $x_i$ is within the ball of radius $r$ around $a$ (since this is only when all-scale fidelity is defined). It can be shown via induction that $|x_n-a| \le r.$
+
+          Finally, we show that $(x_n)$ is a Cauchy-Sequence. We can immediately show this by noting that
+          \begin{equation}
+              |x_n-x_m| \le \frac{1}{257^m}r
+          \end{equation}
+          so $(x_n)$ is cauchy.
     \item While we have shown that $f(x_n)$ converges to $y$, we have not yet shown that this is possible, i.e. what if there is a discontinuity? We can invoke the continuity of $f$ to show that there does exist such an $x_n.$ We have
-    \begin{equation}
-        |f(x_n)-y| = |x_{n+1}-x_n| \le \frac{1}{257^n}\frac{r}{2} \rightarrow 0
-    \end{equation}
-    so from continuity, there exists an $x$ such that
-    \begin{equation}
-        |f(x)-y| = \lim_{n\to \infty} |f(x_n)-y|  = 0.
-    \end{equation}
-    Therefore, $f(x)=y.$ We can now define $V=F^{-1}(W)$ and now 
-    \begin{equation}
-        F|_V: V\rightarrow W
-    \end{equation}
-    is onto and 1-1.
+          \begin{equation}
+              |f(x_n)-y| = |x_{n+1}-x_n| \le \frac{1}{257^n}\frac{r}{2} \rightarrow 0
+          \end{equation}
+          so from continuity, there exists an $x$ such that
+          \begin{equation}
+              |f(x)-y| = \lim_{n\to \infty} |f(x_n)-y|  = 0.
+          \end{equation}
+          Therefore, $f(x)=y.$ We can now define $V=F^{-1}(W)$ and now
+          \begin{equation}
+              F|_V: V\rightarrow W
+          \end{equation}
+          is onto and 1-1.
     \item We have constructed $x$ in one such way. How do we know that if we use a different procedure, we find a different $x$?
-    
-    Assume that $f(x_1)=f(x_2)$ where $x_{1,2} \in B_r(a).$ Then by ASF,
-    \begin{align}
-        |(x_1-x_2)-(f(x_1)-f(x_2))| &\le \frac{1}{257}|x_1-x_2| \\ 
-        |x_1-x_2| & \le \frac{1}{257}|x_1-x_2|
-    \end{align}
-    which is true if and only if $x_1=x_2.$
+
+          Assume that $f(x_1)=f(x_2)$ where $x_{1,2} \in B_r(a).$ Then by ASF,
+          \begin{align}
+              |(x_1-x_2)-(f(x_1)-f(x_2))| & \le \frac{1}{257}|x_1-x_2| \\
+              |x_1-x_2|                   & \le \frac{1}{257}|x_1-x_2|
+          \end{align}
+          which is true if and only if $x_1=x_2.$
 
     \item It might seem that continuity for $f^{-1}$ is cheap. After all, the difference between two vectors in both the input and image space is roughly the same. However, the mistake is written in terms of $|x_1-x_2|$, so this reasoning becomes circular. We need to reformulate the ASF principle such that the mistake is in terms of $|y_1-y_2|.$
-    
-    To simplify things, let $\alpha=x_1-x_2$ and $\beta=f(x_1)-f(x_2).$ Then ASF says that
-    \begin{equation}
-        |\alpha-\beta | \le \frac{1}{257}|\alpha|
-    \end{equation}
-    But $\alpha = \beta + \alpha - \beta$. By the triangle inequality, this becomes
-    \begin{align}
-        |\alpha-\beta | &\le \frac{1}{257}(|\beta|+|\alpha-\beta|) \\ 
-        \frac{256}{257}|\alpha-\beta| &\le \frac{1}{257}|\beta \\ 
-        |\alpha-\beta| &\le \frac{1}{256}\beta
-    \end{align}
-    
-    \item Let us first show that $f^{-1}$ is differentiable at the point $b$. We can write 
-    \begin{equation}
-        f^{-1}(b+h) = f^{-1}(b) + I\cdot h + e(h)
-    \end{equation}
-    We want to show that $e(h)$ is tiny. We want to rearrange this in a form such that we can apply all scale fidelity. Let $b+h = y_2$ and let $x_2=f^{-1}(y_2).$ Let $b=y_1$ and $a=x_1$, so the above just becomes 
-    \begin{equation}
-        x_2 = x_1 + y_2-y_1 + e(h)
-    \end{equation}
-    However the error once rearranged becomes 
-    \begin{equation}
-        |e(h)| = |(x_2-x_1)-(y_2-y_1)| \le \frac{1}{256}|y_2-y_1|
-    \end{equation}
-    Since $y_2-y_1=h$, we end up with 
-    \begin{equation}
-        \frac{|e(h)|}{|h|} \le \frac{1}{256}
-    \end{equation}
-    Now we have a problem: we want to show that this approaches zero. This condition is not good enough. However, this constant was chosen arbitrarily, so we can make $\frac{|e(h)|}{|h|}$ as small as possible.
+
+          To simplify things, let $\alpha=x_1-x_2$ and $\beta=f(x_1)-f(x_2).$ Then ASF says that
+          \begin{equation}
+              |\alpha-\beta | \le \frac{1}{257}|\alpha|
+          \end{equation}
+          But $\alpha = \beta + \alpha - \beta$. By the triangle inequality, this becomes
+          \begin{align}
+              |\alpha-\beta |               & \le \frac{1}{257}(|\beta|+|\alpha-\beta|) \\
+              \frac{256}{257}|\alpha-\beta| & \le \frac{1}{257}|\beta                   \\
+              |\alpha-\beta|                & \le \frac{1}{256}\beta
+          \end{align}
+
+    \item Let us first show that $f^{-1}$ is differentiable at the point $b$. We can write
+          \begin{equation}
+              f^{-1}(b+h) = f^{-1}(b) + I\cdot h + e(h)
+          \end{equation}
+          We want to show that $e(h)$ is tiny. We want to rearrange this in a form such that we can apply all scale fidelity. Let $b+h = y_2$ and let $x_2=f^{-1}(y_2).$ Let $b=y_1$ and $a=x_1$, so the above just becomes
+          \begin{equation}
+              x_2 = x_1 + y_2-y_1 + e(h)
+          \end{equation}
+          However the error once rearranged becomes
+          \begin{equation}
+              |e(h)| = |(x_2-x_1)-(y_2-y_1)| \le \frac{1}{256}|y_2-y_1|
+          \end{equation}
+          Since $y_2-y_1=h$, we end up with
+          \begin{equation}
+              \frac{|e(h)|}{|h|} \le \frac{1}{256}
+          \end{equation}
+          Now we have a problem: we want to show that this approaches zero. This condition is not good enough. However, this constant was chosen arbitrarily, so we can make $\frac{|e(h)|}{|h|}$ as small as possible.
     \item Similarly, the choice of $b$ was also arbitrary. If the conditions for the IFT hold at $a$, then they have to hold in an open set near $a$ (due to continuity). Therefore, we can rewrite the entire proof by considering points near $b$ and not just $b$.
-    \item To show $f^{-1}$ is continuously differentiable, we can use the chain rule: 
-    \begin{equation}
-        (f^{-1})'(y) = [f'(f^{-1}(y))]^{-1}
-    \end{equation}
-    We can conclude that $f^{-1}(y)$ is continuous in $y$ and $f'(x)$ is continuous in $x$. Therefore, $M \mapsto M^{-1}$ is a continuous operation on matrices. Specifically, it is a function that maps $\mathbb{R}^{n^2}\rightarrow \mathbb{R}^{n^2}.$ This is not everywhere defined. But where defined, the inverse is continuous by Cramer's Law. There is an explicit formula for the inverse, so this map is continuous.
+    \item To show $f^{-1}$ is continuously differentiable, we can use the chain rule:
+          \begin{equation}
+              (f^{-1})'(y) = [f'(f^{-1}(y))]^{-1}
+          \end{equation}
+          We can conclude that $f^{-1}(y)$ is continuous in $y$ and $f'(x)$ is continuous in $x$. Therefore, $M \mapsto M^{-1}$ is a continuous operation on matrices. Specifically, it is a function that maps $\mathbb{R}^{n^2}\rightarrow \mathbb{R}^{n^2}.$ This is not everywhere defined. But where defined, the inverse is continuous by Cramer's Law. There is an explicit formula for the inverse, so this map is continuous.
 \end{enumerate}
 
 \newpage
@@ -202,7 +202,7 @@ Let us perform these steps:
         \item $\sum \text{vol}(R_i) < \epsilon.$
     \end{enumerate}
 \end{definition}
-For example, finite \& countable sets, along with $\mathbb{R} \subset \mathbb{R}^2$ are of measure $0$. 
+For example, finite \& countable sets, along with $\mathbb{R} \subset \mathbb{R}^2$ are of measure $0$.
 \begin{definition}
     A set $X$ is called \textbf{countably infinite} if there is a surjective function $F$ such that $F: \mathbb{N} \onto X$
 \end{definition}
@@ -211,28 +211,28 @@ A few facts that follows:
     \item Finite sets are countable. (Typically, we exclude this from the definition.)
     \item Subsets of countable sets are countable. (Proof: Elements in a countable set can be enumerated. Simply select a new enumeration.)
     \item A finite/countable union of countable sets is countable. If $A_i$ is countable for all $i$, then $\bigcup A_i$ is countable.
-    \begin{proof}
-        Consider
-        \begin{align*}
-            A_1:&\quad a_{11}\quad a_{12}\quad a_{13}\quad \cdots \\
-            A_2:&\quad a_{21}\quad a_{22}\quad a_{23}\quad \cdots \\ 
-            A_3:&\quad a_{31}\quad a_{32}\quad a_{33}\quad \cdots \\ 
-        \end{align*}
-        To enumerate the union, we look at the diagonals, i.e.
-        \begin{equation}
-            \bigcup A = \{a_{11}, a_{12}, a_{21}, a_{13}, a_{22}, a_{31}, \dots \}
-        \end{equation}
-    \end{proof}
-    Another fact that immediately follows is that the set of integers is countable, since $\mathbb{Z} = (-\mathbb{N})\cup \{0\} \cup \mathbb{N}$
+          \begin{proof}
+              Consider
+              \begin{align*}
+                  A_1: & \quad a_{11}\quad a_{12}\quad a_{13}\quad \cdots \\
+                  A_2: & \quad a_{21}\quad a_{22}\quad a_{23}\quad \cdots \\
+                  A_3: & \quad a_{31}\quad a_{32}\quad a_{33}\quad \cdots \\
+              \end{align*}
+              To enumerate the union, we look at the diagonals, i.e.
+              \begin{equation}
+                  \bigcup A = \{a_{11}, a_{12}, a_{21}, a_{13}, a_{22}, a_{31}, \dots \}
+              \end{equation}
+          \end{proof}
+          Another fact that immediately follows is that the set of integers is countable, since $\mathbb{Z} = (-\mathbb{N})\cup \{0\} \cup \mathbb{N}$
     \item If $A,B$ are countable, then $A\times B$ is countable.
-    \begin{proof}
-        We can prove this similar to how a countable union of sets is countable. Alternatively, we can write 
-        \begin{equation}
-            A\times B = \bigcup_{b\in B} A \times \{b\}
-        \end{equation}
-        And each set $A\times \{b\}$ is coutnable.
-    \end{proof}
-    A fact that follows is that the set of rationals is countable, since $\mathbb{Q} \subset \mathbb{Z}\times \mathbb{Z}.$
+          \begin{proof}
+              We can prove this similar to how a countable union of sets is countable. Alternatively, we can write
+              \begin{equation}
+                  A\times B = \bigcup_{b\in B} A \times \{b\}
+              \end{equation}
+              And each set $A\times \{b\}$ is coutnable.
+          \end{proof}
+          A fact that follows is that the set of rationals is countable, since $\mathbb{Q} \subset \mathbb{Z}\times \mathbb{Z}.$
 \end{enumerate}
 It may seem a bit suspicious since up to this point, everything is countable. However, there are sets that are uncountable!
 \begin{theorem}
@@ -245,18 +245,18 @@ We can now state and prove a few statements about measure-$0$.
 \begin{enumerate}
     \item If $A$ is measure-$0$ and $B\subset A$, then $B$ is measure-$0$.
     \item A countable union of measure-$0$ sets is measure-$0$.
-    \begin{proof}
-        Suppose $\forall i$, $A_i$ is of measure $0$, so given $\epsilon > 0$, we can cover $A_i$ with countably many rectangles whose $\sum\text{vols} < \frac{\epsilon}{2^i}$. Take all the rectangles above together, as a countable collection of countable sets, this collection of rectangles is countable, and 
-        \begin{equation}
-            \sum\text{vols} < \sum_{i=1}^\infty \frac{\epsilon}{2^i} = \epsilon.
-        \end{equation} 
-        Finally this collection covers
-        \begin{equation}
-            \bigcup A_i = A
-        \end{equation}
-        so $A$ is measure-$0$.
-    \end{proof}
-    Note that we have stated before that $\mathbb{R} \subset \mathbb{R}^2$  
+          \begin{proof}
+              Suppose $\forall i$, $A_i$ is of measure $0$, so given $\epsilon > 0$, we can cover $A_i$ with countably many rectangles whose $\sum\text{vols} < \frac{\epsilon}{2^i}$. Take all the rectangles above together, as a countable collection of countable sets, this collection of rectangles is countable, and
+              \begin{equation}
+                  \sum\text{vols} < \sum_{i=1}^\infty \frac{\epsilon}{2^i} = \epsilon.
+              \end{equation}
+              Finally this collection covers
+              \begin{equation}
+                  \bigcup A_i = A
+              \end{equation}
+              so $A$ is measure-$0$.
+          \end{proof}
+          Note that we have stated before that $\mathbb{R} \subset \mathbb{R}^2$
 \end{enumerate}
 \begin{warning}
     Countable sets are measure-$0$, but the converse is not true! For example, $\mathbb{R}\subset\mathbb{R}^2$ has measure-$0$, but is not countable.
@@ -265,7 +265,7 @@ Another Example: Let $\mathcal{C}$ be the cantor set $\subset [0,1]$ which is un
 \begin{equation}
     \mathcal{C} = \{0.C_1C_2C_3C_4\dots: C_i \in \{0,2\}\}
 \end{equation}
-$C$ is uncountable for the same reason as $\mathbb{R}$. Define $C_k$ to be the union of $2^k$ intervals of length $\frac{1}{3^k}$. THerefore, 
+$C$ is uncountable for the same reason as $\mathbb{R}$. Define $C_k$ to be the union of $2^k$ intervals of length $\frac{1}{3^k}$. THerefore,
 \begin{equation}
     C \subset C_k
 \end{equation}
@@ -305,11 +305,11 @@ We will now formally state it.
     Note that this is incorrect for general functions $f$, but is true if $f$ is continuous.
 \end{theorem}
 \begin{warning}
-    Note that we cannot define $g(x) = \int\limits_{B} f(x,y) \dd{y}$ and $\int\limits_A f = \int\limits_A g \dd{x}$ since while $f$ is integrable over $A\times B$, it is not necessarily integrable over $B$. For example, suppose we have a function defined as 
+    Note that we cannot define $g(x) = \int\limits_{B} f(x,y) \dd{y}$ and $\int\limits_A f = \int\limits_A g \dd{x}$ since while $f$ is integrable over $A\times B$, it is not necessarily integrable over $B$. For example, suppose we have a function defined as
     \begin{equation}
         f(x,y) = \begin{cases}
-            0 & x < 0.5 \\ 
-            1 & x > 0.5 \\ 
+            0 & x < 0.5 \\
+            1 & x > 0.5 \\
             1_{\mathbb{Q}}
         \end{cases}
     \end{equation}
@@ -318,63 +318,63 @@ We will now formally state it.
 While it may be tempting to write the theorem as
 \begin{equation}
     g(x) = \begin{cases}
-        \int\limits_B f(x,y) \dd{y} & \text{ f(x,-) is integrable} \\ 
-        17 & \text{ otherwise}.
+        \int\limits_B f(x,y) \dd{y} & \text{ f(x,-) is integrable} \\
+        17                          & \text{ otherwise}.
     \end{cases}
 \end{equation}
-and define 
+and define
 \begin{equation}
     \int\limits_R f = \int\limits_A g
 \end{equation}
 which might solve the problem of discontinuities. However, this is still wrong. Here is a counter example.
 
 Consider $h(x) = \begin{cases}
-    \frac{1}{q} & x = \frac{p}{q} \\ 
-    0 & \text{otherwise}
-\end{cases}$ defined on $[0,1]$, known as Thomae's function, which looks like the below 
+        \frac{1}{q} & x = \frac{p}{q}  \\
+        0           & \text{otherwise}
+    \end{cases}$ defined on $[0,1]$, known as Thomae's function, which looks like the below
 \begin{center}
     % Draw Thomae's Function in Tikzpicture
     \begin{tikzpicture}[scale=8]
         \draw [-stealth] (-0.1,0) -- (1.1,0);
         \draw [-stealth] (0,-0.1) -- (0,0.6);
         \foreach \X in {1,...,7}
-        {\ifnum\X=1
-        \else
-        \draw (0.02,1/\X) -- (-0.02,1/\X) node[left,xshift={(-(1+pow(-1,\X)))*3pt}]{};
-        \fi
-        }
+            {\ifnum\X=1
+                \else
+                    \draw (0.02,1/\X) -- (-0.02,1/\X) node[left,xshift={(-(1+pow(-1,\X)))*3pt}]{};
+                \fi
+            }
         \foreach \X [evaluate=\X as \Ymax using {int(\X-1)}]in {25,24,...,2}
         {\foreach \Y in {1,...,\Ymax}
-         {\ifnum\X<6
-         \draw (\Y/\X,0.02) -- (\Y/\X,-0.02) node[below,fill=white]{$\frac{\Y}{\X}$};
-         \else
-         \draw[ultra thin] (\Y/\X,0.01) -- (\Y/\X,-0.01);
-         \fi
-         \pgfmathtruncatemacro{\TST}{gcd(\X,\Y)}
-         \ifnum\TST=1
-         \fill ({\Y/\X},1/\X) circle(0.2pt); 
-         \fi
-         }
+            {\ifnum\X<6
+                    \draw (\Y/\X,0.02) -- (\Y/\X,-0.02) node[below,fill=white]{$\frac{\Y}{\X}$};
+                \else
+                    \draw[ultra thin] (\Y/\X,0.01) -- (\Y/\X,-0.01);
+                \fi
+                \pgfmathtruncatemacro{\TST}{gcd(\X,\Y)}
+                \ifnum\TST=1
+                    \fill ({\Y/\X},1/\X) circle(0.2pt);
+                \fi
+            }
         }
         \foreach \X in {0,1,...,80}
-        {\fill (\X/80,0) circle(0.2pt); }
-        \end{tikzpicture}
+            {\fill (\X/80,0) circle(0.2pt); }
+    \end{tikzpicture}
 \end{center}
 Note that $h(x)$ is discontinuous on $\mathbb{Q}$ but continuous on $\mathbb{Q}^C$. Since $\mathbb{Q}$ is of measure $0$, $h$ is integrable. The integral is
 \begin{equation}
     \int_0^1 h(x) = 0
 \end{equation}
-and we can prove this by cropping the function about some arbitrary $y=c.$ Since there are only a finite amount of points above this line, we can ``chop'' them off. Now we extend this to two variables. Consider 
+and we can prove this by cropping the function about some arbitrary $y=c.$ Since there are only a finite amount of points above this line, we can ``chop'' them off. Now we extend this to two variables. Consider
 \begin{equation}
     f(x,y) = \begin{cases}
-        \frac{1}{q} & x,y\in \mathbb{Q}, x=\frac{p}{q} \\ 
-        0 & \text{otherwise}
+        \frac{1}{q} & x,y\in \mathbb{Q}, x=\frac{p}{q} \\
+        0           & \text{otherwise}
     \end{cases}
 \end{equation}
 defined on the set $[0,1]\times [0,1]$. If we try to compute $g$ using the second incorrect attempt, we get
 \begin{equation}
     g(x) = \begin{cases}
-        0 & x \notin \mathbb{Q} \\ 
+        0  & x \notin \mathbb{Q} \\
         17 & x \notin \mathbb{Q}
     \end{cases}
 \end{equation}
@@ -386,25 +386,25 @@ Let us now state the correct theorem,
 \begin{theorem}
     (Correct Fubini's Theorem) Let $A \subset \mathbb{R}_x^n$ and $B \subset \mathbb{R}_y^n$ be rectangles, set $R=A\times B \subset \mathbb{R}^{n+m}$. Let $f:R\rightarrow \mathbb{R}$ be an integrable function and let
     \begin{align}
-        \ubar{g}(x) &= \int\limits_L f(x,y) \dd{y} = L(f(x,-)) = \sup \text{ lower sums for } f(x,-)\\ 
-        \bar{g}(x) &= \int\limits_U f(x,y) \dd{y} = U(f(x,-)) = \inf \text{ upper sums}
+        \ubar{g}(x) & = \int\limits_L f(x,y) \dd{y} = L(f(x,-)) = \sup \text{ lower sums for } f(x,-) \\
+        \bar{g}(x)  & = \int\limits_U f(x,y) \dd{y} = U(f(x,-)) = \inf \text{ upper sums}
     \end{align}
-    Then $\ubar{g}$ and $\bar{g}$ are integrable and 
+    Then $\ubar{g}$ and $\bar{g}$ are integrable and
     \begin{equation}
-        \int\limits_R f = \int\limits_A \ubar{g} = \int\limits_A \bar{g}
+        \int\limits_R f\dd{x}\dd{y} = \int\limits_A \ubar{g} \dd{x} = \int\limits_A \bar{g} \dd{x}
     \end{equation}
 \end{theorem}
 Let us go back to our previous counterexample. Now,
 \begin{align}
-    \ubar{g}(x) &= \begin{cases}
-        0 & x\notin \mathbb{Q} \\ 
+    \ubar{g}(x) & = \begin{cases}
+        0 & x\notin \mathbb{Q} \\
         0 & x\in \mathbb{Q}
     \end{cases}
 \end{align}
 so $\ubar{g}(x)=0$ and $\int \ubar{g} = \int 0 = 0.$ On the other hand,
 \begin{equation}
     \bar{g}(x) = \begin{cases}
-        0 & x\not\in Q \\ 
+        0           & x\not\in Q \\
         \frac{1}{q} & x \in Q
     \end{cases}
 \end{equation}
@@ -415,4 +415,93 @@ Before we do so, note that if $f$ is continuous, all that is a non-issue
     g(x) = \int\limits_B f(x,y) \dd{y} = \bar{g}(x)=\ubar{g}(x)
 \end{equation}
 for all $x$, so the naive Fubini's Theorem holds. Likewise, if $f(x,-)$ is integrable except for finitely many $x$'s, then the second attempt we made holds.
+\begin{proof}
+    We sketch out the proof as follows:
+    \begin{enumerate}
+        \item Bound $L(f,P) \le L(\ubar{g},P_A)$ and $U(f,P) \le U(\bar{g}, P_A)$.
+        \item Show that $\bar{g}$ and $\ubar{g}$ is integrable.
+    \end{enumerate}
+    We will now carry out these steps:
+    \begin{enumerate}
+        \item Consider a partition $P$ of $R \subset \mathbb{R}^{n+m},$ which is illustrated below. We can restrict our attention to the first $n$ and the last $m$ coordinates. We can always write it as $P_A \times P_B,$ where $P_A$ is a partition of $A$ and $P_B$ is a partition of $B$.
+              \begin{center}
+                  \begin{tikzpicture}
+                      % Draw Rectangle
+                      \draw (-2,-1) rectangle (2,1);
+                      \foreach \x in {-2,-1.6,...,2}
+                          {
+                              \draw[dotted] (\x,-1) -- (\x,1);
+                          }
+                      \foreach \y in {-1,-0.6,...,1}
+                          {
+                              \draw[dotted] (-2,\y) -- (2,\y);
+                          }
+                      \filldraw[gray!30] (0.4,0.2) rectangle (0.8,0.6);
+                      \node (S) at (0.6,0.4) {$S$};
+                      % Node at (1.6, 0.4)
+
+                  \end{tikzpicture}
+              \end{center}
+              If $S\in P$, we can write $S = S'\times S''$ where $S' \in P_A$ and $S'' \in P_B$.
+
+              Given this partition $P=P_A \times P_B$ of $R$, we have
+              \begin{align}
+                  L(f,P) & = \sum_{S\in P} V(S) \cdot \inf\limits_{(x,y)\in S} f(x,y)                                               \\
+                         & = \sum_{\substack{S'\in P_A                                                                              \\ S'' \in P_B}} V(S')V(S'') \cdot \inf\limits_{x \in S'} \inf\limits_{y \in S''} f(x,y)\\
+                         & = \sum_{S' \in P_A}V(S') \sum_{S'' \in P_B} V(S'') \inf\limits_{x \in S'} \inf\limits_{y \in S''} f(x,y)
+              \end{align}
+              We are aiming to pull the infimums outside. We can do this with the following lemma.
+              \begin{lemma}
+                  Let $h_k: X\rightarrow \mathbb{R}_1$. Then
+                  \begin{equation}
+                      \sum_k \inf h_k(x) \le \inf \sum_k h_k(x)
+                  \end{equation}
+              \end{lemma}
+              \begin{proof}
+                  Note that $\inf\limits_x h_k(x) \le h_k(y)$ for all $y$ given any $k$. This means that we can sum both sides
+                  \begin{equation}
+                      \sum_k \inf h_k(x) \le \sum_k h_k(y)
+                  \end{equation}
+                  The left hand side is a constant but the right hand side is a function of $y$. Since this inequality is true for all $y$, we can just pick the $y$ to minimize the right hand side:
+                  \begin{equation}
+                      \sum_k \inf\limits_x h_k(x) \le \inf\limits_y \sum_y h_k(y)
+                  \end{equation}
+                  which is just the lemma with different variable names.
+              \end{proof}
+              Using this lemma, we can bound $L(f,P)$ by
+              \begin{align}
+                  L(f,P) & \le \sum_{S' \in P_A}V(S')\inf_{x\in S'}\underbrace{\sum_{S''\in P_B}V(S'')\inf_{y\in S''}f(x,y)}_{L(f(x,-),P_B)} \\
+                         & \le \sum_{S' \in P_A}V(S')\inf\limits_{x\in S'}\ubar{g}(x)                                                        \\
+                         & = L(\ubar{g},P_A)
+              \end{align}
+              Similarly, we can do the same thing with supremums to get
+              \begin{equation}
+                  L(f,P) \le L(\ubar{g}, P_A) \quad\quad\quad U(\bar{g}, P_A) \le U(f,P)
+              \end{equation}
+              \item Note that both $L(\bar{g},P_A)$ and $U(\ubar{g},P_A)$ are bounded by both $L(\ubar{g},P_A)$ (on the lower end) and $U(\bar{g},P_A)$ (on the upper end). Let us restrict our attention to
+              \begin{equation}
+                  L(\ubar{g}, P_A) \le U(\ubar{g}, P_A).
+              \end{equation}
+              This means that $\ubar{g}$ is integrable. Similarly, $\bar{g}$ is integrable.
+
+              Now assume $\epsilon > 0$ and $P$ was chosen such that $U(f,P)-L(f,P) < \epsilon$ (which is possible since $f$ is integrable), then
+              \begin{equation}
+                  U(\ubar{g}, P_A) - L(\ubar{g}, P_A) \le \epsilon
+              \end{equation}
+              and 
+              \begin{equation}
+                    U(\bar{g}, P_A) - L(\bar{g}, P_A) \le \epsilon
+              \end{equation}
+              so $\ubar{g}$ and $\bar{g}$ are integrable on $A$.
+              \item From the inequalities earlier, we can write  
+              \begin{equation}
+                  L(f,P) \le \int_A \bar{g}, \int_A \ubar{g} \le U(f,P)
+              \end{equation}
+              which is true for every $P$. This means that we can take the infimum and supremum over all partitions, to get
+              \begin{equation}
+                  \int f \le \int \bar{g}, \int \ubar{g} \le \int f
+              \end{equation}
+              so $\int f = \int \bar{g} = \int \ubar{g}$ and we are done.
+    \end{enumerate}
+\end{proof}
 \end{document}
