@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY293: Waves and Modern Physics \\ \textbf{Special Relativity}}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\begin{document}
+
+\maketitle
+\section{Basics}
+Special relativity is based on two postulates:
+\begin{itemize}
+    \item The laws of physics are the same in all inertial reference frames.
+    \item The speed of light will travel at the same speed measured in any reference frame.
+\end{itemize}
+While the first postulate is ``obvious,'' the second may be counterintuitive: If we throw a ball on a train at $1\text{ m/s}$, someone standing on a platform will see the ball travel faster than $1\text{ m/s}$. This is \textit{not} true for light.
+
+With these two postulates, we can derive time dilation and length contraction. A person $A$ moving at a speed $v$ relative to person $B$ will observe the other person to experience time
+\begin{equation}
+    t' = t\gamma
+\end{equation}
+and person $B$'s rocket ship will be contracted a distance
+\begin{equation}
+    \ell' = \ell/\gamma
+\end{equation}
+where $\gamma = \frac{1}{\sqrt{1-(v/c)^2}}$.
+\end{document}

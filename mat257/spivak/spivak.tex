@@ -9,6 +9,7 @@
 \usepackage{stmaryrd}
 \usepackage{accents}
 \newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
 \begin{document}
 
 \maketitle
@@ -419,7 +420,7 @@ for all $x$, so the naive Fubini's Theorem holds. Likewise, if $f(x,-)$ is integ
     We sketch out the proof as follows:
     \begin{enumerate}
         \item Bound $L(f,P) \le L(\ubar{g},P_A)$ and $U(f,P) \le U(\bar{g}, P_A)$.
-        \item Show that $\bar{g}$ and $\ubar{g}$ is integrable.
+        \item Show that $\bar{g}$ and $\ubar{g}$ are integrable.
     \end{enumerate}
     We will now carry out these steps:
     \begin{enumerate}
@@ -502,6 +503,148 @@ for all $x$, so the naive Fubini's Theorem holds. Likewise, if $f(x,-)$ is integ
                   \int f \le \int \bar{g}, \int \ubar{g} \le \int f
               \end{equation}
               so $\int f = \int \bar{g} = \int \ubar{g}$ and we are done.
+    \end{enumerate}
+\end{proof}
+\section{Partitions of Unity}
+\subsection{Motivation}
+We will answer the question of how we can integrate over a non-compact set. Similar issues appear in other areas: We know how things work on a small scale. How do we make it work on a large scale?
+
+For example, we could say that to integrate over an unbounded set, we can partition the set by an infinite amount of intersecting rectangles, integrate over the rectangles, and then sum the integrals. However, this is not so easy to do.
+
+Consider the example of two players trying to divide the work over two regions.
+\begin{center}
+    \begin{tikzpicture}
+        \draw [] (-2, -2) -- (0.5, -2) -- (0.5, 2) -- (-2, 2);
+        \draw [] (2, -2.1) -- (-0.5, -2.1) -- (-0.5, 2.1) -- (2, 2.1);
+
+        \node (A) at (-2, 0) {$1$};
+        \node (A') at (-2, -0.5) {$\phi_1$};
+        \node (B) at (2, 0) {$2$};
+        \node (A') at (2, -0.5) {$\phi_2$};
+    \end{tikzpicture}
+\end{center}
+where $\phi_i$ represents the amount of work each player does. In each non-intersecting section, we want $\phi_i=1$ and in the shared section, we want to break up the work in some continuous fashion (i.e. close to player 1, player 1 does more work.)
+
+Let us look at the general case where we want to divide up the work $W= \bigcup U_i$ across $n$ players. We can define $\phi_i$ on three conditions:
+\begin{itemize}
+    \item The function $\phi_i$ is defined 
+    \begin{equation}
+        \phi_i: W \rightarrow [0,1]
+    \end{equation}
+    and we can let it be $C^\infty$. It turns out this condition can be weaker, but this stronger condition works out fine at the end. We also have the condition for all $x$,
+    \begin{equation}
+        \sum \phi_i(x) = 1
+    \end{equation}
+    \item We also want the support of the function to be a subset of $U_i$, that is $\supp \phi_i \subset U_i$, where the support of a function is defined as follows:
+    \begin{equation}
+        \supp \phi_i = \cl \{x:\phi_i(x) \neq 0\}
+    \end{equation}
+    \item We also want \textit{local finiteness}, where ever $x\in W$ has a neighbourhood $V \ni x$ such that 
+    \begin{equation}
+        \left|\{i: V \cap \supp \phi_i \} \right| < \infty.
+    \end{equation}
+\end{itemize}
+This is essentially what partitions of unity is about. We want to partition unity via functions $\phi_i(x).$ Our goal at the end is to show that if we have a function $f$ defined on a set $W \subset \bigcup U_i.$ 
+\begin{equation}
+    \int\limits_W f := \sum_i \int\limits_{U_i}\phi_i f
+\end{equation}
+\subsection{Theorem}
+We propose the following theorem, which states that all of the above can be achieved:
+\begin{theorem}
+    Given $A\subset \mathbb{R}^n$ and given an open cover of $A$ defined as $\cal{U} = \{U_\alpha\}$ where $U_\alpha$ is open and $\bigcup_\alpha U_\alpha \supset A$, we can find a countable collection 
+    \begin{equation}
+        \Phi = \{\phi_i: W\rightarrow [0,1]\}
+    \end{equation}
+    of $C^\infty$ functions defined on some open set $W \supset A$ (where $W$ is defined to be slightly bigger than $A$) such that three conditions hold:
+    \begin{enumerate}
+        \item \textbf{Local Finiteness:} Every $x\in W$ has an open neighbourhood $V\ni x$ such that 
+        \begin{equation}
+            \left|\{i: V\cap \supp \phi_i \} \right| < \infty.
+        \end{equation}
+        \item \textbf{Sum is Unity:} For all $x\in A$, we have
+        \begin{equation}
+            \sum_{i=1}^\infty \phi_i(x) = 1
+        \end{equation}
+        Note that by the first condition, there are only a finite number of $\phi_i$ that is nonzero for each $i$, i.e. it is a ``nearly finite sum.''
+        \item \textbf{Subordinate:} We have $\Phi$ is subordinate to $\cal{U}$, i.e. for all $i$, there exists an (not necessarily unique) $\alpha$ such that
+        \begin{equation}
+            \supp \phi_i \subset U_\alpha
+        \end{equation}
+        Note that this third condition is slightly different from the one in the motivation. This is because we can have an infinite cover. All this is insisting is that each ``worker'' has a set in which it does work.
+    \end{enumerate}
+\end{theorem}
+\subsection{Proof}
+We start with some preliminary lemmas. We want to eventually find a function $\phi$ such that if we have a set $C\in U$, we want to find a function that is $1$ inside $C$ and $0$ outside $C$.
+\begin{lemma}
+    Given a compact $C$ contained in a n open $U$, where $C \subset U$, there exists a $C^\infty$ function $\psi: U \rightarrow [0,1]$ such that 
+    \begin{enumerate}
+        \item $\psi|_C = 1$
+        \item $\supp \psi \subset U$.
+    \end{enumerate}
+\end{lemma}
+That is, if $\psi$ existed, then it could look like the following mountain (where the flat part is $C$, slanted part is $U$, and the rest is outside of $U$) 
+\begin{center}
+    \includegraphics[width=0.5\linewidth]{figures/tabletop.jpg}
+\end{center}
+We should find proving this problematic since even in the simplest case, we don't know any functions that do this! However, we can still prove this.
+\begin{proof}
+    We take the following steps:
+    \begin{enumerate}
+        \item We restrict our attention to one dimension (i.e. a seashore). There exists a function $\sigma: \mathbb{R} \rightarrow \mathbb{R}$ such that 
+        \begin{equation}
+            \begin{cases}
+                \sigma(x) = 0 & x \le 0 \\ 
+                \sigma(x) > 0 & x > 0
+            \end{cases}
+        \end{equation}
+        We claim that \begin{equation}
+            \sigma(x) = \begin{cases}
+                e^{-1/x} & x > 0 \\ 
+                0 & x \le 0
+            \end{cases}
+        \end{equation}
+        is such a function and is also smooth.
+        \begin{center}
+            \begin{tikzpicture}
+                \begin{tikzpicture}
+                \begin{axis}[
+                legend pos=outer north east,
+                title=Seashore Function,
+                axis lines = box,
+                xlabel = $x$,
+                ylabel = $y$,
+                variable = t,
+                trig format plots = rad,
+                ymin = -1,
+                ymax = 1,
+                ]
+                \addplot [
+                    domain=0:10,
+                    samples=400,
+                    color=blue,
+                    ]
+                    {exp(-1/x)};
+                \addplot [
+                    domain=-10:0,
+                    samples=70,
+                    color=blue,
+                    ]
+                    {0};
+                \end{axis}
+                \end{tikzpicture}
+                
+            \end{tikzpicture}
+        \end{center}
+    \end{enumerate}
+    Let us take these steps and prove them: 
+    \begin{enumerate}
+        \item We can show $\sigma$ is smooth via the following: for $x>0$, we have
+        \begin{align}
+            \sigma' &= \frac{1}{x^2}e^{-1/x} \\ 
+            \sigma'' &= (-\frac{2}{x^3}+\frac{1}{x^4})e^{-1/x} \\ 
+            \sigma^{(n)} &= r(x)e^{-1/x}
+        \end{align}
+        where $r(x)$ is some rational function, which we can prove via induction. We can also show that $\lim_{x\to 0} \sigma^{(n)} = 0$ since exponentials beat polynomials (it is not hard to show this formally). This is the key point to showing that the $n^\text{th}$ derivative approaches $0$ at $x=0$, and that $\sigma(x)$ is $C^\infty.$
     \end{enumerate}
 \end{proof}
 \end{document}
