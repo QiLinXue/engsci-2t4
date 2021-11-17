@@ -11,7 +11,7 @@
         \label{eq:}
     \end{equation}
     \begin{definition}
-        If $z$ is irrational, then $e^z$ is the number such that:
+        If $z$ is irrational, then $e^z$ is the unique number such that:
         \begin{equation}
             \ln(e^z) = z
             \label{eq:}
@@ -26,9 +26,51 @@
         for all real $x$.
     \end{definition}
     \item Here are the properties of $e^x$:
-    \begin{itemize}
+    \begin{enumerate}
         \item $\ln(e^x)=x$ where $x\in\mathbb{R}$
-        \item The exponential function is always greater than zero. Comes from the fact that it is the inverse of the natural logarithm function.
+        \item The graph looks like the following
+        \begin{center}
+            \begin{tikzpicture}
+                \begin{tikzpicture}
+                \begin{axis}[
+                legend pos=outer north east,
+                title=Plot of $e^x$ along with $\ln x$,
+                axis lines = middle,
+                xlabel = $x$,
+                ylabel = $y$,
+                variable = t,
+                trig format plots = rad,
+                ymin=-2,
+                ymax=2
+                ]
+                \addplot [
+                    domain=-2:2,
+                    samples=70,
+                    color=blue,
+                    ]
+                    {exp(x)};
+                \addlegendentry{$e^x$}
+                \addplot [
+                    domain=0:2,
+                    samples=400,
+                    color=blue,
+                    ]
+                    {ln(x)};
+                \addlegendentry{$\ln(x)$}
+                \addplot [
+                    domain=-2:2,
+                    samples=70,
+                    color=black,
+                    dotted
+                    ]
+                    {x};                
+                \end{axis}
+                \end{tikzpicture}
+            \end{tikzpicture}
+        \end{center}
+        \item $e^x>0$
+        
+        The exponential function is always greater than zero. Comes from the fact that it is the inverse of the natural logarithm function.
         \item $e^0=1$
         \item $\lim_{x\to-\infty} e^x = 0$
         \item $e^{\ln x} = x$
@@ -36,11 +78,14 @@
         \item $e^{-b}=\frac{1}{e^b}$
         \item $\frac{d}{dx}e^x=e^x$
         \begin{prooof}
-            $$\ln(e^x)= x \implies \frac{d}{dx} \ln(x) = \frac{1}{e^x} \cdot \frac{d}{dx}(e^x) = 1$$
+            $$\ln(e^x)= x \implies \frac{d}{dx} \ln(e^x) = \frac{1}{e^x} \cdot \frac{d}{dx}(e^x) = 1$$
         \end{prooof}
+        \item $\frac{d}{dx}e^{u(x)}=e^u \frac{du}{dx}.$
+        
+        For example, $\frac{d}{dx}e^{kx} = ke^{kx}$ which is a relationship appears many times as this represents a relationship in which the rate of growth/decay is proportional to the actual amount.
         \item $\int e^x \dd{x} = e^x + C$
         \item $\int e^{g(x)}g'(x) \dd{x} = e^{g(x)}+C$
-    \end{itemize}
+    \end{enumerate}
     \begin{example}
         Show $e^x>1+x$ for $x>0$. We can show this via integration:
         \begin{equation}
@@ -58,5 +103,76 @@
             \label{eq:}
         \end{equation}
         Try this yourself pls.
+    \end{example}
+    \begin{example}
+        Sketch the curve $f(x) = x^4e^{-x}$. We go through our checklist:
+        \begin{itemize}
+            \item The domain of $f$ is $\mathbb{R}$ and the range is $f \ge 0$.
+            \item The derivative is
+            \begin{equation}
+                f' = 4x^3e^{-x} + x^4(-1)e^{-x} = x^3e^{-x}(4-x)
+            \end{equation}
+            and is equal to $f'=0$ when $x=0,4$. We have $f' < 0$ for $x>4$ or $x<0$ and $f'>0$ for $0<x<4.$
+            \item The local minimum is at $f(0)=0$ and the local maximum is at $f(4)=256e^{-4} \approx 4.2.$
+            \item The second derivative is
+            \begin{align}
+                f''(x) &= 12x^2e^{-x} - 4x^3e^{-x} - 4x^3e^{-x} + x^4e^{-x} \\ 
+                &= x^2e^{-x}(x^2-8x+12) \\ 
+                &= x^2e^{-x}(x-6)(x-2)
+            \end{align}
+            We have:
+            \begin{itemize}
+                \item $f'' = 0$ at $x=0,2,6$.
+                \item $f'' > 0$ for $x>6$ (concave up)
+                \item $f'' < 0$ for $2<x<6$ (concave down)
+                \item $f'' > 0$ for $x<2$ (concave up)
+            \end{itemize}
+            The points of inflection are at $x=2$ and $x=6$.
+        \end{itemize}
+        We can finally draw the picture:
+        \begin{center}
+            \begin{tikzpicture}
+                \begin{tikzpicture}
+                \begin{axis}[
+                legend pos=outer north east,
+                title=Example Graph,
+                axis lines = middle,
+                xlabel = $x$,
+                ylabel = $y$,
+                variable = t,
+                trig format plots = rad,
+                ]
+                \addplot [
+                    domain=-1.5:10,
+                    samples=200,
+                    color=blue,
+                    ]
+                    {x^4*exp(-x)};
+                \addlegendentry{$x^4e^{-x}$}
+                
+                \end{axis}
+                \end{tikzpicture}
+            \end{tikzpicture}
+        \end{center}
+        Interestingly, this is part of a family of functions that have applications in medicine (among other fields).
+    \end{example}
+    \begin{example}
+        Suppose we wish to integrate 
+        \begin{equation}
+            I = \int \frac{xe^{ax^2}}{e^{ax^2}+1} \dd{x}
+        \end{equation}
+        We motivate our solution by noting that the derivative of the denominator is contained in the numerator. Let $u=e^{ax^2}+1$, $\dd{u} = 2axe^{ax^2}\dd{x}$, such that
+        \begin{equation}
+            I = \frac{1}{2a} \int \frac{\dd{u}}{u} = \frac{1}{2a}\ln(e^{ax^2}+1) + C
+        \end{equation}
+        where we have removed the absolute value signs since the argument of the natural logarithm is always positive.
+    \end{example}
+    \begin{example}
+        Let us calculate $\int_0^{\sqrt{2\ln 3}} xe^{-x^2/2} \dd{x}$. This type of integral will show up often in ECE286. Let $u=-\frac{1}{2}x^2$ and $\dd{u} = - x \dd{x}$. We can change the bounds to $u=0$ (at $x=0$) and $u=-\ln 3$ (at $x=\sqrt{2\ln 3}$). This gives 
+        \begin{align}
+            \int_0^{\sqrt{2\ln 3}} x e^{-x^2/2} \dd{x} &= - \int_0^{-\ln 3} e^u \dd{u} \\ 
+            &= -[e^u]^{-\ln 3}_0 \\ 
+            &= \frac{2}{3}
+        \end{align}
     \end{example}
 \end{itemize}

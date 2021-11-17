@@ -1,8 +1,8 @@
-\section{More Natural Logarithms}
+\section{Feynman's Trick of Differentiation}
 \begin{itemize}
     \item If we want to graph a function $\ln(f(x))$, the domain is given by $x$ values such that $f(x)>0$. As a result:
     \begin{equation}
-        \ln(x) \neq \frac{1}{x}
+        \int \ln(x) \dd{x} \neq \frac{1}{x}
         \label{eq:}
     \end{equation}
     since $x$ cannot be negative.
@@ -27,7 +27,11 @@
              g'(x) = g(x)\left(\frac{g_1'}{g_1}+\frac{g_2'}{g_2}+\cdots+\frac{g_n'}{g_n}\right)
              \label{eq:}
          \end{equation}
-         
     \end{theorem}
-    \item Disgusting curve sketching ensues.
+    \begin{example}
+        Take the derivative of $g(x) = \frac{x^4(x-1)}{(x+2)(x^2+1)}.$ While we can calculate this directly, we can also use the Feynman's trick to calculate the derivative: We get
+        \begin{equation}
+            g'(x) = \frac{x^4(x-1)}{(x+2)(x^2+1)} \left[\frac{4x^3}{x^4}+\frac{1}{x-1}-\frac{1}{x+2}-\frac{2x}{x^2+1}\right]
+        \end{equation}
+    \end{example}
 \end{itemize}
