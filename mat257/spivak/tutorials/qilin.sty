@@ -1,0 +1,252 @@
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=0.6in]{geometry} % Page Dimensions
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand\textbullet{\ensuremath{\bullet}}
+\usepackage{lmodern}
+\usepackage{tabularx, booktabs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Logistics %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath, amsthm, amssymb} % must have math p
+\usepackage{cancel} % Allows for the use of \cancel{}
+\usepackage{enumitem} % Lists
+\usepackage{bm} % Bold math with \bm{}
+\usepackage{graphicx} % images
+\usepackage{bbm} % bold blackboard math
+\usepackage{physics} % various physics related changes
+\usepackage{xcolor} % more colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% STYLE %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage{parskip} % automatically skip paragraphs
+\setlength\parindent{0pt} % no indent
+\everymath{\displaystyle} % automatically display style
+\usepackage{makeidx} % used to make indexes
+
+% Fancy Header
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy}
+
+% Allows for hyperlinking
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=magenta,
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% GRAPHICS %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tikz} % Drawing capabilities
+\usetikzlibrary{shapes,arrows}
+\usepackage{pgfplots} % Plotting capabilities
+\pgfplotsset{compat=1.14}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% COLORS %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{my-blue}{RGB}{93,169,233}
+\definecolor{my-pink}{RGB}{238,118,116}
+\definecolor{my-green}{RGB}{0,191,0}
+\definecolor{my-orange}{HTML}{FE5F55}
+\definecolor{background}{HTML}{f2f2f2}
+\definecolor{my-yellow}{HTML}{F6BD60}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% BOXES %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[breakable,many]{tcolorbox}
+% Math
+
+\tcbset{simple/.style={
+            breakable,
+            enhanced,
+            outer arc=0pt,
+            arc = 0pt,
+            colback=background, % Background color
+            colframe=background, % Border Color
+            coltitle=black, % Title Color
+            fonttitle=\bfseries,
+            attach title to upper,
+            after title={:\ },
+            segmentation style={dashed, gray},
+        }
+}
+
+\tcbset{color-labeled/.style={
+            breakable,
+            enhanced,
+            outer arc=0pt,
+            arc=0pt,
+            colframe=#1,
+            colback=#1!5,
+            attach title to upper,
+            coltitle=#1!200,
+            after title={\medbreak},
+        }
+}
+
+\tcbset{one-sided-color/.style={
+            breakable,
+            enhanced,
+            boxrule=0pt,
+            frame hidden,
+            borderline west={2pt}{0pt}{#1},
+            colback=#1!10,
+            coltitle=#1!200,
+            after title={:\ },
+            sharp corners,
+            attach title to upper,
+        }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%   Box Definitions %%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtcolorbox[auto counter]{example}{
+    simple,
+    title=\textbf{Example} \thetcbcounter,
+    % add a `\thetcbcounter` to the end if you want to keep track of numberings.
+}
+
+\newtcolorbox[auto counter]{custom-big}[1][]{
+    color-labeled=my-yellow,
+    title=\textbf{{#1}},
+}
+
+\newtcolorbox{definition}{
+    one-sided-color=my-green,
+    title=\textbf{Definition},
+}
+
+\newtcolorbox{mnemonic}{
+    one-sided-color=my-green,
+    title=\textbf{Mnemonic},
+}
+
+\newtcolorbox{theorem}{
+    one-sided-color=my-blue,
+    title=\textbf{Theorem},
+}
+
+
+\newtcolorbox[auto counter]{proposition}{
+    one-sided-color=my-blue,
+    title=\textbf{Proposition} \thetcbcounter,
+}
+
+\newtcolorbox[auto counter]{corollary}{
+    one-sided-color=my-blue,
+    title=\textbf{Corollary} \thetcbcounter,
+}
+
+\newtcolorbox[auto counter]{lemma}{
+    one-sided-color=my-blue,
+    title=\textbf{Lemma} \thetcbcounter,
+}
+
+\newtcolorbox{idea}{
+    one-sided-color=my-yellow,
+    title=\textbf{Idea},
+}
+
+
+\newtcolorbox{tip}{
+    one-sided-color=my-blue,
+    title=\textbf{Tip},
+}
+
+\newtcolorbox{think}{
+    one-sided-color=my-green,
+    title=\textbf{Think},
+}
+
+\newtcolorbox{axiom}{
+    one-sided-color=my-green,
+    title=\textbf{Axiom},
+}
+
+\newtcolorbox{warning}{
+    one-sided-color=my-pink,
+    title=\textbf{Warning},
+}
+
+\newtcolorbox{custom-small}[1][]{
+    one-sided-color=my-yellow,
+    title=\textbf{{#1}},
+}
+
+\newtcolorbox[auto counter]{custom-simple}[1][]{
+    simple,
+    title={#1},
+    % add a `\thetcbcounter` to the end if you want to keep track of numberings.
+}
+
+\newtcolorbox[auto counter]{solution}{
+    simple,
+    title={Solution \thetcbcounter},
+}
+
+\newtcolorbox{prooof}{
+    simple,
+    title={Proof},
+}
+
+% NEW COMMANDS
+
+\renewcommand\textbullet{\ensuremath{\bullet}}
+% axis style, ticks, etc
+\pgfplotsset{every axis/.append style={
+            axis x line=middle,    % put the x axis in the middle
+            axis y line=middle,    % put the y axis in the middle
+            axis line style={<->}, % arrows on the axis
+            xlabel={$x$},          % default put x on x-axis
+            ylabel={$y$},          % default put y on y-axis
+        }}
+
+% arrows as stealth fighters
+\tikzset{>=stealth}
+\usepackage{bm}
+
+
+\newcommand{\bff}[1]{\mathbf{#1}}
+\newcommand{\diag}[1]{\mathrm{diag}\,#1}
+
+\newcommand{\image}[1]{\mathrm{im}\,#1}
+\newcommand{\spann}[1]{\mathrm{span}\{#1\}}
+\newcommand{\spannn}[1]{\mathrm{span}\,#1}
+% \newcommand{\rank}[1]{\mathrm{rank}\,#1}
+% \newcommand{\dim}[1]{\dim{rank}\,#1}
+\newcommand{\col}[1]{\mathrm{col}\,#1}
+\newcommand{\row}[1]{\mathrm{row}\,#1}
+\newcommand{\nullity}[1]{\mathrm{nullity}\,#1}
+\newcommand{\nulll}[1]{\mathrm{null}\,#1}
+\newcommand{\adj}[1]{\mathrm{adj}\,#1}
+\newcommand{\red}[1]{\widetilde{#1}}
+\newcommand{\Sym}[1]{\mathrm{Sym}\,#1}
+\newcommand{\id}{\text{id}}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\fix}{Fix}
+\DeclareMathOperator{\inv}{inv}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\Aut}{Aut}
+
+\DeclareMathOperator{\Int}{int}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Bd}{Bd}
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\supp}{supp}
+
+\newcommand{\onto}{\twoheadrightarrow}

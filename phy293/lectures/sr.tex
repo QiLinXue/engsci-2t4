@@ -26,4 +26,41 @@ and person $B$'s rocket ship will be contracted a distance
     \ell' = \ell/\gamma
 \end{equation}
 where $\gamma = \frac{1}{\sqrt{1-(v/c)^2}}$.
+\subsection{Loss of Simultaneity}
+If two events occur at the same time at different locations in one reference frame, it is not necessarily true that they occur at the same time in another reference frame. Suppose we have two clocks on a train separated by a distance $L$ on a train moving at a speed of $v$,
+\begin{itemize}
+    \item If two clocks are synchronized in the frame of the train, then the rear clock will show a reading $Lv/c^2$ more to an outside observer.
+    \item If two clocks are synchronized in the frame of the observer, then the rear clock will show a reading $Lv/c^2$ less to someone on the train.
+\end{itemize}
+\subsection{Doppler Shift}
+We can relate the frequency of the source $f_s$ to the frequency that is received $f_r$ using the doppler shift formula 
+\begin{equation}
+    \frac{f_s}{f_r} = \sqrt{\frac{1+\beta}{1-\beta}}
+\end{equation}
+where $\beta \equiv \frac{v}{c}.$
+
+\newpage
+\section{4-Vectors}
+A four vector has $4$ components. In this course, we are mostly interested in two $4$-vectors, the \textbf{position} 4-vector 
+\begin{equation}
+    x = (ct, x, y, z)
+\end{equation}
+and the \textbf{momentum} 4-vector.
+\begin{equation}
+    p = (E/c, p_x, p_y, p_z)
+\end{equation}
+Their norm is a Lorentz invariant, that is all observers will measure the same thing, independent of the observer's position or velocity. This is analogous to the invariant in the Euclidean case (i.e. relative distances between two points are always the same). It's just that the two points now are both separated by space and time. This is also why people often refer to special relativity treating space-time as $4$ dimensions.
+\subsection{Proper Time}
+The proper time $\tau$ is the invariant of $x$, that is:
+\begin{equation}
+    (c\tau)^2 = x^\mu = (ct)^2 - x^2 - y^2- z^2
+\end{equation}
+The invariant mass $m$ is the invariant of $p$, that is:
+\begin{equation}
+    (mc)^2 = p^\mu = (E/c)^2 - p_x^2 - p_y^2 - p_z^2
+\end{equation}
+Note that the magnitude of momentum is given by
+\begin{equation}
+    |\vec{p}| = \gamma mv
+\end{equation}
 \end{document}

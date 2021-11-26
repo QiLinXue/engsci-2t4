@@ -1,0 +1,29 @@
+
+
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{MAT257: Real Analysis II \\ \textbf{Tutorial 9}}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\begin{document}
+
+\maketitle
+\subsection*{subsection}{Jordan Measurable}
+There are two equivalent definitions of when a function is Jordan Measurable (rectifiable).
+\begin{definition}
+    $S$ is Jordan measurable if and only if $S$ is bounded and the boundary has measure $0$. 
+\end{definition}
+\begin{definition}
+    $S$ is Jordan measurable if and only if the identity function is integrable over $S$.
+\end{definition}
+For example, let $A = \bigcup_{i=1}^\infty (a_i, b_i)$ be a disjoint union of sets such that $(0,1) \cap \mathbb{Q} \subset A$. Then $\sum (b_i-a_i) < 1$, which implies that $\Bd A$ is not measure $0$.
+
+\section{Fubini's Theorem}
+\end{document}

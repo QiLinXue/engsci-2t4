@@ -10,6 +10,8 @@
 \usepackage{accents}
 \newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
 \usepackage{pgfplots}
+\numberwithin{equation}{section}
+
 \begin{document}
 
 \maketitle
@@ -280,7 +282,6 @@ Therefore, $C$ is measure-$0$. As an aside, each $C_k$ is compact, so $\mathcal{
     $A\subset \mathbb{R}^n$ is said to be of content-$0$ if $\forall \epsilon > 0$ it is contained in a finite union of rectangles whose sum of volumes is smaller than $\epsilon$.
 \end{definition}
 Note that $\mathbb{Z} \in \mathbb{R}$ is not of content-$0$.
-
 \section{Fubini's Theorem}
 Currently, we have the tools to define the integral, but we don't have the tools to compute the integral yet. We will start off with a loose example.
 \begin{example}
@@ -505,6 +506,9 @@ for all $x$, so the naive Fubini's Theorem holds. Likewise, if $f(x,-)$ is integ
               so $\int f = \int \bar{g} = \int \ubar{g}$ and we are done.
     \end{enumerate}
 \end{proof}
+It turns out that we can ignore the upper and lower bound conditions if we have that $f_x(y)$ is integrable for all $x$, where $f_x(y)$ is $f$ restricted to a given $x$.
+
+\newpage
 \section{Partitions of Unity}
 \subsection{Motivation}
 We will answer the question of how we can integrate over a non-compact set. Similar issues appear in other areas: We know how things work on a small scale. How do we make it work on a large scale?
@@ -526,7 +530,7 @@ Consider the example of two players trying to divide the work over two regions.
 where $\phi_i$ represents the amount of work each player does. In each non-intersecting section, we want $\phi_i=1$ and in the shared section, we want to break up the work in some continuous fashion (i.e. close to player 1, player 1 does more work.)
 
 Let us look at the general case where we want to divide up the work $W= \bigcup U_i$ across $n$ players. We can define $\phi_i$ on three conditions:
-\begin{itemize}
+\begin{enumerate}
     \item The function $\phi_i$ is defined 
     \begin{equation}
         \phi_i: W \rightarrow [0,1]
@@ -543,7 +547,7 @@ Let us look at the general case where we want to divide up the work $W= \bigcup 
     \begin{equation}
         \left|\{i: V \cap \supp \phi_i \} \right| < \infty.
     \end{equation}
-\end{itemize}
+\end{enumerate}
 This is essentially what partitions of unity is about. We want to partition unity via functions $\phi_i(x).$ Our goal at the end is to show that if we have a function $f$ defined on a set $W \subset \bigcup U_i.$ 
 \begin{equation}
     \int\limits_W f := \sum_i \int\limits_{U_i}\phi_i f
@@ -574,9 +578,11 @@ We propose the following theorem, which states that all of the above can be achi
     \end{enumerate}
 \end{theorem}
 \subsection{Proof}
-We start with some preliminary lemmas. We want to eventually find a function $\phi$ such that if we have a set $C\in U$, we want to find a function that is $1$ inside $C$ and $0$ outside $C$.
+We start with some preliminary lemmas.
+\subsubsection{Preliminary 1: Finding a Smooth Bump}
+We want to eventually find a function $\phi$ such that if we have a set $C\in U$, we want to find a function that is $1$ inside $C$ and $0$ outside $C$.
 \begin{lemma}
-    Given a compact $C$ contained in a n open $U$, where $C \subset U$, there exists a $C^\infty$ function $\psi: U \rightarrow [0,1]$ such that 
+    Given a compact $C$ contained in an open $U$, where $C \subset U$, there exists a $C^\infty$ function $\psi: U \rightarrow [0,1]$ such that 
     \begin{enumerate}
         \item $\psi|_C = 1$
         \item $\supp \psi \subset U$.
@@ -597,20 +603,45 @@ We should find proving this problematic since even in the simplest case, we don'
                 \sigma(x) > 0 & x > 0
             \end{cases}
         \end{equation}
-        We claim that \begin{equation}
+        where $\sigma \in C^\infty$.
+        \item There exists a smooth one-dimensional function $\beta_\epsilon$ that represents a bump such that
+        \begin{equation}
+            \begin{cases}
+                \beta_\epsilon(x) = 0 & |x| > \epsilon \\ 
+                \beta_\epsilon(0) > 0
+            \end{cases}
+        \end{equation} 
+        \item We now look at the general case of $\mathbb{R}^n$. We wish to show that there exists an $n$-dimensional bump. Given $a \in \mathbb{R}^n$ and $\epsilon > 0$, there exists $\beta_{a,\epsilon}$ such that $\beta \in C^\infty$ and 
+        \begin{equation}
+            \begin{cases}
+                \beta(a) > 0 & |x-a| < \epsilon \\
+                \beta(x) = 0 & |x-a| \ge \epsilon
+            \end{cases}
+        \end{equation}
+        \item Let's look at $\mathbb{R}$ again. There exists a smooth \textit{step} function $\sigma\in C^\infty$ and $\theta:\mathbb{R} \rightarrow [0,1]$ such that 
+        \begin{equation}
+            \begin{cases}
+                \theta(x) = 0 & x \le 0 \\ 
+                \theta(x) = 1 & x \ge 1
+            \end{cases}
+        \end{equation}
+        \item We can construct a \textit{flaptop} mountain such that for some $C \subset U$, we have $f(x)=1$ and outside $U$ we have $f(x)=0.$
+    \end{enumerate}
+    Let us take these steps and prove them: 
+    \begin{enumerate}
+        \item In particular, we claim that \begin{equation}
             \sigma(x) = \begin{cases}
                 e^{-1/x} & x > 0 \\ 
                 0 & x \le 0
             \end{cases}
         \end{equation}
-        is such a function and is also smooth.
+        is such a function.
         \begin{center}
             \begin{tikzpicture}
-                \begin{tikzpicture}
                 \begin{axis}[
                 legend pos=outer north east,
                 title=Seashore Function,
-                axis lines = box,
+                axis lines = middle,
                 xlabel = $x$,
                 ylabel = $y$,
                 variable = t,
@@ -619,32 +650,243 @@ We should find proving this problematic since even in the simplest case, we don'
                 ymax = 1,
                 ]
                 \addplot [
-                    domain=0:10,
+                    domain=0:1,
                     samples=400,
                     color=blue,
                     ]
                     {exp(-1/x)};
                 \addplot [
-                    domain=-10:0,
+                    domain=-1:0,
                     samples=70,
                     color=blue,
                     ]
                     {0};
-                \end{axis}
-                \end{tikzpicture}
-                
+                \end{axis}                
             \end{tikzpicture}
         \end{center}
-    \end{enumerate}
-    Let us take these steps and prove them: 
-    \begin{enumerate}
-        \item We can show $\sigma$ is smooth via the following: for $x>0$, we have
+        We can show $\sigma$ is smooth via the following: for $x>0$, we have
         \begin{align}
             \sigma' &= \frac{1}{x^2}e^{-1/x} \\ 
-            \sigma'' &= (-\frac{2}{x^3}+\frac{1}{x^4})e^{-1/x} \\ 
+            \sigma'' &= \left(-\frac{2}{x^3}+\frac{1}{x^4}\right)e^{-1/x} \\ 
             \sigma^{(n)} &= r(x)e^{-1/x}
         \end{align}
         where $r(x)$ is some rational function, which we can prove via induction. We can also show that $\lim_{x\to 0} \sigma^{(n)} = 0$ since exponentials beat polynomials (it is not hard to show this formally). This is the key point to showing that the $n^\text{th}$ derivative approaches $0$ at $x=0$, and that $\sigma(x)$ is $C^\infty.$
+        \item We can construct such a $\beta(x)$ by multiplying two seashore functions together. Namely,
+        \begin{equation}
+            \beta_\epsilon(x) =  \sigma(x+\epsilon)\sigma(\epsilon-x).
+        \end{equation}
+        To show this has the desired properties, we just need to apply the properties of $\sigma$.
+        \item We can define 
+        \begin{equation}
+            \beta_{a,\epsilon}(x) := \beta_{\epsilon^2}(|x-a|^2)
+        \end{equation}
+        Since both $\beta_{\epsilon^2}$ and $|x-a|^2$ is smooth, this function is also smooth. Note that we couldn't have $|x-a|$ in the parameter since we want the function to be smooth, and we only know that the composition of two smooth function is smooth.
+        \item Let us define
+        \begin{equation}
+            \theta_0(x) = \int_0^x \beta_{1/2,1/2}(t) \dd{t}
+        \end{equation}
+        and let 
+        \begin{equation}
+            \theta(x) = \frac{1}{\theta_0(1)}\theta_0(x)
+        \end{equation}
+        \item We can create a finite open cover for $C$. To show this, for each $x\in C$, we can find $\epsilon_x > 0$ such that $B_{\epsilon_x}(x) \subset U$ which is possible since $U$ is open. Then,
+        \begin{equation}
+            \{B_{\epsilon_x}(x)\}
+        \end{equation}
+        is an open cover of $C$, hence it has a finite subcover $x_i$ with $i=1,\dots, m $ and 
+        \begin{equation}
+            \bigcup_{i=1}^m B_{\epsilon_{x_i}}(x_i) \supset C.
+        \end{equation}
+        Our first guess for such a flaptop mountain function may be 
+        \begin{equation}
+            f_0(x) = \sum_{i=1}^m \beta_{x_i,\epsilon_{x_i}}(x)
+        \end{equation}
+        But we still need to crop this! Note that $f_0$ is a continuous function on a compact set bounded below by some $b > 0$ on $C$. The function we want is 
+        \begin{equation}
+            f(x) = \theta\left(\frac{1}{b}f_0(x)\right)
+        \end{equation}
+        
     \end{enumerate}
 \end{proof}
+\subsubsection{Preliminary 2: Separating a Compact Set Contained in Open Set}
+Intuitively, a compact set contains its boundary while an open set is fuzzy around its boundary. Therefore, we should expect a gap between a compact set $C$ and an open set $U$.
+\begin{lemma}
+    Given a compact $C$ and an open $U$, where $C \subset U \subset \mathbb{R}^n$, there exists a compact $D$ such that 
+    \begin{equation}
+        C \subset \Int D \subset D \subset U
+    \end{equation}
+\end{lemma}
+This lemma is a bit stronger than our intuition. It says that a compact set $C$ can be contained in an open set $\Int D$, which is contained in a compact set $D$ and is contained in an open set $U$.
+\begin{proof}
+    The lemma is intuitive: We can construct a finite open cover of $C$ contained in $U$, since $C$ is compact. We can then ``shrink'' each ball by a tiny bit and take the closure, so we can also find a finite closed cover of $C$. Taking the union, we have constructed such a $D$.
+
+    Let's make this more rigorous. For each $x\in C$, we can find an open ball $B_x$ such that $\overline{B_x}\subset U.$  Clearly, $\{B_x\}_{x\in C}$ covers $C$. By compactness, it has a finite subcover $B_{x_i}$ where $i=1,\dots, p.$ Take 
+    \begin{equation}
+        D = \bigcup \overline{B_{x_i}},
+    \end{equation}
+    which is a finite union of closed and bounded sets, so $D$ is closed and bounded, hence it is compact. It is also easy to check that 
+    \begin{equation}
+        \Int D = \bigcup B_{x_i} \supset C.
+    \end{equation}
+\end{proof}
+\subsubsection{Putting it All Together}
+We can now put it all together and prove the Partition of Unity theorem, but we will separate it into cases.
+
+\textbf{Case I: $A$ is compact:}
+
+We can visualize this case: 
+\begin{center}
+    \begin{tikzpicture}
+        
+        \draw[] (-1,0) circle (3);
+        \draw[] (1,0) circle (3);
+
+        \draw[dotted] (-1,0) circle (2.5);
+        \draw[dotted] (1,0) circle (2.5);
+
+
+        \draw[] (-2.5,1) rectangle (2.5,-1);
+
+        \node  at (-4.3,0) {$U_1$};
+        \node  at (-3.2,0) {$D_1$};
+        \node  at (4.3,0) {$U_2$};
+        \node  at (3.2,0) {$D_2$};
+        \node  at (0,-0.8) {$A$};
+
+    \end{tikzpicture}
+\end{center}
+Since $A$ is compact, we can construct a finite open cover of $A$, i.e. $U_1 \subset U_2$, then by lemma 2, construct $D_1 \subset D_2$ to also be a cover. Intuitively, we want each worker to do some work inside $D_1$ but no work outside $U_1.$
+\begin{proof}
+    We perform the following steps: 
+    \begin{enumerate}
+        \item Define the exclusive zone of $U_1$ to be $E_1 = A \setminus \bigcup_{j=2}^p U_j$ and show that we can construct it.
+        \item Show that we can ``Shrink'' each $U_i$ to a compact set $D_i$ such that $\{\Int D_i\}$ still covers $A$. Namely, we can find compact $D_i$ such that $D_i \subset U_i$ and $\bigcup \Int D_i \supset A.$
+        \item Given the claim, we can find $\Psi_i:\mathbb{R}^n \to [0,1]$ which are $C^\infty$ such that $\Psi_i|_{D_i} \equiv 1$ and $\supp \Psi_i \subset U_i$. The $\Psi_i$ does not have to be $C^\infty$ at this point.
+        \item Make the $\Psi_i$ a $C^\infty$ function by using preliminary 1.
+    \end{enumerate}
+    Let us now prove these statements.
+    \begin{enumerate}
+        \item Let $E_1$ denote the exclusive zone of $U_1$, and is equal to $E_1 = A \setminus \bigcup_{j=2}^p U_j.$ We know $E_1$ is compact and $E_1 \subset U_1.$
+        
+        By preliminary 2, we can find a compact set $D_1$ such that 
+        \begin{equation}
+            E_1 \subset \Int D_1 \subset D_1 \subset U_1.
+        \end{equation}
+        \item We have shown how to shrink $U_1$ to $E_1.$ Let's generalize this. Let
+        \begin{equation}
+            E_2 = A \setminus \left[\Int D_1 \subset \bigcup_{j=3}^p U_j\right]
+        \end{equation}
+        $E_2$ is compact since it's a compact set minus a union of open sets. We have $E_2 \subset U_2$ so we can find a compact $D_2$ such that 
+        \begin{equation}
+            E_2 \subset \Int D_2 \subset D_2 \subset U_2.
+        \end{equation}
+        \textcolor{red}{to be continued}
+        \item We can define 
+        \begin{equation}
+            \psi_i(x) = \begin{cases}
+                \frac{\Psi_i(x)}{\sum_{j=1}^{p} \Psi_j(x)} & x \in \bigcup \Int D_i \supset A \\ 
+                0 & x \notin \bigcup \Int D_i
+            \end{cases}
+        \end{equation}
+        Note that the denominator cannot be zero when $x\in \bigcup \Int D_i \supset A$, since it will contain all the $\Psi_i |_{D_i}$. However, we might have continuity issues on the boundary of $\bigcup \Int D_i,$ since it may be zero right outside and nonzero directly inside.
+        \item We can multiply by a function $f(x)$ such that 
+        \begin{equation}
+            \psi_i(x) = \begin{cases}
+                f(x) \frac{\Psi_i(x)}{\sum_{j=1}^{p} \Psi_j(x)} & x \in \bigcup \Int D_i \supset A \\ 
+                0 & x \notin \bigcup \Int D_i
+            \end{cases}
+        \end{equation} 
+        where $f(x)$ is smooth and satisfies $f|_A \equiv 1$ and $\supp f \subset \bigcup \Int D_i.$ We can construct an even smaller cover $\mathcal{V}$ than $\bigcup D_i$ such that outside, $f(x) = 0$ and inside $\mathcal{V}$, we have $f(x)=1.$ This ensures that $\psi_i$ is smooth.
+    \end{enumerate}
+\end{proof}
+\textbf{Case I: $A$ is not compact:}
+Given an open cover for $\mathcal{U}$, we can find a partition of unity for $A' = \bigcup_{u\in \cal{U}} U$, so it works for $A$ too.
+\section{Integration on Unbounded Sets}
+Our goal is to show that 
+\begin{equation}
+    \int^{NT}\limits_A F = \sum_{i} \int \phi_i f.
+\end{equation}
+where $NT$ stands for new technology, which will allow us to integrate over unbounded sets.
+
+We start off with a few preliminaries that worked for our legacy definition of integration.
+\begin{enumerate}
+    \item Assuming $f$ and $g$ are integrable, we have 
+    \begin{align}
+        \int\limits_{R} (f+g) &= \int\limits_{R} f + \int\limits_{R} g 
+    \end{align}
+    \item If $c$ is a scalar, we have
+    \begin{equation}
+        \int\limits_{R} cf = c\int\limits_{R} f
+    \end{equation}
+\end{enumerate}
+\begin{warning}
+    However, be warned that things become super wack for infinite sums. The \textbf{Riemann Rearrangement Theorem} tells us that we can re-arrange these sums to get any sum you want. The reason is as follows: Suppose we have the sum 
+\begin{equation}
+    1-\frac{1}{2}+\frac{1}{3}-\frac{1}{4}+\frac{1}{5}+\cdots,
+\end{equation}
+we can divide it into two groups:
+\begin{equation}
+    1,\frac{1}{3},\frac{1}{5},\frac{1}{7}, \dots \quad\quad\quad\quad\quad\quad -\frac{1}{2}, -\frac{1}{4}, -\frac{1}{6}, -\frac{1}{8},\dots
+\end{equation}
+Note that both the left and right group diverges. I can set this sum equal to $257$ by permuting the terms such that we first construct a number slightly above $257$ using the left terms, then subtract some right terms to get slightly below $257$, and since we have an infinite amount of numbers on both sides, we can have it bounce back and forth and eventually converge to $257$. This sequence of steps is always possible if 
+\begin{equation}
+    \sum |a_n| = \infty
+\end{equation}
+and 
+\begin{equation}
+    \sum a_n \text{converges}
+\end{equation}
+Recall from 157 that $\sum a_i$ is absolutely convergent if $\sum |a_i| <\infty.$ If this is the case, then the above nonsense does not work. The commutative law for an infinite sum then holds.
+\end{warning}
+\subsection{Proof}
+We want to use our legacy definition of integration on functions acting on unbounded sets. To save work, we want to be able to relate the two.
+
+Let $A$ be an open set that is not necessarily bounded. Let $f$ be a function $f:A\rightarrow \mathbb{R}$ with the following properties:
+\begin{enumerate}
+    \item $f$ is locally bounded
+    \begin{definition}
+        A set $A$ is locally bounded if for all $x\in A$, there exists an open $V \ni x$ such that $f$
+    \end{definition}
+    \item $f$ is continuous except on a measure-$0$ set.
+\end{enumerate}
+Let $U=\{\mathcal{U}\}$ be an open cover of $A$ by bounded sets on which $f$ is bounded. Then let $\Phi = \{\phi_i\}$ be a partition of unity for $A$ subordinate to $U$.
+
+We wish to show that 
+\begin{equation}
+    \int^{NT}\limits_{A} f = \sum_i \int \phi_i f.
+\end{equation}
+Note that we didn't specify the region of integration of the right hand side, but this doesn't matter since $\Phi$ is subordinate to $\mathcal{U}$, so we can define the region of integration to a rectangle bigger than $\supp \phi_i.$ There are three problems with this that we can fix:
+\begin{itemize}
+    \item How do we know that $\int \phi_i f$ is integrable?
+    \item How do we know that the infinite sum converges and doesn't do anything weird?
+    \item How do we know that a different choice of $\mathcal{U}$ and a partition of unity doesn't affect this?
+\end{itemize}
+We fix this by saying that $f$ is $(U,\Phi)$-integrable if 
+\begin{equation}
+    \sum_i \int\phi_i |f| < \infty
+\end{equation}
+In that case, we define 
+\begin{equation}
+    \int\limits_A^{(U,\Phi)} f := \sum_{i} \int \phi_i f.
+\end{equation}
+We want to later show that this doesn't depend on $U$ and $\Phi.$ Note that this series is absolutely convergent since
+\begin{equation}
+    \sum \left|\int \phi_i f\right| \le \sum |\phi_i f| = \sum\int_{\infty}\phi_i |f| < \infty
+\end{equation}
+so the weird things with rearrangements do not occur.
+\subsection{Theorem}
+We wish to show that 
+\begin{theorem}
+    If $A$ and $f$ are as before, then 
+    \begin{enumerate}
+        \item If $U,U'$ and $\Phi,\Phi'$ are open covers and partitions of unity as before, then 
+        \begin{equation}
+            \int^{(U',\Phi')}_{A} f = \int^{(U,\Phi)}_{A} f.
+        \end{equation}
+        In that case,
+        \begin{equation}
+            \int^{NT}\limits_{A} f := \int^{(U',\Phi')}_{A} f = \int^{(U,\Phi)}_{A} f.
+        \end{equation}
+    \end{enumerate}
+\end{theorem}
 \end{document}
