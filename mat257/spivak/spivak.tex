@@ -802,6 +802,8 @@ Since $A$ is compact, we can construct a finite open cover of $A$, i.e. $U_1 \su
 \textbf{Case I: $A$ is not compact:}
 Given an open cover for $\mathcal{U}$, we can find a partition of unity for $A' = \bigcup_{u\in \cal{U}} U$, so it works for $A$ too.
 \section{Integration on Unbounded Sets}
+We have only defined integration of bounded functions on bounded sets. We can extend this to unbounded functions on unbounded sets. We wish to define a new integration denoted by $NT$ (for new technology) and relate it to the legacy definition of integration.
+
 Our goal is to show that 
 \begin{equation}
     \int^{NT}\limits_A F = \sum_{i} \int \phi_i f.
@@ -838,7 +840,7 @@ and
 \end{equation}
 Recall from 157 that $\sum a_i$ is absolutely convergent if $\sum |a_i| <\infty.$ If this is the case, then the above nonsense does not work. The commutative law for an infinite sum then holds.
 \end{warning}
-\subsection{Proof}
+\subsection{Setup}
 We want to use our legacy definition of integration on functions acting on unbounded sets. To save work, we want to be able to relate the two.
 
 Let $A$ be an open set that is not necessarily bounded. Let $f$ be a function $f:A\rightarrow \mathbb{R}$ with the following properties:
@@ -873,20 +875,200 @@ We want to later show that this doesn't depend on $U$ and $\Phi.$ Note that this
 \begin{equation}
     \sum \left|\int \phi_i f\right| \le \sum |\phi_i f| = \sum\int_{\infty}\phi_i |f| < \infty
 \end{equation}
-so the weird things with rearrangements do not occur.
-\subsection{Theorem}
+so the weird things with rearrangements do not occur; the sum becomes well behaved.
+\subsection{Choice of PO1 and Open Cover are Irrelevant}
 We wish to show that 
 \begin{theorem}
-    If $A$ and $f$ are as before, then 
+    If $A$ and $f$ are as before, then
     \begin{enumerate}
-        \item If $U,U'$ and $\Phi,\Phi'$ are open covers and partitions of unity as before, then 
+        \item If $U,U'$ and $\Phi,\Phi'$ are open covers and partitions of unity as before, then: $f$ is $(U,\Phi)$-integrable if and only if $f$ is $(U',\Phi')$-integrable.
+        \item If $f$ is integrable (NT), then
         \begin{equation}
-            \int^{(U',\Phi')}_{A} f = \int^{(U,\Phi)}_{A} f.
+            \int^{(U',\Phi')}\limits_{A} f = \int^{(U,\Phi)}\limits_{A} f.
         \end{equation}
         In that case,
         \begin{equation}
-            \int^{NT}\limits_{A} f := \int^{(U',\Phi')}_{A} f = \int^{(U,\Phi)}_{A} f.
+            \int^{NT}\limits_{A} f := \int^{(U',\Phi')}\limits_{A} f = \int^{(U,\Phi)}\limits_{A} f.
         \end{equation}
     \end{enumerate}
 \end{theorem}
+We will also show that this new definition of the integral is equivalent to the old definition, when we have bounded functions in bounded sets.
+\begin{proof}
+    We will write a chain of equalities:
+    \begin{align}
+        \int^{(U,\Phi)}\limits_{A} g &\eq_{(1)} \sum_{i}\int \phi_i g \\ 
+        &\eq_{(2)} \sum_{i}\int \left(\sum_j \phi_j' \right)\phi_i g \\
+        &\eq_{(3)} \sum_i \sum_j \int \phi_j'\phi_i g \\
+        &\eq_{(4)} \sum_j \sum_i \int \phi_i\phi_j' g \\
+        &\eq_{(3)} \sum_j \int \left(\sum_i \phi_i\right)\phi_j' g \\
+        &\eq_{(2)} \sum_j \int \phi_j' g \\
+        &\eq_{(1)} \int^{(U', \Phi')}\limits_{A} g
+    \end{align}
+    Let us go through the above first with $g=|f|$. For this pass, we just need to show that the sum at the top converges if and only if the sum at the bottom converges.
+    \begin{enumerate}
+        \item Irrelevant
+        \item Sum is $1$ in a partition of unity
+        \item Integration is linear, but we have to be a bit more careful when dealing with infinite sums. We need to show that
+        \begin{equation}
+            \int \left(\sum \phi_j'\right) h  = \sum \int \phi_j' h,
+        \end{equation}
+        where $\supp h \subset \supp \phi_i \subset U \in \mathcal{U},$ so $\supp h$ is bounded and closed, hence it is compact. Therefore, byu compactness of $\supp h$ and local finiteness of $\Phi_i'$, only finitely many $i$ satisfy
+        \begin{equation}
+            \supp \phi_i' \cap \supp h \neq \emptyset.
+        \end{equation}
+        Hence, this holds by finite linearity.
+        \item Note that $\phi_i\phi_j' = \phi_j'\phi_i$ due to commutativity. Now, we need to show that we can switch the sums. We have $|g|, \phi_1 \ge 0, \phi_j' \ge 0$ so all terms of the sums are non-negative. By the following exercise, we're done.
+        
+        \textbf{Exercise:} A sum of non-negative terms is convergent if and only if every rearrangement thereof is convergent.
+    \end{enumerate}
+
+    We wish to repeat the above steps for $g=f$. We now work under the assumption that the function is integrable, so the sums are absolutely convergent. The first step is by definition, the next two steps are the same as above, and the last step is true by absolute convergence.
+\end{proof}
+\subsection{Theorem 1}
+We wish to show that NT and old integration is irrelevant when $A$ and $f$ are both bounded. However, the old integration might not even exist since we can write
+\begin{equation}
+    \int\limits_A^{\text{old}} f = \int\limits_{\text{big R}}^{\text{old}} \chi_A f
+\end{equation} 
+where $\chi$ is the characteristic function
+\begin{equation}
+    \chi_A = \begin{cases}
+        1 & x\in A \\ 
+        0 & x\notin A
+    \end{cases}
+\end{equation}
+and we need to make sure $\chi_A$ is continuous except on a set of measure-$0$.
+\begin{theorem}
+    The following are true, keeping the same definitions as above:
+    \begin{enumerate}
+        \item If $A$ and $f$ are bounded, then $f$ is NT-integrable on $A$.
+        \item If in addition $A$ is Jordan Measurable, then
+        the new integration is equivalent to the old integration.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    We will prove both parts:
+    \begin{enumerate}
+        \item Assume $|f| < M$ and $A \subset R$ where $R$ is some rectangle. We need to consider
+        \begin{equation}
+            \sum \int \phi_i |f|
+        \end{equation}
+        If this is finite, then $f$ is NT-integrable. Let us write the following chain of equalities:
+        \begin{equation}
+            \sum \int_R \phi_i |f| = \int_R \sum \phi_i |f| = \int_R |f| \le \int_R M =  M\text{vol}(R).
+        \end{equation}
+        The only problem with this is interchanging the integral and summation symbol. However, this is a non-issue since we can restrict our attention to some finite subset of the $\phi_i$'s. For example, we can write the chain as 
+        \begin{equation}
+            \sum_{i=1}^N \int_R \phi_i |f| = \int_R \sum_{i}^N \phi_i |f| \le \int_R M =  M\text{vol}(R).
+        \end{equation}
+        An infinite sum is convergent if and only if all the partial sums converge, so we are done.
+    \end{enumerate}
+\end{proof}
+
+\newpage
+\section{Change of Variables}
+\begin{theorem}
+    Let $A\subset \mathbb{R}^n$ is open, and let $g: A\rightarrow \mathbb{R}^n$ is continuously differentiable, 1-1, and $\forall a\in A$, $g'(a)$ is invertible. If $f:g(A) \rightarrow \mathbb{R}$ is integrable, then
+    \begin{equation}
+        \int\limits_{g(A)} = \int\limits_{A} (f \circ g) |\det g'|
+    \end{equation}
+\end{theorem}
+This is a powerful theorem. We can use it to compute the Gaussian integral:
+\begin{equation}
+    \int_{-\infty}^{\infty} e^{-x^2/2} \dd{x} = \sqrt{2\pi}
+\end{equation}
+\begin{proof}
+    TBA
+\end{proof}
+However in the above proof, we ignored two things. First, we applied Fubini's on integrals with infinite bounds, and secondly we ignored the distinction between open and closed sets. That is, integrating over the following two sets is equivalent:
+\begin{equation}
+    [0,\infty) \times [0,2\pi] \leftrightarrow (0,\infty) \times (0,2\pi).
+\end{equation}
+Let us address these issues:
+\begin{enumerate}
+    \item We can rewrite
+    \begin{equation}
+        \int\limits_{\mathbb{R} \times \mathbb{R}} e^{-\frac{x^2+y^2}{2}} \dd{x} \dd{y} = \left(\int\limits_{\mathbb{R}} e^{-x^2/2}\dd{x}\right) \left(\int\limits_{\mathbb{R}} e^{-y^2/2}\dd{y}\right)
+    \end{equation}
+    as
+    \begin{equation}
+        a_N = \int\limits_{[-N,N]^2} e^{-\frac{x^2+y^2}{2}} \dd{x} \dd{y} = \left(\int\limits_{-N,N} e^{-x^2/2} \dd{x}\right)\left(\int\limits_{-N,N}e^{-y^2/2}\dd{y}\right),
+    \end{equation}
+    which is true via the old Fubini's Theorem. What remains to show is that as $N\to\infty$, all three integrals converge to each other. Intuitively, this makes sense since the function ``descends rapidly,'' but this is not formal.
+    
+    To be rigorous, define
+    \begin{equation}
+        \int f \equiv \int\limits_{\mathbb{R}\times\mathbb{R}} e^{-(x^2+y^2)/2} \ge 0
+    \end{equation}
+    which is equal to, according to POI:
+    \begin{equation}
+        \int f = \sum_{i=1}^\infty \phi_i f = \lim_{p\to\infty}\sum_{i}^p \int \phi_i f.
+    \end{equation}
+    Since the $\phi_i$ have finite support, so we can interchange the integral and summation:
+    \begin{equation}
+        \int f = \int \left(\sum_{i=1}^p \phi_i\right) f \equiv b_p. 
+    \end{equation}
+    We now want to show that $a_N$ and $b_P$ have the same limit. Note that both $a_N$ and $b_P$ are both increasing sequences. If we can show that for all $N$, there exists an $N$ such that $b_p \ge a_N$ and for all $p$, there exists $N$ such that $a_N \ge b_P$, then
+    \begin{equation}
+        \lim_{p\to\infty} b_p = \lim_{N\to\infty} a_N.
+    \end{equation}
+    To show that these two properties are true, we can do the following:
+    \begin{itemize}
+        \item To show that there exists a $P$, we can pick a $p$ such that $\sum_{i=1}^p \phi_i(x) = 1$ on $[-N,N]^2,$ which implies that 
+        \begin{equation}
+            \sum \phi_i \ge \chi_{[-N,N]^2}.
+        \end{equation}
+        Therefore:
+        \begin{equation}
+            b_p = \int \left(\sum_{i=1}^p \phi_i\right)f \ge \int \chi_{[-N,N]^2}f = a_N.
+        \end{equation}
+        \item The proof is exactly the same. For large enough $N$, the square $[-N,N]^2$ contains the support,
+        \begin{equation}
+            [-N,N]^2 \supset \supp\sum_{i=1}^p \phi_i
+        \end{equation}
+    \end{itemize}
+    \item The general idea is that you can always ignore closed sets of measure-$0$. This is because compact sets of measure-$0$ are content-$0$ and thus can be ignored.
+    \begin{warning}
+        This is not the case with ignoring general sets. If we change the value of a function on a set of measure-$0$, then we can introduce a lot of issues (i.e. continuity). However, if the set of measure-$0$ is also closed, we do not have any issues.
+    \end{warning}
+\end{enumerate}
+\section{Tidbits}
+\subsection{Volume of Spheres}
+Let's compute like physicists! Let
+\begin{equation}
+    \sigma_n = \text{vol}(S^n),\quad\quad S^n = \{x \in \mathbb{R}^{n+1}: |x|=1\}
+\end{equation}
+Note that $S_1$ is just the unit circle, $S_2$ is the unit sphere, and $S_0$ is just two points. To do so, we compute $I_{n+1}$, which is the Gaussian integral in $n+1$ dimensions. We have 
+\begin{equation}
+    I_{n+1} = \int\limits_{\mathbb{R}^{n+1}} e^{-|z|^2/2} \dd{z} = \int\limits_{\mathbb{R}^{n+1}} e^{-(z_1^2+\cdots+z_{n+1}^2)/2}\dd{z}_1\cdots \dd{z}_{n+1} = I_1^{n+1} = \left(2\pi\right)^{(n+1)/2}
+\end{equation}
+Also note that $e^{-|z|^2/2}$ is constant on spheres. Therefore, 
+\begin{equation}
+    I_{n+1} = \int\limits_{\mathbb{R}^{n+1}}e^{-|z|^2/2}\dd{z} = \int_0^\infty \dd{r} \text{vol}(S^n_r)e^{-r^2/2} = \sigma_n \int r^n e^{-r^2/2} \dd{r}
+\end{equation}
+where we define $\sigma_n$ to be $\text{vol}(S^n)$. Note that $\text{vol}(S_r^n) = \text{vol}(rS_1^n)=r^n\text{vol}(S^n) = r^n \sigma_n.$ Therefore, we have:
+\begin{equation}
+    I_{n+1} = \sigma_n \iota_n = (2\pi)^{(n+1)/2}
+\end{equation}
+We don't know how to compute $\iota_n$, but we can still work with it. For example, 
+\begin{align}
+    \iota_{n-2} &= \int_0^\infty \underbrace{r^{n-2}}_{u'}\underbrace{e^{-r^2/2}}_{v}\dd{r} \\ 
+    &= -\int_0^\infty \frac{1}{n-1}r^{n-1} \cdot \left(-re^{-r^2/2}\right) \dd{r}  + uv\Big|_0^\infty \\ 
+    &= \frac{1}{n-1} \int_0^\infty r^n e^{-r^2/2}\dd{r} + 0 \\
+    &= \frac{1}{n-1}\iota_n 
+\end{align}
+which is true for $n>1.$ Therefore, $\sigma_n$ is
+\begin{equation}
+    \sigma_n = \frac{(2\pi)^{(n+1)/2}}{\iota_n} = \frac{2\pi \cdot (2\pi)^{(n-1)/2}}{(n-1)\iota_{n-2}} = \frac{2\pi}{n-1}\sigma_n 
+\end{equation}
+where we have constructed a recurrence relation for $\sigma_n$. We have
+\begin{align}
+    \sigma_0 &= 2 \\ 
+    \sigma_1 &= 2\pi \\ 
+    \sigma_2 &= 4\pi \\
+    \sigma_3 &= 2\pi^2.
+\end{align}
+Let $\beta_n = \text{vol}(B_1(0) \subset \mathbb{R}).$ Then we can compute
+\begin{equation}
+    \beta_n = \int_0^1 \sigma_nr^n \dd{r}.
+\end{equation}
 \end{document}

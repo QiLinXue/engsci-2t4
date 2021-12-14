@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{MAT292 \\ Tutorial 8 Solution}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{xcolor}
+
+\pagecolor[rgb]{0,0,0} %black
+
+\color[rgb]{0.7,0.7,0.7} %grey
+
+\begin{document}
+% \setlength\extrarowheight{20pt}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+\maketitle
+\begin{enumerate}
+    \item  \begin{enumerate}\begin{enumerate}
+        \item \begin{align}
+            \mathcal{L}\{Ce^{at}\} &= \int_0^\infty Ce^{(a-s)t}\dd{t} \\ 
+                                   &= \frac{C}{s-a}
+        \end{align}
+        \item \begin{align}
+            \mathcal{L}\{e^t\sin t\} &= \int_0^\infty e^{(1-s)t}\sin t \dd{t} \\ 
+            &= \frac{1}{2i} \int_0^\infty e^{(1-s+i)t} - e^{(1-s-i)t} \dd{t} \\ 
+            &= \frac{1}{2i} \frac{1}{s-1-i} - \frac{1}{2i} \frac{1}{s-1+i} \\ 
+            &= \frac{1}{2i} \left(\frac{2i}{(s-1)^2+1}\right) \\ 
+            &= \frac{1}{(s-1)^2+1}
+        \end{align}
+        \item \begin{align}
+            \mathcal{L}\{e^t\cos t\} &= \int_0^\infty e^{(1-s)t}\cos t \dd{t} \\ 
+            &= \frac{1}{2} \int_0^\infty e^{(1-s+i)t} + e^{(1-s-i)t} \dd{t} \\ 
+            &= \frac{1}{2} \frac{1}{s-1-i} + \frac{1}{2i} \frac{1}{s-1+i} \\ 
+            &= \frac{1}{2} \left(\frac{2(s-1)}{(s-1)^2+1}\right) \\ 
+            &= \frac{s-1}{(s-1)^2+1}
+        \end{align}
+    \end{enumerate}
+    \item Taking the Laplace transform of both sides, we are left with
+    \begin{equation}
+        sF(s)-f(0) = aF(s)
+    \end{equation}
+    and solving for $F(s)$ gives 
+    \begin{equation}
+        F(s) = \frac{y_0}{s-a}
+    \end{equation}
+    so 
+    \begin{equation}
+        f(t) = y_0e^{-at}
+    \end{equation}
+    \item The characteristic formula is 
+    \begin{equation}
+        r^2 - 2r + 2 = 0
+    \end{equation}
+    and the roots are $r = 1 \pm i$
+    \item Taking the Laplace Transform of both sides, we get
+    $$s^2F(s)-sf(0)-f'(0) - 2sF(s) + 2f(0) + 2F(s) = 0$$
+    using $f(0)=1$, we get
+    $$(s^2-2s+2)F(s) - s + 2 = 0$$
+    and solving for $F(s)$ gives
+    $$F(s) = -\frac{s-2}{s^2-2s+2}$$
+    \item Completing the square, we get
+    \begin{equation}
+        F(s) = -\frac{(s-1)-1}{(s-1)^2+1} = \frac{-(s-1)}{(s-1)^2+1} + \frac{1}{(s-1)^2+1}
+    \end{equation}
+    so using the table, we get 
+    \begin{equation}
+        f(t) = e^{at}(\sin t + \cos t)
+    \end{equation}
+\end{enumerate}
+\item \begin{enumerate}
+    \item \begin{enumerate}
+        \item $e^{-t}$
+        \item Rewrite as $\frac{s}{s^2 + 4} + \frac{3}{s^2 + 4}$ which gives $\frac{1}{4}\cos(2t) + \frac{3}{4}\sin(2t)$
+        \item Rewrite as $\frac{1!}{(s-(-1))^{1+1}}$ so the inverse transform is $te^{-t}$
+        \item Note that $\frac{d}{ds}\left(-2\frac{1}{(s^2+4)}\right) = \frac{4s}{(s^2+4)^2}$ so the inverse Laplace Transform is $-t\sin(2t).$ We want to find the inverse transform of $\frac{4s-4}{(s^2+4)^2}$, so we are left with $-t\sin(2t)-2\sin(2t)$
+        
+        We want inverse transform of $\frac{4(s-4)}{(s^2+4)^2}.$ Let $s'=s-4$. Then we have
+        \begin{equation}
+            \frac{4s'}{(s'^2+8s+16+4)^2} = \frac{4s'}{(s'^2+8s'+20)^2} = \frac{4s'}{((s'+4)^2+4)^2}
+        \end{equation}
+    \end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\end{document}
