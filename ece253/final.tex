@@ -65,7 +65,8 @@
 \setlength{\columnsep}{2pt}
 
 \begin{center}
-     \Large{\textbf{ECE253 Midterm Cheatsheet}} \\
+     \Large{\textbf{ECE253 Final Cheatsheet}}\\
+     \small{\textit{Author: your mother}} \\
 \end{center}
 
 
@@ -333,14 +334,17 @@ module D-ff(D, clk, Q);
     always@(posedge clk) Q <= D; // use <= operator
 endmodule
 \end{verbatim}
-\subsection{Flip Flop (stores on both edges)}
+\subsection{T Flip Flops}
 \begin{verbatim}
-module DDR (input c, input D, output Q) ;
-    reg p, n;
-    always @ (posedge c) p <= D;
-    always @ (negedge c) n <= D;
-    assign Q <= c ? p : n;
-endmodule
+module t_ff(Clock, T, Clear_b, Q);
+    input Clock, Clear_b, T;
+    output reg Q;
+    always @(posedge Clock, negedge Clear_b)
+    begin
+            if (Clear_b == 1'b0) Q <= 0;
+            else Q <= T^Q;
+    end
+endmodule 
 \end{verbatim}
 \subsection{Registers}
 \begin{verbatim}
