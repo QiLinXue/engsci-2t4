@@ -1,0 +1,1 @@
+{"rule":"ADVERB_OR_HYPHENATED_ADJECTIVE","sentence":"^\\QLet \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q where \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is an open bounded set.\\E$"}

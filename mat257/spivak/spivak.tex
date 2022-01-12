@@ -268,7 +268,7 @@ Another Example: Let $\mathcal{C}$ be the cantor set $\subset [0,1]$ which is un
 \begin{equation}
     \mathcal{C} = \{0.C_1C_2C_3C_4\dots: C_i \in \{0,2\}\}
 \end{equation}
-$C$ is uncountable for the same reason as $\mathbb{R}$. Define $C_k$ to be the union of $2^k$ intervals of length $\frac{1}{3^k}$. THerefore,
+$C$ is uncountable for the same reason as $\mathbb{R}$. Define $C_k$ to be the union of $2^k$ intervals of length $\frac{1}{3^k}$. Therefore,
 \begin{equation}
     C \subset C_k
 \end{equation}
@@ -1045,10 +1045,51 @@ As an analogy, consider Prof. Dror's stacked books. We can integrate by going on
         \item Show that $g$ can be written as a composition of linear preserving maps.
         \item If the COV formula holds for small sets, then it holds for large sets.
         \item COV holds for the identity.
+        \item The restricted COV formula implies the general COV formula holds.
     \end{enumerate}
     And to prove the above:
     \begin{enumerate}
-         \item Let $g:\mathbb{R}^n_{x_1}\rightarrow \mathbb{R}^n_{y_1}$ be an arbitrary function such that it maps $(x_1,\dots,x_n)$ to $(y_1,\dots,y_n)$ via $y_i = g_i(x_1,\dots,x_n)$. We can break up this map in the following way:
+        \item Consider the following composition of functions:
+        \begin{equation}
+            A \xrightarrow[h]{} h(A) \xrightarrow[g]{} (g\circ h)(A) \xrightarrow[f]{} \mathbb{R}.
+        \end{equation}
+        Then by the COV formula for $g$, we can write:
+        \begin{equation}
+            \int\limits_{(g\circ h)(A)} f = \int\limits_{h(A)} (f\circ g)|\det g'|.
+        \end{equation}
+        Let us define $\bar{f} \equiv (f\circ g)|\det g'|$, and apply the COV formula for $h.$ We get:
+        \begin{equation}
+            \int\limits_{h(A)} \bar{f} = \int\limits_{A} (\bar{f}\circ h)|\det h'|.
+        \end{equation}
+        Substituting in $\bar{f}$ and using the chain law, we have what is desired.
+        \item Assume that COV holds for $n-1$ dimensions. Let $g: U \rightarrow \mathbb{R}^n$ where $U$ is an open bounded set and let $g$ be a layer-preserving map such that $g(U)$ is bounded. We then want to show the following restricted formula for $\text{cov}(g)$ holds: namely if $f:g(U) \to \mathbb{R}$ is continuous and $\supp f \subset g(U)$, then
+        \begin{equation}
+            \int\limits_{g(U)} f = \int\limits_{U} (f\circ g)|\det g'|.
+        \end{equation}
+        We don't actually need to specify the domain of integration, since the support is contained in $g(U).$ For any $z\in\mathbb{R}$, define $g_Z:\mathbb{R}^{n-1}\rightarrow \mathbb{R}^{n-1}$ by 
+        \begin{equation}
+            g_z(x) = \begin{pmatrix}
+                g_1(x,z) \\ \vdots \\ g_{n-1}(x,z)
+            \end{pmatrix}
+        \end{equation}
+        and define $f_Z:\mathbb{R}^{n-1}\rightarrow \mathbb{R}$ by $f_z(x) = f(x,z)$. The integral is thus 
+        \begin{equation}
+            \int f = \int\limits_{\mathbb{R}} \dd{z} \int\limits_{\mathbb{R}^{n-1}} \dd{x} f(x,z) = \int\limits_{\mathbb{R}} \dd{z} \int\limits_{\mathbb{R}^{n-1}} f_z(x)
+        \end{equation}
+        Using our inductive hypothesis (COV holds for $n-1$ dimensions), we can rewrite the integral as 
+        \begin{equation}
+            \int\limits_{\mathbb{R}} \dd{z} \int\limits_{\mathbb{R}^{n-1}} (f_z(x) \circ g_z) \cdot |\det g_z'|.
+        \end{equation}
+        Recall the derivative is written as the Jacobian 
+        \begin{equation}
+            g' = \begin{pmatrix}
+                \frac{\partial g_1}{\partial x_1} & \cdots & \frac{\partial g}{\partial x_{n-1}} & \frac{\partial g_1}{\partial z} \\ 
+                \vdots & \ddots & \vdots & \vdots \\
+                \frac{\partial g_{n-1}}{\partial x_1} & \cdots & \frac{\partial g_{n-1}}{\partial x_{n-1}} & \frac{\partial g_{n-1}}{\partial z} \\ 
+                \frac{\partial g_n}{\partial x_1} & \cdots & \frac{\partial g_{n-1}}{\partial x_{n-1}} & 1
+            \end{pmatrix}
+        \end{equation}
+        \item Let $g:\mathbb{R}^n_{x_1}\rightarrow \mathbb{R}^n_{y_1}$ be an arbitrary function such that it maps $(x_1,\dots,x_n)$ to $(y_1,\dots,y_n)$ via $y_i = g_i(x_1,\dots,x_n)$. We can break up this map in the following way:
          \begin{equation}
              \begin{pmatrix}
                  x_1 \\ \vdots \\ x_n
