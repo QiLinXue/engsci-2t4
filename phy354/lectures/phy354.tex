@@ -84,4 +84,24 @@ for $i=1,2,3$. These equations are just the $3$ components of $m\ddot{\vec{r}} =
     \end{equation}
     where $\vec{\tau}$ is torque and $\vec{L}$ is the angular momentum.
 \end{example}
+\section{Principle of Least Action}
+In principle, there are an infinite number of paths a particle can take from point A to point B. Traditionally, we will solve this by analyzing the forces at every single point to find the path it actually takes. We take an alternative approach. We define the action 
+\begin{equation}
+    S \equiv \int_{t_0}^{t_1} L(q(t),\dot{q}(t),t) \dd{t},
+\end{equation}
+where $q$ is a generalized coordinate.
+
+We assign each path a particular action, and we claim that the particle takes the path with the least action. However, this may be tricky since it depends on $q(t_0),q(t_0+\epsilon),\dots,q(t_1)$, an infinite number of variables. The terminology here is that the action $S$ is a functional of $q(t)$, i.e. we write it as
+\begin{equation}
+    S[q(t)] = \lim_{\epsilon \to 0} S(q(t_0), q(t_0+\epsilon), \dots, q(t_1)).
+\end{equation}
+We want to find the extremum of this action. In one dimension, this occurs when
+\begin{equation}
+    f(x_0+\delta)=f(x_0)=o(\delta^2)
+\end{equation}
+where $o(\delta^2)$ is the order of second order. For functionals, we can consider a small perturbation $q_c(t) + \delta q(t)$. Then we claim that an extremum occurs when
+\begin{equation}
+    S[q_c(t)+\delta q(t)] - S[q_c(t)] = o(\delta q^2).
+\end{equation}
+We will prove this later.
 \end{document}
