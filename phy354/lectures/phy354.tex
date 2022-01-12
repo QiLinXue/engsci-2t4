@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY354: Advanced Classical Mechanics}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Motivation}
+In previous courses, we focused on $\vec{F}=m\vec{a}$ and its consequences. In this course, we will do it in a more elegant way, i.e. via Euler, Lagrange, Hamilton, Jacobi, Noether.  Some disadvantages of Newton's approach are:
+\begin{itemize}
+    \item Can be difficult to apply to complex situations and extended objects
+    \item Difficult to see how chaos theory arises
+    \item Obscures relationship between quantum and classical mechanics
+\end{itemize}
+\section{Lagrangian Mechanics}
+We first start with a few examples showing Lagrangian Mechanics in action, and we will later discuss generalizations and intricacies:
+\begin{example}
+    Let us consider a simple system with a mass $m$ on a spring with spring constant $k$. Instead of solving this by writing $F=-kx$, let us write the following strange combination of kinetic and potential energy, known as the \textbf{Lagrangian}.:
+    \begin{equation}
+        L = T - V,
+    \end{equation}
+    where $T$ is the kinetic energy and $V$ is the potential energy. Using $T=\frac{1}{2}m\dot{x}^2$ and $V=\frac{1}{2}kx^2$, we get:
+    \begin{equation}
+        L = \frac{1}{2}m\dot{x}^2 - \frac{1}{2}kx^2.
+    \end{equation}
+    Consider the following equation, known as the Euler-Lagrange Equation:
+    \begin{equation}
+        \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{x}}\right) = \frac{\partial L}{\partial x}
+    \end{equation}
+    which gives 
+    \begin{equation}
+        \frac{d}{dt}\left(m\dot{x}\right) = -kx \implies m\ddot{x} = -kx.
+    \end{equation}
+\end{example}
+\begin{example}
+    Suppose we have a general potential $V=V(x).$ Then the E-L equation gives
+    \begin{equation}
+        m\ddot{x} = -\frac{\partial V(x)}{\partial x}.
+    \end{equation}
+    Notice that $-\frac{\partial V(x)}{\partial x}$ is just the force!
+\end{example}
+If we have more than one dimension, i.e. $x,y,z$, then we'll have 3 E-L equations, and we'll have to solve them separately. The Lagrangian would be 
+\begin{equation}
+    L = \frac{1}{2}m\sum_i \dot{x}_i^2 - V(x_i)
+\end{equation}
+and the 3 different E-L equations would be
+\begin{equation}
+    \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{x}_i}\right) = \frac{\partial L}{\partial x_i} \implies m\ddot{x}_i = -\frac{\partial V}{\partial x_i}
+\end{equation}
+for $i=1,2,3$. These equations are just the $3$ components of $m\ddot{\vec{r}} = - \vec{\nabla} V(\vec{r})$. The important idea here is that we can determine the equations of motion without knowing the forces! We just need to figure out the potential energy. We can try a more complex example:
+\begin{example}
+    Suppose we have a mass on a spring that acts as a pendulum. The spring has equilibrium length $\ell$ and at an angle $\theta$, the spring has length $r=\ell + x$. We will work in polar coordinates $x,\theta.$ The kinetic energy is
+    \begin{equation}
+        T = \frac{1}{2}m\vec{v}^2 = \frac{1}{2}m\left(\dot{x}^2 + (\ell+x)^2\dot{\theta}^2\right),
+    \end{equation}
+    and the potential energy is
+    \begin{equation}
+        V = -mg(\ell+x)\cos\theta + \frac{1}{2}kx^2.
+    \end{equation}
+    The $E-L$ equation for $x$ gives
+    \begin{align}
+        \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{x}}\right) &= \frac{\partial L}{\partial x} \\
+        m\ddot{x} &= m(\ell + x)\dot{\theta}^2 + mg\cos\theta - kx.
+    \end{align}
+    The term $m(\ell + x)\dot{\theta}^2$ is the centripetal force, $mg\cos\theta$ is the radial gravitational force, and $-kx$ is the spring force. The $\theta$ component is 
+    \begin{equation}
+        m(\ell + x)^2\dot{\theta} = mg(\ell + x)\sin\theta
+    \end{equation}
+    which corresponds to 
+    \begin{equation}
+        \vec{\tau} = \frac{d\vec{L}}{dt}
+    \end{equation}
+    where $\vec{\tau}$ is torque and $\vec{L}$ is the angular momentum.
+\end{example}
+\end{document}
