@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY365: Quantum Information}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Quantum Coins}
+Consider a quantum coin that can be in a superposition of heads and tails. We can write its state as a vector:
+\begin{equation}
+    |\Psi\rangle = \alpha|H\rangle + \beta|T\rangle  
+\end{equation}
+which lives in the \emf{Hilbert Space.} Inner products of these vectors can be written as 
+\begin{equation}
+    \langle \Psi_1 | \Psi_2 \rangle.
+\end{equation}
+\emf{Born's Rule} tells us we can compute the probability of tails to be $|\beta|^2$ and the probability of heads is $|\alpha|^2$. When there are two quantum coins, there can be four combinations of heads and tails, written as:
+\begin{equation}
+    |\Psi\rangle = \alpha|HH\rangle + \beta|HT\rangle + \gamma TH\rangle + \delta |TT\rangle.
+\end{equation}
+In quantum mechanics, we can construct the following state:
+\begin{equation}
+    |\Psi\rangle = \frac{1}{\sqrt{2}}|HH\rangle + \frac{1}{\sqrt{2}}|TT\rangle,
+\end{equation}
+which represents \emf{entanglement.} If we measure the first coin, we can instantly know the outcome of the second coin, even if they are lightyears apart.
+\end{document}
