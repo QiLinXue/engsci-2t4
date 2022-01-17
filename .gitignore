@@ -19,6 +19,7 @@
 *.mp4
 /mse160/psets/pset3.*
 /mse160/psets/figures/*
+/phy354/psets/*
 /aps360/*
 /mat257/psets/*
 /ece253/lab2/*
