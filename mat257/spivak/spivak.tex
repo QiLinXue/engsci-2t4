@@ -194,20 +194,76 @@ Let us perform these steps:
           \end{equation}
           We can conclude that $f^{-1}(y)$ is continuous in $y$ and $f'(x)$ is continuous in $x$. Therefore, $M \mapsto M^{-1}$ is a continuous operation on matrices. Specifically, it is a function that maps $\mathbb{R}^{n^2}\rightarrow \mathbb{R}^{n^2}.$ This is not everywhere defined. But where defined, the inverse is continuous by Cramer's Law. There is an explicit formula for the inverse, so this map is continuous.
 \end{enumerate}
+\subsection{Implicit Function Theorem}
+TBA
 
 \newpage
 \section{Integration}
-\subsection{Integrability, Measure 0, Content 0, Integrability and Continuity}
+\subsection{Rigorous Definition}
+\subsubsection{Partitions}
+Let $R = \prod_{i=1}^n\left([a_i,b_i]\right)$ be a rectangle in $\mathbb{R}^n$ and let $f:R\to\mathbb{R}$ be bounded. We lay out some definitions:
+\begin{itemize}
+    \item A \emf{partition} $P$ of $R$ is a sequence $(P_i)^n_{i=1},$ where $P_i$ is a partition of $[a_i,b_i]$ (i.e. $P=a_i=t_{i_0}\le t_{i_1}\le \cdots \le t_{i_{N_i}}=b_i$)
+    \item When a \emf{sub-rectangle} $S$ is relative to partition $P$, we use the notation $S \in P$. If we choose integers $1\le j_i \le N_i$ for $i\in \{1,\dots,n\}$ and $j=(j_1,\dots,j_n),$ then it can be written as $S_j = \prod_{i=1}^n([t_{i,j_{i-1}},t_{i,j_i}])$.
+    \item The volume of a rectangle is
+    \begin{equation}
+        \text{vol}(R) = |R| = \prod_{i=1}^n(b_i-a_i)
+    \end{equation}
+\end{itemize}
+\subsubsection{Lower and Upper Sums}
+Let $f:R\to \mathbb{R}$ be founded. Then
+\begin{align}
+    L(f,P) &= \text{lower sum of F rel P} = \sum_{S \in P}(\text{vol}(S) m_s(f)) \\ 
+    U(f,P) &= \text{upper sum of F rel P} = \sum_{S \in P}(\text{vol}(S) M_s(f))
+\end{align}
+where $m_s \le M_s \implies L(f,P) \le U(f,P)$. A function is \emf{integrable} if $L(f,P)$ and $U(f,P)$ converge to each other.
+\begin{proposition}
+    If $P$ is a partition of $R$, then
+    \begin{equation}
+        \sum_{S\in P}(V(S)) = V(R)
+    \end{equation}
+\end{proposition}
+\subsubsection{Refinements and Integrability Theorems}
 \begin{definition}
-    $A$ is of measure $0$ means that for $\forall \epsilon > 0$, there exists open (alternatively closed) rectangles $(R_i)_{i=1}^\infty$ such that
+    We say that $P'$ \emf{refines} $P$ if every $S'\in P'$ is a subset of some $S\in P$. Equivalently, if $S\in P \implies S = U_{S'\in P', s'\in S}(s')$.
+\end{definition}
+\begin{lemma}
+    If a partition $P'$ refines a partition $P$, then
+    \begin{align}
+        L(f,P) &\le L(f,P') \\ 
+        U(f,P) &\ge U(f,P')
+    \end{align}
+\end{lemma}
+A direct corollary is that if $P_1,P_2$ are partitions of $R$ then $L(f,P_1) \le U(f,P_2).$
+\begin{definition}
+    \emf{Upper integral} of $f$ is
+    \begin{equation}
+        \text{inf}\{U(f,P)\} =: U(f) = \int_U f \\ 
+    \end{equation}
+    and the \emf{lower integral} of $f$ is
+    \begin{equation}
+        \text{sup}\{L(f,P)\} =: L(f) = \int_L f \\
+    \end{equation}
+\end{definition}
+An alternative but equivalent way to say $f$ is \emf{integrable} is when $L(f)=U(f).$
+\begin{theorem}
+    The function $f$ is integrable if and only if for all $\epsilon >0$, there exists $P$ such that $U(f,P)-L(f,P) <\epsilon.$
+\end{theorem}
+\begin{theorem}
+    Continuous functions are integrable.
+\end{theorem}
+\subsection{Measure Theory}
+\begin{definition}
+    $A$ is of \emf{measure-$0$} means that for $\forall \epsilon > 0$, there exists open (alternatively closed) rectangles $(R_i)_{i=1}^\infty$ such that
     \begin{enumerate}
         \item $A \subset \bigcup R_i$
         \item $\sum \text{vol}(R_i) < \epsilon.$
     \end{enumerate}
+    Note that when we say measure 0, we refer to \emf{Lebesgue measure-$0$.}
 \end{definition}
 For example, finite \& countable sets, along with $\mathbb{R} \subset \mathbb{R}^2$ are of measure $0$.
 \begin{definition}
-    A set $X$ is called \textbf{countably infinite} if there is a surjective function $F$ such that $F: \mathbb{N} \onto X$
+    A set $X$ is called \emf{countably infinite} if there is a surjective function $F$ such that $F: \mathbb{N} \onto X$
 \end{definition}
 A few facts that follows:
 \begin{enumerate}
@@ -264,7 +320,7 @@ We can now state and prove a few statements about measure-$0$.
 \begin{warning}
     Countable sets are measure-$0$, but the converse is not true! For example, $\mathbb{R}\subset\mathbb{R}^2$ has measure-$0$, but is not countable.
 \end{warning}
-Another Example: Let $\mathcal{C}$ be the cantor set $\subset [0,1]$ which is uncountable, yet of measure-$0$ in $\mathbb{R}$. Let
+Another Example: Let $\mathcal{C}$ be the \emf{cantor set} $\subset [0,1]$ which is uncountable, yet of measure-$0$ in $\mathbb{R}$. Let
 \begin{equation}
     \mathcal{C} = \{0.C_1C_2C_3C_4\dots: C_i \in \{0,2\}\}
 \end{equation}
@@ -279,9 +335,18 @@ Therefore, $C$ is measure-$0$. As an aside, each $C_k$ is compact, so $\mathcal{
     $[a,b] \subset \mathbb{R}$ is \textit{not} measure $0$. In fact, $R \subset \mathbb{R}^n$ is not measure $0$.
 \end{theorem}
 \begin{definition}
-    $A\subset \mathbb{R}^n$ is said to be of content-$0$ if $\forall \epsilon > 0$ it is contained in a finite union of rectangles whose sum of volumes is smaller than $\epsilon$.
+    $A\subset \mathbb{R}^n$ is said to be of \emf{content-$0$} if $\forall \epsilon > 0$ it is contained in a finite union of rectangles whose sum of volumes is smaller than $\epsilon$.
 \end{definition}
-Note that $\mathbb{Z} \in \mathbb{R}$ is not of content-$0$.
+Note that $\mathbb{Z} \in \mathbb{R}$ is not of content-$0$. Note that content-$0$ refers to \emf{Jordan Measure $0$.}
+
+A set is \emf{Jordan Measurable} (alternatively \emf{rectifiable}) as follows:
+\begin{definition}
+    $S$ is Jordan measurable if and only if $S$ is bounded and the boundary has measure $0$. 
+\end{definition}
+We can relate integrability and measure theory.
+\begin{theorem}
+    A function $f$ is integrable if and only if it is continuous except on a set of measure $0$.
+\end{theorem}
 \section{Fubini's Theorem}
 Currently, we have the tools to define the integral, but we don't have the tools to compute the integral yet. We will start off with a loose example.
 \begin{example}
@@ -563,7 +628,7 @@ We propose the following theorem, which states that all of the above can be achi
     \begin{enumerate}
         \item \textbf{Local Finiteness:} Every $x\in W$ has an open neighbourhood $V\ni x$ such that 
         \begin{equation}
-            \left|\{i: V\cap \supp \phi_i \} \right| < \infty.
+            \left|\{i: V\cap \supp \phi_i \neq \emptyset\} \right| < \infty.
         \end{equation}
         \item \textbf{Sum is Unity:} For all $x\in A$, we have
         \begin{equation}
@@ -772,15 +837,22 @@ Since $A$ is compact, we can construct a finite open cover of $A$, i.e. $U_1 \su
         \begin{equation}
             E_1 \subset \Int D_1 \subset D_1 \subset U_1.
         \end{equation}
-        \item We have shown how to shrink $U_1$ to $E_1.$ Let's generalize this. Let
+        \item Let the \emf{exclusivity zone} for $U_1$ be $E_1$, defined as
         \begin{equation}
-            E_2 = A \setminus \left[\Int D_1 \subset \bigcup_{j=3}^p U_j\right]
+            E_1 = A \setminus \bigcup_{i=2}^{p}(U_i) \subseteq U_1.
         \end{equation}
-        $E_2$ is compact since it's a compact set minus a union of open sets. We have $E_2 \subset U_2$ so we can find a compact $D_2$ such that 
+        By preliminary 2, we can find a compact $D_1$ such that $E_1 \subseteq \text{int}(D_1) \subseteq D_1 \subseteq U_1$. Therefore, we have that
         \begin{equation}
-            E_2 \subset \Int D_2 \subset D_2 \subset U_2.
+            \text{int}(D_1) \cup \bigcup_{i=2}^pU_i \supseteq A.
         \end{equation}
-        \textcolor{red}{to be continued}
+        Suppose $D_1,\dots,D_{q-1}$ where $2\le q \le p$ have been constructed such that $D_i \subseteq U_i$ and \begin{equation}
+            \bigcup_{i=1}^{q-1}(\text{int} D_i) \cup \bigcup_{i=q}^p(U_i) \supset A.
+        \end{equation}
+        In words, this says that we can ``shrink'' some $U_i$ to $\text{int} D_i$, and when joined with the other $U_i$, it still forms a cover for $A$. Let us set 
+        \begin{equation}
+            E_q = A \setminus \left(\bigcup_{i=1}^{q-1}\text{int}(D_i) \bigcup_{i=q+1}^p U_i\right).
+        \end{equation}
+        Then $E_q$ is compact, $E_q \subseteq U_q$, so we can use preliminary 2 to find $D_q$ such that $E_q \subset \text{int}(D_q) \subseteq D_q \subseteq U_q$. This is true for $q=2$, and we can repeat until $q=p$.
         \item We can define 
         \begin{equation}
             \psi_i(x) = \begin{cases}
@@ -799,8 +871,33 @@ Since $A$ is compact, we can construct a finite open cover of $A$, i.e. $U_1 \su
         where $f(x)$ is smooth and satisfies $f|_A \equiv 1$ and $\supp f \subset \bigcup \Int D_i.$ We can construct an even smaller cover $\mathcal{V}$ than $\bigcup D_i$ such that outside, $f(x) = 0$ and inside $\mathcal{V}$, we have $f(x)=1.$ This ensures that $\psi_i$ is smooth.
     \end{enumerate}
 \end{proof}
-\textbf{Case I: $A$ is not compact:}
-Given an open cover for $\mathcal{U}$, we can find a partition of unity for $A' = \bigcup_{u\in \cal{U}} U$, so it works for $A$ too.
+\textbf{Case II: $A$ is in the form of $A = \bigcup_{k=0}^{\infty} A_k$ where $A_k$ is compact and $A_k \subseteq \text{int}(A_{k+1})$:} Let us define
+\begin{equation}
+    L_k = A_{k+1} - \text{int}(A_k)
+\end{equation}
+for $k \ge 0.$ Let
+\begin{equation}
+    \mathcal{U}_k = \{U \cap \text{int}(A_{k+2}) \cap A_{k-1}^C | U \in \mathcal{U}\}.
+\end{equation}
+Note that since the interior is open, $U_k$ is open. We can use step 1 to find a partition of unity $\psi_k = \{\psi_{k_i}\}$ for $L_k$ and subordinate to $U_k$. Let
+\begin{equation}
+    \Psi = \bigcup_{k=0}^{\infty} \psi_k = \{\psi_i\},
+\end{equation}
+which is a countable collection of $C^\infty$ functions. We can set 
+\begin{equation}
+    \phi_i(x) = \frac{\psi_i(x)}{\sum_{j=1}^{\infty} \psi_j(x)}.
+\end{equation}
+Clearly, $\{\phi_i\}$ is the desired partition of unity for $A = \bigcup(A_k).$
+
+\textbf{Case III: $A$ is an arbitrary open set:} Let us write 
+\begin{equation}
+    A = \bigcup_{k \ge 1}(A_k)
+\end{equation}
+where 
+\begin{equation}
+    A_k = \left\{x\in A: |x| \le k \text{ and } \text{dist}(x,A^c) \le \frac{1}{k}\right\}.
+\end{equation}
+Our claim is then $A_k$ is contained in $\text{int}(A_{k+1}).$ Each $A_k$ is compact, and $\bigcup_{k \ge 1}(A_k) = A.$ Therefore, by case II, we are done.
 \section{Integration on Unbounded Sets}
 We have only defined integration of bounded functions on bounded sets. We can extend this to unbounded functions on unbounded sets. We wish to define a new integration denoted by $NT$ (for new technology) and relate it to the legacy definition of integration.
 
@@ -845,9 +942,9 @@ We want to use our legacy definition of integration on functions acting on unbou
 
 Let $A$ be an open set that is not necessarily bounded. Let $f$ be a function $f:A\rightarrow \mathbb{R}$ with the following properties:
 \begin{enumerate}
-    \item $f$ is locally bounded
+    \item $f$ is \emf{locally bounded}
     \begin{definition}
-        A set $A$ is locally bounded if for all $x\in A$, there exists an open $V \ni x$ such that $f$
+        A set $A$ is locally bounded if for all $x\in A$, there exists an open $V \ni x$ such that $f$ is bounded on $V$.
     \end{definition}
     \item $f$ is continuous except on a measure-$0$ set.
 \end{enumerate}
@@ -873,7 +970,7 @@ In that case, we define
 \end{equation}
 We want to later show that this doesn't depend on $U$ and $\Phi.$ Note that this series is absolutely convergent since
 \begin{equation}
-    \sum \left|\int \phi_i f\right| \le \sum |\phi_i f| = \sum\int_{\infty}\phi_i |f| < \infty
+    \sum \left|\int \phi_i f\right| \le \sum \int|\phi_i f| = \sum\int_{\infty}\phi_i |f| < \infty
 \end{equation}
 so the weird things with rearrangements do not occur; the sum becomes well behaved.
 \subsection{Choice of PO1 and Open Cover are Irrelevant}
@@ -924,7 +1021,7 @@ We will also show that this new definition of the integral is equivalent to the 
 
     We wish to repeat the above steps for $g=f$. We now work under the assumption that the function is integrable, so the sums are absolutely convergent. The first step is by definition, the next two steps are the same as above, and the last step is true by absolute convergence.
 \end{proof}
-\subsection{Theorem 1}
+\subsection{NT Agrees with Old for Bounded Sets and Functions}
 We wish to show that NT and old integration is irrelevant when $A$ and $f$ are both bounded. However, the old integration might not even exist since we can write
 \begin{equation}
     \int\limits_A^{\text{old}} f = \int\limits_{\text{big R}}^{\text{old}} \chi_A f
@@ -961,9 +1058,44 @@ and we need to make sure $\chi_A$ is continuous except on a set of measure-$0$.
             \sum_{i=1}^N \int_R \phi_i |f| = \int_R \sum_{i}^N \phi_i |f| \le \int_R M =  M\text{vol}(R).
         \end{equation}
         An infinite sum is convergent if and only if all the partial sums converge, so we are done.
+        \item To prove the second part, we need the following lemma.
+        \begin{lemma}
+            For all $\epsilon > 0$, we can find a compact Jordan-measurable set $C \subset A$ such that $\text{vol}(A-C) < \epsilon.$
+        \end{lemma}
+        The proof is given in A8Q1. Assuming lemma, for only finitely many $i$'s, $\text{supp}(\phi_i) \cap C = \emptyset.$ We can find an $N$ bigger than all of those $i$'s, such that $\sum_{i=1}^{N}(\phi_i) = 1$ on $C$. Let us write down the following sequence of equality and inequalities:
+        \begin{align}
+            \left|\int\limits_{A}^{\text{old}} f - \sum_{i=1}^N \int^{\text{old}}(\phi_i f)\right| &= \left|\int\limits_A \left(f - \sum_{i=1}^N \phi_i f\right)\right| \\
+            &\le \int \left(|f| \cdot \left(1 - \sum_{i=1}^N \phi_i\right)\right) \\ 
+            &\le M\int \left(1-\sum_{i=1}^N \phi_i\right) \\ 
+            &\le M\int\limits_{A-C}(1) \\ 
+            &\le M \cdot \text{vol}(A-C) \\ 
+            &\le M\cdot \epsilon,
+        \end{align}
+        and we are done.
     \end{enumerate}
 \end{proof}
-
+We still have a few more things to show. Namely, NT integration is linear and applying Fubini to NT integration.
+\subsection{Other Properties of NT Integration}
+The proof that NT integration is linear. Assuming $f$ and $g$ are integrable, we need to show that $f+g$ is integrable. To do this, pick the same open cover and PO1. The integral in each open ball is the same as the old way of integrating. The sum of two absolutely converging series is absolutely converging, so we are done. Then,
+\begin{equation}
+    \int_A^{NT} (f+g) = \sum_{i=1}^{\infty} \int \phi_i(f+g) = \sum_{i=1}^{\infty} \left(\int \phi_i \cdot f + \int \phi_i \cdot g\right) = \int f + \int g.
+\end{equation}
+Finally, we will show that Fubini applies to NT-integration as well. If $A\subset \mathbb{R}^n$ and $B\subset \mathbb{R}^n$ are open, $f:A\times B \to \mathbb{R}$ is locally bounded and continuous, except for finitely many points. Then,
+\begin{equation}
+    \int\limits_{A\times B} (f(x,y)) \dd{x}\dd{y} = \int\limits_A \dd{x} \int\limits_B \dd{y} f(x,y),
+\end{equation}
+assuming $f$ is integrable on $A\times B$. If:
+\begin{itemize}
+    \item $\mathcal{U}$ is an open cover of $A$
+    \item $\mathcal{V}$ is an open cover of $B$.
+    \item $\Phi = \{\phi_i\}$
+    \item $\Psi = \{\psi_i\}$
+\end{itemize}
+then let us take $\mathcal{W} = \{U\times V: U \in \mathcal{U},V\in\mathcal{V}\}$ is an open cover of $A\times B$ and $\Lambda = \{\lambda_{i,j}=\phi_i(x) \cdot \phi_j(x)\}$ is a partition of unity for $A\times B$ subordinate to $W$. Note that
+\begin{equation}
+    \sum_{i=1}^{\infty}(\lambda_{i,j}(x,y)) = \sum_{i,j}(\phi_i(x) \cdot \phi_j(y)) = 1\cdot 1 = 1.
+\end{equation}
+Once we have this, NT-fubini reduces to old-fubini.
 \newpage
 \section{Change of Variables}
 \begin{theorem}
@@ -972,12 +1104,41 @@ and we need to make sure $\chi_A$ is continuous except on a set of measure-$0$.
         \int\limits_{g(A)} f = \int\limits_{A} (f \circ g) |\det g'|
     \end{equation}
 \end{theorem}
-This is a powerful theorem. We can use it to compute the Gaussian integral:
+This is a powerful theorem. We can use it to compute the \emf{Gaussian integral}, which people often refer to it as the most important integral in mathematics:
 \begin{equation}
     \int_{-\infty}^{\infty} e^{-x^2/2} \dd{x} = \sqrt{2\pi}
 \end{equation}
 \begin{proof}
-    TBA
+    Let us name $I_1 = \int\limits_{\mathbb{R}} e^{-x^2/2}.$ Instead of computing this, let us compute 
+    \begin{equation}
+        I_2 = \int\limits_{\mathbb{R}^2} e^{-(x^2+y^2)/2} \dd{x}\dd{y}.
+    \end{equation}
+    Then, since NT-integration is linear:
+    \begin{align}
+        \int\limits_{\mathbb{R}^2} e^{-(x^2+y^2)/2} \dd{x}\dd{y} &= \int\limits_{\mathbb{R}} \dd{x}\int\limits_{\mathbb{R}} e^{-(x^2+y^2)/2} \\ 
+        &= \int\limits_{\mathbb{R}} \dd{x} e^{-(x^2)/2} \int\limits_{\mathbb{R}} e^{-(y^2)/2} \\
+        &= I_1^2
+    \end{align}
+    Let us now compute $I_2$ by switching to polar coordinates. To do so, consider the map
+    \begin{equation}
+        g(r,\theta) = \begin{pmatrix}
+            r\cos\theta \\ r\sin\theta.
+        \end{pmatrix}
+    \end{equation}
+    Then,
+    \begin{equation}
+        \det g' = \det \begin{pmatrix}
+            \cos\theta & -r\sin\theta \\ 
+            \sin\theta & r\cos\theta.
+        \end{pmatrix} = r.
+    \end{equation}
+    Therefore, applying the COV formula, we have
+    \begin{align}
+        \int\limits_{g(A)} f &= \int\limits_{A} (f \circ g) |\det g'| \\ 
+        &= \int \dd{r}\dd{\theta}e^{-r^2/2} r \\ 
+        &= 2\pi.
+    \end{align}
+    Therefore, $I_1=\sqrt{2\pi}.$
 \end{proof}
 However in the above proof, we ignored two things. First, we applied Fubini's on integrals with infinite bounds, and secondly we ignored the distinction between open and closed sets. That is, integrating over the following two sets is equivalent:
 \begin{equation}
