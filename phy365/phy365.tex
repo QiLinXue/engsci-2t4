@@ -106,4 +106,72 @@ This is a periodic function with period $r$. If we can figure out what $r$ is, t
     \gcd(a^{r/2} \pm 1, n)
 \end{equation}
 is a factor of $n$. This is known as \emf{Shor's Algorithm.}
+\section{Quantum Mechanics of Quantum Computers}
+Suppose there are three qubits. Recall that there are $2^3=8$ possible configurations. These form a basis for a $8$-dimensional vector space. These basis states are known as a \emf{computational basis}.
+
+For a single basis $|\Psi \rangle = \alpha |0\rangle + \beta 1\rangle$, where $\alpha,\beta$ are complex probability amplitudes, then we have
+\begin{equation}
+    |\alpha|^2+|\beta|^2 = 1 \iff \begin{pmatrix}
+        \alpha^*, \beta^*
+    \end{pmatrix}\begin{pmatrix}
+        \alpha \\ \beta 
+    \end{pmatrix} = 1.
+\end{equation}
+Now suppose we apply a transformation (i.e. operators and gates): 
+\begin{align*}
+    |\Psi \rangle &\mapsto |\Psi'\rangle \\ 
+    \alpha \mapsto \alpha' \\
+    \beta \mapsto \beta'.
+\end{align*}
+We can assume linearity (which has been experimentally validated), and therefore
+\begin{align*}
+    \alpha' = u_{00}\alpha + u_{01}\beta \\ 
+    \beta' = u_{10}\alpha + u_{11}\beta
+\end{align*}
+which can be written as a matrix
+\begin{equation}
+    \begin{pmatrix}
+        \alpha' \\ \beta'
+    \end{pmatrix} = \begin{pmatrix}
+        u_{00} & u_{01} \\ u_{10} & u_{11}\end{pmatrix} \begin{pmatrix}
+        \alpha \\ \beta
+    \end{pmatrix} \iff |\Psi'\rangle = \hat{U} |\Psi\rangle.
+\end{equation}
+And the complex conjugates are
+\begin{equation}
+    (\alpha'^*, \beta'^*) = (\alpha^*,\beta^*)\begin{pmatrix}
+        u_{00}^* & u_{10}^* \\ u_{01}^* & u_{11}^*
+    \end{pmatrix} \iff \langle \Psi'| = \langle \Psi | \hat{U}^\dagger.
+\end{equation}
+Here are some properties of the complex conjugate:
+\begin{itemize}
+    \item $(\hat{A}\hat{B})^\dagger = \hat{B}^\dagger\hat{A}^\dagger$
+    \item $\langle \psi'|\psi'\rangle = \langle \psi | \hat{U}^\dagger\hat{U} | \Psi\rangle = 1 \iff \hat{U} \text{ is unitary,}$ which is true for all valid quantum operations on a closed system.
+\end{itemize}
+Let's look at some example gates:
+\begin{itemize}
+    \item Bit-flip gate:
+    \begin{equation}
+        \hat{X} = \begin{pmatrix}
+            0 & 1 \\ 
+            1 & 0.
+        \end{pmatrix}
+    \end{equation}
+    along with the rest of the Pauli matrices:
+    \begin{align}
+        \hat{Y} &= \begin{pmatrix}
+            0 & -i \\ 
+            i & 0.
+        \end{pmatrix} \\ 
+        \hat{Z} &= \begin{pmatrix}
+            1 & 0 \\ 
+            0 & -1.
+        \end{pmatrix} \\
+        \hat{I} &= \begin{pmatrix}
+            1 & 0 \\ 
+            0 & 1.
+        \end{pmatrix}.
+    \end{align}
+    \item Phase-flip gate: $\hat{Z}.$ Note that the overall \emf{phase}, or ``global'' phase is irrelevant, since the norm of the probabilities stay the same.
+\end{itemize}
 \end{document}
