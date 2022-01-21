@@ -343,6 +343,9 @@ A set is \emf{Jordan Measurable} (alternatively \emf{rectifiable}) as follows:
 \begin{definition}
     $S$ is Jordan measurable if and only if $S$ is bounded and the boundary has measure $0$. 
 \end{definition}
+\begin{definition}
+    $S$ is Jordan measurable if and only if the identity function is integrable over $S$.
+\end{definition}
 We can relate integrability and measure theory.
 \begin{theorem}
     A function $f$ is integrable if and only if it is continuous except on a set of measure $0$.
@@ -1267,6 +1270,60 @@ As an analogy, consider Prof. Dror's stacked books. We can integrate by going on
          Note that $\alpha$ and $\beta$ are invertible, which can be shown using the inverse function theorem.
     \end{enumerate}
 \end{proof}
+\subsection{Baby Sard's Theorem}
+We will give a brief overview of Sard's Theorem, and revisit it with greater rigor when we discuss Stoke's Theorem. Suppose we want to map $\{(r,\theta): r \ge 0, 0 \le \theta \le 2\pi\}$ to $\mathbb{R}^2.$ Note that this does not meet the conditions for COV since $\{(0,\theta):0\le \theta\le 2\pi\}$ gets mapped to $(0,0)$, so this map is not injective. However, intuitively, it feels like we can still use the COV formula in this case. A corollary of Sard's Theorem makes this official.
+
+Namely, we can drop the condition that $g'$ is $1-1.$
+\begin{theorem}
+    (Baby Sard Theorem) Suppose we have open $A \subset \mathbb{R}^n$ and $g:A\rightarrow \mathbb{R}^n$ is continuously differentiable. Define:
+    \begin{equation}
+        C = \text{``critical set of $g$''} = \{x\in A| \det g'(x) = 0\}.
+    \end{equation}
+    Then $g(C)$ is of measure-$0$.
+\end{theorem}
+The nomenclature comes from in 1-dimension, $C$ is literally the set of critical values, since $\det g'(x) = g'(x)$ in single-variable calculus. It is important to note that we take the image of $C$. For example, consider a smooth bump. Clearly, the set of $x$ values at which the slope is zero is not of measure-0, since it is a continuous range in $\mathbb{R}.$
+
+\textbf{Claim:} $A \setminus C$ is closed.
+\begin{proof}
+    The function $h(x) \equiv \det g'(x)$ is continuous since $g$ is continuously differentiable and the determinant just involves combining terms in the matrix (which are continuous), so $h$ is continuous. Then:
+    \begin{equation}
+        C = h^{-1}\{0\}.
+    \end{equation} 
+    For continuous functions, the pre-image of a closed set is a closed set
+\end{proof}
+
+\textbf{Corollary:} In the COV theorem, we can drop the condition $g'$ is 1-1 (equivalently invertible).
+\begin{proof}
+    Suppose we map $A$ to $g(A).$ Define $C \in A$ to be the closed set where $g'(C)$ is not invertible. While $C$ may not be of measure-0, $g(C)$ is of measure-0.
+
+    First, we show that $g(A)$ is closed. To do this, we can write $g(A) \setminus g(C) = g(A\setminus C).$ Note that $A\setminus C$ is an open set of which $g'$ is invertible. Therefore, the inverse function theorem applies, so $g(A\setminus C)$ is open.
+    
+    Then:
+    \begin{equation}
+        \int\limits_{g(A)} f = \int\limits_{g(A\setminus C)} f.
+    \end{equation}
+    and
+    \begin{equation}
+        \int\limits_{A}(f\circ g)|\det g'| = \int\limits_{A\setminus C}(f\circ g)|\det g'|.
+    \end{equation}
+    By the old COV theorem, the relevant conditions are satisfied for $\int\limits_{A\setminus C}(f\circ g)|\det g'| = \int\limits_{g(A\setminus C)} f$ and using the equalities above, we can show the new version of COV.
+\end{proof}
+We can give a \textit{baby} proof of baby Sard. We will not go into details, since this is only a sketch
+\begin{enumerate}
+    \item Restrict attention to $A$ is a rectangle, and there is some subset $C\in A$ such that $g'(C)$ is not invertible.
+    \item Partition $A$ into several subrectangles. For the subrectangles that touch $C$, then there will be a point where $g'$ is not onto, i.e. it maps to a smaller dimensional subspace. This subrectangles will not be mapped into a $n-1$ dimensional subspace, but will be mapped to a neighbourhood of one.
+    \item This shows that we can cover $g(C)$ with rectangles where one dimension is very, very narrow, so this suggests it is of measure-$0$. 
+\end{enumerate}
+\subsection{Adult Sard's Theorem}
+We can generalize Sard's theorem to a map from $n$ dimensions to $m$ dimensions.
+\begin{theorem}
+    Let $A$ be an open set and $g:A\subset\mathbb{R}^n \rightarrow \mathbb{R}^m.$ Define 
+    \begin{equation}
+        C = \{x\in A| \text{rank}g' < m\},
+    \end{equation}
+    and $g$ is $k$ times continuously differentiable, where $k=\max(1,n-m+1).$ Then $g(C)$ is measure-0. 
+\end{theorem}
+This is a much harder theorem to prove!
 \section{Tidbits}
 \subsection{Volume of Spheres}
 Let's compute like physicists! Let

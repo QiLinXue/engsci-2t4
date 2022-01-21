@@ -1,0 +1,4 @@
+Sard
+subrectangles
+subrectangle
+neighbourhood

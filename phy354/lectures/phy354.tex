@@ -76,7 +76,7 @@ for $i=1,2,3$. These equations are just the $3$ components of $m\ddot{\vec{r}} =
     \end{align}
     The term $m(\ell + x)\dot{\theta}^2$ is the centripetal force, $mg\cos\theta$ is the radial gravitational force, and $-kx$ is the spring force. The $\theta$ component is 
     \begin{equation}
-        m(\ell + x)^2\dot{\theta} = mg(\ell + x)\sin\theta
+        \frac{d}{dt}m(\ell + x)^2\dot{\theta} = mg(\ell + x)\sin\theta
     \end{equation}
     which corresponds to 
     \begin{equation}
@@ -84,24 +84,134 @@ for $i=1,2,3$. These equations are just the $3$ components of $m\ddot{\vec{r}} =
     \end{equation}
     where $\vec{\tau}$ is torque and $\vec{L}$ is the angular momentum.
 \end{example}
-\section{Principle of Least Action}
+\section{Principle of Stationary Action}
 In principle, there are an infinite number of paths a particle can take from point A to point B. Traditionally, we will solve this by analyzing the forces at every single point to find the path it actually takes. We take an alternative approach. We define the action 
 \begin{equation}
     S \equiv \int_{t_0}^{t_1} L(q(t),\dot{q}(t),t) \dd{t},
 \end{equation}
 where $q$ is a generalized coordinate.
 
-We assign each path a particular action, and we claim that the particle takes the path with the least action. However, this may be tricky since it depends on $q(t_0),q(t_0+\epsilon),\dots,q(t_1)$, an infinite number of variables. The terminology here is that the action $S$ is a functional of $q(t)$, i.e. we write it as
+We assign each path a particular action, and we claim that the \textit{particle takes the path with the least action}. However, this may be tricky since it depends on $q(t_0),q(t_0+\epsilon),\dots,q(t_1)$, an infinite number of variables. The terminology here is that the action $S$ is a functional of $q(t)$, i.e. we write it as
 \begin{equation}
     S[q(t)] = \lim_{\epsilon \to 0} S(q(t_0), q(t_0+\epsilon), \dots, q(t_1)).
 \end{equation}
-We want to find the extremum of this action. In one dimension, this occurs when
+We want to find the extremum of this action. For functionals, we can consider a small perturbation $q_a(t)=q_c(t) + a \beta(t)$. Then we claim that an extremum occurs when
 \begin{equation}
-    f(x_0+\delta)=f(x_0)=o(\delta^2)
+    \frac{\partial}{\partial a}S[\beta(t)] = 0,
 \end{equation}
-where $o(\delta^2)$ is the order of second order. For functionals, we can consider a small perturbation $q_c(t) + \delta q(t)$. Then we claim that an extremum occurs when
+for any function $\beta(t).$ We will now offer a proof for the E-L equations.
+\begin{proof}
+    We can write 
+    \begin{align*}
+        \frac{\partial}{\partial a} S[q_a(t)] &= \frac{\partial}{\partial a}\int_{t_0}^{t_1} L(q_a(t), \dot{q}_a(t), t) \dd{t} \\
+        &= \int_{t_0}^{t_1} \frac{\partial L}{\partial a}(q_a(t), \dot{q}_a(t), t) \dd{t} \\
+        &= \int_{t_0}^{t_1} \left[\frac{\partial L}{\partial q_a}\frac{\partial q_a}{\partial a} + \frac{\partial L}{\partial \dot{q}_a}\frac{\partial \dot{q}_a}{\partial a}\right]\dd{t} \\
+        &= \int_{t_0}^{t_1} \left[\frac{\partial L}{\partial q_a}\beta(t) + \frac{\partial L}{\partial \dot{q}_a}\dot{\beta}(t)\right] \dd{t}.
+    \end{align*}
+    Note that the second term can be simplified using integration by parts 
+    \begin{align*}
+        \int_{t_0}^{t_1}\frac{\partial L}{\partial \dot{q}_a}\dot{\beta}(t)\dd{t} &= \cancel{\frac{\partial L}{\partial \dot{q}_a}\beta(t)\Bigg|^{t_1}_{t_0}} - \int_{t_0}^{t_1}\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_a}\right)\beta(t) \dd{t}.
+    \end{align*}
+    The first term goes to zero since the end and start points do not change. Our original derivative is then
+    \begin{equation}
+        \frac{\partial}{\partial a}S[q_a(t)] = \int_{t_0}^{t_1}\left[\frac{\partial L}{\partial q_a} - \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_a}\right)\right]\beta(t) \dd{t}.
+    \end{equation}
+    Since this integral is zero, and $\beta$ can be arbitrary, then it must be true that
+    \begin{equation}
+        \frac{\partial L}{\partial q_a} - \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_a}\right) = 0,
+    \end{equation}
+    which is the E-L equation. Note that this easily generalizes to multiple dimensions, and hold for any set of generalized coordinates.
+\end{proof}
+\textbf{Remarks:} The stationary point always refers to a local minimum or a saddle point, but \textit{never} a maximum.
+
+Furthermore, note that $L$ is not unique. Here are some acceptable modifications:
+\begin{itemize}
+    \item We can multiply $L$ by a constant.
+    \item We can add a total time derivative to the Lagrangian: $L \to L + \frac{df}{dt}.$
+    \begin{proof}
+        The action will pick up a $\int_{t_0}^{t_1} \frac{df}{dt} \dd{t}$ term, which by the FTC, it adds a constant to the action, and thus the extremums will remain the same.
+    \end{proof}
+\end{itemize}
+\subsection{Generalizations}
+In general, if we have some integral dependent on a path 
 \begin{equation}
-    S[q_c(t)+\delta q(t)] - S[q_c(t)] = o(\delta q^2).
+    I \equiv \int_{x_1}^{x_2} F(y(x),y'(x)) \dd{x},
 \end{equation}
-We will prove this later.
+then $I$ is an extremum when
+\begin{equation}
+    \frac{d}{dx}\frac{\partial f}{\partial y'} = \frac{\partial f}{\partial y}
+\end{equation}
+\begin{example}
+    Let's try a trivial problem: What is the shortest distance between $2$ points on a plane? Consider a path $\ell$ that connects $(x_1,y_1)$ and $(x_2,y_2)$. The path length is then
+    \begin{equation}
+        \ell = \int\limits_{P}\sqrt{1+y'^2}\dd{x},
+    \end{equation}
+    which is an extremum when
+    \begin{align}
+        \frac{d}{dx}\frac{\partial \sqrt{1+y'^2}}{\partial y'} &= \frac{\partial \sqrt{1+y'^2}}{\partial y} \\ 
+        \frac{d}{dx} \frac{y'}{\sqrt{1+y'^2}} &= 0,
+    \end{align}
+    which is true when $y'(x)=\text{constant},$ which corresponds to a straight line.
+\end{example}
+\subsection{Brachistochrome Problem}
+Consider a bead sliding down a frictionless wire, whose endpoints are $(x_1,y_1)$ and $(x_2,y_2)$. What shape of wire will minimize the time it takes to slide down?
+
+We can formulate in terms of a variational calculus problem, i.e. by optimizing a ``time functional'' over all paths $y(x)$. The time it takes is 
+\begin{align*}
+    T &= \int_1^2 \dd{t} \\ 
+    &= \int_1^2 \frac{\dd{s}}{v}
+    &= \int_{x_1}^{x_2} \frac{\sqrt{1+(y')^2}}{v}\dd{x},
+\end{align*}
+or alternatively we can write it as 
+\begin{equation}
+    T = \int_{y_1}^{y_2} \frac{\sqrt{1+(x')^2}}{v} \dd{y},
+\end{equation}
+which turns out to be easier since $v=\sqrt{2gy}$. Then:
+\begin{equation}
+    T = \frac{1}{\sqrt{2g}} \int_{y_1}^{y_2} \underbrace{\frac{\sqrt{1+(x')^2}}{\sqrt{y}}}_{F(y,x')} \dd{y}.
+\end{equation}
+Using the E-L equation, we have
+\begin{align*}
+    0 &= -\frac{d}{dy} \frac{\partial F}{\partial x'} + \frac{\partial F}{\partial x} \\ 
+    0 &= -\frac{d}{dy} \frac{x'}{\sqrt{y}\sqrt{1+(x')^2}}.
+\end{align*}
+Since the derivative is $0$, that means $\frac{\partial F}{\partial x'}=a$ must be a constant. Rearranging, we get
+\begin{equation}
+    x' = \sqrt{\frac{y}{1/a^2-y}} = \sqrt{y/(C-y)}
+\end{equation}
+where $C\equiv 1/a^2.$ Now solving for $x(y)$, and using the substitution $y=c\sin^2\theta$, we end up as:
+\begin{align}
+    y &= \frac{c}{2}(1-\cos 2\theta) \\ 
+    x &= \frac{c}{2}(2\theta-\sin(2\theta)) + \beta.
+\end{align}
+There are two boundary conditions and two unknowns. If we instead chose to do the problem by integrating the functional with $\dd{x}$, then we'll end up with a very messy second order product rule expression in the E-L equations. However, we can simplify things using a simple theorem.
+\begin{theorem}
+    For $S[y] = \int \mathcal{L}(x,y,y') \dd{x}$, if $\mathcal{L}(x,y,y')=\mathcal{L}(y,y')$, that is $\mathcal{L}$ is independent of $x$, then 
+    \begin{equation}
+        \frac{\partial L}{\partial y'}y' - \mathcal{L} = \text{constant}.
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Differentiate the quantity
+    \begin{align}
+        \frac{d}{dx}\left(\frac{\partial \mathcal{L}}{\partial y'}y'- \mathcal{L}\right) &= \frac{d}{dx}\frac{\partial L}{\partial y'}y' + \frac{\partial \mathcal{L}}{\partial y'}{y''} - \frac{\partial \mathcal{L}}{\partial y}y' - \frac{\partial \mathcal{L}}{\partial y'}y'' \\ 
+        &= \left(\frac{d}{dx} \frac{\partial \mathcal{L}}{\partial y'}-\frac{\partial \mathcal{L}}{\partial y}\right)y' = 0 
+    \end{align}
+\end{proof}
+Applying this theorem, and using,
+\begin{align*}
+    F(y,y') = \sqrt{\frac{1+(y')^2}{y}},
+\end{align*}
+we get 
+\begin{align*}
+    a &= \frac{\partial F}{\partial y'} - F \\ 
+    0 &= \frac{y'}{\sqrt{y}\sqrt{1+(y')^2}} - \sqrt{\frac{1+(y')^2}{y}}.
+\end{align*}
+After rearranging, we get a first order differential equation that is equivalent to the 
+\subsection{Constrained Systems}
+Sometimes, we have a constraint. For example in a pendulum when working with $x$ and $y$ coordinates, we can introduce a \emf{holonomic constraint:}
+\begin{equation}
+    x^2+y^2-l^2=0.
+\end{equation}
+In general, holonomic constraints are in the form of $f(q_1,\dots,q_n)=0.$
 \end{document}

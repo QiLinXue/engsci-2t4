@@ -1,0 +1,146 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY365: Quantum Information \\ Problem Set 1}
+\author{QiLin Xue}
+\date{Winter 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+    \item \begin{enumerate}
+        \item We can compute $\det(\hat{X}-I\lambda) = \det\begin{bmatrix}
+            -\lambda & 1 \\ 
+            1 & -\lambda
+        \end{bmatrix} = \lambda^2-1.$ This is zero if and only if $\lambda = \pm 1$, which are the eigenvalues. The corresponding eigenvectors are $\begin{bmatrix}
+            1 \\ 1
+        \end{bmatrix}$ and $\begin{bmatrix}
+            1 \\ -1
+        \end{bmatrix}$ for $\lambda=1,-1$ respectively. The diagonal representation is then
+        \begin{equation}
+            \hat{X} = \begin{bmatrix}
+                0 & 1\\ 
+                1 & 0
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                1 & 1 \\ 
+                1 & -1 
+            \end{bmatrix}
+            \begin{bmatrix}
+                1 & 0 \\ 
+                0 & -1
+            \end{bmatrix}
+            \begin{bmatrix}
+                1/2 & 1/2 \\ 
+                1/2 & -1/2
+            \end{bmatrix}
+        \end{equation}
+        \item Via the same process, we have
+        \begin{equation}
+            \hat{Y} = \begin{bmatrix}
+                0 & -i \\ 
+                i & 0
+            \end{bmatrix} = \begin{bmatrix}
+                i & -i \\ 
+                i & 0
+            \end{bmatrix} \begin{bmatrix}
+                i & -i \\ 
+                1 & 1
+            \end{bmatrix} \begin{bmatrix}
+                -i/2 & 1/2 \\ 
+                i/2 & 1/2
+            \end{bmatrix}
+        \end{equation}
+        \item and 
+        \begin{equation}
+            \hat{Z} = \begin{bmatrix}
+                1 & 0 \\ 
+                0 & -1
+                \end{bmatrix} = \begin{bmatrix}
+                    1 & 0 \\
+                    0 & -1
+                \end{bmatrix}\begin{bmatrix}
+                    0 & 1 \\ 
+                    1 & 0
+                \end{bmatrix}\begin{bmatrix}
+                    0 & 1 \\ 
+                    1 & 0
+                \end{bmatrix}
+        \end{equation}
+    \end{enumerate}
+    \emf{Remarks:} The three Pauli matrices form a group, known as the Pauli group $G_1 = \langle \hat{X},\hat{Y},\hat{Z} \rangle.$
+    \item These can be shown by straight matrix multiplication. However, we can use the special trick that
+    \begin{equation}
+        \hat{X}\hat{Y}\hat{Z} = iI
+    \end{equation}
+    and $\hat{X},\hat{Y},\hat{Z}$ are all order $2$.  The first and third relations then follow immediately. The second relation also follows immediately from their anti-commutative property. Thus:
+    \begin{align}
+        \hat{X}\hat{Z}\hat{X} &= i\hat{X}\hat{Y} \\ 
+        &= i^2\hat{Z}.
+    \end{align} 
+    \item We can compute 
+    \begin{align}
+        \hat{U}^\dagger &= \cos\alpha \hat{I} + \sin\alpha\left(\sin\theta\cos\phi\hat{X}^\dagger + \sin\theta\sin\phi\hat{Y}^\dagger + \cos\theta\hat{Z}^\dagger\right) \\ 
+        &= \cos\alpha \hat{I} + \sin\alpha\left(\sin\theta\cos\phi\hat{X} - \sin\theta\sin\phi\hat{Y} + \cos\theta\hat{Z}\right)
+    \end{align}
+    \item Let us compute $\hat{U},\hat{U}^\dagger$:
+    \begin{align}
+        \hat{U} &= \begin{bmatrix}
+            \cos\alpha + i\sin\alpha\cos\theta & \sin\alpha\sin\theta\sin\phi + i\sin\alpha\sin\theta\cos\phi \\
+             - \sin\alpha\sin\theta\sin\phi + i\sin\alpha\sin\theta\cos\phi & \cos\alpha - i\sin\alpha\cos\theta
+        \end{bmatrix} \\ 
+        \hat{U}^\dagger &= \begin{bmatrix}
+            \cos\alpha - i\sin\alpha\cos\theta & - \sin\alpha\sin\theta\sin\phi - i\sin\alpha\sin\theta\cos\phi \\
+            \sin\alpha\sin\theta\sin\phi - i\sin\alpha\sin\theta\cos\phi & \cos\alpha + i\sin\alpha\cos\theta
+        \end{bmatrix}
+    \end{align}
+    and their product by looking at each element
+    \begin{align*}
+        a_{11} &= (\cos^2\alpha+\sin^2\alpha\cos^2\theta) + (\sin^2\alpha\sin^2\theta\sin^2\phi+\sin^2\alpha\sin^2\theta\cos^2\phi) \\ 
+        &= \cos^2\alpha+\sin^2\alpha\cos^2\theta + \sin^2\alpha\sin^2\theta \\ 
+        &= \cos^2\alpha + \sin^2\alpha \\ 
+        &= 1 \\ 
+        a_{12} &= (\cos\alpha + i\sin\alpha\cos\theta)(- \sin\alpha\sin\theta\sin\phi - i\sin\alpha\sin\theta\cos\phi) \\ 
+        &\quad + (\sin\alpha\sin\theta\sin\phi + i\sin\alpha\sin\theta\cos\phi)(\cos\alpha + i\sin\alpha\cos\theta) \\ 
+        &= 0
+    \end{align*}
+    Due to similar patterns, we can indeed verify that $a_{21}=0$ and $a_{22}=0$. Therefore, $\hat{U}\hat{U}^\dagger = \hat{I}$ implies that $\hat{U}$ is unitary.
+    % using properties of the complex transpose. Then the product:
+    % \begin{align*}
+    %     \hat{U}\hat{U}^\dagger &= \left(\cos\alpha \hat{I} + \sin\alpha\left(\sin\theta\cos\phi\hat{X} - \sin\theta\sin\phi\hat{Y} + \cos\theta\hat{Z}\right)\right) \\ &\quad\cdot\left(\cos\alpha \hat{I} + i\sin\alpha\left(\sin\theta\cos\phi\hat{X} + \sin\theta\sin\phi\hat{Y} + \cos\theta\hat{Z}\right)\right) \\ 
+    %     &\equiv \cos^2\alpha \hat{I} + i\cos\alpha\sin\alpha\sin\theta\cos\phi\hat{X} + i\cos\alpha\sin\alpha\sin\theta\sin\phi\hat{Y} + i\cos\alpha\sin\alpha\cos\theta \hat{Z} \\ 
+    %     &\quad + \sin\alpha\cos\alpha\sin\theta\cos\phi \hat{X} + i\sin^2\alpha\sin^2\theta\cos^2\phi\hat{X}^2 \\ 
+    %     &\quad\quad + i\sin^2\alpha\sin^2\theta\cos\phi\sin\phi \hat{X}\hat{Y} + i\sin^2\alpha\sin\theta\cos\theta\cos\phi \hat{X}\hat{Z} \\ 
+    %     &\quad -\sin\alpha\cos\alpha\sin\theta\sin\phi\hat{Y} - i\sin^2\alpha\sin^2\theta\sin\phi\cos\phi\hat{Y}\hat{X} \\ 
+    %     &\quad\quad - i\sin^2\alpha\sin^2\theta\sin^2\phi\hat{Y}^2  - i\sin^2\alpha\sin\theta\cos\theta\sin\phi\hat{Y}\hat{Z} \\
+    %     &\quad +\sin\alpha\cos\cos\alpha\cos\theta\hat{Z} + i\sin^2\alpha\cos\theta\sin\theta\cos\phi\hat{Z}\hat{X} \\ 
+    %     &\quad\quad + i\sin^2\alpha \cos\theta \sin\theta\sin\phi \hat{Z}\hat{Y} + i\sin^2\alpha\cos^2\theta\hat{Z}^2. \\ 
+    %     &=\cos^2\alpha \hat{I} + i\cos\alpha\sin\alpha\sin\theta\cos\phi\hat{X} + i\cos\alpha\sin\alpha\sin\theta\sin\phi\hat{Y} + i\cos\alpha\sin\alpha\cos\theta \hat{Z} \\ 
+    %     &\quad + \sin\alpha\cos\alpha\sin\theta\cos\phi \hat{X} + i\sin^2\alpha\sin^2\theta\cos^2\phi\hat{I} \\ 
+    %     &\quad\quad - \sin^2\alpha\sin^2\theta\cos\phi\sin\phi\hat{Z} + \sin^2\alpha\sin\theta\cos\theta\cos\phi \hat{Y} \\ 
+    %     &\quad -\sin\alpha\cos\alpha\sin\theta\sin\phi\hat{Y} - \sin^2\alpha\sin^2\theta\sin\phi\cos\phi\hat{Z} \\ 
+    %     &\quad\quad - i\sin^2\alpha\sin^2\theta\sin^2\phi\hat{I}  + \sin^2\alpha\sin\theta\cos\theta\sin\phi\hat{X} \\
+    %     &\quad +\sin\alpha\cos\cos\alpha\cos\theta\hat{Z} - \sin^2\alpha\cos\theta\sin\theta\cos\phi\hat{Y} \\ 
+    %     &\quad\quad + \sin^2\alpha \cos\theta \sin\theta\sin\phi \hat{X} + i\sin^2\alpha\cos^2\theta\hat{I}. \\ 
+    %     % $
+    %     &=\left(\cos^2\alpha  + i\sin^2\alpha\sin^2\theta\cos^2\phi- i\sin^2\alpha\sin^2\theta\sin^2\phi + i\sin^2\alpha\cos^2\theta\right)\hat{I} \\ 
+    %     &\quad + \left(i\cos\alpha\sin\alpha\sin\theta\cos\phi+\sin\alpha\cos\alpha\sin\theta\cos\phi+\sin^2\alpha\sin\theta\cos\theta\sin\phi+\sin^2\alpha \cos\theta \sin\theta\sin\phi\right)\hat{X} \\ 
+    %     &\quad + \left(i\cos\alpha\sin\alpha\sin\theta\sin\phi+\sin^2\alpha\sin\theta\cos\theta\cos\phi-\sin\alpha\cos\alpha\sin\theta\sin\phi-\sin^2\alpha\cos\theta\sin\theta\cos\phi\right)\hat{Y} \\ 
+    %     &\quad + \left(i\cos\alpha\sin\alpha\cos\theta-\sin^2\alpha\sin^2\theta\cos\phi\sin\phi- \sin^2\alpha\sin^2\theta\sin\phi\cos\phi+\sin\alpha\cos\cos\alpha\cos\theta\right)\hat{Z} \\ 
+    %     % $
+    %     &=\left(\cos^2\alpha  + i\sin^2\alpha\sin^2\theta\cos^2\phi- i\sin^2\alpha\sin^2\theta\sin^2\phi + i\sin^2\alpha\cos^2\theta\right)\hat{I} \\ 
+    %     &\quad + \sin\theta\left(i\cos\alpha\sin\alpha\cos\phi+\sin\alpha\cos\alpha\cos\phi+\sin^2\alpha\cos\theta\sin\phi+\sin^2\alpha \cos\theta \sin\phi\right)\hat{X} \\ 
+    %     &\quad + \sin\theta\sin\alpha\cos\alpha\sin\phi\left(i-1\right)\hat{Y} \\ 
+    %     &\quad + \left(i\cos\alpha\sin\alpha\cos\theta-2\sin^2\alpha\sin^2\theta\cos\phi\sin\phi-\sin\alpha\cos\cos\alpha\cos\theta\right)\hat{Z} \\ 
+    % \end{align*}
+\end{enumerate}
+\end{document}
