@@ -1335,7 +1335,7 @@ Let us look at some examples. An inner product is a 2-linear map $\langle u_1,u_
 \begin{definition}
     Define
     \begin{equation}
-        \mathcal{T}^k(V) = \{\text{k-linaer maps on V}\}.
+        \mathcal{T}^k(V) = \{\text{k-linear maps on V}\}.
     \end{equation}
     Note that many other sources call it $\mathcal{T}^k(V^*).$
 \end{definition}
@@ -1396,6 +1396,89 @@ so $\phi_1=(-2,3/2)$ and $\phi_2=(1,-1/2)$.
     (T_1 \otimes T_2)(u_1,\dots,u_{k+\ell}) = T_1(u_1,\dots,u_k)\cdots T_2(u_{k+1},\cdots,u_{k+\ell}).
 \end{equation}
 \textbf{Claim:} $\mathcal{T}_1\otimes \mathcal{T}_2 = \mathcal{T}_1\mathcal{T}_2 \in \mathcal{T}^{k+\ell}$.
+\subsection{Properties and Notation}
+Here are some properties of vectors
+\begin{itemize}
+    \item Associativity: $T_1(T_2T_3)=(T_1T_2)T_3$
+    \item Distributivity: $(T_1+T_2)T_3 = T_1T_2+T_1T_3$ (More specifically, bilinear.)
+\end{itemize}
+Note that multiplication isn't necessarily commutative. Consider the counterexample $e_1,e_2 \in \mathbb{R}^2$ and $\phi_1,\phi_2\in \mathcal{T}'(V).$ Then:
+\begin{align*}
+    (\phi_1\phi_2)(e_1,e_2) = \phi_1(e_1)\phi_2(e_2) = 1 \cdot 1 = 1\\ 
+    (\phi_2\phi_1)(e_1,e_2) = \phi_2(e_1)\phi_1(e_2) = 0 \cdot 0 = 0
+\end{align*}
+\begin{definition}
+    Let $\underline{n} = \{1,\dots,n\}$. Then
+    \begin{equation}
+        \underline{n}^k = \{\bar{i} = I =(i_1,\dots,i_k):i_\alpha \in \underline{n}\}.
+    \end{equation}
+\end{definition}
+This notation is nice since $|\underline{n}^k| = n^k$. Let $(v_j)^n_{j=1} \in V^n$ and $J \in n^k,$ where $J$ is known as a \emf{multi-index}. Let us write
+\begin{equation}
+    V_J = (V_{j_1},V_{j_2},\dots,V_{j_k}).
+\end{equation}
+Then $\phi_i \in V^*$ for $i=1,\dots,n$, $I \in \underline{n}^k$, and $\phi_I = \phi_{i_1}\cdot \cdots \cdot \phi_{i_k}.$
+\begin{itemize}
+    \item \textbf{Example:} Consider our previous counterexample. We can re-write it as
+    \begin{align*}
+        \phi_1\phi_2 - \phi_{(1,2)} &\quad\quad \phi_{(1,2)}(e_{(1,2)}) = 1 \\ 
+        \phi_2\phi_1 = \phi_{(2,1)} &\quad\quad \phi_{(2,1)}(e_{(1,2)}) = 0
+    \end{align*}
+\end{itemize}
+Suppose $V$ is a vector space with basis $v_1,\dots,v_n$ and dual basis $\phi_1,\dots,\phi_n,$ and $I,J \in \underline{n}^k.$ Then
+\begin{align}
+    \mathcal{T}^k &= \phi_I(v_J) \\ 
+    &= (\phi_{i_1}\cdots \phi_{i_k})(V_{j_i}\cdots V_{j_k}) \\
+    &= \prod_{\alpha=1}^k \phi_{i_\alpha}(V_{j_\alpha}) \\ 
+    &= \prod_{\alpha=1}^k \delta_{i_\alpha j_\alpha} \\ 
+    &= \begin{cases}
+        1 & I=J \\ 
+        0 & I \neq J
+    \end{cases}
+\end{align}
+\subsection{Theorem}
+We are finally ready for our first theorem!
+\begin{theorem}
+    Let $V$ be a vector space with respect to a basis $v_1,\dots,v_n$ and dual basis $\phi_1,\dots,\phi_n$. Then:
+    \begin{equation}
+        \{\phi_I:I\in \underline{n}^k\}
+    \end{equation}
+    is a basis of $\mathcal{T}^k(V),$ and hence, the dimension is
+    \begin{equation}
+        \dim \mathcal{T}^kV = n^k.
+    \end{equation}
+\end{theorem}
+This allows us to better understand the space of $k$-tensors. We prove this step by step through a series of lemmas.
+\begin{lemma}
+    If $T_1,T_2\in\mathcal{T}^k$, then $T_1=T_2 \iff \forall I, T_1(V_I)=T_2(V_I)$.
+\end{lemma}
+\begin{proof}
+    The forwards direction is obvious. To prove the backwards direction, assume that for all $I$, we have $T_1(V_I)=T_2(V_I)$. Then set $T=T_1-T_2$. Therefore:
+    \begin{align*}
+        T(u_1,\dots,u_k) = T\left(\sum_{{i_1}=1}^n a_{1,i_1}v_1,\sum a_{2,i_2}v_2,\dots,\sum a_{k,i_k}v_k\right),
+    \end{align*}
+    and applying linearity, we end up with
+    \begin{align*}
+        T(u_1,\dots,u_k) &= (\text{sum and product of coefficients})(T_1(V_I)-T_2(V_I)) = 0 \\ 
+        &\implies T = 0 \implies T_1=T_2.
+    \end{align*}
+\end{proof}
+\begin{lemma}
+    The set $\{\phi_I\}$ spans $\mathcal{T}^kV.$
+\end{lemma}
+Let us verify that this lemma makes sense first. Given $T\in \mathcal{T}^k$, does it make sense that $T$ can be written as a linear combination of $\phi_I$, specifically $T\stackrel{?}{=} \sum_I a_I\phi_I.$ The trick is to evaluate both sides on $V_J$, to get
+\begin{align*}
+    T(V_J) &= \sum_I a_I\phi_I(V_J) \\ 
+    &= \sum_{I} a_I\delta_{IJ} = a_J.
+\end{align*}
+Note that we found a formula for $a_J$, so we're nearly done! Let us turn this into a formal proof.
+\begin{proof}
+    Given $T\in \mathcal{T}^k$, set $a_I =  T(V_I)$, and then I claim that $T = \sum_I a_I\phi_I$. To check two tensors are equal to each other, we can use lemma 1. All we need to show is
+    \begin{align*}
+        T(V_J) &= \left(\sum a_I\phi_I\right)(V_J).
+    \end{align*}
+    But, by definition, $T(V_J)=a_J$ and the RHS is $a_J$ as well from the above discussion.
+\end{proof}
 \section{Tidbits}
 \subsection{Volume of Spheres}
 Let's compute like physicists! Let
