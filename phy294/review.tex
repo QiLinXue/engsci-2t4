@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY294: Review Sheet}
+\author{QiLin Xue}
+\date{Winter 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{siunitx}
+\begin{document}
+
+\maketitle
+\section{The Three-Dimensional Schrödinger Equation.}
+In general, the Schrödinger Equation can be written as
+\begin{equation}
+    \nabla^2 \psi = \frac{2M}{\hbar^2}[U-E]\psi
+\end{equation}
+where $\nabla^2$ is the Laplacian, which is a fancy way of writing:
+\begin{align*}
+    \nabla^2\psi &= \frac{\partial^2 \psi}{\partial x^2} + \frac{\partial^2 \psi}{\partial y^2} + \frac{\partial^2 \psi}{\partial z^2} & \text{(Cartesian)} \\
+    &= \frac{\partial^2 \psi}{\partial r^2} + \frac{1}{r}\frac{\partial \psi}{\partial r} + \frac{1}{r^2}\frac{\partial^2 \psi}{\partial \phi^2} + \frac{\partial^2 \psi}{\partial z^2} & \text{(Cylindrical)} \\ 
+    &= \frac{1}{r}\frac{\partial^2}{\partial r^2}(r\psi) + \frac{1}{r^2\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial\psi}{\partial\theta}\right) + \frac{1}{r^2\sin^2\theta}\frac{\partial^2\psi}{\partial \phi^2}
+\end{align*}
+\subsection{Particle in a Box}
+For a particle in an infinite square well, the allowed energies are
+\begin{equation}
+    E = \frac{\hbar^2 \pi^2}{2M}\left(\frac{n_x^2}{L_x^2}+\frac{n_y^2}{L_y^2}+\frac{n_z^2}{L_z^2}\right)
+\end{equation}
+Here, $n_x,n_y,n_z$ are known as \emf{quantum numbers}. When the same energy occurs at different quantum numbers, then we call it a \emf{degeneracy.}
+\subsection{Central Force Problem}
+\subsubsection*{2-Dimensions}
+For the two-dimensional case, our solution is in the form of $\psi(r,\theta) = R(r)\Theta(\theta).$ Solving for $\Theta(\theta)$ gives:
+\begin{align*}
+    \Phi(\phi) = A\sin(m\phi) + B\cos(m\phi),
+\end{align*}
+which must satisfy the property $\Phi(\phi)=\Phi(\phi+2\pi),$ forcing $m$ to be an integer. The radial part $R(r)$ cannot be solved since it depends on the specific potential.
+\subsubsection*{3-Dimensions}
+The solution is in the form of $\phi(r,\theta,\phi)=R(r)\Theta(\theta)\Phi(\phi).$ 
+\begin{itemize}
+    \item Solving for $\Phi(\phi)$ gives the same equation as the $\Theta(\theta)$ case in 2-D, leading to the same quantum numbers. 
+    \item Solving for $\Theta(\theta)$ gives a parameter $k=l(l+1)$ where $l \ge |m|$ and is an integer.
+\end{itemize} 
+\subsection{Angular Momentum}
+The magnitude of the angular momentum is quantized and given by
+\begin{equation}
+    L = \sqrt{l(l+1)}\hbar.
+\end{equation} 
+The angular momentum acts in a certain direction away from the $z$-axis, and
+\begin{equation}
+    L_z = m\hbar,
+\end{equation}
+where $m$ has the usual restrictions. As a result, we can often draw these as vectors on a diagram. For a given $l$, there are $2l+1$ possible vectors.
+\subsection{Hydrogen Atom}
+Consider the simplest (yet useful) potential $U(r) = \frac{-ke^2}{r}$, for a hydrogen atom. The $R(r)$ part is given by
+\begin{equation}
+    \frac{d^2}{dr^2}(rR)  = \frac{2m_e}{\hbar^2}\left[-\frac{ke^2}{r}+\frac{l(l+1)\hbar^2}{2m_er^2}-E\right](rR),
+\end{equation}
+which only has acceptable solutions if
+\begin{equation}
+    E = -\frac{m_e(ke^2)^2}{2\hbar^2}\frac{1}{n^2} =  - \frac{E_R}{n^2},
+\end{equation}
+where $n$ has the restriction $n>l.$
+\subsection{Hydrogenic Wave Functions}
+The solution for $R(r)$ is in the form of
+\begin{equation}
+    R(r) = Ae^{-r/(na_B)}
+\end{equation}
+where $a_B = \frac{h^2}{m_eke^2}$ is the Bohr radius, and $A$ is some function. The radial probability density is
+\begin{equation}
+    P(r) = 4\pi r^2 |R(r)|^2
+\end{equation}
+\subsection{Hydrogen-like Ions}
+We can extend this discussion to any ion with one electron bounded to a nucleus of charge $Ze$. Note that $\Phi,\Theta$ are left unchanged and everything else can be derived by replacing $ke^2$ with $Zke^2$ and as a direct consequence, replacing $a_B$ with $a_B/Z.$
+\end{document}
