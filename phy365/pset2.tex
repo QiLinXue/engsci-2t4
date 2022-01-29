@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY365: Quantum Information \\ Problem Set 2}
+\author{QiLin Xue}
+\date{Winter 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+    \item \begin{enumerate}
+        \item Suppose $\ket{\varphi} = a\ket{0} + b\ket{1}.$ Then we can compute
+        \begin{equation}
+            S_i = \expval{\hat{\sigma}_i}{\varphi}
+        \end{equation}
+        for $i=1,2,3.$
+        \begin{itemize}
+            \item $S_1 = ab^*+a^*b = 2\Re(ab^*)$
+            \item $S_2= i(ab^*-ab^*) = 2\Im(ab^*)$
+            \item $S_3=|a|^2-|b|^2$
+        \end{itemize}
+        Also note that $S_1^2+S_2^2+S_3^3=1.$
+        \item Apply the rules in part (a).
+        \item \begin{enumerate}
+            \item $\ket{\psi}\bra{\psi} = \begin{pmatrix}
+                aa^* & ab^* \\ 
+                ba^* & bb^*
+            \end{pmatrix} = \begin{pmatrix}
+                |a|^2 & ab^* \\
+                ba^* & |b|^2
+            \end{pmatrix}.$ The eigenvalue equation is given by
+            \begin{equation}
+                \left(|a|^2-\lambda\right)\left(|b|^2-\lambda\right) - ab^*ba^* = 0 \implies \left(|a|^2-\lambda\right)\left(|b|^2-\lambda\right) = |a|^2|b|^2
+            \end{equation}
+            One eigenvalue is $\lambda=0$. Assuming $\lambda \neq 0$, we can divide through to get 
+            \begin{equation}
+                -|a|^2-|b|^2 + \lambda = 0 \implies \lambda = |a|^2+|b|^2 = 1.
+            \end{equation}
+            Therefore, the eigenvalues are $\lambda=0,1.$
+            \item We can compute:
+            \begin{align*}
+                \hat{I} + \bm{S}\cdot\bm{\sigma} = \begin{pmatrix}
+                    1 & 0 \\ 0 & 1
+                \end{pmatrix} + 2\Re(ab^*)\begin{pmatrix}
+                    0 & 1 \\ 1 & 0
+                \end{pmatrix} + 2\Im(ab^*)\begin{pmatrix}
+                    0 & -i \\ 
+                    i & 0
+                \end{pmatrix} + \left(|a|^2-|b|^2\right)\begin{pmatrix}
+                    1 & 0 \\ 
+                    0 & -1
+                \end{pmatrix}.
+            \end{align*}
+            Let us look at each element of $\frac{1}{2}(\hat{I}+\bm{S}\cdot\bm{\sigma})$ individually:
+            \begin{align*}
+                c_{11} &= \frac{1}{2} + \frac{|a|^2-|b|^2}{2} = \frac{1+|a|^2-1+|a|^2}{2} = |a|^2 \\
+                c_{12} &= \Re(ab^*) -i\Im(ab^*) = (ab^*)^* = a^*b \\ 
+                c_{21} &= \Re(ab^*)+i\Im(ab^*) = ab^* \\
+                c_{22} &= \frac{1-|a|^2+|b|^2}{2} = |b|^2
+            \end{align*}
+        \end{enumerate}
+    
+    \end{enumerate}
+\end{enumerate}
+\end{document}

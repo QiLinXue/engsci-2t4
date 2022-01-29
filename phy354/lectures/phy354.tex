@@ -214,4 +214,78 @@ Sometimes, we have a constraint. For example in a pendulum when working with $x$
     x^2+y^2-l^2=0.
 \end{equation}
 In general, holonomic constraints are in the form of $f(q_1,\dots,q_n)=0.$
+\section{Noether's Theorem}
+\begin{theorem}
+    If a system has a continuous symmetry property, then there are corresponding quantities whose values are conserved in time.
+\end{theorem}
+A \emf{cyclic} coordinate is one that does not explicitly appear in the Lagrangian. If $q_i$ is cyclic, then the \emf{generalized/conjugate momentum} is conserved, i.e.
+\begin{equation*}
+    \frac{d}{dt}q_i = 0.
+\end{equation*}
+In general, generalized momentum is not linear momentum. These forms of translational symmetry implies some conservation law, which is an example of Noether's Theorem.
+\begin{definition}
+    A symmetry is a transformation such that the equations of motion do not change.
+\end{definition}
+More precisely, we can do a transformation $q_i(t) \rightarrow Q_i(t,\lambda)$ where $q_i(t) = Q_i(t,0).$ For example, a translation in the $x$ direction is
+\begin{align*}
+    x(t) &\to x(t,\lambda) = x(t) + \lambda \\ 
+    y(t) &\to y(t,\lambda) = y(t) \\ 
+    z(t) &\to z(t,\lambda) = z(t).
+\end{align*}
+and a time translation would be $q_i(t) \to Q_i(t,\lambda)=q_i(t+\lambda)$. Then, a transformation is a symmetry if the equations of motion for $Q_i$ are the same as $q_i.$ More precisely, we claim that this is a symmetry if 
+\begin{equation}
+    \frac{\partial L}{\partial \lambda}(Q_i,\dot{Q}_i,t) = \frac{df}{dt}
+\end{equation}
+for some function $f(Q_i,\dot{Q}_i,t).$ We can now prove Noether's Theorem now:
+\begin{proof}
+    We evaluate $\frac{\partial L}{\partial \lambda}$ at $\lambda=0$ to obtain
+    \begin{align*}
+        \frac{\partial L}{\partial \lambda}\big|_{\lambda=0} &= \sum_i \left[\frac{\partial L}{\partial Q_i}\frac{\partial Q_i}{\partial \lambda} + \frac{\partial L}{\partial \dot{Q}_i}\frac{\partial \dot{Q}_i}{\partial \lambda}\right]_{\lambda = 0} \\ 
+        &= \sum_i \left[\frac{\partial L}{\partial q_i}\frac{\partial Q_i}{\partial \lambda} + \frac{\partial L}{\partial \dot{q}_i}\frac{\partial \dot{Q}_i}{\partial \lambda}\right]_{\lambda = 0} \\ 
+        &= \sum_i \frac{d}{dt}\left[\frac{\partial L}{\partial \dot{q}_i}\frac{\partial Q_i}{\partial \lambda}\right]_{\lambda=0} = \frac{df}{dt}.
+    \end{align*}
+    Therefore,
+    \begin{equation}
+        \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_i}\frac{\partial Q_i}{\partial \lambda} - f\right) = 0
+    \end{equation}
+    is conserved.
+\end{proof}
+\begin{example}
+    Let us look at spatial translations. Consider the Lagrangian of a closed system (no external forces), which is unchanged if all particles are translated by the same amount. For every particle, we apply the transformation
+    \begin{equation*}
+        \vec{r}_i(t) \to \vec{r}_i(t) + \lambda\hat{n} = \vec{R}_i(t,\lambda).
+    \end{equation*}
+    The Lagrangian is
+    \begin{equation*}
+        L = \frac{1}{2}\sum_i m_i\dot{\vec{r}}_i^2 - V(\{\vec{r}_i-\vec{r}_j\}).
+    \end{equation*}
+    Note that $L$ is unchanged for this transformation, so we can set $f=0$. The conserved property is then
+    \begin{align*}
+        \sum_a p_a \frac{\partial Q_a}{\partial \lambda}\biggr|_{\lambda = 0} &= \sum_i \frac{\partial Q_i}{\partial R_i}\hat{n} \\
+        &= \sum_i \vec{p}_i.
+    \end{align*}
+    The total momentum is $\vec{P}=\sum \vec{p}_i,$ so Noether's theorem immediately tells us that the total momentum of a closed system is conserved.
+\end{example}
+\begin{example}
+    Let us look at time translations now. This is represented by $q_i(t) \to Q_i(t,\lambda) = q_i(t+\lambda)$. In general, $L$ depends on $t$ in two ways:
+    \begin{enumerate}
+        \item Via the generalized coordinate $i$ and velocities.
+        \item Explicitly (for example, a time dependent potential energy).
+    \end{enumerate}
+    However, if $L$ has no explicit $t$ dependence, then time translation \textit{does} change $L$, but
+    \begin{align*}
+        \frac{\partial L}{\partial \lambda} &= \frac{\partial L(Q_i(\lambda),\dot{Q}_i(\lambda))}{\partial \lambda} \\ 
+        &= \frac{\partial L(q_i(t+\lambda),\dot{q}_i(t+\lambda))}{\partial \lambda} \\ 
+        &= \frac{dL(q_i(t+\lambda),\dot{q}_i(t+\lambda))}{dt}
+    \end{align*}
+    since $L$ has the same dependence on $\lambda$ as on $t$! Therefore $\frac{dL}{d\lambda}=\frac{dL}{dt}$ so $f=L,$ and so time translation is a symmetry. Similarly,
+    \begin{equation*}
+        \frac{\partial Q_i(t+\lambda)}{\partial \lambda} = \frac{\partial}{\partial \lambda}q_i(t+\lambda) = \frac{dq_i}{dt} = \dot{q}_i
+    \end{equation*}
+    and so the conserved quantity is
+    \begin{equation*}
+        \sum_i \frac{\partial L}{\partial \dot{q}_i}\frac{\partial L}{\partial \lambda}\biggr|_{\lambda=0} - f = \sum_i \dot{q}_i\left[\frac{\partial L}{\partial \dot{q}_i}\right] - L \equiv H,
+    \end{equation*}
+    where $H$ is the \emf{Hamiltonian.}
+\end{example}
 \end{document}

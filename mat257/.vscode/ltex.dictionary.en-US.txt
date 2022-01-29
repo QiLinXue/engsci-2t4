@@ -2,3 +2,5 @@ Sard
 subrectangles
 subrectangle
 neighbourhood
+injectivity
+nonnegative
