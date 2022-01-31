@@ -17,7 +17,8 @@
 \maketitle
 \tableofcontents
 \newpage
-\section{Quantum Coins}
+\section{Overview of Quantum Computing}
+\subsection{Quantum Coins}
 Consider a quantum coin that can be in a superposition of heads and tails. We can write its state as a vector:
 \begin{equation}
     |\Psi\rangle = \alpha|H\rangle + \beta|T\rangle  
@@ -106,7 +107,7 @@ This is a periodic function with period $r$. If we can figure out what $r$ is, t
     \gcd(a^{r/2} \pm 1, n)
 \end{equation}
 is a factor of $n$. This is known as \emf{Shor's Algorithm.}
-\section{Quantum Mechanics of Quantum Computers}
+\subsection{Quantum Mechanics of Quantum Computers}
 Suppose there are three qubits. Recall that there are $2^3=8$ possible configurations. These form a basis for a $8$-dimensional vector space. These basis states are known as a \emf{computational basis}.
 
 For a single basis $|\Psi \rangle = \alpha |0\rangle + \beta 1\rangle$, where $\alpha,\beta$ are complex probability amplitudes, then we have
@@ -174,4 +175,203 @@ Let's look at some example gates:
     \end{align}
     \item Phase-flip gate: $\hat{Z}.$ Note that the overall \emf{phase}, or ``global'' phase is irrelevant, since the norm of the probabilities stay the same.
 \end{itemize}
+\section{Unitary Operators}
+\subsection{SU(2)}
+An arbitrary $2\times 2$ unitary is a matrix $\begin{pmatrix}
+    a & b \\ c & d
+\end{pmatrix}$ such that $|ad-bc|^2=1$. In general, $ad-bc = e^{i\phi} \neq 1.$ However in quantum computing, we don't typically care about the \emf{phase} of our qubits, so without loss of generality, we can assume that $ad-bc=1$. These are known as \emf{special unitary matrices with dimension $2$, or $SU(2)$.} We can therefore write it as 
+\begin{equation*}
+    \hat{U} = \begin{pmatrix}
+        a & b \\ 
+        -b^* & a^*
+    \end{pmatrix}.
+\end{equation*}
+Any unitary matrix can be written as a linear combination of $\hat{I}, \hat{X}, \hat{Y},\hat{Z}..$ Particularly,
+\begin{equation}
+    \hat{U} = \begin{pmatrix}
+        a_1 + ia_2 & b_1+ib_2 \\ 
+        -b_1 + ib_2 & a_1-ia_2
+    \end{pmatrix} = a_1\hat{I} + ib_2\hat{X} + ib_1\hat{Y} + ia_2\hat{Z}.
+\end{equation}
+Note that
+\begin{align}
+    1 &= a_1^2 + a_2^2 + b_1^2 + b_2^2 \\
+    a_1 &= \cos\theta \\ 
+    \{b_2,b_1,a_2\} &= \sin\theta\{n_x,n_y,n_z\}.
+\end{align}
+We can thus express $\hat{U} = \cos\theta \hat{I} + i\sin\theta \bm{n} \cdot \bm{\sigma}$
+\subsection{Basis Change}
+We can introduce new bases use unitaries. Namely, $\hat{U}\ket 0 = \ket u, \hat{U}\ket 1 = \ket {u_\perp}$ are new basis vectors. These two will still be orthogonal.
+\subsection{Time Evolution}
+Suppose we have an evolving unitary
+\begin{equation}
+    \ket{\Psi(t)} = \hat{U}(t)\ket{\Psi(0)}.
+\end{equation}
+Taking the partial time derivative, and substituting in the above identity for $\ket{\Psi(0)}$, we have:
+\begin{align*}
+    \frac{\partial}{\partial t}\ket{\Psi(t)} &= \frac{\partial \hat{U}(t)}{\partial t} \ket{\Psi(0)} \\ 
+    &= \left\{\frac{\partial \hat{U}(t)}{\partial t}\hat{U}^\dagger(t)\right\}\ket{\Psi(t)}.
+\end{align*}
+We can apply the product rule and the identity $(AB)^\dagger = B^\dagger A^\dagger$ to obtain
+\begin{align*}
+    \hat{U}\hat{U}^\dagger &= I \\ 
+    \frac{\partial \hat{U}}{\partial t} \hat{U}^\dagger + \hat{U} \frac{\partial \hat{U}^\dagger}{\partial t} &= 0 \\ 
+    \frac{\partial \hat{U}}{\partial t} \hat{U}^\dagger &= -\left(\frac{\partial \hat{U}}{\partial t} \hat{U}^\dagger\right)^\dagger,
+\end{align*}
+which is an \emf{anti-hermitian operator.} We can relate it to a hermitian operator $\hat{H}$.
+\begin{equation}
+    \frac{\partial \hat{U}}{\partial t} \hat{U}^\dagger = \frac{\hat{H}}{i\hbar},
+\end{equation}
+where $\hat{H}$ is the \emf{Hamiltonian}. Altogether, we end up with \emf{Schrodinger's Equation:}
+\begin{equation}
+    i\hbar \frac{\partial}{\partial t}\ket{\Psi(t)} = \hat{H}\ket{\Psi(t)}.
+\end{equation}
+Usually we choose $\{\ket 0, \ket 1\}$ as the eigenstates of the Hamiltonian.
+\subsection{Measurements and Non-Unitary Operations}
+\begin{quotation}
+    If the particle is in a state $\ket\Psi$, measure of the variable $\hat{\Omega}$ will yield one of the eigenvalues of $\Omega$ with probability $P(\omega) = |\bra{\omega}\ket{\Psi}|^2$. The state of the system will change from $\ket{\Psi}$ to $\ket\omega$ as a result. - Shankar
+\end{quotation}
+For a qubit with the measurement operator $\hat{\Omega} = \begin{pmatrix}
+    0 & 0 \\ 
+    0 & 1
+\end{pmatrix}$ (with eigenvalues $\omega=0,1$), then $P(0)= |\alpha|^2$ and $P(1) = |\beta|^2$. The state at the end is equal to
+\begin{equation}
+    |\Psi^\text{after}| = \frac{\hat{\Pi}_0\ket\Psi}{\sqrt{P(0)}} \text{ or }\frac{\hat{\Pi}_1\ket\Psi}{\sqrt{P(1)}} 
+\end{equation}
+where $\hat{\Pi}_0 = \begin{pmatrix}
+    1 & 0 \\ 0 & 0 \end{pmatrix}$ and $\hat{\Pi}_1 = \begin{pmatrix} 0 & 0 \\ 0 & 1
+\end{pmatrix}$ are rank-1 projectors, i.e. $\hat{\Pi}_0^2 = \hat{\Pi}.$
+\newpage
+\section{Two Qubit State}
+Recall that a two qubit state is written as 
+\begin{equation}
+    \ket\Psi = \alpha\ket{00} + \beta\ket{01} + \gamma\ket{10} + \delta\ket{11}.
+\end{equation}
+An \emf{independent} or \emf{separable} state can be written as a tensor product 
+\begin{equation}
+    \ket{\Psi_\text{sep}} = \left(a\ket 0 + b\ket 1\right)_A \otimes \left(c\ket 0 + d\ket 1\right)_B = ac\ket{00} + ad\ket{01} + bc\ket{10} + bd\ket{11}.
+\end{equation}
+Note that $\alpha \delta - \beta\gamma = acbd-adbc = 0.$ We can immediately determine if a system can be separated by computing the \emf{concurrence}
+\begin{equation}
+    C = 2|\alpha \delta - \beta\gamma|.
+\end{equation}
+If $C\neq 0$, then the system is not separable and is known as \emf{entangled.}
+\subsection{Schmidt Decomposition Theorem}
+\begin{theorem}
+    Any two-qubit pure state can be written as
+    \begin{equation}
+        \ket\Psi = \hat{U}_A \otimes \hat{U}_B \left(\lambda_0 \ket{00} + \lambda_1{11}\right),
+    \end{equation}
+    where $\lambda_0,\lambda_1$ are real, positive constants known as $\emf{singular values}$ and they satisfy $\lambda_0^2 + \lambda_1^2 = 1$. The operators $\hat{U}_A,\hat{U}_B$ are unitaries applied separately to each qubit.
+\end{theorem}
+Consider the unitary operators $\hat{U}_A = \begin{pmatrix}
+    a & b \\ -b^* & a^*
+\end{pmatrix}$ and $\hat{U}_B = \begin{pmatrix}
+    c &d \\ -d^* & c^*
+\end{pmatrix}.$ Therefore,
+\begin{align}
+    \ket\Psi &= \lambda_0\left(a\ket 0 + b\ket 1\right)(c\ket 0 + d\ket 1) + \lambda_1(-b^*\ket 0 + a^* \ket 1)(-d^*\ket 0 + c^*\ket 1) \\ 
+    &= (\lambda_0 ac + \lambda_1 b^* d^*) \ket{00} + (\lambda_0 ad - \lambda_1 b^*c^*) \ket{01} + (\lambda_0 bc-\lambda_1a^*d^*)\ket{10} + (\lambda_0bd+\lambda_1a^*c^*)\ket{11}.
+\end{align}
+This looks very messy, but we can compute the concurrence (and after a length but straightforward computations), we get
+\begin{equation}
+    C = 2\lambda_0\lambda_1.
+\end{equation}
+Using $\lambda_0^2+\lambda_1^2=1$, we can obtain the quadratic equation
+\begin{equation}
+    \lambda^4 - \lambda^2 + (C/2)^2 = 0,
+\end{equation}
+so $\lambda_0,\lambda_1$ are determined by $C$. The maximum value of $C$ is $C_\text{max} = 1$, which occurs at $\lambda_\text{crit} = \frac{1}{\sqrt 2}.$ At $C=1,$ it is known as a \emf{maximally entangled state.}
+
+This isn't justified yet, but $C$ is the measure of entanglement for 2-qubit states.
+\begin{proof}
+    Let us rewrite
+    \begin{equation}
+        \ket\Psi = \sum_{i,j=0}^{1}\chi_{ij}\ket i \ket j
+    \end{equation}
+    where $\chi_{ij}$ are elements of a $2\times 2$ matrix $\chi = \begin{pmatrix}
+        \alpha & \beta \\ \gamma & \delta
+    \end{pmatrix}.$ Note that $\chi$ is not hermitian, but both $\hat{\chi}\hat{\chi}^\dagger$ and $\hat{\chi}^\dagger\hat{\chi}$ are hermitian and their eigenvalues are positive.
+
+    We can show they are hermitian by a direct computation. To show their eigenvalues are positive, note that $\bra{\phi}\ket{\phi} \ge 0$ for any state $\phi$ and we can write:
+    \begin{equation}
+        \bra{\phi}\hat{\chi}\hat{\chi}^\dagger\ket{\phi} = \bra{\phi'}\ket{\phi'} \ge 0.
+    \end{equation} 
+    Note that $\ket{\phi'}$ is an eigenvector of $\hat{\chi}\hat{\chi}^\dagger.$ Then all the eigenvalues are positive.
+
+    Consider an aribtrary matrix $\begin{pmatrix}
+        A & B \\ C & D
+    \end{pmatrix}.$ The determinant can be determined by $\lambda^2 - (\text{Tr})\lambda + (\text{Det}) = 0.$ The trace of $\hat{\chi}\hat{\chi}^\dagger$ is $1$ and the determinant is $C^2/4.$ This allows us to calculate $\lambda_0,\lambda_1$. Define
+    \begin{equation}
+        \Lambda = \begin{pmatrix}
+            \lambda_0 & 0 \\ 
+            0 & \lambda_1
+        \end{pmatrix}.
+    \end{equation}
+    This allows us to write
+    \begin{align*}
+        \hat{\chi}\hat{\chi}^\dagger &= \hat{U}\Lambda^2\hat{U}^\dagger \\ 
+        \hat{\chi}^\dagger\hat{\chi} &= \hat{V}\Lambda^2\hat{V}^\dagger.
+    \end{align*}
+    Combining the two together, we end up with the \emf{singular value decomposition}
+    \begin{equation}
+        \hat{\chi} = \hat{U}\hat{\Lambda}\hat{V}^\dagger. 
+    \end{equation}
+    We can write an expression for each entry:
+    \begin{equation}
+        \chi_{ij} = \sum_{p=0}^{1}U_{ip}\lambda_p V_{jp}^*,
+    \end{equation}
+    which directly leads to the desired relationship.
+\end{proof}
+\subsection{Operations on Two Qubits}
+There are various ways to perform operations. Here are a few ways:
+\begin{enumerate}
+    \item \emf{Local Unitaries} apply to only one qubit. Namely,
+    \begin{equation}
+        \ket{\Psi'} = (\hat{U}\otimes \hat{I})\ket{\Psi}.
+    \end{equation}
+    If $\hat{U} = \begin{pmatrix}
+        a & b  \\ -b^* & a^*
+    \end{pmatrix}$, then this operation can be represented by 
+    \begin{equation}
+        \begin{pmatrix}
+            \alpha' \\ \beta' \\ \gamma' \\ \delta'
+        \end{pmatrix} = \begin{pmatrix}
+            a & 0 & b & 0 \\
+            0 & a & 0 & b \\ 
+            -b^* & 0 & a^* & 0 \\ 
+            0 & -b^* & 0 & a^*
+        \end{pmatrix}\begin{pmatrix}
+            \alpha \\ \beta \\ \gamma \\ \delta
+        \end{pmatrix} = \begin{pmatrix}
+            a\hat{I} & b\hat{I} \\ 
+            -b^*\hat{I} & a^*\hat{I}
+        \end{pmatrix}\begin{pmatrix}
+            \alpha \\ \beta \\ \gamma \\ \delta
+        \end{pmatrix} = (\hat{U} \otimes \hat{I})\begin{pmatrix}
+            \alpha \\ \beta \\ \gamma \\ \delta
+        \end{pmatrix}.
+    \end{equation}
+    A similar relationship can be found for operations in the form $\hat{I} \otimes \hat{V}.$
+\end{enumerate}
+It is important to recognize that local operations can never increase entanglement. So how can we increase entanglement? We start with two qubits in $\ket 0 \ket 0$, and apply a unitary $\hat{U}_1 = \lambda_0 \hat{I} -i\lambda_1 \hat{Y}$ to qubit 1,
+\begin{equation}
+    \ket 0 \rightarrow \lambda_0\ket 0 + \lambda_1\ket 1.
+\end{equation}
+such that 
+\begin{equation}
+    \ket{\Psi_1} = \lambda_0\ket{00} + \lambda_1\ket{11}.
+\end{equation}
+We then apply a \emf{CNOT} gate by applying a bit flip to qubit 2 if qubit 1 is in $\ket 1$ and do nothing if qubit 1 is in $\ket 0$. However, we have to do this unitarily and reversibly. We can write:
+\begin{equation}
+    \text{CNOT} = \hat{\Pi}_0 \otimes \hat{I} + \hat{\Pi}_1 \otimes \hat{X}.
+\end{equation}
+so 
+\begin{equation}
+    \ket{\Psi_2} = \text{CNOT}(\Psi_1) = \lambda_0\ket{00} + \lambda_1\ket{11}. 
+\end{equation}
+We then apply local unitaries $\hat{U}_a$ and $\hat{U}_b,$ so 
+\begin{equation}
+    \ket\Psi_3 = (\hat{U}_a \otimes \hat{U}_b) (\lambda_0\ket{00} + \lambda_1\ket{11}).
+\end{equation}
 \end{document}

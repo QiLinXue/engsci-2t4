@@ -288,4 +288,37 @@ for some function $f(Q_i,\dot{Q}_i,t).$ We can now prove Noether's Theorem now:
     \end{equation*}
     where $H$ is the \emf{Hamiltonian.}
 \end{example}
+What exactly is the Hamiltonian? We claim that usually, the Hamiltonian is the total energy. We can check that since $L=T-V,$ then 
+\begin{equation*}
+    \sum \dot{q}_i \frac{\partial L}{\partial \dot{q}_i} = \sum_i \dot{q}_i \frac{\partial T}{\partial \dot{q}_i}.
+\end{equation*}
+Consider some $T$ that is quadratic in $q_i$. We use \emf{Euler's Theorem of Homogenous Functions,} which says that if
+\begin{equation*}
+    f(\alpha x_1, \dots, \alpha x_n) = \alpha^n f(x_1,\dots,x_n)
+\end{equation*}
+for some $n$, then $\sum_i x_i \frac{\partial f}{\partial x_i} = n f(x).$ Therefore, then $T$ is homogenous with degree $2$. Therefore:
+\begin{equation}
+    \sum_i \dot{q}_i \frac{\partial T}{\partial \dot{q}_i} = \alpha T.
+\end{equation}
+The Hamiltonian is then
+\begin{equation*}
+    H = \sum_i \dot{q}_i \frac{\partial T}{\partial \dot{q}_i} - \mathcal{L} = \alpha T - (T-V) = T+V.
+\end{equation*}
+However, note that the Hamiltonian is not necessarily the total energy. This can occur in an open system where there is some energy transfer, making $T$ not quadratic.
+\begin{example}
+    Consider a rotationally invariant system. We do so by applying an infinitesimal rotation $\delta \lambda$ about an axis $\hat{n}.$ Note that $\delta \vec{r} \perp \hat{r}$ and $\delta \vec{r} \perp \hat{n}.$ We can write:
+    \begin{equation*}
+        \delta \vec{r} = \hat{n} \times \vec{r} \delta\lambda \implies \frac{d\vec{r}}{d\lambda} = \hat{n} \times \vec{r}.
+    \end{equation*}
+    Applying Noether's Theorem, we get the conserved quantity to be
+    \begin{equation*}
+        \frac{d}{dt} \sum_i \vec{p}_i \cdot (\vec{n}\times \vec{r}_i) = 0.
+    \end{equation*}
+    However since $a\cdot (b\times c) = b \cdot (a\times c),$ we end up with
+    \begin{equation*}
+        \frac{d}{dt} \sum_i \vec{p}_i \times \vec{r}_i = 0.
+    \end{equation*}
+    This quantity is the \emf{angular momentum,} which we will denote as $\vec{M}$.
+\end{example}
+Every closed system in three dimensions has $7$ conserved quantities, known as integrals of motion. These are the energy, 3 components of linear momentum, and 3 components of angular momentum.
 \end{document}
