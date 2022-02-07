@@ -219,9 +219,9 @@ In general, holonomic constraints are in the form of $f(q_1,\dots,q_n)=0.$
     If a system has a continuous symmetry property, then there are corresponding quantities whose values are conserved in time.
 \end{theorem}
 A \emf{cyclic} coordinate is one that does not explicitly appear in the Lagrangian. If $q_i$ is cyclic, then the \emf{generalized/conjugate momentum} is conserved, i.e.
-\begin{equation*}
+\begin{equation}
     \frac{d}{dt}q_i = 0.
-\end{equation*}
+\end{equation}
 In general, generalized momentum is not linear momentum. These forms of translational symmetry implies some conservation law, which is an example of Noether's Theorem.
 \begin{definition}
     A symmetry is a transformation such that the equations of motion do not change.
@@ -252,13 +252,13 @@ for some function $f(Q_i,\dot{Q}_i,t).$ We can now prove Noether's Theorem now:
 \end{proof}
 \begin{example}
     Let us look at spatial translations. Consider the Lagrangian of a closed system (no external forces), which is unchanged if all particles are translated by the same amount. For every particle, we apply the transformation
-    \begin{equation*}
+    \begin{equation}
         \vec{r}_i(t) \to \vec{r}_i(t) + \lambda\hat{n} = \vec{R}_i(t,\lambda).
-    \end{equation*}
+    \end{equation}
     The Lagrangian is
-    \begin{equation*}
+    \begin{equation}
         L = \frac{1}{2}\sum_i m_i\dot{\vec{r}}_i^2 - V(\{\vec{r}_i-\vec{r}_j\}).
-    \end{equation*}
+    \end{equation}
     Note that $L$ is unchanged for this transformation, so we can set $f=0$. The conserved property is then
     \begin{align*}
         \sum_a p_a \frac{\partial Q_a}{\partial \lambda}\biggr|_{\lambda = 0} &= \sum_i \frac{\partial Q_i}{\partial R_i}\hat{n} \\
@@ -279,46 +279,160 @@ for some function $f(Q_i,\dot{Q}_i,t).$ We can now prove Noether's Theorem now:
         &= \frac{dL(q_i(t+\lambda),\dot{q}_i(t+\lambda))}{dt}
     \end{align*}
     since $L$ has the same dependence on $\lambda$ as on $t$! Therefore $\frac{dL}{d\lambda}=\frac{dL}{dt}$ so $f=L,$ and so time translation is a symmetry. Similarly,
-    \begin{equation*}
+    \begin{equation}
         \frac{\partial Q_i(t+\lambda)}{\partial \lambda} = \frac{\partial}{\partial \lambda}q_i(t+\lambda) = \frac{dq_i}{dt} = \dot{q}_i
-    \end{equation*}
+    \end{equation}
     and so the conserved quantity is
-    \begin{equation*}
+    \begin{equation}
         \sum_i \frac{\partial L}{\partial \dot{q}_i}\frac{\partial L}{\partial \lambda}\biggr|_{\lambda=0} - f = \sum_i \dot{q}_i\left[\frac{\partial L}{\partial \dot{q}_i}\right] - L \equiv H,
-    \end{equation*}
+    \end{equation}
     where $H$ is the \emf{Hamiltonian.}
 \end{example}
 What exactly is the Hamiltonian? We claim that usually, the Hamiltonian is the total energy. We can check that since $L=T-V,$ then 
-\begin{equation*}
+\begin{equation}
     \sum \dot{q}_i \frac{\partial L}{\partial \dot{q}_i} = \sum_i \dot{q}_i \frac{\partial T}{\partial \dot{q}_i}.
-\end{equation*}
+\end{equation}
 Consider some $T$ that is quadratic in $q_i$. We use \emf{Euler's Theorem of Homogenous Functions,} which says that if
-\begin{equation*}
+\begin{equation}
     f(\alpha x_1, \dots, \alpha x_n) = \alpha^n f(x_1,\dots,x_n)
-\end{equation*}
+\end{equation}
 for some $n$, then $\sum_i x_i \frac{\partial f}{\partial x_i} = n f(x).$ Therefore, then $T$ is homogenous with degree $2$. Therefore:
 \begin{equation}
     \sum_i \dot{q}_i \frac{\partial T}{\partial \dot{q}_i} = \alpha T.
 \end{equation}
 The Hamiltonian is then
-\begin{equation*}
+\begin{equation}
     H = \sum_i \dot{q}_i \frac{\partial T}{\partial \dot{q}_i} - \mathcal{L} = \alpha T - (T-V) = T+V.
-\end{equation*}
+\end{equation}
 However, note that the Hamiltonian is not necessarily the total energy. This can occur in an open system where there is some energy transfer, making $T$ not quadratic.
 \begin{example}
     Consider a rotationally invariant system. We do so by applying an infinitesimal rotation $\delta \lambda$ about an axis $\hat{n}.$ Note that $\delta \vec{r} \perp \hat{r}$ and $\delta \vec{r} \perp \hat{n}.$ We can write:
-    \begin{equation*}
+    \begin{equation}
         \delta \vec{r} = \hat{n} \times \vec{r} \delta\lambda \implies \frac{d\vec{r}}{d\lambda} = \hat{n} \times \vec{r}.
-    \end{equation*}
+    \end{equation}
     Applying Noether's Theorem, we get the conserved quantity to be
-    \begin{equation*}
+    \begin{equation}
         \frac{d}{dt} \sum_i \vec{p}_i \cdot (\vec{n}\times \vec{r}_i) = 0.
-    \end{equation*}
+    \end{equation}
     However since $a\cdot (b\times c) = b \cdot (a\times c),$ we end up with
-    \begin{equation*}
+    \begin{equation}
         \frac{d}{dt} \sum_i \vec{p}_i \times \vec{r}_i = 0.
-    \end{equation*}
+    \end{equation}
     This quantity is the \emf{angular momentum,} which we will denote as $\vec{M}$.
 \end{example}
 Every closed system in three dimensions has $7$ conserved quantities, known as integrals of motion. These are the energy, 3 components of linear momentum, and 3 components of angular momentum.
+\subsection{Systems of Objects}
+Conservation of momentum gives us information about the motion of the \emf{center of mass} of a system. Consider $2$ reference frames moving with relative velocity $\bm{v}.$ Then the velocity of a particle in $K$ is relative to the velocity of the same particle in $K'$ by
+\begin{equation}
+    \bm{v}_i = \bm{v}_i' + \bm{v}.
+\end{equation}
+so we have 
+\begin{equation}
+    \sum_i m_i\bm{v}_i = \sum_i m_i(\bm{v}_i' + \bm{v}) = \sum_i m_i\bm{v}_i + \bm{v}\sum_i m_i
+\end{equation}
+or 
+\begin{equation}
+    \bm{p} = \bm{p}' + \bm{v}\sum_i m_i.
+\end{equation}
+We can always choose $\bm{K}'$ to be a frame where $\bm{p}'=0$ (for all time), i.e. $\bm{K}'$ moves with velocity
+\begin{equation}
+    \bm{v} = \frac{\bm{p}}{\sum_i m_i} = \frac{d}{dt} \bm{R}_\text{com}.
+\end{equation}
+Note that this is the conserved quantity corresponding to Galilean boosts! So this can also be directly derived via Noether's Theorem.
+\subsection{Mechanical Similarity}
+We've talked about symmetry transformations which leave $L$ unchanged or take $\mathcal{L} \to \mathcal{L} + \frac{df}{dt}$ which leaves EOM unchanged. But, we also know that transformations which take $\mathcal{L} \to \alpha \mathcal{L}$ also leave EOM unchanged. Does this give us any useful information?
+
+Suppose we have a system where the potential $U$ is homogenous of degree $K$,
+\begin{equation}
+    U_1(\alpha r_1, \dots, \alpha r_n) = \alpha^k U(r_1,\dots,r_n).
+\end{equation}
+For example $U \propto \frac{1}{r} \implies k = -1.$
+
+Suppose we have a transformation:
+\begin{align*}
+    r_a &\to \alpha r_a \\ 
+    t &\to \beta t.
+\end{align*}
+This means the velocities get scaled to $v_a \to \frac{\alpha}{\beta}v_a,$ so $T \to \frac{\alpha^2}{\beta^2}T$ if $T$ is quadratic in the velocities and $U \to \alpha^k U.$ If 
+\begin{equation*}
+    \frac{\alpha^2}{\beta^2} = \alpha^k \implies L \to \alpha^k L \implies \text{EOM unchanged.}
+\end{equation*}
+Therefore, if $\beta = \alpha^{1-k/2},$ then the EOM is invariant. If $\bm{r}_a(t)$ is a solution to EOM, then there is a family of solutions:
+\begin{equation*}
+    \bm{r}(t) = \alpha \bm{r}_a(\beta t).
+\end{equation*}
+This means that
+\begin{equation*}
+    \frac{t'}{t} = \left(\frac{\ell'}{\ell}\right)^{1-k/2}
+\end{equation*}
+for the same set of solutions.
+\section{Integrals of Motion}
+A free particle can have a maximum of $5$ independent conserved quantities. While there are more conserved quantities, not all are independent of each other. Namely:
+\begin{equation*}
+    E = \frac{\bm{p}^2}{2m},\quad \bm{p}\cdot \bm{M} = 0.
+\end{equation*}
+More generally, a system with $d$ degrees of freedom can have a maximum of $2d-1$ independent conserved quantities. We will use two arguments to prove this.
+\begin{proof}
+    IF we have a system with $d$ degrees of freedom. Then we need $2d$ initial conditions. But changing the initial time $t_0 \to t_0'$ is equivalent to changing one of the initial conditions. For a free particle,
+    \begin{align*}
+        \bm{r}(t) &= \bm{r}_0 + \bm{v}_0(t-t_0) \\ 
+        &= \bm{r}_0 + \bm{v}_0(t-t_0'+(t_0'-t_0)) \\
+        &= \bm{r}_0 + \bm{v}_0(t'-t_0) + \bm{v}_0(t-t_0') \\ 
+        &= \bm{r}'_0 + \bm{v}'(t_0'-t_0).,
+    \end{align*}
+    so this transformation changes the initial position in the same direction as the velocity.
+
+    The catch is that conserved quantities are independent of $t_0$! Therefore, conserved quantities are independent of one of the initial conditions. Therefore, there are a maximum of $2d-1$ independent conserved quantities.
+
+    Another way is to start with 1 degree of freedom. Then the \emf{phase space} is a curve in a graph with axes $q$ and $\dot{q}$. The conservation law then gives us the trajectory. However, if there was a second independent conservation law, then it would give another trajectory, which can't happen. This concept is easy to extend for $d$ degrees of freedom, i.e. there is a bijection between the conservation laws and a trjaectory and a curve in a $2d$ dimensional space.
+\end{proof} 
+But why do we care? Because it is easier to solve with integrals of motion. For example, let's look at one dimensional motion.
+\begin{example}
+    Let $\mathcal{L} = \frac{1}{2}m\dot{x}^2 - U(x).$ Then the Euler-Lagrange equation immediately gives
+    \begin{equation*}
+        m\ddot{x} = -\frac{dU(x)}{dx},
+    \end{equation*}
+    which is a second order differential equation. However, this is time invariant so the Hamiltonian is invariant. There are $2(1)-1=1$ conservation laws, so this is the only one. Therefore:
+    \begin{equation*}
+        H = \frac{1}{2}m\dot{X}^2 + U(x),
+    \end{equation*}
+    which gives a curve in phase space. For example, if we take SHO, we get:
+    \begin{equation*}
+        \dot{x}^2 + \frac{k}{m}x^2 = \frac{2E}{m},
+    \end{equation*}
+    which gives an ellipse. Therefore, we get:
+    \begin{equation*}
+        \dot{x} = \sqrt{\frac{2(E-U(x))}{m}} = \frac{dx}{dt},
+    \end{equation*}
+    which is a first order differential equation. Solving for $t$ gives 
+    \begin{equation*}
+        t = \sqrt{m/2}\int \frac{dx}{\sqrt{E-U}}\dd{x} + C.
+    \end{equation*}
+    This is known as \emf{reducing to quadratures.}
+\end{example}
+If we have $d$ degrees of freedoms and $d$ independent integrals of motion, then we call the system \emf{integrable.} If there are more than $d$ independent integrals of motion, then we call the system \emf{super-integrable.} If there are $2d-1$ independent integrals of motion, then it is \emf{maximally super-integrable.}
+
+The above discussion gives a quick way of determining the period of oscillations for 1-dimensional motion:
+\begin{equation*}
+    T = 2\sqrt{m/2}\int_{x_1}^{x_2}\frac{\dd{x}}{\sqrt{E-U(x)}}
+\end{equation*}
+\begin{example}
+    We can now direct our attention to two particles in a central potential
+    \begin{equation*}
+        U(\vec{r}_1,\vec{r}_2) = U(|\vec{r}_1-\vec{r}_2|),
+    \end{equation*}
+    where 
+    \begin{equation*}
+        \mathcal{L} = \frac{1}{2}m_1\dot{r}_1^2 + \frac{1}{2}m_2\dot{r}_2^2 - U(|r_1-r_2|).
+    \end{equation*}
+    Since this is a closed system, the center of mass defines an inertial frame, so we can take $\bm{r}_\text{com}$ as the origin. We can define $\bm{r}=\bm{r}_1-\bm{r}_2.$ Then:
+    \begin{equation*}
+        \bm{r}_2 = -\frac{m_1}{m_1+m_2}\bm{r},\quad \bm{r}_1 = \frac{m_2}{m_1+m_2}\bm{r}.
+    \end{equation*}
+    In this reference frame, we got rid of three degrees of freedom. Therefore, we can rewrite the Lagrangian as
+    \begin{equation*}
+        \mathcal{L} = \frac{1}{2}\dot{r}^2m_r - U(r).
+    \end{equation*}
+    Note that this system is not closed since the potential depends on the distance from origin, but we've reduced it to a 1-dimensional problem with 3 degrees of freedom. We want to apply integrals of motion, so there are a maximum of $5$ integrals of motion.
+\end{example}
 \end{document}

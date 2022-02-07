@@ -1,0 +1,110 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY365: Quantum Information \\ Problem Set 3}
+\author{QiLin Xue}
+\date{Winter 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+    \item We can directly compute:
+    \begin{equation}
+        C = 2|\alpha \delta - \beta\gamma| = 0.96
+    \end{equation}
+    \item We compute $\lambda_0^2,\lambda_1^2$ to be 
+    \begin{equation}
+        \lambda^4 + \lambda^2 + C^2/4 = 0 \implies \lambda^2 = 0.36, 0.64.
+    \end{equation}
+    Therefore,
+    \begin{equation}
+        \Lambda^2 = \frac{1}{25} \begin{pmatrix}
+            9 & 0 \\ 
+            0 & 16
+        \end{pmatrix}.
+    \end{equation}
+    Consider
+    \begin{equation}
+        \chi = \begin{pmatrix}
+            i\sqrt{27} & 3 \\ 
+            -4 & -i\sqrt{48}
+        \end{pmatrix},
+    \end{equation}
+    so 
+    \begin{equation}
+        \chi^\dagger = \begin{pmatrix}
+            -i\sqrt{27} & -4 \\ 
+            3 & i\sqrt{48}
+        \end{pmatrix}.
+    \end{equation}
+    We can construct the hermitian matrices,
+    \begin{align}
+       \hat{F} =  \chi\chi^\dagger &= \frac{4}{100} \begin{pmatrix}
+            9 & 0 \\ 
+            0 & 16
+        \end{pmatrix} \\ 
+        \hat{G} = \chi^\dagger\chi &= \frac{1}{100}\begin{pmatrix}
+            43 & 7i\sqrt{3} \\ 
+            (-7i)\sqrt{3} & 57
+        \end{pmatrix}.
+    \end{align}
+    We can rewrite $\hat{F}$ as:
+    \begin{equation}
+        \chi\chi^\dagger = \hat{I}\Lambda^2\hat{I}^\dagger.
+    \end{equation}
+    Rewriting $\hat{G}$ is harder. Its eigenvectors are $v_1=(-i\sqrt{3},1), v_2=(i/\sqrt{3}, 1)$ for $\lambda_0,\lambda_1$ respectively. We want to diagonalize $\hat{G}$ into the form $V\Lambda^2V^{-1}$, but ensure $V$ is unitary. To do so, we can multiply the eigenvectors by a phase $e^{ia}$ and $e^{ib}$ and scale them to get the following matrix of eigenvectors:
+    \begin{equation}
+        V = \frac{\sqrt{3}}{2}\begin{pmatrix}
+            -i e^{ia} & i/\sqrt{3} e^{ib} \\ 
+            e^{ia}/\sqrt{3} & e^{ib}.
+        \end{pmatrix}
+    \end{equation}
+    It is straightforward to verify that the determinant has absolute value of $1$. To ensure $V$ is unitary, we require the main diagonal entries to be complex conjugates of each other:
+    \begin{align*}
+        -ie^{ia} &= \left(e^{ib}\right)^* \\ 
+        -ie^{i(a+b)} &= 1 \\ 
+        \sin(a+b) &= 1,
+    \end{align*}
+    as well as the anti-diagonal entries to be the negative of the other's complex conjugate:
+    \begin{align*}
+        (e^{ia})^* &= -(ie^{ib}) \\ 
+        e^{-ia} &= ie^{ib}.
+    \end{align*}
+    This condition yields both $\cos(a)=\sin(b)$ and $\cos(b)=\sin(a)$. We have three equations, with one solution being $a=b=\pi/4$. Let us denote $\theta = \pi/4$. Our matrix is then:
+    \begin{equation}
+        V = \frac{\sqrt{3}}{2} \begin{pmatrix}
+            -ie^{i\theta} & \frac{1}{\sqrt{3}} ie^{i\theta} \\ 
+            \frac{1}{\sqrt{3}}e^{i\theta} & e^{i\theta}
+        \end{pmatrix},
+    \end{equation}
+    and we can \href{https://www.wolframalpha.com/input/?i=\%7B\%7B-i*e\%5E\%28i*pi\%2F4\%29\%2C+i\%2Fsqrt\%283\%29*e\%5E\%28i*pi\%2F4\%29\%7D\%2C\%7Be\%5E\%28i*pi\%2F4\%29\%2Fsqrt\%283\%29\%2Ce\%5E\%28i*pi\%2F4\%29\%7D\%7D*\%7B\%7B9\%2F25\%2C+0\%7D\%2C\%7B0\%2C16\%2F25\%7D\%7D*\%7B\%7B\%283+E\%5E\%28\%28I\%2F4\%29+Pi\%29\%29\%2F4\%2C+\%28-I\%2F4\%29+Sqrt\%5B3\%5D+E\%5E\%28\%28I\%2F4\%29+Pi\%29\%7D\%2C+\%7B-\%28Sqrt\%5B3\%5D+E\%5E\%28\%28I\%2F4\%29+Pi\%29\%29\%2F4\%2C+\%28\%28-3+I\%29\%2F4\%29+E\%5E\%28\%28I\%2F4\%29+Pi\%29\%7D\%7D}{verify} that $\hat{G} = V\Lambda^2V^{-1}$ and $V$ is unitary. Therefore, we can write:
+    \begin{equation}
+        \chi = \hat{I}\Lambda\hat{V}^\dagger = \frac{\sqrt{3}}{10}\begin{pmatrix}
+            3 & 0 \\ 
+            0 & 4
+        \end{pmatrix}\begin{pmatrix}
+            -ie^{i\theta} & \frac{1}{\sqrt{3}} ie^{i\theta} \\ 
+            \frac{1}{\sqrt{3}}e^{i\theta} & e^{i\theta}
+        \end{pmatrix}^\dagger,
+    \end{equation}
+    which is correct up to some phase shift for each term. We can read off the coefficients for $\hat{I}$ and $\hat{V}$ to get the desired
+    \begin{itemize}
+        \item $a_0 = 1$
+        \item $b_0 = 0$
+        \item $c_0 = -\frac{\sqrt{3}}{2}ie^{i\pi/4}$
+        \item $d_0 = \frac{1}{2}ie^{i\pi/4}$
+        \item $a_1 = 0$
+        \item $b_1 = 1$
+        \item $c_1 = \frac{1}{2}e^{i\pi/4}$
+        \item $d_1 = \frac{\sqrt{3}}{2} e^{i\pi/4}$
+    \end{itemize}
+\end{enumerate}
+\end{document}

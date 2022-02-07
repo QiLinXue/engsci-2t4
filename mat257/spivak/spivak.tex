@@ -217,12 +217,12 @@ Let $f:R\to \mathbb{R}$ be founded. Then
     U(f,P) &= \text{upper sum of F rel P} = \sum_{S \in P}(\text{vol}(S) M_s(f))
 \end{align}
 where $m_s \le M_s \implies L(f,P) \le U(f,P)$. A function is \emf{integrable} if $L(f,P)$ and $U(f,P)$ converge to each other.
-\begin{proposition}
+\begin{lemma}
     If $P$ is a partition of $R$, then
     \begin{equation}
         \sum_{S\in P}(V(S)) = V(R)
     \end{equation}
-\end{proposition}
+\end{lemma}
 \subsubsection{Refinements and Integrability Theorems}
 \begin{definition}
     We say that $P'$ \emf{refines} $P$ if every $S'\in P'$ is a subset of some $S\in P$. Equivalently, if $S\in P \implies S = U_{S'\in P', s'\in S}(s')$.
@@ -1436,7 +1436,7 @@ Suppose $V$ is a vector space with basis $v_1,\dots,v_n$ and dual basis $\phi_1,
         0 & I \neq J
     \end{cases}
 \end{align}
-\subsection{Theorem}
+\subsection{Dimension of $k$-tensors}
 We are finally ready for our first theorem!
 \begin{theorem}
     Let $V$ be a vector space with respect to a basis $v_1,\dots,v_n$ and dual basis $\phi_1,\dots,\phi_n$. Then:
@@ -1479,44 +1479,119 @@ Note that we found a formula for $a_J$, so we're nearly done! Let us turn this i
     \end{align*}
     But, by definition, $T(V_J)=a_J$ and the RHS is $a_J$ as well from the above discussion.
 \end{proof}
-\section{Tidbits}
-\subsection{Volume of Spheres}
-Let's compute like physicists! Let
+\begin{lemma}
+    The $\{\phi_I\}$ are linearly independent.
+\end{lemma}
+\begin{proof}
+    Pick $a_I \in \mathbb{R}$ such that $\sum a_I\phi_I = 0.$ Therefore, for every $J\in \underline{n}^k$,
+    \begin{equation}
+        \left(\sum_I a_I \phi_I\right)(V_J) = \sum_I a_I \phi_I V_J = \sum_I a_I \delta_{IJ} = 0.
+    \end{equation}
+    Recall that we also have $\sum_I a_I \delta_{IJ} = a_J,$ so $a_J=0$ for all $J$.
+\end{proof}
+\subsubsection*{A Philosophical Aside}
+In math, things tend to either push forward or pull back. When we map two spaces, we are transforming points, subsets, paths, functions, etc. For example:
+\begin{itemize}
+    \item Points like to be pushed forward (to be pull backed, they need extra conditions)
+    \item Subsets can be pushed forward and be pulled back.
+    \item Paths like to be pushed.
+    \item Functions like to be pulled back. For example, if $f:X\to Y$ and $h:Y\to \mathbb{R}$, then we can write
+    \begin{equation}
+        h\circ f = f^* h
+    \end{equation}
+\end{itemize}
+\subsection{Pullback}
+We will now resume our discussion on $k$-tensors. Suppose $L:V\rightarrow W$ is a linear function. Then there exists $L^*: \mathcal{T}^k(W) \rightarrow \mathcal{T}^k(V)$ defined by
 \begin{equation}
-    \sigma_n = \text{vol}(S^n),\quad\quad S^n = \{x \in \mathbb{R}^{n+1}: |x|=1\}
+    T \mapsto  (L^*T)(u_1,\dots,u_k) = L^*(Tu_1,\dots,Tu_k)
 \end{equation}
-Note that $S_1$ is just the unit circle, $S_2$ is the unit sphere, and $S_0$ is just two points. To do so, we compute $I_{n+1}$, which is the Gaussian integral in $n+1$ dimensions. We have 
+where $T\in \mathcal{T}^k$ and $u_i \in V$.
+\begin{lemma}
+    If $T\in \mathcal{T}^k W$, then $L^*T \in \mathcal{T}^* V.$ Namely, $L^*T$ is multi-linear.
+\end{lemma}
+\begin{proof}
+    We can compute:
+    \begin{align}
+        (L^*T)(u_1,\dots,\alpha u_i' + u_i'', \dots, u_k) &= T(Lu_1, \dots, L(\alpha u_i' + u_i''), \dots, Lu_k) \\ 
+        &= T(Lu_1, \dots, \alpha Lu_i' + Lu_i'', \dots, Lu_k) \\
+        &= \alpha T(u_1, \dots, u_i', \dots, u_k) + T(u_1, \dots, u_i'', \dots, u_k) \\
+        &= \alpha(L^*T)(u_1,\dots,u_1',\dots,u_k) + (L^*T)(u_1,\dots,u_1'',\dots,u_k).
+    \end{align}
+\end{proof}
+\begin{lemma}
+    The pullback map $L^*: \mathcal{T}^k W \rightarrow \mathcal{T}^k V$ is a linear map between vector spaces.
+\end{lemma}
+\begin{proof}
+    We need to show that if $T_1,T_2 \in \mathcal{T}^k W$, then:
+    \begin{equation}
+        L^*(\alpha T_1 + \beta T_2) = \alpha (L^*T_1) + \beta (L^*T_2),
+    \end{equation}
+    which can be shown similarly by direct computation.
+\end{proof}
+\begin{lemma}
+    $L^*$ is compatible with tensor multiplication. Namely, if $T_1 \in \mathcal{T}^kW$ and $T_2\in \mathcal{T}^\ell W$. Then $T_1T_2 \in \mathcal{T}^{k+\ell}(W)$ and:
+    \begin{equation}
+        L^*(T_1T_2) = (L^*T_1)(L^*T_2) \in \mathcal{T}^{k+\ell}V.
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    Trace the definitions and see that it works.
+\end{proof}
+\subsection{Killing Repetitions}
+\begin{definition}
+    A tensor $T \in \mathcal{T}^k V$ \emf{kills repetitions} if $T(u_1,\dots,u_k) = 0$ whenever $u_i=u_j$ is satisfied for some $i,j$.
+\end{definition}
+We wish to study these repetition killing tensors in the same sense that we studied all $k$ tensors.
+\begin{definition}
+    $T\in \mathcal{T}^k$ is \emf{alternating} if
+    \begin{equation}
+        T(\dots,u,\dots,w,\dots) = -T(\dots,w,\dots,u,\dots).
+    \end{equation} 
+    We then define
+    \begin{equation}
+        \Lambda^k(V) := \{T\in \mathcal{T}^k V: T\text{ is alternating}\}
+    \end{equation}
+\end{definition}
+Note that $\Lambda^k(V)$ is a subspace of $\mathcal{T}^k(V).$
+\begin{lemma}
+    If $T\in \mathcal{T}^k,$ then $T$ kills repetitions if and only if $T$ is alternating.
+\end{lemma}
+\begin{proof}
+    Suppose that $T$ is alternating. Consider a repetition. Then:
+    \begin{equation}
+        T(\dots,u,\dots,u,\dots) = -T(\dots,u,\dots,u,\dots) \implies T(\dots,u,\dots,u,\dots) = 0.
+    \end{equation}
+    Now suppose that $T$ kills repetitions. Then: $T(\dots,u+w,\dots,u+w,\dots) = 0.$ If we expand the LHS using multilinearity, we get
+    \begin{align*}
+        0 &= T(\dots,u,\dots,u,\dots) + T(\dots,u,\dots,w,\dots) + T(\dots,w,\dots,u,\dots) + T(\dots,w,\dots,w,\dots) \\ 
+        0 &= T(\dots,u,\dots,w,\dots) + T(\dots,w,\dots,u,\dots),
+    \end{align*}
+    which is the multilinearity property.
+\end{proof}
+\begin{itemize}
+    \item $\det \in \Lambda^n\mathbb{R}^n$
+    \item Suppose $k \le n$. Then $\lambda_I \in \Lambda^k \mathbb{R}^n$ where $I \in \underline{n}^k$ and maps a $n\times k$ matrix to the determinant of the \textit{minor} corresponding to rows given by $I$. 
+\end{itemize}
+Let's explore $\lambda_I$ a bit more. Notice that it doesn't make any sense if $I$ contains anything repeating, because then it will be zero. Furthermore, $\lambda_I$ remains the same (up to a sign change) when the elements of $I$ are permuted. Thus, it is sufficient to only look at $I$ where the numbers are increasing:
 \begin{equation}
-    I_{n+1} = \int\limits_{\mathbb{R}^{n+1}} e^{-|z|^2/2} \dd{z} = \int\limits_{\mathbb{R}^{n+1}} e^{-(z_1^2+\cdots+z_{n+1}^2)/2}\dd{z}_1\cdots \dd{z}_{n+1} = I_1^{n+1} = \left(2\pi\right)^{(n+1)/2}
+    \{I \in \underline{n}^k:i_1<i_2<\dots<i_k\} := \underline{n}^k_a.
 \end{equation}
-Also note that $e^{-|z|^2/2}$ is constant on spheres. Therefore, 
-\begin{equation}
-    I_{n+1} = \int\limits_{\mathbb{R}^{n+1}}e^{-|z|^2/2}\dd{z} = \int_0^\infty \dd{r} \text{vol}(S^n_r)e^{-r^2/2} = \sigma_n \int r^n e^{-r^2/2} \dd{r}
-\end{equation}
-where we define $\sigma_n$ to be $\text{vol}(S^n)$. Note that $\text{vol}(S_r^n) = \text{vol}(rS_1^n)=r^n\text{vol}(S^n) = r^n \sigma_n.$ Therefore, we have:
-\begin{equation}
-    I_{n+1} = \sigma_n \iota_n = (2\pi)^{(n+1)/2}
-\end{equation}
-We don't know how to compute $\iota_n$, but we can still work with it. For example, 
-\begin{align}
-    \iota_{n-2} &= \int_0^\infty \underbrace{r^{n-2}}_{u'}\underbrace{e^{-r^2/2}}_{v}\dd{r} \\ 
-    &= -\int_0^\infty \frac{1}{n-1}r^{n-1} \cdot \left(-re^{-r^2/2}\right) \dd{r}  + uv\Big|_0^\infty \\ 
-    &= \frac{1}{n-1} \int_0^\infty r^n e^{-r^2/2}\dd{r} + 0 \\
-    &= \frac{1}{n-1}\iota_n 
-\end{align}
-which is true for $n>1.$ Therefore, $\sigma_n$ is
-\begin{equation}
-    \sigma_n = \frac{(2\pi)^{(n+1)/2}}{\iota_n} = \frac{2\pi \cdot (2\pi)^{(n-1)/2}}{(n-1)\iota_{n-2}} = \frac{2\pi}{n-1}\sigma_n 
-\end{equation}
-where we have constructed a recurrence relation for $\sigma_n$. We have
-\begin{align}
-    \sigma_0 &= 2 \\ 
-    \sigma_1 &= 2\pi \\ 
-    \sigma_2 &= 4\pi \\
-    \sigma_3 &= 2\pi^2.
-\end{align}
-Let $\beta_n = \text{vol}(B_1(0) \subset \mathbb{R}).$ Then we can compute
-\begin{equation}
-    \beta_n = \int_0^1 \sigma_nr^n \dd{r}.
-\end{equation}
+Note that $|\underline{n}^k_a| = \binom{n}{k}$. Therefore, we will rename $\underline{n}^k_a$ to $\binom{\underline{n}}{k}.$
+
+Suppose we have an arbitrary $\omega \in \Lambda^kV,$ and we feed it some list of vectors, but not in order, i.e. $\omega(u_{\sigma 1}, u_{\sigma 2}, \dots, u_{\sigma k})$ where $\sigma: \underline{k} \to \underline{k}.$
+\begin{lemma}
+    If $T \in \Lambda^k$ and $\sigma \in S_k$, then $T\circ \sigma^* = (-1)^\sigma T$ where $\sigma^*(v_1,\dots,v_k) = (v_{\sigma_1}, \dots, v_{\sigma_k}).$ Therefore, 
+    \begin{equation}
+        (T\circ \sigma^*)(v_1,\dots,v_k) = T(v_{\sigma_1},\dots,v_{\sigma_k}).
+    \end{equation}
+\end{lemma}
+The proof is straightforward if we write out $\sigma$ as a product of permutations.
+
+We now wish to construct a basis for $\Lambda^k V$.
+\begin{definition}
+    If $I \in \underline{n}_a^k$, then 
+    \begin{equation}
+        \omega_I = \sum_{\sigma \in S_k}(-1)^{\sigma} \phi_I \circ \sigma^*.
+    \end{equation}
+\end{definition}
 \end{document}
