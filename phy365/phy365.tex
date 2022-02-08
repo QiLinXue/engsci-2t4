@@ -11,6 +11,7 @@
 \newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
 \usepackage{pgfplots}
 \numberwithin{equation}{section}
+\usetikzlibrary{quantikz}
 
 \begin{document}
 
@@ -373,5 +374,80 @@ so
 We then apply local unitaries $\hat{U}_a$ and $\hat{U}_b,$ so 
 \begin{equation}
     \ket\Psi_3 = (\hat{U}_a \otimes \hat{U}_b) (\lambda_0\ket{00} + \lambda_1\ket{11}).
+\end{equation}
+
+\newpage
+\section{Universal Two-Qubit Gates}
+A \emf{universal 2-qubit gate} (such as the CNOT gate), along with local unitary operators, can be used to create any two-qubit system. A CNOT gate can be represented as 
+\begin{center}
+    \begin{quantikz}
+        \lstick{$\ket{a}$} & \ghost{X} & \qw & \ctrl{1} & \qw & \qw & \rstick{$\ket{a}$} \\
+        \lstick{$\ket{b}$} & \ghost{X} & \qw & \targ{} & \qw &  \qw & \rstick{$\ket{a}\otimes \ket{b}$}
+    \end{quantikz}
+\end{center}
+To test if other gates are universal, we can see if it can be transformed into a CNOT gate. For example, the control-Z gate,
+\begin{center}
+    \begin{quantikz}
+        & \ghost{X} & \qw & \ctrl{1} & \qw & \qw \\
+        & \ghost{X} & \qw & \gate{Z} & \qw & \qw
+    \end{quantikz}
+\end{center}
+is also universal. This is equivalent since $HZH=X.$ This is represented by the \emf{control-Z} matrix, given by 
+\begin{equation}
+    \hat{U}_{CZ} = \begin{pmatrix}
+        1 & 0 & 0 & 0 \\ 
+        0 & 1 & 0 & 0 \\ 
+        0 & 0 & 1 & 0 \\ 
+        0 & 0 & 0 & -1
+    \end{pmatrix}.
+\end{equation}
+The \emf{SWAP} gate is given by 
+\begin{equation}
+    SWAP = \begin{pmatrix}
+        1 & 0 & 0 & 0 \\ 
+        0 & 0 & 1 & 0 \\ 
+        0 & 1 & 0 & 0 \\ 
+        0 & 0 & 0 & 0
+    \end{pmatrix}
+\end{equation}
+and reverses the roles of the two qubits, which is equivalent to the circuit
+\begin{center}
+    \begin{quantikz}
+        \qw & \targ{} & \ctrl{1} & \targ{} & \qw \\
+        \qw & \ctrl{-1} & \targ{} & \ctrl{-1} & \qw
+    \end{quantikz}.
+\end{center}
+Note that the SWAP gate is not universal. However, the \emf{ROOT-SWAP} gate is universal and is given by:
+\begin{equation}
+    \sqrt{SWAP} = \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & (1+i)/2 & (1-i)/2 & 0 \\ 
+        0 & (i-1)/2 & (1+i)/2 & 0 \\ 
+        0 & 0 & 0 & 1
+    \end{pmatrix}.
+\end{equation}
+We can use the SWAP gate along with local unitaries to create control-Z via the following:
+\begin{center}
+    \begin{quantikz}
+        & \qw & \gate[2]{\sqrt{\textsc{swap}}} & \gate{Z} &  \gate[2]{\sqrt{\textsc{swap}}} & \gate{V} & \qw \\
+        & \gate{Z} & & \qw & & \gate{V} & \qw
+    \end{quantikz}        
+\end{center}
+where $V=\sqrt{Z} = (\hat{I}-i\hat{Z})/\sqrt{2}$, and can be checked by matrix multiplication.
+\subsection{Maximally Entangled States}
+Recall that a state is maximally entangled if and only if $C=2|\alpha\delta-\beta\gamma|=1.$ Let us see how we can construct such a state. Consider the circuit:
+\begin{center}
+    \begin{quantikz}
+        \lstick{$\ket{0}$} & \gate{H} & \ctrl{1} & \qw \\ 
+        \lstick{$\ket{0}$} & \qw & \gate{X} & \qw \\
+    \end{quantikz}
+\end{center}
+So, the qubits gets transformed to:
+\begin{equation}
+    \ket{00} \to \frac{1}{\sqrt{2}}(\ket{00}+\ket{10}) \to \frac{1}{\sqrt2}(\ket{00} + \ket{11}) = \ket{\Phi_+},
+\end{equation}
+so the concurrence is $1$. It turns out we can construct more maximally entangled states. Namely, 
+\begin{equation}
+    \ket{\beta_k} = i(\hat{I}\otimes \hat{\sigma}_k)\ket{\beta}.
 \end{equation}
 \end{document}
