@@ -1,0 +1,83 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{ECE286: Stats}
+\author{QiLin Xue}
+\date{Winter 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Cumulative Distribution Functions}
+Given some PDF $f(x)$, the \emf{cumulative distribution function} (CDF) is defined as:  
+\begin{equation}
+    CDF(X) = \int_{-\infty}^x f(t) \dd{t}
+\end{equation}
+where $CFD(\infty)=1.$ Recall that given some function $g(x)$, we have 
+\begin{equation}
+    \int_A^C g(x) \dd{x} = \int_A^B g(x) \dd{x} + \int_B^C g(x) \dd{x}.
+\end{equation}
+Therefore, if we have some random value $x$ which has a PDF $f(x)$. Then:
+\begin{equation}
+    P(A\le X \le B) = F(B) - F(A).
+\end{equation}
+Let us now determine the \emf{normal CDF.} Recall that
+\begin{equation}
+    n(x,\mu,\sigma) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x-\mu)^2}{2\sigma^2}}. % autocompletes
+\end{equation}
+And therefore the CDF is given by
+\begin{equation}
+    \Phi(x, \mu, \sigma) = \int_{-\infty}^x n(t;\mu,\sigma) \dd{t},
+\end{equation}
+so $P(A\le X\le B, \mu, \sigma) = \Phi(B, \mu, \sigma) - \Phi(a, \mu, \sigma).$ Note that $\Phi$ cannot be written in terms of elementary functions. In practice, we will use tables to evaluate this. However, we don't want tables for every $\mu$ and $\sigma$, so we will parametrize it by a single variable and relate it to the \emf{CDF for a standard normal RV},
+\begin{equation}
+    \Phi(x) = \int_{-\infty}^t n(t;0,1)\dd{t}.
+\end{equation}
+Suppose $X$ has PDF $n(x; \mu, \sigma).$ Let $z = \frac{x-\mu}{\sigma}.$ Consider:
+\begin{align}
+    P(X \le x) &= \int_{-\infty}^x n(t; 0, 1) \dd{t} \\ 
+    &= \int_{-\infty}^x \frac{1}{\sqrt{2\pi}\sigma} e^{\frac{-(t-\mu)^2}{2\sigma^2}}\dd{t} \\ 
+    &= \int_{-\infty}^{(x-\mu)/\sigma} \frac{1}{\sqrt{2\pi}\sigma} e^{-s^2/2} \dd{t} \\ 
+    &= \int_{-\infty}^{(x-\mu)/\sigma} n(s; 0, 1) \dd{s} \\ 
+    &= P\left(\frac{x-\mu}{\sigma}\right) \\
+    &= P\left(Z \le \frac{x-\mu}{\sigma}\right).
+\end{align}
+\textit{Note:} In MATLAB, the code for $\Phi$ is \verb#normcdf#.
+\section{Binomial PMF}
+Recall that when we have $n$ coin flips, $p$ is the probability of heads, and $X$ is the number of heats. Recall that the \emf{probability mass function} is
+\begin{equation}
+    b(x; n, p) = \binom{n}{x} p^x (1-p)^{n-x}.
+\end{equation}
+The mean is $np$ and the variance is $np(1-p)$. Then:
+\begin{equation}
+    z = \frac{x-np}{\sqrt{np(1-p)}}.
+\end{equation}
+A preview of the \emf{central limit theorem} is that in the limiting case of $n\rightarrow\infty$, the distribution of $X$ is the normal distribution.
+\section{Gamma Function}
+The \emf{gamma function} is defined as:
+\begin{equation}
+    \Gamma(z) = \int_0^\infty x^{\alpha-1}e^{-x}\dd{x}
+\end{equation}
+for $\alpha > 0$. IT has the following properties:
+\begin{itemize}
+    \item $\Gamma\left(\frac{1}{2}\right) = \sqrt{\pi}.$
+    \item $\Gamma(n) = (n-1)!$ where $n\in \mathbb{N}.$
+\end{itemize}
+The \emf{gamma distribution} is
+\begin{equation}
+    f(x; \alpha, \beta) = \begin{cases}
+        \frac{1}{\beta^\alpha \Gamma(\alpha)}x^{\alpha-1}e^{-x/\beta} & x > 0 \\ 
+        0& \text{otherwise}
+    \end{cases}
+\end{equation}
+The mean is $\mu = \alpha\beta$ and the variance is $\sigma = \alpha\beta^2.$
+\end{document}
