@@ -435,4 +435,101 @@ The above discussion gives a quick way of determining the period of oscillations
     \end{equation*}
     Note that this system is not closed since the potential depends on the distance from origin, but we've reduced it to a 1-dimensional problem with 3 degrees of freedom. We want to apply integrals of motion, so there are a maximum of $5$ integrals of motion.
 \end{example}
+\section{Dynamics of Rigid Body Motion}
+An important kinematic idea is that the velocity of any point can be broken up into a translational component and a rotational component, i.e. 
+\begin{equation}
+    \bm{v}_a = \bm{v}_O + \bm{\Omega} \times \bm{a},
+\end{equation}
+which is true for any choice of $O$. Note that the angular velocity $\bm{\Omega}$ is constant for any point on the rigid object.
+\subsection{Lagrangian}
+Consider the Lagrangian of a rigid body without the presence of a potential. To derive the kinetic energy, we begin with a thought experiment about the kinetic energy of a system of point masses,
+\begin{equation}
+    T = \frac{1}{2}\sum_a m_av_a^2.
+\end{equation}
+However, we can write $\bm{v}_a = \bm{v} + \bm{\omega} \times \bm{r}_a,$ so the kinetic energy becomes
+\begin{equation}
+    T = \sum_a \frac{1}{2}m_a\left(\bm{v}^2 + 2\bm{v}\cdot (\bm{\Omega} \times \bm{r}_a) + (\bm{\Omega} \times \bm{r}_a)^2\right).
+\end{equation}
+The middle term is annoying, so we want to pick a point $O$ such that it vanishes. There are two ways to do so:
+\begin{enumerate}
+    \item Choose $O$ such that $\bm{v}=0.$ This is the instantaneous axis of rotation.
+    \item Choose $O$ to be the center of mass. To prove this, we can apply the triple product identity,
+    \begin{equation}
+        \bm{v} \cdot (\bm{\Omega} \times \bm{r}_a) = \bm{r}_a \cdot (\bm{v} \times \bm{\Omega}).
+    \end{equation}
+    Then the term becomes
+    \begin{equation}
+        \left[\sum_a m_a \bm{r}_a\right] \cdot (\bm{v}\times \bm{\Omega}).
+    \end{equation}
+    Note that $\bm{v}\times \bm{\Omega}$ don't depend on $a$, so we can factor it out. The first term in the product is then zero for the center of mass.
+\end{enumerate}
+The last term is also annoying, but we can apply the identity:
+\begin{equation}
+    (A \times B) \cdot (\bm{C} \times \bm{D}) = (\bm{A} \cdot \bm{C})(\bm{B}\cdot \bm{D}) - (\bm{A}\cdot \bm{D})(\bm{B}\cdot\bm{C}).
+\end{equation}
+Then:
+\begin{equation}
+    (\bm{\Omega} \times \bm{r}_a)^2 = \Omega^2 r_a^2 - (\bm{\Omega} \cdot \bm{r}_a)^2.
+\end{equation}
+Therefore, the kinetic energy is:
+\begin{equation}
+    T = \frac{1}{2}m\bm{v}^2 + \frac{1}{2}\sum_a m_a\left(\Omega^2r_a^2 - (\bm{\Omega}\cdot\bm{r}_a)^2\right).
+\end{equation}
+We can simplify this last term even more by breaking $\bm{\Omega},\bm{r}_a$ into components and writing it as a double sum, i.e.
+\begin{align}
+    (\bm{\Omega}\cdot\bm{r}_a)^2 &= \left[\sum_i (\Omega_ir_{a,i})\right]^2 \\
+    &= \left[\sum_i \Omega_i r_{a,i}\right]\left[\sum_j \Omega_j r_{a,j}\right] \\ 
+    &= \sum_{i,j} \Omega_i\Omega_j r_{a,i}r_{a,j}.
+\end{align}
+Note that the $\Omega$ are independent of $a$, so we can factor them out and write them as $\sum_i \Omega_i^2 = \sum_{i,j}\Omega_i\Omega_j \delta_{ij}$. The rotational kinetic energy is then:
+\begin{equation}
+    T_\text{rot} = \frac{1}{2}\sum_{i,j} \Omega_i\Omega_j\left[\sum_a m_a\left(\delta_{ij}r_a^2 - r_{a_i}r_{a_j}\right)\right].
+\end{equation}
+\subsection{Moment of Inertia Tensor}
+The term in the square brackets depends on only the geometry of the object, and is known as the \emf{moment of inertia} $I_{ij},$ which is a second-rank tensor. Therefore, the kinetic energy is:
+\begin{equation}
+    T = \frac{1}{2}m\bm{v}^2 + \frac{1}{2}\sum_{i,j} I_{ij}\Omega_i\Omega_j.
+\end{equation}
+Note that second-rank tensors can be conveniently written as matrices, and:
+\begin{equation}
+    \sum_{i,j} I_{ij} = \sum_{ij} \Omega_i I_{ij} \Omega_j = \bm{\Omega}^T \bm{I} \bm{\Omega}.
+\end{equation}
+One last thing to note is that $I_{ij}=I_{ji}$, so $\bm{I}$ is symmetric. We can write it out explicitly:
+\begin{equation}
+    \bm{I} = \sum_a m_a\begin{pmatrix}
+        y_a^2+z_a^2 & -x_ay_a & -x_az_a \\ 
+        -x_ay_a & x_a^2+z_a^2 & -y_az_a \\
+        -x_az_a & -y_az_a & x_a^2+y_a^2
+    \end{pmatrix}
+\end{equation}
+If we have a continuous distribution, instead of writing $\sum_a m_a(y_a^2+z_a^2)$, we would write $\int \rho(\bm{r})(y^2+z^2)\dd^3{r}$ instead. Note that the moment of inertia tensor depends on the choice of axes, so is there a particular choice of axes that are the best?
+
+Well it turns out that for a rigid body, no matter how complicated, has a set of principal axes such that the moments of inertia tensor is 
+\begin{equation}
+    I = \diag(I_1,I_2,I_3).
+\end{equation}
+\begin{proof}
+    A symmetric matrix can always be diagonalized by an orthogonal matrix:
+    \begin{equation}
+        I^{diag} = OIO^T
+    \end{equation}
+    such that $O^TO = I,$ where the diagonal elements of $I^{diag}$ contains the eigenvalues of $I$.
+\end{proof}
+Recall that the angular momentum of an object is:
+\begin{align*}
+    \bm{M} &= \sum_a m_a(\bm{r}_a \times \bm{v}_a) \\ 
+    &= \sum_a m_a(\bm{r}_a \times (\bm{\Omega} \times \bm{r}_a))
+\end{align*}
+Using the triple product identity $\bm{a} \times (\bm{b}\times \bm{c}) = \bm{b}(\bm{a} \cdot \bm{c}) - \bm{c}(\bm{a}\cdot\bm{b})$, we can rewrite:
+\begin{equation}
+    \bm{r}_a \times (\bm{\Omega} \times \bm{r}_a) = \bm{\Omega}r_a^2 - \bm{r}_a(\bm{\Omega}\cdot \bm{r}_a),
+\end{equation}
+which looks a lot like the form the moment of inertia tensor is in!. We can write the $i$th component as
+\begin{equation}
+    M_i = \sum_j \Omega_j \left[\sum_a m_a(r_a^2\delta_{ij}-r_{a_i}r_{a_j})\right] = \sum_i I_{ij}\Omega_j.
+\end{equation}
+This is just a matrix applied to a vector, i.e.
+\begin{equation}
+    \bm{M} = I\bm{\Omega}
+\end{equation}
 \end{document}

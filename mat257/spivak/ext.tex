@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage{simple}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{MAT257: Real Analysis II (Manifolds)}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\newpage
+\section{Tensors}
+\begin{definition}
+    A \emf{k-tensor} is a multilinear function $T:V^k \rightarrow \mathbb{R}$ and the set of all $k$-tensors, denoted $\mathcal{T}^k(V)$ becomes a vector space if we define scalar multiplication and vector addition in natural ways, i.e. if for $S,T\in \mathcal{T}^k(V)$ and $a\in\mathbb{R}$, we have:
+    \begin{align}
+        (S+T)(v_1,\dots,v_k) = S(v_1,\dots,v_k) + T(v_1,\dots,v_k) \\ 
+        (aS)(v_1,\dots,v_k) = a \cdot S(v_1,\dots,v_k)
+    \end{align}
+\end{definition}
+\begin{definition}
+    We define the \emf{tensor product} $S\otimes T \in \mathcal{T}^{k+\ell}(V)$ by
+    \begin{equation}
+        S \otimes T(v_1,\dots,v_k,v_{k+1},\dots,v_{k+\ell}) = S(v_1,\dots,v_k) \cdot T(v_{k+1},\dots,v_{k+\ell}).
+    \end{equation}
+\end{definition}
+Note that $S\otimes T \neq T\otimes S.$ Here are the properties of the tensor product:
+\begin{align*}
+    (S_1+S_2)\otimes T &= S_1\otimes T + S_2\otimes T \\
+    S \otimes (T_1 + T_2) &= S \otimes T_1 + S \otimes T_2 \\
+    (aS) \otimes T &= S \otimes (aT) = a(S\otimes T) \\ 
+    (S\otimes T) \otimes U &= S \otimes (T \otimes U)
+\end{align*}
+Note that $\mathcal{T}^1(V)$ is just the dual space $V^*.$ Therefore, it makes sense that we can use the dual elements to create a basis for $\mathcal{T}^k(V).$
+\begin{theorem}
+    Let $v_1,\dots,v_n$ be a basis for $V$ and let $\varphi_1,\dots,\varphi_n$ be the dual basis, i.e. $\varphi_i(v_j) = \delta_{ij}$. Then the set of all $k$-fold tensor products:
+    \begin{equation}
+        \varphi_I = \varphi_{i_1} \otimes \cdots \otimes \varphi_{i_k}
+    \end{equation}
+    is a basis for $\mathcal{T}^k(V)$, where $1\le i_1,\dots,i_k \le n$ and therefore has dimension $n^k$. 
+\end{theorem}
+For notation purposes, let us define $\underline{n} = \{1,\dots,n\}$ and $\underline{n}^k = \{(i_1,\dots,i_k) : i_\alpha \in \underline{n}\}.$ An element $I \in \underline{n}^k$ is thus known as a \emf{multi-index.}
+\begin{proof}
+    We need to show three things:
+    \begin{itemize}
+        \item If $T_1,T_2 \in \mathcal{T}^k$ then $T_1=T_2 \iff \forall I, T_1(V_I) = T_2(V_I)$.
+        \item The set $\{\varphi_I\}$ spans $\mathcal{T}^k(V).$
+        \item The elements of the set $\{\varphi_I\}$ are linearly independent.
+    \end{itemize}
+\end{proof}
+\begin{definition}
+    If $f:V\to W$ is a linear transformation, we can define the \emf{pullback} to be the linear transformation $f^*: \mathcal{T}^k(W) \rightarrow \mathcal{T}^k(V)$, defined by:
+    \begin{equation}
+        f^*T(v_1,\dots,v_k) = T(f(v_1),\dots,f(v_k)).
+    \end{equation}
+\end{definition}
+It is easy to verify that $f^*(S\otimes T) = f^*S \otimes f^*T.$
+\begin{definition}
+    A k-tensor $T\in \mathcal{T}^k$ is \emf{alternating} if
+    \begin{equation}
+        T(\dots,u,\dots,w,\dots) = -T(\dots,w,\dots,u,\dots)
+    \end{equation}
+    for any $u,w.$ We then define $\Lambda^k(V) := \{T \in \mathcal{T}^kV: T\text{ is alternating}\}.$
+\end{definition}
+\end{document}

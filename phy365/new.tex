@@ -1,0 +1,378 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY365: Quantum Information \\ Part 2 (Lecture 10 and Beyond)}
+\author{QiLin Xue}
+\date{Winter 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+\usetikzlibrary{quantikz}
+\usepackage{adjustbox}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Quantum Teleportation}
+Quantum teleportation is the transfer of the quantum state of one qubit to another (not the actual physical qubit) using a shared entangled resource and two classical bits of information. It is performed using the following circuit.
+\begin{center}
+    \begin{quantikz}
+        \lstick{A:} \ket{\Psi_\text{in}} = \alpha\ket{0}+\beta\ket{1} & \qw & \qw & \ctrl{1} & \gate{H} & \meter{} & \cw & \cwbend{2} \\ 
+        \lstick{B:} \ket{0} & \gate{H} & \ctrl{1} & \targ{} & \qw  & \meter{} & \cwbend{1} &   \\
+        \lstick{C:} \ket{0} & \qw & \targ{} & \qw & \qw & \qw & \gate{X} & \gate{Z} & \qw \ket{\Psi_\text{out}}
+    \end{quantikz}
+\end{center}
+\begin{enumerate}
+    \item The input is
+    \begin{equation}
+        \ket{\psi_1} = \alpha\ket{000} + \beta\ket{100}
+    \end{equation}
+    \item We create the entangled resource between B and C
+    \begin{equation}
+        \ket{\Psi_1} \to \ket{\Psi_\text{in}} \frac{1}{\sqrt{2}}\left(\ket{00} + \ket{10}\right) \to \ket{\Psi_\text{out}}\frac{1}{\sqrt{2}}\left(\ket{00} + \ket{11}\right)
+    \end{equation}
+    which is
+    \begin{equation}
+        \ket{\Psi_2} = \frac{1}{\sqrt{2}}\left(\alpha\ket{000} + \alpha\ket{011} + \beta\ket{100} + \ket{111}\right)
+    \end{equation}
+    \item Bell state detection:
+    \begin{equation}
+        \ket{\Psi_3} = \text{CNOT}_{AB} \otimes I_C \ket{\Psi_2} = \frac{1}{\sqrt{2}}\left(\alpha\ket{000} + \alpha\ket{011}  + \beta{\ket{110}} + \beta\ket{101}\right)
+    \end{equation}
+    and
+    \begin{equation}
+        \ket{\Psi_4} = (\hat{H}_A \otimes I \otimes I)\ket{\Psi_3} = \frac{1}{2}\left(\alpha\ket{000} + \alpha\ket{100} + \alpha\ket{011} + \alpha\ket{111} + \beta\ket{010} - \beta\ket{110} + \beta\ket{001} - \beta\ket{101}\right).
+    \end{equation}
+    We can clean this up a bit into:
+    \begin{align}
+        \ket{\Psi_4} &= \frac{1}{2}\left(\alpha\{\ket{000} + \ket{100} +\ket{011} + \ket{111}\} + \beta\{\ket{010} - \ket{110} + \ket{001} - \ket{101}\}\right) \\ 
+        &= \frac{1}{2} \left(\ket{00} \{\alpha\ket{0} + \beta\ket{1}\} + \ket{01}\{\alpha \ket{1} + \beta\ket{0}\} + \ket{10}\{\alpha\ket{0} - \beta\ket{1}\} + \ket{11}\{\alpha\ket{1} - \beta{\ket{0}}\}\right) \\ 
+        &= \frac{1}{2}\left(\ket{00} \hat{I} \ket{\Psi_\text{in}} + \ket{01} \hat{X} \ket{\psi_\text{in}} + \ket{10}\hat{Z}\ket{\psi_\text{in}} + \ket{11} \hat{X}\hat{Z}\ket{\psi_\text{in}}\right)
+    \end{align}
+    \item Sending classical bits: The target qubit is now in a linear combination of several states, depending on what the first two qubits are. Once the first two qubits are measured, and results are sent, then C can take the inverse to retrieve $\ket{\psi_\text{in}}.$ After measurement, the state is:
+    \begin{equation}
+        \ket{\Psi_\text{proj}}_c = \hat{X}^b\hat{Z}^a\ket{\Psi_\text{in}}
+    \end{equation}
+    To reconstruct it, we can apply:
+    \begin{equation}
+        \ket{\Psi_\text{out}} = \hat{Z}^a\hat{X}^b\ket{\Psi_\text{proj}}_c = \ket{\Psi_\text{in}}
+    \end{equation}
+\end{enumerate}
+Let us now attempt to analyze this using a circuit-based approach. To do so, we need to use the \emf{Griffiths-Niu Theorem.}
+\begin{theorem}
+    The following circuits, according to the Griffiths-Niu Theorem, are equivalent:
+    \begin{center}
+        \begin{quantikz}
+            \qw & \meter{} & \cwbend{1} & \cw \\ 
+            \qw & \qw & \gate{U} & \qw
+        \end{quantikz} =
+        \begin{quantikz}
+            \qw & \ctrl{1} & \meter{} & \cw \\ 
+            \qw & \gate{U} & \qw & \qw
+        \end{quantikz}
+    \end{center} 
+\end{theorem}
+Using this theorem, we can redraw our circuit as:
+\begin{center}
+    \begin{quantikz}
+        \lstick{A:} \ket{\Psi_\text{in}} = \alpha\ket{0}+\beta\ket{1} & \qw & \qw & \ctrl{1} & \gate{H} & \qw & \gate{Z} & \meter{} & \cw & a\\ 
+        \lstick{B:} \ket{0} & \gate{H} & \ctrl{1} & \targ{} & \qw  & \ctrl{1}  & \qw & \meter{} & \cw & b\\
+        \lstick{C:} \ket{0} & \qw & \targ{} & \qw & \qw & \targ{} & \ctrl{-2} & \qw
+    \end{quantikz}
+\end{center}
+Recall that for a control-Z, it doesn't matter which one is the control and which one is the target. Using the identity $Z=HXH$, we can reduce it further:
+\begin{center}
+    \begin{quantikz}
+        \lstick{A:} \ket{\Psi_\text{in}} = \alpha\ket{0}+\beta\ket{1} & \qw & \qw & \ctrl{1} & \gate{H} & \qw & \gate{H} & \targ{} & \gate{H} & \meter{} & \cw & a\\ 
+        \lstick{B:} \ket{0} & \gate{H} & \ctrl{1} & \targ{} & \qw  & \ctrl{1}  & \qw & \qw & \qw & \meter{} & \cw & b\\
+        \lstick{C:} \ket{0} & \qw & \targ{} & \qw & \qw & \targ{} & \qw & \ctrl{-2} & \qw & \qw
+    \end{quantikz}
+\end{center}
+Since $H^2 = I,$ we can simplify the top part. Furthermore, we can introduce another CNOT between the first and the second branch.
+\begin{center}
+    \begin{quantikz}
+        \lstick{A:} \ket{\Psi_\text{in}} = \alpha\ket{0}+\beta\ket{1} & \qw & \ctrl{1} & \qw & \ctrl{1} & \qw & \targ{} & \meter{} & \cw & a\\ 
+        \lstick{B:} \ket{0} & \gate{H} & \targ{} & \ctrl{1} & \targ{}  & \ctrl{1}  & \qw & \meter{} & \cw & b\\
+        \lstick{C:} \ket{0} & \qw & \qw & \targ{} & \qw & \targ{} & \ctrl{-2} & \qw
+    \end{quantikz}
+\end{center}
+We were allowed to introduce this CNOT gate since $XH\ket{0} = H\ket{0}.$ This actually makes it easier since the following two circuits are also equivalent:
+\begin{center}
+    \begin{quantikz}
+        \qw & \ctrl{1} & \qw & \ctrl{1} & \qw & \qw\\ 
+        \qw & \targ{} & \ctrl{1} & \targ{} & \ctrl{1} & \qw  \\ 
+        \qw & \qw & \targ{} & \qw & \targ{} &\qw
+    \end{quantikz} = \begin{quantikz}
+        \qw & \ctrl{2} & \qw \\ 
+        \qw & \qw & \qw \\ 
+        \qw & \targ{} & \qw
+    \end{quantikz}
+\end{center}
+This can be proved by looking at how it maps the basis elements. Using this substitution, we end up with:
+\begin{center}
+    \begin{quantikz}
+        \lstick{A:} \ket{\Psi_\text{in}} = \alpha\ket{0}+\beta\ket{1} & \qw & \ctrl{2} & \targ{} & \gate{H} & \meter{} & \cw \\ 
+        \lstick{B:} \ket{0} & \gate{H} & \qw & \qw & \qw & \meter{} & \cw \\
+        \lstick{C:} \ket{0} & \qw & \targ{} & \ctrl{-2} & \qw & \qw & \qw
+    \end{quantikz}
+\end{center}
+We can now introduce another CNOT gate, which doesn't do anything since $C$ will always be $\ket{0}$.
+\begin{center}
+    \begin{quantikz}
+        \lstick{A:} \ket{\Psi_\text{in}} = \alpha\ket{0}+\beta\ket{1} & \qw & \targ{} & \ctrl{2} & \targ{} & \gate{H} & \meter{} & \cw \\ 
+        \lstick{B:} \ket{0} & \gate{H} & \qw & \qw & \qw & \qw & \meter{} & \cw \\
+        \lstick{C:} \ket{0} & \qw & \ctrl{-2} & \targ{} & \ctrl{-2} & \qw & \qw & \qw
+    \end{quantikz}
+\end{center}
+Three alternating CNOT gates is equivalent to the SWAP gate, so we can write:
+\begin{center}
+    \begin{quantikz}
+        \lstick{A:} \ket{\Psi_\text{in}} = \alpha\ket{0}+\beta\ket{1} & \qw  & \swap{2}  & \gate{H} & \meter{} & \cw \\ 
+        \lstick{B:} \ket{0} & \qw & \qw & \gate{H} & \meter{} & \cw \\
+        \lstick{C:} \ket{0} & \qw &  \targX{} & \qw & \qw & \qw
+    \end{quantikz}
+\end{center}
+\section{No-Cloning Theorem}
+It is impossible to clone a qubit. If this was possible, we can make an amplifier $A$ that can effectively ``measure'' a qubit, allowing faster than light communication to happen. Here is how an amplifier actually works. An amplifier can act on single bits:
+\begin{align*}
+    A\ket{0} &= \ket{00} \\ 
+    A\ket{1} &= \ket{11}
+\end{align*}
+If it acts on a linear combination, it gives:
+\begin{equation}
+    A\left(\frac{\ket{0}+\ket{1}}{2}\right) = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11}),
+\end{equation}
+which is en entangled pair, and not the tensor product between two of these linear combinations.
+\section{Quantum Algorithms}
+NB: There's a course on this! CSC2332
+\subsection{Deutsch Algorithm}
+Consider a function $f(x)$ that takes a bit as an input and a bit as an output. Note that there are only four possible functions. Some of them are constant (all outputs are the same), and some are balanced (equal number of $1$s and $0$s as outputs). How can we determine if $f(x)$ is balanced, using only one evaluation?
+
+To do this quantumly, we need a unitary operation to evaluate $f(x)$. However, we can't evaluate it directly via $\ket{x} \to \ket{f(x)}$ since if $f(x)$ is constant, then it is non-unitary. Instead, we examine the map:
+\begin{align*}
+    \ket{x,0} &\to \ket{x,f(x)} \\ 
+    \ket{x,1} &\to \ket{x, \overline{f(x)}}
+\end{align*}
+Let's see if this works! Recall that there are only four possible functions $f(x)$. Let's look at them each:
+\begin{enumerate}[label=(\alph*)]
+    \item $f(0) = 0, f(1) = 0$
+    \begin{align*}
+        \ket{00} &\to \ket{00} \\
+        \ket{01} &\to \ket{01} \\
+        \ket{10} &\to \ket{10} \\
+        \ket{11} &\to \ket{11}
+    \end{align*}
+    Then:
+    \begin{equation*}
+        \hat{U} = \hat{I} \otimes \hat{I}
+    \end{equation*}
+    \item $f(0)=0, f(1) =1$
+    \begin{align*}
+        \ket{00} &\to \ket{00} \\
+        \ket{01} &\to \ket{01} \\ 
+        \ket{10} &\to \ket{11} \\ 
+        \ket{11} &\to \ket{10}
+    \end{align*}
+    Then
+    \begin{equation*}
+        \hat{U} = CNOT
+    \end{equation*}
+    \item $f(0)=1, f(1)=0$
+    We have:
+    \begin{equation*}
+        \hat{U} = CNOT(\hat{I} \otimes \hat{X})
+    \end{equation*}
+    \item $f(0)=1, f(1)=1$
+    \begin{equation*}
+        \hat{U} = \hat{I} \otimes \hat{X}
+    \end{equation*}
+\end{enumerate}
+To accomplish this, we will apply the following circuit:
+\begin{center}
+    \begin{quantikz}
+        \ket{0} & \qw & \gate{H} &  \gate[wires=2]{U} & \gate{H} & \meter{}\\ 
+        \ket{0} & \gate{X} & \gate{H} & & \qw & \qw\\
+    \end{quantikz}
+\end{center}
+The input to the unitary gate $U$ is
+\begin{equation*}
+    \ket{\Psi_\text{in}} = \frac{1}{2}(\ket{0}+\ket{1})(\ket{0}-\ket{1}).
+\end{equation*}
+Then after the unitary gate, we have:
+\begin{align*}
+    U_f\ket{x}\left(\frac{\ket{0}-\ket{1}}{\sqrt{2}}\right) &= \ket{x} \left(\frac{\ket{f(x)} - \ket{\overline{f(x)}}}{\sqrt{2}}\right) \\ 
+    &= (-1)^{f(x)}\ket{x}\left(\frac{\ket{0}-\ket{1}}{\sqrt{2}}\right) \\ 
+    &= \frac{1}{2}\left((-1)^{f(x)}\ket{0} + (-1)^{f(x)}\ket{1}\right)(\ket{0} - \ket{1})
+\end{align*}
+where $\ket{x} = \frac{\ket{0}+\ket{1}}{\sqrt{2}}$. Then working through each of the four cases, we can see that this circuit can determine if the circuit is balanced or not.
+
+After measurement, if qubit 1 is $0$, then it's constant. Otherwise, it's balanced.
+\subsection{Deutsch-Josza Algorithm}
+Let us attempt to make the previous result more powerful. Suppose $x\in \{0,1,\dots,2^{N}-1\}$ is $n$-bits and $f(x) \in\ {0,1}$ is still a 1-bit function. Suppose that $f(x)$ is either constant or balanced. To do so, the circuit is remarkably similar!
+\begin{center}
+    \begin{quantikz}
+        \ket{0} & \qw\qwbundle{N} & \gate{H^{\otimes n}} &  \gate[wires=2]{U} & \gate{H^{\otimes n}} & \meter{}\\ 
+        \ket{0} & \gate{X} & \gate{H} & & \qw & \qw\\
+    \end{quantikz}
+\end{center}
+Note that when you apply $\hat{H}^{\otimes n}$, you get a superposition of all possible $n$ qubit states. The overall idea is that each individual bit will either contribute to a phase shift of $(-1)^x.$ Similar to before, the state after the unitary is
+\begin{equation*}
+    \ket{\Psi} = \sum_{x=0}^{2^N-1} \frac{(-1)^{f(x)}\ket{x}}{\sqrt{2^n}} \left(\frac{\ket{0}-\ket{1}}{\sqrt 2}\right)
+\end{equation*}
+Note that:
+\begin{equation*}
+    \hat{H}^{\otimes n}\ket{x} = \frac{1}{2}\sum_{z=0}^{2^N-1} \frac{1}{\sqrt{2^n}}(-1)^{x\cdot z}\ket{z},
+\end{equation*}
+where $z_i$ refers to the $i$th bit of $x$. The result is the same as before. If $f$ is constant, the measurement will be $0$. Otherwise, it is $1$.
+\subsection{Berstein-Vazirani}
+This is a restricted version of the previous problem. Suppose $a,x$ are $n$-bit numbers with digits $a_{n-1}a_{n-2}\dots a_1a_0$ and $x_{n-1}x_{n-2}\dots x_1x_0.$ Suppose we have the function:
+\begin{equation*}
+    f(x) = a \cdot x = a_0x_0 \oplus a_1x_1 \cdots \oplus a_{n-1}x_{n-1}
+\end{equation*}
+The question is: for how many different arguments $x$ do we need to evaluate $f(x)$ in order to find $a$?
+
+Classically, you need $n$ evaluations, by doing $a_m = f(2^m)$.  It happens that we can just apply the same circuit as before, and the measurements will give us $a$!
+\subsection{Quantum Fourier Transform}
+Recall that the standard fourier transform turns a function $x(t)$ from its time domain to its frequency domain, i.e. 
+\begin{equation*}
+    \tilde{x}(\omega) = \int_{-\infty}^{\infty} x(t)e^{2\pi i\nu t} dt
+\end{equation*}
+There are only a few functions where this can be computed analytically. When working with real data, we would typically have a set $\{x_0, x_1, \dots, x_{N-1}\}$ where the data points are taken from a set of equally spaced time intervals $x(T+\ell \Delta t).$ The \emf{discrete fourier transform} then gives a sequence
+\begin{equation*}
+    \{\tilde{x}_0, \tilde{x}_1, \dots, \tilde{x}_{N-1}\}
+\end{equation*}
+where 
+\begin{equation*}
+    \tilde{x}_k = \frac{1}{\sqrt{N}}\sum_{\ell=0}^{N-1} \exp\left(2\pi i \frac{k \ell}{N}\right)x_\ell.
+\end{equation*}
+This is quite a resource heavy computation. There is a faster method to do this calculation, known as the Fast Fourier Transform (FFT), which only works when $N=2^n$ is a power of $2$.
+
+Let us now examine the Quantum Fourier Transform. Let $\ket{\ell_1}$ be the most significant and $\ket{\ell_n}$ be the least significant bit.
+\begin{center}
+    \begin{quantikz}
+        \ket{\ell_1} & \qw \\ 
+        \ket{\ell_2} & \qw \\ 
+        \vdots & \vdots \\ 
+        \ket{\ell_n} & \qw
+    \end{quantikz}
+\end{center}
+Let
+\begin{equation}
+    \ket{\ell} = \ket{\ell_1}\otimes \ket{\ell_2} \otimes \cdots \otimes \ket{\ell_n},
+\end{equation}
+such that $\ell = (\ell_1\ell_2\dots\ell_n)_2.$ Then the quantum fourier transform is given by the unitary operator $\hat{U}_\text{QFT}$ defined by
+\begin{equation*}
+    \hat{U}_\text{QFT}\ket{\ell} = \frac{1}{\sqrt{2^n}} \sum_{k=0}^{2^n-1} \exp\left(2\pi i \cdot \frac{k\ell}{2^n}\right)\ket{k.}
+\end{equation*}
+In general, an $n$-qubit state is a linear combination of the basis $\ket{\ell}$ states, i.e.
+\begin{align}
+    \hat{U}_\text{QFT} \ket{\Psi} &= \hat{U}_\text{QFT} \sum_\ell c_\ell \ket{\ell} \\ 
+    &= \sum_{\ell k} c_\ell \exp\left(2\pi i \frac{k \ell}{2^n}\right)\ket{k} \\ 
+    &= \sum_k \tilde{c}_k \ket{k},
+\end{align}
+where $\tilde{c}_k$ is the DFT of $\{c_k\}.$
+
+We will now attempt this for the $n=2$ case. Then:
+\begin{align}
+    \hat{U}_\text{QFT} \ket{\ell} &= \frac{1}{2} \left\{ \ket{00} + \exp\left(2\pi i \frac{\ell}{4}\right)\ket{01} + \exp\left(2\pi i \frac{2\ell}{4}\right)\ket{10} + \exp\left(2\pi i \frac{3\ell}{4}\right)\ket{11}\right\}.
+\end{align}
+The concurrence is
+\begin{align}
+    C &= 2|\alpha\delta-\beta\gamma| = 0,
+\end{align}
+so these are separable. Therefore, we can rewrite this as
+\begin{align}
+    \hat{U}_\text{QFT} \ket{\ell} &= \frac{1}{2} \left[\ket{0}\left\{\ket{0} + \exp\left(2\pi i \frac{\ell}{4}\right)\ket{1}\right\} + \ket{1}\left\{\ket{0}\exp\left(2\pi i \frac{2\ell}{4}\right) + \exp\left(2\pi i \frac{3\ell}{4}\right)\ket{1}\right\}\right] \\ 
+    &= \frac{1}{\sqrt{2}}\left\{\ket{0} +\ket{1} \exp\left(2\pi i \frac{2\ell}{4}\right)\right\} \otimes \frac{1}{\sqrt{2}}\left\{\ket{0} + \ket{1} \exp\left(2\pi i \frac{\ell}{4}\right)\right\}.
+\end{align}
+Note that 
+\begin{align*}
+    \frac{2\ell}{4} &= \frac{1}{2} \left(2\ell_1 + \ell_2\right) = \ell_1 + \frac{\ell_2}{2} \\ 
+    \frac{\ell}{4} &= \frac{\ell_1}{2} +\frac{\ell_2}{4}.
+\end{align*}
+We can ignore the $\ell_1$ term since if $\ell_1=0$ it does nothing and if $\ell_1=1$ then $e^{2\pi i} = 1$. Therefore:
+\begin{equation}
+    \hat{U}_\text{QFT}\ket{\ell} = \frac{1}{\sqrt{2}}\left\{\ket{0} +\ket{1} \exp\left(2\pi i \frac{\ell_2}{2}\right)\right\} \otimes \frac{1}{\sqrt{2}}\left\{\ket{0} + \ket{1} \exp\left(2\pi i \left(\frac{\ell_1}{2}+\frac{\ell_2}{4}\right)\right)\right\}.
+\end{equation}
+Recall that
+\begin{equation}
+    \hat{H}\ket{\ell_k} = \frac{1}{\sqrt{2}}\left(\ket{0} + (-1)^{\ell_k}\ket{1}\right).
+\end{equation}
+However, $(-1)^{\ell_k} = \exp\left(2\pi i \frac{\ell_k}{2}\right),$ which looks suspiciously like what we had in our Quantum Fourier Transform. In particular,
+\begin{equation}
+    \hat{H} \otimes \hat{H} \ket{\ell_1\ell_2} = \frac{1}{\sqrt{2}}\left\{\ket{0} +\ket{1} \exp\left(2\pi i \frac{\ell_1}{2}\right)\right\} \otimes \frac{1}{\sqrt{2}}\left\{\ket{0} + \ket{1} \exp\left(2\pi i \frac{\ell_2}{2}\right)\right\}.
+\end{equation}
+It seems like $\ell_1$ and $\ell_2$ is swapped, so we have to perform a SWAP operation. To get the second qubit to the right location, we can perform a rotation that is controlled by the other qubit. In particular,
+\begin{align*}
+    \hat{R}_0 &= \hat{I} \\ 
+    \hat{R}_1 &= \hat{Z} \\ 
+    \hat{R}_2 &= \sqrt{\hat{Z}} \\ 
+    \hat{R}_k &= \begin{pmatrix}
+        1 & 0 \\ 
+        0 & \exp\left(\frac{2\pi i}{2^k}\right)
+    \end{pmatrix}
+\end{align*}
+Therefore, the circuit looks like:
+\begin{center}
+    \begin{quantikz}
+        \ket{\ell_1} & \gate{H} & \gate{R_2} & \qw & \swap{1} & \qw \\ 
+        \ket{\ell_2} & \qw & \ctrl{-1} & \gate{H} &\targX{} & \qw
+    \end{quantikz}
+\end{center}
+We will now try to generalize this result. We can write the $\frac{k}{2^n}$ part as:
+\begin{equation}
+    \frac{k}{2^n} = \sum_{m=1}^n k_m \frac{2^{n-m}}{2^n} = \sum_{m=1}^n \frac{k_m}{2^m}.
+\end{equation}
+This allows us to take the sum over the individual digits of $k$. That is,
+\begin{equation}
+    \hat{U}_\text{QFT}\ket{\ell} = \frac{1}{\sqrt{2^n}} \sum_{k_1=0}^1\sum_{k_2=0}^{1} \dots \sum_{k_n=0}^{1} \bigotimes_{m=1}^n \exp\left(\exp 2\pi i \frac{\ell k_m}{2^m}\right)\ket{k_m}.
+\end{equation}
+Recall that the tensor product is distributive, i.e. $(a+b)\otimes (c+d) = a\otimes c + a\otimes d + b\otimes c + b\otimes d.$ Therefore, we can write the above as a product of a sum:
+\begin{equation}
+    = \bigotimes_{m=1}^n \frac{1}{\sqrt{2}}\left\{\ket{0}_m + \exp\left(2\pi i \frac{\ell}{2^m}\right)\ket{1}_m\right\}.
+\end{equation}
+Recall that we can write $\ell = \ell_1 2^{n-1} + \cdots + \ell_{n-2}2 + \ell_n.$ Then:
+\begin{equation}
+    \frac{\ell}{2^m} = \underbrace{\ell_1 2^{n-(m+1)} + \ell_2 2^{n-(m+2)} + \cdots + \ell_{m-n}} + \frac{\ell_{m-n+1}}{2} + \cdots + \frac{\ell_1}{2^m}.
+\end{equation}
+We can ignore the numbers in the underbrace since they are integers, so their exponent will just be $1$. To process $\frac{\ell_{m-n+1}}{2}$, we can use a Hadamard and a swap and for the other terms, we can use controlled phases. The circuit looks like the following:
+\begin{center}
+    \begin{quantikz}
+        \ket{\ell_1}  & \gate{H} & \gate{R_2} & \ldots \qw & \gate{R_{n-1}} & \gate{R_n} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \swap{4}\\
+        \ket{\ell_2}  & \qw & \ctrl{-1} & \qw & \qw & \qw & \gate{H} & \ldots \qw & \gate{R_{n-2}} & \gate{R_{n-1}} & \qw & \qw & \qw & \qw & \qw & \swap{2}\\ 
+        \vdots \\ 
+        \ket{\ell_{n-1}} & \qw & \qw & \qw & \ctrl{-3} & \qw & \qw & \qw & \ctrl{-2} & \qw &  \ldots \qw & \gate{H} & \gate{R_2} & \qw & \qw & \targX{}\\ 
+        \ket{\ell_{n}} & \qw & \qw & \qw & \qw & \ctrl{-4} & \qw & \qw & \qw & \ctrl{-3} & \qw & \qw & \ctrl{-1} & \gate{H} & \targX{}\\ 
+    \end{quantikz}
+\end{center}
+\subsubsection*{Complexity}
+Note that a single controlled $R_k$ gate is consisted of 2 CNOTs and $3$ single qubit gates. There are $\lfloor{n/2\rfloor}$ swaps, which canb e implemented with $3$ CNOTS each. We apply $R_k$ $(n-1)+(n-2)+\cdots + 1 = \frac{n(n-1)}{2}$ times. Therefore, we apply $(3n-2)n/2$ single qubit operations and $(2n+1)n/2$ CNOTS.
+
+As a result, the QFT is polynomial in $n$. For reference, the DFT is $\mathcal{O}(2^{2n})$ and $\mathcal{)}(n2^n).$
+
+This is one of the first real applications that show the power of quantum computing. While in theory QFT is much more efficient, it is very difficult to implement this in practice.
+\subsubsection*{Modification}
+To make it more applicable, we can use a modification of the QFT. For example, we don't need to bother with the SWAP gates. We'll just do it after measurement! Using the identities:
+\begin{itemize}
+    \item A controlled $R_k$ gate can be flipped and still give the same thing.
+    \item Measuring the top branch after a controlled operation is the same as measuring it before the operation (Griffiths-Niu Theorem)
+\end{itemize}
+We can now redraw the diagram:
+\begin{center}
+    \begin{adjustbox}{width=\textwidth}
+    \begin{quantikz}
+        \ket{\ell_1} & \gate{H} & \meter{} & \cwbend{1} &  \cwbend{3} &  \cwbend{4} & \cw & \cw &\cw & \cw & \cw & \cw & \cw & \cw & \cw & \cw & \cw & \cw\\ 
+        \ket{\ell_2} & \qw & \qw & \gate{R} & \qw & \qw & \gate{H} & \meter{} & \, \ldots \cw &\cwbend{2} & \cwbend{3} & \cw & \cw & \cw & \cw & \cw & \cw & \cw \\ 
+        \vdots \\ 
+        \ket{\ell_{n-1}} & \qw & \qw & \qw & \gate{R_{n-1}} & \qw  & \qw & \qw & \ldots\qw & \gate{R_{n-2}} &  \qw & \qw  & \gate{H} & \qw & \meter{} & \cwbend{1} & \cw & \cw & \cw\\ 
+        \ket{\ell_n} & \qw & \qw & \qw & \qw & \gate{R_n} & \qw & \qw &  \ldots\qw & \qw &\gate{R_{n-1}} & \qw & \qw & \qw & \gate{R_2} & \gate{H} & \meter{} & \cw
+    \end{quantikz}
+\end{adjustbox}
+\end{center}
+\end{document}

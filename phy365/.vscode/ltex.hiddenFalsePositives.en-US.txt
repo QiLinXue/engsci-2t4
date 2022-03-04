@@ -1,0 +1,1 @@
+{"rule":"NUMEROUS_DIFFERENT","sentence":"^\\QSuppose we have the function: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q The question is: for how many different arguments \\E(?:Dummy|Ina|Jimmy-)[0-9]+$"}

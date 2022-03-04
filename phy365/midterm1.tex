@@ -1,0 +1,116 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY365: Quantum Information \\ Midterm \#1 Review}
+\author{QiLin Xue}
+\date{Winter 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+\usetikzlibrary{quantikz}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Quantum Gates}
+All quantum gates are unitary matrices, i.e. $U^\dagger U = UU^\dagger = I,$ and in general can be represented as
+\begin{equation}
+    \hat{U} = \begin{pmatrix}
+        a & b \\ 
+        -b^* & a^*
+    \end{pmatrix}.
+\end{equation}
+Some common gates:
+\begin{itemize}
+    \item The Pauli gates $\hat{X},\hat{Y},\hat{Z}$ are given by
+    \begin{align*}
+        \hat{X} &= \begin{pmatrix}
+            0 & 1 \\ 
+            1 & 0
+        \end{pmatrix} \\ 
+        \hat{Y} &= \begin{pmatrix}
+            0 & -i \\ 
+            i & 0
+        \end{pmatrix} \\
+        \hat{Z} &= \begin{pmatrix}
+            1 & 0 \\ 
+            0 & -1
+        \end{pmatrix}
+    \end{align*}
+    \item And the Hadamard gate 
+    \begin{equation}
+        \hat{H} = \frac{1}{\sqrt{2}} \begin{pmatrix}
+            1 & 1 \\ 
+            1 & -1
+        \end{pmatrix}.
+    \end{equation}
+    sends $\ket{0} \mapsto \ket{+}$ and $\ket{1} \mapsto \ket{-}$.
+\end{itemize}
+\section{Measurements}
+Quantum measurements are described by a collection $\{M_m\}$ of \emf{measurement operators.} These are operators acting on the state space of the system being measured. The index $m$ refers to the measurement outcomes that may occur in the experiment. If the state of the quantum system is $\ket{\psi}$ immediately before the measurement, then the probability that result $m$ occurs is given by 
+\begin{equation}
+    p(m) = \bra{\psi} M_m^\dagger M_m\ket{\psi}.
+\end{equation}
+and the state of the system after the measurement is given by
+\begin{equation}
+    \frac{M_m\ket{\psi}}{\sqrt{p(m)}}.
+\end{equation}
+The measurement operators satisfy the \emf{completeness equation} (fancy talk for probabilities summing to one):
+\begin{equation}
+    \sum_m M_m^\dagger M_m = I.
+\end{equation}
+To measure in a basis $\ket{m}$, where $\ket{m}$ forms an orthonormal basis, simply means to perform the projective measurement with projectors $P_m = \ket{m}\bra{m}$. Note in lecture, we used $\Pi$ as the symbol (but I believe $P$ is more commonly used).
+\section{Quantum Circuits}
+A control gate is in the form of:
+\begin{center}
+    \begin{quantikz}
+        \lstick{$\ket{a}$} & \ghost{X} & \qw & \ctrl{1} & \qw & \qw & \rstick{$\ket{a}$} \\
+        \lstick{$\ket{b}$} & \ghost{X} & \qw & \gate{\hat{U}} & \qw &  \qw & \rstick{$(\hat{I}\otimes \hat{U})(\ket{a}\otimes \ket{b})$}
+    \end{quantikz}
+\end{center}
+where the dot represents the \emf{control.} In a sense, we apply $\hat{U}$ if and only if the control is $1$.
+\section{Schmidt Decomposition Theorem}
+Any two-qubit pure state can be written as
+\begin{equation}
+    \ket\Psi = \hat{U}_A \otimes \hat{U}_B \left(\lambda_0 \ket{00} + \lambda_1{11}\right),
+\end{equation}
+where $\lambda_0,\lambda_1$ are real, positive constants known as $\emf{singular values}$ and they satisfy $\lambda_0^2 + \lambda_1^2 = 1$. The operators $\hat{U}_A,\hat{U}_B$ are unitaries applied separately to each qubit.
+
+The unitary operators $\hat{U}_A,\hat{U}_B$ are given by unitary matrices that satisfy the relationships  
+\begin{equation}
+    \hat{\chi}\hat{\chi}^\dagger = \hat{U}_A\Lambda^2\hat{U}_A^\dagger,\quad\quad \hat{\chi}^\dagger\hat{\chi} = \hat{U}_B\Lambda^2\hat{U}_B^\dagger.
+\end{equation}
+where $\chi$ is a matrix where entries are the coefficients of $\ket{\Psi}$ and $\Lambda^2 = \text{diag}(\lambda_0^2,\lambda_1^2)$, where $\lambda_i$ are solutions to the quadratic equation:
+\begin{equation}
+    \lambda^4 - \lambda^2 + (C/2)^2 = 0,
+\end{equation}
+where $C$ is the concurrence.
+\section{Entangled States}
+The \emf{concurrence} of $\alpha \ket{00} + \beta\ket{01} + \gamma\ket{10} + \delta\ket{11}$ is given by
+\begin{equation}
+    C = 2|\alpha\delta - \beta\gamma|
+\end{equation}
+where it is maximally entangled if $C = 1$ and separable if $C = 0$.
+
+The \emf{fundamental theorem of entanglement} says that for a $C = 1$ two-qubit system,
+\begin{equation}
+    (\hat{I} \otimes \hat{U})\ket{\beta} = -(\hat{U}^\dagger \otimes \hat{I} \ket{\beta})
+\end{equation}
+and 
+\begin{equation}
+    (\hat{U} \otimes \hat{U})\ket{\beta} = -\ket{\beta}
+\end{equation}
+The \emf{Bell States} are four maximally entangled two qubit states that form a basis for the four-dimensional Hilbert space for two qubits. They are given by:
+\begin{align*}
+    \ket{\beta_0} &= \frac{1}{\sqrt 2}\left(\ket{00}+\ket{11}\right) = \ket{\Phi}\\ 
+    \ket{\beta_1} &= \frac{i}{\sqrt 2}\left(\ket{01}+\ket{10}\right) = i\ket{\Psi_+}\\
+    \ket{\beta_2} &= \frac{-1}{\sqrt 2}\left(\ket{01}-\ket{10}\right) = -i\ket{\Psi_-}\\
+    \ket{\beta_3} &= \frac{i}{\sqrt 2}\left(\ket{00}-\ket{11}\right) = -\ket{\Phi_-}
+\end{align*}
+\end{document}

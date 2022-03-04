@@ -80,4 +80,51 @@ The \emf{gamma distribution} is
     \end{cases}
 \end{equation}
 The mean is $\mu = \alpha\beta$ and the variance is $\sigma = \alpha\beta^2.$
+
+The gamma distribution is special since many other distributions can be written as it. For example, the \emf{chi-squared} distribution $\chi^2$ is
+\begin{equation}
+    f(x;v) = f_\text{gamma}(x;v/2,2) = \begin{cases}
+        \frac{1}{2^{v/2}\Gamma(v/2)}x^{v/2-1}e^{-x/2} & x > 0 \\
+        0 & \text{otherwise}
+    \end{cases}.
+\end{equation}
+The \emf{exponential distribution is}
+\begin{equation}
+    f(x; \beta) = f_\text{gamma}(x;1,\beta)\begin{cases}
+        \frac{1}{\beta}e^{-x/\beta} & x > 0 \\
+        0 & \text{otherwise}
+    \end{cases}.
+\end{equation}
+Let us relate this to the poisson PMF,
+\begin{equation}
+    p(x;\lambda) = \frac{e^{-\lambda}\lambda^x}{x!}.
+\end{equation}
+We can interpret this by setting $\lambda = rt$, where $r$ is the rate of arrivals and $t$ is the length of the interval. Therefore, the probability of no arrivals in an interval of length $t$ is:
+\begin{equation}
+    p(0;rt) = e^{-rt}.
+\end{equation}
+Let $Y$ be a RV for the time to first arrival. Then:
+\begin{equation}
+    P(Y>t) = e^{-rt}.
+\end{equation}
+Therefore,
+\begin{equation}
+    P(Y \le t) = 1 - e^{-rt} = F(t),
+\end{equation}
+so the PDF of $Y$ is
+\begin{equation}
+    f(t) = \frac{d}{dt}F(t) = re^{-rt}.
+\end{equation}
+\section{Memoryless Property}
+Suppose $X$ is exponential with $\beta>0$. Then:
+\begin{equation}
+    P(X>s+t | X>s) = \frac{P(X > s + t \cap X >s)}{P(X > s)} = \frac{P(X > s+t)}{P(x>s)}.
+\end{equation}
+This is equal to 
+\begin{align}
+    &= \frac{\int_{s+t}^{\infty} \frac{1}{\beta}e^{-x/\beta} \dd{x}}{\int_s^\infty \frac{1}{\beta} e^{-x/\beta} \dd{x}} \\ 
+    &= \frac{e^{-(s+t)/\beta}}{e^{-s/\beta}} \\ 
+    &= e^{-t/\beta} \\ 
+    &= P(X>1).
+\end{align}
 \end{document}
