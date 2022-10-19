@@ -375,4 +375,87 @@ We can now redraw the diagram:
     \end{quantikz}
 \end{adjustbox}
 \end{center}
+\subsection{Period Finding with a Quantum Computer}
+Suppose a function $f(x)$ is periodic which takes in $x\in \{0, 2^{n}-1\}$. How do we find the period, given that there is some $r$ such that $f(x+r) = f(x)?$
+
+Classically, this problem is exponentially and runs in $\mathcal{O}(2^{n-1})$ time, often known as being \emf{intractible} in computer science.
+
+Suppose we can construct $\hat{U}_f$ which evaluates $f(x).$ Suppose that:
+\begin{equation}
+    \hat{U}_f\ket{x}\ket{y} = \ket{x} \ket{y \oplus f(x)}
+\end{equation}
+where $\ket{x}$ is $n$ qubits and $\ket{y}$ is $m$ qubits. Our circuit is given by:
+\begin{center}
+    \begin{quantikz}
+        \text{(argument) }\ket{0} & \qw\qwbundle{N} & \gate{\hat{H}^{\otimes n}} & \gate[wires=2]{U_f} & \gate{\hat{U}_\text{QFT}} & \meter{}\\ 
+        \text{(function) }\ket{0} & \qw\qwbundle{m} & \qw &
+    \end{quantikz}
+\end{center}
+where directly before $U_f$, we have:
+\begin{equation}
+    \ket{\Psi_1} = \frac{1}{\sqrt{2^n}} \sum_{x=0}^{2^n-1}\ket{x} \otimes \ket{0},
+\end{equation}
+and directly after $U_f$, we have:
+\begin{align*}
+    \ket{\Psi_2} &= \frac{1}{\sqrt{2^n}}\sum_{x=0}^{2^n-1}\ket{x}\ket{f(x)} \\ 
+    &= \frac{1}{\sqrt{2^n}}\Biggl(\ket{0}\ket{f(0)} + \ket{1}\ket{f(1)} + \cdots + \ket{r-1}\ket{f(r-1)} + \\ 
+    & \quad\quad\quad + \ket{r}\ket{f(0)} + \ket{r+1}\ket{1} + \cdots + \ket{2^n-1}\ket{f(x_0)}\Biggr) \\ 
+    &=\frac{1}{\sqrt{2^n}} \left(\sum_{k=0}^{m-1} \ket{kr} \ket{f(0)} + \ket{kr+1}\ket{f(1)} + \cdots\right)
+\end{align*}
+where $2^n = mr + x_0.$ Now what is $m$? The naive answer is that:
+\begin{equation}
+    m_0 = \left\lfloor \frac{2^n}{r} \right\rfloor
+\end{equation}
+is the largest integer smaller or equal to than $\frac{2^n}{r}.$ If $r=3$, then $x\in \{0,1,\dots,7\}.$ If we have $m_0=2$, then:
+\begin{itemize}
+        \item If $x_0=0$, then $kr+x_0$ can take on the values of $\ket{0},\ket{3},\ket{6}$ ($m=3$)
+        \item If $x_0=2$ then we can take on the values of $\ket{2},\ket{5}$ ($m=2$)
+\end{itemize}
+We see that there are two possibilities. In general,
+\begin{itemize}
+    \item If $x_0 < 2^n - rm_0$, then $m(x_0) = m_0 + 1$
+    \item If $x_0 \ge 2^n - rm_0$, then $m(x_0) = m_0$
+\end{itemize}
+Therefore if we define:
+\begin{equation}
+    \ket{\chi(x_0)} = \frac{1}{\sqrt{m(x_0)}} \sum_{k=0}^{m(x_0)-1}\ket{kr+x_0}
+\end{equation}
+then
+\begin{equation}
+    \ket{\Psi_2} = \sum_{x_0=0}^{r-1}\sqrt{\frac{m(x_0)}{2^n}}\ket{\chi(x_0)}\ket{f(x_0)}
+\end{equation}
+This gives us data (i.e. a graph) with values $x_0,x_0+r, x_0+2r.$ To find the frequency, we can now take the Quantum Fourier Transform:
+\begin{equation}
+    \ket{\Psi_3} = (\hat{U}_\text{QFT} \otimes \hat{I}_m)\ket{\Psi_2}
+\end{equation}
+where 
+\begin{equation}
+    \hat{U}_\text{QFT}\ket{\chi(x_0)} = \hat{U}_\text{QFT} \sum_{j=0}^{2^n-1} c_j \ket{j}
+\end{equation}
+where 
+\begin{equation}
+    c_j = \frac{1}{\sqrt{m}}\sum_{x=0}^{m-1} \delta_{j,kr+x_0}.
+\end{equation}
+Therefore,
+\begin{align}
+    \hat{U}_\text{QFT}\ket{\chi(x_0)} &= \frac{1}{\sqrt{2^n}} \sum_{j,\ell=0}^{2^n-1} \exp\left(2\pi i \frac{j\ell}{2^n}\right)\frac{1}{\sqrt{m}}\sum_{k=0}^{m-1} \delta_{j,kr+x_0}\ket{\ell} \\ 
+    &= \frac{1}{\sqrt{2^nm}} \sum_{\ell=0}^{2^n-1} \exp\left(2\pi i \frac{\ell x_0}{2^n}\right)\sum_{x=0}^{m-1} \underbrace{\exp\left(2\pi i \frac{\ell r}{2^n}\right)^k}_{\gamma}\ket{\ell}
+\end{align}
+where we can evaluate $\gamma$ using a geometric series:
+\begin{equation}
+    \gamma = \frac{1-e^{i2m\theta}}{1-e^{i2\theta}} = e^{i(m-1)\theta}\frac{\sin(m\theta)}{\sin\theta} \simeq m\sum_{p=0}^{r} \delta_{\ell,pm},
+\end{equation}
+where $\theta = \frac{\pi \ell r}{2^n},$ and we are allowed to make the approximation on the last step for large $m$. Then:
+\begin{align}
+    \hat{U}_\text{QFT}\ket{\chi(x_0)} &\simeq \sqrt{\frac{m}{2^n}} \sum_{\ell=0}^{2^n-1} \exp\left(2\pi i \frac{\ell x_0}{2^n}\right) \sum_{p=0}^{r-1} \delta_{\ell, p \frac{2^n}{r}} \ket{\ell} \\ 
+    &= \frac{1}{\sqrt{r}} \sum_{p=0}^{r-1} \exp\left(2\pi i \frac{px_0}{r}\right) \ket{p\frac{2^n}{r}}.
+\end{align}
+Therefore:
+\begin{equation}
+    \ket{\Psi_3} \simeq \frac{1}{r} \sum_{x_0=0}^{r-1} \sum_{p=0}^{m-1} \exp\left(2\pi i p \frac{x_0}{r}\right)\ket{p \frac{2^n}{r}} \ket{f(x_0)}.
+\end{equation}
+By Born's rule, we know that once we make the measurement, we will either get $0, \frac{2^n}{r}, \frac{2^{n+1}}{r}, \dots.$ We can divide by $2^n$ to get 
+\begin{equation*}
+    0, \frac{1}{r}, \frac{2}{r}, \dots.
+\end{equation*}
 \end{document}

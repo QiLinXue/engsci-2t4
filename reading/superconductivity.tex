@@ -1,0 +1,162 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{Reading Project: Superconductivity}
+\author{QiLin Xue}  
+\date{Fall 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+\usetikzlibrary{quantikz}
+\usepackage[american]{circuitikz}
+\newcommand{\equals}{=}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Problem Set Two}
+\subsection{Ginzburg-Landau Theory of Superconductivity}
+Consider a potential 
+\begin{equation}
+    V(\Delta) = t|\Delta|^2 + u|\Delta|^4,
+\end{equation}
+which will be derived in the future. Here, $\Delta$ is the energy required to break a cooper pair. When $t$ goes from positive to negative, it signifies a phase transition, where
+\begin{equation*}
+    t = \frac{T-T_c}{T_c}.
+\end{equation*}
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[
+        legend pos=outer north east,
+        title=Potential $V(|\Delta|)$,
+        axis lines = middle,
+        xlabel = $|\Delta|$,
+        ylabel = $V$,
+        variable = t,
+        trig format plots = rad,
+        ]
+        \addplot [
+            domain=-1.1:1.1,
+            samples=70,
+            color=blue,
+            ]
+            {x^2 + x^4};
+        \addlegendentry{$t>0$}
+        \addplot [
+            domain=-1.1:1.1,
+            samples=70,
+            color=blue,
+            ]
+            {-x^2 + x^4};
+        \addlegendentry{$t<0$}
+        \end{axis}
+        \end{tikzpicture}
+\end{center}
+For $t>0,$ then $\Delta_* =0.$ For $t<0,$ we have $|\Delta_*|^2 = \frac{-t}{2u}.$ Therefore,
+\begin{equation*}
+    V(\Delta_*) = \begin{cases}
+        0 & t>0 \\ 
+        -\frac{t^2}{4u} & t<0.
+    \end{cases}
+\end{equation*}
+We can use this to determine what the specific heat capacity is (which is something that is measurable). The specific heat capacity is 
+\begin{equation*}
+    C = -\frac{\partial^2 F}{\partial t^2}.
+\end{equation*}
+If we assume that we only have potential energy, we have $F = V,$ which gives 
+\begin{equation*}
+    C = \begin{cases}
+        0 & t>0 \\ 
+        \frac{!}{2u} & t< 0,
+    \end{cases}
+\end{equation*}
+so experimentally there will be a discontinuity. Furthermore, the power law relationship that 
+\begin{equation*}
+    |\Delta| \sim |t|^{1/2}
+\end{equation*}
+can be experimentally verified.
+\subsection{Fermions vs Bosons and 2nd Quantization}
+Subatomic particles are either fermions (which obey the Pauli exclusion principle), and bosons.
+\begin{itemize}
+    \item Electrons are fermions
+    \item Photons are bosons
+    \item Phonons are bosons
+\end{itemize}
+Note that no two fermions can be in the same quantum state. For example, consider the two states $\ket{\uparrow}$ and $\ket{\downarrow}.$ If we think from a chemistry perspective, no two fermions can be in the $s$ shell with the same spin. This is a \textit{consequence} of the antisymmetry of the wavefunction. Namely, for fermions 
+\begin{equation*}
+    \psi(x_1,x_2) = -\psi(x_2,x_1),
+\end{equation*}
+and for bosons,
+\begin{equation*}
+    \psi(x_1,x_2) = \psi(x_2,x_1).
+\end{equation*}
+For \emf{second quantization,} we want to build a Hilbert space for many identical quantum particles. We can define \emf{sectors.}
+\begin{idea}
+    In many particle quantum mechanics, the number of particles is not a conserved quantity. For example, we can have annhilationa dn creation of particles (converting it from energy to mass and back). In superconductors, we typically have a bath of electrons where we can freely take and put back electrons.
+\end{idea}
+Instead, we can define \emf{Sectors,} each with a well-defined number of particles. For fermions,
+\begin{itemize}
+    \item 0 particles: $\ket{0}$ is the \emf{vacuum vector}
+    \item 1 particle: $\{\ket{i,\sigma}\}_{i=1,\dots,N_s,\sigma=\uparrow,\downarrow}$ where $N_s$ is the number of sites and $\sigma$ is the site. We are assuming that there is one occupiable orbital site. This gives $2N_s$ single particle states.
+    \item 2 particles: $\ket{i\sigma}\ket{j\tau}:$ The naive guess is $(2N_s)^2$ states, but we have to account for the fact that they can't occupy the same state. Instead, there are 
+    \begin{equation*}
+        \binom{2N_s}{2} = \frac{(2N_s)(2N_s-1)}{2} 
+    \end{equation*}
+    states.
+    \item $n$ particles: We have 
+    \begin{equation*}
+        \binom{2N_s}{n}
+    \end{equation*}
+    states, which gets very big, very fast. This is another reason why single-particle quantum mechanics can only get us so far.
+\end{itemize}
+We wish to define operators which bring us between different sectors. We can define the \emf{creation operator}
+\begin{equation*}
+    c^\dagger_{i\sigma}\ket{\sigma} = \ket{i\sigma}
+\end{equation*}
+and the inverse is the \emf{annihilation operator}, where
+\begin{equation*}
+    c_{i\sigma}c_{i\sigma} = \ket{0}.
+\end{equation*}
+Note these identities, 
+\begin{align*}
+    c_{i\sigma}\ket{0} &= 0 \\ 
+    (c_{i\sigma})^2 &= 0 \\ 
+    (c^\dagger_{i\sigma}) &= 0.
+\end{align*}
+Furthermore, we can deal with the antisymmetric nature of fermions by noting that 
+\begin{equation*}
+    c^\dagger_{i\sigma}c^\dagger_{j\sigma'} = -c^\dagger_{j\sigma'}c^\dagger_{i\sigma},
+\end{equation*}
+so
+\begin{equation*}
+    \ket{(i\sigma)(j\sigma')} = -\ket{(j\sigma')(i\sigma)}.
+\end{equation*}
+In general, if we define the anti-commutator $\{A,B\}=AB+BA,$ then 
+\begin{equation}
+    \{c_{i\sigma},c^\dagger_{j\sigma'}\} = \delta_{ij}\delta_{\sigma\sigma'}.
+\end{equation}
+Furthermore, annhilation and creation operators anti-commute with themselves, i.e. 
+\begin{align*}
+    \{c_{i\sigma}, c_{j\sigma'}\} &= 0 \\
+    \{c^\dagger_{i\sigma}, c^\dagger_{j\sigma'}\} &= 0.
+\end{align*}
+For \textit{bosons,} we have 
+\begin{align*}
+    [b_{i\sigma},b_{j\sigma}^\dagger] &= \delta_{ij}\delta_{\sigma\sigma'} \\
+    [b_{i\sigma},b_{j\sigma}] &= 0 \\
+    [b_{i\sigma}^\dagger,b_{j\sigma}^\dagger] &= 0,
+\end{align*}
+where $[A,B]=AB-BA.$
+
+Usually, we can think of an analogy with the quantum harmonic oscillator, where 
+\begin{equation}
+    \hat{H} = \hbar\omega\left(\underbrace{a^\dagger a}_{n} + \frac{1}{2}\right),
+\end{equation}
+where we can treat $a^\dagger a$ as the energy level. As an analogy, we can treat the system as only one energy level, and each new particle we add on a constant energy. This is what motivates the creation and annihilation operators.
+\end{document}

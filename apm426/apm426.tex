@@ -1,0 +1,881 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{APM426: General Relativity}
+\author{QiLin Xue}  
+\date{Fall 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\overline}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+\usetikzlibrary{quantikz}
+\usepackage[american]{circuitikz}
+\newcommand{\equals}{=}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Manifolds and Tensor Fields}
+\subsection{Review}
+\textit{Note:} The manifold section should serve as a review from MAT367, so we will be quickly going over it.
+\begin{definition}
+    An $n$-dimensional, $C^\infty$, real manifold $M$ is a topological space together with a collection of subsets $\{O_\alpha\}$ satisfying the following properties:
+    \begin{enumerate}
+        \item $\{O_\alpha\}$ cover $M.$
+        \item For each $\alpha$ there is a homeomorphism $\psi_\alpha: O_\alpha \to U_\alpha,$ where $U_\alpha$ is an open subset of $\mathbb{R}^n$.
+        \item If any two sets $O_\alpha$ and $O_\beta$ intersect, then $\psi_\beta \circ \psi_\alpha^{-1}$ is smooth.
+    \end{enumerate}
+    Note that there are a few extra conditions (Hausdorff and paracompact), but they generally aren't important.
+\end{definition}
+Let $\mathcal{F}$ denote the collection of $C^\infty$ functions from $M$ to $\mathbb{R}.$
+\begin{definition}
+    Tangent vectors are maps $v:\mathcal{F}\to \mathbb{R}$ which satisfy:
+    \begin{enumerate}
+        \item Linearity: $v(af + g) = av(f) + g$
+        \item Leibniz's rule: $v(fg) = v(f)g + f v(g)$ 
+    \end{enumerate}
+\end{definition}
+The commutator (Lie Bracket) of two tangent vectors $[v,w] = v\circ w - w\circ v$ is also a tangent vector.
+\subsection{Tensors}
+Now, we can introduce the notion of tensors.
+\begin{definition}
+    A $(k,\ell)$ tensor over a vector space $V$ is a multilinear map
+    \begin{equation*}
+        T: \underbrace{V^* \times \cdots \times V^*}_{k} \times \underbrace{V\times \cdots \times V}_{\ell} \to \mathbb{R}
+    \end{equation*}
+\end{definition}
+Some examples:
+\begin{itemize}
+    \item A $(0,1)$-tensor is a dual vector
+    \item A $(1,0)$ tensor is an element of $V^{**}.$
+\end{itemize}
+An interesting example is a $(1,1)$-tensor, which is a map $V^*\times V\to \mathbb{R}.$ However, we can fix $v\in V$ so $V(\cdot, v)$ is in $V^{**}.$ But since $V^{**}$ is canonically isomorphic to $V,$ we have a linear map from $V$ to $V.$ Similarly, we can also view $T$ as a map from $V^*\to V^*.$
+
+Let $\mathcal{T}(k,\ell)$ be the space of all $(k,\ell)$-tensors. There are two important operations on tensors:
+\begin{enumerate}
+    \item \emf{Contraction:} This is a map $C:\mathcal{T}(k,\ell) \to \mathcal{T}(k-1,\ell-1),$ defined by
+    \begin{equation*}
+        CT = \sum_{\sigma=1}^{n} T(\dots,v^{\sigma^*},\dots; \dots , v_{\sigma},\dots).
+    \end{equation*}
+    \item \emf{Outer product:} Given a $(k,\ell)$-tensor and a $(k',\ell')$-tensor, the outer product is defined by 
+    \begin{equation*}
+        (T \otimes T')(v^{1^*},\dots,v^{(k+k')^*};v_1,\dots,v_{\ell+\ell'}) = T(v^{1^*},\dots,v^{k^*};v_1,\dots,v_{\ell'})T'(v^{(k+1)^*},\dots,v^{(k+k')^*};v_{\ell'+1},\dots,v_{\ell+\ell'}).
+    \end{equation*}
+\end{enumerate}
+One way to construct tensors is to take the outer product of smaller tensors, i.e. vectors and dual vectors. If this is possible, then the tensor is \emf{simple.} Let $\{v_\mu\}$ be the basis for $V$ and $\{v^{\nu^*}\}$ its dual basis. Then,
+\begin{equation*}
+    \{v_{\mu_1}\otimes \cdots \otimes v_{\mu_k} \otimes v^{\nu_1^*} \otimes \cdots \otimes v^{\nu_\ell^*}\}
+\end{equation*}
+forms a basis for $\mathcal{T}(k,\ell).$ Then every $(k,\ell)$ tensor can be written as a linear combination,
+\begin{equation*}
+    T = \sum_{\mu_1,\dots,\nu_\ell = 1}^n T^{\mu_1\cdots\mu_k}{}_{\nu_1\cdots\nu_\ell} v_{\mu_1} \otimes \cdots \otimes v^{\nu_\ell^*},
+\end{equation*}
+where the coefficients $T^{\mu_1\cdots\mu_k}{}_{\nu_1\cdots\nu_\ell}$ are known as the \emf{components} of $T.$ Note that it is often more convenient to work with just the components. For example, when applying the contraction and outer product:
+\begin{itemize}
+    \item Contraction: We have
+    \begin{equation*}
+        (CT)^{\mu_1\cdots \mu_{k-1}}{}_{\nu_1\cdots \nu_{\ell-1}} = \sum_{\sigma=1}^n T^{\mu_1\cdots \sigma \cdots \mu_{k-1}}{}_{\nu_1\cdots \sigma \cdots \nu_{\ell-1}}.
+    \end{equation*}
+    \item Outer product: We have
+    \begin{equation*}
+        (T\otimes T')^{\mu_1\cdots \mu_{k+k'}}{}_{\nu_1 \cdots \nu_{\ell+\ell'}} = T^{\mu_1\cdots \mu_k}{}_{\nu_1\cdots \nu_\ell}T'^{\mu_{k+1}\cdots \mu_{k+k'}}{}_{\nu_{\ell+1}\cdots \nu_{\ell+\ell'}}.
+    \end{equation*}
+\end{itemize}
+\begin{theorem}
+    The \emf{tensor transformation law} says that 
+    \begin{equation*}
+        T'^{\mu_1'\cdots \mu_k'}{}_{\nu_1'\cdots \nu_\ell'} = \sum_{\mu_1,\cdots \nu_\ell =1}^{n} T^{\mu_1 \cdots \mu_k}{}_{\nu_1 \cdots \nu_\ell}\frac{\partial x'^{\mu_1'}}{\partial x^{\mu_1}}\cdots\frac{\partial x^{\nu_\ell}}{\partial x'^{\nu_\ell'}}.
+    \end{equation*}
+\end{theorem}
+\begin{definition}
+    A metric is a $(0,2)$-tensor that is also:
+    \begin{itemize}
+        \item Symmetric: $g_{\mu\nu} = g_{\nu\mu}$
+        \item Nondegenerate: $g_{\mu\nu} = 0$ only if $\mu=\nu=0.$
+    \end{itemize}
+\end{definition}
+We can write
+\begin{equation*}
+    g = \sum_{\mu,\nu} g_{\nu\mu} \dd{x}^\mu \otimes \dd{x}^\nu
+\end{equation*}
+\subsection{Abstract Index Notation}
+\section{Curvature}
+How do we compare vectors in a curved space? We can't simply add or subtract since they live in different tangent spaces. To do so, we need to introduce a derivative operator.
+\begin{definition}
+    A derivative operator $\nabla$ on a manifold $M$ is a map $\nabla: \mathcal{T}(k,\ell) \to \mathcal{T}(k,\ell+1),$ that satisfies the five properties:
+    \begin{enumerate}
+        \item Linearity: For $A,B\in \mathcal{T}(k,\ell)$ and $\alpha,\beta\in \mathbb{R},$
+        \begin{equation*}
+            \nabla_c(\alpha A^{a_1\cdots a_k}{}_{b_1\cdots b_\ell}+ \beta B^{a_1\cdots a_k}{}_{b_1\cdots b_\ell}) = \alpha \nabla_c(A^{a_1\cdots a_k}{}_{b_1\cdots b_\ell}) + \beta \nabla_c(B^{a_1\cdots a_k}{}_{b_1\cdots b_\ell}). 
+        \end{equation*}
+        \item Leibnitz Rule:
+        \begin{equation*}
+            \nabla_e\left[A^{a_1\cdots a_k}{}_{b_1\cdots b_\ell}B^{c_1\cdots c_{k'}}{}_{d_1\cdots d_{\ell'}}\right] = \left[\nabla_e A^{a_1\cdots a_k}{}_{b_1\cdots b_\ell}\right]B^{c_1\cdots c_{k'}}{}_{d_1\cdots d_{\ell'}} + A^{a_1\cdots a_k}{}_{b_1\cdots b_\ell}\left[\nabla_e B^{c_1\cdots c_{k'}}{}_{d_1\cdots d_{\ell'}}\right].
+        \end{equation*}
+        \item Commutativity with contraction:
+        \begin{equation*}
+            \nabla_d(A^{a_1\cdots c\cdots a_k}{}_{b_1\cdots c\cdots b_\ell}) = (\nabla_d A)^{a_1\cdots c\cdots a_k}{}_{b_1\cdots c\cdots b_\ell}
+        \end{equation*}
+        \item Consistent with tangent vectors. For all $f\in \mathcal{F}$ and $t^a\in V_p,$ we have:
+        \begin{equation*}
+            t(f) = t^a\nabla_a f
+        \end{equation*}
+        \item Torsion free:
+        \begin{equation*}
+            \nabla_a\nabla_b f = \nabla_b\nabla_a f
+        \end{equation*}
+    \end{enumerate}
+\end{definition}
+We need to show a few important facts about this derivative operator:
+\begin{itemize}
+    \item $\nabla$ exists: To do so, pick local coordinates $\left\{\frac{\partial}{\partial x^\mu}\right\}$ and $\{\dd{x}^\mu\}.$ Then trhe ordinary derivative $\partial_a$ defined by:
+    \begin{equation*}
+        \partial_a: T^{\mu_1\cdots \mu_k}{}_{\nu_1\cdots \nu_\ell} \mapsto \frac{\partial}{\partial x^\sigma}T^{\mu_1\cdots\mu_k}{}_{\nu_1\cdots\nu_\ell}
+    \end{equation*}
+    \item The derivative operator is almost unique. Given two operators $\tilde{\nabla}_a$ and $\nabla_a,$ their difference is characterized by the tensor field $C^c_{ab},$ which is sometimes denoted as the \emf{Christoffel symbol} $\Gamma^{b}_{ac}$ when $\tilde{\nabla}_a$ is the ordinary derivative oeprator. That is,
+    \begin{equation*}
+        \nabla_a t^b = \partial_a t^b + \Gamma^b_{ac}t^c
+    \end{equation*}
+\end{itemize}
+
+    \begin{definition}
+        A vector $v^a$ given at each point on the curve is said to be \emf{parallelly transported} as one moves along the curve if the equation
+        \begin{equation*}
+            t^a\nabla_av^b = 0
+        \end{equation*}
+        is satisfied along the curve. In general, a tensor of arbitrary rank is parallelly transported if 
+        \begin{equation*}
+            t^a\nabla_a T^{b_1\cdots b_k}{}_{c_1\cdots c_\ell} = 0.
+        \end{equation*}
+    \end{definition}
+    Consider a vector and choose a coordinate system. Then the above simplifies to:
+    \begin{equation*}
+        t^a\partial_a v^b + t^a\Gamma^b_{ac}v^c = 0 \iff \frac{dv^\nu}{dt} + \sum_{\mu,\lambda} t^{\mu}\Gamma^{\nu}_{\mu\lambda}v^{\lambda} = 0.
+    \end{equation*}
+    A vector at a point $p$ on the curve uniquely defines a parallel transported vector everywhere else on the curve. The mathematical structure arising from such a curve dependent identification of the tangent spaces of different points is called a \emf{connection}.
+    \begin{theorem}
+        Let $g_{ab}$ be a metric. Then there exists a unique derivative operator $\nabla_a$ satisfying $\nabla_ag_{bc}=0.$
+    \end{theorem}
+    A direct corollary is that a metric $g_{ab}$ naturally determines a derivative operator $\nabla_a$. In particular, we have:
+    \begin{equation*}
+        \Gamma^c_{ab} = \frac{1}{2}g^{cd}\left(\partial_ag_{bd} + \partial_bg_{ad} - \partial_dg_{ab}\right),
+    \end{equation*}
+    and the coordinate basis components are
+    \begin{equation*}
+        \Gamma^{\rho}_{\mu\nu} = \frac{1}{2}\sum_\sigma g^{\rho\sigma}\left(\frac{\partial g_{v\sigma}}{\partial x^\mu} + \frac{\partial g_{\mu\sigma}}{\partial x^\nu} - \frac{\partial g_{\mu\nu}}{\partial x^\sigma}\right).
+    \end{equation*}
+
+\subsection*{Motivation to Curvature}
+Suppose we are on a riemannian manifold, i.e. the metric is positive definite. Consider a curve $\tau \in C^1([0,1] \to M^n),$ then
+\begin{equation*}
+    L(\tau)^2 = \int g(\tau'(t), \tau'(t)) \dd{t},
+\end{equation*} 
+and define the distance between $x_0$ and $x_1$ as
+\begin{equation*}
+    d(x_0,x_1)^2 = \text{inf}\left\{L(\tau)^2,\right\}
+\end{equation*}
+where $\tau(0)=x_0$ and $\tau(1)=x_1.$ If $\tau$ attains this infinum, then $L(\tau + \epsilon \sigma) > L(\tau)$ for all $\epsilon > 0$ if $\sigma(0)=\sigma(1)=0.$ Then:
+\begin{equation*}
+    0 = \frac{d}{d\epsilon}L(\tau+\epsilon\sigma) \iff \dot{\tau} \text{ is parallel transported along }\tau,
+\end{equation*}  
+where the connection is the Levi-Civita derivative,
+\begin{equation}
+    \dot{\tau}^a(t)\nabla_a \dot{\tau}^b,
+\end{equation}
+which is known as the \emf{geodesic equation}. In coordinates, recall that $\nabla_AV^b = \partial_aV^b + \Gamma^b_{ac}V^c,$ so the geodesic equation becomes
+\begin{equation}
+    \frac{d\tau^\alpha}{dt}\partial_\alpha \frac{d\tau^B}{dt} + \frac{d\tau^\alpha}{dt}\Gamma^{b}_{\alpha\gamma}\frac{d\tau^\gamma}{dt} = 0,
+\end{equation}
+which is sometimes written as 
+\begin{equation}
+    \frac{d^2\tau^B}{dt^2} + \Gamma^\beta_{\alpha\gamma}(\tau(t)) \frac{d\tau^\alpha}{dt}\frac{d\tau^\gamma}{dt} = 0.
+\end{equation}
+If $\tau^\beta(0) = x^\beta$ and $\frac{d\tau^\beta}{dt}(0) = V^\beta,$ then the solution (locally) is
+\begin{equation*}
+    \tau(t) = \text{exp}_x(tV),
+\end{equation*}
+where the exponential map is $\text{exp}_x:T_xM \to M, 0 \to x,$ defined by:
+\begin{equation*}
+    (x,V) \mapsto (x,\text{exp}_xV).
+\end{equation*}
+We can think of the exponential function as $\exp_{x_0}tv_0$ tells us to go a distance $t(v_0)_g$ in direction $\vec{v}_0.$ The exponential map is smooth, and locally and smoothly defined. If we identify $(T_{x_0}M,g_{x_0})\approx (\mathbb{R}^n,\delta_{ab}),$ i.e. with the euclidean space and metric, then we can call it the \emf{Riemannian normal coordinates at $x_0$,} which is a local coordinate chart at $x_0.$
+Now consider two curves $\tau(t) = \exp_x(tW)$ and $\sigma(s) = \exp_xsV$ with $\sigma(0) = \tau(0) = x.$ Therefore,
+\begin{equation*}
+    d^2(\sigma(s),\tau(0)) = s^2,\quad\quad\quad\quad d^2(\sigma(0),\tau(t)) = t^2,
+\end{equation*}
+which is true per the geodesic equation. If we taylor expand $d^2(\tau(s),\tau(t))$ around $(s,t)=(0,0),$ then the cross terms are zero, so 
+\begin{align*}
+    d^2(\sigma(s),\tau(t)) &= |sV-tW|^2 + O(|(s,t
+    )|^3) \\ 
+    &= |sV-tW|^2 - \frac{s^2t^2}{3}R(v,w,v,w) + O(|(s,t)|^5).
+\end{align*}
+Here, $R$ is the Riemannian curvature tensor. Therefore, curvature is just a way to describe higher order terms when computing the distance.
+\subsection*{Formal Definition of Curvature}
+Now we extend to a more usual definition of curvature, which also extends to vectors that cannot be parallelly transported. Consider $f\in \mathcal{F}$ and $\omega \in \mathcal{T}(0,1)$ such that $\nabla_{[a}\nabla_{b]}f=0.$ Then,
+\begin{align*}
+    \nabla_a\nabla_b(f\omega_c) &= \nabla_a(\omega_c\nabla_b f + f\nabla_b \omega_c).
+\end{align*}
+The commutator relationship is then:
+\begin{equation*}
+    \nabla_{[a}\nabla_{b]}(f\omega_c) = f\nabla_{[a}\nabla_{b]}\omega_c.
+\end{equation*}
+The fact that $f$ pulls through implies that this function can only depend on the value of $\omega_c$ at $p$ and not at any nearby points. The most general linear thing that satisfies this is some arbitrary tensor 
+\begin{equation*}
+    (\nabla_a\nabla_b - \nabla_b\nabla_a)\omega_c = R_{abc}^d\omega_d,
+\end{equation*}
+where $R_{abc}^d$ is the Riemann curvature tensor. We can write something similar for $(\nabla_a\nabla_b - \nabla_b\nabla_a)V^c.$ Here, $V^c \in \mathcal{T}(1,0)$ and $\omega_c \in \mathcal{T}(0,1).$ Therefore, we can contract the two together to get,
+\begin{align*}
+    0 &= (\nabla_a\nabla_b - \nabla_b\nabla_a)(V^c\omega_c) \\ 
+    &= V^c R_{abc}^d\omega_d + \omega_d \nabla_{[a}\nabla_{b]}V^d.
+\end{align*}
+This gives us 
+\begin{equation*}
+    \nabla_{[a}\nabla_{b]}V^d = -R_{abc}^dV^c.
+\end{equation*}
+By induction, we can show that if $T\in \mathcal{T}(k,\ell),$ then
+\begin{equation*}
+    \nabla_{[a}\nabla_{d]} T^{b_1\cdots b_k}{}_{c_1\cdots c_\ell} = -\sum_{i=1}^k R_{ade}{}^{b_i}T^{b_1\cdots e\cdots b_k}{}_{c_1\cdots c_\ell} + \sum_{j=1}^k R_{adc_j}{}^{e}T^{b_1\cdots b_k}{}_{c_1\cdots e\cdots c_\ell}.
+\end{equation*}
+The standard intuition behind this formulation is the failure to conserve a vector when taken under parallel transport around a closed curve.
+
+First recall that if $U^a,B^v \in \mathcal{T}(1,0)$ and we want a vector field $W$ such that $[U,V]^c = W^c,$ then 
+\begin{align*}
+    W(f) &=  U(V(f)) - V(U(f)) \\ 
+    &= U^b \nabla_b(V^a\nabla_a f) - V^a\nabla_a(U^b\nabla_b f) \\ 
+    &= (U^a\nabla_a V^c - V^a \nabla_a U^c) \nabla_c f
+\end{align*}
+Consider a surface $S.$ Let's attempt to parallel transport $V^a$ around a parallelogram $(0,0) \to (\Delta s, 0) \to (\Delta s, \Delta t) \to (0,\delta t).$ Let us fix $\omega_b \in \mathcal{T}(0,1)$ and let us see how $V^a\omega_a$ changes.
+
+Define $S^a = \left(\frac{\partial}{\partial s}\right)^a$ and $T^b = \left(\frac{\partial}{\partial t}\right)^b$ be coordinate tangent vectors to $S.$ Note that $[S,T]=0.$ Then,
+\begin{align*}
+    \delta_1 &= (\Delta s) \frac{d}{ds}(v^a\omega_a)\bigg|_{(\Delta s/2, 0)} + O((\Delta s)^3) \\ 
+    &= (\Delta s) S^b\nabla_b (v^a\omega_a)\bigg|_{(\Delta s/2, 0)}  \\ 
+    &= (\Delta s)S^b v^a \Delta b \omega_a\bigg|_{(\Delta s/2, 0)} 
+\end{align*}
+Similarly,
+\begin{equation*}
+    \delta_3 = -(\Delta s)S^b v^a\nabla_b\omega_a\bigg|_{(\Delta s/2, \Delta t)}.
+\end{equation*}
+However, the $v^a$ in this last expression is the vector we get after being transported halfway across the parallelogram. But first, note that
+\begin{equation*}
+    \delta_1+\delta_2+\delta_3+\delta_4 = O((\Delta s)^2 + (\Delta t)^2),
+\end{equation*}
+so since the difference between the vectors at different points vary by second order, we can effectively ignore them. Therefore, 
+\begin{equation*}
+    \delta_1+\delta_2+\delta_3+\delta_4 = v_\text{new} - v_0 = -S^bT^cR_{bca}^dv_0%a.
+\end{equation*}
+The Riemann tensor has some symmetries,
+\begin{enumerate}
+    \item $R_{abc}{}^d=-R_{bac}{}^d$
+    \item $R_{[abc]}{}^d=0.$
+    \item If $\nabla_a g_{bc} = 0,$ then $R_{abcd}=-R_{abdc}.$
+    \item $\nabla_{[e}R_{ab]c}{}^d = 0$ is the \emf{Bianchi} identity.
+\end{enumerate}
+We can prove these,
+\begin{enumerate}
+    \item $R_{abc}{}^d\omega_d = \nabla_{[a}\nabla_{b]}\omega_c$
+    \item Consider some form $T_{[abc]}.$ Then
+    \begin{equation*}
+        \nabla_{[a}T_{bcd]}
+    \end{equation*}
+    is a form. But taking the derivative again 
+    \begin{equation*}
+        \nabla_{[a}\nabla_bT_{cde]} = 0.
+    \end{equation*}
+    To see this, we can rewrite 
+    \begin{equation*}
+        \nabla_{[a} T_{bcd]} = \partial_a T_{bcd} + \Gamma_{[ab]}^{e}T_{ecd} + \cdots.
+    \end{equation*}
+    Since the $\Gamma$ are symmetric, then the $\Gamma$ terms disappear, and we get $\partial_a T_{bcd}.$ Therefore,
+    \begin{equation*}
+        \nabla_{[a}\nabla_bT_{cde]} = \partial_{[a}\partial_bT_{cde]} = 0.
+    \end{equation*}
+    \item 
+\end{enumerate}
+\subsection{Geodesics}
+Let $\Sigma^{n+1} \subseteq M^n$ be an $(n-1)$-dimensional submanifold of $M$, i.e. a hypersurface. Then,
+\begin{equation*}
+    \mathbb{R}^{n-1} \approx T_p\Sigma \subseteq T_pM \approx \mathbb{R}^n.
+\end{equation*} 
+There are three cases for $g$
+\begin{equation*}
+    g\bigg|_{T_p\Sigma \times T_p\Sigma} > 0 \iff \Sigma\text{ is spacelike at } p,
+\end{equation*}
+which is alwys true for Riemannian metrics. For Lorentizn metrics,
+\begin{equation*}
+    \det g|_{(T_p\Sigma)^2} = 0 \iff \Sigma \text{ is null at } p
+\end{equation*}
+\begin{equation*}
+    g|_{(T_p\Sigma)^2} < 0 \iff \Sigma \text{ is timelike at } p.
+\end{equation*}
+We claim that there exists a nonzero normal vector $N\in T_pM$ such that $g(N,X) = 0$ for all $X\in T_p\Sigma.$ Note that $N$ won't be null, i.e. $N\notin T_p\Sigma$ (except possibly in case 2). Therefore WLOG,
+\begin{equation*}
+    g(N,N) = \pm 1
+\end{equation*}
+except of course in case 2.
+
+\textbf{Gaussian Normal Coordinates near $\Sigma$}
+Let $\underline{\overline{X}} = (x^1,\dots,x^{n-1})$ be any coordinates on a neighbourhood of $p$ in $\Sigma.$ Then,
+\begin{equation*}
+    (x^1,\dots,x^{n-1},t) \in \mathbb{R} \mapsto \exp_{\underline{\overline{X}}= (x^1,\dots,x^{n-1})}tN \in M
+\end{equation*}
+gives coordinates in a neighborhood of $\Sigma.$ Notice that 
+\begin{equation*}
+    N^aN_a = \pm 1
+\end{equation*}
+and for all $X^b\in T_q\Sigma_0,$ we have
+\begin{equation*}
+    g(N,X) = N_aX^a = 0.
+\end{equation*}
+\textbf{Claim:} The geodesic $t\in \mathbb{R} \to \exp_{\underline{\overline{X}}}tN$ remains orthogonal to $\Sigma_t$ for all small $t.$
+\begin{proof}
+    The tangent vectors 
+    \begin{equation*}
+        X_i^a = \left(\frac{\partial}{\partial x^i}\right)^a
+    \end{equation*}
+    for $i\in \{1,\dots,n-1\}$ form a coordinate basis for $T_p\Sigma_t,$ and $N^b = \left(\frac{\partial}{\partial t}\right)^b$ denotes the tangent to the geodesic. Recall,
+    \begin{equation*}
+        \left[N, X_{(i)}\right]^a = 0.
+    \end{equation*}
+    This is equivalent to 
+    \begin{equation*}
+        T^b\nabla_bX^a = X^b\nabla_bT^a,
+    \end{equation*}
+    for $X\in \{X_1,\dots,x_{n-1}\}.$ We then claim that
+    \begin{equation*}
+        N^aX_a = 0,
+    \end{equation*}
+    for all $|t| \ll 1.$ Its derivative along the geodesic is 
+    \begin{align*}
+        N^b\nabla_b(N^aX_a) &= \cancel{(N^b\nabla_bN^a)}X_a + N^aN^b\nabla_b X_a \\ 
+        &= N_aX^b\nabla_bN^a \\ 
+        &= \frac{1}{2}X^b\nabla_B(N_aN^a) \\ 
+        &= \frac{1}{2}X^b\nabla_B(\pm 1) \\ 
+        &= 0.
+    \end{align*}
+\end{proof}
+\subsection{Geodesic Deviation Equation and Jacobi Fields}
+Let $t\in I \subseteq \mathbb{R} \to \sigma(t) \in M$ be a geodesic. Now consider a surface
+\begin{equation*}
+    (s,t) \in B_1(0) \subseteq \mathbb{R}^2 \to \sigma_{s}(t) = \sigma(t;s) \in M
+\end{equation*}
+formed by geodesics $t\in I_s \subseteq \mathbb{R} \to \sigma_s(t),$ i.e. 
+\begin{equation*}
+    \dot{\sigma}_s^a \nabla_a \dot{\sigma}_s = 0.
+\end{equation*}
+If we have a geodesic, we can re-parametrize it. That is, $\sigma(bt+c)$ is also a geodesic. If $\sigma$ depends on $s$, then $\sigma_s(b(s)t+c(s))$ is also a geodesic. We have some freedom to choose $b(s)$ and $c(s).$ Let us choose $b(s)$ such that 
+\begin{equation*}
+    \dot{\sigma}^a\dot{\sigma}_a = \pm 1.
+\end{equation*}
+We can also choose $c'(0)$ so that 
+\begin{equation*}
+    \dot{\sigma}^aX_a\bigg|_{\sigma_0(0)} = 0.
+\end{equation*}
+Finally, we can choose $X^a = \left(\frac{\partial}{\partial s}\right)^a$ and $c(s)$ such that 
+\begin{equation*}
+    \dot{\sigma}^aX_a\bigg|_{\sigma_s(0)} = 0.
+\end{equation*}
+As before, $\dot{\sigma}^b\nabla_b(\dot{\sigma}^aX_a) = 0.$ Therefore, $X^a$ remains orthogonal to $\dot{\sigma}$ along $\sigma_0(t)$ for all $t,$ which is a result we've seen before.
+
+We can linearize the geodesic equation around $\sigma_0(t)$ to get a linear 2nd order equation for $X^a.$ That is, we can compute the velocity
+\begin{align*}
+    v^a &= \dot{\sigma}^b\nabla_bX^a \\ 
+    a^a &= \dot{\sigma}^c\nabla_c v^a
+\end{align*}
+of a nearby geodesic relative to $\sigma_0(t).$ We can rewrite,
+\begin{equation*}
+    a^a = \dot{\sigma}^c\nabla_c\left(\dot{\sigma}^b\nabla_bX^a\right),
+\end{equation*}
+which includes two derivatives. Recall that the order of derivatives matter and if we want to switch the order, we need to include curvature. Note that since $[\dot{\sigma},X] = 0,$ we can rewrite,
+\begin{align*}
+    a^a &= \dot{\sigma}^c\nabla_c\left(X^b\nabla_b\dot{\sigma}^a\right) \\ 
+    &= \dot{\sigma}^c(\nabla_cX^b)\nabla_b\dot{\sigma}^b + X^b\dot{\sigma}^c\nabla_c\nabla_b \dot{\sigma}^a \\ 
+    &= (X^c\nabla_c\dot{\sigma}^b)\nabla_b\dot{\sigma}^a + X^b\dot{\sigma}^c\nabla_b\nabla_c\dot{\sigma}^a - R_{cbd}^a\dot{\sigma}^dX^b\dot{\sigma}^c \\ 
+    &= -R_{cbd}^a\dot{\sigma}^dX^b\dot{\sigma}^c.
+\end{align*}
+Note that $a$ is linear in $X,$ so this is the linear second order equation we wanted. In coordinates, this becomes,
+\begin{equation*}
+    \frac{d^2}{dt^2}X^\alpha + R_{\gamma\beta\delta}^{\alpha}\dot{\sigma}^\gamma \dot{\sigma}^{\delta}X^\beta = 0.
+\end{equation*}
+The initial conditions are $X^\alpha(0) = X_0^\alpha$ and $\dot{X}^\alpha(0) = V_0^\alpha.$ There are $n$ choices for both, so $2n$ degrees of freedom. Note that $2$ of them correspond to the affine reparametrization of $\sigma_0(t).$ 
+
+Solutions $X^\alpha(t)$ along $\sigma_c(t)$ are called \emf{Jacobi Fields.}
+\subsection{Computing the Riemann Tensor}
+How do we compute $R_{abc}^d$? There are different methods to do so, but we begin with the coordinate method. Given a tensor field $\omega_d \in \mathcal{T}(0,1),$ then 
+\begin{align*}
+    \frac{1}{2}R_{abc}^d \omega_d &= \frac{1}{2}(\nabla_a\nabla_b - \nabla_b\nabla_a)\omega_c \\ 
+    &= \nabla_{[a}\nabla_{b]}\omega_c.
+\end{align*}
+In local coordinates,
+\begin{equation*}
+    \nabla_a\omega_b = \partial_a\omega_b - \Gamma^c{}_{ab}\omega_c.,
+\end{equation*}
+and we can write it in a more useful form,
+\begin{equation*}
+    D_b\omega_c = \partial_b\omega_c - \Gamma^d{}_{bc}\omega_d.
+\end{equation*}
+We have,
+\begin{align*}
+    & \nabla_a\nabla_b \omega_c = \partial_a(\partial_b\omega_c - \Gamma^d{}_{bc}\omega_d) - \Gamma^e{}_{ab}\left(\partial_e\omega_c - \Gamma^d{}_{ec}\omega_d\right) - \Gamma^e{}_{ac}\left(\partial_b\omega_\ell - \Gamma^d_{be}\omega_d\right)\\
+    \implies & \nabla_{[a}\nabla_{b]}\omega_c = -\partial_{[a}\Gamma^d{}_{b]c}\omega_d + \Gamma^e{}_{c[a}\Gamma^d{}_{b]e}\omega_d.
+\end{align*}
+Therefore,
+\begin{equation*}
+    R_{\alpha\beta\gamma}{}^{\delta} = -\frac{\partial}{\partial x^\alpha} \Gamma^{\delta}{}_{\beta\gamma} + \frac{\partial}{\partial x^\beta}\Gamma^{\delta}{}_{\alpha\gamma} + \Gamma^{\epsilon}{}_{\gamma\alpha}\Gamma^{\delta}{}_{\epsilon} - \Gamma^{\epsilon}{}_{\gamma\beta}\Gamma^{\delta}{}_{\alpha\epsilon}.
+\end{equation*}
+There are different types of curvature tensors. We have the \emf{Ricci curvature,}
+\begin{equation*}
+    R_{ac} = R_{abc}^b
+\end{equation*}
+and the scalar curvature $R=R_a^a = R_{ac}g^{ca}.$
+\subsection{Twice Contracted Identity}
+Starting from the Bianchi identity, we can expand it:
+\begin{equation*}
+    0 = 2\nabla_a R_{bcd}{}^{e} + 2\nabla_b R_{cad}^{e} + 2\nabla_c R_{abd}^e.
+\end{equation*}
+Contracting on $c,e$ gives 
+\begin{equation*}
+    \nabla_a R_{bd} - \nabla_b R_{ad} + \nabla_e R_{abd}^e,
+\end{equation*}
+and contracting it by $ad$ (i.e. multiplying by $g^{ad}$) gives 
+\begin{align*}
+    0 &= \nabla^a R_{ba} - \nabla_b R_a{}^a + \nabla^e R_{be} \\ 
+    &= 2\left(\nabla^a R_{ba} - \frac{1}{2}\nabla_b R\right) \\ 
+    &= 2\nabla^a \left(R_{ab} - \frac{1}{2}Rg_{ab}\right),
+\end{align*}
+where $G_{ab} \equiv R_{ab}-\frac{1}{2}Rg_{ab}$ is often known as the \emf{Einstein tensor}, and the twice contracted identity tells us that it is divergence free, which gives us a conservation law.
+
+Recall that we can write,
+\begin{align*}
+    0 &= \nabla_a v^a \\ 
+    &= \frac{\partial v^a}{\partial x^a} + \Gamma^a{}_{ab}v^b.
+\end{align*}
+We can write out an explicit formula for the contracted Christoffel symbols:
+\begin{align*}
+    \Gamma^a{}_{ab} &= \frac{1}{2}g^{ad} \left(\frac{\partial g_{db}}{\partial x^a} + \frac{\partial g_{ad}}{\partial x^b} - \frac{\partial g_{ab}}{\partial x^d}\right) \\ 
+    &= \frac{1}{2}\left(\frac{\partial g_{bd}}{\partial x^d} + g^{ad} \frac{\partial g_{ad}}{\partial x^b} - \frac{\partial g_{ab}}{\partial x^a}\right) \\ 
+    &= \frac{1}{2}g^{ac}\frac{\partial}{\partial x^b}g_{ac}.
+\end{align*}
+Alternatively,
+\begin{align*}
+    \Gamma^{a}{}_{ab} &= \frac{1}{2}\frac{\partial}{\partial x^b}\log |g| \\ 
+    &= \frac{1}{2}\frac{\partial}{\partial x^b} \sum_{i=1}^{n} \log |\lambda_i| \\ 
+    &= \frac{1}{2} \frac{1}{\lambda_i}\frac{\partial \lambda^i}{\partial x^b} \\ 
+    &= \frac{1}{2} g^{ac} \frac{\partial}{\partial x^b}g_{ac}
+\end{align*}
+where $|g| = |\det g_{ij}|.$
+\subsection{Differential Forms}
+Let $\nabla_a$ be a connection on $M.$ We can define the derivative operator
+\begin{equation*}
+    d: \Lambda^p(M) \to \Lambda^{p+1}(M)
+\end{equation*}
+by 
+\begin{equation*}
+    \omega_{a_1\dots a_p} \mapsto \nabla_{[b}\omega_{a_1\dots a_p]}
+\end{equation*}
+which we can expand to 
+\begin{equation*}
+    \nabla_{[b}\omega_{a_1\dots a_p]} = \frac{\partial}{\partial x^i} \omega_{a_1 \dots a_p} + \sum_{i=1}^p C^c_{[ba_i}\omega_{a_1\dots |c|\dots a_p}.
+\end{equation*}
+But this last term is zero, so $d$ only depends on the differential topology of the manifold, and not its differential geometry. It is independent of the connection choice! Therefore, we often denote the derivative of $\omega$ as $d\omega.$
+
+Note that $\omega \in \Lambda^p(M)$ is \emf{closed} when $\dd{\omega}=0$ and $\omega$ is \emf{exact} when it can be written as $\omega = \dd{\eta}.$
+
+The manifold $M$ is \emf{orientable} if and only if there exists an $\epsilon \in \Lambda^n(M)$ that is continuous non-vanishing. If $\alpha \in \Lambda^n(M)$ and $M$ is oriented (by $\epsilon$) then 
+\begin{equation*}
+    \int_M \alpha
+\end{equation*}
+is defined locally in charts and globally by partitions of unity, and is independent of coordinates on the chart.
+
+However, things become spicy once we bring a metric into play. A pseudo-Riemannian metric $g$ on $M^n$ selects a preferred volume form $\epsilon$ (up to a sign (orientable)). This is to ensure 
+\begin{equation*}
+    \epsilon^{a_1\dots a_n}\epsilon_{a_1\dots a_n} = (-1)^s n!
+\end{equation*}
+Many nice things follow from this. In right-handed coordinates on $U \subseteq M,$ we have 
+\begin{equation*}
+    \epsilon \to \sqrt{|g|} \dd{x}^1 \wedge \cdots \dd{x}^n,
+\end{equation*}
+where $|g| = |\det g_{\alpha\beta}|$ in some coordinates. Let:
+\begin{equation*}
+    g_{\mu\nu} = g\left(\frac{\partial}{\partial x^\mu}, \frac{\partial}{\partial x^\nu}\right),
+\end{equation*}
+and consider the change of basis 
+\begin{equation*}
+    \frac{\partial}{\partial x^{\bar{\mu}}} = \frac{\partial x^\mu}{\partial x^{\bar{\mu}}} \frac{\partial}{\partial x^\mu} = \Lambda^{\mu}_{\bar{\mu}} \frac{\partial}{\partial x^\mu}.
+\end{equation*}
+Then,
+\begin{align*}
+    g_{\bar{\mu}\bar{\nu}} &= \frac{\partial x^{\mu}}{\partial x^{\bar{\mu}}}\frac{\partial x^{\nu}}{\partial x^{\bar{\nu}}}g\left(\frac{\partial}{\partial x^\mu}, \frac{\partial}{\partial x^\nu}\right) \\ 
+    &= \Lambda^{\mu}_{\bar{\mu}} \Lambda^{\nu}_{\bar{\nu}} g_{\mu\nu},
+\end{align*}
+where the $\Lambda$ are Jacobians. Then,
+\begin{equation*}
+    |\bar{g}|^{1/2} = |\det \Lambda | |g|^{1/2},
+\end{equation*}
+is how the determinant of the metric changes wrt coordinates.
+
+
+allows for the reduction to the Standard Stoke's Theorem via integration by parts.
+\begin{lemma}
+    If the derivative $\nabla_a$ and volume form $\epsilon$ are compatible with $g_{ba}$ then $U$ is a subdomain $U\subset\subset M^n$ implies
+    \begin{equation*}
+        \int_{U} f(\nabla_a V^a)\epsilon = \int_{\partial U} (fV^a n_a) \dd{A} - \int_U (\nabla_a f)V_a^a \epsilon,
+    \end{equation*}
+    where $n_a$ is an outer normal form\footnote{For example if $U=\{x\in M, \phi(x) < 0\}$ with $|d\phi| = 1$, then we can identify $n=\dd{\phi}$}. If $f\in C^1(U)$ and $V \in \mathcal{T}(1,0)$ is $c^1.$
+\end{lemma}
+\begin{proof}
+    Assume a coordinate chart $\psi$ covers $U$. Then, we can integrate,
+\begin{align*}
+    -\int_{U} f(\nabla_a V^a)\epsilon 
+    &=  -\int_{\psi(U)} f\left(\frac{\partial V^\alpha}{\partial x^\alpha} + \Gamma^{\alpha}_{\alpha\beta}V^\beta\right)\sqrt{g} \dd{x}^1\wedge \cdots \wedge \dd{x}^n\\ 
+    &= -\int_{\psi(U)} f\left(\frac{\partial V^\alpha}{\partial x^\alpha}\sqrt{g} + \frac{V^\beta}{|g|^{1/2}} \frac{\partial |g|^{1/2}}{\partial x^\beta}\right) \dd{x}^1\wedge \cdots \wedge \dd{x}^n \\ 
+    &= -\int_{\psi(U)} f\frac{\partial V^\alpha}{\partial x^\alpha}|g|^{1/2} + fV^\beta \frac{\partial |g|^{1/2}}{\partial x^\beta} \dd{x}^1\wedge \cdots \wedge \dd{x}^n, \\ 
+    &= +\int_{\psi(U)} V^\alpha \frac{\partial}{\partial x^\alpha}(f\sqrt{g}) + \frac{\partial(fV^\alpha)}{\partial x^\alpha}\sqrt{g} \dd^n{x} - 2\int_{\partial \psi(U)} fV^\alpha \sqrt{g} n_\alpha \dd^{n-1}{x} \\ 
+    &= \int_{\psi(U)} \frac{\partial}{\partial x^\alpha}(V^\alpha f \sqrt{g}) + (\partial_\alpha f)V^\alpha \sqrt{g} \dd^n{x} - 2\int_{\partial \psi(U)} fV^\alpha \sqrt{g} n_\alpha \dd^{n-1}x.
+\end{align*}
+Which gives 
+\begin{align*}
+    -\int_{\partial \psi(U)} (f\sqrt{g} + V^\alpha n_\alpha) \dd^{n-1}x + \int_{\psi(U)} (\partial_\alpha f)V^{\alpha}\sqrt{g} \dd{x}^n,
+\end{align*}
+which is the same thing as what we want in our lemma.
+
+Note that the reason there is an extra $\sqrt{g}$ term is because of the \emf{minkowski capacity},
+\begin{equation*}
+    \text{Area}(\Sigma) = \lim_{\epsilon \to 0} \frac{vol(U_{\epsilon}-U_0)}{\epsilon},
+\end{equation*}
+and the volume will have a $\sqrt{g}$ factor, so we need to add this to the area when we work with coordinates.
+\end{proof}
+\section{Stress Energy Tensor}
+In Euclidean geometry $\mathbb{R}^3,$ we have $h_{\mu \nu} = \text{diag}(1,1,1),$ which implies that $\Gamma^{\mu}_{\alpha\beta} = 0,$ so the covariant derivative agrees $\nabla_\mu = \partial_\mu,$ geodesics are straight lines, and parallel transport is curve independent. In $\mathbb{R}^4$ in special relativity, we have 
+\begin{equation*}
+    \eta_{\mu\nu} = \text{diag}(-1,1,1,1),
+\end{equation*}
+and the Christoffel symbols vanish, etc. Although there is no inertial frame, there is still a future direction and orientation. Consider the $(M^n,g^{\mu\nu})$ Lorentzian manifold:
+\begin{itemize}
+    \item At each point, we have a lightcone, and we can decide the future direction in a consistent way (orientable).
+    \item Massive particles, absent other forces, follow timelike geodesics, parametrized such that 
+    \begin{equation*}
+        g(\sigma'(s), \sigma'(s)) = -1
+    \end{equation*}
+    \item The 4-velocity is 
+    \begin{equation*}
+        U^a = \frac{d\sigma^a}{ds}
+    \end{equation*}
+    and the 4-momentum is 
+    \begin{equation*}
+        P^a = mU^a.
+    \end{equation*}
+    \item The energy of our particle, measured by a non-comoving observer at the same point in spacetime $M,$ is 
+    \begin{equation*}
+        \tilde{U}^b p_b = g_{ab}(\tilde{U}^b, p^a),
+    \end{equation*}
+    where $\tilde{U}^b$ is the 4-velocity of observer.
+    \item $\tilde{U}$ and $U$ makes an angle of $\theta$ with each other. Note that 
+    \begin{equation*}
+        \tanh\psi = v = \tan\theta,
+    \end{equation*}
+    so we can write the energy as 
+    \begin{equation*}
+        \tilde{U}^b p_b = m\cosh\psi = \frac{m}{\sqrt{1-|v|^2}},
+    \end{equation*}
+    where $|v|$ is the relative 3-velocity.
+    \item If $g_{ab}\tilde{X}^a\tilde{U}^b=0,$ then the momentum in the $\tilde{X}^a$ direction is $g_{ab}\tilde{X}^ap^b = \frac{mv}{\sqrt{1-|v|^2}}.$
+\end{itemize}
+Something else that is affected by boosts is number density. Consider $N$ particles at rest and draw some box with volume $r^3$ in the $x,y,z$ direction. The density is 
+\begin{equation*}
+    n = \frac{N}{r^3}.
+\end{equation*}
+In a moving reference frame, the Lorentz boost, the particles are now moving at some relative velocity $(v,0,0)$ in the $x$-direction. The density now becomes 
+\begin{equation*}
+    \bar{n} = \frac{n}{\gamma r^3},
+\end{equation*}
+due to length contraction, so density transforms like the first component of a 4-vector. We can treat this as a 4-vector, where the other 3 directions are the fluxes. The \emf{number flux vector} is
+\begin{align*}
+    N^a &\xrightarrow[]{\text{comoving}} (n,0,0,0) \\ 
+    &\xrightarrow[]{\text{x-boosted}} (n/\sqrt{1-|v|^2},\frac{nv}{\sqrt{1-|v|^2}},0,0) \\ 
+    &\xrightarrow[]{\text{boosted}} \left(n/\sqrt{1-|v|^2},\frac{nv^1}{\sqrt{1-|v|^2}},\frac{nv^2}{\sqrt{!-|v|^2}},\frac{nv^3}{\sqrt{1-|v|^2}}\right).
+\end{align*}
+Note that the number of particles is observer independent, i.e. 
+\begin{equation*}
+    n^2 = g_{ab}(N^a,N^b),
+\end{equation*}
+where $n$ is the scalar rest density and is the first component of $N^a$ in comoving coordinates.
+
+This motivates the question of what the energy density of these particles might look like. The energy density is the energy per particle times the density of the particles, i.e.
+\begin{align*}
+    &\xrightarrow[]{\text{comoving}} mn \\ 
+    &\xrightarrow[]{\text{x-boosted}} \frac{mn}{1-|v|^2}.
+\end{align*}
+This transforms like a $(2,0)$ tensor $T^{ab} = P^a \otimes N^b$. This motivates us to write,
+\begin{align*}
+    T^{ab} &\xrightarrow[]{\text{comoving}} \begin{pmatrix}
+        mn &0 & 0 & 0 \\ 
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0
+    \end{pmatrix} \\ 
+    &\xrightarrow[]{\text{x-boosted}} \begin{pmatrix}
+        \frac{mn}{1-v^2} & \frac{mvn}{1-v^2} & 0 & 0 \\
+        \frac{mvn}{1-v^2} & \frac{mnv^2}{1-v^2} & 0 & 0 \\ 
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0
+    \end{pmatrix}
+\end{align*}
+which is the energy momentum tensor for \emf{dust.} More generally, $T^{ab}$ is the \emf{stress-energy tensor} of matter, with the following properties 
+\begin{itemize}
+    \item The energy-density observed by observer having velocity $v$ is 
+    \begin{equation*}
+        T_{ab}v^av^b
+    \end{equation*}
+    \item If $g_{ab}(X^a,V^b)=0,$ Then the energy flux of matter in $X^b$ direction is 
+    \begin{equation*}
+        T_{ab}v^aX^b
+    \end{equation*}
+    and 
+    \begin{equation*}
+        T_{ab}X^av^b
+    \end{equation*}
+    is the $X^a$ momentum density, and 
+    \begin{equation*}
+        T_{ab}X^aY^b
+    \end{equation*}
+    is the  $X^a$ momentum flux in the $Y^b$ direction, where $g_{ab}(X^a,Y^b)=g_{ab}(V^a,Y^b)=0.$
+\end{itemize}
+\begin{lemma}
+    The stress-energy tensor is symmetric, i.e. $T^{ab} = T^{ba}.$
+\end{lemma}
+\begin{proof}
+    Note that $T^{a0}$ is the $X^a$ momentum density and $T^{0a}$ is the energy flux in the $x^a$ direction. These are the same quantity, so 
+    \begin{equation*}
+        T^{a0} = T^{0a}.
+    \end{equation*}
+    To show that $T^{ab}=T^{ba}$ for $a,b \neq 0,$ we can use a rotation argument. Consider small volume cuboid elements. The torque in one direction is created by contributions from four sides. For example, the $z$ torque is given by 
+    \begin{equation*}
+        \left(T^{xy}\bigg|_{y=-r}r^2 + T^{xy}\bigg|_{y=r}r^2\right)  - \left(T^{yx}\bigg|_{x=-r}r^2 + T^{yx}\bigg|_{x=r}r^2\right).
+    \end{equation*}
+    The $zz$ momentum of inertia scales like $r^5.$ The angular acceleration is a ratio, and to prevent diverging for small $r$, we evaluate at $y=0+r^3 \approx 0$ instead, and we get 
+    \begin{equation*}
+        T^{xy} = T^{yx}
+    \end{equation*}
+    in order to prevent infinite acceleration.
+\end{proof}
+\subsection{Perfect Fluids}
+\emf{Perfect fluids} have no viscosity (no heat conduction), so there is no shear force. Therefore, $T^{\alpha\beta}=0$ for all $\alpha\neq \beta \in \{1,2,3\}$ spacelike indices. Since there is no heat conduction, heat (energy density) can only be transported in the direction of the fluid, i.e. 
+\begin{equation*}
+    T^{\alpha 0} =0 \forall \alpha \in \{1,2,3\}.
+\end{equation*}
+In a special relativity frame, we have
+\begin{align*}
+    T^{ab} &\xrightarrow[]{SR} \begin{pmatrix}
+        T^{00} & 0 & 0 & 0 \\ 
+        0 & T^{11} & 0 & 0 \\
+        0 & 0 & T^{22} & 0 \\
+        0 & 0 & 0 & T^{33}
+    \end{pmatrix} \\ 
+    &\xrightarrow[]{} \begin{pmatrix}
+        \rho(x,y,z,t) & 0 & 0 & 0 \\ 
+        0 & P(x,y,z,t) & 0 & 0 \\
+        0 & 0 & P & 0 \\
+        0 & 0 & 0 & P
+    \end{pmatrix}.
+\end{align*}
+The stress energy tensor is also divergence free, which is the statement that energy and momentum is conserved locally. Note that in special relativity,
+\begin{itemize}
+    \item $T_{00}$ is the energy density
+    \item $T_{0i}$ is the energy flux in the $i$ direction
+    \item $T_{i0}$ is the $i$-momentum density
+    \item $T_{ij}$ is the flux of momentum in the $j$ direction.
+\end{itemize}
+Consider an imaginary cube. The flux through the 6 faces of the cube is given by 
+\begin{align*}
+    \frac{\partial}{\partial t}\bigg|_{(0,0,0)} (T^{00}L^3) &= -\left(T^{01}\bigg|_{(L,0,0)} - T^{01}\bigg|_{(0,0,0)}\right)\frac{L^2}{L} - \left(T^{02}\bigg|_{(0,L,0)} - T^{02}\bigg|_{(0,0,0)}\right)\frac{L^2}{L} - \left(T^{03}\bigg|_{(0,0,L)} - T^{03}\bigg|_{(0,0,0)}\right)\frac{L^2}{L},
+\end{align*}
+which gives, after taking the limit $L\to 0,$
+\begin{equation}
+    \frac{\partial T^{00}}{\partial t} + \frac{\partial T^{01}}{\partial x} + \frac{\partial T^{02}}{\partial y} + \frac{\partial T^{03}}{\partial z} = 0,
+\end{equation}
+which is the equation for conservation of energy. Similarly, conservation of momentum can be written as 
+\begin{equation}
+    \frac{\partial T^{j0}}{\partial t} + \frac{\partial T^{j1}}{\partial x} + \frac{\partial T^{j2}}{\partial y} + \frac{\partial T^{j3}}{\partial z} = 0.
+\end{equation}
+More generally, we can write that 
+\begin{equation*}
+    \nabla_a T^{ab} = 0.
+\end{equation*}
+Note that we can write 
+\begin{align*}
+    T^{ab} &= (\rho + P)U^aU^b + Pg^{ab} \\ 
+    T_{ab} &= (\rho+P)U_aU_b + Pg_{ab}.
+\end{align*}
+Taking the covariant derivative, we have 
+\begin{align*}
+    0 = \nabla_a T^{ab} &= U^b\nabla_a(\rho U^a) + \rho U^a \nabla_a U^b + P\left(U^b \nabla_a U^a + U^a\nabla_a U^b\right) + (g^{ab} + U^aU^b)\nabla_aP \\ 
+    &= U^b\left(\nabla_a(\rho U^a) + P\nabla_a U^a\right) + (\rho+P)U^a \nabla_a U^b + (g^{ab}+U^aU^b)\nabla_a P.
+\end{align*}
+Contracting with $U^b$ (note: $U^bU_b = -1$) in order to get the motion in a particular direction, 
+\begin{align*}
+    0 = -1\left[\nabla_a(\rho U^a) + P\nabla_a U^a\right] + \cancel{\frac{1}{2}(\rho+P)U^a\nabla_a(U^bU_b)} + \cancel{(U^a-U^a)\nabla_a P},
+\end{align*}
+which gives us 
+\begin{align*}
+    0 &= \nabla_a(\rho U^a) + P\nabla_a U^a = U^a\nabla_a\rho + (\rho+P)\nabla_aU^a\\ 
+    0 &= (\rho+P)U^a \nabla_a U^b + (g^{ab}+U^aU^b)\nabla_a P.
+\end{align*}
+How do we interpret this? In SR, $g_{ab}=\eta_{ab}$ and $\nabla_a = \partial_a,$ and $\rho \gg P$ for $|v| \ll 1.$ Then,
+\begin{align*}
+    0 &= \frac{\partial \rho}{\partial t} + (\vec{v}\cdot \vec{\nabla})\rho + \rho\left(\vec{\nabla} \cdot \vec{v}\right) = \frac{\partial \rho}{\partial t} + \vec{\nabla} \cdot \left(\rho \vec{v}\right),
+\end{align*}
+which gives us the \emf{continuity equation.} We can also recover Netwon's second law, for $b=1,2,3.$
+\begin{equation*}
+    \rho\left(\frac{\partial U^b}{\partial t} + (\vec{v}\cdot \vec{\nabla})U^b\right) = -\partial_b P.
+\end{equation*}
+Together, they form the 3D compressible Euler equations for fluids. We have five unknowns here, $\rho, U^1,U^2,U^3,P,$ and four equations. We can get a fifth equation by getting an equation of state (i.e. ideal gas law). 
+\subsection{Klein-Gordon Wave Equation}
+For $\phi: M\to \mathbb{R},$ the Klein-Gordon wave equation is 
+\begin{equation*}
+    \nabla^a\nabla_a \phi - m^2\phi = 0,
+\end{equation*}
+which can be written as 
+\begin{equation*}
+    \left(-\frac{\partial^2}{\partial t^2} + \Delta\right)\phi - m^2\phi = 0.
+\end{equation*}
+Sometimes, we write 
+\begin{equation*}
+    -\square = -\frac{\partial^2}{\partial t^2} + \Delta.
+\end{equation*}
+This comes from conservation of energy/momentum frmo the following stress energy tensor.
+\begin{align*}
+    T^{ab} = \nabla^a\phi \nabla^\phi - \frac{1}{2}g^{ab}\left(\nabla^c\phi \nabla_c\phi + m^2\phi^2\right)
+\end{align*}
+Contracting it with $\nabla_a$ gives 
+\begin{align*}
+    0 = \nabla_a T^{ab} &= (\nabla_a\nabla^a\phi)\nabla^b\phi + \nabla_a\phi(\nabla_a\nabla^a\phi) - \frac{1}{2}g^{ab}\left(\nabla_a\nabla^c \phi \nabla_c \phi + \nabla^c \phi \nabla_a\nabla_c \phi + 2m^2\phi \nabla_a\phi\right) \\ 
+    0 &= (\nabla_a\nabla^a \phi - m^2\phi)\nabla^b\phi + \nabla^a\phi (\nabla_a\nabla^b\phi) - \frac{1}{2}\left(\nabla^b\nabla_a\phi\nabla^a\phi + \nabla^c\phi\nabla^b\nabla_c\phi\right).
+\end{align*}
+By the torsion free condition, we get the desired wave equation.
+\subsection{Maxwell's Equations}
+We can write the \emf{Faraday tensor} as 
+\begin{equation*}
+    F_{ab} = F_{[ab]} =
+    \begin{pmatrix}
+        0 & E_{1} & E_{2} & E_{3} \\
+        -E_{1} & 0 & B_{3} & -B_{2} \\
+        -E_{2} & -B_{3} & 0 & B_{1} \\
+        -E_{3} & B_{2} & -B_{1} & 0
+    \end{pmatrix}
+\end{equation*}
+Maxwell's equations are very simple in this notation. Namely,
+\begin{align*}
+    \nabla^a F_{ab} &= -4\pi J_b \\ 
+    \nabla_{[a}F_{bc]} &= 0,
+\end{align*}
+where $J^b$ is the charge/current density four-vector. First, we can check that $J^b$ is divergence free. Note that 
+\begin{align*}
+    \nabla^b J_b &= -\frac{1}{4\pi} \nabla^b\nabla^a F_{ab} \\ 
+    &-\frac{1}{4\pi}\partial_a\partial_b F^{ab} \\ 
+    &= 0,
+\end{align*}
+which tells us that current is the flux of the charge density. The second relationship tells us that locally, we can write 
+\begin{equation*}
+    F_{ab} = \nabla_a A_b - \nabla_b A_a,
+\end{equation*}
+where $A$ is a four-vector, known as the \emf{vector potential.} Plugging this into the first relationship gives 
+\begin{equation*}
+    \nabla^a\nabla_a A_b - \nabla_b\nabla_a A^a - R_{abc}^a A^c = -4\pi J_b.
+\end{equation*}
+Notice that we can write $A_a = A_a' + \nabla_a \chi$ (choosing the Lorentz gauge). Then we can show, with some work, that 
+\begin{equation*}
+    \nabla_a A^a = \nabla_a A'^{a} + \nabla_a\nabla^a \chi.
+\end{equation*}
+We can choose $\nabla_a\nabla^a \chi = \nabla_a A^a$ to make $\nabla_a A'^a = 0.$ Therefore, our conservation law gives 
+\begin{equation*}
+    \nabla^a\nabla_a A_b - R_{bc} A^c = - 4\pi J_b.
+\end{equation*}
+How will charges move in these fields? The answer is that the acceleration is given by 
+\begin{equation*}
+    u^a \nabla_a u^b = \frac{q}{m} F^b_c u^c,
+\end{equation*}
+and corresponds to Newton's second law.
+\subsection{Lorentz Gauge}
+In special relativity, the Lorentz gauge seeks solutions 
+\begin{equation*}
+    A_b = C_b e^{iS(t,x,y,z)},
+\end{equation*}
+where $C^b$ is a constant, i.e. parallel transport. Plugging this into the wave equation in the absence of charges, i.e. $\nabla^a\nabla_a A_b=0.$ Then,
+\begin{align*}
+    \partial_a A_b &= A_b i\partial_a S \\ 
+    \partial^a\partial_a A_b &= A_b\left(-\partial^a S\partial_a S + i\partial^a\partial_a S\right).
+\end{align*}
+For this to vanish, both the real and imaginary components need to vanish, i.e. 
+\begin{equation*}
+    \partial^aS \partial_a S = 0 = \partial^a \partial_a S.
+\end{equation*}
+Similarly, $\nabla_b A^b=0$ gives
+\begin{equation*}
+    C^b\nabla_b S = 0.
+\end{equation*}
+Let $k_a = \nabla_a S.$ Then $k_ak^a=0$ is a null vector orthogonal to $C^b.$ Then the surfaces 
+\begin{equation*}
+    \Sigma_\lambda := \{x:S(x)=\lambda\}
+\end{equation*}
+are null surfaces. In fact $k^a$ is both normal and tangent to $\Sigma$ and its integral curves. Foliate $\Sigma_\lambda.$
+
+We have 
+\begin{align*}
+    0 = \partial_b(\partial_a S\partial^a S) &= 2\partial_b\partial_a S\partial^a S \\ 
+    &= 2\left(\partial b k_a\right)k^a,
+\end{align*}
+which is the geodesic equation with tangent $k^a.$
+\subsection{Relating Geometry to Physics}
+For a manifold $(M^n,g_{ij}),$ there is a tensor (Einstein tensor)
+\begin{equation*}
+    G_{ab} = R_{ab} - \frac{1}{2}g_{ab}R,
+\end{equation*}
+that satisfies $\nabla^a G_{ab} = 0.$ But from physics, we know there is another tensor that satisfies 
+\begin{equation*}
+    \nabla^a T_{ab} = 0.
+\end{equation*}
+For Maxwell, this tensor is 
+\begin{equation*}
+    T_{ab} = \frac{1}{4\pi} \left(F_{ac}F^{c}_{a} - g_{ab} F_{cd}F^{cd}\right),
+\end{equation*}
+where $\nabla^a T_{ab}=0$ if $J_b=0.$ Note that more generally, we need to take the stress energy of charges + currents to get the more general statement.
+
+The brilliant idea of Einstein was that maybe these are the same things. The Einstein Field equations says geometry = physics, and says 
+\begin{equation*}
+    G_{ab} = \alpha T_{ab},
+\end{equation*}
+for some constant $\alpha.$ We can determine $\alpha$ be consistencies with Newtonian gravity, where tidal forces at separation $\vec{X}$ are given by 
+\begin{equation*}
+    F = -\left(\vec{X} \cdot \vec{\nabla}\right) \nabla\phi,
+\end{equation*}
+where $\nabla\phi = 4\pi \rho.$ In general relativity, the geodesic deviation gives 
+\begin{equation*}
+    (X^a\nabla_a)(X^b\nabla_b U^d) = -R_{abc}{}^dU^aU^cX^b.
+\end{equation*}
+We need to somehow match these two ideas. We can identify 
+\begin{equation*}
+    R_{abc}^dU^aU^c
+\end{equation*}
+(which has trace $R_{ac}$ with 
+\begin{equation*}
+    \partial_b\partial^d \phi,
+\end{equation*}
+which has trace $4\pi \rho.$ This suggests that 
+\begin{equation*}
+    R_{ac}U^aU^c = 4\pi T_{ac},
+\end{equation*}
+but the right side is divergence free but the left side is not. We can fix this by contracting with $U^aU^b$ to get 
+\begin{equation*}
+    4\pi \rho \sim R_{ab}U^aU^b,
+\end{equation*}
+which eventually gives us $\alpha = 8\pi.$ Therefore, Einstein's equation is 
+\begin{equation*}
+    G_{ab} = 8\pi T_{ab}.
+\end{equation*}
+\end{document}

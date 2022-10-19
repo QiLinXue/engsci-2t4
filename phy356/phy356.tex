@@ -1,0 +1,534 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY356: Quantum Mechanics}
+\author{QiLin Xue}
+\date{Winter 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+\usetikzlibrary{quantikz}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\section{Introduction}
+\subsection{Motivation}
+In classical mechanics, there is a 1:1 correspondence between ``elements of reality'' and ``elements of mathematical description.'' However, this is not true for quantum mechanics. Some examples:
+\begin{itemize}
+    \item \textit{Double/Single Slit:} Electromagnetic waves carry energy and momentum that can be transferred 
+    \begin{center}
+        \begin{tikzpicture}
+            % Draw rectangle
+            \draw[thick] (0,-1) rectangle (0.1,1);
+            \draw[thick] (0,1.1) rectangle (0.1,2);
+            \draw[thick] (0,2.1) rectangle (0.1,4.2);
+            \draw[<->] (-0.2,1.1) -- (-0.2,2) node[midway,left]{$d$};
+            \draw[-,thick] (4,-1) -- (4,4.2);
+            \draw[-] (0.1, 1.05) -- (4,3);
+            \draw[-] (0.1, 2.05) -- (4,3);
+            \draw[-,dashed] (0.1, 2.05) -- (0.36, 1.22);
+
+            % Draw circle
+            \draw[thick, fill=yellow, color=yellow] (-2,1.55) circle (0.15);
+        \end{tikzpicture}
+    \end{center}
+    For a screen far away, the difference in ray lengths is given by $\Delta L = d\sin\theta.$ For destructive decoherence, we want this difference to be half a wavelength $d\sin\theta = \left(n+\frac{1}{2}\right)\lambda.$ For a wall a distance $L$ very far away, this produces a spacing of fringes a distance $\Delta x = \frac{\lambda}{d}{L}$ apart.
+
+    A single slit diffraction experiment occurs when there's a single slit of width $d,$ the angle the first minimum makes is given by $\delta \theta = \frac{\lambda}{D}.$
+    \item \textit{Photoelectric Effect:} Light also has a particle-like nature. If we shoot an electromagnetic wave at a metal, electrons can be ejected with an energy of
+    \begin{equation*}
+        E_{e^-} = \hbar\omega - W,
+    \end{equation*}
+    where $W$ is the work function. Recall that $k=2\pi/\lambda,\omega=\nu/2\pi, \omega=ck.$ This suggests that photons come in ``clumps'' of energy of magnitude $\hbar\omega,$ and also that $\vec{p}=\hbar\vec{k},$ where $\vec{k}$ is the classical \emf{wave-vector} of the electromagnetic wave.
+\end{itemize}
+The above examples suggest that a purely wave picture of EM waves is inconsistent.
+
+\begin{experiment}
+    \textit{Davison-Gener Experiment (1927)}
+
+    An electron diffraction experiment was performed with a slit of width $D$ with an initial momentum $\vec{p}.$ A fringe separation of
+    \begin{equation*}
+        \Delta \theta = \frac{h}{pD}
+    \end{equation*}
+    was observed. To explain the experiment, we associate the \emf{de-Broglie wavelength} 
+    \begin{equation*}
+        \lambda = \frac{h}{p}
+    \end{equation*}
+    in accordance with $\vec{p}=\hbar\vec{k}.$
+\end{experiment}
+We have an \textit{optical analogy:} associate a frequency $\omega = \frac{E}{\hbar},$ in which case,
+\begin{equation*}
+    E_{kin} = \frac{p^2}{2m} = \frac{h^2}{2m\lambda^2}
+\end{equation*}
+is the kinetic energy. We can write down the \emf{wavefunction} as,
+\begin{equation*}
+    \psi(\vec{r},t) = e^{i\vec{k}\cdot\vec{r} - i\omega t}
+\end{equation*}
+describes the probability amplitude of a particle's presence at $\vec{r},t.$
+
+The wave nature of matter is essential in understanding the stability of atoms. For a classical atom, electrons are unstable because of:
+\begin{itemize}
+    \item Moving electrons radiates and decays per the \href{https://en.wikipedia.org/wiki/Larmor_formula}{Larmor effect}
+    \item Unstable due to strong external perturbation.
+\end{itemize}
+But in the wave picture, the wavefunction of the electron crudely forms a standing wave around its orbit, giving the \emf{Bohr-Sommerfeld quantization,}
+\begin{equation*}
+    2\pi r = n\lambda
+\end{equation*}
+For a classical atom, the electron momentum $\vec{p}$ and position $\vec{r}$ are completely independent variables, but now it's no longer true!
+
+The total energy is 
+\begin{equation*}
+    E = \frac{\hbar^2}{2mr^2} - \frac{e^2}{r}.
+\end{equation*}
+Note that we have a very large energy cost (first term) to confining the electron to a very small radius.
+
+To reconcile the particle and wave-like nature of matter for a single slit, we have a position uncertainty of $\delta y = D.$
+\begin{center}
+    \begin{tikzpicture}
+        \draw[-] (0,0) -- (3,0) node[midway,below] {$p_x$};
+        \draw[-] (3,0) -- (3,1) node[midway,right] {$\Delta p_y$};
+        \draw[-] (0,0) -- (3,1);
+    \end{tikzpicture}
+\end{center}
+Recall that the diffracted angle is also given by $\lambda/D.$ We then have the relationship that 
+\begin{equation*}
+    \frac{\Delta p_y}{p_x} = \frac{\lambda}{D},
+\end{equation*}
+which gives us the \emf{uncertainty principle},
+\begin{equation*}
+    \Delta p_y \Delta y = \lambda p_x = h.
+\end{equation*}
+\subsection{Schrodinger Wave Equation}
+Recall that a general wavefunction is described by
+\begin{equation*}
+    \psi(\vec{r},t) = e^{i\vec{k}\cdot \vec{r} - i\omega t}.
+\end{equation*}
+Can we guess the governing equation? Note that
+\begin{align*}
+    \frac{\hbar}{i}\vec{\nabla}\psi &= \hbar \vec{k}\psi = \vec{p}\psi \\ 
+    i\hbar \frac{\partial}{\partial t}\psi &= \hbar \omega \psi = E\psi.
+\end{align*}
+Classically, $E=p^2/2m$ in free space, so this might suggest where the \emf{free particle Schrödinger equation} comes from,
+\begin{equation}
+    \frac{1}{2m}\left(\frac{\hbar}{i}\nabla\right)^2 = i\hbar\frac{\partial}{\partial t}\psi.
+\end{equation}
+More generally, $E=\frac{p^2}{2m}+V(\vec{r},t)$, where $V$ is some external potential, allowing us to conjecture
+\begin{equation}
+    \boxed{-\frac{\hbar^2}{2m}\nabla^2\psi + V(\vec{r},t)\psi = i\hbar\frac{\partial}{\partial t}\psi.}
+\end{equation}
+The wavefunction has a probability interpretation. Namely, the probability density function is given by 
+\begin{equation}
+    p(\vec{r},t) = \left|\psi(\vec{r},t)\right|^2,
+\end{equation} 
+such that
+\begin{equation*}
+    \int_V \dd^3\vec{r} p(\vec{r},t) = 1,
+\end{equation*}
+which represents the fact that the particle is \textit{somewhere} in the space of volume $V.$ Because of this, we need to add in a normalization factor, 
+\begin{equation*}
+    \psi = \frac{1}{\sqrt{V}e^{i\vec{k}\cdot\vec{r} - i\omega t}}.
+\end{equation*}
+The Schrödinger equation also satisfies a conservation law. If particles are neither created nor destroyed, then there is a \emf{continuity equation.} Namely, note that
+\begin{equation*}
+    \frac{\partial P(\vec{r},t)}{\partial t} = \frac{\partial \psi^*}{\partial t}\psi + \psi^*\frac{\partial \psi}{\partial t} = - \nabla \cdot \vec{J},
+\end{equation*}
+i.e. the change in probability is the flux of some quantity. The integral, using the divergence theorem, is then:
+\begin{align*}
+    \frac{\partial}{\partial t}\int_V \dd{V} P(\vec{r},t) = -\int_{\partial V} \vec{J} \cdot \dd{\vec{A}}.
+\end{align*}
+We can find $J$ by computing,
+\begin{align*}
+    \psi^*\frac{\partial \psi}{\partial t} + \psi \frac{\partial \psi^*}{\partial t} &= \frac{i\hbar}{2m}\left(\psi^*\nabla^2\psi - (\nabla^2\psi^*)\psi\right) \\ 
+    &= \frac{i\hbar}{2m}\nabla \cdot \left(\psi^*\nabla\psi - (\nabla \psi^*)\psi\right),
+\end{align*}
+We have the expression in the right form, so we can identify
+\begin{equation}
+    \vec{J} = -\frac{i\hbar}{2m}\left(\psi^* \nabla \psi - (\nabla \psi^*)\psi\right).
+\end{equation}
+as the \emf{probability flux.} For a plane wave, the probability flux is $\vec{J} = \frac{\hbar \vec{k}}{m} = \vec{v}.$ This flux imposes some restrictions on our wavefunction.
+\begin{lemma}
+    Specifically, $\psi(\vec{r},t)$ must be continuous and differentiable and $\nabla \psi$ must be continuous.
+\end{lemma}
+This is unlike an electromagnetic wave, which can be discontinuous on surfaces.
+\subsection{Superposition Principle}
+Now that we have the basic tools to describe wavefunctions, how does wave mechanics recapture the notion of a classical particle? We can achieve this by using the \emf{superposition principle.}
+
+That is, if $\psi_1,\psi_2$ are both solutions to the SE, then $\psi_1+\psi_2$ is also a solution. A general solution could be written as
+\begin{align*}
+    \psi = A_1e^{i\vec{k}_1 \cdot \vec{r} - i\omega(\vec{k_1})t} + A_2e^{i\vec{k}_2 \cdot \vec{r} - i\omega(\vec{k_2})t} + \cdots,
+\end{align*}
+provided $h\omega(k) = \frac{\hbar^2k^2}{2m}.$
+\begin{example}
+    Suppose $\cos k_1x,\cos k_2x$ are solutions. Then:
+    \begin{align*}
+        \cos k_1x + \cos k_2 x &= 2\cos\left(\frac{k_1+k_2}{2}x\right)\cos\left(\frac{k_1-k_2}{2}x\right),
+    \end{align*}
+    which represent \emf{beats:}
+    \begin{center}
+        \begin{tikzpicture}
+        \begin{axis}[
+        legend pos=outer north east,
+        title=Example,
+        axis lines = box,
+        xlabel = $x$,
+        ylabel = $y$,
+        variable = t,
+        trig format plots = rad,
+        ]
+        \addplot [
+            domain=-4:4,
+            samples=150,
+            color=blue,
+            ]
+            {cos(5*x)*cos(x)};
+        \addlegendentry{$f(x)$}
+        \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{example}
+\subsection{Fourier Decomposition}
+The general solution of a free particle SE can be written as
+\begin{equation*}
+    \psi(\vec{r},t) = \frac{1}{(2\pi)^{3/2}}\int \dd^3\vec{k} g(\vec{k}) e^{i(\vec{k}\cdot \vec{r} - \omega(k)t)}.
+\end{equation*} 
+Let us interpret $g(\vec{k})$ as the probability amplitude of the particle's momentum.
+\begin{example}
+    Consider a simple example where $t=0$ and in 1 dimension only. Then:
+    \begin{align*}
+        \psi(x,0) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} \dd{k} g(k)e^{ikx}.
+    \end{align*}
+    and
+    \begin{align*}
+        g(k) = \exp\left(-\frac{(k-k_0)^2}{2(\Delta k)^2}\right),
+    \end{align*}
+    is the standard normal distribution, where $k_0$ is the average, and $\Delta k$ is the standard deviation.
+    The average momentum is $p=\hbar k_0.$ Let $k=k'-k_0,$ such that 
+    \begin{align*}
+        \int \dd{k'} \exp\left(-\frac{(k'-k_0)^2}{2(\Delta k)^2} + ik'x\right) &= e^{ik_0 x}\int \dd{k} \exp\left(-\frac{k^2}{2(\Delta k)^2} + ikx\right).
+    \end{align*}
+    We can complete the square, by noting that 
+    \begin{align*}
+        -\frac{k^2}{2(\Delta k)^2} + ikx &= -\frac{1}{2(\Delta k)^2}\left[k^2 - (2i(\Delta k)^2x)k - (\Delta k)^4x^2\right] - \frac{1}{2}x^2(\Delta k)^2 \\ 
+        &= \frac{1}{2(\Delta k)^2}\left[k-i(\Delta k)^2x\right]^2 - \frac{1}{2}x^2(\Delta k)^2.
+    \end{align*}
+    Therefore,
+    \begin{align*}
+        \psi(x,0) = Ae^{ik_0x}e^{-\frac{1}{2}x^2(\Delta k)^2},
+    \end{align*}
+    which is a Gaussian. The particle's position is uncertain by some amount 
+    \begin{equation*}
+        \Delta x \simeq \frac{1}{\Delta k}.
+    \end{equation*}
+    In other words, $\Delta x \Delta k \simeq 1,$ and multiplying it through by $\hbar$ leads us to once again give an argument for the Heisenberg Uncertainty Principle,
+    \begin{align*}
+        \Delta x\Delta p \ge \frac{\hbar}{2}
+    \end{align*}
+\end{example}
+\subsection{Formulation of Quantum Mechanics}
+Recall that $|g(\vec{k})|^2$ gives the probability that the particle has a momentum $\hbar \vec{k}$. Given $\psi(\vec{r},0)$, then the Fourier Transform gives,
+\begin{align*}
+    g(\vec{k}) = \frac{1}{(2\pi)^{3/2}}\dd^3{\vec{r}}e^{-i\vec{k}\cdot \vec{r}}\psi(\vec{r},0)
+\end{align*}
+and the S.E. gives subsequent states in time. Now we can examine \emf{Stationary state solutions} to the S.E.
+
+In general,
+\begin{equation*}
+    -\frac{\hbar^2}{2m}\nabla^2 \psi + V(\vec{r},t)\psi = i\hbar \frac{\partial}{\partial t}\psi(\vec{r},t),
+\end{equation*}
+and suppose $V(\vec{r},t) = V(\vec{r})$ is time independent (i.e. electron in an orbit around a proton through a Bohr model). Can QM resolve the paradox of radiation from an accelerating charge causing an orbiting electron to lose its energy? The answer is yes, and it has to do with the idea that the concept of trajectory has to be abandoned.
+
+For no radiation, we require no acceleration, which can be described mathematically as:
+\begin{equation*}
+    \frac{d^2 P(\vec{r},t)}{dt^2} = 0 \implies |\psi(\vec{r},t)|\text{ is time independent.}
+\end{equation*}
+Note that $\psi$ cannot be linear in time since it would cause the wavefunction to not be normalized. Suppose that 
+\begin{equation*}
+    \psi(\vec{r},t) = \phi(\vec{r})e^{-iEt/\hbar}
+\end{equation*}
+is a stationary state. Then the S.E> can be rewritten as:
+\begin{equation*}
+    -\frac{\hbar^2}{2m}\nabla^2\phi + V(\vec{r})\phi(\vec{r}) = E\phi(\vec{r}),
+\end{equation*}
+with $\hbar\omega = E$ is the energy of the state, also known as the \emf{eigenvalue of a Hamiltonian Operator:} $H \equiv -\frac{\hbar^2}{2m}\nabla^2 + V(\vec{r}).$ For example,
+\begin{enumerate}[label=(\alph*)]
+    \item Hydrogen Atom $V(r) = -e^2/r$ (We will revisit this later)
+    \item A square well in 1-dimension:
+    \begin{equation*}
+        V(x) = \begin{cases}
+            -V_0 & \text{if } -a/2 \le x \le a/2 \\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    \item A particle in a Box:
+    \begin{equation*}
+        V(x) = \begin{cases}
+            0 & \text{if } 0 \le x \le a \\
+            \infty & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+\end{enumerate}
+We will deal with a particle in a box first. We have:
+\begin{equation*}
+    -\frac{\hbar^2}{2m}\frac{d^2}{dx^2}\phi = E\phi,
+\end{equation*}
+with the boundary condition that $\phi(0)= \phi(a)=0.$ We can identify this as a 2nd order differential equation we know the solution to, but we can also approach it with a ``QM'' mindset.
+
+We know that plane waves satisfy the S.E. but they won't produce the necessary boundary conditions, so we need to take linear combinations of them. This gives the $n$th solution to be:
+\begin{equation*}
+    \phi_n(x) = A_n\sin\left(\frac{n\pi}{a}x\right) \implies E_n = \frac{\pi^2 \hbar^2 n^2}[2ma^2].
+\end{equation*}
+We also need to ensure this is normalized. That is,
+\begin{align*}
+    & \int_0^a \dd{x} \phi_n^2(x) = 1 \\ 
+\implies & A_n^2 \int_0^a \dd{x} \sin\left(\frac{n\pi x}{a} \right) = 1\\ 
+\implies & A_n^2\frac{a}{2} = 1 \\ 
+\implies & A_n = \sqrt{\frac{2}{a}}.
+\end{align*}
+The $\phi_n$ are \emf{eigenfunctions} of the Hamiltonian Operator, and correspond to \emf{fundamental modes}.
+
+One observation is that the $n$th eigenfunction has exactly $(n-1)$ nodes. Therefore,
+\begin{equation*}
+    \psi_n(x,t) = \phi_n(x)e^{iE_nt/\hbar}\quad\quad\quad\quad n=1,2,3,\dots
+\end{equation*}
+Since the S.E. is linear, the general solution of the time-dependent S.E. is
+\begin{align*}
+    \psi(x,t) = \sum_{n=1}^\infty c_n\phi_n(x)e^{iE_nt/\hbar},
+\end{align*}
+and we will later show that any wavefunction can be written in the above form, as the \emf{superposition of stationary states}
+\subsection{Principle of Spectral Decomposition}
+In any measurement of energy, the system will be found in one of its eigenstates. This explains the line spectra of atoms.
+
+Any initial state $\psi(x,0)$ can be represented by a superposition of eigenstates,
+\begin{equation*}
+    \psi(x,0) = \sum_n c_n \phi_n(x)
+\end{equation*}
+for some $c_n.$
+
+We can also look at the stability to some external force. Suppose we squeeze the box from $a\to 0,$ which would imply the energy would increase, causing the wavefunction to resist, and the box won't be crushed.
+\subsection{Square Well Potential}
+A more realistic case is the finite square well potential. For $|x| < a/2$, we have 
+\begin{equation*}
+    -\frac{\hbar^2}{2m}\frac{d^2\phi}{dx^2} = (E+V_0)\phi,
+\end{equation*}
+and for $|x| > a/2,$ we have:
+\begin{equation*}
+    -\frac{\hbar^2}{2m}\frac{d^2\phi}{dx^2} = E\phi.
+\end{equation*}
+We are interested in the range $-V_0 < E < 0,$ i.e. in order to look for \emf{bound states}. For $|X|<a/2,$ we have,
+\begin{align*}
+    \phi_k(x) = A_1e^{ikx}+A_2e^{-ikx} \implies \frac{\hbar^2 k^2}{2m} = E + V_0.
+\end{align*}
+For $x>a/2,$ we have 
+\begin{align*}
+    \phi_q(x) = B_1e^{-qx} + B_2e^{qx} \implies -\frac{\hbar^2q^2}{2m} = E < 0.
+\end{align*}
+This corresponds to the \emf{tunneling} of wavefunction into classically forbidden space. We can use symmetry to say that 
+\begin{align*}
+    & |\psi(x)|^2 = |\psi(-x)|^2 \\ 
+    \implies & \psi(x) = \pm \psi(-x).
+\end{align*}
+This means that $\frac{d\Psi}{dx}(0) = 0,$ which gives $ikA_1-ikA_2=0\implies A_1=A_2\equiv A.$
+
+Another boundary condition is that $\psi(a/2)$ and $\psi'(a/2)$ are continuous, which gives the system of equations:
+\begin{align*}
+    A\cos(ka/2) &= Be^{-qa/2} \\ 
+    -Ak\sin(ka/2) &= -qBe^{-qa/2},
+\end{align*}
+which can be written as 
+\begin{equation*}
+    \begin{pmatrix}
+        \cos(ka/2) & -e^{-qa/2} \\ 
+        k\sin(ka/2) & qe^{-qa/2}
+    \end{pmatrix}\begin{pmatrix}
+        A \\ B
+    \end{pmatrix} = 0,
+\end{equation*}
+which is a homogeneous equation. To find nontrivial equations, we can set the determinant to be zero, giving  the \emf{eigenvalue condition}
+\begin{align*}
+    & (q\cos(ka/2) - k\sin(ka/2))e^{-qa/2} = 0 \\ 
+\implies & \boxed{\cot(ka/2) = k/q}.
+\end{align*}
+Recall that the $k,q$ depend on the energy, so this is also a condition for the energy. Recall that
+\begin{align*}
+    k &= \frac{\sqrt{2m(E+V_0)}}{\hbar} > 0  \\
+    q &= \frac{\sqrt{-2mE}}{\hbar} > 0,
+\end{align*}
+so
+\begin{equation*}
+    k^2 + q^2 = \frac{2mV_0}{\hbar^2} \equiv k_0^2.
+\end{equation*}
+Therefore,
+\begin{align*}
+    & \frac{\cos^2(ka/2)}{\sin^2(ka/2)} = \frac{k^2}{q^2} = \frac{k^2}{k_0^2-k^2} \\ 
+    \implies & \frac{\cos^2(ka/2)}{1-\cos^2(ka/2)} = \frac{(k/k_0)^2}{1-(k/k_0)^2}.
+\end{align*}
+Since $k>0,$ we get an \emf{eigenvalue equation} for the \emf{symmetric bound state,}
+\begin{equation*}
+    \frac{k}{k_0} = \frac{\hbar k}{\sqrt{2mV_0}}= |\cos(ka/2)|.
+\end{equation*}
+The eigenvalue condition is 
+\begin{equation*}
+    \frac{k}{q} = \cot(ka/2) > 0.
+\end{equation*}
+\begin{center}
+        \begin{tikzpicture}
+        \begin{axis}[
+        legend pos=outer north east,
+        title=Example,
+        axis lines = box,
+        xlabel = $x$,
+        ylabel = $y$,
+        variable = t,
+        trig format plots = rad,
+        ]
+        
+        \addplot [
+            domain=0:10,
+            samples=150,
+            color=blue,
+            ]
+            {sqrt((cos(x))^2)};
+            \addlegendentry{$|\cos(ka/2)|$}
+        \addplot [
+            domain=0:10,
+            samples=150,
+            color=red,
+            ]
+            {0.1*x};
+            \addlegendentry{Large $V_0$}
+        \addplot [
+            domain=0:1,
+            samples=150,
+            color=orange,
+            ]
+            {2*x};
+            \addlegendentry{Small $V_0$}
+        \end{axis}
+        \end{tikzpicture}
+    \end{center}
+        We have to ignore the points where $\cot(ka/2)<0.$ We consider large and small $V_0$ limits for a fixed $q.$
+        \begin{enumerate}[label=(\roman*)]
+            \item Small $V_0,$ we have $k_0 \to 0$ so $k/k_0 \to 1.$ Then:
+            \begin{equation*}
+                \cos(ka/2) \approx 1- \frac{k^2a^2}{8}.
+            \end{equation*}
+            For $k_0a \ll 1,$ we can write $k=k_0(1-\epsilon)$ for some small $\epsilon.$ Let us determine $\epsilon.$ Note 
+            \begin{align*}
+                & 1- \epsilon \simeq 1 - \frac{(k_0a)^2}{8}(1-\epsilon)^2 \\ 
+                \implies & \frac{\epsilon}{(1-\epsilon)^2} \simeq \frac{(k_0a)^2}{8} \\ 
+                \implies & \epsilon \simeq \frac{(k_0a)^2}{4}.
+            \end{align*}
+            Recall that the energy eigenvalue is $k^2 = \frac{2mE}{\hbar^2}+k_0^2,$ so 
+            \begin{align*}
+                \frac{2mE}{\hbar^2} &= k^2-k_0^2 = k_0^2[(1-\epsilon)^2-1] \\ 
+                &\simeq -2\epsilon k_0^2 \\ 
+                &\simeq -k_0^2 \frac{(k_0a)^2}{4}.
+            \end{align*}
+            Therefore, we can write 
+            \begin{equation*}
+                \frac{E}{V_0} = -\frac{(k_0a)^2}{4}.
+            \end{equation*}
+            This has very weak binding, with an energy $E=\frac{-ma^2V_0^2}{2\hbar^2}.$
+
+            The \emf{tunnelling distance} is 
+            \begin{align*}
+                q^{-1} &= \frac{\hbar}{\sqrt{-2mE}} = \frac{1}{(k_0a)}\sqrt{\frac{2\hbar^2}{mV_0}}
+            \end{align*}
+            \item In the large $V_0$ limit, we have 
+            \begin{equation*}
+                k = \frac{\pi}{a},\frac{3\pi}{a},\dots,\frac{\pi}{a}(2n-1)
+            \end{equation*}
+            and 
+            \begin{equation*}
+                E = -V_0 + \frac{\hbar^2k^2}{2m} = -V_0 + \frac{\pi^2\hbar^2}{2ma^2}(2n-1)^2.
+            \end{equation*}
+            We can repeat this for antisymmetric solutions $\psi(x) = -\psi(-x)$ yields
+            \begin{equation*}
+                E = -V_0 + \frac{\pi^2\hbar^2}{2ma^2}(2n)^2.
+            \end{equation*}
+        \end{enumerate}
+        Note, what does it actually mean when we say small or large $V_0?$ We always have to compare it to something. We can perform a dimensional analysis. Recall that the Schrödinger equation is 
+        \begin{equation*}
+            -\frac{\hbar^2}{2m}\frac{d^2}{dx^2}\psi(x) = -V_0\psi = E\psi.
+        \end{equation*}
+        Let $y$ be a dimensionless length scale such that $x=ay.$ Then:
+        \begin{align*}
+            & \left[-\frac{\hbar^2}{2ma^2}\frac{d^2}{dy^2} - V_0\right]\psi = E\psi.
+        \end{align*}
+        Therefore, $\frac{\hbar^2}{2ma^2}$ is an indicator of an energy associated with the length scale $a.$ We can view it as the \emf{kinetic energy of localization.} Therefore, for $V_0 \gg \frac{\hbar^2}{2ma^2},$ we venture into the classical regime (particle in a box) and for $V_0 \ll \frac{\hbar^2}{2ma^2},$ we have the \emf{quantum limit.}
+        \subsection{Direct \texorpdfstring{$\delta$}{delta}-Function Potential}
+        Let us define the dirac $\delta$-function potential such that $\alpha \equiv V_0a \equiv \text{finite}$ and take the limit as $V_0 \to \infty,a\to 0.$ Then,
+        \begin{equation*}
+            \int_{-\infty}^{\infty} \dd{x} V(x) = -V_0\alpha.
+        \end{equation*} 
+        Suppose that $V(x) = -\alpha \delta (x).$ One important property of the $\delta$-function is that 
+        \begin{equation*}
+            \int_{-\infty}^{\infty} \dd{x} f(x)\delta(x) = f(0).
+        \end{equation*}
+        Then,
+        \begin{align*}
+            -\frac{\hbar^2}{2m}\frac{d^2}{dx^2}\psi - \alpha \delta(x) \psi = E\psi.
+        \end{align*}
+        This is singular in potential at $x=0,$ so we should reconsider boundary conditions. Assume that $\psi$ is continuous, so 
+        \begin{align*}
+            & -\frac{\hbar^2}{2m} \int_{-\epsilon}^{\epsilon} \dd{x} \frac{d^2\psi}{dx^2} - \alpha \int_{-\epsilon}^{\epsilon}\dd{x} \delta(x) \psi(x) = E\int_{-\epsilon}^{\epsilon}\dd{x} \psi(x) \\ 
+            (\text{for } \epsilon \to 0) \implies & -\frac{\hbar^2}{2m}\left[\psi'(\epsilon) - \psi'(-\epsilon)\right] - \alpha\psi(0) = 0.
+        \end{align*}
+        An important observation is that $\psi'$ is discontinuous. We already know that 
+        \begin{equation*}
+            \psi(x) = \begin{cases}
+                Ae^{-qx} & x> 0 \\ 
+                Be^{qx} & x< 0.
+            \end{cases}
+        \end{equation*}
+        Applying the discontinuity equation, we have:
+        \begin{align*}
+            & -\frac{\hbar^2}{2m}A[-q-q] - \alpha A = 0 \\ 
+\implies & \frac{\hbar^2q}{m}=\alpha.
+        \end{align*}
+        The energy eigenvalue is 
+        \begin{equation*}
+            E = \frac{-\hbar^2q^2}{2m} = -\frac{m\alpha^2}{2\hbar^2}.
+        \end{equation*}
+        Compare this with the finite square well for the quantum limit, we have 
+        \begin{equation*}
+            -\frac{ma^2V_0^2}{2\hbar^2}.
+        \end{equation*}
+    \subsection{Continuum States and Resonances}
+    Consider a potential step,
+    \begin{equation*}
+        V(x) = \begin{cases}
+            0 & x<0 \\ 
+            -V_0 & x>0.
+        \end{cases}
+    \end{equation*}
+    The wavefunction is 
+    \begin{align*}
+        \phi(x) &= \begin{cases}
+            e^{iqx} + re^{-iqx} & x<0 \\ 
+            te^{ikx} & x>0.
+        \end{cases}
+    \end{align*}
+    In order for $\phi$ to be continuous, we demand that $1+r=t.$ In order for $\phi'$ to be continuous, we want $iq - iqw = ikt\implies 1-r = \frac{k}{q}t.$ We have two equations and two unknowns, so
+    \begin{align*}
+        t &= \frac{2q}{q+k} \\ 
+        r &= \frac{q-k}{q+k}.
+    \end{align*}
+    We have 
+    \begin{equation*}
+        k = \frac{\sqrt{2mE}}{\hbar}, \quad\quad\quad\quad q=\frac{\sqrt{2m(E+V_0)}}{\hbar}.
+    \end{equation*}
+    There is always a nonzero reflection for $V_0 \neq 0.$ We have several cases:
+    \begin{enumerate}[label=(\alph*)]
+        \item $k>q$ implies a $180^\circ$ phase shift.
+        \item $k<q$ implies $r>0$ so there is no phase shift and $V_0$ is actually negative.
+    \end{enumerate}
+    This is a surprising result since classically, we do not expect a plane wave to reflect when it goes down in potential. To recapture the classical behavior, we need the potential to drop smoothly over a distance $\delta$ and demand that $\lambda \ll \delta,$ where $\lambda$ is the de Broglie wavelength.
+\end{document}

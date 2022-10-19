@@ -1,0 +1,5 @@
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QA metric is a \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-tensor that is also: Symmetric: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Nondegenerate: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q only if \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QA metric is a \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-tensor that is also: Symmetric: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Nondegenerate: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q only if \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"BEEN_PART_AGREEMENT","sentence":"^\\QDefine \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q be coordinate tangent vectors.\\E$"}
+{"rule":"BEEN_PART_AGREEMENT","sentence":"^\\QDefine \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q be coordinate tangent vectors to \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"IN_A_X_MANNER","sentence":"^\\QAt each point, we have a lightcone and we can decide the future direction in a consistent way (orientable).\\E$"}

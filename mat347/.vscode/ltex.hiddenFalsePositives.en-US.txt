@@ -1,0 +1,1 @@
+{"rule":"CAPITALIZATION_NNP_DERIVED","sentence":"^\\QIf \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is abelian, then \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q and every element is its own conjugacy class.\\E$"}

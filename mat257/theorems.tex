@@ -1,0 +1,184 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{MAT257: Term Test III Theorems}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\begin{theorem}
+    \textbf{Change of Variables:} Let $A\subset \mathbb{R}^n$ be open, $g: A\rightarrow \mathbb{R}^n$ be continuously differentiable, 1-1, and such that $\forall x\in A$, $g'(x)$ is invertible. If $f:g(A) \rightarrow \mathbb{R}$ is integrable, then
+    \begin{equation}
+        \int\limits_{g(A)} f  = \int\limits_{A} (f\circ g)|\det g'|.
+    \end{equation}
+\end{theorem}
+\textit{Lemmas:}
+\begin{enumerate}
+    \item If $cov(g)$ and $cov(f)$ holds, then $cov(g\circ h)$ holds.
+    \item Assume $cov(n-1)$. Let $g: U\rightarrow \mathbb{R}^n$ where $U$ is open and bounded be a layer-preserving map such that $g(U)$ is bounded. This means that:
+    \begin{equation}
+        g(x_1,\dots,x_n) = (\dots,x_n).
+    \end{equation}
+    Then a restricted $cov(g)$ holds: If $f:g(U) \rightarrow \mathbb{R}$ is continuous and $\text{supp }f \subset g(U)$, then
+    \begin{equation}
+        \int f = \int (f\circ g) |\det g'|.
+    \end{equation}
+    \item For every $a\in A$, there is some open neighbourhood $U \ni a$ such that on $U$, $g$ is a composition of linear maps and coordinate swaps:
+    \begin{equation}
+        T_{ij}: \mathbb{R}^n \rightarrow \mathbb{R}^n\quad\quad T_{ij}(x_1,,\dots,x_i,\dots,x_j,\dots,x_n) = (x_1,\dots,x_j,\dots,x_i,\dots,x_n).
+    \end{equation}
+    \item Local RCOV implies Global RCOV (where R denotes that it is a restricted COV formula, where we only work with continuous functions)
+    \item COV(1D) holds
+    \item RCOV implies COV (if it holds for continuous functions, it holds for integrable functions)
+    \item COV holds for coordinate swaps $T_{ij}$
+\end{enumerate}
+\begin{theorem}
+    \textbf{Baby Sard's Theorem:} If $A \in \mathbb{R}^n$ is open and $g:A\rightarrow \mathbb{R}^n$ is continuously differentiable, given
+    \begin{equation}
+        C:= \{x\in A: \det g'(x) = 0\}
+    \end{equation}
+    then $g(C)$ is of measure 0.
+\end{theorem}
+\textit{But more importantly, the corollary:}
+\begin{enumerate}
+    \item In the COV theorem, we can drop the condition that $g'$ is 1-1.
+\end{enumerate}
+\begin{definition}
+    Let $V$ be a vector space over $\mathbb{R}$, then 
+    \begin{equation}
+        T: V^k \rightarrow \mathbb{R}
+    \end{equation}
+    is called multilinear or $k$-linear if
+    \begin{equation}
+        T(u_1,\dots,\alpha u_i'+\beta u_i'', \dots, u_k) = \alpha T(u_1,\dots,u_i',\dots,u_k) + \beta T(u_1,\dots,u_i'',\dots,u_k).
+    \end{equation}
+\end{definition}
+\begin{definition}
+    A $k$-tensor $\mathcal{T}^k(V)$ is the set of $k$-linear maps on $v$, i.e.
+\end{definition}
+\textit{A few claims about the $k$-vector:}
+\begin{enumerate}
+    \item $\mathcal{T}^k(V)$ is a vector space.
+    \item $T_1 \otimes T_2 = T_1T_2 \in \mathcal{T}^{k+\ell}$
+\end{enumerate}
+\begin{theorem}
+    Let $V$ have a basis $v_1,\dots,v_n$ and a dual basis $\varphi_1,\dots,\varphi_n$. Then:
+    \begin{equation}
+        \varphi_I = \{\varphi_I: I\in \underline{n}^k\}
+    \end{equation}
+    is a basis of $\mathcal{T}^kV$ and hence $\dim \mathcal{T}^k(V) = n^k$.
+\end{theorem}
+\textit{Which is done through lemmas:}
+\begin{enumerate}
+    \item If $T_1,T_2 \in \mathcal{T}^k(V)$, then 
+    \begin{equation}
+        T_1 = T_2 \iff \forall I, T_1(v_I) = T_2(v_I)
+    \end{equation}
+    \item $\{\varphi_I\}$ spans $\mathcal{T}^k(V)$
+    \item $\varphi_I$ are linearly independent.
+\end{enumerate}
+\begin{definition}
+    Suppose $L:V\rightarrow W$ is a linear map. Then there exists a function $L^*: \mathcal{T}^k(W) \rightarrow \mathcal{T}^k(V)$, defined by
+    \begin{equation}
+        T \mapsto (L^*T)(u_1,\dots,u_k) = T(Lu_1,\dots,Lu_k)
+    \end{equation}
+    where $T\in \mathcal{T}^kW$ and $u_i \in V.$
+\end{definition}
+\textit{We make a few claims:}
+\begin{enumerate}
+    \item If $T\in \mathcal{T}^kW$, then $L^*T \in \mathcal{T}^*V.$
+    \item The map $L^*: \mathcal{T}^kW \rightarrow \mathcal{T}^kV$ is linear.
+    \item $L^*$ is compatible with the tensor product $\otimes$. If $T_1\in\mathcal{T}^kW,T_2\in\mathcal{T}^\ell W$, then 
+    \begin{equation}
+        L^*(T_1T_2) = (L^*T_1)(L^*T_2)
+    \end{equation}
+\end{enumerate}
+\begin{definition}
+    $T \in \mathcal{T}^k$ is alternating if $T(\dots,u,\dots,w,\dots) = -T(\dots,w,\dots,u,\dots).$ Then:
+    \begin{equation}
+        \Lambda^k(V) = \{T\in\mathcal{T}^k V: T\text{ is alternating}\}. 
+    \end{equation}
+\end{definition}
+\textit{We can do a lot of the same things as before, but introducing some group theory permutation notation:}
+\begin{theorem}
+    There exists a unique function $\text{sign}: S_k \rightarrow \{\pm\}$ such that
+    \begin{equation}
+        \text{sign}(\sigma \tau) = \text{sign}(\sigma)\text{sign}(\tau)
+    \end{equation}
+    and 
+    \begin{equation}
+        \text{sign}(\tau_{ij}) = -1.
+    \end{equation}
+\end{theorem}
+\textit{This is alos compatible with pullbacks. Namely:}
+\begin{enumerate}
+    \item If $T\in\Lambda^kV$ and $\sigma \in S_k$, then $\tau \circ \sigma^* = (-1)^\sigma T$ where 
+    \begin{equation}
+        \sigma^*(v_1,\dots,v_k) = (v_{\sigma 1}, \dots, v_{\sigma k}).
+    \end{equation}
+\end{enumerate}
+\begin{definition}
+    If $I\in \underline{n}^k$, then:
+    \begin{equation}
+        \omega_I = \sum_{\sigma \in S_k} (-1)^\sigma \cdot \varphi_I \circ \sigma^*
+    \end{equation}
+\end{definition}
+\begin{definition}
+    $\{\omega_I: I \in \underline{n}_a^k\}$ is a basis for $\Lambda^kV$ and so $\dim \Lambda^kV = \binom{n}{k}.$
+\end{definition}
+\textit{We prove through a series of steps:}
+\begin{enumerate}
+    \item $\omega_I(v_J) = \delta_{IJ}$
+    \item $\lambda_1,\lambda_2\in \Lambda^kV$, then $\lambda_1=\lambda_2 \iff \forall I \in \underline{n}_a^k, \lambda_1(V_I) = \lambda_2(V_I)$
+    \item Given $\lambda$, we can find $a_I$ such that
+    \begin{equation}
+        \lambda = \sum a_I \omega_I
+    \end{equation}
+    \item the $\omega_I$ are linearly independent.
+\end{enumerate}
+% \begin{definition}
+%     We define the wedge product $\wedge$ such that
+%     \begin{equation}
+%         \varphi_i \wedge \varphi_j = \begin{cases}
+%             \omega_{ij} & i<j \\ 
+%             -\omega_{ji} & i>j \\
+%             0 & i=j 
+%         \end{cases}
+%     \end{equation}
+% \end{definition}
+% Then:
+% \begin{equation}
+%     \omega_I \wedge \omega_J = \begin{cases}
+%         0 & I\cap J \neq \emptyset \\ 
+%         \pm \omega_{I \cup J} & I\cap J = \emptyset
+%     \end{cases}
+% \end{equation}
+\begin{theorem}
+    There exists a unique family of bilinear operations 
+    \begin{equation}
+        \wedge: \Lambda^k(V) \times \Lambda^\ell(V) \rightarrow \Lambda^{k+\ell}(V)
+    \end{equation}
+    such that it is
+    \begin{enumerate}
+        \item Associative
+        \item Super-commutative
+        \begin{equation}
+            \omega^\lambda = (-1)^{k\ell} \lambda \wedge \omega
+        \end{equation}
+        \item $\omega_I = \varphi_{i_1} \wedge \varphi_{i_2} \wedge \cdots \wedge \varphi_{i_k}$
+    \end{enumerate}
+\end{theorem}
+\textit{Pullbacks are compatible with the wedge product, namely:}
+\begin{enumerate}
+    \item $L^*(\lambda \wedge \eta) = (L*\lambda) \wedge (L^*\eta)$
+\end{enumerate}
+\end{document}

@@ -1,0 +1,2 @@
+{"rule":"ENGLISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\QWe can expand, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"ENGLISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\QFor negative \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, there are an infinite number of fixed points and the separation between fixed points approaches \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, since \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q for very negative \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
