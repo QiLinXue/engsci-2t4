@@ -92,8 +92,6 @@ For linear,
 \section{Mortgage}
 \begin{itemize}
     \item \textbf{Principal:} The amount of money you borrow to pay for a real property
-    \item \textbf{Down Payment:} The fraction of the cost of the real property that you pay upfront yourself.
-    \item \textbf{Loan-to-Value ratio (LTV):} Ratio of mortgage loan to value of property
     \item \textbf{Mortgage rate:} the interest rate charged on the mortgage. Compounding period usually matches frequency of payments
     \item \textbf{Amortization Period:} Time horizon for mortgage payment
     \item \textbf{Term:} Duration of time when the mortgage rate is fixed. When term ends, re-evaluate how much you still owe, then use new interest rate to calculate monthly payment based on time left in amortization period.
@@ -127,8 +125,8 @@ The expected rate of return for a company is given by
 $$CAPM = E[R_c] = r_f + \beta_c\left(E[R_{MP} - r_f]\right).$$
 Let $a$ be the \# of $MP$ shares and $b$ be the \# of risk-free shares. Then,
 \begin{align*}
-    aP_{MP+} + bP_{r-} = P_{I+} \\ 
-    aP_{MP-} + bP_{r+} = P_{I-}
+    aP_{MP+} + bP_{r+} = P_{I+} \\ 
+    aP_{MP-} + bP_{r-} = P_{I-}
 \end{align*}
 where
 \begin{equation*}
@@ -138,12 +136,16 @@ Here, the present market price $P_{MP}$ will take on certain values if it goes u
 \begin{equation*}
     \beta_i = \frac{\sigma_{i,MP}}{\sigma_{MP}^2} = \frac{\rho_{i,MP}\sigma_i}{\sigma_{MP}},
 \end{equation*}
-where $\sigma_{i,MP}$ is the covariance between $i$th company and market portfolio, $\sigma_{MP}^2$ is the variance of MP, $\rho_{i,MP}$ is the correlation of returns between $i$th company and MP, $\sigma_i$ is volatility of $i$th company, $\sigma_{MP}$ is volatility of MP.
-\section{Comparisons}
+where $\sigma_{i,MP}$ is the covariance between $i$th company and market portfolio, $\sigma_{MP}^2$ is the variance of MP, $\rho_{i,MP}$ is the correlation of returns between $i$th company and MP, $\sigma_i$ is volatility of $i$th company, $\sigma_{MP}$ is volatility of MP. If the fair price at $t=0$ is $P_0,$ then the fair price at time $t$ is 
+\begin{equation*}
+    P_t = P_0 (F/P, CAPM, t).
+\end{equation*}
+\section{Forward Rates}
 \begin{itemize}
-    \item \textbf{MARR:} Minimum acceptable rate of return, i.e. the ``do nothing'' option.
-    \item \textbf{Present Worth (PW):} Present value of benefits minus costs.
-    \item \textbf{Annual Worth (AW):} The equivalent annuity of PW, with MARR as discount rate.
+    \item Given rates for investments between $t=0$ and $t=t_1$ or $t=t_2$: $t_{0,t_1}$ and $t_{0,t_2},$ respectively. The interest forward rate $t_1$ years from $t=0$ for a duration of $t_2-t_1$ years is 
+    \begin{equation*}
+        r_{t_1,t_2} = \frac{r_{0,t_2} \cdot t_2 - r_{0,t_1}\cdot t_2}{t_2-t_1}.
+    \end{equation*}
 \end{itemize}
 \section{Example Problems}
 $\star$ Suppose an annual yield rate of $7\%,$ (semi-annual compounding), face value \$100. A bond with a coupon rate of $6\%$ maturing in 3 years and 4 months from now is 
@@ -221,5 +223,38 @@ where we converted the USD graph to CAD (hence why we divide by $FX_1$ and $FX_0
 \begin{equation*}
     0.8(1+r_{US}) \times \frac{1}{0.781} = 1.05 \implies r_{US} = 2.5\%.
 \end{equation*}
+$\star$ Wish to calculate yield rate for a client company, RSG, that is interested in raising
+\$10,000,000 through 5 year term bonds with annual coupon payments. Risk-neutral probability of going bankrupt, and thus defaulting on making its future payments is 2\% per coupon payment term (i.e. per year). Assume that the "loss given default" equals 40\% - i.e. if RSG goes bankrupt, no more coupons will be paid and the investors will receive 40\% of the face value of the bond. The risk-free rate is 3\% (annual, effective). You estimate RSG's weighted average cost of
+capital to be 7\%. The coupon rate is 5\%. The expected cash flow is,
+\begin{center}
+    \includegraphics[width=\linewidth]{tree.jpg}
+\end{center}
+where 
+\begin{align*}
+    P_0 &= (0.98 \cdot P_1 + 0.02 \cdot 40)/1.03 \\ 
+    P_1 &= 5 + (0.98 \cdot P_2 + 0.02 \cdot 40)/1.03 \\
+    \cdots & \cdots \\ 
+    P_4 &= 5 + (0.98 \cdot 105 + 0.02 \cdot 40)/1.03 = 105.679,
+\end{align*}
+and work backwards to solve for the price of the bond $P_0=\$103.083$. The yield is therefore given by 
+\begin{equation*}
+    103.083 = 100 \cdot 5\% (P/A,Y,5) +100(P/F,Y,5).
+\end{equation*}
+$\star$ Given a bond yield curve where at year 3 the continuously compounded yield is 4.3\% and at year 8 the continuously compounded yield is 5.82\%, at what forward rate should an investor lock into for an investment in a bond, 3 years from now, for 5 years. That is, the investor plans to look into a rate to invest in the bonds for 5 years 3years from now (i.e. a forward rate). We have,
+\begin{equation*}
+    F_{0,3yr}=P_0e^{r_{3yr}t_3};\quad\quad\quad\quad F_{0,8yr}=P_0e^{r_{8yr}t_8}.
+\end{equation*}
+Let $r_{3yr,8yr}$ be the forward rate. Then, the following are true:
+\begin{align*}
+    F_{0,8yr} = F_{0,3yr}e^{r_{3yr,8yr}(t_8-t_3)} \\ 
+    P_0e^{r_{8yr}t_8} = P_0 e^{r_{3yr}t_3}e^{r_{3yr,8yr}(t_8-t_3)} \\ 
+    r_{3yr,8yr} = \frac{r_{8yr}t_8 - r_{3yr}t_3}{t_8-t_3} = 6.732\%.
+\end{align*}
+For example, we can compute,
+\begin{align*}
+    F_8 = 1e^{5.82\% \times 8} \\ 
+    F_{3,8} = F_3e^{r_{3,8} \times 5},
+\end{align*}
+where $F_{3,8}$ is the future value at $t=8$ given present at $t=3.$
 \end{multicols*}
 \end{document}
