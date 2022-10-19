@@ -240,6 +240,8 @@ and work backwards to solve for the price of the bond $P_0=\$103.083$. The yield
 \begin{equation*}
     103.083 = 100 \cdot 5\% (P/A,Y,5) +100(P/F,Y,5).
 \end{equation*}
+Note that if the first payment period is $f\%$ of the regular period, we divide by $1.03^{f\%},$ and the probability becomes $p\mapsto fp.$
+
 $\star$ Given a bond yield curve where at year 3 the continuously compounded yield is 4.3\% and at year 8 the continuously compounded yield is 5.82\%, at what forward rate should an investor lock into for an investment in a bond, 3 years from now, for 5 years. That is, the investor plans to look into a rate to invest in the bonds for 5 years 3years from now (i.e. a forward rate). We have,
 \begin{equation*}
     F_{0,3yr}=P_0e^{r_{3yr}t_3};\quad\quad\quad\quad F_{0,8yr}=P_0e^{r_{8yr}t_8}.
@@ -252,7 +254,6 @@ Let $r_{3yr,8yr}$ be the forward rate. Then, the following are true:
 \end{align*}
 For example, we can compute,
 \begin{align*}
-    F_8 = 1e^{5.82\% \times 8} \\ 
     F_{3,8} = F_3e^{r_{3,8} \times 5},
 \end{align*}
 where $F_{3,8}$ is the future value at $t=8$ given present at $t=3.$
