@@ -9,3 +9,7 @@ reparemetrize
 reparemetrize
 orientable
 exponentials
+free-ness
+diffeomorphism
+pushforwards
+hyperspherical

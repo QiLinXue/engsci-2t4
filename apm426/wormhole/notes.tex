@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{APM426: General Relativity \\ Wormhole Notes}
+\author{QiLin Xue}  
+\date{Fall 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\overline}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+\usetikzlibrary{quantikz}
+\usepackage[american]{circuitikz}
+\newcommand{\equals}{=}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Wormhole Metric}
+\subsection{Inter-universe Wormhole}
+\begin{itemize}
+    \item The simplest wormhole to describe is one that connects two universes. This allows for symmetry arguments to be made, simplifying the mathematics. Later on, we can generalize this to a wormhole that connects two regions of the same universe.
+    \item Assume that wormhole are static, nonrotating, and spherically symmetric. The most general metric is,
+    \begin{equation}
+        \dd{s}^2 = -e^{2\phi(\ell)}\dd{t}^2 + \dd{\ell}^2 + r^2(\ell)\left(\dd{\theta}^2 + \sin^2\theta \dd{\phi}^2\right) 
+    \end{equation}
+    \item Here, $\ell$ is the \emf{proper radial distance} (distance between two regions in space at a constant cosmological time)
+    \item To ensure it is traversable, we must be able to obtain the standard metric far away from the wormhole,
+    \begin{equation}
+        \lim_{\ell \to \pm \infty} r(\ell) = \ell
+    \end{equation}
+    and that 
+    \begin{equation}
+        \lim_{\ell \to \pm \infty} \phi(\ell) = \phi_{\pm}
+    \end{equation}
+    is finite.
+    \item We can identify the radius of the throat of the wormhole to be 
+    \begin{equation}
+        r_0 = \text{min}(r(\ell)) = r(0),
+    \end{equation}
+    where WLOG we are letting the throat occur at $\ell = 0.$
+    \item Often, to make computations simpler, the metric is written in Schwarzschild coordinates, where 
+    \begin{equation}
+        \dd{s}^2 = -e^{2\phi_{\pm}(r)} \dd{t}^2 + \frac{\dd{r}^2}{1 - b_\pm (r)/r} + r^2\left[\dd{\theta}^2 + \sin^2\theta \dd{\varphi}^2\right].
+    \end{equation}
+    We can use two coordinate patches $[r_0, \infty)$ to identify the two universes whose intersection is at $r_0.$
+    \item Note that $b(r)$ is the \emf{shape function} and $\phi_{\pm}(r)$ is the \emf{redshift function,} where $\lim_{r \to \infty} b_{\pm}(r) = b_{\pm}$ and $\lim_{r\to\infty} \phi_{\pm}(r) = \phi_{\pm}$ are finite.
+    
+    Note that we do not need to assume that $\phi_+ = \phi_-,$ so time can travel at different rates between the two universes. However, for simplicity we will assume that $\phi_+ = \phi_-$ and $b_+ = b_-.$ The $+$ and $-$ identify which universe we are in.
+    \item Proper radial distance is related to the $r$ coordinate by 
+    \begin{equation}
+        l(r) = \pm \int_{r_0}^{r} \frac{dr'}{\sqrt{1+b_{\pm}(r')/r'}}
+    \end{equation}
+    \begin{prooof}
+        TBA
+    \end{prooof}
+    \item The shape function scales such that $b_{\pm}(r_0) = r_0$ and $b_{\pm}(r) < r$ for $r > r_0.$
+    \begin{prooof}
+        TBA
+    \end{prooof}
+    \item The Einstein tensors at the throat are given by 
+    \begin{align*}
+        G_{tt} &= \frac{b'(r_0)}{r_0^2} \\ 
+        G_{rr} &= -\frac{1}{r_0^2} \\ 
+        G_{\theta\theta} &= \frac{1-b'(r_0)}{2r_0}\left(\phi' + \frac{1}{r_0}\right)
+    \end{align*}
+    \begin{prooof}
+        
+    \end{prooof}
+    \item If we have $T_{tt} = \rho,T_{rr}=-\tau,T_{\theta\theta}=T_{\varphi\varphi} = p$ where $\rho$ is energy density, $\tau$ is radial tension, and $p$ is the transverse pressure, then we get the differential equations
+    \begin{align*}
+        \rho &= \frac{b'}{8\pi G r^2} \\ 
+        \tau &= \frac{1}{8\pi G} \left[\frac{b}{r^3} -2\left(1-\frac{b}{r}\right)\frac{\phi'}{r}\right] \\ 
+        p &= \frac{1}{8\pi G}\left\{\left(1 - \frac{b}{r}\right)\left(\phi'' + \phi'\left[\phi' + \frac{1}{r}\right]\right) - \frac{1}{2r^2}(b'r-b)\left(\phi' + \frac{1}{r}\right)\right\}
+    \end{align*}
+    \begin{prooof}
+        
+    \end{prooof}
+    \item The first equation gives 
+    \begin{equation*}
+        b(r) = b(r_0) + \int_{r_0}^r 8\pi G\rho(r')r^2 \dd{r} = 2Gm(r),
+    \end{equation*}
+    where 
+    \begin{equation*}
+        m(r) = \frac{r_0}{2G} + \int_{r_0}^{r} 4\pi \rho r^2 \dd{r},
+    \end{equation*}
+    which can be interpreted as the effective mass inside some radius $r.$ Therefore, the shape function $b(r)$ describes the distribution of mass.
+    \item There are some important inequalities,
+    \begin{align*}
+        \exists r_* | \forall r\in (r_0,r_*),\quad\quad\quad \rho &< \tau \\ 
+        \rho(r_0) &\le \tau(r_0).
+    \end{align*}
+    
+\end{itemize}
+\end{document}

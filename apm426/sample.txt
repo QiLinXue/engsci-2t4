@@ -1,0 +1,5 @@
+\begin{equation*}
+    \frac{1}{r^2}\left(\csc[\phi_1]^2 \left(\csc[\phi_2]^2 \frac{\partial^2f}{\partial \phi_3^2}+\text{Cot}[\phi_2]
+f^{(0,0,1,0)}[r,\phi_1,\phi_2,\phi_3]+f^{(0,0,2,0)}[r,\phi_1,\phi_2,\phi_3]\right)\right) \\ +\frac{2}{r^2}\left(\text{Cot}[\phi_1] f^{(0,1,0,0)}[r,\phi_1,\phi_2,\phi_3]+f^{(0,2,0,0)}[r,\phi_1,\phi_2,\phi_3]+r
+\left(3 f^{(1,0,0,0)}[r,\phi_1,\phi_2,\phi_3]+r f^{(2,0,0,0)}[r,\phi_1,\phi_2,\phi_3]\right)\right)
+\end{equation*}

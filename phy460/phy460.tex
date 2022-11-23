@@ -347,4 +347,43 @@ is the total/net spin. Here, $M$ is an example of an \emf{order parameter,} with
 For curie temperatures greater than $T>T_C,$ we have $\langle M \rangle = 0,$ but if $T<T_C,$ we have $\langle M \rangle \neq 0$ and there is now a preffered direction 
 
 In this phase where symmetry is spontaneously broken ($T<T_c$), it is unstable to have equal numbers $\uparrow,\downarrow.$
+\section{Two-Dimensional Equations}
+For a 2d nonlinear equation, we can find fixed points and linearize there to analyze stability, i.e. a matrix with constant entries. If the matrix for the system can be diagonalized, then we decouple $x,y$ so the evolution of $x'$ only depends on $x,$ and similarly for $y'.$ There are different cases,
+\begin{itemize}
+    \item $\lambda_1,\lambda_2>0$ gives unstable nods
+    \item $\lambda_1,\lambda_2<0$ gives stable nodes
+    \item $\lambda_1>0,\lambda_2<0$ gives saddle nodes
+\end{itemize}
+But what if it's not diagonalizable in $\mathbb{R}^2?$ Suppose we have the rotation matrix for a $90^\circ$ rotation, which gives us 
+\begin{equation*}
+    \begin{pmatrix}
+        \dot{x} \\ \dot{y}
+    \end{pmatrix} = \begin{pmatrix}
+        0 & -1 \\ 
+        1 & 0
+    \end{pmatrix}\begin{pmatrix}
+        x\\y 
+    \end{pmatrix}.
+\end{equation*}
+While this can't be diagonalized, it represents a vector field that can be integrated in circles. In the phase space for $(x,\dot{x}),$ we have concentric circles, which is also true for simple harmonic oscillators. We can analyze in general,
+\begin{itemize}
+    \item Case 1: Both roots are related
+    \begin{itemize}
+        \item Case 1a: $(\tr A)^2 \ge 4 \det A$ We have distinct eigenvalues, and get nodes with the sign (stable/unstable) or saddle nodes with mixed signs.
+        \item Case 1b: $(\tr A)^2 = 4 \det A$ We have repeated eigenvalues, and get two equal valued eigenvalues 
+        \begin{equation*}
+            \lambda_1=\lambda_2 = \frac{\tr A}{2}.
+        \end{equation*}
+        \begin{itemize}
+            \item Case 1b(i): $A$ is symmetric $A=A^T.$ Then we have a star shape.
+            \item Case 1b(ii): $A$ is not symmetric. We have only a single eigenvector,
+            \begin{equation*}
+                v_2=\begin{pmatrix}
+                    (a-b)/2d \\ 1
+                \end{pmatrix}.
+            \end{equation*}
+            This can be thought of as the limiting case of two nearly parallel eigenvectors.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
 \end{document}

@@ -735,6 +735,14 @@ which gives us the \emf{continuity equation.} We can also recover Netwon's secon
     \rho\left(\frac{\partial U^b}{\partial t} + (\vec{v}\cdot \vec{\nabla})U^b\right) = -\partial_b P.
 \end{equation*}
 Together, they form the 3D compressible Euler equations for fluids. We have five unknowns here, $\rho, U^1,U^2,U^3,P,$ and four equations. We can get a fifth equation by getting an equation of state (i.e. ideal gas law). 
+\begin{idea}
+    For dust, we have $P=0,$ which gives
+    \begin{align*}
+        0 &= \nabla_a(\rho U^a) \\ 
+        0 &= \rho U^a \nabla_a U^a.
+    \end{align*}
+    The first condition is the continuity condition (density is transported by velocity), and the second condition tells us that the dust particles follow geodesics.
+\end{idea}
 \subsection{Klein-Gordon Wave Equation}
 For $\phi: M\to \mathbb{R},$ the Klein-Gordon wave equation is 
 \begin{equation*}
@@ -823,14 +831,35 @@ Let $k_a = \nabla_a S.$ Then $k_ak^a=0$ is a null vector orthogonal to $C^b.$ Th
 \begin{equation*}
     \Sigma_\lambda := \{x:S(x)=\lambda\}
 \end{equation*}
-are null surfaces. In fact $k^a$ is both normal and tangent to $\Sigma$ and its integral curves. Foliate $\Sigma_\lambda.$
-
-We have 
+are null surfaces. In fact $k^a$ is both normal and tangent to $\Sigma$ and its integral curves. In particular, $\nabla_a S$ is a vector field and its integral curves $\phi(t,x)$ solve
+\begin{equation*}
+    \begin{cases}
+        \frac{\partial \phi^\alpha}{\partial s} = g^{\alpha\beta}\nabla_\beta S\left(\phi(s,x)\right) \\ 
+        \phi^\alpha(s,x) = x^\alpha.
+    \end{cases}
+\end{equation*}
+To show that they stay on the same level set, we can plug $\phi$ into $S$ and take the derivative. We can compute,
 \begin{align*}
-    0 = \partial_b(\partial_a S\partial^a S) &= 2\partial_b\partial_a S\partial^a S \\ 
-    &= 2\left(\partial b k_a\right)k^a,
+    \frac{d}{ds} S(\phi(s,x)) &= \nabla_a S \frac{\partial \phi^\alpha}{\partial s} \\ 
+    &= \nabla_\alpha S g^{\alpha\beta}\nabla_\beta S \\ 
+    &= 0.
 \end{align*}
-which is the geodesic equation with tangent $k^a.$
+Moreover, these integral curves are null geodesics, because 
+\begin{align*}
+    0 &= \nabla_b(\nabla_a S\nabla^a S) \\ 
+    &= 2\nabla_b\nabla_a S \nabla^a S \\ 
+    &= 2\nabla^a S\nabla_a\nabla_b S \\ 
+    &= 2\nabla^a S\nabla_a\nabla^c S \\ 
+    &= 2k^a\nabla_a k^c
+\end{align*}
+where the third line follows from torsion free-ness, and 
+\begin{equation*}
+    k^c = g^{ca}\nabla_a S
+\end{equation*}
+is tangent to the integral curve
+\begin{equation*}
+    ad - k_ck^c = \nabla_a S\nabla^a S = 0.
+\end{equation*} 
 \subsection{Relating Geometry to Physics}
 For a manifold $(M^n,g_{ij}),$ there is a tensor (Einstein tensor)
 \begin{equation*}
@@ -850,32 +879,685 @@ The brilliant idea of Einstein was that maybe these are the same things. The Ein
 \begin{equation*}
     G_{ab} = \alpha T_{ab},
 \end{equation*}
-for some constant $\alpha.$ We can determine $\alpha$ be consistencies with Newtonian gravity, where tidal forces at separation $\vec{X}$ are given by 
+for some constant $\alpha.$ We want to show that $\alpha = 8\pi.$ To show this, we can compare the geodesic variation equation (which gives us the acceleration of a nearby geodesic)
 \begin{equation*}
-    F = -\left(\vec{X} \cdot \vec{\nabla}\right) \nabla\phi,
+    U^a\nabla_a(U^bv_bX^d) = -R_{abc}{}^{d}U^aU^cX^b,
 \end{equation*}
-where $\nabla\phi = 4\pi \rho.$ In general relativity, the geodesic deviation gives 
+to Newton's second law, which gives 
 \begin{equation*}
-    (X^a\nabla_a)(X^b\nabla_b U^d) = -R_{abc}{}^dU^aU^cX^b.
+    F = ma = -(\vec{X} \cdot \vec{\nabla})\vec{\nabla}\phi,
 \end{equation*}
-We need to somehow match these two ideas. We can identify 
+where the potential $\phi$ is $\Delta \phi = 4\pi \rho,$ which can be rewritten as 
 \begin{equation*}
-    R_{abc}^dU^aU^c
+    F = -X^b\partial_b\partial^d \phi,
 \end{equation*}
-(which has trace $R_{ac}$ with 
+where $\partial_b\partial^d$ is the \emf{Hessian}, and also has trace $4\pi \rho$. The Hessian is a part of the Riemann tensor $R_{abc}{}^d.$ Contracting by $R^{b}{}_{d}$ gives
 \begin{equation*}
-    \partial_b\partial^d \phi,
+    4\pi \rho = \Delta \phi = R_{ac} U^a U^c,
 \end{equation*}
-which has trace $4\pi \rho.$ This suggests that 
+so we can \textit{guess} that 
 \begin{equation*}
-    R_{ac}U^aU^c = 4\pi T_{ac},
+    R_{ac} = 4\pi T_{ac},
 \end{equation*}
-but the right side is divergence free but the left side is not. We can fix this by contracting with $U^aU^b$ to get 
-\begin{equation*}
-    4\pi \rho \sim R_{ab}U^aU^b,
-\end{equation*}
+but the right side is divergence free. We can rearrange
+\begin{align*}
+    & G_{ab} = R_{ab} - \frac{1}{2}Rg_{ab} \\ 
+    & R_{ac} = G_{ac} - \frac{!}{2}Gg_{ac},
+\end{align*}
+Noting that $R_{ab}U^aU^b \sim 4\pi \rho,$ we get
+\begin{align*}
+    4\pi \rho &= (G_{ab} - \frac{G}{2}g_{ab})U^aU^b \\ 
+    \alpha \left(T_{ab}-\frac{T}{2}g_{ab}\right)U^aU^b \\ 
+    &= \alpha\left(\rho + T/2\right) \\ 
+    &= \frac{\alpha}{\rho}{2},
+\end{align*}
 which eventually gives us $\alpha = 8\pi.$ Therefore, Einstein's equation is 
 \begin{equation*}
     G_{ab} = 8\pi T_{ab}.
 \end{equation*}
+\section{Physics}
+\subsection{Linearized Gravity}
+Suppose we are given $T_{ab}.$ Then we can find $g_{ab}.$ Recall that,
+\begin{equation*}
+    \Gamma^a{}_{bc} = \frac{1}{2}g^{ad}\left(\nabla_b g_{cd} + \nabla_c g_{bd} - \nabla_d g_{bc}\right),
+\end{equation*}
+where the derivatives are linear in $g,$ but multiplying it by $g^{ad}$ makes it nonlinear. Furthermore,
+\begin{equation*}
+    R_{abc}{}^d = -\partial_{[a}\Gamma_{b]c}{}^d + \Gamma^{e}{}_{c[a}\Gamma_{b]e}{}^d.
+\end{equation*}
+These are very hard equations to solve as they are nonlinear. One of the first things we'll do is \emf{linearize gravity} (i.e. weak gravity). We take,
+\begin{equation*}
+    g_{ab} = \eta_{ab} + \gamma_{ab},
+\end{equation*}
+where $\eta_{ab}$ is Minkowski metric and $\gamma_{ab}$ is some small variation. Its solutions correspond to \emf{gravitational waves.} We can write 
+\begin{equation*}
+    g_{\alpha\beta}=\eta_{\alpha\beta}+\lambda \gamma_{\alpha\beta} + \mathcal{O}(\lambda^2).
+\end{equation*}
+More generally, given $(M,g_{ab}(s))$ and a 1-parameter group 
+\begin{equation*}
+    \phi_s:M\to M
+\end{equation*}
+of diffeomorphisms, then $(M,g_{ab}(s))$ and $(M,\phi^*_s(g_ab(s)))$ will present equivalent theories. Therefore, we can (without loss of generality), set 
+\begin{equation*}
+    \gamma_{ab} := \frac{\partial g_{ab}}{\partial s}\bigg|_{s=0}.
+\end{equation*}
+and 
+\begin{align*}
+    \tilde{\gamma}_{ab} &= \frac{\partial}{\partial s}\bigg|_{s=0}(\phi^*_s(g_ab(s))) \\ 
+    &= \frac{\partial g_{ab}}{\partial s}\bigg|_{s=0} + \mathcal{L}_{-v}g_{ab} \\ 
+    &= \gamma_{ab} - \mathcal{L}_{+v}g_{ab}.
+\end{align*}
+Now, we can compute,
+\begin{align*}
+    \mathcal{L}_vg_{ab} &= v^c\nabla_c g_{ab} + g_{ad}\nabla_b v^d + g_{db} \nabla_a v^{d}.
+\end{align*}
+Using the Levi-Civita connection, we have $v^c\nabla_c g_{ab}=0,$ which gives 
+\begin{equation*}
+    \tilde{\gamma}_{ab} = \gamma_{ab} - \nabla_bv_a - \nabla_av_b.
+\end{equation*}
+This says that in linearized gravity, if we take any $\gamma_{ab}$ and disturb it to get $\tilde{\gamma}_{ab},$ then we get an equivalent theory, as expected. Therefore, we pick 
+\begin{equation*}
+    g_{ab} = \eta_{ab} + \gamma_{ab},
+\end{equation*}
+where to first-order in $\gamma_{ab},$ we have 
+\begin{equation*}
+    g^{ab} = \eta^{ab} - \gamma^{ab},
+\end{equation*}
+and 
+\begin{align*}
+    \Gamma^c{}_{ab} &= \frac{!}{2}\eta^{cd}(\partial_a\gamma_{db}+\partial_b\gamma_{ad} - \partial_d\gamma_{ab}) \\ 
+    \Gamma^c{}_{cb} &= \frac{1}{2}\left(\partial^c\gamma_{cb} + \partial_b\gamma - \partial^c\gamma_{cb}\right) = \frac{1}{2}\partial_b\gamma,
+\end{align*}
+where $\gamma =\gamma^a_a.$ Then, we have 
+\begin{equation*}
+    R_{acb}{}^d = -2\partial_{[a}\Gamma^d_{c]b}
+\end{equation*}
+and 
+\begin{align*}
+    R_{ab} &= R_{acb}^{c} = \partial_c \Gamma^c_{ab} - \partial_a\Gamma^c_{cb} \\ 
+    &= \frac{1}{2}\left(\partial^c\partial_a\gamma_{cb} + \partial^a\partial_b\gamma_{ac} - \partial^c\partial_c\gamma_{ab}-\partial_a\partial_b\gamma\right),
+\end{align*}
+so 
+\begin{equation*}
+    \partial^c\partial_c \gamma = \square \gamma = \left(-\frac{\partial^2}{\partial t^2} + \Delta\right)\gamma.
+\end{equation*}
+\subsection{Homogeneous Isotropic Universe Models}
+For a homogeneous, isotropic universe, we have the \emf{FLRW tensor},
+\begin{equation}
+    \dd{s}^2 = -\dd\tau^2 + a(\tau)^2 \times \begin{cases}
+        \dd{\Psi}^2 + \sin^2\Psi(\dd{\theta}^2+\sin^2 \dd{\phi}^2) & k = 1 \\ 
+        \dd{\Psi}^2 + \Psi^2(\dd{\theta}^2+\sin^2 \dd{\phi}^2) & k = 0 \\ 
+        \dd{\Psi}^2 + \sinh^2\Psi(\dd{\theta}^2+\sin^2 \dd{\phi}^2) & k = -1 
+    \end{cases},
+\end{equation}
+where $k$ is the curvature. For the $k=0$ case, we can compute,
+\begin{align*}
+    R_{\tau\tau} &= -3\frac{\ddot{a}}{a} \\ 
+    R_{xx} &= a\ddot{a} + 2\dot{a}^2 \\ 
+    R_{**} &= \frac{a\ddot{a}+2\dot{a}^2}{a^2},
+\end{align*}
+We can compute the Ricci tensor to be,
+\begin{equation}
+    R = - R_{\tau\tau} + 3R_{**} = 6\left(\frac{\ddot{a}+\dot{a}^2}{a^2}\right).
+\end{equation}
+The einstein tensor is given by,
+\begin{align*}
+    G_{ab} &= R_{ab} - \frac{1}{2}Rg_{ab} = 8\pi T_{ab} = 8\pi\left((\rho+P)\dd{\tau}_a\dd{\tau}_b + Pg_{ab}\right) \\ 
+    G_{\tau\tau} &= -\frac{3\ddot{a}a}{a^2} + 3\left(\frac{\ddot{a}a+\dot{a}^2}{a^2}\right) = \frac{3\dot{a}^2}{a^2} = 8\pi \rho \\ 
+    G_{**} &= \frac{a\ddot{a}+2\dot{a}^2}{a^2} - 3\left(\frac{\ddot{a}a+\dot{a}^2}{a^2}\right) = 8\pi P.
+\end{align*}
+This gives two equations,
+\begin{align*}
+    \dot{a}^2 &= \frac{8\pi}{3}\rho a^2 - k \\ 
+    \frac{\ddot{a}}{a} &= -\frac{4\pi}{3}\left(\rho+3P\right),
+\end{align*}
+where the $k$ is the curvature. From the second equation, we immediately know that $a$ is concave. This is important as it means in future time, the universe will either continue expanding, or expand and then contract. We can also go back in time, and see that there will be some time such that $a=0.$ Hubble's Law tells us that 
+\begin{equation}
+    \frac{dR}{d\tau} = \frac{R}{a} \frac{da}{d\tau} = RH(\tau).
+\end{equation}
+Recall that we only care about dust, in which $P=0$ and for radiation, where $P=\rho/3,$ and density is a function of time. Let's integrate! The derivative of the first equation is
+\begin{align*}
+    & 2\ddot{a}\dot{a} = \frac{8\pi}{3}\left(\dot{\rho}a^2 + 2\rho a \dot{a}\right) \\ 
+    \implies & -\frac{8\pi}{3}a\dot{a}\left(\rho+3P\right)= \frac{8\pi}{3}\left(\dot{\rho}a^2 + 2\rho a \dot{a}\right) \\  
+    \implies & 0 = \dot{\rho}a^2 + 3a\dot{a}(\rho+P).
+\end{align*}
+For dust, this simplifies to 
+\begin{equation}
+    0 = \frac{1}{a}\frac{d}{d\tau}(\rho a^3)
+\end{equation}
+and for radiation, we have,
+\begin{equation}
+    0 = \frac{1}{a}\frac{d}{d\tau}(\rho a^4).
+\end{equation}
+This tells us that,
+\begin{itemize}
+    \item Dust: $\rho a^3 = C_1$
+    \item Radiation $\rho a^4 = C_2$
+\end{itemize}
+So $\rho$ and $a$ are inversely proportional (to some exponent). Therefore, radiation energy dominates in the early universe and as $a(\tau) \to \infty,$ dust energy will dominate. Therefore, we have,
+\begin{equation}
+    \dot{a}^2 = \frac{C_q}{a^q} - k,
+\end{equation}
+where $q\in \{1,2\}$ depending on whether we have dust or radiation. Note that if $k \le 0,$ we have a continuous expansion, $\dot{a} \neq 0$ and after a long time, the rate of expansion will approach $-k.$ If $k = 1,$ then the universe expands to a maximum $a_c,$ then reverses the process ending in a big crunch.
+
+If $k=0$ we can solve this to get 
+\begin{align*}
+    a(\tau) = \left(\frac{q+2}{2}\sqrt{C_q}\tau\right)^{2/(q+2)},
+\end{align*}
+which scales like $\tau^{2/3}$ for dust and $\tau^{1/2}$ for radiation. For $k=1$, we have 
+\begin{itemize}
+    \item Dust: $a(\tau) = \frac{c_1}{2}(1-\cos \eta)$
+    \item Radiation: $a(\tau) = \sqrt{c_2}\left[1 - \left(1 - \frac{\tau}{\sqrt{c_2}}\right)^2\right]^{1/2}$
+\end{itemize}
+\subsection{Hubble's Law}
+Photons follow null geodesics with tangent vector $n^b.$ Suppose that $k=0.$ Then, $\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}$ are killing vector fields. Without loss of generality, assume 
+\begin{equation}
+    n_b\left(\frac{\partial}{\partial y}\right)^b \bigg|_{\Sigma_d} = 0 = n_b\left(\frac{\partial}{\partial z}\right)^b \bigg|_{\Sigma_1}.
+\end{equation}
+Since the dot product of $n_b$ with a tangent vector of a Killing field is preserved, we have 
+\begin{equation*}
+    n_b\left(\frac{\partial}{\partial y}\right)^b\bigg|_{\Sigma_2} = 0 = n_b\left(\frac{\partial}{\partial z}\right)^b \bigg|_{\Sigma_2},
+\end{equation*}
+and $n_b\left(\frac{\partial}{\partial x_b}\right)^b$ is proportional to the energy. Since we have photons, the dot product using the time-like vector and the space-like vector givs the same thing. Including the proportionality factor, we have 
+\begin{equation*}
+    E = \frac{1}{a(\tau)} \cdot n_b \left(\frac{\partial}{\partial x_b}\right)^b = \frac{1}{\sqrt{g}} \cdot n_b \left(\frac{\partial}{\partial x_b}\right)^b.
+\end{equation*} 
+For our photon,
+\begin{equation*}
+    \omega(\tau) a(\tau) = n_b\left(\frac{\partial}{\partial x}\right)^b = \text{const},
+\end{equation*}
+or 
+\begin{equation*}
+    \frac{a(\tau_2)}{a(\tau_1)} = \frac{\omega(\tau_1)}{\omega(\tau_2)} = \frac{\lambda_2}{\lambda_1}.
+\end{equation*}
+So if a photon has a small wavelength (and high energy) when the universe was small, then it will have a long wavelength (and a low energy) when the universe is big. This describes redshift, and is quantified by 
+\begin{align*}
+    z &= \frac{\lambda_2}{\lambda_1} - 1 \\ 
+    &= \frac{a(\tau_2)}{a(\tau_1)} - 1 \\ 
+    &\approx \frac{a(\tau_1)+a'(\tau_1)(\tau_2-\tau_1)}{a(\tau_1)} - 1 \\
+    &= \frac{a'(\tau_1)}{a(\tau_1)} (\tau_2-\tau_1) \\ 
+    &= H(\tau)R,
+\end{align*}
+where $R$ is the distance between nearby galaxies, since we used a Taylor approximation.
+\subsection{Particle Horizons}
+This prompts the question: Looking back in time, can we see the whole big bang, or just part of it?
+
+Lightcones are invariant under conformal factors. Conformal factors are functions of the metric that preserve the dot product. So for $k=0,$ the FLRW metric has some the same lightlike surfaces as Minkowski space. Then the question becomes whether the integral 
+\begin{equation*}
+    t = \int_0^{\tau} \frac{\dd{s}}{a(s)}
+\end{equation*}
+diverges or converges. If it diverges, then going to a finite $\tau$ (i.e. in Minkowski space) gives us to an infinite $t$ (i.e. allowing us to see the whole big bang). If it converges, then we can only see a finite part of the universe's past. This converges for both dust and radiation. We can only see stuff inside the \emf{particle horizon}, and this grows as time progresses. Therefore, as time progresses, we can see more and more of the universe's past.
+
+It turns out that if $k=1$ and we are in a universe dominated by dust, then we can see the big bang at the maximum size of the universe. If we are in a universe dominated by radiation, we can see the big bang at the big crunch.
+
+\subsection{Schwarzschild Solution}
+The Newtonian potential for a point source is 
+\begin{equation*}
+    u(x) = - \frac{m}{|x|^{n-2}}
+\end{equation*}
+in $n$ dimensions, where $\Delta u = 0.$ We seek a vaccuum solution to Esintein's equation 
+\begin{equation*}
+    R_{ab} = 8\pi T_{ab} = 0,
+\end{equation*}
+(except maybe at a point). We are also seeking a solution with a lot of symmetries.
+\begin{itemize}
+    \item We call $(M^a,g_{ab})$ \emf{stationary} if $g_{ab}$ admits a Killing vector field $\xi^c$.
+    
+    This implies that we have time translation symmetry, so $t \to t + \delta t$ should give the same metric.
+    \item It is \emf{static} if in addition, $\xi^c$ is hypersurface orthogonal ($\xi_{[a}\nabla_b\xi_{c]}$).
+    
+    This implies time reflection $t \to -t$ symmetry.
+    \item It is \emf{spherically symmetric} if $SO(3)$ generates a group of isometries on it.
+    
+    The spherically symmetric condition tells us that there are three other spatial killing vector fields, so the orbit of $x$ traces out a two-dimensional sphere $S^2$ on the hyperplane at $t=0$ with a radius 
+    \begin{equation*}
+        r \propto \sqrt{A}.
+    \end{equation*}
+    They also rule out cross terms like $\dd{r}\dd{\theta}$ because if their components were nonzero, then the projection onto the 2-sphere would have a nonzero direction, but the action of $SO(3)$ rotation on any point gives a 2-sphere with no preferred direction.
+\end{itemize}
+ The metric is therefore 
+\begin{equation*}
+    \dd{s}^2 = -f(r)\dd{t}^2 + h(r)\dd{r}^2 + r^2\left(\dd{\theta}^2 + \sin^2\theta a\dd{\phi}^2\right).
+\end{equation*}
+\emf{Tetrad methods:} Choose an orthonormal basis for each $T_{p}M$ for each $p\in M.$ Consider an orthonormal basis $\tilde{e}_{\mu} = (e_\mu)^{_a}$ for $\mu \in \{0,1,2,3\}.$ Consider,
+\begin{align*}
+    \tilde{\omega}_{\mu\nu} \equiv \omega_{a\mu \nu} \equiv (e_\mu)^b \nabla_a (e_\nu)_b,
+\end{align*}
+which are known as the \emf{Connection 1-forms.} By orthonormal, we mean that 
+\begin{equation*}
+    (e_\mu)^a(e_\nu)_a = \eta_{\mu\nu}.
+\end{equation*}
+and we can write,
+\begin{equation*}
+    \delta^a_b = \eta^{\mu\nu}(e_\mu)^a)e_\nu)_b.
+\end{equation*}
+\begin{proof}
+    Contract with $(e_\sigma)^b$ to get 
+    \begin{align*}
+        (e_\sigma)^a &= \eta^{\mu\nu} (e_\mu)^a \eta_{\nu\sigma} \\ 
+        &= (e_\sigma)^a.
+    \end{align*}
+\end{proof}
+The connection 1-forms are a lot like the Christoffel symbols but are antisymmetric in terms of its indices, i.e. 
+\begin{equation*}
+    \tilde{\omega}_{\mu\nu} = -\tilde{\omega}_{\nu\mu}.
+\end{equation*}
+The Riemann tensor can be written as,
+\begin{align*}
+    \tilde{R}_{\mu}^{\nu} = R_{ab\mu}^{\nu} = \dd{\tilde{\omega}_{\mu}^{\nu}} + \dd{\tilde{\omega}_\mu^{\sigma}} \wedge \tilde{\omega_\sigma}^{\nu},
+\end{align*}
+where $\eta_{\mu\nu}$ is used to raise and lower greek indices. The derivative of the basis 1-forms is given by
+\begin{equation*}
+    \dd{\tilde{e}_{\mu}} = \tilde{e}_{\sigma} \wedge \tilde{\omega_\mu}^{\sigma}.
+\end{equation*}
+\begin{idea}
+    We have not justified why these are true, but if we assume they are, we can use the above two formulas to find what the connection 1-form is, and what the Riemann curvature tensor is. We will try to justify the formula 
+    \begin{equation*}
+        \tilde{R}_{\mu}^{\nu} = \dd{\tilde{\omega}_{\mu}^{\nu}} + \tilde{\omega}_{\mu}^{\sigma} \wedge \tilde{\omega}_{\sigma}^{\nu}.
+    \end{equation*}
+    Recall that 
+    \begin{align*}
+        R_{ab\mu\nu} &= R_{abc}{}^d (e_\mu)^c (e_{\nu})_d \\ 
+        &=(e_{\mu})^{c} (\nabla_a\nabla_b - \nabla_b\nabla_a)(e_\nu)_c.
+    \end{align*}
+    The first term can be written as, 
+    \begin{align*}
+        (e_\mu)^c \nabla_a\nabla_b (e_\nu)_c &= \nabla_a \left((e_\mu)^c \nabla_b (e_\nu)_c\right) - \nabla_a (e_\mu)^c + \nabla_b(e_{\nu})_c \\ 
+        &= \nabla_a(\omega_{b\mu\nu}) - \eta^{\alpha\beta}[\nabla_a (e_{\mu})_f](e_\alpha)^c(e_\beta)^f v_b(e_\nu)_c \\ 
+        &= \nabla_{a}(\omega_{b\mu\nu}) - \eta^{\alpha\beta}\omega_{a\beta \mu}\omega_{b\alpha\nu}.
+    \end{align*}
+    where we used $\delta^c_f = \eta^{\alpha\beta}(e_\alpha)^c (e_\beta)_f$ to get the second equality. Combining the first and the second term (which is taking the anti-symmetry), we can identify the first term as $\dd{tilde{\omega}_{\mu}^{\nu}}$ and the second term as the wedge product.
+\end{idea}
+Let us choose,
+$$(\tilde{e}_0)_a = f^{1/2}_{(r)}(\tilde{\dd{t}})_a$$
+such that
+\begin{align*}
+    \tilde{e}_0 &= \sqrt{f(r)} \tilde{\dd{t}} \\
+    \tilde{e}_1 &= \sqrt{h(r)}\tilde{\dd{r}} \\ 
+    \tilde{e}_2 &= r \tilde{\dd{\theta}} \\ 
+    \tilde{e}_3 &= r\sin\theta \tilde{\dd{\phi}},
+\end{align*}
+and their derivatives are 
+\begin{align*}
+    \dd{\tilde{e}_0} &= \frac{1}{2}f^{-1/2}f'\tilde{\dd{t}} \wedge \tilde{\dd{t}} \\
+    \dd{\tilde{e}_1} &= 0 \\ 
+    \dd{\tilde{e}_2} &= \dd{r}\wedge \dd{\theta} \\ 
+    \dd{\tilde{e}_3} &= \sin\theta \dd{r}\wedge \dd{\phi} + r\cos\theta\dd{\theta}\wedge \dd{\phi}.
+\end{align*}
+Using our formula for the derivative of basis 1-forms gives
+\begin{equation*}
+    \frac{1}{2}f^{-1/2}f' \tilde{\dd{r}}\wedge \tilde{\dd{t}} = h^{1/2} \dd{r} \wedge \tilde{\omega}_0^1 + r\dd{\theta} \wedge \tilde{\omega}_0^2 + r\sin\theta \dd{\phi} \wedge \tilde{\omega}_0^3.
+\end{equation*}
+One natural guess could be that $\tilde{\omega}_0^2=\tilde{\omega}_0^3=0$ and
+\begin{equation*}
+    \tilde{\omega}_0^1 = \alpha_1 \dd{r} + \frac{1}{2} \frac{f'}{(fh)^{1/2}}\dd{t},
+\end{equation*}
+which would cause the first term to match, and the last two terms to be zero. Let's hope this is in agreement when we apply the formula on the other terms. We get, 
+\begin{align*}
+    & 0 = -e_0 \wedge \omega_0^1 + e_2 \wedge \omega_1^2 + e_3 \wedge \omega_1^3 \\ 
+    \implies & 0 = -f^{1/2} \dd{t}\wedge \omega_0^1 + r\dd{\theta}\wedge \omega^2_1 + r\sin\theta \dd{\phi} \wedge \omega^3_1.
+\end{align*}
+Letting $\alpha_1=0$ and setting
+\begin{align*}
+    \omega_1^2 &= \alpha_2 \dd{\theta} + \alpha_3 \dd{\phi} \\ 
+    \omega_1^3 &= \frac{\alpha_3}{\sin\theta}\dd{\theta} + \alpha_4 \dd{\phi}
+\end{align*}
+makes the second equation true. For $\dd{\tilde{e}_2},$ we have 
+\begin{align*}
+    & \dd{r}\wedge \dd{\theta} = -f^{1/2} \dd{t}\wedge \omega_0^2 - h^{1/2}\dd{r}\wedge \omega_1^2 + r\sin\theta \dd{\phi} \wedge \omega_2^3.
+\end{align*}
+Substituting in the guesses we already made, we arrive at $\alpha_2 = \frac{1}{h^{1/2}}.$ To make this equation true, we can guess 
+\begin{equation*}
+    \omega_2^3 =  - \frac{\alpha_3 h^{1/2}}{r\sin\theta}\dd{r} + \alpha_5 \dd{\phi}.
+\end{equation*}
+Going to the last equation, we have,
+\begin{equation*}
+    \sin\theta \dd{r} \wedge \dd{\phi} + r\cos\theta \dd{\theta} \wedge \dd{\phi} = f^{1/2}\dd{t}\wedge \omega_3^0 - h^{1/2}\dd{r}\wedge \omega_1^3 - r\dd{\theta}\wedge \omega_2^3.
+\end{equation*}
+Plugging everything in, we get $\alpha_3=0$ and $\alpha_4 = -\frac{\sin\theta}{h^{1/2}}, \alpha_5=-\cos\theta.$ In conclusion, we have our six connection 1-forms,
+\begin{align*}
+    \omega_0^2 &= 0 \\ 
+    \omega_0^3 &= 0 \\ 
+    \omega_0^1 &= \frac{1}{2} \frac{f'}{(fh)^{1/2}}\dd{t} \\ 
+    \omega_1^2 &= -\frac{1}{h^{1/2}}\dd{\theta} \\ 
+    \omega_1^3 &= -\frac{\sin\theta}{h^{1/2}}\dd{\phi} \\ 
+    \omega_2^3 &= -\cos\theta \dd{\phi}
+\end{align*}
+
+We can now compute the Riemann tensors. Since $R_{ab\mu\nu} = -R_{ab\nu\mu},$ we only need to compute the ones where $\mu < \nu.$ Therefore,
+\begin{align*}
+    \tilde{R}_0^1 &= \dd{\omega_0^1} + \omega_0^{\sigma} \wedge \omega_\sigma^0 = \frac{1}{2}\frac{d}{dr}\left(\frac{f'}{(fh)^{1/2}}\right)\dd{r}\wedge \dd{t} \\ 
+    \tilde{R}_0^2 &= \dd{\omega_0^2} + \omega_0^{\sigma} \wedge \omega_\sigma^2 = \omega_0^1 \wedge \omega_1^2 = -\frac{1}{2} \frac{f'}{f^{1/2}h}\dd{t}\wedge \dd{\theta} \\ 
+    \tilde{R}_0^3 &= \dd{\omega_0^3} + \omega_0^{\sigma} \wedge \omega_\sigma^3 = \omega_0^1 \wedge \omega_1^3 = - \frac{1}{2} \frac{f'\sin\theta}{f^{1/2}h}\dd{t}\wedge \dd{\phi} \\ 
+    \tilde{R}_1^2 &= \dd{\omega_1^2} - \omega_1^3 \wedge \omega_2^3 = \frac{1}{2}h^{-3/2}h'\dd{r}\wedge \dd{\theta} \\ 
+    \tilde{R}_1^3 &= \dd{\omega_1}^3 + \omega_1^2 \wedge \omega_2^3 = -cos\theta h^{-1/2} \dd{\theta} \wedge \dd{\phi} + \frac{1}{2}\sin\theta h^{-3/2}h' \dd{r} \wedge \dd{\phi} + \cos\theta h^{-1/2} \dd{\theta} \wedge \dd{\phi} = \frac{1}{2}\sin\theta h^{-3/2}h' \dd{r}\wedge \dd{\phi} \\ 
+    \tilde{R}_2^3 &= \dd{\omega_2^3} - \omega_1^2 \wedge \omega_1^3 = \sin\theta \dd{\theta}\wedge \dd{\phi} - \frac{\sin\theta}{h} \dd{\theta} \wedge \dd{\phi} = \left(1 - \frac{1}{h}\right)\sin\theta \dd{\theta}\wedge \dd{\phi}.
+\end{align*}
+We are looking for vacuum solutions, so the Ricci tensor needs to vanish. We have,
+\begin{align*}
+    R_{00} &= R_{010}{}^1 + R_{020}{}^2 + R_{030}{}^3 = \frac{1}{2} \frac{1}{(fh)^{1/2}}\frac{d}{dr}\left(\frac{f'}{(fh)^{1/2}}\right) + \frac{1}{2} \frac{f'}{f^{1/2}h} - \frac{f'\sin\theta}{rfh} \\ 
+    R_{11} &= R_{101}{}^0 + R_{121}{}^2 + R_{121}{}^3 = -\frac{1}{2} \frac{1}{(fh)^{1/2}}\frac{d}{dr}\left(\frac{f'}{(fh)^{1/2}}\right) + \frac{1}{2} \frac{h'}{h^2 r} \\ 
+    R_{22} &= R_{33} = R_{202}{}^0 + R_{212}{}^1 + R_{232}{}^3 = -\frac{1}{2}\frac{f'}{rfh} + \frac{1}{2} \frac{h'}{rh^2} + \frac{1}{r^2}\left(1 - \frac{1}{h}\right),.
+\end{align*}
+Note that we have to evaluate $\tilde{R}_0^1 = R_{ab0}{}^1$ through its orthonormal basis. That is, 
+\begin{align*}
+    \dd{t} \wedge \dd{r} = \frac{1}{(fh)^{1/2}} e_0 \wedge e_1 \\ 
+    \dd{t} \wedge \dd{\theta} = \frac{1}{rf^{1/2}} e_0 \wedge e_2 \\ 
+    \dd{r} \wedge \dd{\theta} = \frac{1}{h^{1/2} r}e_1 \wedge e_2 \\ 
+    \dd{r} \wedge \dd{\phi} = \frac{1}{h^{1/2} r\sin\theta} e_1 \wedge e_3 \\ 
+    \dd{\theta} \wedge \dd{\phi} = \frac{1}{r^2\sin\theta} e_2 \wedge e_3
+\end{align*}
+We want the trace to be zero, so each of the $R_{ii}=0.$ We have three equations and two unknowns, so we hope that they are equivalent with each other! Adding the first two equations, we get 
+\begin{equation*}
+    \frac{f'}{f} + \frac{h'}{h} = 0 \implies \frac{d}{dr} \ln(fh) = 0 \implies f(r)h(r) = K,
+\end{equation*}
+for some constant $K.$ By rescaling time we can make $K=1.$ Therefore, $h=1/f$ and $h' = -\frac{1}{f^2}f'.$ The third equation gives,
+\begin{align*}
+    0 = -f'r + (1-f) \implies (rf)' = 1.
+\end{align*}
+Therefore, 
+\begin{equation*}
+    f = 1 + \frac{C}{r},
+\end{equation*}
+and we have derived the \emf{Schwarzschild metric,}
+\begin{equation}
+    \dd{s}^2 = -\left(1 - \frac{2M}{r}\right) \dd{t}^2 + \left(1 - \frac{2M}{r}\right)^{-1}\dd{r}^2 + r^2 (\dd{\theta}^2 + \sin^2\theta \dd{\phi}^2),
+\end{equation}
+where we identified $C=-2M,$ derived such that when $M$ is small, we get Newtonian gravity. Note that at $r = 2M,$ $\frac{\partial}{\partial t}$ and $\frac{\partial}{\partial r}$ are not linearly independent. At first, Schwarzschild thought that this was no good since it is singular at this point, but it turns out that we just need different coordinates to describe $r=2M.$
+
+A true physical singularity occurs at $r=0$ (i.e. physical, curvature tensor blows up).
+
+Outside the spherical mass distribution, such as a star, we have a vaccuum solution, so $G_{ab}=0= R_{ab}.$ Inside the star, the Ricci tensors are 
+\begin{align*}
+    R_{00} &= \frac{1}{2}(fh)^{-1/2} \frac{d}{dr}\left(\frac{f'}{(fh)^{1/2}}\right) + \frac{f'}{rfh} \\ 
+    R_{11} &= \frac{1}{2}(fh)^{-1/2} \frac{d}{dr}\left(\frac{f'}{(fh)^{1/2}}\right) + \frac{h'}{rh^2} \\ 
+    R_{22} = R_{33} &= -\frac{1}{2}\frac{f'}{rfh} + \frac{1}{2}\frac{h'}{rh^2} + \frac{1-h^{-1}}{r^2},
+\end{align*}
+and the scalar curvature is
+\begin{align*}
+    R &= -R_{00} + R_{11} + R_{22} + R_{33} \\ 
+    &= -(fh)^{-1/2}\frac{d}{dr}\left(\frac{f'}{(fh)^{1/2}}\right) - 2\frac{f'}{rfh} + 2\frac{h'}{rh^2} + 2\frac{(1-h^{-1})}{r^2}.
+\end{align*}
+Assume the star is a perfect fluid, so the Einstein equation gives 
+\begin{align*}
+    8\pi\rho &= G_{00} = \frac{h'}{rh^2} + \frac{1-h^{-1}}{r^2} = \frac{1}{r^2}\left(r\left(1 - \frac{1}{h}\right)\right)'\\ 
+    8\pi P &= G_{11} \\ 
+    8\pi P&= G_{22} = G_{33}.
+\end{align*}
+The solution to the first equation gives 
+\begin{align*}
+    & r\left(1 - \frac{1}{h(r)}\right) = 8\pi \int_0^r \rho(r) r^2 \dd{r} \\ 
+\implies & r\left(1 - \frac{1}{h(r)}\right) = 2m(r) \\ 
+\implies & h(r)^{-1} = 1 - \frac{2m(r)}{r}.
+\end{align*}
+Note that outside the star for $\rho = 0,$ this agrees with the Schwarzschild solution. For $r\le R,$ the proper mass is
+\begin{equation*}
+    M_p = \int_0^R \rho(r) r^2 \left(1- \frac{2m(r)}{r}\right)^{-1/2}\dd{r} > m(R) = M.
+\end{equation*}
+Letting $f=e^{2\Phi},$ we get 
+\begin{equation*}
+    \frac{d\Phi}{dr} = \frac{m(r) + 4\pi r^3}{r(r-2m(r))} \sim\frac{m(r)}{r^2},
+\end{equation*}
+so we get the Newtonian potential in the limit.
+
+\subsection{Geodesics of Schwarzschild}
+Determining the geodesics may seem to be extremely complex, but because of the high degree of symmetries. Let $\sigma (\tau)$ be a proper time (or affinely parametrerized) geodesic. Then 
+\begin{align*}
+    -K = \langle \dot{\sigma},\dot{\sigma}\rangle_g
+\end{align*}
+where $K\in\{0,1\}.$ We have the symmetry $\theta \leftrightarrow \pi - \theta,$ allowing us to write 
+\begin{align*}
+    \theta(0) = \pi/2,\quad\quad\quad \dot{\theta}(0) = 0,\quad\quad\quad \theta(\tau) = \frac{\pi}{2}.
+\end{align*}
+We also have our Killing fields. The conserved quantities are 
+\begin{align*}
+    E &= -\langle \dot{\sigma},\frac{\partial}{\partial t}\rangle_g = \dot{t}\left(1 - \frac{2M}{r}\right) \\ 
+    L &= \langle \dot{\sigma},\frac{\partial}{\partial \phi}\rangle = \dot{\phi} r^2, 
+\end{align*}
+and using these conservations, we can write 
+\begin{align*}
+    -K &= \langle \dot{\sigma},\dot{\sigma}\rangle_g = - \left(1-\frac{2M}{r}\right) + \left(1-\frac{2M}{r}\right)^{-1} \dot{r}^2 + \cancel{r^2\dot{\theta}^2} + r^2\dot{\phi}^2 \\ 
+    &= -\left(1-\frac{2M}{r}\right) \frac{E^2}{\left(1-\frac{2M}{r}\right)^2} + \left(1-\frac{2M}{r}\right)^{-1}\dot{r}^2 + \frac{L^2}{r^2}.
+\end{align*}
+We can write,
+\begin{align*}
+    \frac{E^2}{2} = \frac{1}{2}\left(K + \frac{L^2}{r^2}\right)\left(1-\frac{2M}{r}\right) + \frac{\dot{r}^2}{2},
+\end{align*}
+where the first term is the potential energy, i.e. 
+\begin{align*}
+    V(r) &= \left(\frac{1}{2} - \frac{M}{r}\right)\left(K + \frac{L^2}{r^2}\right) \\ 
+    &= \frac{K}{2} - \frac{MK}{r} + \frac{L^2}{2r^2} - \frac{ML^2}{r^3},
+\end{align*}
+where the second term is the Newtonian potential, second term corrects for angular momentum, and the last term is the Einstein correction. We have two cases,
+\begin{itemize}
+    \item Case 1: $K = 1.$ We get 
+    \begin{equation*}
+        V(r) = \frac{1}{2} - \frac{M}{r} + \frac{L^2}{2r^2} - \frac{ML^2}{r^3}.
+    \end{equation*}
+    We can find its critical points by setting $V'(r)=0,$ which gives 
+    \begin{align*}
+        & 0 = \frac{1}{r^4}\left(Mr^2 - L^2r + 3ML^2\right),
+    \end{align*}
+    which gives 
+    \begin{align*}
+        R_{\pm} &= \frac{L^2 \pm \sqrt{L^4 - 12M^2L^2}}{2M} \\ 
+                &= \frac{M}{2}\left(\frac{L^2}{M}\right)\left(1 \pm \sqrt{1-12\left(\frac{M}{L}\right)^2}\right),
+    \end{align*}
+    so there can be two circular orbits for a given angular momentum $L,$ given that $\frac{L^2}{M^2}>12,$ where one of them is the standard Newtonian stable one, and the other one is closer to the central body and unstable.
+
+    We have,
+    \begin{align*}
+        \frac{E^2(R_{\pm})}{2} &= V(R_{\pm}) \\ 
+        &= \frac{1}{2} - \frac{M}{R_{\pm}}
+    \end{align*}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Appendix C: Maps of Manifolds}
+\subsection{Pushforwards and Pushbacks}
+In this appendix, we will talk about maps of manifolds. If we have a map $\phi \in C^{\infty}(M,N),$ i.e. $\phi:M^m\to N^n,$ then tangent vectors to $M$ can be pushed forward through $\phi$ to $N,$ and cotangent vectors to $N$ can be pulled back through $\phi$ to $M$ (unless $\phi$ is a diffeomorphism).
+
+A tangent vector $v\in T_x M$ pushes forward to 
+\begin{equation*}
+    \phi^* v \in T_{\phi(X)}N.
+\end{equation*}
+Note that Wald uses $\phi^*$ for pushforward and $\phi_*$ for pullback, which is the opposite of the standard notation. If $f\in C^\infty(N)$ then $f\circ \phi\in C^{\infty}(M).$ Then we also have 
+\begin{align*}
+    (\phi^* v)(f) = v(f\circ \phi).
+\end{align*}
+Similarly, if $\mu \in T_{\phi(x)}N$, then its pullback 
+\begin{equation*}
+    \phi_*\mu \in T_xM
+\end{equation*}
+is 
+\begin{equation*}
+    (\phi_*\mu)_a(v^a) := \mu_a(\phi^*v)^a,
+\end{equation*}
+for all $v\in T_{\lambda}M.$ More generally for arbitrary tensors we can push forward any tensor with only up indices
+\begin{equation*}
+    (\phi^*T)^{a_1\cdots a_k}{}{(\mu_1)_{a_1}\cdots (\mu_k)_{a_k}} = T^{a_1\cdots a_k}(\phi_* \mu_1)_{a_1}\cdots (\phi_* \mu_k)_{a_k},
+\end{equation*}
+or pull-back any tensor with only down indices Mixed index tensors $T^{a}_{b}$ present a problem unless $\phi:M\to N$ is a diffeomorphism, in which case 
+\begin{equation*}
+    (\phi^* T)^{a_1\cdots a_k}{}_{b_1\cdots b_l}v^{b_1}\cdots v^{b_l} \mu^1_{a_1}\cdots \mu^k_{a_k} := T^{a_1\cdots a_k}{}_{b_1\cdots b_l} (\phi_x \mu^1)_{a_1}\cdots \left(\left(\phi^{-1}\right)^{k}v_\ell\right)^{b_\ell},
+\end{equation*}
+which can also be interpreted as the Jacobian map from the coordinates on $M$ to the coordinates on $N.$
+
+Note that if $\phi: M\to M$ and $(\phi^*g)_{ab} = g_{ab},$ then $\phi$ is called an \emf{isometry.} More generally if $\phi^*T = T$ for some tensor field $T$, then $\phi$ is called a \emf{symmetry} of $T.$ That is, if we have a physical theory on $(M,T{(1)},\dots,T_{(k)})$ and another physical theory on $(M',T'_{(1)},T'_{(k)}),$ then they are equivalent (or same) if there is a diffeomorphism $\phi:M\to M',$ which pushforwards each $T_{ij}$ to $T'_{ij}.$ 
+\subsection{Lie Derivatives}
+Recall (at least on a compact manifold) a vector field $v^a$ on a compact manifold $M$ induces a 1-parameter group of diffeomorphisms
+\begin{equation*}
+    \phi_s: M\to M
+\end{equation*}
+given by 
+\begin{equation*}
+\begin{cases}
+    \frac{\partial \phi_s(x)}{\partial s}  = v(\phi_s(x)) \\ 
+    \phi_0(x) = x,
+\end{cases}
+\end{equation*}
+locally in $s.$ We can define the Lie derivative of a tensor field 
+\begin{equation*}
+    T \in \mathcal{T}(k,\ell)
+\end{equation*}
+on $M$ (in direction $v$) by
+\begin{equation*}
+    (\mathcal{L}_v T)^{a_1\cdots a_k}{}_{b_1\cdots b_\ell} = \lim_{s\to 0} \frac{(\phi^*_{-s}T)^{a_1\cdots a_k}{}_{b_1\cdots b_\ell} - T^{a_1\cdots a_k}{}_{b_1\cdots b_ell}}{s},
+\end{equation*}
+and it also satisfies the Leibnitz rule.
+\begin{lemma}
+    Some properties of the Lie derivative:
+    \begin{enumerate}[label=(\alph*)]
+        \item If $T = f \in C^{\infty}(M),$ then 
+        \begin{equation*}
+            \mathcal{L}_v f = v(f)
+        \end{equation*}
+        \item If $T = w \in \mathcal{T}(1,0)$ is a vector field, then 
+        \begin{equation*}
+            \mathcal{L}_v w = [v,w]
+        \end{equation*}
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}
+        \item Build a coordinate system on $M$ where $s$ is the first coordinate. Then,
+        \begin{align*}
+            \phi_{-s}(x_1,\cdots,x_n) = (x_1-t,x_2,\cdots,x_n).
+        \end{align*}
+        The Jacobian of this change of variables is 
+        \begin{equation*}
+            (\phi^*_{-t})^{\mu}_{\nu} = \delta^{\mu}_{\nu},
+        \end{equation*}
+        so 
+        \begin{equation*}
+            (\phi^*_{-t}T)^{\mu_1\cdots \mu_k}{}_{v_1\cdots v_\ell} = T^{\mu_1\cdots \mu_k}{}_{v_1\cdots v_k}(x_1+t,x_2,\cdots,x_n).
+        \end{equation*}
+        Plugging this back, we have 
+        \begin{equation*}
+            \mathcal{L}_v(f) = \lim_{s\to 0} \frac{f(x_1+s,x_2,\cdots,x_n) - f(x_1,x_2,\cdots,x_n)}{s} = v(f),
+        \end{equation*}
+        is the standard directional derivative.
+        \item In these coordinates,
+        \begin{equation*}
+            (\mathcal{{L}_v T})^{\mu_1\cdots\mu_k}{}_{\nu_1\cdots\nu_{\ell}} = \frac{\partial T^{\mu_1\cdots\mu_k}{}_{\nu_1\cdots \nu_\ell}}{\partial x^1,}
+        \end{equation*}
+        so 
+        \begin{align*}
+            (\mathcal{L}_{\nu}w)^{\mu} &= \frac{\partial w^{\mu}}{\partial x^1} \\ 
+            &= v^1 \frac{\partial w^{\mu}}{\partial x^1} \\ 
+            &= \sum_\alpha v^\alpha \frac{\partial w^\mu}{\partial x^\alpha} - w^\alpha \frac{\partial v^\mu}{\partial x^\alpha} \\ 
+            &= [v,w]^\mu,
+        \end{align*}
+        where we recall that $v^\nu = \left(\frac{\partial}{\partial x}\right)^{\mu}$.
+    \end{enumerate}
+\end{proof}
+Once we can define the Lie derivative of functions and vector fields, we can define the Lie derivative of any tensor field through duality.
+\begin{corollary}
+    \begin{enumerate}[label=(\alph*)]
+        \item If $\mu \in \mathcal{T}(0,1),$ then 
+        \begin{equation*}
+            (\mathcal{L}_\nu\mu)_a = v^c \nabla_c \mu_a + \nu_c \nabla_a \nu^c
+        \end{equation*}
+        \item If $T\in \mathcal{T}(k,\rho)$ on $M,$ then 
+        \item \begin{equation*}
+            \left(\mathcal{L}_\nu T\right)^{a_1\cdots a_k}{}_{b_1\cdots b_\ell} = v^c\nabla_c T^{a_1\cdots a_k}{}_{b_1\cdots b_\ell} - \sum_{i=1}^k T^{a_1\cdots c \cdots a_k}{}_{b_1\cdots b_\ell} \nabla_c v^a + \sum_{j=1}^{\ell} T^{a_1\cdots a_k}{}_{b_1\cdots c \cdots b_\ell} \nabla b_j v^c.
+        \end{equation*}
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    We only prove the first part. Given $\mu_a \in \mathcal{T}(0,1)$ and $w^a\in \mathcal{T}(1,0),$ we have 
+    \begin{align*}
+        \mathcal{L}_v(\mu_a w^a) &= v(\mu_aw^a) = v^c\nabla_c(\mu_a w^a) \\ 
+        &= (v^c\nabla_c \mu_a)w_a + \mu_a v^c \nabla_c w^a.
+    \end{align*}
+    Since $\mathcal{L}_v$ satisfies Leibnitz rule, we can also write this as 
+    \begin{align*}
+        \mathcal{L}_v(\mu_aw^a) &= \mathcal{L}_v(\mu_a)w^a + \mu_a \mathcal{L}_v(w^a) \\ 
+        &= \mathcal{L}_v(\mu_a)w^a + \mu_a\left(v^c\nabla_c w^a - w^c\nabla_c v^a\right).
+    \end{align*}
+    Equating the two expressions for the Lie derivative gives us the desired relationship.
+\end{proof}
+\subsection{Killing Vector Fields}
+\begin{definition}
+    A vector field $V^c$ on $M$ is a \emf{kiling vector field} if and only if $\nabla_{[a}v_{b]}=0,$ for the Levi-Civita connection.
+\end{definition}
+\begin{lemma}
+    If $v^a$ is a killing vector field, and $\gamma$ is a geodesic with tangent vector $U^a = \frac{d\gamma(\tau)}{d\tau},$ then 
+    \begin{equation*}
+        \frac{d}{d\tau}(v_au^a) = 0
+    \end{equation*}
+    along $\gamma.$
+\end{lemma}
+\begin{proof}
+    Note that 
+    \begin{align*}
+        \frac{d}{d\tau}(v^au^a) &= u^b\nabla_b (v_au^a) \\ 
+        &= u^bu^a\nabla_b v_a + v_a u^b\nabla_b u^a \\ 
+        &= 2u^bu^a \nabla_{[b}v_{a]} \\ 
+        &=0.
+    \end{align*}
+    Note that $u^bu^a$ is symmetric and $\nabla_{[b}v_{a]}$ is antisymmetric, so the above expression is zero.
+\end{proof}
+We can also count symmetries. On $\mathbb{R}^n,$ we have $n$ translations and $\binom{n}{2}$ rotations, for a total of $n+\binom{n}{2}$ symmetries.
+
+If $v^c$ is a Killing field, we have 
+\begin{align*}
+    R_{abc}^{d}v_d &= \nabla_a\nabla_bv_c - \nabla_b\nabla_a v_c \\ 
+    &= \nabla_a\nabla_bv_c + \nabla_b\nabla_cv_a \\ 
+    R_{bca}^dv_d &= \nabla_b\nabla_cv_a + \nabla_c\nabla_av_b \\ 
+    R_{cab}^dv_d &= \nabla_c\nabla_av_b + \nabla_a\nabla_b v_c.
+\end{align*}
+Adding the second line and subtracting the third, we get 
+\begin{align*}
+    (R_{abc}^d+R_{bca}^a-R_{cab}^d)v_d = 2\nabla_b\nabla_cv_a.
+\end{align*}
 \end{document}

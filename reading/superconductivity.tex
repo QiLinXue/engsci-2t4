@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage{qilin}
 \tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
-\title{Reading Project: Superconductivity}
+\title{Reading Project: Superconductivity \\ A Random Collection of Notes}
 \author{QiLin Xue}  
 \date{Fall 2022}
 \usepackage{mathrsfs}
@@ -20,6 +20,125 @@
 \maketitle
 \tableofcontents
 \newpage
+\section{Mathematical Background}
+\subsection{Gaussian Integrals}
+We have the following formulas for gaussian integrals,
+\begin{equation}
+    \label{eq:gaussian}
+    \boxed{\int e^{-x^2/2} \dd{x} = \sqrt{2\pi}}.
+\end{equation}
+\begin{proof}
+    Let $I = \int e^{-x^2/2} \dd{x}.$ By Fubini, we have,
+    \begin{align*}
+        I^2 &= \int\int e^{-(x^2+y^2)/2}\dd{x}\dd{y} \\ 
+        &= \int_0^{2\pi}\int_{0}^{\infty} r e^{-r^2/2}\dd{r}\dd{\theta} \\ 
+        &= 2\pi,
+    \end{align*}
+    so $I = \sqrt{2\pi}.$
+\end{proof}
+If we have a linear term, the integral can be generalized to,
+\begin{equation}
+    \boxed{I(a,b) = \int e^{-ax^2/2-bx}\dd{x} =\exp\left(\frac{b^2}{2a}\right)\sqrt{\frac{2\pi}{a}}}.
+\end{equation}
+\begin{proof}
+    Completing the square, we can write,
+    \begin{align*}
+        \int e^{-ax^2/2-bx}\dd{x} &= \int \exp\left(-\frac{a}{2}\left(x+\frac{b}{a}\right)^2\right)\exp\left(\frac{b^2}{2a}\right) \dd{x}.
+    \end{align*}
+    The constant term factors out and the remaining can be solved using equation \ref{eq:gaussian} and applying u-substitution. 
+\end{proof}
+Generalizing even further, we can compute,
+\begin{equation}
+    \boxed{I(a,n) = \int x^n e^{-ax^2/2}\dd{x} = \begin{cases}
+        \exp\left(a^{-n/2}\sqrt{\frac{2\pi}{a}}\right) & n\text{ even} \\ 
+        0 & n\text{ odd}
+    \end{cases}}
+\end{equation}
+\begin{proof}
+    We can take partial derivatives of the simplified expression for $I(a,b)$, and prove via induction that:
+    \begin{align*}
+        \frac{\partial^n}{\partial b^n}I(a,b)\bigg|_{b=0} = \begin{cases}
+            a^{-n/2}\sqrt{2\pi/a} & n \text{ even} \\
+            0 & n \text{ odd}.
+        \end{cases}
+    \end{align*}
+    But we can also take partial derivatives of $I(a,n)$ using the fundamental theorem, that if $n$ is even, we have,
+    \begin{equation*}
+        \frac{\partial^n}{\partial b^n}I(a,b)\bigg|_{b=0} = I(a,n).
+    \end{equation*}
+\end{proof}
+Everything can be generalized to multiple dimensions using matrices. For example, using Fubini we can evaluate 
+\begin{equation}
+    \boxed{I(\lambda_1,\dots,\lambda_d) = \int\cdots \int e^{-\lambda_1x^2/2-\cdots -\lambda_nx_d^2/2}\dd{x_1}\cdots\dd{x_d} = \frac{(2\pi)^{d/2}}{\sqrt{\lambda_1\cdots\lambda_d}}.}
+\end{equation}
+Given a symmetric, positive definite matrix $A \in \mathbb{R}^{d\times d},$ we have 
+\begin{equation}
+    \boxed{Z = \int e^{-\bm{x}^T A \bm{x}/2} \dd{\bm{x}} = \sqrt{\frac{(2\pi)^d}{\det A}}.}
+    \label{eq:gaussian-nd}
+\end{equation}
+\begin{proof}
+    Since symmetric matrices are orthogonally diagonalizable, we can write $A=S\Lambda S^{-1},$ where $\Lambda$ is diagonal. Then under the change of variables $S_T:x \mapsto S^Tx$ where the Jacobian is $|\det (S^T)'| = \det (S^T) = 1,$ we have,
+    \begin{align*}
+        Z &= \int e^{-1/2 \bm{x}^T \Lambda \bm{x}} \dd{\bm{x}} \\ 
+        &= I(\lambda_1,\dots,\lambda_d),
+    \end{align*}
+    which can be evaluated using equation \ref{eq:gaussian-nd}.
+\end{proof}
+Similarly to the 1-dimensional case, we can also add a linear term and evaluate 
+\begin{equation}
+    \boxed{Z(\bm{J}) = \int e^{-\bm{x}^TA\bm{x}/2 - \bm{J}^T\bm{x}}\dd{\bm{x}} = \sqrt{\frac{(2\pi)^d}{\det A}}\exp\left(\frac{1}{2}\bm{J}^TA^{-1}\bm{J}\right)}.
+\end{equation}
+\begin{proof}
+    We can complete the square to write and expand,
+    \begin{align*}
+        Z(\bm{J}) &= \int \exp\left(-\frac{1}{2}\lambda_i x_i^2 - (\bm{J}^TS^T)_i x_i\right) \dd{\bm{x}} \\ 
+        &= \prod_{i}\sqrt{\frac{2\pi}{\lambda_i}}\exp\left(\frac{(J^TS^T)_i^2}{2\lambda_i}\right).
+    \end{align*}
+    The first factor is easy to evaluate, and the exponential factor can be evaluated using,
+    \begin{align*}
+        \frac{(\bm{J}^TS^T)_i^2}{2\lambda_i} &= \frac{1}{2 \lambda_i}\left((\bm{J}^T)_a(S^T)^{a}{}_i\right)^2 \\ 
+        &= \frac{1}{2}(\bm{J}^T)_a(S^T)^{a}{}_i \frac{1}{\lambda_i} S_{i}{}^b(\bm{J}^T)_{b} \\ 
+        &= \frac{1}{2}(\bm{J}^T)_a(S^T)^{a}{}_i \left(S_{ik}(A^{-1})^{k\ell}(S^T)_{\ell i}\right) S_{i}{}^b(\bm{J}^T)_{b} \\ 
+        &= \frac{1}{2}(\bm{J}^T)_k (A^{-1})^{k\ell} (\bm{J}^T)_{\ell} \\
+        &= \frac{1}{2}\bm{J}^T A^{-1}\bm{J},
+    \end{align*}
+    where we used the facts that 
+    \begin{equation*}
+        \frac{1}{\lambda_i} = S_{ik}(A^{-1})^{k\ell}(S^T)_{\ell i},
+    \end{equation*}
+    as well as 
+    \begin{equation*}
+        S_{ab}S_{bc}^T = \delta_{ac}
+    \end{equation*}
+    for the second last step.
+\end{proof}
+Using this result, we can determine 
+\begin{equation}
+    \boxed{\langle x_{i_1}\cdots x_{i_n}\rangle_0 = \frac{1}{Z(0)}x_{i_1}\cdots x_{i_n}e^{-\bm{x}^TA\bm{x}/2}\dd{\bm{x}} = \frac{\partial}{\partial \bm{J^T}_{i_1}}\cdots \frac{\partial}{\partial \bm{J^T}_{i_d}} \bigg|_{\bm{J}=0} (-1)^n \exp\left(\frac{1}{2}\bm{J}^TA^{-1}\bm{J}\right).}
+\end{equation}
+\begin{proof}
+    Differentiating inside the integral sign and differentiating the result gives us the above. The trick is that each $\frac{\partial}{\partial (\bm{J^T}_{i_k})}$ brings down a factor of $x_k.$
+\end{proof}
+\subsection{Correlation Functions}
+\begin{theorem}
+    \emf{Wick's Theorem} can be written in the form 
+    \begin{equation}
+        \langle x_{i_1}x_{i_2}\cdots x_{i_{2n}}\rangle_0 = \sum_\pi \langle x_{i_{\pi(1)}}x_{i_{\pi(2)}}\rangle_0  \cdots \langle x_{i_{\pi(2n-1)}}x_{i_{\pi(2n)}}\rangle_0,
+    \end{equation}
+    where $\pi \in S_{2n}.$
+\end{theorem}
+To make this useful, note that 
+\begin{equation*}
+    \boxed{\langle x_ix_j\rangle_0 = (A^{-1})_{ij}.}
+\end{equation*}
+Sometimes, we may write the functioning generator as 
+\begin{equation*}
+    Z(\bm{J}) = Z(0)\exp\left(\frac{1}{2}\bm{J}^TG\bm{J}\right),
+\end{equation*}
+instead such that we take on the slightly simpler expression of 
+\begin{equation*}
+    \langle x_ix_j\rangle_0 = G_{ij}.
+\end{equation*}
 \section{Problem Set Two}
 \subsection{Ginzburg-Landau Theory of Superconductivity}
 Consider a potential 
@@ -81,7 +200,184 @@ so experimentally there will be a discontinuity. Furthermore, the power law rela
     |\Delta| \sim |t|^{1/2}
 \end{equation*}
 can be experimentally verified.
-\subsection{Fermions vs Bosons and 2nd Quantization}
+
+\section{Quantum Mechanics in 3D}
+The Laplacian in spherical coordinates is 
+\begin{equation}
+    \nabla^2 = \frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2 \frac{\partial}{\partial r}\right) + \frac{1}{r^2\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial}{\partial\theta}\right) + \frac{1}{r^2\sin^2\theta}\frac{\partial^2}{\partial\phi^2}.
+\end{equation}
+Suppose we're given a potential $V(\bm{x})=V(r),$ so the Schrödinger equation gives 
+\begin{equation}
+    \frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2\frac{\partial\Psi}{\partial r}\right) + \frac{1}{r^2\sin\theta} \frac{\partial}{\partial \theta}\left(\sin\theta \frac{\partial \Psi}{\partial \theta}\right) + \frac{1}{r^2\sin^2\theta} \frac{\partial^2\Psi}{\partial \varphi^2} - \frac{2m}{\hbar}V(r)\Psi = -\frac{2mE}{\hbar^2}\Psi.
+\end{equation}
+Using separation of variables, we can write $\Psi = R(r)Y(\theta,\varphi),$ so we can write,
+\begin{align*}
+    &\frac{\partial}{\partial r}\left(r^2 \frac{\partial \Psi}{\partial r}\right) + \frac{1}{\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta \frac{\partial\Psi}{\partial \theta}\right) + \frac{1}{\sin^2\theta}\frac{\partial^2\Psi}{\partial\varphi^2} + \frac{(E-V)2mr^2\Psi}{\hbar^2}=0 \\ 
+\implies & \frac{\partial}{\partial r}(r^2R'Y) + \frac{1}{\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta \frac{\partial r}{\partial\theta}\right)R + \frac{R}{\sin^2\theta}\frac{\partial^2Y}{\partial\varphi^2}+\frac{(E-V)2mr^2RY}{\hbar^2} RY = 0.
+\end{align*}
+Dividing both sides by $RY$ gives 
+\begin{equation*}
+    \frac{1}{R}\frac{\partial}{\partial r}(r^2R') + \frac{(E-V)2mr^2}{\hbar^2} + \frac{1}{Y\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial Y}{\partial\theta}\right) + \frac{1}{Y\sin^2\theta}\frac{\partial^2Y}{\partial\varphi^2}=0.
+\end{equation*}
+The first part depends only on $r,$ and is valid for all $r,$ and the second part depends on and only on $\theta,\varphi,$ so they must both be constants. That is,
+\begin{align*}
+    \frac{1}{Y\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta \frac{\partial Y}{\partial \theta}\right) + \frac{1}{Y\sin^2\theta}\frac{\partial^2 Y}{\partial\varphi^2} = -\ell(\ell + 1), 
+\end{align*}
+where $\ell$ is a constant. Therefore, 
+\begin{align*}
+    \frac{1}{R}\frac{\partial}{\partial r}(r^2R') + \frac{(E-V)2mr^2}{\hbar^2} = \ell(\ell + 1),
+\end{align*}
+which is the radial equation, and the previous equation is the angular equation. We can rewrite the radial equation as,
+\begin{align*}
+    -\frac{\hbar^2}{2mr^2}\frac{\partial}{\partial r}\left(r^2 \frac{\partial R}{\partial r}\right) + \left(V+\frac{\hbar^2\ell(\ell+1)}{2mr^2}\right)R=ER,
+\end{align*}
+where we can interpret the first term as the kinetic energy and the second term can be interpreted as the effective potential energy. In problem set three, we are asked to find the bound state for a particle in the potential 
+\begin{equation*}
+    V = \begin{cases}
+        -V_0 & r<a \\ 
+        0 & \text{ otherwsie}
+    \end{cases}.
+\end{equation*}
+A bound state will have $E<0.$ It so happens that $\ell=0$ is the minimum value of $\ell,$ which corresponds to the smallest energy. This gets us 
+\begin{align*}
+    &-\frac{\hbar^2}{2mr^2}\frac{\partial}{\partial r}\left(r^2\frac{\partial R}{\partial r}\right) + VR = ER. 
+\end{align*}
+We can make the substitution $u = rR,$ we can solve. We can compute,
+\begin{equation*}
+    \frac{\partial u}{\partial r} = \frac{\partial (rR)}{\partial r} = R + r\frac{\partial R}{\partial r}.
+\end{equation*}
+This is an important problem because it shows that there is some minimum $V_0$ that allows for bound states. However, in a metal which has fermions (i.e. superconductors), $V_0$ can be infinitesimally small, and bound states can still be formed, which is remarkable. In superconductors, these bound states correspond to cooper pairs, which are required for superconductors.
+\section{Free Fermi Gas}
+The simplest model for a metal is found by ignoring both the lattice structure and the Coulomb force. We only keep the fact that we have electrons which are fermions.
+
+Consider a cube-shaped box of side length $L$ such that $V=L^3,$ and put $N$ electrons in it. The Hamiltonian is then 
+\begin{equation*}
+    \hat{H} = \sum_{i=1}^N \frac{\vec{p}_i^2}{2m},
+\end{equation*}
+since there is no potential energy. Note that we have not yet taken into account that they are fermions. We wish to solve $\hat{H}\psi = E\psi,$ where 
+\begin{equation*}
+    \psi = \psi(\vec{x}_1,\vec{x}_2,\dots,\vec{x}_N).
+\end{equation*}
+Technically speaking, we still need to take into account the spin, but will do so later. We have,
+\begin{align*}
+    H\psi = \sum_{i=1}^N -\frac{\hbar^2}{2m}\nabla_i^2 \psi = E\psi.
+\end{align*}
+Applying separation of variables, we have
+\begin{align*}
+    \psi(\vec{x}_1,\vec{x}_2,\dots,\vec{x}_N) = \prod_{i=1}^N \psi_i(\vec{x}_i),
+\end{align*}
+which is possible when there are no interactions. This gives,
+\begin{equation*}
+    H\psi = -\frac{\hbar^2}{2m}\sum_{i=1}^{N}\psi_1(\vec{x}_1)\cdots (\nabla_i^2 \psi_i(\vec{x}_i)) \cdots \psi_N(\vec{x}_N) = E\psi_1(\vec{x}_1)\cdots \psi_N(\vec{x}_N).
+\end{equation*}
+Dividing both sides by $\psi,$ we get 
+\begin{equation*}
+    \frac{H\psi}{\psi} = E = -\frac{\hbar^2}{2m} \sum_{i=1}^N \frac{\nabla_i^2 \psi_i(\vec{x}_i)}{\psi_i(\vec{x}_i)}.
+\end{equation*}
+Observe that each term in the sum must be a constant. Then, we can identify 
+\begin{equation*}
+    E_i = -\frac{\hbar^2}{2m}\frac{\nabla_i^2\psi_i(x_i)}{\psi_i}
+\end{equation*}
+and $E = \sum_{i=1}^N E_i.$ Oftentimes people will say that a noninteracting problem is the same as a one-particle problem, which is certainly true in this case. For a 1-particle problem, we can apply separation of variables again,
+\begin{equation*}
+    E\psi = -\frac{\hbar^2}{2m} \left(\frac{\partial^2\psi}{\partial x^2} + \frac{\partial^2\psi}{\partial y^2} + \frac{\partial^2\psi}{\partial z^2}\right). 
+\end{equation*}
+Let us write $\psi(x,y,z)=X(x)Y(y)Z(z),$ giving,
+\begin{equation*}
+    E = -\frac{\hbar^2}{2m}\left( \frac{X''}{X} + \frac{Y''}{Y} + \frac{Z''}{Z}\right).
+\end{equation*}
+We can solve the three differential equations separately, with the \emf{periodic boundary conditions,}
+\begin{align*}
+    X(x) &= X(x+L) \\ 
+    Y(x) &= Y(x+L) \\ 
+    Z(x) &= Z(x+L).
+\end{align*}
+Note that in some texts, periodic boundary conditions refer to $f(x)=f(x+L),$ which is more general, but in this case they are equivalent since the Hamiltonian is translation invariant. The equations we which to solve are,
+\begin{align*}
+    -\frac{\hbar^2}{2m}\frac{X''}{X} &= E_x \\ 
+    -\frac{\hbar^2}{2m}\frac{Y''}{Y} &= E_y \\
+    -\frac{\hbar^2}{2m}\frac{Z''}{Z} &= E_z.
+\end{align*}
+This gives,
+\begin{align*}
+    X'' + \frac{2mE_x}{\hbar^2}X &= 0,
+\end{align*}
+so 
+\begin{align*}
+    X =\{\sin(k_xx),\cos(k_x,x)\} = \{e^{ik_xx},e^{-ik_xx}\},
+\end{align*}
+where $k_x^2 = \frac{2mE_x}{\hbar^2}.$ The periodic boundary conditions put a restriction on what $k_x$ can be. This gives us 
+\begin{equation*}
+    e^{\pm ik_xx} = e^{\pm ik_x(x+L)} \implies k_xL = 2\pi n_x,
+\end{equation*}
+where $n_x$ is an integer. Note that we account for both $\pm ik_xn$ by allowing $n_x$ to be positive or negative. The same is true for the $Y,Z$ equations,
+\begin{align*}
+    k_x=\frac{2\pi n_x}{L},\quad\quad\quad k_y=\frac{2\pi n_y}{L},\quad\quad\quad k_z=\frac{2\pi n_z}{L},
+\end{align*}
+so the wavevector is 
+\begin{equation*}
+    \vec{k} = \frac{2\pi}{L}(n_x,n_y,n_z),
+\end{equation*}
+and the energy for a single particle is,
+\begin{equation*}
+    E = E_x+E_y+E_z = \frac{\hbar^2}{2m} \sqrt{k_x^2+k_y^2+k_z^2}.
+\end{equation*}
+Now we can take into account these electrons are fermions.
+\begin{itemize}
+    \item Ground state $E=0:$ $2$ particles can occupy it.
+    \item First excited state $E_1:$ $3\cdot 2$ particles can occupy it.
+    \item $n$th excited state: $E_n:$ $2n$ particles can occupy it.
+\end{itemize}
+If we have $N$ electrons, then they in the ground state of the system, they will occupy all the lowest energy states, such that no two particles are in the same quantum state.
+
+In $k$-space, each point $(k_x,k_y,k_z)$ occupies a box space of volume $\left(\frac{2\pi}{L}\right)^3.$ In $k$-space, a sphere of radius $k_F$ has volume 
+\begin{equation*}
+    \frac{4}{3}\pi k_F^3,
+\end{equation*}
+which has a total of 
+\begin{align*}
+    \frac{N}{2} \cdot \frac{8\pi^3}{L^3} = \frac{4}{3}\pi k_F^3 \implies N = \frac{1}{3\pi^2} L^3k_F^3,
+\end{align*}
+or 
+\begin{equation*}
+    k_F = \left(\frac{N}{V}3\pi^2\right)^{1/3},
+\end{equation*}
+where $k_F$ is the \emf{Fermi wave vector} and
+\begin{equation*}
+    E_F = \frac{\hbar^2k_F^2}{2m}
+\end{equation*}
+is the \emf{Fermi energy}, and the hypersphere in $k$-space is the \emf{Fermi surface.}
+\begin{idea}
+    Oftentimes, we need to evalute 
+    \begin{equation*}
+        \sum_{\vec{k} \in FS} f(E(\vec{k})),
+    \end{equation*}
+    where $FS$ is the Fermi surface and $E(\vec{k}) = \frac{\hbar^2\vec{k}^2}{2m}.$ This can be a pain, but we can use the fact that 
+    \begin{equation*}
+        \int \delta(\epsilon - E(\vec{k})) \dd{\epsilon} = 1.
+    \end{equation*}
+    This allows us to rewrite,
+    \begin{align*}
+        \sum_{\vec{k}}f(E(\vec{k})) &= \int \underbrace{\rho(E)}_{\approx \text{ const}} f(E) \dd{E} \\ 
+        &= \rho \int f(E) \dd{E}.
+    \end{align*}
+\end{idea}
+\section{Quantum Statistical Mechanics}
+The partition function in quantum mechanics is 
+\begin{equation*}
+    Z = \sum_n e^{-\beta E_n} = \text{tr }e^{-\beta \hat{H}}.
+\end{equation*}
+For a quantum harmonic oscillator, i.e. $E_n=\hbar \omega(n+1/2),$ the partition function is 
+\begin{align*}
+    Z &= \sum_n e^{-\beta E_n} \\ 
+    &= e^{-\frac{1}{2}\beta \hbar\omega}\sum_n \left(e^{-\beta \hbar \omega}\right)^n \\ 
+    &= \boxed{\frac{e^{-\frac{1}{2}\beta \hbar\omega}}{1-e^{-\beta \hbar \omega}}}.
+\end{align*}
+The expectation value can be written as 
+\begin{equation*}
+    \langle \hat{A}\rangle  = \frac{1}{Z}\text{tr}\left(\hat{A}e^{-\beta \hat{H}}\right).
+\end{equation*}
+\subsection{2nd Quantization}
 Subatomic particles are either fermions (which obey the Pauli exclusion principle), and bosons.
 \begin{itemize}
     \item Electrons are fermions
@@ -98,7 +394,7 @@ and for bosons,
 \end{equation*}
 For \emf{second quantization,} we want to build a Hilbert space for many identical quantum particles. We can define \emf{sectors.}
 \begin{idea}
-    In many particle quantum mechanics, the number of particles is not a conserved quantity. For example, we can have annhilationa dn creation of particles (converting it from energy to mass and back). In superconductors, we typically have a bath of electrons where we can freely take and put back electrons.
+    In many particle quantum mechanics, the number of particles is not a conserved quantity. For example, we can have annhilation and creation of particles (converting it from energy to mass and back). In superconductors, we typically have a bath of electrons where we can freely take and put back electrons.
 \end{idea}
 Instead, we can define \emf{Sectors,} each with a well-defined number of particles. For fermions,
 \begin{itemize}
@@ -159,4 +455,130 @@ Usually, we can think of an analogy with the quantum harmonic oscillator, where
     \hat{H} = \hbar\omega\left(\underbrace{a^\dagger a}_{n} + \frac{1}{2}\right),
 \end{equation}
 where we can treat $a^\dagger a$ as the energy level. As an analogy, we can treat the system as only one energy level, and each new particle we add on a constant energy. This is what motivates the creation and annihilation operators.
+\begin{problem}[3.3.1]
+    We can prove the following,
+    \begin{enumerate}[label=(\alph*)]
+        \item $[\hat{a},\hat{a}^\dagger] = 1$ since $$\hat{a}\hat{a}^\dagger \ket{n} = \sqrt{n+1}\hat{a}\ket{n+1} = (n+1)\ket{n}$$ and 
+        $$\hat{a}^\dagger \hat{a}\ket{n} = \hat{a}^\dagger\sqrt{n}\ket{a-1} = n\ket{n},$$ so the commutator of the two will give $[\hat{a},\hat{a}^\dagger]\ket{n} = \ket{n}.$
+        \item $\hat{H} = \hbar\omega\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right)$ is true since we've already shown that $\hat{a}^\dagger\hat{a} = n.$ But in order to prevent circular logic in the future, we can write,
+        \begin{align*}
+            \hat{a}^\dagger\hat{a} &= \frac{1}{2m\hbar\omega}\left(m\omega \hat{x}-i\hat{p}\right)\left(m\omega \hat{x}+i\hat{p}\right) \\ 
+            &= \frac{1}{2m\hbar\omega}\left(\hat{p}^2 + m^2\omega^2\hat{x}^2 + m\omega i [\hat{x},\hat{p}]\right) \\
+            &= \frac{1}{\hbar\omega}\left(\frac{\hat{p}^2}{2m} + \frac{1}{2}m\omega^2\hat{x}\right) - \frac{1}{2}.
+        \end{align*}
+        Substituting this into $\hbar\omega(\hat{a}^\dagger\hat{a} + \frac{1}{2})$ gives us the desired relationship.
+        \item $[\hat{H},\hat{a}^\dagger]=\hbar\omega\hat{a}^\dagger$ since
+        \begin{align*}
+            \hat{H}\hat{a}^\dagger \ket{n} &= \hat{H}\sqrt{n+1}\ket{n+1}\\ 
+            &= \frac{1}{n+1}\hat{a}^\dagger \hat{a}\sqrt{n+1}E_{n+1}\ket{n+1} \\ 
+            &= \hat{a}^\dagger E_{n+1}\ket{n},
+        \end{align*}
+        and 
+        \begin{align*}
+            \hat{a}^\dagger \hat{H}\ket{n} &= \hat{a}^\dagger E_n \ket{n}.
+        \end{align*}
+        Recall that $E_{n+1} - E_n  = \hbar\omega,$ which proves this. We can show similarly that $[\hat{H},\hat{a}]=-\hbar\omega\hat{a}.$
+        \item We already proved this in the previous problem, where we can identify $E_{n+1} = E_n + \hbar\omega.$
+        \item Using part (b), the eigenvalues of $\hat{H}$ are directly related to the eigenvalues of $\hat{a}^\dagger\hat{a},$ so we get 
+        \begin{equation*}
+            E_n = \frac{\hbar\omega}{2}\left(n+\frac{1}{2}\right).
+        \end{equation*}
+        \item To show $\hat{a}\ket{n} = \sqrt{n}\ket{n-1}$ and $\hat{a}^\dagger\ket{n} = \sqrt{n+1}\ket{n+1},$ we can compute,
+        \begin{align*}
+            \hat{a}\ket{n} &= \frac{1}{\sqrt{2m\hbar\omega}}(m\omega\hat{x}+i\hat{p})\ket{n }
+        \end{align*}
+    \end{enumerate}
+\end{problem}
+\section{Time Evolution}
+In quantum mechanics, an initial wavefunction $\ket{\psi}$ evolves through time according to the Schrodinger equation,
+\begin{align*}
+    i\hbar\partial_t\ket{\psi} = H\ket{\psi}.
+\end{align*}
+This means that 
+\begin{equation*}
+    \ket{\psi(t)} = e^{-iHt/\hbar}\ket{\psi(0)}.
+\end{equation*}
+We can extract physical information about the system by using expectation values of operators, i.e. 
+\begin{equation*}
+    \langle A\rangle = \bra{\psi(t)}A\ket{\psi(t)}.
+\end{equation*}
+This is the \emf{Schrodinger picture}
+\begin{itemize}
+    \item States depend on time
+    \item Operators are independent of time.
+\end{itemize}
+Alternatively, we can use the \emf{Heisenberg picture,} wherein states are time independent but operators are time dependent, i.e. 
+\begin{align*}
+    \langle A\rangle &= \ket{\psi}e^{iHt/\hbar}Ae^{-iHt/\hbar}\ket{\psi},
+\end{align*}
+where $A_H(t)$ is operator, with the $H$ standing for Heisenberg. This can be nice because we can make conceptual connections to classical mechanics. Normally, to understand how the position of a particle evolves through time in classical mechanics, we just need to find $x(t)$. With the Heisenberg picture, we can compute 
+\begin{equation*}
+    \hat{x}(t) = e^{i\hbar{H}t/\hbar}\hat{x}e^{-i\hbar{H}t/\hbar}.
+\end{equation*}
+\begin{example}
+    Consider the quantum harmonic oscillator,
+    \begin{equation*}
+        \hat{H} = \frac{1}{2m}\hat{P}^2 + \frac{1}{2}m\omega^2\hat{x}^2,
+    \end{equation*}
+    and wish to find $\hat{x}(t).$ To do this, we need a mathematical trick,
+    \begin{equation*}
+        e^{A}Be^{-A} = \sum_{n=0}^{\infty}\frac{1}{n!}[A,[A,\dots,[A,B]]],
+    \end{equation*}
+    where the commutators are nested $n$ times.
+    \begin{proof}
+        Let $f(s) = e^{sA}Be^{-sA}.$ Its Taylor expansion is
+        \begin{align*}
+            f(s) &= \sum_{n=0}^{\infty} \frac{1}{n!}s^n f^{(n)}(0),
+        \end{align*}
+        where
+        \begin{align*}
+            f(0) &= B \\ 
+            f'(0) &= e^{sA}ABe^{-sA}+e^{sA}B(-A)e^{-sA} \\ 
+            &= e^{sA}[A,B]e^{-sA} \\ 
+            f''(0) &= e^{sA}A[A,B]e^{-sA}+e^{sA}[A,B](-A)e^{-sA} \\
+            &= e^{sA}[A,[A,B]]e^{-sA},
+        \end{align*}
+        and we can inductively prove the initial statement by setting $s=1.$
+    \end{proof}
+    Using this, we can compute,
+    \begin{align*}
+        \hat{x}(t) = \sum_{n=0}^{\infty}\left(\frac{it}{\hbar}\right)^n \frac{1}{n!}[H,[H,\dots,[H,x]\dots]].
+    \end{align*}
+    Recall that $[H,x] = -\frac{i\hbar p}{m}$ and $[H,p] = i\hbar m\omega^2 x.$ Therefore, the nested commutators give us something proportional to $p,$ for an odd number of commutators and for an even number of commutators, it is proportional to $x.$ This then leads to something in the form of 
+    \begin{equation*}
+        \dot{x}(t) = A\hat{x}\cos\omega t + B\hat{p}\sin\omega t
+    \end{equation*}
+\end{example}
+\section{Coherent States}
+A \emf{coherent state} of a QHO is a state which is the most \textit{classical}. They satisfy 
+\begin{equation*}
+    \hat{a}\ket{\alpha} = \alpha\ket{\alpha},
+\end{equation*}
+where $\hat{a}$ is the annihilation operator. To find the position space wavefunction of a state $\psi$, we compute
+\begin{equation*}
+    \bra{x}\ket{\psi}=\psi(x).
+\end{equation*}
+\begin{example}
+    To find the position space wavefunction of the ground state of the ground state of the QHO, $\ket{0},$ we note that $\hat{a}\ket{0} = 0$ (as it is the definition). We have 
+    \begin{align*}
+        & \bra{x}a\ket{0}=0\\ 
+        \implies & \bra{x}(i\hat{p}+m\omega \hat{x})\ket{0} = 0 \\ 
+        \implies & i\bra{x}\hat{p}\ket{0} + m\omega\bra{x}\hat{x}\ket{0} = 0 \\
+        \implies & \hbar \frac{\partial}{\partial x}\psi_0 + m\omega x\psi_0 = 0.
+    \end{align*}
+    Solving this differential equation gives us 
+    \begin{equation*}
+        \psi_0(x) = Ae^{-m\omega x^2/2\hbar},
+    \end{equation*}
+    where $A$ is the normalization factor.
+\end{example}
+A hint for problem set 4, 2.2(a)ii,
+\begin{itemize}
+    \item \textit{Hint:} Consider
+    \begin{align*}
+        \bra{x}\hat{a}\ket{\alpha(t)}&=\bra{x}\hat{a}e^{-iHt/\hbar}\ket{\alpha} \\ 
+        &= \bra{x}e^{-iHt/\hbar}e^{iHt/\hbar}\hat{a}e^{-iHt/\hbar}\ket{\alpha},
+    \end{align*}
+    and work from there.
+\end{itemize}
 \end{document}
