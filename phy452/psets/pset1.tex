@@ -1,0 +1,127 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY452: Statistical Mechanics \\ Problem Set 1}
+\author{QiLin Xue}
+\date{winter 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+\usepackage{siunitx}
+\usepackage{esint}
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+    \item This is a very general question, with different ways to approach it, depending on what we are ``allowed'' to assume. Suppose we can assume that $\frac{1}{T} = \frac{\partial S}{\partial U}\bigg|_{N,V}.$ Then for two systems together in thermal contact, where they can exchange energy (but otherwise $N$ and $V$ remain the same), we have
+    \begin{equation}
+        \dd{S} = \frac{\dd{U}}{T}.
+    \end{equation}
+    For the interacting systems in thermal contact, recall that the total energy remains constant since it is isolated from the environment. If one system loses an energy $\dd{U},$ the other system will gain an energy $\dd{U},$ so we have 
+    \begin{align}
+        \dd{S} &= \dd{S}_1 + \dd{S}_2 \\ 
+        &= \frac{\dd{U}_1}{T} + \frac{\dd{U}_2}{T} \\ 
+        &= \frac{\dd{U}_1}{T} - \frac{\dd{U}_1}{T} \\ 
+        &= 0.
+    \end{align}
+    Here, the subscripts $1$ and $2$ refer to the two systems. This shows that the entropy of the system at thermal equilibrium is an extremum, but we don't know it's a maximum yet! To show that it is a maximum, consider a slight deviation in the temperature. System 1 is at a temperature $T_1$ and system 2 is at a temperature $T_2$ where WLOG set $T_2>T_1.$ Energy will flow from system 2 to system 1, so $\dd{U}_1>0.$ Then:
+    \begin{align}
+        \dd{S} &= \frac{\dd{U}_1}{T_1} - \frac{\dd{U}_1}{T_2} \\ 
+                &= \dd{U}_1\left(\frac{1}{T_1}-\frac{1}{T_2}\right) >0.
+    \end{align}
+    We've shown that if the system is not at thermal equilibrium, the entropy will increase, so at thermal equilibrium, $\dd{S}=0$ must imply that the entropy is at a maximum.
+    % \begin{align}
+    %     \frac{\partial S_{total}}{\partial U} = \frac{\partial S_1}{\partial U_1} + \frac{\partial S_2}{\partial U_2}.
+    % \end{align}
+    % Note that the system is isolated from the environment, so $\partial U_1 = -\partial U_2$
+
+    \item \begin{enumerate}
+        \item Suppose the number of atoms with spin up and spin down is $N_{\uparrow}$ and $N_{\downarrow}$ respectively. Then the multiplicity of this state is equal to the number of permutations of $N$ objects, with $N_{\uparrow}$ of them being $\uparrow$ and $N_{\downarrow}$ of them being $\downarrow$. This is given by the binominal coefficient,
+        \begin{equation}
+            \Omega(N,V,E) = \binom{N}{N_{\uparrow}} = \frac{N!}{N_{\uparrow}!(N-N_{\uparrow})!} = \frac{N!}{N_{\uparrow}!N_{\downarrow}!},
+        \end{equation}
+        where $N,V,E$ are fixed.
+        \item Recall that Stirling's approximation gives
+        \begin{align}
+            N! &\approx \sqrt{2\pi N} \left(\frac{N}{e}\right)^N \\ 
+            \implies \ln(N!) &\approx \frac{1}{2}\ln(2\pi N) + N\ln N - N - (N- N_\uparrow)\ln(N-N_\uparrow).
+        \end{align}
+        We can compute the entropy to be 
+        \begin{align}
+            S/k_B =& \ln \Omega \\ 
+            =& \ln N! - \ln N_{\uparrow}! - \ln (N-N_\uparrow)! \\
+            \approx& \frac{1}{2}\ln(2\pi N) + N\ln N - N - \frac{1}{2}\ln(2\pi N_{\uparrow}) - N_{\uparrow}\ln N_{\uparrow} + N_{\uparrow} \\ 
+            &+ \frac{1}{2}\ln(2\pi (N-N_\uparrow)) - (N-N_\uparrow)\ln (N-N_\uparrow) + N - N_{\uparrow} \\
+            &= \frac{1}{2}\ln \left(2\pi \frac{N}{N_\uparrow (N-N_\uparrow)}\right) + N\ln N - N_{\uparrow}\ln N_{\uparrow}  - (N-N_\uparrow)\ln (N-N_\uparrow) \\ 
+            &\approx N\ln N - N_{\uparrow}\ln N_{\uparrow} - (N-N_\uparrow)\ln (N-N_\uparrow) 
+        \end{align}
+        Note that the minimum that $\frac{N}{N_{\uparrow}(N-N_{\uparrow})}$ reaches is $\frac{4}{N}$, so the first term is on the order of $\mathcal{O}(N),$ which becomes negligible compared to $N\ln N$ for $N \gg 1.$ To make our lives easier, we can also compute,
+        \begin{align}
+            \frac{\partial (S/k_B)}{\partial N_{\uparrow}} &= -\ln N_{\uparrow} -1 + \ln(N-N_{\uparrow}) + 1 \\ 
+            &= \ln \left(\frac{N}{N_\uparrow} - 1\right).
+        \end{align}
+        The definition of temperature is given by 
+        \begin{align}
+            \frac{1}{T} &= \frac{\partial S}{\partial U}\bigg|_{N,H} \\
+            &= \frac{\partial S}{\partial N_\uparrow}\frac{\partial N_{\uparrow}}{\partial U} \\ 
+            &= \frac{1}{2\mu H}\frac{\partial S}{\partial N_\uparrow},
+        \end{align}
+        where the energy of a system of paramagnetic atoms with spin $\frac{1}{2}$ is given by 
+        \begin{equation}
+            U = \mu H(N_\uparrow - N_\downarrow) = \mu H(2N_\uparrow - N) \implies N_\uparrow = \frac{1}{2}\left(\frac{U + N\mu H}{\mu H}\right),
+        \end{equation}
+        where we have set the magnetic field to point in the negative $z$ direction, and the $\uparrow$ state corresponds to alignment in the positive $z$ direction.
+        Therefore,
+        \begin{align}
+            \frac{1}{T} &= \frac{k_B}{2\mu H} \ln\left(\frac{N}{N_{\uparrow}} - 1\right) \\ 
+            &= \frac{k_B}{2\mu H}\ln \left(\frac{2\mu HN}{U + \mu HN} - 1\right)\\ 
+            &= \frac{k_B}{2\mu H}\ln \left(\frac{\mu HN- U}{\mu HN + U}\right).
+        \end{align}
+        We can solve for $U$ via 
+        \begin{align}
+            & \frac{\mu HN- U}{\mu HN + U} = \underbrace{\exp\left(\frac{2\mu HT}{k_B}\right)}_{\beta} \\ 
+            \implies &\mu HN-U = \mu HN\beta + U\beta \\ 
+            \implies & U = \mu HN\frac{1-\beta}{1+\beta} \\ 
+            &= \mu HN \frac{1-e^{2\mu HT/k_B}}{1+e^{2\mu HT/k_B}} \\ 
+            &= - N\mu H \tanh\left(\frac{\mu H}{kT}\right).
+        \end{align}
+        \item We can non-dimensionalize the equation as 
+        \begin{equation}
+            \tilde{U} = -\tanh(\frac{1}{\tilde{T}}),
+        \end{equation}
+        which can be plotted as 
+        \begin{center}
+            \begin{tikzpicture}
+            \begin{axis}[
+            legend pos=outer north east,
+            title=Dependence of $U$ on $T$,
+            axis lines = middle,
+            xlabel = $\tilde{T}$,
+            ylabel = $\tilde{U}$,
+            variable = t,
+            trig format plots = rad,
+            ymin=-1.2,
+            ymax=0.2,
+            ]
+            \addplot [
+                domain=0:15,
+                samples=200,
+                color=blue,
+                ]
+                {-tanh(1/x)};
+            \end{axis}
+            \end{tikzpicture}
+        \end{center}
+        That is, the energy starts off as $-N\mu H$ and increases monotonically to approach $0$ as $T$ increases. These are a few observations:
+        \begin{itemize}
+            \item Observation 1: The energy approaches $-N\mu H$ as $T\to 0.$ This makes sense because the amount of statistical fluctuations approaches zero as $T\to 0,$ so the system will tend to the lowest energy state, which occurs when everything is aligned with the magnetic field, i.e. spin down: $N_{\downarrow}=N,N_{\uparrow}=0.$
+            \item Observation 2: As the temperature increases, the amount of statistical fluctuations will also increase (i.e. thermal energy increases). At high temperatures, random fluctuations will dominate the tendency for the magnetic field to orient the dipoles, so there should be an equal number of spin ups and spin downs.
+            \item Observation 3: The energy never goes above $0.$ This is because the multiplicity of having $x$ spin-up and $N-x$ spin-down is the same as having $N-x$ spin-up and $x$ spin-down. However, the energies associated with the two states are different, and for sufficiently large $N$ we will always observe more dipoles aligned with the magnetic field than against it, so the energy is always negative. 
+        \end{itemize}
+    \end{enumerate}
+\end{enumerate}
+\end{document}

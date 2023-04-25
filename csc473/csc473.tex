@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{CSC473: Algorithms}
+\author{QiLin Xue}  
+\date{Spring 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+\usetikzlibrary{quantikz}
+\usepackage[american]{circuitikz}
+\newcommand{\equals}{=}
+\usepackage{algpseudocode}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Global Min Cut}
+\begin{itemize}
+    \item \textbf{Input:} Undirected, unweighted connected graph $G=(V,E).$
+    \item \textbf{Output:} Smallest set of edges that disconnects $G.$
+\end{itemize}
+\begin{center}
+    \begin{tikzpicture}[x=2cm, y=2cm]
+        \tikzstyle{vertex}=[circle,fill=black!25,minimum size=20pt,inner sep=2pt]
+
+        \draw[dashed] (-1,-1) rectangle (1.3,1) node[above] {$S$};
+        \draw[dashed] (1.7,-1) rectangle (4,1) node[above] {$V\setminus S$};
+
+        \node[vertex] (G_1) at (0,0) {};
+        \node[vertex] (G_3) at (1,0) {a};
+        \node[vertex] (G_2) at (0.5,0.5) {};
+        \node[vertex] (G_4) at (0.5,-0.5) {};
+        \node[vertex] (G_5) at (2,0) {b};
+        \node[vertex] (G_7) at (3,0) {};
+        \node[vertex] (G_6) at (2.5,0.5) {};
+        \node[vertex] (G_8) at (2.5,-0.5) {};
+
+        \draw (G_1) -- (G_2) -- (G_3) -- (G_4) -- (G_1) -- cycle;
+        \draw (G_5) -- (G_6) -- (G_7) -- (G_8) --(G_5) -- cycle;
+
+        % % \draw (G_5) -- (G_2) -- (G_4) -- cycle;
+        \draw (G_3) -- (G_5);
+    \end{tikzpicture}
+
+    \begin{tikzpicture}[x=2cm, y=2cm]
+        \tikzstyle{vertex}=[circle,fill=black!25,minimum size=20pt,inner sep=2pt]
+        \node[vertex] (G_1) at (0,0) {};
+        \node[vertex] (G_3) at (1,0) {};
+        \node[vertex] (G_2) at (0.5,0.5) {c};
+        \node[vertex] (G_4) at (0.5,-0.5) {};
+
+        \draw (G_1) -- (G_2) -- (G_3) -- (G_4) -- (G_1) -- cycle;
+
+        % % \draw (G_5) -- (G_2) -- (G_4) -- cycle;
+        \draw (G_1) -- (G_3);
+    \end{tikzpicture}
+\end{center}
+For the first graph, disconnect the edge separating $a$ and $b$ and for the second graph, disconnect the edges around node $c.$ We wish to instead return $S,T \subseteq V$ with $S\cap T = \emptyset$ such that the desired edges are simply 
+\begin{equation*}
+    E(S,T) = \{(u,v) \in E : u\in S, v\in T\}.
+\end{equation*} 
+The global min-cut is therefore the output $S\subseteq V$ such that $S \neq \emptyset,V$ where $|E(S,V\setminus S)|$ is minimized.
+
+Notice that this is very similar to the max flow problem. Consider the source-sink min-cut problem, where the input is $G=(V,E)$ as before, and two nodes $s,t\in V.$ The desired output is the same $S$ with the same minimization, except with one extra constraint: that is, $s\in S$ and $t\notin S.$ Any max flow algorithm can determine this.
+
+To solve the global min cut problem, we can fix $t$ and choose $s$ to be any of the other $V-1$ nodes, then run the max flow algorithm on each case. The best max flow algorithm (Which came out in a recent paper) does max flow in $O(m^{1+O(1)}) \approx O(n^2),$ so this algorithm would give a time complexity of $O(n^3).$ However, we can improve this to $O(n^2\log^2(n)).$
+\end{document}

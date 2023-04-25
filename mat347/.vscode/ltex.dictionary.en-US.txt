@@ -2,3 +2,11 @@ Quaternion
 quaternion
 cosets
 conjugacy
+Noetherian
+componentwise
+homomorphisms
+elementwise
+endomorphism
+well-definedness
+Bezout
+isomorphisms

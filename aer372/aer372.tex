@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{AER372: Control Systems}
+\author{QiLin Xue}
+\date{Spring 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{System Models}
+Terminology:
+\begin{itemize}
+    \item \emf{System:} A collection of components of interest, demarcated by a boundary, interacting through certain physical principles (device / process / plant)
+    \item \emf{System Parameters (C)}: Properties that define the components of the system 
+    \item \emf{State Variables (X)}: A minimal set of variables that completely identify the state of the system at each moment. 
+    \item \emf{Static System:} The output vector $Y(t)$ depends only on the input vector $U(t)$ at time $t.$ For any given input, state variables do not change, i.e. 
+    \begin{equation}
+        Y(t) = H(U(t),C)
+    \end{equation}
+    \item \emf{Dynamic System:} The current value of the output depends on the past history as well as the present values of the input. For any given input, state variables change in time.
+\end{itemize}
+\end{document}

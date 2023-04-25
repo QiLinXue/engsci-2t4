@@ -1,0 +1,726 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{Phy450: Relativistic Electrodynamics}
+\author{QiLin Xue}
+\date{Spring 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+\usepackage{siunitx}
+\usepackage{esint}
+\usepackage{ mathrsfs }
+
+% table of contents package
+\usepackage{tocloft}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+\section{Review of E/M}
+\subsection{Maxwell's Equations}
+Gauss's Law states that 
+\begin{equation}
+    \oiint_{\mathcal{S}}\dd{\Phi} = \oint_{\mathcal{S}} \bm{E} \cdot \dd{\bm{a}} = \frac{Q}{\epsilon_0} = \iiint_{V} \frac{\rho}{\epsilon_0} \dd{V},
+\end{equation}
+where $\epsilon_0 = 8.854\times 10^{-12} \si{\meter^{-3}\kilo\gram^{-1}\ampere^{2}\second^{4}}$ is the permittivity of the vacuum. It basically states that electric fields are created by charges. There is an equivalent for magnetic fields,
+\begin{equation}
+    \oiint_{\mathcal{S}} \bm{B}\cdot \dd{\bm{a}} = 0,
+\end{equation}
+i.e. there are no magnetic monopoles. Faraday's Law states that changing magnetic fields induce electric fields. Mathematically,
+\begin{equation}
+    \ointctrclockwise_{\bm{e}} \bm{E} \cdot \dd{\bm{\ell}} = - \frac{\partial}{\partial t}\oiint_{\mathcal{S}} \bm{B}\cdot \dd{\bm{a}},
+\end{equation}
+where $\bm{e}$ is a unit vector pointing along the closed curve of interest. Ampere's Law is related to Faraday's Law in the opposite direction, that is, current can be induced by electric fields. We have,
+\begin{equation}
+    \ointctrclockwise_{\bm{e}} \bm{B}\cdot \dd{\bm{\ell}} = \mu_0 \oiint_{\mathcal{S}} \bm{J} \cdot \dd{\bm{a}},
+\end{equation}
+where $\mu_0 = 4\pi \times 10^{-2} \si{\meter\kilo\gram\ampere^{-2}\second^{-2}}$ is the permeability of vacuum. There are two important mathematical theorems. We have Divergence theorem,
+\begin{equation}
+    \iiint_{V} \bm{\nabla}\cdot \bm{F} \dd{V} = \oiint \bm{F} \cdot \dd{\bm{a}},
+\end{equation} 
+and Stokes's theorem,
+\begin{equation}
+    \oiint_{\mathcal{S}}(\bm{\nabla}\times \bm{F}) \cdot \dd{\bm{a}} = \ointctrclockwise \bm{F} \cdot \dd{\bm{\ell}}. 
+\end{equation}
+We can then convert our integral forms of Maxwell's equations to differential (or local) forms. We have,
+\begin{align}
+    \bm{\nabla}\cdot \bm{B} &= 0 \\ 
+    \bm{\nabla}\times \bm{E} &= -\frac{\partial \bm{B}}{\partial t} & \text{Faraday}\\ 
+    \bm{\nabla} \times \bm{B} &= \mu_0 \bm{J} + \mu_0\epsilon_0 \frac{\partial \bm{E}}{\partial t} & \text{Ampere-Maxwell}\\ 
+    \bm{\nabla}\cdot \bm{E} &= \frac{\rho}{\epsilon_0} & \text{Gauss's Law}
+\end{align}
+The first two equations are homogeneous and the last two equations are inhomogeneous. The extra term for the last equation is due to conservation of current density, i.e. 
+\begin{equation}
+    \frac{\partial}{\partial t}\iiint \rho \dd{V} = -\oiint \bm{J} \cdot \dd{\bm{a}} \implies \bm{\nabla}\cdot \bm{J} = -\frac{\partial\rho}{\partial t}.
+\end{equation}
+The Lorentz force is given by 
+\begin{equation}
+    \bm{F} = q\bm{E} + q\bm{v}\times \bm{B}.
+\end{equation}
+\subsection{Magnetic and Scalar Potentials}
+How do we solve these \textit{suckers}? We can use some simplifying tricks (other known as happy facts). We have happy fact \#1,
+\begin{equation}
+    \bm{\nabla} \cdot (\bm{\nabla} \times \bm{F}) = 0.
+\end{equation}
+This suggests that we could potentially write 
+\begin{equation}
+    \boxed{\bm{B} = \bm{\nabla} \times \bm{A}},
+\end{equation}
+where $\bm{A}$ is known as the vector potential. This automatically solves the first equation. Substituting the magnetic potential into Faraday's Law gives 
+\begin{align}
+    \bm{\nabla}\times (\bm{E} + \frac{\partial}{\partial t}\bm{A}) = 0.
+\end{align}
+Happy fact \#2 tells us that 
+\begin{equation}
+    \bm{\nabla} \times (\bm{\nabla} \bm{f}) = 0,
+\end{equation}
+which suggests we can write 
+\begin{equation}
+    \boxed{\bm{E} = - \frac{\partial \bm{A}}{\partial t} -\bm{\nabla}\phi,}
+    \label{eq:E-as-A-and-phi}
+\end{equation}
+where $\phi$ is the scalar potential. 
+
+But what about \textit{uniqueness}? For a given magnetic and electric field, is $\bm{A}$ and $\phi$ necessarily unique? It turns out we can transform 
+\begin{align}
+    \bm{A} \to \bm{A}' = \bm{A} + \bm{\nabla}\chi \\ 
+    \phi \to \phi' = \phi - \frac{\partial \chi}{\partial t}.
+\end{align}
+These lead to the same $\bm{E}'=\bm{E},\bm{B}'=\bm{B}.$ Interestingly, these transformations can be shown to be equivalent to another gauge transformation, that is the phase shift of a quantum mechanical wavefunction.
+
+What happens when we substitute these potentials and gauge transformations into the homogeneous transformations? We have,
+\begin{align}
+    &\bm{\nabla} \times (\bm{\nabla} \times \bm{A}) - \mu_0\epsilon_0 \frac{\partial}{\partial t}\left(-\frac{\partial \bm{A}}{\partial t} - \bm{\nabla}\phi\right) = \mu_0 \bm{J} \\
+    \implies & \bm{\nabla}(\bm{\nabla}\cdot \bm{A}) - \nabla^2 \bm{A} + \mu_0\epsilon_0 \frac{\partial^2}{\partial t^2}\bm{A} + \mu_0\epsilon_0 \bm{\nabla} \frac{\partial}{\partial t}\phi = \mu_0\bm{J} \\ 
+    \implies & \left(\nabla^2 \bm{A} - \mu_0\epsilon_0\epsilon_0 \frac{\partial^2}{\partial t^2}\bm{A} \right) - \bm{\nabla}(\bm{\nabla}\cdot \bm{A} + \epsilon_0\mu_0 \frac{\partial\phi}{\partial t}) = - \mu_0 \bm{J}.
+\end{align}
+The first term is the wave equation which is something we are familiar with, which suggests $\mu_0\epsilon_0= \frac{1}{c^2}.$ The second term is yucky, but we can set it to zero using gauge transformations. We have,
+\begin{align}
+    \xi &:= \bm{\nabla}\cdot \bm{A} + \frac{1}{c^2} \frac{\partial \phi}{\partial t} \\ 
+    \implies \xi' &= \bm{\nabla}\cdot \bm{A}' + \frac{1}{c^2}\frac{\partial \phi'}{\partial t} \\ 
+    &= \xi + \square^2 \chi,
+\end{align}
+where $\square^2 = \nabla^2 - \frac{1}{c^2}\frac{\partial^2}{\partial t^2}$ is known as the d'Alembert operator. We get a wave equation, and we can solve such that $\xi'=0.$ With this, we get the \emf{Lorentz Gauge condition,}
+\begin{equation}
+    \boxed{\bm{\nabla}\cdot\bm{A} + \frac{1}{c^2}\frac{\partial \phi}{\partial t} = 0.}
+\end{equation}
+which can be used to simplify and get 
+\begin{equation}
+    \boxed{\square^2 \bm{A} = -\mu_0 \bm{J}.}
+\end{equation}
+Similarly, Gauss's Law becomes 
+\begin{align}
+    &\bm{\nabla}\cdot \left(-\frac{\partial \bm{A}}{\partial t} - \bm{\nabla}\phi\right) = \frac{\rho}{\epsilon_0} \\ 
+    \implies & \nabla^2 \phi + \frac{\partial}{\partial t}(\bm{\nabla}\cdot \bm{A}) = - \rho/\epsilon_0.
+\end{align}
+The second term can be simplified using the Lorentz Gauge condition to get 
+\begin{equation}
+    \boxed{\square^2\phi = -\frac{\rho}{\epsilon_0}.}
+\end{equation}
+\begin{summary}
+    \begin{align}
+        \square^2 \begin{pmatrix}
+            \phi/c \\ \bm{A}
+        \end{pmatrix} &= -\mu_0\begin{pmatrix}
+            c\rho \\ \bm{J}
+        \end{pmatrix} & \text{Wave Equation}\\ 
+        \frac{1}{c}\frac{\partial}{\partial t}\left(\phi/c\right) + \bm{\nabla}\cdot \bm{A} &= 0 & \text{Lorentz Condition}\\ 
+        \frac{1}{c}\frac{\partial}{\partial t}(c\rho) + \bm{\nabla}\cdot \bm{J} &= 0 & \text{Continuity}
+    \end{align}
+\end{summary}
+Let us denote
+\begin{align}
+    &ct =-x_0,\quad\quad, x=x_1,\quad\quad y=x_2,\quad\quad z=x_3 \\ 
+    &\phi/c = -A_0,\quad\quad A_x=A_1,\quad\quad A_y=A_2,\quad\quad A_z=A_3 \\ 
+    & c\rho = -J_0,\quad\quad J_x=J_1,\quad\quad J_y=J_2,\quad\quad J_z=J_3.
+\end{align}
+Using this notation, the three equations become 
+\begin{align}
+    \left(\sum_{i=1}^{3} \frac{\partial^2}{\partial x_i^2} - \frac{\partial^2}{\partial x_0^2}\right)A_\nu &= -\mu_0 J_{\nu} \\ 
+    \sum_{\mu=0}^{3} \frac{\partial A_{\mu}}{\partial x_{\mu}} &= 0 \\ 
+    \sum_{\mu=0}^{3} \frac{\partial J_{\mu}}{\partial x_{\mu}} &= 0.
+\end{align}
+\subsection{Poynting's Theorem}
+The work done by a charge $q$ displaced by $\dd{\bm{\ell}}$ is given by 
+\begin{equation}
+    \dd{W} = q(\bm{E}+\bm{v}\times\bm{B}) \cdot \bm{v} \dd{t} = q\bm{v}\cdot \bm{E} \dd{t}
+\end{equation}
+We then get 
+\begin{equation}
+    \frac{dW}{dt} = \int_{V} \bm{E} \cdot \bm{J} \cdot \dd^3{r},
+\end{equation}
+where 
+\begin{equation}
+    \bm{J} = \sum_n q_n \bm{v}_n \delta(\bm{r}-\bm{r}_n).
+\end{equation}
+We can rewrite 
+\begin{align}
+    \bm{E} \cdot \bm{J} &= \frac{1}{\mu_0} \bm{E} \cdot (\bm{\nabla} \times \bm{B}) - \epsilon_0 \bm{E} \cdot \frac{\partial \bm{E}}{\partial t} \\ 
+    &= \frac{1}{\mu_0}\left(\bm{B}\cdot (\nabla\times \bm{E}) - \bm{\nabla}\cdot (\bm{E}\times \bm{B})\right) - \epsilon_0 \bm{E} \cdot \frac{\partial \bm{E}}{\partial t} \\ 
+    &= -\frac{\partial}{\partial t}\left(\frac{B^2}{2\mu_0}+\frac{\epsilon_0 E^2}{2}\right) - \frac{1}{\mu_0}\bm{\nabla}\cdot (\bm{E}\times \bm{B}).
+\end{align}
+Then,
+\begin{align}
+    \frac{dW}{dt} = -\frac{\partial}{\partial t}\int_V \frac{1}{2}\left(\epsilon_0 E^2 + \frac{B^2}{\mu_0}\right) \dd^3{r} - \oiint_{S} \left(\frac{\bm{E}\times \bm{B}}{\mu_0}\right) \cdot \bm{A}.
+\end{align}
+The first term is the change in energy contained in a volume and the second term is the flux of energy coming out of a surface. If no work is being done, these two must be equal to each other. Therefore,
+\begin{equation}
+    u = \frac{1}{2}(\epsilon_0 E^2 + \frac{1}{\mu_0}B^2)
+\end{equation}
+is the total energy density stored in the field and 
+\begin{equation}
+    \bm{S} = \frac{1}{\mu_0}(\bm{E} \times \bm{B})
+\end{equation}
+is the flux of energy per unit area and is \emf{Poynting's Vector.} If no work is being done, we have 
+\begin{equation}
+    \boxed{\frac{\partial u}{\partial t} = - \bm{\nabla}\cdot \bm{S}.}
+\end{equation}
+Note that we do need to be cautious here since the transformation $\bm{S}' = \bm{S} + \bm{\nabla}\times \bm{F},$ so we have to be careful here, especially when using this differential form.
+
+We can now look at solutions of the wave equation. For the equation 
+\begin{equation}
+    \left(\nabla^2 - \frac{1}{c^2}\frac{\partial^2}{\partial t^2}\right) u = 0,
+\end{equation}
+we have \emf{d'Alembert's Solution,}
+\begin{equation}
+    u(\bm{r},t) = f(\bm{n}\cdot \bm{r} \pm ct),
+\end{equation}
+where $\bm{n}$ is the constant unit normal vector of the plane wave. One important case is when $f$ has the form 
+\begin{equation}
+    f(x) = \cos(\frac{\omega x}{c} + \phi),
+\end{equation}
+which is the \emf{monochromatic plane wave.} Therefore, the solution is then 
+\begin{equation}
+    A\cos\left(\frac{\omega \bm{n}}{c}\bm{r} \pm \omega t + \phi\right)
+\end{equation}
+where we can write the \emf{wave vector} as $\bm{k} = \frac{\omega \bm{n}}{c}.$ The electric field plane wave can be written as 
+\begin{align}
+    \bm{E}(\bm{r},t) &= \bm{E}_0 \cos\left(\bm{k}\cdot \bm{r} - \omega t + \phi_1\right) \\ 
+    \bm{B}(\bm{r},t) &= \bm{B}_0 \cos\left(\bm{k}\cdot \bm{r} - \omega t + \phi_2\right)
+\end{align} 
+which is one possible solution to Maxwell's equation. Note that since $\bm{\nabla}\cdot \bm{E} = 0,$ this implies that 
+\begin{equation}
+    \bm{E}_0 \cdot \bm{n} = \bm{B}_0 \cdot \bm{n} = 0.
+\end{equation}
+We can write,
+\begin{align}
+    \bm{E} &= \Re\left\{\mathcal{E}_0 \exp\left[i(\bm{k}\cdot \bm{r} - \omega t)\right]\right\} \\ 
+    \bm{B} &= \Re\left\{\mathcal{B}_0 \exp\left[i(\bm{k}\cdot \bm{r} - \omega t)\right]\right\}.
+\end{align}
+Then $\bm{\nabla}\times \bm{E} = -\frac{\partial\bm{B}}{\partial t}$ gives 
+\begin{equation}
+    \boxed{\bm{\mathcal{B}} = \frac{1}{c}\bm{n} \times \bm{\mathcal{E}}_0}.
+\end{equation}
+Using this, we can write 
+\begin{align}
+    u &= \epsilon_0 E_0^2 \cos^2\left(\bm{k}\cdot \bm{r} - \omega t + \phi\right) \\ 
+    \bm{S} &= cu\bm{n}.
+\end{align}
+Intuitively, note that $u$ oscillates fast. We can average this over time,
+\begin{align}
+    \langle u \rangle = \frac{2\pi}{\omega} \int_{t-2\pi/\omega}^{t+2\pi/\omega} u(t')\dd{t'}
+\end{align}
+\subsection{Monochromatic Plane Waves}
+\textbf{NB: This is a ``re-do'' of last lecture.}
+
+We assert that the most general monochromatic plane wave is given by
+\begin{equation}
+    \bm{E}(\bm{r},t) = \bm{E}_1 \cos\left[\frac{\omega}{c}(\bm{n}\cdot \bm{r} - ct)\right] + \bm{E}_2 \sin\left[\frac{\omega}{c}\left(\bm{n}\cdot\bm{r} - ct\right)\right].
+\end{equation}
+Note that there are no phase shifts explicitly written here. This can be written out in terms of a complex exponential,
+\begin{equation}
+    \bm{E}(\bm{r},t) = \text{Re}\left\{\underbrace{(\bm{E}_1-i\bm{E}_2)}_{\mathcal{E}_0}\exp\left(i\frac{\omega}{c}(\bm{n}\cdot \bm{r} - ct)\right)\right\}
+\end{equation}
+where $\bm{E}_0$ is the complex vector. Similarly for magnetic fields,
+\begin{equation}
+    \bm{B}(\bm{r},t) = \text{Re}\left\{\underbrace{(\bm{B}_1-i\bm{B}_2)}_{\mathcal{B}_0}\exp\left(i\frac{\omega}{c}(\bm{n}\cdot \bm{r} - ct)\right)\right\}
+\end{equation}
+Recall that Faraday's Law is $\bm{\nabla} \times \bm{E} + \frac{\partial\bm{B}}{\partial t} = 0.$ Writing out the electric and magnetic fields in terms of complex exponentials, we obtain:
+\begin{align}
+    \text{Re}\left\{\frac{i\omega}{c}\left(\bm{n}\times \bm{\mathcal{E}}_0 - c\bm{\mathcal{B}}_0\right)\exp\left[\frac{i\omega}{c}\left(\bm{n}\cdot \bm{r} - ct\right)\right]\right\} = 0.
+\end{align}
+This is true for all of $\bm{r},t$ so the magnitude must be zero. That is,
+\begin{equation}
+    \bm{n} \times \bm{\mathcal{E}} = c\bm{\mathcal{B}}
+\end{equation}
+When $\bm{E}_1$ and $\bm{E}_2$ are parallel, we have \emf{linear polarization}. If they are orthogonal, then it is \emf{circularly polarized}. In the general case, it is known as \emf{ellipticly polarized}.
+
+To save space, let us denote
+\begin{equation}
+    \Phi \equiv \bm{k}\cdot \bm{r} - \omega t.
+\end{equation}
+Then,
+\begin{align}
+    E^2 &= \left(\frac{\bm{\mathcal{E}_0} e^{i\Phi} + \bm{\mathcal{E}^*_0}}{2}\right)^2 \\ 
+    &= \frac{1}{4}\left({\mathcal{E}_0}^2 e^{i2\Phi} + {\mathcal{E}^*_0}^2 e^{-i2\Phi} +2\bm{\mathcal{E}_0}\cdot \bm{\mathcal{E}^*_0}\right).
+\end{align}
+Similarly,
+\begin{align}
+    B^2 &= \frac{1}{4}\left({\mathcal{B}_0}^2 e^{i2\Phi} + {\mathcal{B}^*_0}^2 e^{-i2\Phi} +2\bm{\mathcal{B}_0}\cdot \bm{\mathcal{B}^*_0}\right).
+\end{align}
+Recall that energy density is 
+\begin{equation}
+    u = \frac{1}{2}\left\{\epsilon_0 E^2 + \frac{1}{\mu_0}B^2\right\}.
+\end{equation}
+We can compute 
+\begin{align}
+    \bm{\mathcal{B}_0}\cdot \bm{\mathcal{B}^*_0} &= \frac{\bm{n}\times \bm{\mathcal{E}_0}}{c} \cdot \frac{\bm{n}\times \bm{\mathcal{E}^*_0}}{c} \\ 
+    &= \frac{(\bm{n}\cdot \bm{e})\bm{\mathcal{E}^*_0}\cdot\bm{\mathcal{E}_0} - (\bm{n}\cdot \bm{\mathcal{E}_0}^*)(\bm{n}\cdot \bm{\mathcal{E}_0}^*)}{c^2} \\ 
+    &= \frac{\bm{\mathcal{E}^*_0}\cdot\bm{\mathcal{E}_0}}{c^2}.
+\end{align}
+Recalling that $\epsilon_0 = \frac{1}{\mu_0 c^2},$ we can show that the energy density contribution from the electric and magnetic field are going to be equal. Therefore,
+\begin{equation}
+    u = \frac{\epsilon_0}{4}\left(\mathcal{E}_0^2 e^{i2\Phi}  + {\mathcal{E}^*_0}^2 + 2 \bm{\mathcal{E}_0}\bm{\mathcal{E}^*_0}\right).
+\end{equation}
+The Poynting vector can then be written as 
+\begin{align}
+    \bm{S} = \bm{n}cu,
+\end{align}
+as before. Computing the average, we obtain 
+\begin{equation}
+    \langle u \rangle = \frac{\epsilon_0}{2} \bm{\mathcal{E}_0}\cdot \bm{\mathcal{E}_0^*}
+\end{equation}
+\section{Special Relativity}
+\subsection{Introduction}
+The \emf{Principle of Relativity:} physical laws are the same in all inertial reference frames of reference. Here, \emf{reference frame} refers to a system of coordinates $x,y,z,$ origin and axes, as well as time $t.$ And \emf{inertial} refers to Newton's First Law being true.
+
+Before Einstein, a change in coordinates was described by common sense, i.e. the \emf{Gallilean Transform}, given by
+\begin{align}
+    x' &= x - vt \\ 
+    y' &= y \\
+    z' &= z \\
+    t' &= t.
+\end{align}
+If we choose the axes such that the velocity is in the $x$ direction, then the $y$ and $z$ coordinates are unchanged. Note that the acceleration is the same sinc 
+\begin{equation}
+    \frac{dx'}{dt'} = \frac{dx}{dt} - v \implies \frac{d^2x'}{dt'^2} = \frac{d^2x}{dt^2}
+\end{equation}
+Recall from Maxwell's equation that the term $c^2 = \frac{1}{\mu_0\epsilon_0}$ comes into play, suggesting that the speed of light was finite. This however does not depend on the frame, i.e. all observers observe the same speed of light. While there are some theories to try to rationalize this (ether), but Einstein's theory of special relativity is the simplest: time is not absolute, the speed of light is.
+
+Consider two events:
+\begin{itemize}
+    \item Event 1: A light bulb emits a flash at $\bm{r}_1,t_1.$
+    \item Event 2: You see the flash at $\bm{r}_2,t_2$
+\end{itemize}
+We have,
+\begin{align}
+    \Delta r &= \sqrt{(x_1-x_2)^2 + (y_1-y_2)^2 + (z_1-z_2)^2} \\ 
+    \Delta t &= t_2 - t_1,
+\end{align}
+so the sped of light is $c=\Delta r/\Delta t,$ and it gives the relationship 
+\begin{equation}
+    -c^2\Delta t^2 + \Delta x^2 + \Delta y^2 + \Delta z^2 = 0.
+\end{equation} 
+Let us now move into a primed frame (i.e. moving at some velocity). Then special relativity states that we have 
+\begin{equation}
+    \Delta x'^2 + \Delta y'^2 + \Delta z'^2 - c^2\Delta t'^2 = 0.
+\end{equation}
+The \emf{space-time interval} between two events is given by 
+\begin{equation}
+    \Delta s^2 = -c^2\Delta t^2 + \Delta x^2 + \Delta y^2 + \Delta z^2,
+\end{equation}
+and we claim a fundamental result,
+\begin{equation}
+    \Delta s = \Delta s'.
+\end{equation}
+If:
+\begin{itemize}
+    \item $\Delta s^2 =0:$ light-like interval
+    \item $\Delta s^2 > 0:$ space-like interval
+    \item $\Delta s^2 < 0:$ time-like interval
+\end{itemize}
+\subsection{Other Stuff}
+Notes were not taken.
+\subsection{Relativistic Action}
+Recall that the action is given by 
+\begin{equation}
+    S = \int_a^b L(q_i,\dot{q}_i,t)\dd{t},
+\end{equation}
+and the principle of stationary action $\delta S = 0$ gives 
+\begin{equation}
+    \frac{d}{dt}\frac{\partial L}{\partial \dot{q}_i} - \frac{\partial L}{\partial x_i} = 0,
+\end{equation} 
+where the momentum is given by $p_i = \frac{\partial L}{\partial \dot{q}_i}$ and energy as $E=\dot{q}_ip^i - L.$ What about the relativistic action? One guess is 
+\begin{equation}
+    S = \alpha \int_a^b \dd{\tau} = \alpha\int_a^b \frac{1}{\gamma(u)}\dd{t},
+\end{equation}
+so
+\begin{equation}
+    L = \alpha\sqrt{1-u^2} \simeq \alpha\left(1-\frac{1}{2}u^2 + O(u^4)\right)
+\end{equation}
+This should correspond to $\frac{mu^2}{2}$ for $u \ll 1,$ so we need $\alpha = - m.$ Therefore,
+\begin{equation}
+    S = -m\int_a^b \frac{1}{\gamma(u)}\dd{t}.
+\end{equation}
+We can compute the momentum to be 
+\begin{align}
+    p_i &= -mc^2 \frac{d}{du_i}\left(1 - u^2\right)^{1/2} \\ 
+    &= m\gamma(u) u_i \\ 
+    &= m\eta_i.
+\end{align}
+Similarly, the energy is 
+\begin{align}
+    \mathcal{E} &= \bm{u} \cdot \bm{p} - L \\ 
+    &=mc\eta_t.
+\end{align}
+Recall that $\eta$ is the 4-velocity. We can write our 4-vectors as:
+\begin{align}
+    \Delta x^\mu &= \left\{\Delta t, \Delta \bm{r}\right\} \\ 
+    \eta^\mu &= \left\{\gamma, \gamma\bm{u}\right\} \\ 
+    p^\mu &= \left\{\mathcal{E}, \bm{p}\right\}.
+\end{align}
+\subsection{Lorentz Transformation}
+Let $\Gamma$ be the Lorentz transformation. We have,
+\begin{align*}
+    \Delta x^{\mu'} = \Lambda^{\mu}{}_{\nu}\Delta x^{\nu}.
+\end{align*}
+Similarly,
+\begin{align}
+    \Delta s^2 = g^{\mu\nu}\Delta x_{\mu}\Delta x_{\nu}
+\end{align}
+\subsection{Wave-vector and Doppler Shift}
+\textcolor{red}{Missed this class, but basic idea:} The wavevector is a 4-veector 
+\begin{equation}
+    k^\mu = \begin{pmatrix}
+        \omega/c \\ 
+        n_x \omega/c \\ 
+        n_y \omega/c \\
+        n_z \omega/c
+    \end{pmatrix},
+\end{equation}
+and applying the Lorentz transformation gives the Doppler shift and we get a ``baby model'' of Big Bang cosmology. Namely, the longitudinal component transforms as:
+\begin{align}
+    \frac{\omega'}{c} =& \frac{\omega}{c}(-\gamma \beta + \gamma n_x) \\
+    \implies & \bm{n}_{\parallel}' = \frac{\bm{n}_{\parallel}-\bm{v}/c}{1- \bm{v}\cdot \bm{n} / c},
+\end{align}
+and the longitudinal components transformations give
+\begin{align}
+    \bm{n}_{\perp}' = \frac{\bm{n}_\perp}{\gamma(1-\bm{v}\cdot \bm{n}/c)},
+\end{align}
+where recall 
+\begin{align}
+    \bm{v} \cdot \bm{n} &= \bm{v} \cdot (\bm{n}_\perp + \bm{n}_\parallel) \\ 
+    &= \bm{v}\cdot \bm{n}_{\parallel}.
+\end{align}
+Suppose the angle between $\bm{n}$ and $\bm{v}$ is $\theta,$ such that 
+\begin{align}
+    |\bm{n}_{\parallel}| &= \cos\theta \\ 
+    |\bm{n}_{\perp}| &= \sin\theta.
+\end{align}
+Then the transformations give 
+\begin{align}
+    \cos\theta' &= \frac{\cos\theta - \beta}{1-\beta\cos\theta} \\ 
+    \sin\theta' &= \frac{\sin\theta}{\gamma(1-\beta\cos\theta)}.
+\end{align}
+This is a bit ugly, but note that 
+\begin{align}
+    \cos(\theta-\theta') &= \cos\theta\cos\theta' + \sin\theta\sin\theta' \\ 
+    &= \frac{\cos\theta(\cos\theta-\beta)}{\gamma(1-\beta\cos\theta)} + \frac{\sin^2\theta}{1-\beta\cos\theta} \\ 
+    &= \frac{\cos^2\theta - \beta\cos\theta + \sqrt{1-\beta^2}\sin^2\theta}{1-\beta\cos\theta}.
+\end{align}
+Using $\sin^2\theta+\cos^2theta=1,$ we can reduce this to 
+\begin{align}
+    \cos(\theta-\theta') &= 1 + \sin^2\theta\frac{\sqrt{1-\beta^2}-1}{1-\beta\cos\theta} \\ 
+    &\sim 1 - \frac{1}{2}\beta^2\sin^2\theta.
+\end{align}
+But this is equal to $\cos(\Delta \theta) = 1 - \frac{(\Delta \theta)^2}{2},$ so we can conclude that 
+\begin{equation}
+    \boxed{\Delta \theta = -\beta\sin\theta.}
+\end{equation}
+There's actually a sign error in the derivation, but the final boxed answer is correct.
+
+\textbf{Historical Side Note:} (aberration of starlight) Astronomers used to determine the distance to stars by looking at the parallax. However, there is an apparent shift in the position of stars due to the Earth's motion around the Sun.
+\vspace{2mm}
+
+A circular radiating light source that is moving towards an observer will display the \emf{headlamp effect,} where the lights tend to ``bunch'' up in the direction of motion. So if a star is moving towards Earth, it will get brighter.
+ 
+\emf{Penrose-Terrel effect:} Thanks to the differential timelag effects in signals reaching the observer from the object's different parts, a receding object would appear contracted, an approaching object would appear elongated (even under special relativity) and the geometry of a passing object would appear skewed, as if rotated.
+\vspace{2mm}
+
+For images of passing objects, the apparent contraction of distances between points on the object's transverse surface could then be interpreted as being due to an apparent change in viewing angle, and the image of the object could be interpreted as appearing instead to be rotated
+\vspace{2mm}
+
+\emf{Superluminal Motion:} Can you travel faster than light? No, because then $\dd{s}^2<0.$ Thre is no reference frame where $t_2>t_1$ (i.e. you arrive before you depart).
+\vspace{2mm}
+
+Quasar 3C273: Quasars (short for "quasi-stellar objects") are extremely luminous and distant celestial objects. For this specific quasar, we measured a redshift of $z=0.158$ which corresponds to $R=1.5\times 10^{25}\text{ m}.$ The quasar is consisted of two separate objects and they found that as years progressed, these two objects were separating, and they could determine the rate at which they were separating, $6.2\times 10^{-17}\text{ rad/sec}.$ However, there is a problem! If we multiply $\omega R,$ we get a speed greater than the speed of light....
+
+This is caused by light arriving from one object arriving at some time after the light that was emitted from the other object. Suppose a time $t$ has passed when an object was ejected from the quasar (measured on Earth... I think). The light from the quasar $Q$ arriving at Earth $O$ started at time $t_1 = t - R/c.$ The light from the ejected object $E$ arriving at $O$ started at time $t_2 = t-EO/c.$ Working through the algebra, we get 
+\begin{equation}
+    t_2 = \frac{t-R/c}{1-\beta \cos\phi},
+\end{equation}
+where $\phi$ is the angle between $QE$ and $QO.$ We have 
+\begin{equation}
+    \theta \simeq \tan\theta = \frac{v\sin\phi t_2}{R-v\cos\phi t_2}.
+\end{equation}
+We can compute $\dot{\theta}$ to get 
+\begin{equation}
+    \omega = \frac{v\sin\phi}{R} \frac{1}{1-v\cos\phi/c}
+\end{equation}
+and 
+\begin{equation}
+    v/c = \frac{R\omega/ c}{\sin\phi + (R\omega /c)\cos\phi} = \frac{R\omega /c}{\sqrt{1+(R\omega /c)^2}}\sec(\phi-\phi_0).
+\end{equation}
+And apparently special relativity is safe.
+\section{Field Theory}
+\subsection{Action}
+Recall that the action for a free particle is 
+\begin{equation}
+    S_\text{free} = -mc^2 \int_a^b \gamma \dd{t}.
+\end{equation}
+We claim that the action due to interactions in a field is 
+\begin{equation}
+    S_\text{em} =  q\int_a^b A_{\mu}\dd{x}^{\mu}. 
+\end{equation} 
+We develop this by observing that this action must be Lorentz invariant, where $A$ is a 4-vector, specifically the 4-potential. Therefore, 
+\begin{equation}
+    S_{\text{total}} = S_\text{free} + S_\text{em} = -mc^2 \int_a^b \gamma \dd{t} + q\int_a^b A_{\mu}\dd{x}^{\mu}.
+\end{equation}
+We can break up $A_\mu$ into its spatial and temporal components, so 
+\begin{equation}
+    S_\text{total} = \int_a^b \underbrace{-mc^2\sqrt{1-u^2/c^2} + q\bm{A}\cdot \bm{u} - q\phi}_{L} \dd{t}. 
+\end{equation}
+Recall that $Pi = \frac{\partial L}{\partial \dot{x}_i},$ so we can compute 
+\begin{equation}
+    P_i = m\gamma(u)u_i + qA_i \implies \bm{P} = \bm{p} + q\bm{A}.
+\end{equation}
+The Hamiltonian is 
+\begin{align}
+    H &= \sum_i \dot{x}_i P_i - L \\ 
+    &= \bm{u}\cdot \bm{p} + q\bm{u} \cdot \bm{A} - \left(-mc^2\sqrt{1-u^2/c^2} + q\bm{A}\cdot \bm{u} - q\phi\right) \\ 
+    &= m\gamma u^2 + \frac{mc^2}{\gamma} + q\phi \\ 
+    &= \gamma mc^2 + q\phi.
+\end{align}
+Or equivalently, $(H-q\phi) = \gamma mc^2.$ From the canonical momentum, we obtain 
+\begin{equation}
+    \left(\bm{P}-q\bm{A}\right)^2 = \gamma^2 mu^2.
+\end{equation}
+Combining everything, we obtain:
+\begin{equation}
+    \left(\frac{H-q\phi}{c}\right)^2 - \left(\bm{P}-q\bm{A}\right)^2 = (m\gamma c)^2 - \gamma^2 mu^2 = mc^2.
+\end{equation}
+This allows us to write the Hamiltonian as 
+\begin{align}
+    \left(\frac{H-q\phi}{c}\right)^2 = m^2c^2 + \left(\bm{P} - q\bm{A}\right)^2.
+\end{align}
+Note that if there are no field interactions, we obtain $E^2 = m^2c^4 + p^2c^2.$ At low velocities, we obtain 
+\begin{equation}
+    H = mc^2 + \frac{1}{2m}(\bm{P}-q\bm{A})^2 + q\phi.
+\end{equation}
+We can also apply the Euler-Lagrange equation to the Lagrangian. We obtain 
+\begin{align}
+    \frac{\partial L}{\partial \dot{x}_i} &= m\gamma(u) u_i + qA_i \\ 
+    \frac{\partial L}{\partial x_i} &= \left\{q \nabla (\bm{A} \cdot \bm{u}) - q\nabla\phi\right\}_i \\ 
+\end{align}
+Note that 
+\begin{align}
+    \frac{\partial a_j}{\partial x_i} &= \frac{\partial a_i}{\partial x_j} + \frac{\partial a_j}{\partial x_i} - \frac{\partial a_i}{\partial x_j} \\ 
+    &= \frac{\partial a_i}{\partial x_j} + \left(\delta_{i\ell}\delta_{jm} - \delta_{im}\delta_{j\ell}\right)\frac{\partial a_m}{\partial x_\ell} \\ 
+    &= \frac{\partial a_i}{\partial x_j} + \epsilon_{ijm}\epsilon_{k\ell m}\frac{\partial a_m}{\partial x_\ell}.
+\end{align}
+This gives us 
+\begin{align}
+    \frac{\partial a_j}{\partial x_i} b_j &= \left(\bm{b}\cdot \bm{\nabla}\right) \bm{a} + b_j \epsilon_{ijk}\epsilon_{klm}\frac{\partial a_m}{\partial x_\ell} \\ 
+    &= (\bm{b}\cdot \bm{\nabla})\bm{a} + \bm{b} \times \left(\bm{\nabla}\times \bm{a}\right).
+\end{align}
+We can apply the Euler-Lagrange equation, to get:
+\begin{align}
+    \frac{d}{dt}\left(\bm{p} + q\bm{A}\right) &= q(\bm{u}\cdot \bm{\nabla}) \bm{A} + q\bm{u} \times (\bm{\nabla}\times \bm{A})  - q\bm{\nabla}\phi\\
+    &= \underbrace{q(\bm{u}\cdot \bm{\nabla})\bm{A} - q\frac{d\bm{A}}{dt}}_{-\frac{\partial \bm{A}}{\partial t}} - q\nabla\phi + q\bm{u}\times \bm{B} \\ 
+    &= q(\bm{E} + \bm{u} \times \bm{B})
+\end{align}
+\subsection{Relativistic Approach}
+We consider the action
+\begin{equation}
+    S = \int_a^b (\mathcal{E} - mc^2)\dd{\tau} + qA_\mu \dd{x}^\mu.
+\end{equation}
+Consider a variation of the trajectory $x^{\mu}(\tau) \to x^{\mu}(\tau) + \delta x^{\mu}(\tau),$ where $\delta x^{\mu}(a) = \delta x^{\mu}(b) = 0.$ We obtain,
+\begin{align}
+    \delta S = \int_a ^b -mc^2 \dd{(\delta \tau)} + \underbrace{q \delta A_\mu \dd{x}^\mu}_{q \partial_\nu A_\mu \partial x^\nu}\dd{x}^\mu + q A_\mu \dd{(\delta x^{\mu})}.
+\end{align}
+Note that $-c^2 \dd{\tau}^2 = \dd{x}^\nu \dd{x}_\nu,$ so
+\begin{align}
+    -2c^2 \dd{\tau} \dd{(\delta \tau)} &= \delta(\dd{x}^\nu \dd{x}_\nu) \\ 
+    &= \delta(\dd{x}^\nu \dd{x}^\lambda g_{\nu\lambda}) \\ 
+    &= \dd{(\delta x^\nu)}\dd{x}^\lambda g_{\nu\lambda} + \dd{x}^\nu \dd{(\delta x^\lambda)}g_{\mu\lambda} \\ 
+    &= 2\dd{(\delta x^\nu)} \dd{x}_\nu.
+\end{align}
+Dividing by $\dd{\tau}$ (yuck!) we obtain,
+\begin{align}
+    \dd{(\delta \tau)} = -\frac{1}{c^2}\eta_\nu \dd{\delta x^\nu},
+\end{align}
+where $\eta_\nu$ is the 4-velocity. This allows us to write the action as 
+\begin{align}
+    \delta S &= \int_a^b -mc^2 \left(-\frac{1}{c^2}\right) \eta_\nu \dd{\delta x^\nu} + q\partial_\nu A_\mu \delta x^\nu \dd{x}^\mu + qA\mu \dd{(\delta x^\mu)} \\ 
+    &=\int_a^b m \eta_\nu \dd{(\delta x^\nu)} + q\partial_\nu A_\mu \delta x^\nu \dd{x}^\mu + qA\mu \dd{(\delta x^\mu)} \\
+    &= \int_a^b (m\eta_\nu + qA_\nu)\dd{\delta x^\nu} + q\partial_\nu A_\mu \delta x^\nu \dd{x}^\mu.
+\end{align}
+We can compute, via integration by parts of the first term:
+\begin{align}
+    &\int_a^b \dd{\left\{(m\eta\nu + qA\nu) \delta x^\nu\right\}} = \left[(m\eta_\nu + qA_\nu) \delta x^\nu\right]^{b}_{a} = 0 \\ 
+    \implies& \int_a^b \dd{\left\{m\eta_\nu + qA_\nu\right\}}\delta x^{\nu} + \left\{m\eta_\nu + qA_\nu\right\}\dd{(\delta x^\nu)} = 0.
+\end{align}
+Therefore, we can write our action as 
+\begin{align}
+    \delta S = \int_a^b \left\{ -\dd{(m\eta_\nu + qA_\nu)} + q\partial_\nu A_\mu \dd{x}^\mu\right\} \delta x^\nu.
+\end{align}
+Recall that the canonical momentum is $P_\nu = p_\nu + qA_\nu.$ We can perform the change of variables:
+\begin{align}
+    \dd{\eta}_\nu &= \frac{\dd{\eta_\nu}}{\dd{\tau}}\dd{\tau} \\ 
+    \dd{A}_\mu &= \partial_\mu A_\nu \frac{\dd{x}^\mu}{\dd{\tau}}\dd{\tau} = (\eta^\nu \partial_\mu A_\nu) \dd{\tau} \\ 
+    \dd{x^\mu} &= \frac{\dd{x}^\mu}{\dd{\tau}}\dd{\tau} = \eta^\mu \dd{\tau}.
+\end{align} 
+This gives 
+\begin{align}
+    \delta S &= \int_a^b \left\{ - m \frac{d\eta_\nu}{\dd{\tau}} - q\eta^\mu \partial_\mu A_\nu + q\eta^\mu \partial_\nu A_\mu\right\} \delta x^\nu \dd{\tau}.
+\end{align}
+The principle requires that $\delta S = 0$ for the actual trajectory that $x^\nu$ takes. Setting this to zero gives 
+\begin{equation}
+    \boxed{m\frac{d\eta_\mu}{\dd{\tau}} = q\eta^\nu \left(\partial_\mu A_\nu - \partial_\nu A_\mu\right)},
+\end{equation}
+where 
+\begin{equation}
+    F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu
+\end{equation}
+is the Faraday field tensor. Here are some properties:
+\begin{itemize}
+    \item It is antisymmetric, so $F_{ii} = 0$ and $F_{\mu\nu} = -F_{\nu\mu}.$
+    \item The time component can be computed as 
+    \begin{align}
+        F_{0i} &= \partial_t A_i - \partial_i A_0 \\ 
+        &= \frac{1}{c} \frac{\partial A_i}{\partial t} + \frac{1}{c}\nabla_i \phi \\ 
+        &= -E_i/c.
+    \end{align}
+    See equation \ref{eq:E-as-A-and-phi} for the last step. We also get $F_{i0} = E_i/c$ from anti-symmetry.
+    \item We can also obtain:
+    \begin{align}
+        F_{12} &= B_z \\ 
+        F_{13} &= -B_y \\ 
+        F_{23} &= B_x
+    \end{align}
+     by using the fact that $\bm{B} = \bm{\nabla} \times \bm{A}.$ Therefore, we get 
+     \begin{equation}
+        F_{\nu\mu} = \begin{pmatrix}
+            0 & -E_z/c & E_y/c & -E_z/c \\ 
+            E_x/c & 0 & B_z & -B_y \\ 
+            -E_y/c & -B_z & 0 & B_x \\
+            E_z/c & B_y & -B_x & 0
+        \end{pmatrix}.
+     \end{equation}
+\end{itemize}
+\subsection{Lorentz Transform of the Faraday Tensor}
+Recall that 
+\begin{align}
+    (F')^{\mu\nu} &= \Lambda^{\mu}{}_{\kappa}\Lambda^\nu{}_{\lambda}F^{\kappa\lambda} = \Lambda^{\mu}{}_{\kappa}F^{k\lambda}\Lambda^{\nu}{}_{\lambda} \\ 
+    &= \begin{pmatrix}
+        \gamma & \gamma \beta & 0 & 0 \\ 
+        \gamma \beta & \gamma & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1
+    \end{pmatrix}\begin{pmatrix}
+        0 & E_x & E_y & E_z \\ 
+        -E_x & 0 & B_z & - B_y \\ 
+        -E_y & -B_z & 0 & B_x \\
+        -E_z & B_y & -B_x & 0
+    \end{pmatrix}\begin{pmatrix}
+        \gamma & \gamma \beta & 0 & 0 \\ 
+        \gamma \beta & \gamma & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1
+    \end{pmatrix}.
+\end{align}
+If we compute this, we get $B_x = B_x'$ and $E_x = E_x'.$ However, the other components transform like 
+\begin{align}
+    E_y' &= \gamma(E_y + vB_z) = \gamma \left\{\bm{E} - \bm{v} \times \bm{B}\right\}_y \\ 
+    E_z' &= \gamma(E_z - vB_y) = \gamma \left\{\bm{E} - \bm{v} \times \bm{B}\right\}_z \\
+    B_y' &= \gamma(B_y - vE_z) = \gamma \left\{\bm{B} - \bm{v} \times \bm{E}\right\}_y \\
+    B_z' &= \gamma(B_z + vE_y) = \gamma \left\{\bm{B} - \bm{v} \times \bm{E}\right\}_z.
+\end{align}
+We can rewrite these as 
+\begin{align}
+    \bm{E}_{\parallel} &= \bm{E}_{\parallel}' \\
+    \bm{E}_{\perp} &= \gamma \left\{\bm{E}_\perp - \bm{v} \times \bm{B}_\perp\right\} \\
+    \bm{B}_{\parallel} &= \bm{B}_{\parallel}' \\
+    \bm{B}_{\perp} &= \gamma \left\{\bm{B}_\perp - \bm{v} \times \bm{E}_\perp\right\}.
+\end{align}
+\subsection{Full Action}
+The full action can be written as 
+\begin{equation}
+    S = S_\text{field} + S_\text{matter} + S_\text{field-matter}
+\end{equation}
+where 
+\begin{equation}
+    S_\text{f/m} = \frac{1}{c} \int \dd^4 x j^\mu A_\mu
+\end{equation}
+is what we use to derive the Lorentz force law. We wish to construct the Lagrangian for the field 
+\begin{equation}
+    S_\text{field} = \int \dd^4 x \mathscr{L}(A_\nu, \partial_\mu A_\nu)
+\end{equation}
+where
+\begin{itemize}
+    \item $\mathscr{L}$ must be a Lorentz Scalar
+    \item Gauge Independent
+    \item No derivatives of $F_{\mu\nu}$
+    \item Quadratic in $F_{\mu\nu}.$
+\end{itemize}
+Recall that
+\begin{align}
+    F_{\mu\nu}F^{\mu\nu} &= 2(B^2-E^2/c^2) \\ 
+    \tilde{F}_{\mu\nu}F^{\mu\nu} &= - 4(\bm{B}\cdot \bm{E})/c \\ 
+    &= 4\partial_\kappa (\epsilon^{\kappa \lambda \mu \nu} A_\lambda \partial_\mu A_\nu)
+\end{align}
+However, the hypersurface surface integral is zero, so we guess the first quadratic term
+\begin{equation}
+    \mathscr{L}_\text{field} = -\frac{\epsilon_0 c}{4} F_{\mu\nu}F^{\mu\nu}.
+\end{equation}
+Therefore,
+\begin{equation}
+    \boxed{\mathscr{L}(A_\nu, \partial_\mu A_\nu) = \frac{1}{c}j^k A_k - \frac{1}{4}\epsilon_0 c F_{k\lambda}F^{k\lambda}}
+\end{equation}
+and the E-L equations are
+\begin{equation}
+    \boxed{\partial_\mu \left[\frac{\partial \mathscr{L}}{\partial(\partial_\mu \varphi)}\right] - \frac{\partial\mathscr{L}}{\partial \varphi} = 0}
+\end{equation}
+Using $\varphi \to A_\nu$ we can compute 
+\begin{equation}
+    \frac{\partial \mathscr{L}}{\partial A_\nu} = \frac{1}{c}j^\nu
+\end{equation}
+and 
+\begin{align}
+    \frac{\partial \mathscr{L}}{\partial(\partial_\mu A_\mu)} &= - \frac{\epsilon_0 c}{2}F^{k\lambda} \left(\frac{\partial F_{k\lambda}}{\partial(\partial_\mu A_\nu)}\right).
+\end{align}
+It is not too hard to determine 
+\begin{align}
+    \frac{\partial F_{k\lambda}}{\partial(\partial_\mu A_\nu)} &= \frac{\partial}{\partial_\mu A_\nu}\left\{\partial_\kappa A_\lambda - \partial_\lambda A_\kappa\right\} \\ 
+    &= \delta^{\mu}{}_{\kappa} \delta^{\nu}{}_{\lambda} - \delta^{\mu}{}_{\lambda}\delta^{\nu}{}_{\kappa}.
+\end{align}
+Therefore, this gives 
+\begin{align}
+    \frac{\partial \mathscr{L}}{\partial(\partial_\mu A_\nu)} &= -\frac{\epsilon_0 c}{2} F^{\kappa \lambda}\left\{ \delta^\mu{}_{\kappa}\delta^{\nu}{}_{\lambda} - \delta^{\mu}{}_\lambda \delta^{\nu}{}_\kappa\right\} \\ 
+    &= - \frac{\epsilon_0 c}{2}(F^{\mu\nu} - F^{\nu\mu}) \\ 
+    &= -\epsilon_0 c F^{\mu\nu}.
+\end{align}
+Therefore, E-L gives 
+\begin{equation}
+    \boxed{\partial_\mu F^{\nu\mu} = \mu_0 j^\nu}.
+\end{equation}
+How does this give us Maxwell's equations? Let's set $\nu=0.$ This gives 
+\begin{equation}
+    \frac{\partial}{\partial x}F^{01} + \frac{\partial}{\partial y}F^{02} + \frac{\partial}{\partial z}F^{03} = \mu_0 j^0 = \mu_0 c\rho.
+\end{equation}
+which gives 
+\begin{equation}
+    \frac{1}{c}(\partial_x E_x + \partial_y E_y + \parial_z E_z) = \mu_0 c \rho \implies \bm{\nabla}\cdot \bm{E} = \mu_0 c^2 \rho = \frac{\rho}{\epsilon_0}.
+\end{equation}
+If we set $\nu=1$ we get 
+\begin{equation}
+    \partial_0 (-E_x/c) + \partial_y B_z - \partial_z B_y =\mu_0 J_x \implies (\bm{\nabla} \times \bm{B})_x = \mu_0 J_x + \frac{1}{c}\frac{\partial E_x}{\partial t}
+\end{equation}
+\end{document}

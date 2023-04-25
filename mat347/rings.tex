@@ -1,0 +1,251 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{MAT347: Groups, Rings and Fields}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Ring Theory}
+\subsection{Eisenstein's Criterion}
+\begin{lemma}
+    \emf{Eisenstein's Criterion:} Of $f(x) \in \mathbb{Z}[x],$
+    \begin{equation*}
+        f(x) = x^n + a_{n-1}x^{n-1} + \cdots + a_1x+a_0,
+    \end{equation*}
+    and if $p$ is a prime such that $p|a_i$ for all $i=0,1,\dots,a_{n-1}$ but $p^2$ does not divide $a_0$ then $f$ is irreducible.
+\end{lemma}
+\begin{proof}
+    Suppose
+    $$f(x) = (x^k+b_{k-1}x^{k-1}+\cdots + b_1x+b_0)(x^{\ell} + c_{\ell-1}x^{\ell-1}+\cdots+c_1 x + c_0).$$
+    Then take the constant term $a_0=b_0c_0.$ One of $b_0,c_0$ is not divisible by $p$ so WLOG let $b_0$ not divisible by $p.$ Modulo $p,$ we have 
+    \begin{align*}
+        f(x)&=x^n \\ 
+        &= (x^k+\cdots +b_0)(x^{\ell}+\cdots + 0) \\ 
+        &= x^k + \cdots,
+    \end{align*}
+    where $b_0$ is nonzero mod p. Whichever coefficient is nonzero mod p with the highest power of $x$ (other than $x^k,x^\ell$) will give a nonzero term in the product.
+    \vspace{2mm}
+
+    NB: There is some subtlety to this last step. We should consider the term where we multiply $b_n$ by the lowest nonzero term in the second factor. Then we can show there is no other term with the same degree that can cancel it out. 
+\end{proof}
+For example, for any odd prime $p,$
+\begin{align*}
+    f(x) := \frac{x^p-1}{x-1} = x^{p-1} + x^{p-2} + \cdots + x + 1.
+\end{align*}
+Now consider $f(x+1).$ Then,
+\begin{align*}
+    f(x+1) &= \frac{(x+1)^p-1}{x} \\ 
+    &= \frac{1}{x}\left(x^{p} + px^{p-1} + \binom{p}{2} + \cdots + px\right) \\ 
+    &= x^{p-1} + px^{p-2} + \binom{p}{2}x^{p-3}+\cdots + p.
+\end{align*}
+Note that all the binomial coefficients are divisible by $p.$ The constant coefficient is $p,$ so $f(x+1)$ is an Eisenstein polynomial, and therefore it is irreducible. We can now extend Eisenstein's Criterion to be in general,
+\begin{theorem}
+    Eisenstein's Criterion for UFD: If $R$ is a UFD, and $f(x) \in R[x],$ is such that there is some prime ideal $P$ such that $f$ is monic but all its coefficients except the first are in $P$ and the constant term is not in $P^2,$ then $f$ is irreducible.
+\end{theorem}
+\begin{theorem}
+    If $F$ is a field, then the maximal ideals in $F[x]$ are of the form $(g(x))$, where $g(x)$ is irreducible.
+\end{theorem}
+That is, $F[x]/(g(x))$ is a field if and only if $g(x)$ is irreducible. This implies that 
+\begin{equation}
+    \mathbb{Q}[x]/(x^2+1)
+\end{equation}
+is a field since $x^2+1$ has no roots in $\mathbb{Q}.$ Similarly, $\mathbb{R}[x]/(x^2+1)$ is a field, and we can conclude that
+\begin{equation}
+    \mathbb{R}[x]/(x^2+1) = (\bar{1},\bar{x}) \cong \mathbb{C},
+\end{equation}
+with $\bar{x}^2=-1.$ 
+
+If $f(x) \in F[x],$ we can factor it as 
+\begin{equation}
+    f(x) = p_1^{a_1}p_2^{a_2}\cdots p_r^{a_r},
+\end{equation}
+with $p_i(x) \in F[x]$ are irreducible. Let us assume that the $p_i$s are distinct. By the Chinese Remainder Theorem,
+\begin{align*}
+    F[x]/(f(x)) \cong F[x](p_1(x)^{a_1}) \times \cdots \times F[x]/(p_r(x)^{a_r}).
+\end{align*}
+We'll come back to this later.
+\begin{proposition}
+    If $a_1,\dots,a_r$ are roots of $f(x),$ then $f(x) \in F[x]$ is divisible by $(x-a_1)(x-a_2)\cdots (x-a_r).$
+\end{proposition}
+While quite simple, this leads to an interesting corollary,
+\begin{corollary}
+    Given any field $F,$ any finite subgroup of $H$ of the multiplicative group $F^\times$ of $F$ must be cyclic.
+\end{corollary}
+We know that, from the classification of finite abelian groups, 
+\begin{equation}
+    H \cong C_{m_1} \times C_{m_2} \times \cdots \times C_{m_k}
+\end{equation}
+where $m_1|m_2|\cdots | m_k.$ Every element of $x\in C_{m_k}$ satisfies $x^{m_k}=1.$ But since $m_i|m_k,$ we also know that $x^{m_k}=1$ is also true for any $x\in C_{m_i}.$
+
+If $k>1,$ there are more than $m_k$ roots of $x^{m_k}-1,$ so we have a contradiction, and we must have $k=1.$
+
+Corollary, the multiplicative group of any finite field is cyclic.
+\subsection{Noetherian Rings}
+\begin{definition}
+    A ring $R$ is Noetherian if every ideal $I$ is $R$ if finitely generated.
+\end{definition}
+As a non-example, $F[x_1,x_2,\dots]$ with an infinite number of variables is not Noetherian as $I=(x_1,x_2,\dots)$ is the ideal of polynomials with constant coefficients is not finitely generated.
+\begin{theorem}
+    \emf{Hilbert's Basis Theorem:} If $R$ is Noetherian, then $R[x]$ is Noetherian.
+\end{theorem}
+% \begin{proof}
+%     Suppose $I\subset R[x]$ is an ideal. If $f(x)=a_nx^n + \cdots +a_1x+a_0 \in I$ with $a_n\neq 0,$ then $a_n\in R$ is the leading coefficient of $f.$
+
+%     Consider the set of all leading coefficients of elements of $I,$ together with $0.$ This set $J$ is an ideal. If $a\in J,$ and $f=ax^m+\cdots$ and $r\in R,r\neq 0$ implies that 
+%     \begin{equation}
+%         rf = rax^{m} + \cdots \implies rf \in J,
+%     \end{equation}
+%     which shows that $J$ can be written as 
+%     \begin{equation}
+%         J = (a_1,\dots,a_k)
+%     \end{equation}
+%     for some $a_i \in r$
+
+%     Each $a_i$ is a leading coefficient, say $f_i(x) = a_ix^{d_i} + \cdot$
+% \end{proof}
+\section{Modules}
+\begin{definition}
+    Suppose $R$ is a ring. A module $M$ is an abelian group $(M,+)$ equipped with an action of $R$ 
+    \begin{equation}
+        R\times M\to M,\quad\quad\quad (r,m) \mapsto rm,
+    \end{equation}
+    such that 
+    \begin{enumerate}[label=(\roman*)]
+        \item $(r+s)m=rm+sm$
+        \item $r(m+n)=rm+rn$
+        \item $(rs)m=r(sm)$
+        \item If $R$ has identity, then $1m=m.$
+    \end{enumerate}
+    Note that if $R$ has no identity, $rm=0$ for all $r,m$ is a possibility.
+\end{definition}
+To be specific, the above is a left module, but the same thing can be applied to a right module. If $M$ is an $R$-module, a submodule is a subgroup $N \le M$ (relative to $+$) such that $rn \in N \forall r\in R,n\in N.$
+
+Some examples,
+\begin{itemize}
+    \item If $R$ is a ring, then it is a module over itself. Submodules are then ideals.
+    \item If $R=F$ is a field, then any $F$-module $V$ is a vector space over $F.$ 
+    However, we should not expect modules to be like vector spaces in general. If we write $R^n = (r_1,\dots,r_n)=R \times \cdots R$ with componentwise addition and multiplication, $R^n$ is an $R$-module, called the \emf{free R-module of rank $n$.}
+    
+    \item Suppose that $R=\mathbb{Z}.$ Then any $\mathbb{Z}$-module $M$ is an abelian group, and vice versa (i.e. the conditions don't add any extra structure)
+    
+    \item Suppose $F$ is a field, $V$ is a vector space over $F$ and $T:V\to V$ is an $F$-linear operator. Then $V$ becomes a $F[x]$-module by letting 
+    \begin{equation}
+        xv = Tv,\quad\quad\quad\quad (a_nx^n +\cdots a_1x + a_0)v = a_nT^nv + \cdots + a_1 Tv + a_0 v
+    \end{equation}
+    Note that $F[x]$ has many module structures on $V,$ one for each $T.$ What is an $F[x]$-submodule of $V$?
+    \begin{itemize}
+        \item A \emf{$T$-stable} subspace $W$ (i.e. $T(W) \le W$) is also called a subspace preserved by $T.$ 
+    \end{itemize}
+    \item Suppose $F$ is a field, $G$ is a group, and recall the group ring 
+    \begin{equation}
+        F[G] = \left\{\sum_{i=1}^n a_ig_i | a_i \in F,g_i \in G\right\},
+    \end{equation}
+    if there is an action of $G$ on an $F$-vector space $V$ then $V$ becomes a $F[G]$-module.
+
+    Suppose $M$ is an $R$-module. Suppose $I\subset R$ is an ideal such that $i\cdot m=0 \forall i\in I,\forall m\in M.$ Then we say $I$ \emf{annhilates} $M.$ In this case, the obvious choice of $R/I$ on $M$ is well-define: $(r+I)m=rm$ and $(r+i+I)m=(r+i)m=rm+0=rm.$ 
+\end{itemize}
+\begin{definition}
+    Supopse $R$ is commutative ring with identity $1_R.$ Suppose $A$ is a ring with identity $1_A$ and suppose there exists a homomorphism 
+    \begin{align*}
+        \varphi: R\to A
+    \end{align*}
+    such that $\varphi(1_R)=1_A$ and $\varphi(R) \subseteq Z(A),$ then $A$ is called an $R$-algbra.
+\end{definition}
+For example,
+\begin{itemize}
+    \item let $R=F$ be a field and $A = F[x],$ and $\varphi(r)=r$ (a constant polynomial).
+
+    \item This also works for any commutative ring $R$ with $1$ and $A=R[x]$ and it also works for commutative rings $R\subset S$ with $1_R=1_S.$ For example, $S[x]$ is an $R$-algebra and $\mathbb{C}[x]$ is an $\mathbb{Q}-algebra$ and a $\mathbb{Z}-algebra.$
+    
+    \item Also true for group rings! If $R$ is commutative with identity, then $R[G]$ is an $R$-algebra for any (finite) group $G.$ Note, the algebra may no longer be commutative.
+    
+    \item Perhaps the most important example, let $R=F$ be a field and $A=M_{n\times n}(F).$ Let $\varphi(r) = r \cdot \text{id}_n.$
+    \item One non-trivial example: $\mathbb{F}_p[x]$ is a $\mathbb{Z}$-algebra, where $\varphi(n)=n+p\mathbb{Z} \in \mathbb{F}_p.$
+\end{itemize}
+\begin{definition}
+    If $A$ is an $R$-module then $B\subseteq A$ is an $R$-submodule if it is closed under addition and multiplication.
+\end{definition}
+\begin{proposition}
+    If $R$ contains $1,$ then it is sufficient to check $(b+rc)\in B$ for all $b,c\in B,r\in R.$
+\end{proposition}
+\begin{definition}
+    If $A,B$ are $R$-modules, then $\varphi:A\to B$ is an $R$-homomorphism if $\varphi(a+b)=\varphi(a)+\varphi(b)$ and $\varphi(rm)=r\varphi(m)$ for all $a,b\in A$ and $r\in R.$
+\end{definition}
+In this case, $\ket\varphi$ is an $R$-submodule of $A$ and $\varphi(A)$ is an $R$-submodule of $B.$
+
+You can always take the quotient between a module and a submodule. That is, if $A\subseteq B$ are $R$-modules, then $B/A$ is an $R$-submodule.
+
+An example from linear algebra is that 
+\begin{equation}
+    T(V) \cong V/\ker(T).
+\end{equation}
+\begin{definition}
+    We write $HOM_R(M,N)$ for the set of $R$-module homomorphisms $f:M\to N$ (where $M,N$ are $R$-modules).
+\end{definition}
+Notice: $\text{HOM}_R(M,N)$ is an $R$-module. If $f,g\in \text{HOM}_R(M,N)$, $r\in R$, then $(f+g)(m)=f(m)+g(m)$ and $(rf)(m)=rf(m).$
+
+If $f\in \text{HOM}_R(M,N)$ and $g \in \text{HOM}_R(N,P)$ then $g\circ f \in \text{HOM}_R(M,P).$ Therefore, $\text{HOM}_R(M,M)$ is a ring. This ring is called the \emf{endomorphism ring} of $M.$ It is interchangeably called $\text{END}_R(M).$
+\vspace{2mm}
+
+\textbf{TESTABLE MATERIAL ENDS (END OF 10.2)}
+\vspace{2mm}
+
+Assume that $R$ has an identity. If $M$ is an $R$-module and $A\subset M$ is a (possibly finite) subset, then there is a \emf{free module on A,} the set of all finite $R$-combinations of elements of $A,$
+\begin{align*}
+    \{\sum_{i=1}^n r_ia_i | r_i \in R, a_i \in A\}.
+\end{align*}
+This is a set of formal sums, \textit{not} a subset of $A.$
+\begin{definition}
+    If $N_1,\dots,N_n \subseteq M$ are $R$-submodules of $M,$ their sum is 
+    \begin{equation}
+        N_1+\cdots + N_n = \left\{\sum_{i=1}^n r_in_i| r_i \in R, n_i \in N_i\right\}
+    \end{equation} 
+\end{definition}
+It is easy to show that this is an $R$-submodule of $M$, the smallest one that contains all the $N_i$s.
+\begin{definition}
+    If $A\subseteq M,$ and $A$ is a subset of $R$-module $M$, then 
+    \begin{equation}
+        RA = \left\{\sum_{i=1}^n r_ia_i | r_i \in R, a_i \in A\right\}.
+    \end{equation}
+    $RA$ is an $R$-submodule of $M$, the smallest such that contains $A.$ Even if $A$ is infinite, we still only have finite sums.
+\end{definition}
+If $N_1,\dots,N_n$ are $R$-modules, consider the product \begin{equation}
+    N_1\times N_2 \times \cdots \times N_n = \{(n_1,n_2,\dots,n_n)| n_i \in N_i\}.
+\end{equation}
+If each $N_i$ is a submodule of $M$ then there is a map $\varphi: N_1 \times N_2 \times \cdots \times N_n \to M$ defined by $(n_1,n_2,\dots,n_n) \mapsto n_1+\cdots +n_n.$ 
+
+If $\varphi$ is an isomorphism, $\ker\varphi = \{0\}.$ Note: missing some stuff here onwards.
+
+
+Remarks: If $R=F$ is a field, then $R$-direct sums are just vector space direct products, i.e. 
+\begin{equation}
+    N_1 \oplus \cdots \oplus N_n \cong N_1 \times \cdots \times N_n.
+\end{equation}
+This remark is worth making because it is not true for infinite products and sums.
+\begin{example}
+    In $F[X]$, let $A=\{1,x\},$ then 
+    \begin{equation}
+        FA = \{a+bx | a,b\in F\}.
+    \end{equation}
+    But note that $A$ generates $F[x]$ as a ring, even though it does not generate it as an $F$-module.
+\end{example}
+If $M$ is an $R$-module and $A\subseteq M$ such that $M=RA$ then we say $A$ generates $M$. If $M=RA$ for some finite set $A,$ then $M$ is finitely generated.
+
+Suppose $M$ is an $R$-module and $A$ is a set. Suppose $\varphi: A\to M$ is a map. Then $\varphi$ extends to $\Phi:F(A) \to M$ by 
+\begin{equation}
+    \sum_{i=1}^n r_ia_i \mapsto r_i\varphi(a_i).
+\end{equation}
+Here, $F(A)$ is the free module on $A$ and $\Phi$ is an $R$-module map. $F(A)$ has the universal property that 
+\end{document}

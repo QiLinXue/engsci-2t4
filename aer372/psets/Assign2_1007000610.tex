@@ -1,0 +1,497 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{AER372: Control Systems  \\ Assignment 2}
+\author{QiLin Xue}
+\date{Spring 2023}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+\usepackage{tabu}
+\newcounter{mathematicapage}
+\begin{document}
+
+\maketitle
+\begin{enumerate}[label=\textbf{2.\arabic*}]
+    \item \begin{enumerate}[label=(\alph*)]
+        \item We have the following array:
+\begin{center}
+    {\tabulinesep=1.2mm
+   \begin{tabu}{c|c|c|c}
+        $s^5$ & $1 $& $30 $& $344 $\\ \hline
+        $s^4$ & $10$ &$ 80$ &$ 480$ \\ \hline
+        $s^3$ & $\frac{300-80}{10} = 22 $ & $\frac{344 \cdot 10 - 1 \cdot 480}{10} = 296$ & 0\\ \hline
+        $s^2$ & $\frac{80 \cdot 22 - 10\cdot 296}{22} = - \frac{600}{11}$ & 480 & 0 \\ \hline 
+        $s^1$ & $\frac{296 \cdot -600/11 - 480 \cdot 22}{-600/11} = \frac{2448}{5}$ & 0 & \\ \hline
+        $s^0$ & 480& & \\ 
+    \end{tabu}
+    }
+\end{center}
+There are 2 sign changes, so there are two roots with positive real parts.
+\item We have the following array:
+\begin{center}
+    {\tabulinesep=1.2mm
+    \begin{tabu}{c|c|c|c}
+    $s^4$ & 1 & 7 & 8 \\ \hline
+    $s^3$ & 2 & -2 & 0 \\ \hline
+    $s^2$ & $\frac{2 \cdot 7 - 1 \cdot -2}{2} = 8$ & 8 & \\ \hline
+    $s^1$ & $\frac{-2 \cdot 8 - 2\cdot 8}{8} = -4$ & 0 & \\ \hline
+    $s^0$ & 8 & & \\
+    \end{tabu}}
+\end{center}
+Again, there are two sign changes, so there are two roots with positive real parts.
+\item We have the following array:
+\begin{center}
+    {\tabulinesep=1.2mm
+    \begin{tabu}{c|c|c|c}
+    $s^4$ & 1 & 6 & 25 \\ \hline 
+    $s^3$ & 0 & 0 & 0 \\  
+    $s^3$ (new) & 4 & 12 & 0 \\ \hline
+    $s^2$ & $\frac{24-12}{4} = 3$ & 25 & \\ \hline
+    $s^1$ & $\frac{12\cdot 3 - 4\cdot 25}{3} = - \frac{64}{3}$ & 0 & \\ \hline
+    $s^0$ & 25 & & \\
+    \end{tabu}}
+\end{center}
+where the new row for $s^3$ was created by considering the auxiliary polynomial for $s^4,$ which was $s^4 + 6s^2 + 25,$ and computing its derivative, which was $4s^3 + 12s.$
+    \end{enumerate}
+    \item \begin{enumerate}[label=(\alph*)]
+        \item The transfer function is:
+        \begin{align}
+            \frac{Y(s)}{R(s)} &= \frac{e^{-sT} \cdot \frac{A}{s(s+1)}}{1 + e^{-sT} \cdot \frac{A}{s(s+1)}} \\ 
+            &= \frac{A}{A + s (s + 1) e^{T s}},
+        \end{align}
+        so the characteristic equation is 
+        \begin{equation}
+            A + s (s + 1) e^{T s} = 0.
+        \end{equation}
+        \item Making this substitution, the transfer function becomes:
+        \begin{align}
+            \frac{Y(s)}{R(s)} &=   \frac{(1-sT) \cdot \frac{A}{s(s+1)}}{1 + (1-sT) \cdot \frac{A}{s(s+1)}} \\ 
+            &= \frac{A (T s - 1)}{A (T s - 1) - s (s + 1)},
+        \end{align}
+        and we wish to solve for the stability of the characteristic polynomial,
+        \begin{align}
+            s^2 + (1-AT)s + A = 0
+        \end{align}
+        by using the Routh's Stability criterion. The Routh array is:
+        \begin{center}
+            {\tabulinesep=1.2mm
+            \begin{tabu}{c|c|c}
+            $s^2$ & 1 & $A$ \\ \hline
+            $s^1$ & $1-AT$ & 0  \\ \hline
+            $s^0$ & $A$ & 0
+            \end{tabu}}
+        \end{center}
+        For the system to be stable, we need no sign changes in the first column. This means that $AT < 1$ and $A>0.$ If we make a different approximation for $e^{-sT},$ we get the transfer function 
+        \begin{align}
+            \frac{Y(s)}{R(s)} &= \frac{\frac{1-sT/2}{1+sT/2} \cdot \frac{A}{s(s+1)}}{1 + \frac{1-sT/2}{1+sT/2} \cdot \frac{A}{s(s+1)}} \\ 
+            &= \frac{A (T s - 2)}{A (T s - 2) - s (s + 1) (T s + 2)} \\ 
+            &=  \frac{A (T s - 2)}{A T s - 2 A - T s^{3} - T s^{2} - 2 s^{2} - 2 s} \\ 
+            &= \frac{A(2-Ts)}{Ts^3 + (T+2)s^2 + (2-AT)s + 2A}.
+        \end{align}
+        The Routh array for the characteristic polynomial is 
+        \begin{center}
+            {\tabulinesep=1.2mm
+            \begin{tabu}{c|c|c}
+            $s^3$ & $T$ & $2-AT$ \\ \hline
+            $s^2$ & $T+2$ & $2A$ \\ \hline
+            $s^1$ & $-\frac{2AT-(2-AT)(2+T)}{T+2}$ & 0 \\ \hline
+            $s^0$ & $2A$ & 0.
+            \end{tabu}}
+        \end{center}
+        We want the first column to all have the same sign. Note that since $T>0$ we have $T+2>0.$ We just need $A>0$ and \begin{equation}
+            2AT-(2-AT)(2+T) < 0 \implies  A T^{2} + 4 A T - 2 T - 4 < 0.
+        \end{equation}
+    \end{enumerate}
+    \item \begin{enumerate}[label=(\alph*)]
+        \item First, compute the transfer function for system (a). It is consisted of two nested negative feedback loops. The inner loop has a gain of 
+        \begin{equation}
+            \frac{\frac{KK_m}{s(1+\tau_ms)}}{1+k_t s \frac{KK_m}{s(1+\tau_ms)}} = \frac{K K_{m}}{s (K K_{m} k_{t} + s \tau_{m} + 1)}.
+        \end{equation}
+        Therefore, the transfer function is 
+        \begin{align}
+            \frac{\Theta(s)}{\Theta_r(s)} &= \frac{\frac{k_PK K_{m}/k}{s (K K_{m} k_{t} + s \tau_{m} + 1)}}{1+\frac{k_PK K_{m}/k}{s (K K_{m} k_{t} + s \tau_{m} + 1)}} \\ 
+            &= \frac{K K_{m} k_{P}/k}{K K_{m} k_{P}/k +  s (K K_{m} k_{t} + s \tau_{m} + 1)}.
+        \end{align}
+        The transfer function for (b) is 
+        \begin{align}
+            \frac{\Theta(s)}{\Theta_r(s)}  &= \frac{\frac{K'}{s(1+\tau_m s)}}{1+(1+k_t's)\frac{K'}{s(1+\tau_m s)}} \\ 
+            &= \frac{K'}{K'  + s (K'k_t' + s\tau_{m} + 1)}.
+        \end{align}
+        Matching coefficients, we obtain 
+        \begin{align}
+            K' &= \frac{KK_mk_P}{k} \\ 
+            k_t' &= \frac{k_tk}{k_P}.
+        \end{align}
+        \item This is a unity feedback control, so the open-loop transfer function is 
+        \begin{equation}
+            GD_\text{cl} = \frac{k_PK K_{m}/k}{s (K K_{m} k_{t} + s \tau_{m} + 1)},
+        \end{equation}
+        which has a single pole at $s=0,$ so according to the Theorem learned in class, it is type 1, and the velocity error coefficient is 
+        \begin{equation}
+            K_{\nu} = \frac{k_PK K_{m}/k}{(K K_{m} k_{t} + 1)} = \frac{K'}{1+k_t'}.
+        \end{equation}
+        \item Since $k_t$ is directly proportional to $k_t'$ and not $K',$ increasing $k_t$ will cause the denominator to grow, which decreases $K_\nu.$
+    \end{enumerate}
+    \item \begin{enumerate}[label=(\alph*)]
+        \item We obtain 
+        \begin{align}
+            E_{c}(s) = R(s) - Y_{c}(s) = R\left(1-\frac{D_{c}G}{1+D_cGH}\right) = R(s) \cdot \frac{(D_{c} G H - D_{c} G + 1)}{D_{c} G H + 1},
+        \end{align}
+        so the transfer function is 
+        \begin{equation}
+            \frac{E_c(s)}{R(s)} = \frac{D_c(s)G(s)H(s) - D_c(s)G(s) + 1}{D_c(s)G(s)H(s) + 1}.
+        \end{equation}
+        A ramp reference input is given by $r(t) = t1(t) \implies R(s) = \frac{1}{s^2}.$ Therefore,
+        \begin{align}
+            e_{ss} = \lim_{t\to \infty}e(t) = \lim_{s\to 0} sE(s) = \lim_{s\to 0} \frac{D_c(s)G(s)H(s) - D_c(s)G(s) + 1}{s(D_c(s)G(s)H(s) + 1)}
+        \end{align}
+        \item Write $G(s) = \frac{\tilde{G}(s)}{s}.$ Then to be Type 1, it needs to be able to track a ramp reference input, i.e. $|e_{ss}| < \infty.$ We obtain,
+        \begin{align}
+            e_{ss} &= \lim_{s\to 0} \frac{\frac{1}{s}0.73 \tilde{G}(s) (H(s) - 1) + 1}{s(\frac{1}{s}0.73 \tilde{G}(s) H(s) + 1)} \\ 
+            &= \lim_{s\to 0}\frac{100 s}{s (100 s + 73 H{(s)} \tilde{G}{(s)})}  + \lim_{s\to 0}\frac{73 (H{(s)} - 1) \tilde{G}{(s)}}{s (100 s + 73 H{(s)} \tilde{G}{(s)})}\\
+            &= \frac{100}{73H\tilde{G}} + \lim_{s\to 0}\frac{73 (H{(s)} - 1) \tilde{G}{(s)}}{s (100 s + 73 H{(s)} \tilde{G}{(s)})}.
+        \end{align}
+        For the second term to not diverge, we want to write
+        \begin{equation}
+            (H(s)-1)\tilde{G}(s) = sA(s)
+        \end{equation}
+        for some $A(s)$ which does not have a pole at $s=0.$ That is, we want $H(s)$ in the form of 
+        \begin{equation}
+            H(s) = \frac{s A(s)}{\tilde{G}(s)} + 1 = \frac{A(s)}{G(s)} + 1.
+        \end{equation}
+        If this was true, then we have:
+        \begin{equation}
+            e_{ss} = \frac{100}{73\tilde{G}(0)} + \frac{A(0)}{\tilde{G}(0)} = \frac{A{(0)} + \frac{100}{73}}{\tilde{G}{(0)}}.
+        \end{equation}
+        We just need to be careful that $A(s)$ does not have a pole at $s=0.$ Note that we satisfy the relationship $H(0) = 1$ since $\tilde{G}(0) \neq 0.$
+        \item Plugging this in, we have 
+        \begin{align}
+            e_{ss} &= \lim_{s\to 0} \frac{s}{s^2} \frac{1+(H-1)GD}{1+DGH} \\ 
+            &= \lim_{s\to 0} \frac{1}{s}\frac{1 + \left(\frac{2.75s+1}{0.36s+1} -1\right)\frac{1}{s(s+1)^2} \cdot 0.73}{1 + \frac{1}{s(s+1)^2} \cdot 0.73 \cdot \frac{2.75s+1}{0.36s+1}} \\ 
+            &= \lim_{s\to 0}\frac{400 (s + 1)^{2} \cdot (9 s + 25) + 17447}{25 \cdot (16 s (s + 1)^{2} \cdot (9 s + 25) + 803 s + 292)} \\ 
+            &= \frac{400 (0 + 1)^{2} \cdot (0 + 25) + 17447}{25 \cdot (0 (0 + 1)^{2} \cdot (0 + 25) + 0 + 292)} \\ 
+            &= 3.75986301369863.
+        \end{align}
+        Thus, $K_\nu = 3.75986301369863^{-1} = 0.26597\text{ s}^{-1}.$
+    \end{enumerate}
+    \item \begin{enumerate}[label=(\alph*)]
+        \item Because it is unity feedback, the open loop transfer function is
+        \begin{equation}
+            D_c(s)G(s) = \frac{K(s+a)}{s+b} \cdot \frac{1}{s^2+2\zeta s + 1} = \frac{K (a + s)}{(b + s) (s^{2} + 2 s \zeta + 1)}.
+        \end{equation}
+        To be type 1, we need $b = 0$ to get $s=0$ as a pole. However, we also need $a,K \neq 0$ in order to prevent cancelling out the pole.
+        \item The closed loop transfer function is 
+        \begin{align}
+            T(s) = \frac{D_c(s)G(s)}{1+D_c(s)G(s)} &= \frac{\frac{K (a + s)}{(0 + s) (s^{2} + 2 s \zeta + 1)}}{1+\frac{K (a + s)}{(0 + s) (s^{2} + 2 s \zeta + 1)}} \\ 
+            &= \frac{K (a + s)}{K (a + s) + s (s^{2} + 2 s \zeta + 1)} \\ 
+            &= \frac{K (a + s)}{s^{3} + 2 \zeta s^{2}  + (K+1)s + aK} .
+        \end{align}
+        We can create a Routh array for this transfer function to determine the stability,
+        \begin{center}
+            {\tabulinesep=1.2mm
+            \begin{tabu}{c|c|c}
+                 $s^3$ & 1 & $K+1$ \\ \hline 
+                 $s^2$ & $2\zeta$ & $aK$ \\ \hline
+                 $s^1$ &$ \frac{(K+1)2\zeta - aK}{2\zeta}$ \\ \hline 
+                 $s^0$ & $aK$ &
+             \end{tabu}
+             }
+        \end{center}
+        To ensure that the system is stable, we require the first column to all be positive. That is, $\zeta > 0,$ $aK>0,$ and 
+        \begin{equation}
+            2\zeta(K+1) > aK \implies K  > \frac{2\zeta}{a-2\zeta}.
+        \end{equation}
+        \item We can solve for $a$ to get 
+        \begin{equation}
+            \frac{2\zeta(K+1)}{K} > a
+        \end{equation}
+        For this to be true for all values of $a,$ we can find the range of the LHS as a function of $K$ in the domain $(0,\infty).$ We obtain the range $(2\zeta,\infty).$ Therefore,
+        \begin{equation}
+            0 < a < 2\zeta,\quad\quad\quad b=0,\quad\quad\quad \zeta>0,
+        \end{equation} 
+        if and only if the system is both Type 1 and remains stable for every positive value for $K.$
+    \end{enumerate}
+    \item \begin{enumerate}[label=(\alph*)]
+        \item Because it has unity feedback, the system type is equal to the poles of 
+        \begin{equation}
+            D_c(s)G(s) = \frac{10(s+2)}{s^2(s+5)},
+        \end{equation} 
+        so it is $2.$ We can compute 
+        \begin{equation}
+            K_a = K_2 = \lim_{s\to 0} \frac{10(s+2)}{s+5} = \frac{10(2)}{5} = 4.
+        \end{equation}
+        Therefore, $e_{ss} = \frac{1}{K_a} = \frac{1}{4}$ and $e_{ss}=0$ for lower order inputs.
+        \item We have shown in lecture that the transfer function when taking into account the disturbance $W$ for a unity feedback system is 
+        \begin{align}
+            -T_w(s) = \frac{E_c(s)}{W(s)} &= \frac{-G(s)}{1+G(s)D_c(s)} \\ 
+            &= \frac{-1/s^2}{1+\frac{10(s+2)}{s^2(s+5)}} \\ 
+            &= \frac{- s - 5}{s^{3} + 5 s^{2} + 10 s + 20},
+        \end{align}
+        which has no zeros at the origin, so it is of type 0. The error is then 
+        \begin{equation}
+            e_{ss} = -T_w(0) = -\frac{5}{20} = -\frac{1}{4},
+        \end{equation}
+        and $K_{0,w}=4.$
+    \end{enumerate}
+    \item Let us define 
+    \begin{equation}
+        D_c(s) = 160 \cdot \frac{s+4}{s+30}
+    \end{equation}
+    and 
+    \begin{equation}
+        G(s) = \frac{1}{s(s+2)}.
+    \end{equation}
+    Note that we have unity feedback, so the standard formulas from lecture apply.
+    \begin{enumerate}[label=(\alph*)]
+        \item We have
+        \begin{equation}
+            D_c(s)G(s) = 160 \cdot \frac{s+4}{s+30} \cdot \frac{1}{s(s+2)} = \frac{160 (s + 4)}{s (s + 2) (s + 30)},
+        \end{equation}
+        which is type 1, so it can track a step reference input with zero steady-state error. The velocity constant is 
+        \begin{equation}
+            K_\nu = 160 \cdot \frac{4}{30} \cdot \frac{1}{2} = \frac{32}{3}.
+        \end{equation}
+        \item We can compute 
+        \begin{align}
+            T_w(s) &= \frac{\frac{1}{s(s+2)}}{1+\frac{1}{s(s+2)} \cdot 160 \cdot \frac{s+4}{s+30}} \\ 
+            &= \frac{s + 30}{s^{3} + 32 s^{2} + 220 s + 640},
+        \end{align}
+        which has no zeros at the origin, so it is of type 0, so it cannot reject a step disturbance $w$ with zero steady-state error.
+        \item The sensitivity for unity feedback control is 
+        \begin{equation}
+            \mathcal{S}^T_{G} = \frac{1}{1+GD_c} = \frac{1}{1+\frac{1}{s(s+2)} \cdot 160 \cdot \frac{s+4}{s+30}} = \frac{s (s + 2) (s + 30)}{s^{3} + 32 s^{2} + 220 s + 640}.
+        \end{equation}
+        Let $p=2$ and write the gain as 
+        \begin{equation}
+            G(s) = \frac{1}{s(s+p)}.
+        \end{equation}
+        We have,
+        \begin{align}
+            \mathcal{S}^G_p\bigg|_{p=2} &= \frac{p}{\frac{1}{s(s+p)}} \frac{\partial}{\partial p}\left(\frac{1}{s(s+p)}\right)\bigg|_{p=2} \\ 
+            &= - \frac{p}{p + s}\bigg|_{p=2} \\ 
+            &= -\frac{2}{s + 2}.
+        \end{align}
+        Therefore,
+        \begin{align}
+            \mathcal{S}^T_2 &= \mathcal{S}^T_G \mathcal{S}^G_2 \\ 
+            &= \frac{1}{1+\frac{1}{s(s+2)} \cdot 160 \cdot \frac{s+4}{s+30}} \cdot  -\frac{2}{s + 2} \\ 
+            &= - \frac{2s (s + 30)}{s(s + 2) (s + 30) + 160 s + 640}.
+        \end{align}
+        As $s\to 0,$ the sensitivity approaches $0$.
+        \item For $H(s) = \frac{20}{s+20},$ we have the transfer function 
+        \begin{align}
+            \frac{E_c(s)}{R(s)} &= 1 - \frac{D_c(s)G(s)}{1 + D_c(s)G(s)H(s)} \\ 
+            &= 1 - \frac{\frac{160 (s + 4)}{s (s + 2) (s + 30)}}{1 + \frac{20}{s+20} \cdot \frac{160 (s + 4)}{s (s + 2) (s + 30)}} \\ 
+            &= \frac{s (s^{3} + 52 s^{2} + 540 s + 560)}{s^{4} + 52 s^{3} + 700 s^{2} + 4400 s + 12800}
+        \end{align}
+        For a unit-step, we have $R(s) = \frac{1}{s},$ so the error is 
+        \begin{align}
+            e_{ss} &= \lim_{s\to 0} E_c(s) = 0,
+        \end{align}
+        so yes, it can track a step reference input with zero steady-state error. We can compute 
+        \begin{align}
+            T_w(s) &= \frac{\frac{1}{s(s+2)}}{1+\frac{20}{s+20} \cdot \frac{1}{s(s+2)} \cdot 160 \cdot \frac{s+4}{s+30}} \\ 
+            &= \frac{(s + 20) (s + 30)}{s (s + 2) (s + 20) (s + 30) + 3200 s + 12800}
+        \end{align}
+        which has no zeros at the origin, so it is of type 0, so it cannot reject a step disturbance $w$ with zero steady-state error. The sensitivity for feedback control is 
+        \begin{equation}
+            \mathcal{S}^T_{G} = \frac{1}{1+HGD_c} = \frac{1}{1+\frac{20}{s+20} \cdot \frac{1}{s(s+2)} \cdot 160 \cdot \frac{s+4}{s+30}} = \frac{s (s + 2) (s + 20) (s + 30)}{s (s + 2) (s + 20) (s + 30) + 3200 s + 12800}
+        \end{equation}
+        We also have 
+        \begin{align}
+            \mathcal{S}^G_p\bigg|_{p=2} = -\frac{2}{s + 2}
+        \end{align}
+        as before, so 
+        \begin{align}
+            \mathcal{S}^T_2 &= \mathcal{S}^T_G \mathcal{S}^G_2 \\ 
+            &= \frac{1}{1+\frac{20}{s+20} \cdot \frac{1}{s(s+2)} \cdot 160 \cdot \frac{s+4}{s+30}} \cdot  -\frac{2}{s + 2}  \\ 
+            &= - \frac{2 s (s + 20) (s + 30)}{s (s + 2) (s + 20) (s + 30) + 3200 s + 12800},
+        \end{align}
+        which also approaches $0$ as $s\to 0.$
+    \end{enumerate}
+    \item \begin{enumerate}[label=(\alph*)]
+        \item We have the following systems:
+        \begin{align}
+            U &= 4\left(R - Y + \frac{1}{4}x\right) = 4R - 4Y + x \\
+            x &= \frac{U}{s+a} \\ 
+            Y &= \frac{U+x}{s}.
+        \end{align}
+        Substituting the first into the second and third gives 
+        \begin{align}
+            x &= \frac{4R-4Y+x}{s+a} \implies x = \frac{4R-4Y}{s+a}\left(1 - \frac{1}{s+a}\right)^{-1} = \frac{4 (R - Y)}{a + s - 1}\\ 
+            Y &= \frac{4R-4Y+2x}{s}.
+        \end{align}
+        Plugging the second equation into the third gives 
+        \begin{equation}
+            Y = \frac{4R-4Y}{s} + \frac{2}{s}\left(\frac{4 (R - Y)}{a + s - 1}\right) = \frac{4 (R - Y) (a + s + 1)}{s (a + s - 1)}
+        \end{equation}
+        Solving for $Y$ gives 
+        \begin{equation}
+            Y = \frac{4 R (a + s + 1)}{a s + 4 a + s^{2} + 3 s + 4}
+        \end{equation}
+        so the transfer function is 
+        \begin{equation}
+            \frac{Y(s)}{R(s)} = \frac{4 (a + s + 1)}{a s + 4 a + s^{2} + 3 s + 4}
+        \end{equation}
+        For a standard unity feedback transfer function, we have 
+        \begin{equation}
+            T(s) = \frac{G}{1+G} \implies G = \frac{T}{1-T},
+        \end{equation}
+        so 
+        \begin{equation}
+            G(s) = \frac{\frac{4 (a + s + 1)}{a s + 4 a + s^{2} + 3 s + 4}}{1 - \frac{4 (a + s + 1)}{a s + 4 a + s^{2} + 3 s + 4}}  = \frac{4 (a + s + 1)}{s (a + s - 1)}.
+        \end{equation}
+        \item Substituting $a=1,$ we have 
+        \begin{equation}
+            G(s) = \frac{4 (1 + s + 1)}{s (1 + s - 1)} = \frac{4 (s + 2)}{s^{2}}.
+        \end{equation}
+        and $D_c(s) = 1.$ Note that $GD_c(s)$ has 2 poles at the origin, so it is type 1. The error constant is 
+        \begin{equation}
+            K_2 = \lim_{s\to 0} s^2\frac{4(s+2)}{s^2} = 8.
+        \end{equation}
+        \item For simplicity, write $\delta \equiv \delta a.$
+        \begin{equation}
+            G(s) =\frac{4 (1 + \delta + s + 1)}{s (1 + \delta + s - 1)} = \frac{4 (\delta + s + 2)}{s (\delta + s)}.
+        \end{equation}
+        This has 1 pole at the origin for $\delta \neq 0,$ so it is type 1. The error constant is 
+        \begin{equation}
+            K_1 = \lim_{s\to 0} s \frac{4(\delta +s + 2)}{s (\delta + s)} = 4 + \frac{8}{\delta a}.
+        \end{equation}
+    \end{enumerate}
+    \item \begin{enumerate}[label=(\alph*)]
+        \item The $F=ma$ force law gives us 
+        \begin{equation}
+            1000\dot{v} =  10u - 10v.
+        \end{equation}
+        Taking the Laplace Transform of both sides gives 
+        \begin{equation}
+            100 sV(s) = U(s) - V(s) \implies \frac{V(s)}{U(s)} = \frac{1}{1 +100s}.
+        \end{equation}
+        \item After adding the feedback loop, we have 
+        \begin{align}
+            &V(s) = \frac{k_P}{s+0.02}\left[U(s) - V(s)\right] + \frac{0.05}{s+0.02}W(s) \\ 
+            \implies & V(s) = \left[\frac{k_P}{s+0.02}U(s) + \frac{0.05}{s+0.02}W(s)\right] \left(1 + \frac{k_P}{s+0.02}\right)^{-1} \\ 
+            &= \frac{k_{P} U{(s)} + 0.05W(s)}{s + k_{P} + 0.02}.
+        \end{align}
+        The error is 
+        \begin{equation}
+            E(s) = U(s) - \frac{k_{P} U{(s)} + 0.05W}{s + k_{P} + 0.02} = \frac{- 0.05 W(s) + (s + 0.02) U{(s)}}{s + k_{P} + 0.02}.
+        \end{equation}
+        Setting $U(s)=0$ (no input), we want to maintain an error of less than $1\text{ m/s}.$ If the grade is $w(t)=2,$ then $W(s)=\frac{2}{s},$ so we have 
+        \begin{equation}
+            e_{ss} = \lim_{s\to 0} |s E(s)| = \lim_{s\to 0} \left|\frac{-0.1}{s+k_P+0.01}\right| = \frac{0.1}{k_P+0.02}.
+        \end{equation}
+        If we want $e_{ss} < 1,$ we want
+        \begin{equation}
+            k_{P} > \frac{2}{25} = 0.08.
+        \end{equation} 
+        \item By performing an integral control, we can upgrade the order of the system, so constant grades will give 0 error. We have, 
+        \begin{equation}
+            V(s) = \left[\frac{k_I/s}{s+0.02}U(s) + \frac{0.05}{s+0.02}W(s)\right] \left(1 + \frac{k_I/s}{s+0.02}\right)^{-1} = \frac{5 \cdot (20 k_I U{(s)} + s W{(s)})}{2 \cdot (50 k_I + s (50 s + 1))},
+        \end{equation}
+        so 
+        \begin{equation}
+            E(s) = U(s) - \frac{5 \cdot (20 k_I U{(s)} + s W{(s)})}{2 \cdot (50 k_I + s (50 s + 1))} = \frac{s (100 s U{(s)} + 2 U{(s)} - 5 W{(s)})}{2 \cdot (50 k_I + 50 s^{2} + s)}.
+        \end{equation}
+        Setting $U(s)=0$ and $W(s) = \frac{2}{s}$ gives 
+        \begin{equation}
+            E(s) = - \frac{5}{50 k_I + 50 s^{2} + s}
+        \end{equation}
+        and
+        \begin{equation}
+            e_{ss} = \lim_{s\to 0} sE(s) = 0,
+        \end{equation}
+        as expected.
+        \item Recall that 
+        \begin{equation}
+            E(s) = \frac{s (s U{(s)} + 0.02 U{(s)} - 0.05 W{(s)})}{s^{2} + 0.02 s + k_I}.
+        \end{equation}
+        We can compare the denominator to $s^2 + 2\zeta \omega_n s +\omega_n^2$ to get $\omega_n = \sqrt{k_I}$ and 
+        \begin{equation}
+            \zeta = \frac{0.01}{\sqrt{k_I}}.
+        \end{equation}
+        Critical damping occurs when $\zeta= 1,$ so pick $k_I = 0.01^2 = 1\times 10^{-4}.$
+    \end{enumerate}
+    \item \begin{enumerate}[label=(\alph*)]
+        \item First consider 
+        \begin{equation}
+            G(s) = \frac{0.9}{(s+0.4)(s+1.2)} = \frac{0.9}{s^{2} + \frac{8 s}{5} + \frac{12}{25}}.
+        \end{equation}
+        Comparing the gain to $\frac{K\omega_n^2}{s^2 +2\zeta\omega_n s + \omega_n^2}$ We can match coefficients
+        \begin{align}
+            \omega_n &= \sqrt{12/25} = 0.7071 \\ 
+            \zeta &= \frac{8/5}{2 \cdot 0.7071} = 1.13138 \\ 
+            K &= \frac{0.9}{12/25} = 1.875.
+        \end{align}
+        The rise time is given by 
+        \begin{equation}
+            t_r = \frac{1.8}{\omega_n}  < 2 \implies \omega_n > 0.9,
+        \end{equation}
+        which is currently not satisfied, so we need to introduce our PI controller. To be stable, we need
+        \begin{equation}
+            k_I < \frac{2\zeta\omega_n(1+k_PK)}{K} = \frac{8/5 \cdot (1+1.875)}{1.875} = 2.453,
+        \end{equation}
+        where we let $k_P=1.$ Consider $D_c(s) = k_P + k_I/s.$ The transfer function is
+        \begin{align}
+            T(s) &= \frac{(k_P + k_I/s) \cdot \frac{0.9}{(s+0.4)(s+1.2)}}{1 + (k_P + k_I/s) \cdot \frac{0.9}{(s+0.4)(s+1.2)}} \\ 
+            &= \frac{45 (k_{I} + s)}{45 k_{I} + 45 s + 50 s^{3} + 80 s^{2} + 24 s}.
+        \end{align}
+        Note that $K_I < 2.453$ such that all poles are stable. We wish to cancel out a stable pole. Choose $k_I$ such that $s=-k_I$ is a pole, i.e.
+        \begin{equation}
+            45k_I - 45k_I - 50k_I^3 + 80k_I^2 - 24k_I = 0 \implies [ k_{I} = 0, \  k_{I} = \frac{2}{5}, \  k_{I} = \frac{6}{5}].
+        \end{equation}
+        We can cancel out both poles, since $k_I < 2.453$ is satisfied for both $0.4$ and $1.2.$ Plugging in $k_I=0.4$ gives 
+        \begin{equation}
+            T(s) = \frac{45(0.4+s)}{45(0.4) + 45s + 50s^3 + 80s^2 + 24s} = \frac{0.9}{s^{2} + 1.2 s + 0.9},
+        \end{equation}
+        which gives $\omega_n' = \sqrt{0.9} = 0.9487,$ which satisfies $\omega_n' > 0.9.$ Note that choosing $k_I = 1.2$ gives the same thing.
+        \item Consider $D_c(s) = k_P + k_I/s + k_Ds.$ The transfer function is
+        \begin{align}
+            T(s) &= \frac{(k_P + k_I/s + k_Ds) \cdot  \frac{0.9}{(s+0.4)(s+1.2)}}{1+(k_P + k_I/s + k_Ds) \cdot  \frac{0.9}{(s+0.4)(s+1.2)}} \\ 
+            &= \frac{45 (k_{D} s^{2} + k_{I} + k_{P} s)}{45 k_{D} s^{2} + 45 k_{I} + 45 k_{P} s + 50 s^{3} + 80 s^{2} + 24 s}.
+        \end{align}
+        There is no overshoot when the system is first-order, i.e. the numerator is a factor of the denominator. We can write:
+        \begin{align}
+            &50s^3 + (80+45k_D)s^2 + (24+45k_P)s + 45k_I \\ 
+            =& \frac{50s}{k_D}\left(k_{D} s^{2} + k_{I} + k_{P} s\right)   + \left(80+45k_D- \frac{50k_P}{k_D}\right)s^2 + \left(24+45k_P-\frac{50k_I}{k_D}\right)s + 45k_I \\
+            =& \frac{50s}{k_D}\left(k_{D} s^{2} + k_{I} + k_{P} s\right)   + \left(\frac{80}{k_D}+45- \frac{50k_P}{k_D^2}\right)\left(k_{D} s^{2} + k_{I} + k_{P} s\right) + \left(- \frac{80k_I}{k_D} + \frac{50k_Pk_I}{k_D^2}\right) \\ 
+            &+ \left(24-\frac{50k_I}{k_D}- \frac{80k_P}{k_D}+ \frac{50k_P^2}{k_D^2}\right)s.
+        \end{align}
+        The remainder of $T(s)^{-1}$ is thus 
+        \begin{align}
+            R(s) &= \left(24-\frac{50k_I}{k_D}- \frac{80k_P}{k_D}+ \frac{50k_P^2}{k_D^2}\right)s + \left(- \frac{80k_I}{k_D} + \frac{50k_Pk_I}{k_D^2}\right) \\ 
+            &= \frac{2 s (12 k_{D}^{2} - 25 k_{D} k_{I} - 40 k_{D} k_{P} + 25 k_{P}^{2})}{k_{D}^{2}} + \frac{10 k_{I} (- 8 k_{D} + 5 k_{P})}{k_{D}^{2}}.
+        \end{align}
+        We need both terms to be zero. The constant term satisfies 
+        \begin{equation}
+            \frac{k_P}{k_D} = \frac{8}{5} = 1.6.
+        \end{equation}
+        For the linear (with respect to $s$) term to be zero, we require:
+        \begin{align}
+            &12 - 25\frac{k_I}{k_D} - 40\frac{k_P}{k_D} + 25\left(\frac{k_P}{k_D}\right)^2 =0 \\ 
+            \implies & 12 - 25 \cdot \frac{k_I}{k_D} - 40 \cdot \frac{8}{5} + 25 \cdot \frac{8^2}{5^2} = 0\\
+            \implies & 12 - \frac{25 k_{I}}{k_{D}} = 0 \\ 
+            \implies & \frac{k_I}{k_D} = \frac{12}{25} = 0.48.
+        \end{align}
+        We need to ensure we are cancelling out stable poles. Routh's stability criteria gives 
+        \begin{align}
+            k_I &< \frac{(2\zeta+k_DK\omega_n)(1+k_pK)\omega_n}{K} \\ 
+            &= \frac{(2 \cdot 1.13138 + k_D \cdot 1.875 \cdot 0.7071)(1+k_P \cdot 1.875) \cdot 0.7071}{1.875} \\ 
+            &=  (0.0625 k_{D} + 0.10667) (15.0 k_{P} + 8.0).
+        \end{align}
+        Choose $k_D = 1$ to get $k_I = 0.48$ and $k_P=1.6.$ Then we can verify that 
+        \begin{equation}
+            (0.0625  + 0.10667) (15.0 \cdot 1.6 + 8.0)=  5.41344 > 0.48.
+        \end{equation}
+    \end{enumerate}
+\end{enumerate}
+\end{document}

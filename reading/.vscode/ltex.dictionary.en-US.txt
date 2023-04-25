@@ -2,3 +2,6 @@ antisymmetry
 wavefunction
 antisymmetry
 noninteracting
+diagonalised
+Grassmann
+anticommutes

@@ -1,0 +1,135 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY484: General Relativity II \\ Problem Set One}
+\author{QiLin Xue}
+\date{Spring 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Problem One}
+\begin{enumerate}[label=(\alph*)]
+    \item We have 
+    \begin{equation}
+        \mathcal{L}_\text{matter}[g^{\mu\nu}] = \delta^{(D)}(x-z(\lambda))\int \dd{\lambda} \frac{1}{2}\left[e^{-1}(\lambda)\dot{z}^2(\lambda)+e(\lambda)m^2\right].
+    \end{equation}
+    Note that we can write 
+    \begin{equation}
+        \dot{z}^2 = \dot{z}_\mu \dot{z}_\nu g^{\mu\nu}.
+    \end{equation}
+    Note that 
+    \begin{align}
+        \frac{\delta \mathcal{L}_{matter}}{\delta g^{\alpha\beta}} &= \delta^{(D)}(x-z(\lambda))\int \dd{\lambda} \frac{1}{2}e^{-1}(\lambda)\dot{z}_\mu \dot{z}_\nu \frac{\delta g^{\mu\nu}}{\delta g^{\alpha\beta}} \\ 
+        &= \delta^{(D)}(x-z(\lambda))\int \dd{\lambda} \frac{1}{2}e^{-1}(\lambda)\dot{z}_\mu \dot{z}_\nu \delta^{\mu}_{\alpha}\delta^{\nu}_{\beta} \\ 
+        &= \delta^{(D)}(x-z(\lambda))\int \dd{\lambda} \frac{1}{2}e^{-1}(\lambda)\dot{z}_\alpha \dot{z}_\beta
+    \end{align}
+    Therefore,
+    \begin{align}
+        T_{\alpha\beta}(x) &= \frac{2}{\sqrt{-g}}\delta^{(D)}(x-z(\lambda))\int \dd{\lambda} \frac{1}{2}e^{-1}(\lambda)\dot{z}_\alpha \dot{z}_\beta \\ 
+        &= \frac{e^{-1}}{\sqrt{-g}}\int\dd{\lambda}\delta^{(D)}(x-z(\lambda))\dot{z}_\alpha\dot{z}_\beta,
+    \end{align}
+    as intended, where $e^{-1}=m$ for a massive particle and $e^{-1}=1$ for a massless one.
+    \item We can write the covariant derivative in terms of the connection. We have,
+    \begin{align}
+        \nabla_\mu T^{\mu\nu} = \partial_\mu T^{\mu\nu} + T^{\alpha\nu}\Gamma^{\mu}{}_{\alpha\mu} + T^{\mu\sigma}\Gamma^{\nu}{}_{\sigma\mu}.
+    \end{align}
+    To continue, we need to prove the following property which we stated in class,
+    \begin{equation}
+        \Gamma^{\lambda}{}_{\lambda\nu} = \frac{1}{\sqrt{-g}}\partial_\nu (\sqrt{-g}).
+    \end{equation}
+    We can write the Christoffel symbol out explicitly as 
+    \begin{align}
+        \Gamma^{\lambda}{}_{\lambda\nu} &= \frac{1}{2}g^{\lambda \alpha}\left(\partial_\lambda g_{\nu\alpha}+ \partial_\nu g_{\lambda \alpha} - \partial_\alpha g_{\lambda\nu}\right) \\ 
+        &= \frac{1}{2}\left(\partial^\alpha g_{\nu \alpha} + g^{\lambda\alpha}\partial_\nu g_{\lambda\alpha} - \partial^{\lambda}g_{\lambda\nu}\right),
+    \end{align}
+    where we raised indices using the metric on the second line. Also notice that the first and third terms are the same, as they both sum over one of the indices, so they cancel each other out, i.e. we are left with 
+    \begin{equation}
+        \Gamma^{\lambda}{}_{\lambda\nu} = \frac{1}{2}g^{\lambda\alpha}\partial_{\nu}g_{\lambda\alpha}.
+    \end{equation}
+    Recall from lecture that $\partial_\nu(\sqrt{-g}) = -\frac{1}{2}\sqrt{-g}g^{\alpha\beta}\partial_{\nu}g_{\alpha\beta}.$ We derived it using the functional differential $\delta,$ but the derivation remains exactly the same since we can check that in each step, $\partial_\mu$ and $\delta$ obey Leibnitz's rule and the chain rule in the same sense.
+
+    Then, we can check that this is a result of the product rule, i.e. 
+    \begin{align}
+        \frac{1}{\sqrt{-g}}\partial_{\nu}\sqrt{-g} &= \frac{1}{2}g^{\lambda\alpha}\partial_{\nu}g_{\lambda\alpha}.
+    \end{align}
+    Therefore,
+    \begin{equation}
+        \Gamma^{\lambda}{}_{\lambda\nu} =\frac{1}{\sqrt{-g}}\partial_{\nu}\sqrt{-g}
+    \end{equation}
+    as desired. Finally, we can compute,
+    \begin{align}
+        \frac{1}{\sqrt{-g}}\partial_{\nu}(\sqrt{-g}T^{\mu\nu}) &= T^{\mu\nu}\frac{1}{\sqrt{-g}}\partial_{\nu}\sqrt{-g}  + \frac{\sqrt{-g}}{\sqrt{-g}}\partial_\nu T^{\mu\nu} \\ 
+        &=\partial_\nu T^{\mu\nu} + \Gamma^{\lambda}{}_{\lambda\nu}T^{\mu\nu},
+    \end{align}
+    which corresponds to the first two terms when we write out the covariant derivative. This gives 
+    \begin{align}
+        \nabla_{\mu}T^{\mu\nu} = \frac{1}{\sqrt{-g}}\partial_{\nu}(\sqrt{-g}T^{\mu\nu}) + T^{\mu\sigma}\Gamma^{\nu}{}_{\sigma\mu}
+    \end{align}
+    as desired.
+    \item The expression $\nabla_\mu T^{\mu\nu}$ comes from the conservation of energy. \emf{Explain more using GR1 stuff.}
+    
+    Using the previous two parts, we can write 
+    \begin{align}
+        \nabla_{\mu}T^{\mu\nu} &= \frac{1}{\sqrt{-g}}\partial_{\nu}(\sqrt{-g}T^{\mu\nu}) + T^{\mu\sigma}\Gamma^{\nu}{}_{\sigma\mu} \\ 
+        &= \frac{1}{\sqrt{-g}}\partial_{\nu}\left(m\int\dd{\lambda}\delta^{(D)}(x-z(\lambda))\dot{z}^\mu\dot{z}^\nu\right) + \Gamma^{\nu}{}_{\sigma\mu}\left(\frac{m}{\sqrt{-g}}\int\dd{\lambda}\delta^{(D)}(x-z(\lambda))\dot{z}^\mu\dot{z}^\sigma\right) \\ 
+        &= \frac{m}{\sqrt{-g}}\int \dd{\lambda}\delta^{(D)}(x-z(\lambda))\left[\partial_\nu (\dot{z}^\mu\dot{z}^{\nu}) + \Gamma^{\nu}{}_{\sigma\mu} \dot{z}^\mu \dot{z}^{\sigma}\right].
+    \end{align}
+    \emf{what to do with thing inside partial?} By conservation of energy, this term is zero. Inside the square brackets, we have the geodesic equation: Thus this is another way of deriving the geodesic equation.
+\end{enumerate}
+\section{Problem Two}
+\begin{enumerate}[label=(\alph*)]
+    \item We can guess $\mathcal{L}_{matter}=\rho - P,$ so the stress-energy tensor is given by 
+    \begin{align}
+        T_{\mu\nu} &= -g_{\mu\nu}\mathcal{L}_{matter}  + 2\frac{\delta \mathcal{L}}{\delta g^{\mu\nu}}.
+    \end{align}
+    Recall that perfect fluids satisfy the continuity equation,
+    \begin{equation}
+        \nabla_\sigma(\rho u^\sigma) = 0.
+    \end{equation}
+    Expanding this, we have,
+    \begin{align}
+        \nabla_\sigma(\rho u^\sigma) &= \nabla_\sigma(\rho)u^{\sigma} + \rho \nabla_{\sigma}u^{\sigma} \\ 
+        &= \partial_{\sigma}\rho u^{\sigma} + \rho \left(\partial_{\sigma} u^{\sigma} + \Gamma^{\sigma}{}_{\sigma k}u^k\right) \\ 
+        &= \partial_{\sigma}\rho u^{\sigma} + \rho \left(\partial_{\sigma} u^{\sigma} + u^k\frac{1}{\sqrt{-g}}\partial_k \sqrt{-g}\right) \\ 
+        &= \partial_{\sigma}\rho u^{\sigma} + \rho \left(\partial_{\sigma} u^{\sigma} + \frac{1}{2}u^k\frac{1}{\sqrt{-g}}g^{\lambda \alpha}\partial_{k}g_{\lambda\alpha}\right) \\ 
+    \end{align}
+    which we can use to compute,
+    \begin{align}
+        \frac{\delta \mathcal{L}_\text{matter}}{\delta g^{\mu\nu}} &= 
+    \end{align}
+    and 
+    \begin{align}
+        \frac{\partial \rho}{\partial g^{\mu\nu}} - \nabla_{\sigma}\left(\frac{\partial \rho}{\partial(\nabla_{\sigma}g^{\mu\nu})}\right) &= \frac{\partial\rho}{\partial g^{\mu\nu}} \\ 
+        &= \frac{\partial\rho}{\partial x^i}\frac{\partial x^i}{\partial g^{\mu\nu}} \\
+        &= -\rho \left(\partial_{\sigma} u^{\sigma} + \frac{1}{2}u^k\frac{1}{\sqrt{-g}}g^{\lambda \alpha}\partial_{k}g_{\lambda\alpha}\right)
+    \end{align}
+    We can compute,
+    \begin{align}
+        \frac{2}{\sqrt{-g}}\frac{\delta(\rho\sqrt{-g})}{\delta g^{\mu\nu}} &= \frac{2}{\sqrt{-g}}\left(\rho \frac{\delta\sqrt{-g}}{\delta g^{\mu\nu}} + \sqrt{-g}\frac{\delta\rho}{\delta g^{\mu\nu}}\right) \\
+        &= -\rho g_{\mu\nu} + \rho u^k \frac{1}{g}g^{\lambda\alpha}\frac{\partial g_{\lambda\alpha}}{\partial x^k}\frac{\partial x^i}{\partial g^{\mu\nu}}
+    \end{align}
+\end{enumerate}
+
+\section{Problem Three}
+\begin{enumerate}[label=(\alph*)]
+    \item The coordinate shift $x^{mu} \to x^{\mu}+a^{\mu}$ is a symmetry if 
+    \begin{equation}
+        \delta \mathcal{L} = \partial_{\mu}f^{\mu}
+    \end{equation}
+    for some function $f^{\mu}.$
+    \begin{align}
+        a^\nu \partial_{\mu} \left(\frac{\delta \mathcal{L}}{\delta \partial_\mu \phi}\partial_\nu \phi\right) &= a^\nu \partial_\nu \mathcal{L} \\ 
+        a^{\nu}\left(\partial_\mu \frac{\delta \mathcal{L}}{\delta \partial_\mu \phi} \right)\partial_\nu\phi + a^{\nu}\left(\partial_{\mu}\partial_{\nu}\phi\right)&= a^\nu \partial_\nu \mathcal{L}
+    \end{align}
+\end{enumerate}
+\end{document}

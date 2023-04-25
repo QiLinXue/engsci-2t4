@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{AER372: Control Systems  \\ Prelab 3}
+\author{}
+\date{Spring 2023}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+\begin{document}
+
+\maketitle
+\begin{enumerate}[label=(\alph*)]
+    \item The plant is $a/(s+b)$ which has no poles at $s=0,$ so it is type 0. Let 
+    \begin{equation}
+        C(s) = K\left(1 + \frac{1}{T_Is}\right)
+    \end{equation}
+    where $K,T_I>0.$ When $D(s)=0$ we have 
+    \begin{align}
+        \frac{E(s)}{R(s)} &= 1 - \frac{V(s)}{R(s)} \\ 
+        &= 1 - \frac{K\left(1 + \frac{1}{T_Is}\right)\frac{a}{s+b}}{1 + K\left(1 + \frac{1}{T_Is}\right)\frac{a}{s+b}} \\ 
+        &= \frac{T_{I} s (b + s)}{K a (T_{I} s + 1) + T_{I} s (b + s)} \equiv \alpha
+    \end{align}
+    and when $R(s)=0$ we have 
+    \begin{equation}
+        V(s) = \left(D(s) + C(s)(-V(s))\right)\frac{a}{s+b} \implies \frac{V(s)}{D(s)} = \frac{a/(s+b)}{1+C(s)a/(s+b)}
+    \end{equation}
+    \begin{align}
+        \frac{E(s)}{D(s)} &= - \frac{V(s)}{D(s)} \\ 
+        &= -\frac{a/(s+b)}{1+C(s)a/(s+b)} \\ 
+        &= -\frac{a/(s+b)}{1+K\left(1 + \frac{1}{T_Is}\right)a/(s+b)} \\ 
+        &= - \frac{T_{I} a s}{K a (T_{I} s + 1) + T_{I} s (b + s)}
+    \end{align}
+    \item From superposition, we have:
+    \begin{align}
+        E(s) &= \alpha \frac{\bar{v}}{s} + \beta \frac{\bar{d}}{s} \\ 
+        &= \frac{T_{I} s (b + s)}{K a (T_{I} s + 1) + T_{I} s (b + s)}  \frac{\bar{v}}{s} - \frac{T_{I} a s}{K a (T_{I} s + 1) + T_{I} s (b + s)}  \frac{\bar{d}}{s} \\ 
+        &= \frac{T_{I} (- \bar{d} a + \bar{v} (b + s))}{K a (T_{I} s + 1) + T_{I} s (b + s)}
+    \end{align}
+    \item Using the final value theorem, we have 
+    \begin{align}
+        \lim_{t\to \infty}e(s) &= \lim_{s\to 0}sE(s) \\ 
+        &= \lim_{s\to 0}s\frac{T_{I} (-\bar{d} a + \bar{v} (b + s))}{K a (T_{I} s + 1) + T_{I} s (b + s)} \\ 
+        &= 0,
+    \end{align}
+    which verifies (SPEC1).
+\end{enumerate}
+\end{document}

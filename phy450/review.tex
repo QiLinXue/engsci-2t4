@@ -1,0 +1,269 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY450: Relativistic Electrodynamics \\ Review}
+\author{QiLin Xue}
+\date{Spring 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{subsection}
+\usepackage{siunitx}
+\usepackage{esint}
+\usepackage{ mathrsfs }
+
+% table of contents package
+\usepackage{tocloft}
+\begin{document}
+
+\maketitle
+\tableofcontents
+\section{Electromagnetic Waves}
+\subsection{Maxwell's Equations}
+Maxwell's equations in differential form are given by
+\begin{meq}
+    \vspace{-4mm}
+    \begin{align}
+        \bm{\nabla}\cdot \bm{B} &= 0 \\ 
+        \bm{\nabla}\times \bm{E} &= -\frac{\partial \bm{B}}{\partial t} & \text{Faraday}\\ 
+        \bm{\nabla} \times \bm{B} &= \mu_0 \bm{J} + \mu_0\epsilon_0 \frac{\partial \bm{E}}{\partial t} & \text{Ampere-Maxwell}\\ 
+        \bm{\nabla}\cdot \bm{E} &= \frac{\rho}{\epsilon_0} & \text{Gauss's Law}
+    \end{align}
+\end{meq}
+\subsection{Scalar and Vector Potentials}
+We can write
+\begin{meq}
+    \begin{align}
+        \bm{B} &= \bm{\nabla} \times \bm{A} \\ 
+        \bm{E} &= - \frac{\partial \bm{A}}{\partial t} -\bm{\nabla}\phi
+    \end{align}
+\end{meq}
+where $\phi$ is the scalar potential and $\bm{A}$ is the vector potential.
+\subsection{Gauge Invariance}
+The choice of $\bm{A}$ and $\phi$ are not unique. The transformations 
+\begin{meq}
+    \begin{align}
+        \bm{A} \to \bm{A}' = \bm{A} + \bm{\nabla}\chi \\ 
+        \phi \to \phi' = \phi - \frac{\partial \chi}{\partial t}.
+    \end{align}
+\end{meq}
+These lead to the same $\bm{E}'=\bm{E},\bm{B}'=\bm{B}.$ The \emf{Lorenz Gauge} is given by
+\begin{meq}
+    \begin{equation}
+        \partial_\mu A^{\mu} = 0.
+    \end{equation}
+\end{meq}
+and the \emf{Coulomb Gauge} is given by 
+\begin{meq}
+    \begin{equation}
+        \bm{\nabla} \cdot \bm{A} = 0.
+    \end{equation}
+\end{meq}
+\subsection{The Wave Equation}
+If we use the Lorenz gauge, we can write the vector potential as a wave equation 
+\begin{meq}
+    \begin{equation}
+        \nabla^2 \bm{A} - \frac{1}{c^2}\frac{\partial^2 \bm{A}}{\partial t^2} = -\mu_0 \bm{J}.
+    \end{equation}
+\end{meq}
+We can write down wave equations for $\bm{B},\bm{E}$ by computing $\bm{\nabla}\times (\bm{\nabla} \times \bm{B})$ and $\bm{\nabla} \times (\bm{\nabla} \times \bm{E})$ in a vacuum. 
+
+The electric field and magnetic field plane waves can be written in the form of 
+\begin{meq}
+    \vspace{-4mm}
+    \begin{align}
+        \bm{E} &= \Re\left\{\mathcal{E}_0 \exp\left[i(\bm{k}\cdot \bm{r} - \omega t)\right]\right\} \\ 
+        \bm{B} &= \Re\left\{\mathcal{B}_0 \exp\left[i(\bm{k}\cdot \bm{r} - \omega t)\right]\right\},
+    \end{align}
+\end{meq}
+where $\mathcal{E}_0,\mathcal{B}_0$ are complex amplitudes and $\omega = c|\bm{k}|$ is the frequency. One fundamental idea is that solutions to Maxwell's equations must obey the wave equation, the converse is not true. In fact, from $\bm{\nabla} \cdot \bm{E} = \bm{\nabla} \cdot \bm{B} = 0$ we have that electromagnetic plane waves are perpendicular to the direction of propagation. We have,
+\begin{meq}
+    \begin{equation}
+        \hat{\bm{n}} \cdot \hat{\bm{k}} = 0,
+    \end{equation}
+\end{meq}
+and the magnetic and electric fields are related via 
+\begin{meq}
+    \begin{equation}
+        \bm{B} = \frac{1}{c} \bm{k} \times \bm{E}.
+    \end{equation}
+\end{meq}
+The electric and magnetic fields in a monochromatic plane wave with propagation vector $\bm{k}$ and polarization $\hat{bm{n}}$ are given by
+\begin{meq}
+    \begin{align}
+        \bm{E}(\bm{r},t) &= E_0\cos(\bm{k}\cdot \bm{r} - \omega t + \delta)\hat{\bm{n}} \\ 
+        \bm{B}(\bm{r},t) &= \frac{1}{c}E_0 \cos(\bm{k}\cdot \bm{r} - \omega t + \delta)(\hat{\bm{k}} \times \hat{\bm{n}})
+    \end{align}
+\end{meq}
+\subsection{Energy and Momentum in Electromagnetic Waves}
+The energy per unit volume in an electromagnetic field is given by 
+\begin{meq}
+    \begin{equation}
+        u = \frac{1}{2}\epsilon_0\bm{E}^2 + \frac{1}{2}\mu_0\bm{B}^2.
+    \end{equation}
+\end{meq}
+The Poynting vector gives the energy flux density (energy per unit area, per unit time) as 
+\begin{meq}
+    \begin{equation}
+        \bm{S} = \frac{1}{\mu_0}\bm{E} \times \bm{B}.
+    \end{equation}
+\end{meq}
+For a monochromatic plane wave propagating in the $\hat{\bm{n}}$ direction, we have 
+\begin{meq}
+    \begin{equation}
+        \bm{S} = cu\hat{\bm{n}}.
+    \end{equation}
+\end{meq}
+The average energy per unit volume is given by 
+\begin{meq}
+    \begin{equation}
+        \langle u \rangle = \frac{1}{2}\epsilon_0 E_0^2.
+    \end{equation}
+\end{meq}
+\section{Field Theory}
+\subsection{Basic Action}
+The action for a particle in an electromagnetic field is given by 
+\begin{meq}
+    \begin{equation}
+        S = S_\text{free} + S_\text{em} = -mc^2\int \frac{1}{\gamma}\dd{t} + q\int A_\mu \dd{x}^\mu + \frac{1}{c}\int j^\mu A_\mu \dd^4x.
+    \end{equation}
+\end{meq}
+\subsection{Deriving Lorentz Force Law}
+Neglecting the field interaction term, we can write the action as 
+\begin{equation*}
+    S = \int_a^b - mc^2\sqrt{1-u^2/c^2} + q\bm{A} \cdot \bm{u} - q\phi \dd{t}.
+\end{equation*}
+Minimizing this action will give us the Lorentz Force Law. Specifically,
+\begin{align*}
+    \frac{\partial L}{\partial \dot{x}_i} = \underbrace{m\gamma u_i}_{p_i} + qA_i \\ 
+    \frac{\partial L}{\partial x_i} = q \frac{\partial A_j}{\partial x_i}u_j - q \frac{\partial \phi}{\partial x_i}.
+\end{align*}
+There are two important properties:
+\begin{align*}
+    \frac{\partial a_j}{\partial x_i} &= \frac{\partial a_i}{\partial x_j} + \frac{\partial a_j}{\partial x_i} - \frac{\partial a_i}{\partial x_j} \\ 
+    &= \frac{\partial a_i}{\partial x_j} + \left(\delta_{i\ell}\delta_{jm} - \delta_{im}\delta_{j\ell}\right)\frac{\partial a_m}{\partial x_\ell} \\ 
+    &= \frac{\partial a_i}{\partial x_j} + \epsilon_{ijm}\epsilon_{k\ell m}\frac{\partial a_m}{\partial x_\ell}.
+\end{align*}
+This gives us 
+\begin{align*}
+    \frac{\partial a_j}{\partial x_i} b_j &= \left(\bm{b}\cdot \bm{\nabla}\right) \bm{a} + b_j \epsilon_{ijk}\epsilon_{klm}\frac{\partial a_m}{\partial x_\ell} \\ 
+    &= (\bm{b}\cdot \bm{\nabla})\bm{a} + \left(\bm{b} \times \left(\bm{\nabla}\times \bm{a}\right)\right)_i.
+\end{align*}
+This gives us (using the E-L equation)
+\begin{equation*}
+    \frac{d}{dt}(\bm{p} + q\bm{A}) = q(\bm{u}\cdot \bm{\nabla})\bm{A} + q\bm{u} \times (\bm{\nabla}\times \bm{A}) - q\bm{\nabla}\phi.
+\end{equation*}
+Using the fact that $\frac{d}{dt}\bm{A} = \frac{\partial A}{\partial t} + (u\bm{\nabla})\bm{A}$ we can solve for $\bm{F} = \frac{d}{dt}\bm{p}$ to get
+\begin{meq}
+    \begin{equation}
+        \bm{F} = q\left(\bm{E} + \bm{u}\times \bm{B}\right)
+    \end{equation}
+\end{meq} 
+where 
+\begin{equation*}
+    \bm{E} = -\frac{\partial \bm{A}}{\partial t} - q\bm{\nabla}\phi
+\end{equation*}
+was used.
+\subsection{Faraday Tensor Motivation}
+The basic action can be written in the form 
+\begin{equation*}
+    S = \int_a^b \left(\mathcal{E} - mc^2\right)\dd{\tau} + qA_\mu \dd{x}^\mu
+\end{equation*}
+since $\mathcal{E} = \gamma mc^2$ and $\dd{\tau} = \frac{\dd{t}}{\gamma}.$ Consider now a variation of the 4-trajectory $x^\mu(\tau) \mapsto x^\mu(\tau) + \delta x^{\mu}(\tau)$ where $\delta x^{\mu}(a) = \delta x^{\mu}(b) = 0.$ We can compute the variation in $S$ and set it to zero. That is,
+\begin{align*}
+    \delta S &= \int_a^b -mc^2 \dd{(\delta \tau)} + q(\delta A_\mu) \dd{x}^\mu + qA_\mu \dd{(\delta x^{\mu})} \\ 
+    &= \int_a^b - mc^2 \left(-\frac{1}{c^2}\right) \eta_\nu \dd{(\delta x^\nu)} + q\partial_\nu A_\mu \delta x^{\nu}\dd{x}^\mu + qA_\mu \dd{(\delta x^\mu)} \\ 
+    &= \int_a^b (m\eta_\nu + qA_\nu)\dd(\delta x^\nu) + q\partial_\nu A_\mu \delta x^\nu \dd{x^\mu}.
+\end{align*}
+Here, we used the fact that
+\begin{equation*}
+    \delta A_\mu = \partial_\nu A_{\mu} \delta x^\nu
+\end{equation*}
+and 
+\begin{equation*}
+    \dd(\delta \tau) = -\frac{1}{c^2}\eta_\nu(\dd{(\delta x^\nu)})
+\end{equation*}
+which is derived by taking the variation of both sides of $-c^2 \dd{\tau}^2 = \dd{x}^\nu \dd{x}_\nu.$ Integration by parts on the first term gives us 
+\begin{equation*}
+    \delta S = \int_a^b \left\{-\dd{(m\eta_\nu + qA_\nu) + q\partial_\nu A_\mu \dd{x}^\mu}\right\} \delta x^\nu.
+\end{equation*}
+Recall that the canonical momentum is $P_\nu = p_\nu + qA_\nu.$ We can perform the change of variables:
+\begin{align*}
+    \dd{\eta}_\nu &= \frac{\dd{\eta_\nu}}{\dd{\tau}}\dd{\tau} \\ 
+    \dd{A}_\mu &= \partial_\mu A_\nu \frac{\dd{x}^\mu}{\dd{\tau}}\dd{\tau} = (\eta^\nu \partial_\mu A_\nu) \dd{\tau} \\ 
+    \dd{x^\mu} &= \frac{\dd{x}^\mu}{\dd{\tau}}\dd{\tau} = \eta^\mu \dd{\tau}.
+\end{align*} 
+This gives 
+\begin{align*}
+    \delta S &= \int_a^b \left\{ - m \frac{d\eta_\nu}{\dd{\tau}} - q\eta^\mu \partial_\mu A_\nu + q\eta^\mu \partial_\nu A_\mu\right\} \delta x^\nu \dd{\tau}.
+\end{align*}
+The principle requires that $\delta S = 0$ for the actual trajectory that $x^\nu$ takes. Setting this to zero gives 
+\begin{equation*}
+    m\frac{d\eta_\mu}{\dd{\tau}} = q\eta^\nu \left(\partial_\mu A_\nu - \partial_\nu A_\mu\right),
+\end{equation*}
+where,
+
+\begin{meq}
+    \begin{equation}
+        F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu = \begin{pmatrix}
+            0  & -E_x/c & -E_y/c & -E_z/c \\
+            E_x/c & 0 & -B_z & B_y \\
+            E_y/c & B_z & 0 & -B_x \\
+            E_z/c & -B_y & B_x & 0
+        \end{pmatrix}
+    \end{equation}
+\end{meq}
+is the Faraday field tensor (electromagnetic tensor). Note that
+\begin{meq}
+    \begin{equation}
+        m\frac{d\eta_\mu}{d\tau} = q\eta^\nu F_{\mu\nu}
+    \end{equation}
+\end{meq}
+is known as the relativistic form of the Lorentz force.
+\subsection{Maxwell's Equations from Faraday Tensor}
+Because $F_{\mu\nu}$ is antisymmetric, we have the Bianchi Identity,
+\begin{equation*}
+    \epsilon^{\alpha\lambda\mu\nu}\partial_\lambda F_{\mu\nu} = 0.
+\end{equation*}
+Setting $\alpha = 0$ gives 
+\begin{equation*}
+    \epsilon^{0ijk}\partial_i F_{jk} =\epsilon^{ijk}\partial_i(\epsilon_{jkp}B^p) = 2\partial_i B^i = 2\bm{\nabla}\cdot \bm{B} = 0.
+\end{equation*}
+Setting $\alpha = i$ gives 
+\begin{equation*}
+    \epsilon^{ij0k}\partial_j F_{0k} + \epsilon^{ijk0}\partial_j F_{k0} + \epsilon^{i0jk}\partial_0 F_{jk} = 0 \implies \epsilon^{ijk}\partial_j E_k + \partial_0 B^i = 0,
+\end{equation*}
+which is Faraday's Law. To get \emf{Ampere-Maxwell} and \emf{Gauss's Law} we need to construct the action for the electromagnetic field and how it interacts with matter.
+\begin{meq}
+    \begin{equation}
+        S_\text{full} = \int \dd^4x \mathcal{L}(A_\nu, \partial_\mu A_\nu),\quad\quad\quad\quad \mathcal{L}(A_\nu, \partial_\mu A_\nu) = \frac{1}{c}j^k A_k - \frac{1}{4}\epsilon_0 cF_{\kappa \lambda}F^{\kappa \lambda}.
+    \end{equation}
+\end{meq}
+Minimizing using the Euler-Lagrange equations gives us 
+\begin{meq}
+    \begin{equation}
+        \partial_\nu F^{\mu\nu} = \mu_0 j^\mu.
+    \end{equation}
+\end{meq}
+Setting $\nu = 0$ gives Gauss's Law and setting $\nu = i$ gives Ampere's Law.
+\subsection{Noether's Theorem and Stress Energy Tensor}
+TBA. See \href{http://www.damtp.cam.ac.uk/user/tong/qft/one.pdf}{pg 13-15 (of the actual book)}
+\subsection{Field Transformations}
+The total charge and dipole moment of the charge content distribution is
+\begin{align*}
+    Q &= \int_V \rho(\bm{r}',t)\dd^3r = \sum_m q_m \\ 
+    \bm{d} &= \int_V \bm{r}' \rho(\bm{r}',t)\dd^3 r' = \sum_m q_m\bm{r}_m
+\end{align*}
+and the potential is a sum of the static coulomb potential, static dipole moment potential, and the oscillating dipole term.
+\begin{equation*}
+    \phi(r\bm{n}, t) = \frac{Q}{4\pi\epsilon_0 r} + \frac{\bm{n}\cdot \bm{d}(t-r/c)}{4\pi\epsilon_0 r^2} + \frac{\bm{n}\cdot \dot{\bm{d}}(t-r/c)}{4\pi \epsilon_0 rc} + \mathcal{O}(r'/r)^2
+\end{equation*}
+and the magnetic vector potential
+\begin{equation*}
+    A(r\bm{n}, t) = \frac{\mu_0}{4\pi}\dot{\bm{d}}(t-r/c) + \mathcal{O}(r'/r)^2
+\end{equation*} 
+\subsection{Radiation}
+\end{document}

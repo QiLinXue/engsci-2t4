@@ -1,0 +1,125 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{APM346: PDEs}
+\author{QiLin Xue}
+\date{Spring 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+\usepackage{siunitx}
+\usepackage{esint}
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{(2.1) Wave Equation}
+Wave equation,
+\begin{equation}
+    u_{tt} = c^2u_{xx}.
+\end{equation}
+General formula is 
+\begin{equation}
+    u(x,t) = f(x+ct) + g(x-ct).
+\end{equation}
+D'Alambert's formula gives the solution to the IVP $u(x,0)=\phi(x)$ and $u_t(x,0)=\psi(x).$
+\begin{equation}
+    u(x,t) = \frac{1}{2}[\phi(x+ct)+\phi(x-ct)] + \frac{1}{2c}\int_{x-ct}^{x+ct} \psi(s) \dd{s}.
+\end{equation}
+% Spherical wave equation is 
+% \begin{equation}
+%     u_{tt} = c^2\left(u_{rr} + \frac{2}{r}u_r\right)
+% \end{equation}
+% NB: All wave equations are written as $\nabla^2 u = \frac{1}{c^2}\frac{\partial^2 u}{\partial t^2},$ where in the above equation, $\nabla^2$ was the spherical version.
+In general, note that 
+\begin{equation}
+    au_t+bu_x=0
+\end{equation}
+has the general solution 
+\begin{equation}
+    \phi\left(ax-bt\right),
+\end{equation}
+which we can use to solve arbitrary differential equations that can be factored. We have,
+\begin{equation}
+    (\partial_x+a\partial_t)(\partial_x-b\partial_t)u=0 \implies u(x,t) = f(ax - t) + g(bx + t)
+\end{equation}
+\section{(2.2) Causality and Energy}
+Consider
+\begin{equation}
+    \rho u_{tt} = Tu_{xx}.
+\end{equation}
+Energy of a wave is given by 
+\begin{equation}
+    E = \frac{1}{2}\int_{-\infty}^{+\infty} (\rho u_t^2 + Tu_x^2) \dd{x}
+\end{equation}
+and is conserved.
+\section{(2.3-2.4) Diffusion on Real Line}
+Diffusion equation is given by 
+\begin{equation}
+    u_t = ku_{xx}
+\end{equation}
+for $x\in \mathbb{R}, t>0$ and initial condition $u(x,0)=\phi(x).$ General solution is 
+\begin{equation}
+    u(x,t) = \frac{1}{\sqrt{4\pi kt}}\int_{-\infty}^{\infty} e^{-(y-x)^2/4kt}\phi(y) \dd{y}.
+\end{equation}
+Sometimes we need to write it in terms of error function,
+\begin{equation}
+    \text{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-t^2} \dd{t}.
+\end{equation}
+\section{(3.1-3.3) Reflections and Sources}
+Consider 
+\begin{equation}
+    v_t = kv_{xx},
+\end{equation}
+where $x,t>0$ and $v(x,0)=\phi(x)$ and $v(0,t)=0.$ Can be solved by extending $\phi$ to be odd and defined over $\mathbb{R},$ to get general solution:
+\begin{equation}
+    u(x,t) = \frac{1}{\sqrt{4\pi kt}}\int_{-\infty}^{\infty} \left(e^{-(y-x)^2/4kt} - e^{-(y+x)^2/4kt}\right)\phi(y) \dd{y}.
+\end{equation}
+Some boundary conditions:
+\begin{itemize}
+    \item Dirichlet: $u(0,t)=c$
+    \item Neumann: $u_x(0,t)=c$ 
+\end{itemize}
+Diffusion with a source: Given $u_t - ku_{xx} = f(x,t),$ we have 
+\begin{equation}
+    u(x,t) = \int_{-\infty}^{\infty} S(x-y,t)\phi(y) \dd{y} + \int_0^t \int_{-\infty}^{+\infty} S(x-y,t-s)f(y,s)\dd{y}\dd{s}
+\end{equation}
+Suppose we are given the boundary condition $u_x(0,t)=h(t),$ then we solve it for $U(x,t)=u(x,t)-xh(t).$
+\section{(3.4) Waves with a Source}
+Consider 
+\begin{equation}
+    u_{tt} - c^2u_{xx} =f(x,t)
+\end{equation}
+with the standard initial conditions $u(x,0)=\phi(x)$ and $u_t(x,0)=\psi(x).$ The unique solutions is
+\begin{equation}
+    u(x,t) = u_\text{standard}(x,t) + \frac{1}{2c}\int_0^t \int_{x-c(t-t_0)}^{x+c(t-t_0)}f,
+\end{equation}
+where $\Delta$ is the area of the characteristic triangle. Recall Green's Theorem:
+\begin{equation}
+    \iint_{\Delta} (P_x - Q_t)\dd{x}\dd{t} = \int_{\partial \Delta} P \dd{t} + Q\dd{x}
+\end{equation}
+\section{(4.1-4.2) Boundary Value Problem and Separation of Variables}
+The solution to the wave equation given some boundary condition is 
+\begin{equation}
+    u(x,t) = \sum_n \left(A_n \cos \frac{n\pi ct}{\ell} + B_n\sin\frac{n\pi ct}{\ell}\right) \sin \frac{n\pi x}{\ell}.
+\end{equation}
+For diffusion, we have 
+\begin{equation}
+    u(x,t) = \sum_n A_ne^{-(n\pi /\ell)^2 kt}\sin\frac{n\pi x}{\ell}
+\end{equation}
+\section{(5.1) Fourier Series Coefficients}
+\section{(5.3-5.4) Orthogonality and Completeness of Fourier Series}
+\section{(5.6) Inhomogeneous Boundary Conditions}
+\section{(6.1) Laplace's Equation}
+\section{(6.2) Rectangles and Cubes}
+\section{(9.1) Energy and Causality in Waves in Space}
+\section{(9.2) Wave Equation in Space-Time}
+\section{(10.1) Fourier's Method, Revisited}
+\section{(11.1,11.3,11.5) General Eigenvalue Problems}
+\section{(12.3) Fourier Transforms + Instructor Notes}
+\end{document}

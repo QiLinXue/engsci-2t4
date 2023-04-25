@@ -1,0 +1,277 @@
+
+
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{\vspace{-2cm}MAT357: Real Analysis \\ Problem Set 3}
+\author{QiLin Xue}
+\date{2022-2023}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+    \item Let $C$ be the topologist's sine circle. It is path connected because given any two points in this set, there are two paths that connect it: one passes through the very weird part and one passes through the circular arc. Let's make this rigorous. We start with the following lemma:
+    \begin{lemma}
+        Let $M$ be a metric space. If $p,q \in M$ are path connected and $q,r\in M$ are path connected, then $q,r\in M$ are path connected.
+        \begin{proof}
+            There exists continuous functions $f_1:[a,b] \to M$ and $f_2:[b,c] \to M$ such that 
+            \begin{align}
+                f_1(a) &= p \\
+                f_1(b) &= q \\
+                f_2(b) &= q \\
+                f_2(c) &= r.
+            \end{align} 
+            Let us now define $f_3:[a,c] \to M$ by 
+            \begin{equation}
+                f_3 = \begin{cases}
+                    f_1 & \text{if } t \in [a,b] \\
+                    f_2 & \text{if } t \in (b,c]
+                \end{cases}
+            \end{equation}
+            Clearly, $f_3(a)=p$ and $f_3(c)=r.$ This is continuous because $f_1$ and $f_2$ are each continuous, and they agree at $t=b.$
+        \end{proof}
+    \end{lemma}
+    
+    Recall that in the topologist's sine curve, there is a vertical line at $x=0.$ Let us denote this subset as $V.$ Now consider $p,q\in C.$ We deal with three cases:
+    \begin{enumerate}[label=Case (\roman*)]
+        \item If $p,q \in V$, then there is a path that follows this vertical line that joins $p$ and $q.$ Specifically, if $p=(0,p')$ and $q=(0,q')$ then we have the function $f_1:[0,1]\to C$ given by 
+        $$t\mapsto (0,tq'+(1-t)p').$$ 
+        \item If $p,q$, then we consider $D \setminus V.$ We now have a subset that is homeomorphic to $(a,b)$ and since path connectedness is a topological property, $p$ and $q$ must be path connected. We work on some subcases:
+        \begin{enumerate}[label=(\alph*)]
+            \item If $p$ and $q$ are both part of the arc, then we can write their location as $p=(r\cos\theta_p,r\sin\theta_p)$ and $q=(r\cos\theta_q,r\sin\theta_q)$ where $r>0$ and $\theta_p,\theta_q \in [0,2\pi).$ We can then define the function $f_2:[0,1]\to C$ by
+            \begin{equation}
+                t\mapsto (r\cos(t\theta_q+(1-t)\theta_p),r\sin(t\theta_q+(1-t)\theta_p))
+            \end{equation}
+            \item If $p,q$ are both part of the original topologist's sine curve but not in $V,$ then we can write their location as $p=(x_p,\sin(1/x_p))$ and $q=(x_q,\sin(1/x_q))$ where $x_p,x_q > 0.$ We can then define the function $f_3:[0,1]\to C$ by
+            \begin{equation}
+                t\mapsto \left(tx_q + (1-t)x_p,\sin(\frac{1}{tx_q + (1-t)x_p})\right)
+            \end{equation}
+            \item If $p$ is part of the original topologist's sine curve and $q$ is part of the arc, then we can define $x_0$ to be on the intersection of the topologist's curve and the arc. We've shown that $p$ is path connected to $x_0$ and $q$ is path connected to $x_0$ so by the lemma, $p,q$ are path connected.
+        \end{enumerate}
+        \item If $p\in V$ and $q\notin V$, then consider $x_0 = (0,0).$ This point is on the intersection between the arc and $V.$ By the first case, $p$ and $x_0$ are path connected, and by the second case, $q$ and $p$ are path connected. Thus, $p,q$ are path connected by the lemma.
+    \end{enumerate}
+    Next, we will show that it is not locally path connected. Denote $x_0$ as the intersection of $V$ and the arc and consider the neighbourhood around it defined by 
+    \begin{equation}
+        U = \mathbb{R}^2 \setminus \{x'\}
+    \end{equation}
+    where $x' \neq x_0$ is a point on the arc. This is open since removing a single point from an open set is still open. 
+    
+    Note that this is homeomorphic to the regular topologist's sine curve union a straight line. That is,
+    \begin{equation}
+        U \cap C \simeq C' \cup H,
+    \end{equation}
+    where $C'$ is the regular topologist's sine curve and $H=\{(x,0): x<0\}$. This homeomorphism is not hard to construct, as all we have to do is map an open interval of the arc to an infinite interval. We need the following lemma, 
+    \begin{lemma}
+        In the regular topologist's sine curve $C',$ there exists a point $p\in V$ such that in any open neighborhood around $p,$ there exists $r\in C'$ such that $p,r$ are not path connected.
+        \begin{proof}
+            Recall that $C'$ is not path connected, but we have proved in Case (ii) that it becomes path connected once we remove the straight line, i.e. $C' \setminus V$ is path connected. This means that there exists some point $p\in V$ such that there exists $q \in C'$ such that $p,q$ are not path connected.
+            \vspace{2mm}
+
+            This $q\in C'$ is contained in $C' \setminus V$ since we have shown in Case (i) that any two points in $V$ is path connected. Finally, recall that $V$ is the limit set of the graph $C' \setminus V,$ so for any open neighborhood around some point $p\in V,$ there exists some $r\in C' \setminus V.$ We claim that $p,r$ are not path connected. This is easy to show by contradiction. We have shown that since $r,q\in C'\setminus V,$ they are path connected. So if $p,r$ are path connected and $r,q$ are path connected, then $p,q$ are path connected, which is a contradiction. 
+        \end{proof}
+    \end{lemma}
+    Now, we will use the above lemma to show that given the $p$ in the previous lemma, in any neighborhood around $p$ there exists a $q \in C' \cup H$ such that $p,q$ are not path connected. To do this, we find $p,q$ as given above. We need to show that there does not exist a path from $p$ to $q$ that passes through $H$ This is impossible since if we remove the straight line, then $H$ and $C' \setminus V$ are not connected, so any path from $H$ to $C' \setminus V$ must pass through $V.$ Thus, $p,q$ are not path connected.
+
+    Therefore, we found a $p\in V \subseteq C' \cup H$ such that any open neighborhood around it, there exists a $q\in C'\setminus V \subseteq C'\cup H$ such that $p,q$ are not path connected. Since $C'\cup H$ is homeomorphic to $U\cap C$, then the same holds true for $p \in U\cap C.$
+    
+    We have constructed a neighborhood $U$ around $p$ such that any subneighbourhood of $U$ is not path connected since we can find a $q$ in any open neighborhood of $p$ such that $p,q$ are not path connected.
+    
+    % which is not path connected. The homeomorphic is easy to construct as all we have to do
+    
+    % Specifically, given two points $p,q$ that are not in $V$ but on opposite sides of $V$ (in the regular topologist's sine curve), we've shown in lecture these two are not path connected. And for any open neighborhood $W$ of $x_0$ embedded in $\mathbb{R}^2,$ we can always find two points $p,q$ that satisfy this property. Thus, $C$ is not locally path connected.
+    \newpage
+    \item Let $\epsilon > 0.$ We wish to show that there exists a $\delta > 0$ such that for any $p,q\in M$ we have $d(p,q) < \delta$ implies $d(f(p),f(q)) < \epsilon.$
+    
+    To construct such a $\delta,$ we will first cover $f(M) \subseteq N$ by a finite number of open balls with radius $\epsilon/2.$ This is possible because $f$ is a continuous function and $M$ is compact, so $f(M)$ is compact, which implies it is totally bounded. Now, we consider the preimage of each of these balls. It is easy to show that the preimage of all these balls is an open cover for $M$ (because for any $p\in M$, there is a ball that covers $f(p)$ and thus the preimage of this ball covers $p$ and is open since $f$ is continuous). Let this open cover be $\mathcal{U}.$
+
+    By the Lebesgue Number Lemma, there exists $\lambda > 0$ such that for any $p\in M,$ the ball of radius $\lambda$ centered at $p$ is contained in one of the open sets in $\mathcal{U}$. Then let $\delta = \lambda.$ If $d(p,q)<\delta,$ then there is an open ball $B_\lambda \subseteq M$ that contains $p$ and $q.$ Since there exists $U\in \mathcal{U}$ such that $B_\lambda \subseteq U,$ we have
+    \begin{equation}
+        d(p,q)<\delta \implies p,q \in U
+    \end{equation}
+    which implies that $f(p),f(q) \in f(U).$ But $f(U)$ is a ball of radius $\epsilon/2,$ so $d(f(p),d(q))<\epsilon,$ as desired.
+    \newpage
+    \item We will do this in several steps.
+    \begin{enumerate}[label=(\arabic*)]
+        \item Any element in $[0,1]$ can be uniquely written as $\sum_{n=1}^{\infty} \frac{a_n}{2^n}$ where $a_n \in \{0,1\}.$
+        \item Given any selection of $a_1,a_2,\dots$ the number $\sum_{n=1}^{\infty} \frac{2a_n}{3^n}$ is an element of the middle-thirds Cantor set constructed from $[0,1].$
+        \item Any point on the Cantor set can be written in this way.
+        \item The choice of $a_i$ is unique for any element in $C.$
+        \item Let the Cantor set be $C.$ Consider the function $f:C\to [0,1]$ via the map $x \mapsto \sum_{n=1}^{\infty}\frac{a_n}{2^n},$ where $a_n \in \{0,1\}$ is given by (1). Then if $x_1,x_2\in [0,1]$ with $x_1<x_2,$ then $f(x_1)< f(x_2).$ 
+        \item The function $f$ is continuous since the pre-image of a closed set $[a,b]\in [0,1]$ is closed.
+    \end{enumerate}
+    We will do the above:
+    \begin{enumerate}[label=Proof of (\arabic*)]
+        \item This is trivial since any number has a unique binary representation.
+        \item We will first show that $\sum_{n=1}^{\infty}\frac{2a_n}{3^n}$ is an element of the middle-thirds Cantor set. To do this we claim that 
+        \begin{equation}
+            \sum_{n=1}^{N} \frac{2a_n}{3^n} \in C_N,
+        \end{equation}
+        where $C_N$ is the middle-thirds Cantor set constructed from $[0,1]$ with $N$ iterations. In fact, we will prove something that is more specific: that these numbers are containd in the left boundary of each interval in $C_N.$
+        
+        We will prove this by induction on $N.$ Suppose $N=1.$ Then $C_1 = [0,1/3] \cup [2/3,1].$ We have two cases: $a_n=0$ or $a_n=1.$ The two cases correspond to $\frac{0}{3},\frac{2}{3} \in \partial C_1.$
+
+        Now suppose that $\sum_{n=1}^{k} \frac{2a_n}{3^n} \in C_k$ for any choice of $(a_n)$ where $1\le n \le k.$ We again have two cases, but first we need to characterize $C_{k+1}.$
+        \begin{lemma}
+            $C_{k+1}$ has intervals of length $\frac{1}{3^k}.$
+        
+            \begin{proof}
+                Recall that $C_{k+1}$ can be constructed from $C_{k}$ by removing the middle third of each interval in $C_k.$ Each of these middle thirds has a length $\frac{1}{3^k}.$
+                \vspace{2mm}
+
+                Clearly if $k=1$ then the interval that is being removed has length $1/3,$ so each of the intervals has length $1/3.$ If this process is repeated $k$ times, then it can be shown (i.e. using induction) that removing the middle thirds of an interval of length $\frac{1}{3^k}$ results in intervals of length $\frac{1}{3^{k+1}}.$
+            \end{proof}
+        \end{lemma}
+        \begin{lemma}
+            $\partial C_{k+1} \supseteq \partial C_{k}$ and $\partial_L C_{k+1} \supseteq \partial_L C_{k}.$ Here, $\partial_L$ denotes the boundary that is on the left of an interval.
+            \begin{proof}
+                Because to construct $C_{k+1}$ frmo $C_{k},$ we remove the middle thirds of each closed interval (which is contained in the interior), the boundaries are never affected.
+            \end{proof}
+        \end{lemma}
+        We can then write 
+        \begin{equation}
+            c_{k+1} = \sum_{n=1}^{k+1} \frac{2a_n}{3^n} = c_k + \frac{2a_{k+1}}{3^{k+1}}
+        \end{equation}
+        where $c_{k}$ is any element that can be written in the form $\sum_{n=1}^{k} \frac{2a_n}{3^n}.$ If $a_{k+1}=0$ then $c_{k+1} = c_k.$ By Lemma 4, $c_k$ is contained in the left boundary of $C_{k+1}$ so $c_{k+1}$ is contained in the left boundary of $C_{k+1}.$
+        
+        If $a_{k+1}=1$ then $c_{k+1} = c_k + \frac{2}{3^{k+1}}.$ By Lemma 3, the interval that $c_k$ is the left boundary becomes broken down into three equal subintervals of length $1/3^{k+1}$ in $C_{k+1},$ so $c_k + 2\left(1/3^{k+1}\right)$ will correspond to the left boundary of the rightmost subinterval. 
+        
+        This completes the induction, and is true for all $k \ge 1.$ We have shown that
+        \begin{equation}
+            \sum_{n=1}^{k} \frac{2a_n}{3^n} \in C 
+        \end{equation}
+        for all $k,$ so $\sum_{n=1}^{\infty} \frac{2a_n}{3^n} \in C$ since $C$ is closed, so it contains all its limit points.
+
+        \item Now we will prove that any element in $C$ can be written as $\sum_{n=1}^\infty \frac{2a_n}{3^n}.$ To do so, we show that if we write down $x\in C$ in base 3, which can be done uniquely, the expansion does not contain a $1$ or if it does contain a $1,$ it can be rewritten such that it does not. We prove this by contradiction. Consider the base 3 expansion as 
+        \begin{equation}
+            x = (a_1a_2\dots )_3
+        \end{equation} 
+        and define $k = \text{min}\left\{i:a_i = 1\right\}.$ We can then write:
+        \begin{equation}
+            x = (a_1a_2\cdots a_{k-1}1)_3  + (0\cdots 0a_{k+1}a_{k+2}\cdots)_3.
+        \end{equation}
+        Recall that $(a_1\cdots a_{k-1})_3$ corresponds to the left boundary of an interval with length $\frac{1}{3^{k-1}}$ in $C_{k-1}.$ Therefore, $(a_1a_2\cdots a_{k-1}1)_3 =  (a_1a_2\cdots a_{k-1})_3 + \frac{1}{3^k}$ corresponds to the right endpoint of the same interval. This is a point in $C.$ The next point in $C$ that is to the right of this point is a distance $\frac{1}{3^{k-1}}$ away. We have three cases:
+        \begin{enumerate}[label=Case (\arabic*)]
+            \item If $a_{i} = 0$ for $i > k$ then $x = (a_1a_2\cdots a_{k-1}1)_3.$ This can be written as
+            \begin{align}
+                x &= (a_1a_2\cdots a_{k-1}0222\cdots)_3 \\ 
+                &= (a_1a_2\cdots a_{k-1})_3 + \sum_{i=k+1}^{\infty}\frac{2}{3^i} \\ 
+                &= (a_1a_2\cdots a_{k-1})_3 + \frac{2}{3^{k+1}}\frac{1}{1-1/3} \\ 
+                &= (a_1a_2\cdots a_{k-1})_3 + \frac{1}{3^k} \\ 
+                &= (a_1a_2\cdots a_{k-1}1)_3.
+            \end{align}
+            \item If $a_i=2$ for $i>k$ then $x=(a_1a_2\cdots a_{k-1}2)_3.$ This can be written as 
+            \begin{align}
+                x &= (a_1a_2\cdots a_{k-1}1222\cdots)_3 \\ 
+                &= (a_1a_2\cdots a_{k-1}1)_3 + \sum_{i=k+1}^{\infty}\frac{2}{3^i} \\ 
+                &= (a_1a_2\cdots a_{k-1}1)_3 + \frac{1}{3^k} \\ 
+                &= (a_1a_2\cdots a_{k-1}2)_3.
+            \end{align}
+            \item For any other case, note that we can write $x = (a_1a_2\cdots a_{k-1}1)_3 + \Delta x$ where 
+            \begin{equation}
+                0 < \Delta x < \frac{1}{3^k},
+            \end{equation}
+            since the lower and upper bounds can only be achieved when they are all zero or all two (as shown above). Anything else will be sandwiched in between. Then $x$ will not be contained in $C.$
+        \end{enumerate}
+        In the first two cases, we can write $x$ as the sum $\sum_{n=1}^{\infty} \frac{2a_n}{3^n},$ and we have shown that the third case is impossible.
+
+        \item We will show that the choice of $a_n$ is unique. This is not immediately trivial since we have already seen that $(1\overline{2})_3=(2)_3.$ Suppose we can write $x$ in two different ways:
+        \begin{equation}
+            x = \sum_{n=1}^{\infty} \frac{2a_n}{3^n} = \sum_{n=1}^{\infty} \frac{2b_n}{3^n}.
+        \end{equation}
+        Let $k$ be the first index in which $a_k \neq b_k.$ Without loss of generality, let $a_k=0$ and $b_k=1.$ We claim that if this is the case, then 
+        \begin{equation}
+            \sum_{n=1}^{\infty}\frac{2a_n}{3^n} < \sum_{n=1}^{\infty}\frac{2b_n}{3^n}.
+        \end{equation}
+        To do this, note that 
+        \begin{align}
+            \sum_{n=1}^{\infty} \frac{2a_n}{3^n} &= \sum_{n=1}^{k-1} \frac{2a_n}{3^n} + 0 + \sum_{n=k+1}^{\infty}\frac{2a_n}{3^n} \\ 
+            & \le \sum_{n=1}^{k-1}\frac{2b_n}{3^n} + \sum_{n=k+1}^{\infty}\frac{2}{3^n} \\ 
+            & \le \sum_{n=1}^{k-1}\frac{2b_n}{3^n} + \frac{2}{3^{k+1}}\frac{1}{1-2/3} \\ 
+            & \le \sum_{n=1}^{k-1} \frac{2b_n}{3^n} + \frac{1}{3^k} \\ 
+            &\le (b_1\cdots b_{k-1} 1)_3 \\ 
+            &< (b_1\cdots b_{k-1} 2)_3 \\
+            &\le (b_1\cdots b_{k-1} 2b_{k+1}\cdots )_3 = \sum_{n=1}^{\infty}\frac{2b_n}{3^n}.
+        \end{align}
+        Therefore, we have shown that any $\sum_{n=0}^{\infty} \frac{2a_n}{3^n}$ corresponds to an element of $C$ and each element in $C$ can be uniquely written in this form.
+        \item We claim that the function is monotonic. That is, given $x_1,x_2\in [0,1]$ with $x_1 < x_2,$ we have that $f^{-1}(x_1) \le f^{-1}(x_2).$ Consider the sequence $(a_n)$ that represents $x_1$ and the sequence $(b_n)$ that represents $x_2.$ Let $k$ be the smallest index such that $a_k \neq b_k.$ Specifically, this implies that $a_k=0$ and $b_k=1$ since:
+        \begin{align}
+            x_1 = \sum_{n=0}^{\infty} \frac{a_n}{2^n} &= \sum_{n=0}^{k-1}\frac{a_n}{2^n} + 0 + \sum_{n=k+1}^{\infty}\frac{a_n}{2^n} \\
+            &< \sum_{n=0}^{k-1}\frac{b_n}{2^n} + \sum_{n=k+1}^{\infty}\frac{1}{2^n} \\
+            &= \sum_{n=0}^{k-1}\frac{b_n}{2^n} + \frac{1}{2^k} \\
+            &\le x_2,
+        \end{align}
+        so we confirm that $x_1< x_2.$ We can apply the same line of reasoning to $f^{-1}(x_1)$ and $f^{-1}(x_2).$ That is, 
+        \begin{align}
+            f^{-1}(x_1) = \sum_{n=0}^{\infty} \frac{2a_n}{3^n} &= \sum_{n=0}^{k-1}\frac{2a_n}{3^n} + 0 + \sum_{n=k+1}^{\infty}\frac{2a_n}{3^n} \\ 
+            &\le \sum_{n=0}^{k-1}\frac{2b_n}{3^n} + \sum_{n=k+1}^{\infty}\frac{2}{3^n} \\ 
+            &\le \sum_{n=0}^{k-1}\frac{2b_n}{3^n} + \frac{1}{3^k} \\
+            &< \sum_{n=0}^{k-1}\frac{2b_n}{3^n} + \frac{2}{3^k} \le f^{-1}(x_2),
+        \end{align}
+        so $f^{-1}(x_1) < f^{-1}(x_2).$
+        \item Consider the closed interval $[a,b]\in [0,1].$ Then we claim that 
+        \begin{align}
+            f^{-1}([a,b]) = [f^{-1}(a), f^{-1}(b)] \cap C.
+        \end{align}
+        First, note that clearly $f^{-1}([a,b]) \subseteq C$ by (1) and (2) and $f^{-1}([a,b]) \in [f^{-1}(a), f^{-1}(b)]$ since the function is monotonic as per (5). More specifically, the boundary of $[a,b]$ gets mapped to the boundary of $[f^{-1}(a), f^{-1}(b)]$ and everything in the interior of $[a,b]$ gets mapped to the interior of $[f^{-1}(a), f^{-1}(b)]$ due to the monotonic property. Therefore, $f^{-1}([a,b]) \subseteq [f^{-1}(a), f^{-1}(b)] \cap C.$
+
+        Finally, we will show that $[f^{-1}(a), f^{-1}(b)] \cap C \subseteq f^{-1}([a,b]).$ If there were to exist some element $$y\in [f^{-1}(a), f^{-1}(b)] \cap C,$$ then by $f^{-1}$ being an increasing function, we must have $a<f(y)<b,$ so $y \in f^{-1}[a,b].$ 
+
+        Note that $[f^{-1}(a), f^{-1}(b)] \cap C$ is the intersection of two closed sets, which is closed.
+    \end{enumerate}
+    We are almost done! One might be tempted to say that every closed set in $[0,1]$ is constructed from a union of closed sets, so the preimage of any closed set is closed. This is tricky to prove because the union of an infinite number of closed sets is not necessarily closed. Instead, we will use this result to prove that the preimage of any open set is open.
+    
+    Consider 
+    \begin{equation}
+        f^{-1}((a,b)) = f^{-1}([a,b]) \setminus \{f^{-1}(a), f^{-1}(b)\} = \text{int}\left(f^{-1}([a,b])\right).
+    \end{equation}
+    The interior is always open, so $f^{-1}((a,b))$ is open. Any open set can be written as a union of open sets, so the preimage of any open set $A = \cup_\alpha (a_\alpha,b_\alpha)$ is 
+    \begin{equation}
+        f^{-1}A = f^{-1} \bigcup_\alpha (a_\alpha,b_\alpha) = \bigcup_\alpha f^{-1}(a_\alpha,b_\alpha).
+    \end{equation}
+    Because the preimage of any open set is open, and $f$ is surjective, we found a surjective function from the Cantor set to $[0,1].$
+    \newpage
+    \item \begin{enumerate}
+        \item Consider $\mathbb{Q}^m \subseteq \mathbb{R}^m.$ Clearly, $\mathbb{Q}^m = \mathbb{Q} \times \mathbb{Q} \times \cdots \times \mathbb{Q}$ is countable since the direct product of a finite number of countable sets is countable. It is dense in $\mathbb{Q}^m$ by the following reasoning: Take $x=(x_1,\dots,x_m)\in \mathbb{Q}.$ For every open ball $B_r(x)$ around $x$ with radius $r>0,$ there exists a subset 
+        \begin{align}
+            &\{(x_1+\delta_1,x_2+\delta_2,\dots,x_m+\delta_m):-r/3<\delta_i<r/3, i=1,\dots,m\} \subseteq B_r(x)\\ 
+            \implies & (x_1-r/3,x_1+r/3) \times \cdots \times (x_m - r/3,x_m+r/3) \subseteq B_r(x)
+        \end{align}
+        But since $\mathbb{Q}$ is dense in $\mathbb{R},$ there is a rational number in each of the open sets $(x_1-r/3,x_1+r/3).$ Therefore, there is a rational number in $B_r(x)$ and 
+        \begin{equation}
+            B_r(x) \cap \mathbb{Q}^m \neq \emptyset.
+        \end{equation}
+        \item We will construct a countable dense subset. Pick any $\lambda > 0.$ Because the metric space $M$ is compact, it is totally bounded, so we can cover it with a finite number of open balls of radius $\lambda/i$ where $i\in \mathbb{Z}.$ Let $B_{i,1},B_{i,2},\dots$ be these balls. In each open set, select an arbitrary point, and denote the set of these points as $U_{i}=\{p_{i,1},p_{i,2},\dots\}.$
+        
+        Now, we perform this construction with $i=1,2,3,\dots,$ giving us the collection of open sets 
+        \begin{equation}
+            \mathcal{U} = \{U_1,U_2,U_3,\dots\}
+        \end{equation}
+        and let $V = \bigcup_{i=1}^{\infty} U_i.$ Then $V$ is a countable dense subset of $M.$ A countable union of finite sets is countable, so $V$ is countable. It remains to show that $V$ is dense in $M.$
+
+        Consider an arbitrary $p\in M.$ Then for any open ball $B_r(p)$ with radius $r>0,$ there exists $i\in \mathbb{Z}$ such that $\frac{\lambda}{i} < r/2.$ Then in the $\lambda/i$ covering of $M,$ there exists an open ball $B_{i,j}$ with radius $\lambda/i$ that contains $p.$ Since the diameter of $B_{i,j}$ is smaller than the radius of $B_{r}(p)$ and they both contain $p,$ we have 
+        \begin{equation}
+            p \in B_{i,j} \subseteq B_r(p).
+        \end{equation}
+        But by our construction, there is a point $p_{i,j}\in U_i$ and recall that $p_{i,j}\in U_i \subseteq V.$ Therefore, $V \cap B_r(p) \neq \emptyset$ for any $r>0$ and any point $p,$ so $V$ is dense in $M.$
+    \end{enumerate}
+    \newpage
+    \item I claim that $\mathbb{R}$ equipped with the trivial metric is nonseparable. We prove via contradiction and assume that it is separable. Let the countable dense subset be $V.$ Recall that the trivial metric is 
+    \begin{equation}
+        d(x,y) = \begin{cases}
+            0 & \text{if } x=y\\
+            1 & \text{if } x\neq y
+        \end{cases}
+    \end{equation}
+    and every subset is open. Therefore, $\{x\}$ is an open subset containing $x\in \mathbb{R}.$ Because $V$ is dense, it needs to have a nonempty intersection with all open subsets that contain $x,$ so $V \cap \{x\} \neq \emptyset$ for all $x\in \mathbb{R}.$ This implies that $x\in V$ for all $x\in \mathbb{R}$ and so $V=\mathbb{R}.$ But the reals are uncountable, so $V$ is not countable, a contradiction. Therefore, $\mathbb{R}$ is not separable under the trivial metric.
+    \newpage
+\end{enumerate}
+
+\end{document}

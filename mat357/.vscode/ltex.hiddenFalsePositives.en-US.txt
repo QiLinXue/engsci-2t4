@@ -1,0 +1,2 @@
+{"rule":"NOUN_AROUND_IT","sentence":"^\\QDenote \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q as the intersection of \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q and the arc and consider the neighbourhood around it defined by \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Let \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"A_RB_NN","sentence":"^\\QWe can show that \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q has a countably number of discontinuities.\\E$"}

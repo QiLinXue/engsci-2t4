@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AER372 Control Systems</title>
+  
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> -->
+
+        <!-- Bootstrap Style -->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          crossorigin="anonymous"
+        />
+
+        <!-- TOC CSS -->
+        <link rel="stylesheet" href="https://afeld.github.io/bootstrap-toc/bootstrap-toc.css">
+
+        <link rel="stylesheet" href="https://afeld.github.io/bootstrap-toc/assets/screen.css" media="screen" charset="utf-8">
+
+        <script
+          src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+          crossorigin="anonymous"
+        ></script>
+
+        <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"
+      ></script>
+      <script src="https://afeld.github.io/bootstrap-toc/bootstrap-toc.js"></script>
+          
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+    <script src="https://tikzjax.com/v1/tikzjax.js"></script>
+    <script type="text/javascript">
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(
+        window,
+        document,
+        "script",
+        "//www.google-analytics.com/analytics.js",
+        "ga"
+      );
+
+      ga("create", "UA-19048260-11", "auto");
+      ga("send", "pageview");
+
+      hljs.highlightAll();
+    </script>
+    
+  </head>
+<body data-bs-spy="scroll" data-target="#toc">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+        <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+      </div>      <div class="col-sm-9">
+          <h1 id="-Title">AER372 Control Systems</h1>
+
+<p>Final review. Not intended to be a complete set of class notes. Also very lazy writing.     </p>
+
+<h1 id="L1"> Dynamic System Response</h1>
+
+<h2 id="L1-laplace-and-transfer-function"> Laplace and Transfer Function</h2>
+
+<p>The unilateral Laplace transform given by 
+\[  F(s) \equiv \mathcal{L}[f(t)] =  \int_{0}^{\infty} f(t) e^{-st}dt \]</p>
+
+<ul>
+<li>Some <a href="Laplace transform - Wikipedia.mhtml">properties</a></li>
+<li>List of <a href="List of Laplace transforms - Wikipedia.mhtml">common transforms</a></li>
+</ul>
+
+<p>Defined as the ratio of the laplace transform of the output signal to that of the input signal, assuming that the system is at equilibrium initially. Let \( H(s) \) be the transfer function, then the <strong>DC Gain</strong> is 
+\[ \text{DC Gain} = \lim_{s\to 0} H(s) \]</p>
+
+<h2 id="L1-first-order-system-response"> First-order System Response</h2>
+
+<p>Transfer function is in the form
+\[  H(s) = \frac{b}{s+a} \]
+This has a time constant of \( T = \frac{1}{a} \) such that <br />
+\[ \begin{align}
+y_{step}(T) &amp;= 0.63\frac{b}{a} \\
+y_{impulse}(T) &amp;= 0.37 b
+\end{align} \]
+For a step input, the steady state value is \( y_{ss} = \frac{b}{a} \) which corresponds to a rise time and settling time of 
+\[ t_r \approx \frac{2.2}{a}, \qquad t_s \approx \frac{4.6}{a} \]
+where rise time is the time to go from \( 0.1y_{ss}\to 0.9y_{ss} \) and the settling time satisfies \( y_{step}(t_s)=0.99y_{ss}. \) There is no overshoot, and no oscillations.</p>
+
+<h2 id="L1-second-order-system-response"> Second-order System Response</h2>
+
+<p>A second-order system can be written as
+\[ H(s) = \frac{\omega_n^2}{s^2+2\zeta\omega_n s + \omega_n^2} = \frac{\sigma^2 + \omega_d^2}{(s+\sigma)^2 + \omega_d^2} \]
+A second order system has a DC gain of (1) and a peak time of 
+\[ t_p = \frac{\pi}{\omega_n\sqrt{1-\zeta^2}} = \frac{\pi}{\omega_d} \]
+and an overshoot of 
+\[ M_p = e^{-\pi \zeta/\sqrt{1-\zeta^2}}. \]
+As <em>approximations</em> a typical design relation requires \( \zeta = 0.5 \) and \( e^{-\zeta\omega_n t_s} \approx 0.1 \) which gives 
+\[ t_r \approx \frac{1.8}{\omega_n},\qquad t_s \approx \frac{4.6}{\sigma} \]
+What are the <strong>effects of zeros?</strong> If there is a zero, we can put the transfer function in the form 
+\[ H(s) = \frac{\frac{1}{\alpha\zeta}s+1}{s^2+2\zeta s + 1} \]</p>
+
+<ul>
+<li>Results in a shorter rise and peak time, but larger overshoot.</li>
+<li>The larger \( \alpha \) is, the further the (real) zero is from the poles, \( \implies \) smaller effect on the transient response.</li>
+<li>If a zero is sufficiently close to a pole, it tends to <em>neutralize</em> the effect.</li>
+<li>A real zero in the LHP will notably increase overshoot if the zero is within <strong>a factor of 4</strong> of the real part of the complex poles</li>
+<li>A real zero in the RHP will reduce the overshoot (but may cause the step response to start out in a wrong direction)</li>
+</ul>
+
+<h2 id="L1-higher-order-system-response"> Higher-order System Response</h2>
+
+<ul>
+<li>In general, the major effect of additional poles (with a negative real value) is to increase the system rise time (and decrease overshoot)</li>
+<li>They slow down transient response, but has little effect on settling time</li>
+<li>An additional real pole in the LHP will notably increase rise time (but decrease the overshoot) if the extra pole is within a <strong>factor of 4</strong> of the real part of the complex poles.</li>
+</ul>
+
+<p>In general, the time constant is given by
+\[ T = \left|\frac{1}{\sigma}\right| \]
+where \( \sigma \) is the real part of the pole, and the imaginary part of the pole, \( \omega_d \) determines the damped frequency. The magnitude of the pole determines the natural frequency and the argument of the pole determines the damping ratio. We can compute
+\[ \zeta = \sin(\theta) \]
+with the convention that the point \( 1+0j \) has an angle of \( \theta=0. \) </p>
+
+<h2 id="L1-stability-of-lti-systems"> Stability of LTI Systems</h2>
+
+<p>Very concise discussion <a href="/stability.pdf">here</a></p>
+
+<p>Key words:</p>
+
+<ul>
+<li>Bounded-Input-Bounded-Output (BIBO) Stability</li>
+<li>Asymptotic Stability</li>
+<li>Routh's (Routh-Hurwitz) Stability Criterion</li>
+</ul>
+
+<h1 id="L2"> Feedback Control System Analysis</h1>
+
+<h2 id="L2-stability"> Stability</h2>
+
+<p>Consider an <strong>open-loop</strong> transfer function in the form of
+\[ T_{ol}(s) = \frac{b(s)c(s)}{a(s)d(s)} \]
+Recall that we cannot have \( a(s) \) or \( d(s) \) to have roots in the RHP. It is <strong>impractical</strong> to cancel these roots with the numerator (which are affected by the controller)
+However, it is possible to perform root cancellation for <strong>open-loop</strong> transfer functions.</p>
+
+<h2 id="L2-tracking"> Tracking</h2>
+
+<p>Tracking is the ability of the control system to make the output follow reference input as closely as possible. </p>
+
+<ul>
+<li>If the plant is <em>stable</em> AND has <em>no zeros in the RHP</em>, then the open-loop controller can be selected to "cancel" the plant transfer function and replace it with a desired one, with the following conditions:
+<ul>
+<li>Transfer function must be proper</li>
+<li>Controller cannot cause too fast a response past the plant actuation limit</li>
+<li>Cancelling plant's stable poles that are very close to imaginary axis may turn the system too sensitive and cause unacceptable transients</li>
+</ul></li>
+</ul>
+
+<p>If we have a closed-loop control, then we can do the same thing, but have more freedom (i.e. pole-zero placement)</p>
+
+<p>We assume reference input \( R \) is a polynomial</p>
+
+<p>\[ r(t) = Ct^k 1(t) \]</p>
+
+<p><div class="alert alert-success" role="alert">The <strong>type</strong> of a (closed-loop) control system with respect to tracking is defined as the degree of the polynomial reference input that the system can reasonably track (i.. with constant error)
+</div>
+<div class="alert alert-primary" role="alert">The type of a feedback system depends on the number of poles that its open-loop transfer function \( GD_{cl} \) has at the origin. If we have
+\[ GD_{cl} = \frac{b(s)}{s^ka(s)} \]
+Then, the system is of type \( k. \)
+</div></p>
+
+<p>We can define \( K_i = \lim_{s\to 0} s^k GD_{cl}(s) \) so \( K_p,K_v,K_a = K_0,K_1,K_2. \) </p>
+
+<p><img src="assets/type_table.png" alt="" width="100%" /></p>
+
+<h2 id="L2-regulation"> Regulation</h2>
+
+<p>The ability of the control system to keep the error (difference between output and reference input) small when the reference input is at most a constant setpoint and disturbance and noise are present</p>
+
+<p><strong>Open-loop Control:</strong> Controller has no influence on the output with respect to disturbance and noise</p>
+
+<p><strong>Closed-Loop Control</strong> LEt the input by \( R(s) \) and output be \( Y_{cl}(s). \) We can define 
+\[ E_{cl} = R-Y_{cl} = (1-\mathcal{T})R - G \mathcal{S}W + H\mathcal{T}V \]
+where \( W \) is the disturbance added between controller and plant, and \( V \) is noise added to the sensor. For a closed negative feedback system with controller \( D_{cl}(s) \), plant \( G(s) \), and sensor \( H(s) \), we have 
+\[ E_{cl} = \frac{1+GD_{cl}(H-1)}{1+HGD_{cl}}R - \frac{G}{1+HGD_{cl}}W + \frac{HGD_{cl}}{1+HGD_{cl}}V \]
+To make the effect of \( W \) small, make \( D_{cl} \) as large as possible, but this also causes sensor noise to increase. To solve this, design \( D_{cl} \) to hav large values at low frequencies (where plant disturbance appears) and small values at high frequencies (where sensory noise shows up).</p>
+
+<p>One way to analyze this is to set \( R=V=0 \) and consider the transfer function
+\[ T_w(s) = \frac{Y(s)}{W(s)} \]</p>
+
+<h2 id="L2-sensitivity"> Sensitivity</h2>
+
+<p>Define the <strong>sensitivity</strong> of a transfer function \( T \) to a plant gain \( G \) as 
+\[ \mathcal{S}^T_G = \frac{G}{T} \frac{\delta T}{\delta G} \]
+<strong>Open-loop Control:</strong> Sensitivity is \( 1 \)</p>
+
+<p><strong>Closed-loop Control:</strong> The sensitivity is given by the <em>sensitivity transfer function</em></p>
+
+<p>\[ \mathcal{S}^{T_{cl}}_G = \frac{1}{1+HGD_{cl}} \]
+The controller \( D_{cl} \) can be designed such that sensitivity is significantly less than \( 1. \)</p>
+
+<h2 id="L2-pid-control-system"> PID Control System</h2>
+
+<p>PID Controller in the form of
+\[ k_P + \frac{k_I}{s} + sk_D \]</p>
+
+<ul>
+<li><strong>Proportional Control:</strong> increasing \( k_P \) can cause the steady state error to be reduced (but not removed) and speed of response increased, but response damping will also be decreased resulting in higher overshoots</li>
+<li><strong>Integral Control:</strong> Steady state tracking (and regulation) errors to constant input (and disturbance) will always be zero. Robust against plant variations (i.e. sensitivity is zero). However, system can be slower. For stability, we need
+\[  k_I &lt; \frac{2\zeta\omega_n}{K} \]</li>
+<li><strong>Derivative Control:</strong> May increase steady-state error, but can reduce the overshoot and improve stability. It can also speed up transient response, but in practice, it always amplifies the noise.</li>
+<li><strong>PI Control</strong> Steady state tracking errors to constant input are zero. Can behave like a second-order system by stable pole cancellation. Generally allows for a faster response than a pure integral controllre. For stability,
+\[  k_I &lt; \frac{2\zeta\omega_n(1+k_PK)}{K} \]</li>
+<li><strong>PID Control</strong> Very good. For stability,
+\[ k_I &lt; \frac{(2\zeta+k_DK\omega_n)(1+k_PK)\omega_n}{K} \]</li>
+</ul>
+
+<h2 id="L2-pid-gain-tuning-general-rules"> PID Gain Tuning (General Rules)</h2>
+
+<ol>
+<li>Determine what characteristic of the system response needs to be improved</li>
+<li>Use \( k_P \) to decrease rise time</li>
+<li>Use \( k_D \) to reduce the overshoot and settling time</li>
+<li>Use \( k_I \) to eliminate steady-state error (be careful about system stability)</li>
+</ol>
+
+<p><img src="assets/pid_table.png" alt="" width="100%" /></p>
+
+<h2 id="L2-ziegler-nichols-gain-tuning"> Ziegler-Nichols Gain Tuning</h2>
+
+<p><strong>Method 1: Step Response</strong>
+This is applicable to plants without integrators and dominant complex poles, with a behaviour approximately represented by the following transfer function:
+\[ \frac{Y(s)}{U(s)} = \frac{As^{-t_ds}}{\tau s + 1} \]
+Step response exhibits an S-shaped profile called <strong>process reaction curve</strong> characterized by lag \( L=t_d, \) time constant \( \tau, \) and a slope \( R=A/\tau. \) If we want to design a PID controller with a 25% decay ratio (i.e. \( \zeta\approx 21\% \)) in the form of
+\[ D_{cl}(s) = k_p\left(1+ \frac{1}{T_Is} + T_Ds\right) \]
+we want to choose
+\[ (k_P,T_I,T_D) = (1.2/RL, 2L, 0.5L) \]
+and for PI,
+\[ (k_P,T_I) = ( 0.9/RL, L/0.3) \]
+and for P,
+\[ k_P = 1/RL \]</p>
+
+<p><strong>Method 2: Ultimate Sensitivity</strong></p>
+
+<ol>
+<li>Start with a closed-loop controller with only a proportional gain \( k_P \)</li>
+<li>Begin with a low value of \( k_P \) and gradually increase it until the onset of a stead-state oscillation is achieved. The proportional gain \( K_u \) for such a response is called <strong>ultimate gain</strong> and the period of such an oscillation \( P_u \) is called <strong>ultimate period.</strong></li>
+<li>Determine the proper PID control gains given by
+\[ (k_P,T_I,T_D) = (1.6K_u, 0.5P_u, 0.125P_u) \]
+or for PI
+\[ (k_P,T_I = 0.45K_u, P_u/1.2) \]
+or for P
+\[ k_P=0.5K_u \]</li>
+</ol>
+
+<p>For <strong>both</strong> methods, the gain \( k_P \) can usually be reduced (around 50\%) after tuning to reduce response oscillations.</p>
+
+<h1 id="L3"> Root Locus Method</h1>
+
+<h2 id="L3-root-locus-evans-form"> Root Locus (Evans) Form</h2>
+
+<p>Given a transfer function
+\[ \frac{D_c(s)G(s)}{1+D_c(s)G(s)H(s)} \]
+we can write the denominator as
+\[ a(s) + Kb(s) = 0 \]
+The Root Locus (Evans) Form is if we can manipulate this into the form
+\[ 1 + KL(s) = 0 \]
+and giving \( L(s) \) to MATLAB will give us the root locus for the original transfer function.
+<div class="alert alert-success" role="alert">The root locus is the set of all possible values of \( s \) for which the characteristic equation \( 1+KL(s)=0 \) holds, as the real parameter \( K \) varies from \( 0 \) to \( \infty. \) This is typically for the closed-loop system, so the roots are the system poles.
+</div>
+An equivalent definition,
+<div class="alert alert-success" role="alert">The root locus is the set of points in the \( s \)-plane where the phase of \( L(s) \) is \( 180^\circ \) for positive locus, or \( 0^\circ \) for negative locus.
+</div></p>
+
+<h2 id="L3-visualization"> Visualization</h2>
+
+<pre><code>% Clear workspace and command window
+clear;clc;
+
+numerator_coefficients = [1 0];
+denominator_coefficients = [1 0 1];
+
+% Create the transfer function
+G = tf(numerator_coefficients, denominator_coefficients);
+
+% Plot the root locus
+figure;
+rlocus(G);
+title('Root Locus Plot');
+xlabel('Real Part');
+ylabel('Imaginary Part');
+grid on;
+</code></pre>
+
+<p>The diagonal lines represent \( \cos\theta \) and the \( K \) value associated with the poles can be found using</p>
+
+<pre><code>rlocfind(G)
+</code></pre>
+
+<p>in the terminal.</p>
+
+<h2 id="L3-positive-root-locus-rules"> Positive Root Locus Rules</h2>
+
+<ol>
+<li>There are \( n \) branches of the locus starting at the poles of \( L(s) \) (open-loop poles) and \( m \) (\( \le n \)) of these branches end at the zeros of \( L(s) \) (open-loop zeros), and the rest goes to infinity.</li>
+<li>The segments of the locus on the real axis are always to the left of an odd number of real poles and zeros.</li>
+<li>If \( n>m \) when \( K\to\infty \) those \( n-m \) branches that must go to infinity are asymptotic to lines radiating out from real axis at the points \( s=\alpha \) at angles \( \phi_l \) where
+\[ \alpha = \frac{\sum p_i - \sum z_i}{n-m} \]
+\[ \phi_l = \frac{180^\circ + 360^\circ(l-1)}{n-m} \]
+for \( l=1,2,\dots,n-m. \) Here, the angle is calculated normally (i.e. \( \phi=0 \) corresponds to \( 1+0j \)).</li>
+<li>The angle of departure of a branch of the locus from a single pole is identified by
+\[ \phi_{dep} = \sum \psi_i - \sum_{i\neq dep} - 180^\circ \]
+where \( \sum \psi_i \) is the sum of the angles from all zeros to the single pole and \( \sum \phi_i \) is the sum of angles from all remaining poles to the single pole. The angle of arrival of a branch at a zero is obtained by
+\[ \psi_{arr} = \sum \phi_i - \sum_{i\neq arr} \psi_i + 180^\circ. \]
+where \( \sum \phi_i \) is the sum of the angles from zero to all the poles and \( \sum \psi_i \) is the sum of the angles from the zero to the other zeros. Note that if there is multiplicity, it's slightly complicated. See page 13 of Chapter 5 Part 1 for more information.</li>
+<li><p>There can be multiple roots (of the characteristic polynomial) at points on the locus, and branches depart (or approach) from a point of \( q \) roots at angles separated by
+\[ \frac{180^\circ+360^\circ(l-1)}{q} \]
+for \( l=1,2,\dots,q. \) This forms an array of \( 2q \) rays that are equally spaced. If this point is on the real axis, note that phase angles of conjugate poles/zeros cancel each other.</p></li>
+<li><p>Breakaway-break-in points (points where two or more branches meet and break away) are among the roots of 
+\[ \frac{dL(s)}{ds}=0 \]</p>
+
+<h2 id="L3-design-for-dynamic-compensation"> Design for Dynamic Compensation</h2></li>
+</ol>
+
+<p>Chapter 5 Part 3.</p>
+
+<ul>
+<li>Lead Compensation</li>
+<li>Lag Compensation</li>
+<li>Notch Compensation</li>
+</ul>
+
+<h1 id="L4"> Frequency Response</h1>
+
+<p>If \( u(t)=A\sin(\omega_0t)1(t) \) is the input, the steady state output is
+\[ y_{ss}(t) = A|G(j\omega_0)|\sin(\omega_0t+\angle G(j\omega_0)) \]</p>
+
+<h2 id="L4-lead-compensator"> Lead Compensator</h2>
+
+<p>Lead Compensator: \( \alpha &lt; 1 \)
+\[ D_c(s) = \frac{Ts+1}{\alpha Ts + 1} \]</p>
+
+<p>The following can be input into offline Desmos. The magnitude:</p>
+
+<pre><code>f(x)=\frac{\sqrt{\left(1+\alpha T^{2}x^{2}\right)^{2}+\left(1-\alpha\right)^{2}T^{2}x^{2}}}{\left(\alpha Tx\right)^{2}+1}
+</code></pre>
+
+<p>The angle:</p>
+
+<pre><code>g(x)=\arctan\left(Tx\right)-\arctan\left(\alpha Tx\right)
+</code></pre>
+
+<p>Make sure when plotting the magnitude and phase, do it on a log scale! For example, \( f(10^x) \) and \( g(10^x). \) We have the following relationships:
+\[ \omega_{max}=\frac{1}{T_D\sqrt{\alpha}} \]
+\[ \phi_\text{max} = \tan^{-1}\left(\frac{1}{\sqrt{\alpha}}\right) - \tan^{-1}(\sqrt{\alpha}) \]
+\[ \sin\phi_\text{max} = \frac{1-\alpha}{1+\alpha} \implies \alpha = \frac{1-\sin\phi_\text{max}}{1+\sin\phi_\text{max}} \]</p>
+
+<h2 id="L4-lag-compensator"> Lag Compensator</h2>
+
+<p>Lag Compensator
+\[ D_c(s) = \beta \frac{T_Is+1}{\beta T_I s + 1} \]
+Formulas for magnitude and angle are the same as before, along with other relationships.</p>
+
+<h2 id="L4-terminology"> Terminology</h2>
+
+<ul>
+<li>Bandwidth: \( \omega_{BW} \) is the frequency at which the amplitude is \( 0.707 \) (or \( -3dB \)) for the <strong>closed-loop transfer function</strong></li>
+<li>Resonant Peak: \( M_r \) is the maximum value of the frequency-response magnitude ratio for the <strong>closed-loop transfer function</strong></li>
+</ul>
+
+<p>The following apply for open-loop transfer functions</p>
+
+<ul>
+<li>Gain Margin:
+\[ GM=\frac{1}{|KG(j\omega)| \]</li>
+<li>Crossover Frequency: frequency \( \omega_c \) when open-loop magnitude is unity</li>
+<li>Phase Margin: The amount by which the phase of \( G(j\omega) \) exceeds \( -180^\circ \) when \( |KG(j\omega)|=1. \) Can be computed via
+\[  PM = \angle L(j\omega_c) - (-180^\circ) \]
+where \( L(s) \) is the open-loop TF. </li>
+</ul>
+
+<p>For <strong>stability</strong> to occur, we need the following to be true for the open-loop frequency response.
+\[ |KG(j\omega)| &lt; 1\quad \text{ at }\quad \angle G(j\omega)=-180^\circ \]</p>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

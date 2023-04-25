@@ -1,0 +1,317 @@
+
+
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{\vspace{-2cm}MAT357: Real Analysis \\ Problem Set 2}
+\author{QiLin Xue}
+\date{2022-2023}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+I discussed problems Ahmad, Jonah, Andy, and Nathan for this problem set (different for each question).
+\begin{enumerate}
+    \item \begin{enumerate}[label=(\alph*)]
+        \item Let $(a_n)$ be a converging sequence in $M$ that converges to $a.$ We wish to show that any isometry $f$ sends this converging sequence to another converging sequence in $N.$ That is, we wish to show that $(f(a_n))$ converges to $f(a)$ in $N.$ First, since $(a_n)$ is converging, we know that for all $\epsilon > 0$ there exists $N\in \mathbb{N}$ such that $n> N$ implies that 
+        \begin{equation}
+            d_M(a_n, a) < \epsilon.
+        \end{equation}
+        Now working with the sequence $(f(a_n))$ in $N,$ for all $\epsilon > 0,$ we can pick the same $N$ as before. Then,
+        \begin{equation}
+            d_M(a_n, a) < \epsilon \implies d_N(f(a_n), f(a)) < \epsilon,
+        \end{equation}
+        where the implication is given by the fact that $f$ is an isometry.
+        \item A homeomorphism is a bijective continuous function with a continuous inverse. By definition, it is continuous, and we have shown that it is continuous. It remains to show that its inverse is also continuous.
+        
+        Let $g := f^{-1}.$ We wish to show that $g$ is also an isometry, or equivalently for any $p,q\in N$ we have 
+        \begin{equation}
+            d_N(p, q) = d_M(g(p), g(q))
+        \end{equation}
+        This is true since if $f$ is an isometry, we can find $p',q'\in M$ such that $f(p')=p$ and $f(q')=q.$ Then by definition, the following chain of implications hold:
+        \begin{align}
+            & d_N(f(p'), f(q')) = d_M(p, q) \\ 
+             \implies & d_N(f(p'), f(q')) = d_M((f^{-1}\circ f)p,(f^{-1}\circ f)q) \\ 
+             \implies & d_N(p, q) = d_M(g(p), g(q)).
+        \end{align}
+        This is true for all $p,q$ so $f^{-1}$ is an isometry. But we've shown that isometries are continuous, so $f^{-1}$ is continuous, and we are finished. 
+        \item Suppose for the sake of contradiction that $[0,1]$ is isometric to $[0,2].$ We will make use of the following lemma:
+        \begin{lemma}
+            Let $f: M\to N$ be a homeomorphism between two compact sets in $\mathbb{R}^n.$ If $m \in \partial M$ then $f(m) \in \partial N.$
+            \begin{proof}
+                Suppose for contradiction that the above is not true. That is, there exists a homeomorphism $f:M\to N$ and $m\in \partial M$ such that $f(m) \in \text{int}(N).$ If this was true, then we can consider an open ball $B_\delta \in \text{int}(N)$ around $f(m)$ for some $\delta > 0.$ Then the preimage of this open ball will be an open ball in $\text{int}(M)$ that contains $m.$ This contradicts our assumption that $m$ is on the boundary, and thus not in the interior of $M.$
+            \end{proof}
+        \end{lemma}
+        Let $f: [0,1] \to [0,2]$ be an isometry. Then by the above lemma, then we either have $f(0)=0, f(1)=2$ or $f(0)=2,f(1)=0.$ In either case,
+        \begin{equation}
+            d_{[0,1]}(0, 1) = 1
+        \end{equation}
+        and 
+        \begin{equation}
+            d_{[0,2]}(f(0), f(1)) = d_{[0,2]}(0, 2) = d_{[0,2]}(2, 0) = 2.
+        \end{equation}
+        Since $1 \neq 2,$ we have contradicted the assumption that $f$ is an isometry.
+    \end{enumerate}
+    \newpage
+    \item We first make use of the following lemma, 
+    \begin{lemma}
+        Every Cauchy sequence $(a_n)$ is bounded.
+        \begin{proof}
+            We wish to show that there is some $M$ such that $|a_n|<M.$ Because $(a_n)$ is Cauchy, we have that for all $\epsilon >0,$ there exists $N\in \mathbb{N}$ such that $n_1,n_2 \ge N$ implies that 
+            \begin{equation}
+                d(a_{n_1},a_{n_2}) <\epsilon.
+            \end{equation}
+            Suppose that the sequence is unbounded. Then we can choose $\epsilon = 1.$ For some $N \in \mathbb{N}$ we have for all $n_1,n_2 > N,$
+            \begin{equation}
+                d(a_{n_1},a_{n_2}) < 1
+            \end{equation}
+            But by the reverse triangle inequality, we have that 
+            \begin{equation}
+                d(a_{n_1},a_{n_2}) \ge d(|a_{n_1}|,|a_{n_2}|).
+            \end{equation}
+            Because $(a_n)$ is unbounded, there exists $n_1 > N$ such that $|a_{n_1}| > 2 + |a_{n_2}|.$ This implies that 
+            \begin{equation}
+                d(a_{n_1}, a_{n_2}) \ge 2.
+            \end{equation}
+            But this contradicts the statement that $|a_{n_1} - a_{n_2}| < 1,$ so we have a contradiction and $(a_n)$ has to be bounded.
+        \end{proof}
+    \end{lemma}
+    Consider a Cauchy sequence $(a_n)$ contain in $M.$ The above lemma implies that there exists a closed set $S$ such that $a_n \in S$ for all $n \in \mathbb{N}.$ This set is bounded, and by the assumption given in the problem, $S$ is compact.
+
+    By definition, because $S$ is compact, every sequence $(b_n)$ has a convergent subsequence $(b_{n_k})$. If $(b_n)$ converges in  $S$, then $(b_{n_k})$ must converge to the same limit point in $S$.
+
+    Every Cauchy sequence has a limit point. What remains to be shown is that the limit point of $(a_n)$ is contained in $S.$ But because $S$ is compact, we know that there is a subsequence that converges to a point in $S.$ Since $(a_n)$ converges to its limit point, this limit point must be the same as the limit point of its converging subsequence, which is contained in $S.$
+    \newpage
+    \item \begin{enumerate}[label=(\alph*)]
+        \item Suppose the graph is not closed. Then there exists a sequence $y_n := (a_n, f(a_n))$ such that its limit point, which we denote as $y := (a,b)$, is not contained in the graph. This means that $b \neq f(a_n)$ (because if they were equal, then $y=(a,f(a))$ would be contained in the graph).
+
+        Because $(a_n,f(a_n))$ has a limit point, then so does the component sequence $(a_n)$ and $(f(a_n))$ which converges to $a$ and $b$ respectively.
+
+        Consider the sequence $(a_n) \subset M,$ which converges to $a\in M.$ Then because $f$ is continuous, we must have that $(f(a_n))$ converges to $f(a) \in \mathbb{R},$ so the limit point of $(a_n,f(a_n))$ is $(a,f(a)).$ But we already said that the limit point was actually $(a,b)$ with $b \neq f(a),$ leading to a contradiction.
+
+        \item If $f$ is continuous and $M$ is compact, then $f(M)$ is compact. This is true since we can take any sequence $(a_n)$ in $M$ and find a convergent subsequence $(a_{n_k})$ that converges to $a.$ Then by continuity, we have that for the sequence $f(a_{n}) \in \mathbb{R},$ there exists a subsequence $f(a_{n_k})$ that converges in $\mathbb{R}$ to $f(a),$ so $f(M)$ is compact.
+        
+        Consider any sequence $y_n := (a_n, f(a_n))$ on the graph. We know that $(a_n)$ has a converging subsequence and we just proved that because $f(M)$ is compact, $(f(a_n))$ has a converging subsequence. Assume these subsequences are given by $(a_{n_k}),(f(a_{n_k})),$ Therefore, $(a_n,f(a_n))$ has the converging subsequence $(a_{n_k},f(a_{n_k}))$ which converges to the point $(a,b) \in M\times \mathbb{R}.$
+        
+        \item
+        Consider a converging sequence $(a_n)$ that converges to $a \in M.$ We wish to show that $(f(a_n))$ converges in $\mathbb{R}.$ First, consider the sequence $((a_n,f(a_n))).$ Because the graph is compact, this has a converging subsequence $(a_{n_k},f(a_{n_k}))$ that converges to a point $(a,b)$ on the graph. Note that $(a_{n_k})$ converges to $a$ since a convergent subsequence of a convergent sequence has the same limit point. But every point on the graph can be written as $(x, f(x)),$ we must have $b=f(a).$ So we have that $(f(a_{k_n}))$ converges to $f(a).$
+
+        We have shown that any converging subsequence $(f(a_{n_k}))$ converges to $(f(a)).$ We then consider the following lemma.
+        \begin{lemma}
+            Let $(x_n) \subset M$ be a sequence, where $M \subset \mathbb{R}$ is a compact set. If all converging subsequences have the same limit point $x,$ then $(x_n)$ converges to $x.$
+            \begin{proof}
+                Suppose for the sake of contradiction that $(x_n)$ does not converge to $x.$ Then there exists some $\epsilon > 0$ such that for any choice of $N\in \mathbb{N},$ there exists some $n>N$ such that 
+                \begin{equation}
+                    d(x_n,x) \ge \epsilon.
+                \end{equation}
+                Let $X$ be the sequence of all $x_n$ such that $d(x_n,x) \ge \epsilon$ with $n>N.$ This is an infinite set because if it was finite, then we could pick a higher $N$ value such that there are no $n>N$ such that $|x_n-x| \ge \epsilon.$
+                
+                Now, we can treat $X=(a_n)$ as a sequence. Because $M$ is compact, there is a converging subsequence $(a_{n_k})$ that converges to $x.$ This means that for all $\epsilon >0$ (including the one we chose above), there exists some $N\in \mathbb{N}$ such that for every $n>N$ we have
+                \begin{equation}
+                    d(a_{n_k},x) < \epsilon.
+                \end{equation}
+                But we defined $a_{n_k}$ to be in the set of the of $x_n$ such that $d(x_n,x) \ge \epsilon,$ leading to a contradiction.
+            \end{proof}
+        \end{lemma}
+        The properties of the above lemma hold, so $(f(a_n))$ converges. Therefore, $f$ is continuous since it maps convergent sequences in $M$ to convergent sequences in $\mathbb{R}.$
+
+        % Suppose for the sake of contradiction that $f$ is not continuous. Then there exists a converging sequence $(a_{n}) \subset M$ that converges to $a,$ where $(f(a_{n}))$ does not converge. This means that $(a_n, f(a_n))$ does not converge. Since $(a_n)$ converges, this means that $f(a_n)$ does not.
+
+        % But the graph is compact, so we know that $(a_{n},f(a_{n}))$ has a converging subsequence $(a_{n_k},f(a_{n_k}))$ that converges to a point $(a,b).$ Note that $(a_{n_k})$ converges to $a$ since a convergent subsequence of a convergent sequence has the same limit point. But every point on the graph can be written as $(x, f(x)),$ so we must have $b=f(a).$ Therefore, $(a_{n_k},f(a_{n_k}))$ converges to $(a,f(a)).$ It must converge component-wise as well, so $(f(a_{n_k}))$ converges to $f(a).$
+
+        % Because the graph is compact, it is closed and bounded. Because it is closed, it contains all its limit points. Therefore, $(a,f(a))$ is contained in the graph. We will now claim that $(f(a_n))$ converges to $f(a).$ Let $\epsilon > 0,$ there exists $N\in \mathbb{N}$ such that $n>N$ implies that 
+        % \begin{equation}
+        %     |f(a)-f(a_n)| < \epsilon
+        % \end{equation} 
+
+        % \begin{lemma}
+        %     Consider a sequence $(a_{n},b_{n}).$ Let $(a_{n_k},b_{n_k})$ be a convergent subsequence and consider the subsequence $(a_{n_j},b_{n_j}).$ If $(a_{n_j})$ converges, then $(b_{n_j})$ converges.
+        % \end{lemma}
+        % \begin{proof}
+        %     Becaus
+        % \end{proof}
+        \item Consider the function
+        \begin{equation}
+            f(x) = \begin{cases}
+                \frac{1}{x} & x \neq 0 \\ 
+                0 & x = 0.
+            \end{cases}
+        \end{equation}
+        Then this function is clearly not continuous, since we can consider the sequence $(a_n)=-\frac{1}{1},-\frac{1}{2},-\frac{1}{3},\dots.$ This clearly converges to $0$ but $(f(a_n))$ does not converge since $(f(a_n))=(f(1/n))=(n),$ which is unbounded. However, this graph is closed since it contains all its limit points. Consider a converging sequence $p_n:=(a_n,f(a_n)).$ There are three cases:
+        \begin{itemize}
+            \item The sequence $p_n$ contains an infinite number of points $(0,0).$ If this occurs, then it converges to $(0,0)$ which is contained in the graph.
+            \item The sequence $p_n$ contains an infinite number of points $(a_n,f(a_n))$ where $a_n>0.$ If this occurs, there exists $N\in \mathbb{N}$ such that $n>N$ implies that $a_n>0$ so we are restricted to the graph $\{(p,y)\in (0,\infty)\times \mathbb{R}:y=1/p\}.$ This is continuous, so the graph is closed (by part (a)), so the limit point of $p_n$ is contained in the graph.
+            \item The same argument as the previous case, but with an infinite number of points where $a_n<0.$
+        \end{itemize} 
+    \end{enumerate}
+    \newpage
+    \item We are given that $K_1 \supset K_2 \supset \cdots $ and $\text{diam}(K_i) \ge \mu.$ Let us define 
+    \begin{equation}
+        \mu' = \text{sup}\{\mu: \text{diam}(K_i) \ge \mu\}.
+    \end{equation}
+    \begin{lemma}
+        The sequence $(\text{Diam}(K_n))$ converges to $\mu'.$
+        \begin{proof}
+            Because $K_n \supset K_{n+1},$ then $(\text{Diam}(K_n))$ is a non-increasing function that is bounded below by $0.$ Therefore, a limit definitely exists, and specifically the limit point is the infimum of the sequence, which is by definition $\mu'.$
+        \end{proof}
+    \end{lemma}
+    Next, we can show that $\mu' \in \{\mu: \text{diam}(K_i) \ge \mu\}.$ This is true because $(\text{diam}(K_i))$ is a non-increasing converging sequence, so this is a closed set, and the supremum is contained in the set.
+
+    Note that 
+    \begin{equation}
+        \text{diam}(K) = \text{diam}\left(\bigcap K_i\right) = \text{inf}\{\text{diam}(K_i)\} = \mu'.
+    \end{equation}
+    The last equality is true since the infimum is the largest such $\mu$ such that $\text{diam}(K_i) \ge \mu,$ which we defined as $\mu'.$ Therefore, since $\mu' \ge \mu$ we have $\text{diam}(K_i) \ge \mu.$
+    \newpage
+    \item \begin{enumerate}
+        \item We will prove this for a general complete metric space $N$, and since $\mathbb{R}$ is a complete metric space, then we are done. We will do this in a few steps:
+        
+        \begin{enumerate}[label=(\arabic*)]
+            \item Consider a sequence $(a_n) \subset S$ that converges to $Lx \in \partial S.$ Given this, we will show that $(f(a_n))$ converges to some $Y.$ 
+            \item Consider a different sequence $(b_n) \subset S$ that converges to the same limit point as above, $x.$ We will show that $(f(b_n))$ converges to the same point as above, $Y.$
+            \item We extend $f$ to $\bar{f}$ by defining $\bar{f}(x) = f(x)$ for all $x \in S$ and $\bar{f}(x) = \lim_{n\to\infty} a_n$ for any $(a_n)$ that converges to $x \in \bar{S} \setminus S.$ This is a well-defined function by the above, and it remains to show that this is uniformly continuous.
+        \end{enumerate}
+        We will do the above:
+
+        \textbf{(1)} The sequence $(a_n)$ converges, so it is also a Cauchy sequence. Because $f$ is uniformly continuous, for every $\epsilon > 0$ there exists a $\delta >0$ such that given $a_i,a_j \in S,$ we have $d(a_i,a_j)<\delta \implies d(f(a_i),f(a_j))<\epsilon.$ Because $(a_n)$ converges, for all $\epsilon > 0,$ there exists some $N\in \mathbb{N}$ such that $i,j>N$ implies that $d(a_{i}, a_{j}) < \epsilon.$ If we set $\epsilon = \delta,$ then we've shown that 
+        \begin{equation*}
+            i,j > N \implies d(a_i, a_j) < \delta \implies d(f(a_i), f(a_j)) < \delta,
+        \end{equation*}
+        so $(f(a_n))$ is Cauchy. But because $N$ is complete, this Cauchy sequence must converge. Let us denote this limit point to be $Y.$
+        
+        \textbf{(2)} We wish to show that given any sequence $(b_n)$ that also converges to $x$, the sequence $(f(b_n))$ also converges to $Y.$ To do this, we need to show that for all $\epsilon > 0,$ there exists $N\in \mathbb{N}$ such that $n>N \implies d(Y,f(b_n)) < \epsilon.$ To show this, we make use of the triangle inequality:
+        \begin{align}
+            d(Y,f(b_n)) &\le d(Y,f(a_n)) + d(f(a_n), f(b_n)).
+        \end{align}
+        Both terms can have an arbitrary upper bound. Because $(f(a_n))$ converges to $Y$ there exists $N_a \in \mathbb{N}$ such that $d(Y,f(a_n)) < \frac{\epsilon}{3}.$ Note that for every $\delta >0$ there exists an $N\in\mathbb{N}$ such that $n>N$ implies that $d(a_n,b_n) < delta.$ This is true since by the triangle inequality,
+        \begin{equation}
+            d(a_n,b_n) \le d(a_n,x) + d(x,b_n) < \frac{\delta}{2} + \frac{\delta}{2} = \delta.
+        \end{equation}
+        which is true since both $(a_n)$ and $(b_n)$ converge, so they can get arbitrarily close to $x.$ 
+
+        By uniform continuity there exists $\delta >0$ such that $d(a_n,b_n)<\delta \implies d(f(a_n),f(b_n)) < \frac{\epsilon}{3}.$ We showed that for any choice of $\delta$ we can pick $n$ such that $d(a_n,b_n)<\delta,$ so we are able to bound the second term in the original triangle inequality by $\frac{\epsilon}{3}$ as well. We have, for all $\epsilon >0,$ a choice of $N\in \mathbb{N}$ such that $n>N$ implies that
+        \begin{equation}
+            d(Y,f(b_n)) \le d(Y,f(a_n)) + d(f(a_n), f(b_n)) < \frac{2\epsilon}{3} < \epsilon
+        \end{equation}
+        so $(f(b_n))$ converges to the same $Y.$
+
+        \textbf{(3)} Finally, we extend $f$ to $\bar{f}$ by defining $\bar{f}(x)=f(x)$ for all $x\in S$ and $\bar{f}(x)= \lim_{n\to \infty}a_n$ for any sequence $(a_n)$ that converges to $x \in \bar{S} \setminus S.$ We wish to show that for any $x,y\in \bar{S}$ and every $\epsilon>0$ there exists a $\delta > 0$ such that $d(x,y) < \delta \implies d(\bar{f}(x),\bar{f}(y)) < \delta.$ There are three cases to consider here:
+        \begin{itemize}
+            \item If $x,y\in S,$ then $\bar{f}=f$ and since $f$ is uniformly continuous we are done.
+            \item Let $x\in S$ and $y\in \bar{S}\setminus S.$ Consider a sequence $(a_n)$ that converges to $y.$
+            
+            Because the sequence converges, for any $N\in \mathbb{N}$ there exists some $\delta > 0$ such that $d(a_n,y)<\delta \implies n>N.$ Then for every $\epsilon > 0,$ we can choose $N\in\mathbb{N}$ such that $n>N$ implies that $d(f(a_n),\bar{f}(y)) < \epsilon.$ Therefore, we have shown that $d(a_n,y)<\delta \implies d(f(a_n),\bar{f}(y)) < \epsilon.$ Since $x$ can be part of a sequence that converges to $y,$ then we're done.
+            
+            \item Let $x,y\in \bar{S} \setminus S.$ Then, we use the triangle inequality. Consider,
+            \begin{equation}
+                d(x,y) \le d(x,z) + d(z,y)
+            \end{equation}
+            where $z\in S.$ We have shown in the previous case that for all $\epsilon_x,\epsilon_y>0,$ there exists $\delta_x,\delta_y>0$ such that $d(x,z)<\delta_x \implies d(\bar{f}(x),f(z))<\epsilon_x$ and $d(z,y)<\delta_y \implies d(f(z),\bar{f}(y))<\epsilon_y.$ If we choose $\epsilon_x,\epsilon_y = \frac{\epsilon}{3}$ and $\delta'=\text{min}\{\delta_x,\delta_y\},$ then it follows that $d(x,z),d(z,y)<\delta'$ implies that $d(\bar{f}(x),f(z))+d(f(z),\bar{f}(y))<\frac{2\epsilon}{3}<\epsilon.$
+            
+            To finish our proof that $\bar{f}$ is continuous, consider any $\epsilon > 0$ and some arbitrary $z\in S.$ Then there exists a $\delta = 2\delta'$ where $\delta'$ is the value from the previous paragraph which corresponds to $\epsilon_x,\epsilon_y=\frac{\epsilon}{3}$ such that
+            \begin{equation}
+                d(x,y) < \delta.
+            \end{equation}
+            By how $\delta$ is defined, we must also have:
+            \begin{equation}
+                d(x,z) + d(z,y) < \delta.
+            \end{equation}
+            But we have shown that this implies 
+            \begin{equation*}
+                d(\bar{f}(x),f(z))+d(f(z),\bar{f}(y))<\epsilon.
+            \end{equation*}
+            Therefore, $d(x,y)<\beta$ implies that,
+            \begin{equation*}
+                d(\bar{f}x,\bar{f}y) < d(\bar{f}(x),f(z))+d(f(z),\bar{f}(y)) < \epsilon
+            \end{equation*}
+            and we are done.
+            % Similarly, consider:
+            % \begin{equation}
+            %     d(\bar{f}(x),\bar{f}(y)) \le d(\bar{f}(x),{f}(z)) + d({f}(z),\bar{f}(y))
+            % \end{equation}
+            % From the second case, for every $\epsilon_1>0,$ there exists a $\delta_1$ such that $d(x,z)<\delta_1\implies d(\bar{f}(x),f(z))<\epsilon_1.$ Similarly, for every $\epsilon_2>0,$ there exists a $\delta_2$ such that $d(z,y)<\delta_2\implies d(f(z),\bar{f}(y))<\epsilon_2.$
+
+            % Now we can finish the proof. Consider $\epsilon > 0.$ Then there exists $\delta>0$ such that $d(x,y)<\delta \implies$
+        \end{itemize}
+        Because $\mathbb{R}$ is a complete metric space, then the above holds.
+        \item We wish to show that this extension is unique. Consider a function $g\neq \bar{f}$ that also extends $f$ that is uniformly continuous. This means that there exists a point $p\in \bar{S}\setminus S$ such that $g(p) \neq \bar{f}(p).$ Then we claim that the above is impossible, i.e. there is a contradiction.
+        
+        Consider a sequence $(a_n) \subset S$ that converges to $p.$ Then for every $\delta >0$ there exists $N\in \mathbb{N}$ such that $n>N$ implies that,
+        \begin{equation*}
+            d(a_n,p) < \delta
+        \end{equation*}
+        and because $g$ is uniformly continuous, it means that for very $\epsilon>0$ and $x,y\in \bar{S},$ there exists $\delta' > 0$ such that 
+        \begin{equation*}
+            d(x,y) < \delta' \implies d(g(x),g(y)) < \epsilon
+        \end{equation*}
+        Let $x=a_n$ and $y=p.$ Then 
+        \begin{align*}
+            n > N &\implies d(a_n,p) < \delta \\ 
+            &\implies d(a_n,p) < \delta' \\ 
+            &\implies d(f(a_n),g(p)) < \epsilon.
+        \end{align*}
+        On the second line, we were able to set $\delta =\delta'$ since we can find a $N\in\mathbb{N}$ for any $\delta$ value. For the third line, we used the fact that $f$ agrees with $g$ in $S.$ We have shown that for every $\epsilon >0$ there exists $N\in \mathbb{N}$ such that 
+        \begin{equation*}
+            d(f(a_n),g(p)) < \epsilon,
+        \end{equation*}
+        or equivalently, $(f(a_n))$ converges to $g(p)$. But we have shown in the previous part that $(f(a_n))$ converges to $\bar{f}(p),$ so we have 
+        \begin{equation*}
+            g(p) = \bar{f}(p),
+        \end{equation*}
+        which violates our assumption that they do not agree at this point.
+        \item See above.
+
+    \end{enumerate}
+    \newpage
+    \item \begin{enumerate}[label=(\alph*)]
+        \item Suppose that $M$ is not compact. Then there exists a sequence $(a_n)$ with no convergent subsequence, so the sequence as a set is closed. If it was not closed then there would be a subsequence that that converges to a point not in this set, so $M$ would not be compact. Therefore, the distance between any two distinct points will be nonzero. We then define:
+        \begin{equation}
+            \delta_i = \frac{1}{3}\text{inf}\left\{d(a_i,a_j):a_i \neq a_j\right\}.
+        \end{equation} 
+        Then consider the closed ball around point $a_i$ with radius $\delta_i$, given by:
+        \begin{equation}
+            B_i(x) = \begin{cases}
+                1 & \text{if } d(x,a_i) \le \delta_i \\
+                0 & \text{otherwise}
+            \end{cases} 
+        \end{equation}
+        as well as the function,
+        \begin{equation}
+            f(x) = \sum_{i=1}^{\infty} (-1)^iiB_i(x)(1-d(x,a_i)).
+        \end{equation}
+        We wish to show that this is continuous. We look at different cases:
+        \begin{itemize}
+            \item The function is continuous outside the closed balls, because then we have $f=0,$ which is continuous.
+            \item Inside the closed balls, only one of the terms in the sum is nonzero. So we need to show that 
+            \begin{equation*}
+                (-1)^iiB_i(x)(1-d(x,a_i))
+            \end{equation*}
+            is continuous. Here, $B_i(x)=1$ and $i$ is a constant. The distance function is continuous, so a linear combination of this distance function must also be continuous.
+            \item Finally, we need to show the function is continuous at the boundary of the support of this function. A sequence $(b_n)$ that approaches $X$ in this boundary from outside the balls will have the corresponding sequence $(f(a_n))=0,0,\dots,$ which converges to $0.$ A sequence $(c_n)$ that approaches the same $X$ in this boundary from inside the balls will have the corresponding sequence $(f(c_n))$ which converges to $f(X)=0.$ These agree, so $f$ must be continuous.
+        \end{itemize}
+        However, this function is not bounded above because for any $M > 0\in \mathbb{R}$ we know that $$f(a_{2\lceil M\rceil + 4}) = 2\lceil M\rceil+4 > M.$$ Similarly, it doesn't have a lower bound since for any $M<0\in\mathbb{R}$ we know that 
+        $$
+f(a_{2\lfloor M\rfloor - 3}) = 2\lfloor M\rfloor - 3 < M.
+        $$
+        
+        So we proved the contrapositive.
+        \item This is a similar question. We again prove the contrapositive. Consider $M$ is not compact. We can perform the same construction to arrive at the function 
+        \begin{equation*}
+            f(x) = \sum_{i=1}^{\infty} (-1)^iiB_i(x)(1-d(x,a_i)).
+        \end{equation*}
+        Now consider the function.
+        \begin{equation*}
+            g(x) = \tanh(f(x))
+        \end{equation*}
+        This is continuous because $\tanh$ is continuous and $f$ is continuous, and the composition of continuous functions is continuous. It is also bounded since the codomain of $\tanh$ is $(-1,1).$ However, it doesn't reach a maximum or a minimum since $f(x)$ is unbounded on both sides.
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}

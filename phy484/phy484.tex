@@ -1,0 +1,319 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{PHY484: General Relativity II}
+\author{QiLin Xue}
+\date{Spring 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Deriving Einstein's Equation from the Action}
+Recall that for a non-relativistic particle, the action is given by $S = \int \dd{t} \mathcal{L}(q,\dot{q}),$ where $q$ is a generalized coordinate. Then the Euler-Lagrange equations gives the equation of motion 
+\begin{equation}
+    \frac{\partial \mathcal{L}}{\partial q} - \frac{d}{dt}\frac{\partial \mathcal{L}}{\partial \dot{q}} = 0.
+\end{equation}
+In field theory, the action becomes 
+\begin{equation*}
+    S[\Phi^a] = \int d^D x \mathcal{L}(\Phi^a,\partial_\mu \Phi^a)
+\end{equation*}
+and the E-L equation becomes 
+\begin{equation}
+    \frac{\partial \mathcal{L}}{\partial \Phi^a} - \partial_\mu \left(\frac{\partial \mathcal{L}}{\partial(\partial_\mu \Phi^a)}\right) = 0.
+\end{equation}
+\subsection{Scalar Gravity}
+We first, incorrectly, attempt to write the gravitational field as a scalar (spin 0 field). The Einbein action is 
+\begin{equation}
+    S_\text{einbein} = \frac{1}{2}\int \dd{\lambda}(e^{-1}(\lambda)\dot{z}(\lambda) + e(\lambda)m^2).
+\end{equation}
+For a massive particle, $e^{-1}=m$ and for a massless particle $e^{-1}=1$ in order to enforce the on shell conditions, $E^2-p^2c^2=m_0^2c^4.$ To try and recreate Newtonian gravity, the simplest realization is given by 
+\begin{equation}
+    S = \int \dd^D x\left[\frac{1}{8\pi G_N} \partial^{\mu}\psi\partial_{\mu}\psi + \int \dd{\lambda} \delta(x-z(\lambda))\left\{-\psi(x)e^{-1}\dot{z}^{\mu}(\lambda)\dot{z}_\mu(\lambda) + \frac{1}{2}e^{-1}\dot{z}^2(\lambda) + \frac{e}{2}m^2\right\}\right]
+\end{equation}
+The E-L equations give, when varying $\psi.$
+\begin{align}
+    \int \dd{\lambda} \delta^D(x-z(\lambda))(-e^{-1}\dot{z}^2) = \frac{1}{4\pi G_n}\partial_{\mu}\partial^{\mu}\psi.
+\end{align}
+When varying $e,$ we have $\frac{\partial \mathcal{L}}{\partial e}=0,$ or 
+\begin{equation}
+    m^2 = \frac{1}{e^2}\dot{z}^2(\lambda)(1-2\psi z(\lambda)).
+\end{equation}
+For a massive particle, we have $\lambda=\tau$ and $e^{-1}=m$ so this reduces to $1=\dot{z}^2(1-2\psi).$ For a massless particle, we can choose $e^{-1}=1$ so $\dot{z}^2=0.$ The trajectory of a particle is given by 
+\begin{equation}
+    \frac{\partial \mathcal{L}}{\partial z^{\nu}} = \partial_{\mu}\frac{\partial \mathcal{L}}{\partial (\partial_{\mu}z^{\mu})}.
+\end{equation}
+We can compute,
+\begin{align}
+    &\partial_\mu z^{\nu} = \frac{dz^{\nu}}{d\lambda}\frac{d\lambda}{dx^{\mu}} \\ 
+    \implies & \frac{\partial}{\partial x^{\mu}} \frac{\partial \mathcal{L}}{\partial(\partial_{\mu}z^{\nu})} = \frac{\partial}{\partial x^{\mu}}\frac{dx^{\mu}}{d\lambda}\frac{\partial \mathcal{L}}{\partial \dot{z}^{\nu}} = \frac{d}{d\lambda}\frac{\partial \mathcal{L}}{\partial \dot{z}^{\nu}}
+\end{align}
+For the LHS, it looks like we have no explicit $z$-dependence in $S,$ but there is, in $\psi$! We have,
+\begin{align}
+    \frac{\partial \mathcal{L}}{\partial z^{\nu}} &= \frac{\partial \mathcal{L}}{\partial \psi}\frac{\partial \psi}{\partial x^{\mu}}\frac{\partial x^{\mu}}{\partial z^{\nu}} \\ 
+    &= \left(\int \dd{\lambda} \delta^D(x-z(\lambda))(-e^{-1}\dot{z}^2)\right)\partial_{\mu}\psi\frac{\partial x^{\mu}}{\partial z^{\nu}} \\ 
+    &= -e^{-1}\dot{z}^2(\lambda)\partial_{\nu}\psi,
+\end{align}
+where we used the fact that 
+\begin{equation}
+    \int \dd{\lambda}\delta^D(x-z)\frac{\partial x^{\mu}}{\partial z^{\nu}} = \delta^{\mu}_{\nu}.
+\end{equation}
+Therefore, we have 
+\begin{equation}
+    \frac{d}{d\lambda}\frac{\partial\mathcal{L}}{\partial \dot{z}^{\nu}} = -e^{-1}\dot{z}^2(\lambda)\partial_\nu\psi.
+\end{equation}
+The $\psi$ EoM for massive particles gives
+\begin{equation}
+    \partial_{\mu}\partial^{\mu}\psi = 4\pi Gm \delta(x-z),
+\end{equation}
+reproducing Newton. But for massless particles, we have $\dot{z}^2=0,$ and taking the derivative, we get 
+\begin{equation}
+    \frac{d}{d\lambda}\left[\dot{z}_{\nu}(\lambda)(1-2\psi(z(\lambda)))\right] = 0.
+\end{equation}
+Therefore, the direction of $z$ cannot change since $\psi$ is a scalar quantity. Therefore, light cannot be deflected by gravitational fields.
+\subsection{Choosing the Right Spin}
+Scalar gravity corresponds to a spin-0 field. Because this predicts light deflection, this cannot be the case. We can also rule out spin $1/2$ and $3/2$ because the Pauli-Exclusion principle would apply, which would predict no large field strength. Spin 1 would predict repulsion (as the electromagnetic field is spin 1), and it turns out that spin 2 works. The guiding principle in deriving Einstein's equations is via symmetry. Particularly, physics is basis independent. We then want to upgrade our classical field theory for acting in a curved spacetime manifold which depends on $M$ and properties of $M$ such as $g_{\mu\nu},\Gamma^{\lambda}{}_{\nu\sigma}.$ The covariant action in SR is 
+\begin{equation}
+    S_{SR} = \int d^{D}x \mathcal{L}(\phi^a,\partial_\mu \phi^a),
+\end{equation}
+but this is not covariant in curved space. Under Lorentz transformations, we get the non-identity Jacobian $g\equiv \det(g_{\mu\nu}).$ Then,
+\begin{equation}
+    \dd{s}^2= \dd{x}^\mu\dd{x}^\nu g_{\mu\nu} = \dd{x}^{\mu'}\dd{x}^{\nu'}g_{\mu'\nu'}. 
+\end{equation}
+This implies that 
+\begin{equation}
+    g'_{\mu'\nu'} = g_{\mu\nu}\frac{dx^{\mu}}{dx'^{\mu'}}\frac{dx^{\nu}}{dx'^{\nu'}} \implies g' = \left|\frac{dx'}{dx}\right|^{-2}g,
+ \end{equation}
+ where we computed the determinant of both sides. If $x'$ is a function of $x,$ then 
+ \begin{equation}
+    \dd{x}^{D'} = \left|\frac{\partial x'}{\partial x}\right| d^{D}x \implies d^{D}x\sqrt{-g} = d^{D}x'\left|\frac{\partial x'}{\partial x}\right|^{-1}\left|\frac{\partial x'}{\partial x}\right|\sqrt{-g'} = d^{D}x'\sqrt{-g'},
+ \end{equation}
+ so this gives an invariant integration measure for any choice of a coordinate system. We can then construct $\mathcal{L}$ out of $\Phi^a$ and $\nabla_\mu\Phi^a$ to make it invariant, so 
+ \begin{equation}
+    S = \int \dd^D{x}\sqrt{-g}\mathcal{L}(\Phi^a,\nabla_\mu\Phi^a),
+ \end{equation}
+ and apply the EOM for variational principle. We can apply the divergence theorem for curved manifolds,
+ \begin{align}
+    \int_M \dd^{D}{x}\sqrt{-g}(\nabla_\mu V^{\mu}) &=\int_{\partial M} \dd{S} \hat{n}_{\mu}\sqrt{-g}V^{\mu} \\ 
+    &= \int_{\partial M}\dd^{D-1}y\sqrt{-h}\hat{n}_\mu V^{\mu}
+ \end{align}
+ where $\dd{S} = \left|\frac{dx}{dy}\right| d^{D-1}y.$ To prove this, we need the property that 
+ \begin{equation}
+    \Gamma^{\lambda}{}_{\lambda\nu} = \frac{1}{\sqrt{-g}}\partial_\nu(\sqrt{-g}),
+ \end{equation}
+ to show that 
+ \begin{align}
+    \nabla_\mu V^{\mu} &= \partial_{\mu}V^\mu + \Gamma^{\mu}{}_{\mu\lambda}V^{\lambda} \\ 
+    &= \partial_\mu V^{\mu} + \frac{1}{\sqrt{-g}}(\partial_\mu \sqrt{-g})V^{\mu} \\ 
+    &= \frac{1}{\sqrt{-g}}\partial_\mu(\sqrt{-g}V^{\mu}),
+ \end{align}
+ and the metric on $\partial M$ is the induced metric 
+ \begin{equation}
+    h_{\mu\nu} = \frac{\partial x^{\alpha}}{\partial y^\mu}\frac{\partial x^\beta}{\partial y^{\nu}}g_{\alpha\beta}.
+ \end{equation}
+ The punchline is that $\delta S=0$ gives 
+ \begin{equation}
+    \frac{\partial L}{\partial \Phi^a} - \nabla_\mu \left(\frac{\partial L}{\partial (\nabla_\mu \Phi^a)}\right) = 0,
+ \end{equation}
+ which allows us to do gravity right. Some quick differential geometry facts:
+ \begin{itemize}
+    \item $\hat{n}$ points outwards if spacelike and inwards if timelike.
+ \end{itemize}
+ Therefore, $\hat{n}_{\mu}\hat{n}^{\mu} = \mp 1.$ The induced metric can be written as 
+ \begin{equation}
+    h_{\mu \nu} = g_{\mu\nu} - n^2n_\mu n_\nu,
+ \end{equation}
+ which implies that $h_{\mu\nu}n^\mu = 0.$ Therefore, $h_{\mu\nu}$ projects tensors onto the surface submanifold, i.e. 
+ \begin{equation}
+    A^{\mu\nu} \to A^{\alpha\beta}_{\text{surface}} = h^\alpha_{\mu}h^{\beta}_{\nu}A^{\mu\nu}.
+ \end{equation}
+ The extrinsic curvature is encoded by the variation of $\hat{n}$ along hypersurfaces. We have,
+ \begin{equation}
+    K_{\mu\nu} = h^{\alpha}_{\mu}h^{\beta}_{\nu}\nabla_{(\alpha}\hat{n}_{\beta)}
+ \end{equation}
+ We can define a foliation of manifolds $M$ by a family of hypersurfaces $\Sigma$ such that $\hat{n}$ of each hypersurface leads to the next one. Therefore $n_{\mu}(x^\alpha)$ defines a vector field on $M.$ The extrinsic curvature is given by the Lie derivative,
+ \begin{equation}
+    K_{\mu\nu} = \frac{1}{2}\mathcal{L}_n h_{\mu\nu} = \frac{1}{2}\left[n^\sigma \partial_\sigma h^{\mu\nu} + (\partial_\mu n^\sigma)h_{\sigma\nu}+\partial_\nu n^{\sigma}h_{\mu\sigma}\right].
+ \end{equation}
+ Finally, the Levi-Civita tensor in its covariant form is 
+ \begin{equation}
+    \epsilon_{\mu_0\cdots \mu_d}=\sqrt{-g} \epsilon_{\mu_0\cdots \mu_d}.
+ \end{equation}
+ \subsection{Einstein Hilbert Action}
+ To motivate this action, we need a kinetic term that is proportional to $\partial^2 g^2$ that is also a Lorentz scalar. One naive guess would be $\nabla^\mu \nabla^{\nu} g_{\mu\nu},$ but due to torsion free-ness, this will always be zero. It turns out the simplest way of writing it is using the Riemann tensor, so we can guess 
+ \begin{equation}
+    S_1 = \frac{1}{16\pi G_n}\int\dd^D{x}\sqrt{-g}R,
+ \end{equation}
+ but there is also an even easier one! Just a scalar works too, so we have 
+ \begin{equation}
+    S_2 = \frac{1}{16\pi G_n}\int\dd^D{x}\sqrt{-g}(-2\Lambda).
+ \end{equation}
+ Together, they form the Einstein-Hilbert action,
+ \begin{equation}
+    \boxed{S_{EH} = \frac{1}{16\pi G_n}\int\dd^D{x}\sqrt{-g}(R-2\Lambda).}
+ \end{equation}
+ To get the equations of motion, we just need to vary $S$ and set $\delta S=0.$ We have,
+ \begin{align}
+    0 = \delta(\mathbb{I}) &= \delta(g^{\alpha}_{\mu}) \\ 
+    &=\delta(g^{\alpha\beta}g_{\beta\mu}) \\ 
+    &= (\delta g^{\alpha\beta})g_{\beta\mu} + g^{\alpha\beta}\delta(g_{\beta\mu}) \\ 
+    \implies \delta g_{\mu\nu} &= -g_{\mu\alpha}g_{\nu\beta}\delta g^{\alpha\beta}.
+ \end{align}
+ This allows us to compute the variation in the $\Lambda$ term. We first compute $\delta (\sqrt{-g})$ by using the property that 
+ \begin{equation}
+    \det M = \prod_i \lambda_i = \exp\left(\text{Tr }\log M\right).
+ \end{equation}
+ So,
+ \begin{equation}
+    \delta(\det M) = \det M \delta(\text{Tr }\log M) = (\det M)\text{Tr}(M^{-1}\delta M).
+ \end{equation}
+ This gives 
+ \begin{equation}
+    \frac{\delta(-g)}{g} = g^{\alpha\beta}\delta g_{\alpha\beta} = -g_{\alpha\beta}\delta g^{\alpha\beta}.
+ \end{equation}
+ Finally, we can simplify 
+ \begin{equation}
+    \delta(\sqrt{-g}) = -\frac{1}{2}\sqrt{-g}g_{\alpha\beta}\delta g^{\alpha\beta},
+ \end{equation}
+ and 
+ \begin{equation}
+    \delta S_2 = \frac{1}{16\pi S_n}\int \dd^{D}{x}\sqrt{-g} \Lambda g_{\alpha \beta}\delta g^{\alpha\beta}.
+ \end{equation}
+ Now, for the Ricci term. We can write $g^{\alpha\beta}R_{\alpha\beta}$ and expand $\delta S_1$ using the triple product rule. We have,
+ \begin{align}
+    \delta S_1 &= \frac{1}{16\pi G_n}\int \dd^D x\left[(\delta \sqrt{-g})g^{\alpha\beta}R_{\alpha\beta}+\sqrt{-g}R_{\alpha\beta}\delta g^{\alpha\beta} + \sqrt{-g}g^{\alpha\beta}\delta R_{\alpha\beta}\right] \\ 
+    &= \frac{1}{16\pi G_n}\int \dd^D{x} \left\{\sqrt{-g}\left[-\frac{1}{2}g_{\alpha\beta}R+R_{\alpha\beta}\right]\delta g^{\alpha\beta} + \sqrt{-g}g^{\alpha\beta}\delta R_{\alpha\beta}\right\}.
+ \end{align}
+ Note that the first term is just the LHS of Einstein's Equations, so we will be almost finished if the last term, which is a surface term, is zero. One might think that all we have to do is make the boundary infinite and then all the terms vanish, but we have to take into account that spacetime is a manifold in $\mathbb{R}^4,$ so conceptually we can't go back before the start of the universe! It turns out that we don't actually care too much about this (we still don't know if the universe has a beginning!) but it does become very important later on for numerical relativity.
+
+ We can also use the Pailtini Identity 
+ \begin{equation}
+    \delta R_{\alpha\beta} = \nabla_\lambda \delta \Gamma^{\lambda}{}_{\alpha\beta}- \nabla_\beta \delta\Gamma^{\lambda}{}_{\lambda\alpha},
+ \end{equation}
+ such that we can compute,
+ \begin{equation}
+    \delta S_{surface} = \frac{1}{16\pi G_n}\int \dd^{D}{x} \sqrt{-g}\nabla_\lambda\left[\underbrace{g^{\alpha\beta}\delta\Gamma^{\lambda}{}_{\alpha\beta}-g^{\alpha\lambda}\delta \Gamma^{\sigma}{}_{\sigma\alpha}}_{v^{\lambda}}\right],
+ \end{equation}
+ and further compute,
+ \begin{equation}
+    \delta \Gamma^{\alpha}{}_{\alpha\beta} = -\frac{1}{2}\left[g_{\lambda\alpha}\nabla_\beta \delta g^{\lambda\sigma} + g_{\lambda\beta}\nabla_\alpha \delta g^{P\lambda\sigma} - g_{\sigma\lambda}g_{\beta\rho}\nabla^{\sigma}\delta g^{\lambda\rho}\right]
+ \end{equation}
+ to obtain 
+ \begin{equation}
+    v^{\lambda}=g_{\alpha\beta}(\nabla^\lambda \delta g^{\alpha\beta} - \nabla^\beta \delta g^{\alpha\lambda}).
+ \end{equation}
+ The first term can be simplified as $g_{\alpha\beta}=h_{\alpha\beta}+n^2 n_{\alpha}n_\beta$ while the second term is anti-symmetric in $\lambda,\beta.$ Applying divergence theorem, we have 
+ \begin{equation}
+    \delta S_{surface} = \frac{1}{16\pi G_n}\int_{\partial M}\dd^{D-1}y\sqrt{|n|}h_{\alpha\beta}n_{\lambda}\left[\nabla^\lambda \delta g^{\alpha\beta} - \nabla^\beta \delta g^{\alpha \lambda}\right].
+ \end{equation}
+ Note that $\delta g^{\alpha\beta}|_{\partial M}=0$ and $h_{\alpha\beta\nabla^\beta \delta g^{\alpha\lambda}}=0.$ We can view $h_{\alpha\beta}$ as a projector, but not for the first term (different indices). Therefore, we have 
+ \begin{equation}
+    \delta S_{surface} = \frac{1}{16\pi G_n}\int_{\partial M}\dd^{D-1}y\sqrt{|n|}h_{\alpha\beta}n_\lambda \nabla^\lambda \delta g^{\alpha\beta}\neq 0.
+ \end{equation}
+ Since this is nonzero, we can't minimize the action on the surface! We need to introduce another term.
+\subsection{Full Action and Energy Conditions}
+To cancel the pesky boundary term, we can add something to $S_{EH}$ to cancel this. This is the Gibbons-Hawking-York term, which is given by
+\begin{equation}
+   S_{GHY} = \frac{1}{8\pi G_N}\int_{\partial M}\dd^{D-1}{y}\sqrt{|n|}K.
+\end{equation}
+If we let $S=S_{EH}+S_{GHY}$ then the surface terms cancel. This matters when we want to know the action, not just the EOM! For example, it comes up during QFT, numerical relativity, and looking at conservation laws.
+\vspace{2mm}
+
+We can also assign an action to the matter. We have, 
+\begin{equation}
+   S_{matter} = \int \dd^D{x} \mathcal{L}_{matter} = \int \dd^D{x} \sqrt{-g}L_{matter},
+\end{equation}
+and we can write the variation of the matter in terms of the stress-energy tensor, i.e. define it to be the quantity such that 
+\begin{equation}
+   \delta S_{matter} = \int d^Dx \frac{1}{2}\sqrt{-g}T_{\mu\nu}g^{\mu\nu},
+\end{equation}
+where 
+\begin{equation}
+   T_{\alpha\beta} = \frac{2}{\sqrt{-g}}\frac{\delta \mathcal{L}_{matter}}{\delta g^{\alpha\beta}} = - g_{\alpha\beta}L + 2\frac{\delta L}{\delta g^{\alpha\beta}},
+\end{equation}
+and the full action is 
+\begin{equation}
+   S  = S_{EH} + S_{GHY} + S_{matter}.
+\end{equation}
+Energy conditions are just different ways of saying energy density can't be negative.
+\begin{itemize}
+   \item WEC: $T_{\alpha\beta}n^\alpha n^\beta \geq 0$ for all time-like $n$ (weak energy condition). This implies 
+   \begin{equation}
+      \rho\ge 0, \rho + P \ge 0
+   \end{equation}
+   \item NEC: $T_{\alpha\beta}n^\alpha n^\beta \geq 0$ for all null $n$ (null energy condition). This implies
+   \begin{equation}
+      \rho + P \ge 0
+   \end{equation}
+   \item Dominant Energy Condition: WEC and $T_{\mu\nu}t^{\nu}$ is not spacelike. This implies that 
+   \begin{equation}
+      \rho \ge |P|
+   \end{equation}
+   \item Null Dominant EC: DEC for null vectors $T^{\mu\nu}\ell_\mu$ only.
+   \item Strong EC: $T_{\mu\nu}t^{\mu}t^\nu \ge \frac{1}{2}T^{\lambda}{}_{\lambda} t^\sigma t_{\sigma}$, which implies 
+   \begin{equation}
+      \rho + P \ge 0, \rho + 3P \ge 0,
+   \end{equation}
+   or that gravity is always attractive (note: cosmological constant breaks this).
+\end{itemize}
+\section{Extensions of Gravity}
+\subsection{High Level Overview}
+We derived Einstein's equations using minimality and symmetries, i.e. $S \sim R \subset \partial^2 g^2,$ but there could be more! For example, we could have 
+\begin{equation*}
+   S = S_{EH} + S_{extra},
+\end{equation*}
+where $S_{extra}$ has higher-order suppressed corrections, which will be on the scale of $M_p^{-1}.$ Why would we want to do this?
+\begin{enumerate}
+   \item This could be true. The end.
+   \item We know gravity as a quantum field theory is non-renormalizable. It breaks down as the energy approaches the Planck scale. Can $S_{extra}$ improve this?
+   
+   Note that any quantum gravity completion will be able to predict this term, i.e. string theory gives us this term!
+   \item Could it explain inflation? Maybe!
+   \item Could it solve the cosmological constant? Perhaps we could solve it, but it's not convincing enough.
+   \item Could it explain away dark matter? No!
+\end{enumerate}
+We will explore a few modified gravity actions.
+\begin{itemize}
+   \item \textbf{$f(R)$} gravity: Consider the action 
+   \begin{equation}
+      S = \frac{1}{16\pi G}\int \dd^4{x}\sqrt{-g}f(R) + S_{GHY},
+   \end{equation}
+   where 
+   \begin{equation}
+      f(R) = R-2\Lambda + \delta f(R),
+   \end{equation}
+   where $\delta f(R)$ is small. The equations of motion is 
+   \begin{equation}
+      f'(R)R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}f(R) + [g_{\mu\nu}\square -\nabla_\mu\nabla_\nu]f'(R) = -8\pi G_N T_{\mu\nu}.
+   \end{equation}
+   Since $\delta f(R)$ has to be small, and any constant terms are absorbed into $\Lambda,$ we can write it as a power series in $R,$ starting with $R^2,$
+   \begin{equation}
+      \delta f(R) = a_1 \frac{R^2}{M^2} + a_2 \frac{R^3}{M^4}+\cdots
+   \end{equation}
+   Now what is $M$? This depends on where these terms come from. If it's a theory of quantum gravity, we could have $M\to M_p.$ If it's a theory of inflation, we could have $M\ll M_p.$
+
+   One key idea is that $f(R)$ gravity has many similarities to normal GR, since only $R$ shows up in the action. This is equivalent to a gravity where $G$ depends on $R$! For a given $R,$ we hav 
+   \begin{equation}
+      \frac{f(R)}{G}\approx R\cdot \frac{1+\delta f(R)/R}{G}
+   \end{equation}
+   where $G/(1+\delta f(R)/R)$ is the effective Newton's constant. 
+   
+   This can be tested experimentally. Consider $f(R)=R^{1+\delta}$ We've experimentally tested that $|\delta|<10^{-5}.$ This is derived from gravitational redshift measurements of radial photons to and from the Cassini Spacecraft.
+   \item $R$-squared gravity: Consider the action 
+   \begin{equation}
+      S = \frac{1}{16\pi G}\int \dd^4{x} \sqrt{-g}\left[R + \frac{d_1}{M^2}R^{\mu\nu \lambda \sigma}R_{\mu\nu\lambda\sigma} + \frac{d_2}{M^2}R^{\mu\nu}R_{\mu\nu}+\frac{d_3}{M^2}R^2\right].
+   \end{equation}
+   Experimental constraints, we can set $d_1=0,d_2=8\pi \beta,d_3=8\pi \alpha.$ We can bound $\alpha,\beta$ by $10^{85}$ using the effect it would have on our solar system. Our best estimates come from table-top torsion balance, which bound them by $10^{60}.$ We can show that for $\alpha,\beta \sim 10^{61},$ the solar system is unaffected.
+   \item Scalar Tensor Theories: What if there are scalars $\phi$ that minimally couples to gravity?
+   
+   Cool. See notes for more details.
+\end{itemize}
+\end{document}

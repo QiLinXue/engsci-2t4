@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{CSC367: Parallel Computing}
+\author{QiLin Xue}
+\date{Spring 2022}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+\usepackage{siunitx}
+\usepackage{esint}
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Introduction}
+Why are all computers since 2005 parallel computers?
+\begin{itemize}
+    \item Moore's Law: number of transistors in a given space doubles every 18 months.
+    \item Similarly, the frequency of clocks are also increasing exponentially.
+    \item NB: Above was only mainly true for pre-2000 computing.
+    \item \emf{Power Wall:} The dynamic power is proportional to $V^2fc$ (since $P=\frac{V^2}{Z}$ and impedance of capacitor is $\frac{1}{\omega C}$). Therefore, increasing both the frequency and voltage causes a cubic effect, which is \textit{bad.}
+    \item An alternative is to linearly increase the capacitance but save power by \textit{lowering} the clock speed. To save power, some companies use less-powerful transistors but use more of them: leads up to parallelism.
+    \item Since 2000, chip density is still doubling every 2 years, but the \textit{clock speed is not.} Instead, we see a new trend where the number of processor cores may double. This allows power to be under control, i.e. it is no longer growing.
+    \item One main problem is that all code were sequential: How can we adapt them to multi-core architectures?
+\end{itemize}
+What are some of the world's fastest computers? (Top 500 list)
+\begin{itemize}
+    \item To measure high performance computing (HPC), we use the units:
+    \begin{itemize}
+        \item Flop: floating point operation, usually double precision unless noted 
+        \item Flop/s : floating point operations per second
+        \item Bytes: size of data (double precision floating number is 8 bytes)
+    \end{itemize}
+    Laptops are usually $\text{Gflop/s} = 10^9\text{ flop/sec},$ while the clusters we'll be working with in this course are $\text{Pflop/s}=10^{15}\text{ flop/s}.$
+    \item See the \href{https://www.top500.org/lists/top500/list/2022/11/}{Top 500 List.}
+\end{itemize}
+What does a parallel computer look like?
+\begin{itemize}
+    \item Regular Computer: We have a Proc/Cache/L2 Cache connected to a L3 Cache which is connected to Memory
+    \item For parallel computers, there are potential interconnects between Proc/Cache/L2 Cache and L3 Cache and between L3 Cache and memory.
+\end{itemize}
+Does performance engineering really matter?
+\begin{itemize}
+    \item Example: Dense matrix multiplication. Consider we are trying to multiply two square matrices.
+    \item Let's code this up in Python, Java, C and implement it on the Intel Haswell Computer System. Consider $n=4096,$
+    \begin{itemize}
+        \item Python: 21042 seconds = 6 hours
+        \item Java: 2387.32 seconds
+        \item C: 1156 seconds = 19 minutes
+    \end{itemize} 
+    \item Back of the envelope calculation of the target speed. There are $2n^3=2^{37}$ floating point operations. Therefore, we have $2^{37}/6.25 = 0.007 \text{ GFLOPS}.$ For Java, we have 0.058 GFLOPS and C gives 0.119 GFLOPS, which is $0.01\%$ of the peak.
+    \item The reason is that Python is interpreted: dynamic interpretation at cost of performance. Java is compiled to byte code and C is compiled to machine code.
+    \item When we implement matrix multiplication using three nested for loops, the loop order affects running time by a factor of $15$!
+    \begin{itemize}
+        \item In C, matrices are stored in memory in row-major order.
+        \item Caches: Each processor reads and writes from main memory in contiguous blocks, called cache lines. Previously accessed cache lines are stored in a smaller memory called the cache. If the data required by the processor resides in cache we get a cache hit, fast! Data accesses not in cache can be slow.
+        \item The reason one order might be better is because we can minimize the last-level cache miss rate.
+    \end{itemize}
+    \item With simple optimizations, we can improve this to $0.3\%.$
+    \item With parallel loops, we can get to $5.4\%$ of peak.
+    \item There are a lot of other optimizations we can do, and we can improve that to $42\%$ (which uses a different implementation, i.e. Intel MKL). That's a 50,000 times improvement!
+\end{itemize}
+\end{document}

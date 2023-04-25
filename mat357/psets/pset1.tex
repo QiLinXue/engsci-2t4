@@ -1,0 +1,286 @@
+
+
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{\vspace{-2cm}MAT357: Real Analysis \\ Problem Set 1}
+\author{QiLin Xue}
+\date{2022-2023}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+    \item \begin{enumerate}[label=(\alph*)]
+        \item We show the implication both ways. Suppose there is a fixed point. Then there exists an $a \in A$ such that $f(a)=a.$ The graph of $f$ is given by $(x,f(x)),$ which at $x=a$ becomes $(a,a),$ which crosses the diagonal.
+        
+        Now suppose that the graph given by $(x,f(x))$ crosses the diagonal, i.e. there exists some $a\in A$ such that $(x,f(x))=(a,a).$ Component-wise, this implies that $x=a$ and $f(x)=f(a)=a,$ which is the definition of a fixed point.
+        \item Consider the trivial case where $f(0)=0$ or $f(1)=1.$ If either of this is true, then by definition there exists a fixed point. We now assume that $f(0) > 0$ and $f(1) < 1.$ Note that this is the only other case since the range of $f$ is restricted to $[0,1].$
+        
+        The diagonal of $[0,1]\times [0,1]$ is given by the function $g:[0,1]\to [0,1], g(x)=x.$ We then have $f(0)>g(0)=0$ and $f(1)<g(1)=1.$ By the intermediate value theorem, there must be an intersection, and by part (a), this intersection corresponds to a fixed point.
+        \item This is not true. Consider $f:(0,1)\to (0,1), x \mapsto 0.$ This function will never cross the diagonal in the domain $(0,1),$ so there are no fixed points.
+        \item This is also not true. Consider $f:(0,1)\to (0,1)$ defined piecewise by 
+        \begin{equation}
+            f(x) = \begin{cases}
+                1  & 0 \le x \le \frac{1}{2} \\ 
+                0 & \frac{1}{2} < x \le 1.
+            \end{cases}
+        \end{equation}
+        This clearly doesn't intersect the diagonal since in the region $[0,1/2],$ we have $g(x)=x < 1$ and in the region $(1/2,1],$ we have $g(x)=x > 0.$
+    \end{enumerate}
+    \newpage
+    \item \begin{enumerate}
+        \item First, we will show that a uniformly continuous function is continuous. Suppose $f$ is uniformly continuous. We know that for each $\epsilon > 0$ there exists a $\delta > 0$ such that for all $t,$ we have $|x-t|<\delta$ implies that $|f(x)-f(t)|<\epsilon.$
+        
+        Then to show continuity, we need to show that for each $\epsilon > 0,$ there exists a $\delta'(t) > 0$ such that $|x-t|<\delta'(t)$ implies that $|f(x)-f(t)|<\delta',$ where the only difference is that $\delta'$ is allowed to vary along the domain of the function. If we set $\delta'(t)=\delta$ (i.e. the same $\delta$ as what uniform continuity gives us), then by uniform continuity, 
+        \begin{equation}
+            |x-t|<\delta'(t)=\delta \implies |f(x)-f(t)| < \epsilon
+        \end{equation}
+        is satisfied. To prove the converse is not true, we turn to part (c) of this problem, where we show that while $x^2$ is a continuous function, it is not uniformly continuous.
+        \item Let $f(x)=2x.$ For each $\epsilon > 0,$ pick $\delta = \frac{\epsilon}{3}.$ Then
+        \begin{equation*}
+            |x-t| < \delta = \frac{\epsilon}{3}.
+        \end{equation*} 
+        Using this, we can bound 
+        \begin{align*}
+            |f(x)-f(t)| &= |2x-2t| \\ 
+            &= 2|x-t| \\ 
+            &< 2\frac{\epsilon}{3} \\ 
+            &< \epsilon.
+        \end{align*}
+        Therefore, we found a value of $\delta$ such that $|x-t|<\delta \implies |f(x)-f(t)|<\epsilon$ for all $t\in (-\infty,\infty).$
+        \item Suppose that $f(x)=x^2$ is uniformly continuous. Then for each $\epsilon>0,$ there exists a $\delta$ such that $|x-t|<\delta \implies |x^2-t^2| < \epsilon$ for all $t\in \mathbb{R}.$ We will show that this leads to a contradiction.
+        
+        With the given choice of $\delta,\epsilon,$ consider $t = \frac{\epsilon}{\delta}$ and $x = \frac{\epsilon}{\delta} + 0.9\delta.$ Clearly 
+        \begin{equation*}
+            |x-t| = |0.9\delta| < \delta,
+        \end{equation*}
+        so this is satisfied. What remains is to verify whether $|x^2-t^2|<\epsilon$ is satisfied or not. We can compute,
+        \begin{align}
+            |x^2-t^2| &= \left|\left(\frac{\epsilon}{\delta}+0.9\delta\right)^2 - \frac{\epsilon^2}{\delta^2}\right| \\ 
+            &= \left|1.8\epsilon + 0.81\delta^2\right| \\ 
+            &> |1.8\epsilon + 0| \\ 
+            &> \epsilon.
+        \end{align}
+        But our assumption was that this choice of $\delta,\epsilon$ ensured that $|x^2-t^2|<\epsilon,$ hence a contradiction. Intuitively, this corresponds to the fact that the derivative of $x^2$ is unbounded.
+    \end{enumerate}
+    \newpage
+    \item \begin{enumerate}
+        \item We will use two useful facts in this computation. Because $\langle \cdot ,\cdot \rangle$ is bilinear, we can compute
+        \begin{align}
+            \langle x \pm y, x \pm y\rangle &= \langle x,x\pm y\rangle \pm \langle y, x\pm y\rangle \\ 
+            &= \langle x,x\rangle \pm \langle x,y\rangle \pm \langle y,x\rangle \pm \langle y,y\rangle \\ 
+            &= \langle x,x\rangle \pm 2\langle x,y\rangle + \langle y,y\rangle.
+        \end{align}
+        Using this, we can simplify using the fact that the inner product induces a norm,
+        \begin{align}
+            |x+y|^2+|x-y|^2 &= \langle x+y,x+y\rangle + \langle x-y,x-y\rangle \\ 
+            &= \left(\langle x,x\rangle + 2\langle x,y\rangle  + \langle y,y\rangle \right)+ \left(\langle x,x\rangle - 2\langle x,y\rangle + \langle y,y\rangle\right) \\ 
+            &= 2\langle x,x\rangle + 2\langle y,y\rangle \\ 
+            &= 2|x|^2+2|y|^2.
+        \end{align}
+        \item We will assume that the map $f:V\times V\to F$ defined by 
+        \begin{equation*}
+            f(x,y) = \left|\frac{x+y}{2}\right|^2 - \left|\frac{x-y}{2}\right|^2
+        \end{equation*}
+        is an inner-product (Piazza post says we don't have to show bilinearity). Note the change of notation, to make it clear later on which inner product we are talking about.
+        
+        Now suppose for the sake of contradiction that the norm $|\cdot |$ arises from two different inner products, $f(\cdot,\cdot)$ and $g(\cdot,\cdot).$ That is, there exists $a^*,b^*\in V$ such that 
+        \begin{equation*}
+            f(a^*,b^*) \neq g(a^*,b^*).
+        \end{equation*}  
+        Now consider 
+        \begin{align}
+            x = \frac{a^*+b^*}{2},\quad\quad\quad\quad y = \frac{a^*-b^*}{2},
+        \end{align}
+        such that $a^*=x+y$ and $b^*=x-y.$ Then, 
+        \begin{align}
+            g(a^*,b^*) &= g(x+y,x-y) \\ 
+            &= g(x,x-y)+g(y,x-y) \\ 
+            &= g(x,x) - g(x,y) + g(y,x) - g(y,y) \\ 
+            &= g(x,x) - g(y,y) \\ 
+            &= |x|^2 - |y|^2
+        \end{align}
+        We can also compute,
+        \begin{align}
+            f(a^*,b^*) &= \left|\frac{a^*+b^*}{2}\right|_f^2- \left|\frac{a^*-b^*}{2}\right|_f^2 \\ 
+            &= |x|^2 - |y|^2.
+        \end{align}
+        % Here, the subscript $f,g$ refer to the norms induced by $f,g$ respectively. 
+        Therefore, since the two give the same result, we have $g(a^*,b^*)= f(a^*,b^*),$ which is a contradiction. Therefore, the inner product which defines the norm must be unique.
+        % Note that for both computations are reversible.
+
+        % We have 
+        % \begin{align*}
+        %     |x|^2 - |y|^2 &= |x|^2+ |y|^2 - 2|y|^2 \\ 
+        %     &= \frac{1}{2}\left(|x+y|^2+|x-y|^2\right) - 2|y|^2 \\ 
+        %     &= |a|^2 -2|y|^2 + |b|^2 \\ 
+        %     &= |a|^2 - \frac{1}{2}|a-b|^2 + |b|^2
+        % \end{align*}
+    \end{enumerate}
+    \item \begin{enumerate}[label=(\alph*)]
+        \item \textbf{FALSE:} Consider the function $f:[0,1) \cup (1,2] \to [0,3]$ defined by 
+        \begin{equation*}
+            f(x) = \begin{cases}
+                x & 0 \le x < 1 \\ 
+                x + 1 & 1 < x \le 2.
+            \end{cases}
+        \end{equation*}
+        Clearly, this is not continuous at $x=1,$ so it suffices to show that this is open. Consider an open set $(a,b)$ where $0 \le a < b< 2.$ We have two cases:
+        \begin{itemize}
+            \item Case 1: $a,b \le 1:$ When restricted to this set, $f((a,b))=(a,b),$ so it is open.
+            \item Case 2: $a,b > 1:$ When restricted to this set, $f((a,b))=(a+1,b+1),$ so it is open.
+        \end{itemize}
+        Note that any open set can be constructed by the union of open sets of the above types. If $A,B$ are disjoint open sets in $[0,1)\cup (1,2]$ then $f(A),f(B)$ are also disjoint, since $f(x)$ is injective. Any open set $U$ in $[0,1)\cup (1,2]$ can be written as $U = \cup V,$ where $V$ are disjoint open sets that satisfy either of the two cases above. Then:
+        $f(U)=\cup f(V).$ Since $f(V)$ is open, a collection of open sets is open, and therefore $f$ is an open function.
+        \item \textbf{TRUE:} If $f$ is a homeomorphism, then $f$ is bijective and $f^{-1}:N\to M$ is continuous. For any open set $U\subset M,$ this continuity condition tells us that 
+        \begin{equation*}
+            \left(f^{-1}\right)^{-1}(U) 
+        \end{equation*}
+        is open. But since $f$ is bijective, the inverse of $f^{-1}$ is just $f.$ The above statement is therefore equivalent to saying that for any open set $U\subset M,$ we get that $f(U)$ is open, which is the definition for open function.
+        \item \textbf{TRUE:} The function $f$ is a homeomorphism if and only if $f$ is bijective and continuous, and $f^{-1}$ is continuous. We already satisfied the bijective and continuous condition.
+        
+        To show that $f^{-1}$ is continuous, we use the fact that $f$ is open to show that $f(U)$ is open for any open set $U\subset M.$ But since $f$ is bijective, we can rewrite $f = (f^{-1})^{-1},$ so $\left(f^{-1}\right)^{-1}(U)$ is open, which is what it means for $f^{-1}:N\to M$ to be continuous.
+        \item \textbf{FALSE:} Consider the function $f:\mathbb{R}\to\mathbb{R}$ defined piecewise to be 
+        \begin{equation*}
+         f(x) = \begin{cases}
+            -x-2\pi & x \le -2\pi \\ 
+            \sin(x) & -2\pi < x < 2\pi \\ 
+            -x+2\pi & x \ge 2\pi,
+         \end{cases}   
+        \end{equation*} 
+
+         which when plotted out, looks like the following (visualization purposes only):
+         \begin{center}
+            \begin{tikzpicture}
+            \begin{axis}[
+            legend pos=outer north east,
+            title=Counter Xxample,
+            axis lines =middle,
+            xlabel = $x$,
+            ylabel = $y$,
+            variable = t,
+            trig format plots = rad,
+            ]
+            \addplot [
+                domain=-10:-2*pi,
+                samples=70,
+                color=blue,
+                ]
+                {-x-2*pi};
+                \addplot [
+                    domain=2*pi:10,
+                    samples=70,
+                    color=blue,
+                    ]
+                    {-x+2*pi};
+                    \addplot [
+                        domain=-2*pi:2*pi,
+                        samples=70,
+                        color=blue,
+                        ]
+                        {sin(x)};
+            \end{axis}
+            \end{tikzpicture}
+         \end{center}
+         It is easy to verify that $f$ is continuous. We will show that it is not open. Consider the set $U=(-2\pi,2\pi) \subset \mathbb{R}.$ Then,
+         \begin{align*}
+            f(U) &= \left\{\sin(x): -2\pi < x < 2\pi \right\} \\ 
+            &= [-1,1].
+         \end{align*} 
+         To see why this is the case, for any $y\in [-1,1],$ we can compute $\arcsin(y),$ which is bounded between $-\pi/2$ and $+\pi/2,$ within our domain. Since $f(U)$ is closed, this is false.
+         \item \textbf{TRUE:} First recognize that if $f$ is also an injection, then $f$ must be a homeomorphism, since the bijection and continuous condition is satisfied, and the continuity of $f^{-1}$ is satisfied as $f$ is open (which we have proved). Therefore, we just need to show that $f$ is injective.
+         
+         Let $x,y\in \mathbb{R}$ such that $f(x)=f(y).$ We want to show that $x=y.$ Suppose for the sake of contradiction, this was not true, and that $x\neq y.$ WLOG, let $x<y.$ By the extreme value theorem (which is valid since $f$ is continuous), there exists a $z\in \mathbb{R}$ such that $x<z<y$ and that $f(z)$ is the extremum point (either maximum or minimum). Again, without loss of generality, assume that $f(z)$ is the maximum, i.e. 
+         \begin{equation*}
+            f(z) \ge f(x) \forall x \in (a,b).
+         \end{equation*}
+         Then $f((x,y))$ is NOT open. To see why, consider $f(z) \in f((x,y)),$ and consider an open neighborhood $(f(z)-\delta,f(z)+\delta)$ around $f(z)$ with $\delta > 0.$ For any choice of $\delta > 0,$ this neighborhood cannot be continued in $f((a,b))$ since $f(z) + \frac{\delta}{2} > f(z).$ But since $f(z)$ is the maximum of $f((a,b))$ there cannot be any values in $f((a,b))$ that are greater than $f(z).$
+         \item \textbf{FALSE:} Consider the function $f:S^1 \to S^1$ defined by 
+         \begin{equation*}
+            (\cos(\theta),\sin(\theta)) \mapsto (\cos(2\theta),\sin(2\theta)),
+         \end{equation*}
+         where $\theta \in \mathbb{R}.$ Clearly, this is a surjection since $(\cos \phi,\sin\phi)$ is mapped to by $(\cos \phi/2,\sin \phi/2).$ This map is open because consider the open set 
+         \begin{equation*}
+            U = \{(\cos\theta,\sin\theta):a < \theta < b\},
+         \end{equation*}
+         where $0 \le a,b < 2\pi.$ Then:
+         \begin{align*}
+            f(U) &= \{(\cos 2\theta,\sin 2\theta):a < \theta < b\} \\ 
+            &= \{(\cos \theta,\sin\theta): 2a < \theta < 2b\}
+         \end{align*}
+         is open. We can also show that it is continuous. Consider the same $U$ as before. We have,
+         \begin{align*}
+            f^{-1}(U) &= f^{-1}\{(\cos \theta,\sin\theta): a < \theta < b\} \\ 
+            &= \{(\cos \theta/2,\sin\theta/2):a < \theta < b\}  \cup \{(\cos(\theta/2 + \pi), \sin(\theta/2+\pi):a < \theta < b)\} \\ 
+            &= \{(\cos\theta,\sin\theta):a/2<\theta<b/2\} \cup \{(\cos(\theta+\pi),\sin(\theta+\pi)):a/2<\theta<b/2\},
+         \end{align*}
+         which is open as it is the union of two open sets. Note that we have two sets in the first place because for each point $(\cos\theta,\sin\theta) \in S^1$ other than $(1,0),$ there are two points on the circle that gets mapped to it by $f.$ However, it is not homeomorphic because it is not injective. We have 
+         \begin{equation*}
+            f(1,0) = (1,0),\quad\quad\quad f(-1,0) = (1,0).
+         \end{equation*} 
+         Because $f$ is not injective, it cannot be bijective.
+    \end{enumerate}
+    \newpage
+    \item Note that $\text{id}:f\mapsto f$ is a linear bijection by definition, as it is the identity map and the domain and codomain contain the same functions (but with a different metric).
+    
+    We will first show that $id$ is continuous.
+
+
+    Consider a sequence $(f_n)$ that converges to the limit $g$ in $C_{max}.$ This means that for each $\epsilon > 0,$ there exists $N\in \mathbb{N}$ such that 
+    \begin{equation*}
+        d_{max}(f_n,g)<\epsilon
+    \end{equation*}  
+    for all $n \ge N.$ Rewriting this with the metric, we have 
+    \begin{align*}
+        \text{max}|f(x)-g(x)| < \epsilon \implies |f(x)-g(x)|<\epsilon.
+    \end{align*}
+    Then the map $id$ is continuous if the sequence $(\text{id}(f_n))=(f_n)$ converges to $(\text{id}(g))=(g)$ in $C_{int}.$ This converges if for every $\epsilon' > 0,$ there exists an $N' \in \mathbb{N}$ such that for all $n\ge N'$ we have 
+    \begin{equation*}
+        d_{int}(f_n,g) = \int_0^1 |f_n-g| \dd{x}.
+    \end{equation*}
+    We can choose $N'$ the same way we chose $N$ for the converging sequence in $C_{max},$ i.e. such that for all $n\ge N'$ we have $|f(x)-g(x)|<\epsilon'.$ We can compute,
+    \begin{align*}
+        \int_0^1 |f(x)-g(x)| \dd{x} < \int_0^1 \epsilon' \dd{x} = \epsilon,.
+    \end{align*}
+    which is equivalent to showing that $d_{int}(f_n,g)<\epsilon'.$ Therefore, $\text{id}$ is continuous.
+
+    To show that $\text{id}^{-1}$ is not continuous, we will find a counterexample. Consider the sequence $(f_n)$ in $C_{int}$ that is defined by 
+    \begin{equation*}
+        f(x) = \begin{cases}
+            nx & 0 \le x \le \frac{1}{n} \\ 
+            -nx + 2 & \frac{1}{n} < x \le \frac{2}{n} \\ 
+            0 & \text{else},
+        \end{cases}
+    \end{equation*}
+    where $n>1.$ We claim that this converges to $g$ where $g(x)=0.$ We have,
+    \begin{align*}
+        d_{int}(f_n,g) &= \int_0^1 |f_n(x)| \dd{x} \\ 
+        &= \int_0^{1/n} nx \dd{x} + \int_{1/n}^{2/n} (-nx + 2)\dd{x} \\ 
+        &= \frac{1}{n}.
+    \end{align*}
+It's clear that this converges. For any $\epsilon > 0,$ we can choose $N=\text{max}\{2,\lceil 1/ \epsilon\rceil\}$ such that for any $n > N,$ we have 
+    \begin{equation*}
+        d_{int}(f_n,g) = \frac{1}{n} < \frac{1}{N}.
+    \end{equation*}
+    If $\epsilon > 1,$ then pick $N=2$ such that $d_{int}(f_n,g_n) < 1/2 < 1.$ If $\epsilon \le 1,$ then
+    \begin{equation*}
+        d_{int}(f_n,g_n) < \frac{1}{N} < \frac{1}{(\epsilon^{-1})}  = \epsilon,
+    \end{equation*}  
+    so it does converge. However, $\text{id}^{-1}$ is not continuous because $(f_n)$ does not converge to $0$ in $C_{max}.$ This is because 
+    \begin{equation*}
+        d_{max}(f_n,g) = \text{max}|f_n(x)-0| = \text{max}(f_n(x)) = 1. 
+    \end{equation*}
+    Therefore, for $\epsilon = \frac{1}{2},$ there does not exist any $N \in \mathbb{N}$ such that for $n \ge N$ implies that $d_{max}(f_n,g) < \epsilon = \frac{1}{2},$ since $d_{max}(f_n,g)=1$ always.
+
+    Intuitively, the trick for this problem is to realize you can construct a skinny function such that the area disappears, but the height remains the same (sort of like the opposite of a $\delta$ function!).
+\end{enumerate}
+
+\end{document}

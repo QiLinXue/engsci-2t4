@@ -1,0 +1,1 @@
+{"rule":"ENGLISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\QWe prove this by contradiction.\\E$"}

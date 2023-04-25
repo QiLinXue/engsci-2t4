@@ -1,0 +1,265 @@
+
+
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{\vspace{-2cm}MAT357: Real Analysis \\ Problem Set 6}
+\author{QiLin Xue}
+\date{2022-2023}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+    \item \begin{enumerate}[label=(\alph*)]
+        \item Consider $M=[0,1]$ and $f:M\to M$ given by $f(x) = \frac{1}{1+x}.$ We can show that this is a weak contraction since for all $x,y\in M$ with $x\neq y,$ we have
+        \begin{align}
+            \left|\frac{1}{1+y}-\frac{1}{1+x}\right| &= \left|\frac{x-y}{(1+x)(1+y)}\right|\\
+            & < |x-y|.
+        \end{align}
+        The inequality is strict because the only time when $(1+x)(1+y)=1$ is when $x=y=0,$ in which case we don't have $x\neq y.$ However, this is not a contraction. For any $k$ such that $0<k<1,$ we can find $x,y\in M$ such that $d(fx,fy) = k d(x,y).$ WLOG, let $y < x.$ Then:
+        \begin{align}
+            d(fx,fy) - kd(x,y) &= \frac{1}{1+y}-\frac{1}{1+x} - k(x-y) \\ 
+            &= (x-y)\left(\frac{1}{(1+x)(1+y)}-k\right).
+        \end{align}
+        We can choose $y=0$ and $x = \frac{1}{k}-1$ for this to be zero. Note that for any $0<k<1,$ we have $x,y\in M$ and $x\neq y.$ Therefore,
+        \begin{equation}
+            d(fx,fy) = kd(x,y)
+        \end{equation}
+        for some $x,y\in M$ with $x\neq y,$ so it is not a contraction.
+        \item The above example worked it out for a compact space $[0,1].$
+        \item Because $f$ is a weak contraction, it is Lipschitz continuous, so it is continuous. A point $x$ is a fixed point of $f$ if $d(x,f(x))=0.$ Recall that $d:M^2 \to \mathbb{R}$ is a continuous function, so 
+        \begin{equation}
+            g: M\to \mathbb{R},\qquad g(x) = d(x,f(x))
+        \end{equation} 
+        is a composition of continuous function, so $g$ is continuous. Because it is a continuous function defined on a compact metric space, it is bounded and the extreme value theorem applies: there exists some point $y$ such that $g(y)=\text{inf}_{x\in M}\{g(x)\}.$ 
+        
+        We claim that $g(y)=0,$ i.e. $y$ is a fixed point. Suppose it is not. Then consider
+        \begin{equation}
+            g(f(y)) = d(f(y),f(f(y))) < d(y,f(y)) = g(y),
+        \end{equation}
+        where the inequality is due to the fact that $f$ is a weak contraction. This contradicts that $g(y)$ is the minimum of $g(x)$ over all $x\in M.$ Therefore, $y$ is a fixed point.
+
+        To show the uniqueness of a fixed point is easy. Suppose there were two fixed points $y_1,y_2\in M.$ Then by weak contraction, we want
+        \begin{equation}
+            d(f(y_1),f(y_2)) < d(y_1,y_2).
+        \end{equation}
+        But this is impossible since $d(f(y_1),f(y_2)) = d(y_1,y_2).$ Therefore, there is only one fixed point.
+    \end{enumerate}
+    \newpage
+    \item \begin{enumerate}
+        \item Let us define 
+        \begin{equation}
+            f(x) = \begin{cases}
+                x + \frac{1}{x} & x \le - 1 \\ 
+                -2 & x > -1.
+            \end{cases}
+        \end{equation}
+        It is easy to check that function $f$ is continuous at $x=-1.$ The derivative is 
+        \begin{equation}
+            f'(x) = \begin{cases}
+                1 - \frac{1}{x^2} & x \le -1 \\
+                0 & x > -1.
+            \end{cases}
+        \end{equation}
+        It's also easy to verify that $|f'(x)|<1.$ Finally, also notice that $f(x)=x$ has no solutions. For $x<-1,$ we can't have $x+\frac{1}{x}=x.$ For $x>-1,$ we have $f(x) > -2.$ Therefore, there are no fixed points, so $f$ is not a contraction.
+        \item Yes, it is a weak contraction. Suppose for the sake of contradiction that it is not weak. That is, there exists $a,b\in \mathbb{R}$ where $b>a$ such that 
+        \begin{equation}
+            \frac{f(b)-f(a)}{b-a} = M.
+        \end{equation}
+        where $|M| \ge 1.$ By the mean value theorem, there exists some $c \in \mathbb{R}$ with $a<c<b$ such that $f'(c) = M.$ But since $|M|\ge 1$ we have $|f'(c)|\ge 1,$ contradicting the assumption that $|f'(x)|<1$ for all $x\in\mathbb{R}.$
+        \item See part (a). We found a function $f$ that satisfies the preconditions but is not a contraction.
+    \end{enumerate}
+    \newpage
+    \item \begin{enumerate}[label=(\alph*)]
+        \item Limiting case of part (b), where $C=0$ and $M=K.$
+        \item If $|f(x)| \le C|x|+K$ for all $x,$ then 
+        \begin{equation}
+            |x'(t)| \le C|x|+K 
+        \end{equation} 
+        for all $x.$ We first show that $x(t)$ is bounded above for finite time, and by the same argument (or by symmetry), we can show that $x(t)$ is bounded below.
+        
+        Suppose for the sake of contradiction that the solution diverges to positive infinity in finite time. Therefore, WLOG, we can let $x>0$ in our time of interest. This is equivalent to 
+        \begin{align}
+            x'(t) \le Cx + K \iff & x'(t) - Cx \le K \\ 
+            \iff & e^{-Ct}x'(t) - Ce^{-Ct}x \le Ke^{-Ct} \\
+            \iff & \frac{d}{dt}(e^{-Ct}x) \le Ke^{-Ct}.
+        \end{align}
+        Integrating over some bounded interval $0\le t \le T,$ we have 
+        \begin{align}
+            &e^{-CT}x(T) - x(0) \le \int_0^T Ke^{-Ct}\dd{t}.
+        \end{align}
+        If $C=0,$ then 
+        \begin{align}
+            x(T) - x(0) \le KT \implies x(T) \le x(0) + KT.
+        \end{align}
+        If $C>0,$ then 
+        \begin{align}
+            e^{-CT}x(T) - x(0) \le \frac{K}{C}\left(e^{-CT} - 1\right) \implies x(T) \le \left(x(0)+\frac{K}{C}\right)e^{CT}-\frac{K}{C}.
+        \end{align}
+        % \begin{equation}
+        %     x'(t) \le Cx + K \iff \frac{x'(t)}{Cx+K} \le 1
+        % \end{equation}
+        % Integrating over some bounded interval $0\le t \le T,$ we have 
+        % \begin{align}
+        %     & \int_0^T \frac{x'(t)}{Cx+K} \dd{t} \le \int_0^T 1\dd{t} \\
+        %     \implies & \int_{x(0)}^{x(T)} \frac{1}{Cx+K}\dd{x} \le T \\
+        %     \implies & \log\left(\frac{Cx(T)+K}{Cx(0)+K}\right) \le T \\ 
+        %     \implies & \frac{Cx(T)+K}{Cx(0)+K} \le e^T \\
+        %     \implies & x(T) \le \left(x(0)+\frac{K}{C}\right)e^T-\frac{K}{C},
+        % \end{align}
+        which is bounded above. Since $T \in \mathbb{R}^+$ is arbitrary, we have shown that $x(t)$ does not diverge in finite $t.$
+
+        Note: There is actually one case we have not considered here. Perhaps it is possible for a solution to diverge in finite time, yet not diverge to either positive or negative infinity. Instead, it oscillates, i.e. 
+        \begin{equation}
+            x(t) = \frac{\sin(1/(t-T))}{t-T}.
+        \end{equation}
+        We will show that this behavior which we neglected, cannot actually exist! This is because this solution would satisfy $x(t)=0$ at infinitely many times $t_i$ in a bounded interval. However, when $x=0$ we have 
+        \begin{equation}
+            |x'(t_i)| \le K
+        \end{equation}
+        so for any $\epsilon > 0,$ there exists $\delta>0$ such that for all $i$ we have $|t-t_i|<\delta$ implies $|x'(t) - K| < \epsilon.$ If we choose $\epsilon = K,$ we have $|t-t_i|<\delta$ implies 
+        \begin{equation}
+            -2K < x'(t) < 2K \implies |x(t)| < 2K\delta.
+        \end{equation}
+        But the intersection points $t_i$ get arbitrarily close together (i.e. closer than $\delta$), so by the above $x(t)$ must be bounded by a constant $2K\delta$ when this occurs, contradicting the fact that $x(t)$ diverges.
+
+        \item Not assigned.
+        \item We just need to show that $f(x)$ being uniformly continuous implies that there are constants $C,K$ such that $|f(x)| \le C|x|+K.$ Intuitively, this is true since uniform continuity states that in a $\delta$-interval, the function can only change by so much. We prove this rigorously below.
+        
+        Fix any $\epsilon > 0.$ Then there exists $\delta > 0$ such that $|x-y|<\delta \implies |f(x)-f(y)|<\epsilon.$ Choose $C = \epsilon/\delta.$
+        
+        For each $x\in \mathbb{R},$ choose $N = \lceil sx/\delta \rceil$ where $s \in \{+1,-1\}$ is the sign of $x.$ Then by triangle inequality:
+        \begin{equation}
+            |f(x)-f(0)| \le |f(0)-f(s\delta)| + |f(s\delta)-f(2s\delta)| + \cdots + |f(s(N-1)\delta)-f(x)|  < N\epsilon,
+        \end{equation}
+        where the last inequality comes from applying the $\delta-\epsilon$ definition to each term. Note that 
+        \begin{equation}
+            N\epsilon < (|x|/\delta + 1)\epsilon = C|x| + \epsilon.
+        \end{equation}
+        We have $|f(x)-f(0)| < C|x|+\epsilon,$ which we can rewrite as 
+        \begin{equation}
+            f(0) - C|x| - \epsilon < f(x) < f(0) + C|x| + \epsilon.
+        \end{equation}
+        There exists $K >0$ such that $K>|f(0)| + \epsilon.$ Then the above inequality implies that 
+        \begin{equation}
+            -K-C|x| < f(x) < K+C|x| \implies |f(x)| < K+C|x|,
+        \end{equation}
+        which is a stronger version of the desired inequality.
+    \end{enumerate}
+    \newpage
+    \item \begin{enumerate}[label=(\alph*)]
+        \item Let $\mu$ denote the measure defined using open intervals and $\mu'$ denote the measure defined using closed intervals. We wish to show that given any set $X\in \mathbb{R}$ we have $\mu(X)=\mu'(X).$ First note that $|(a,b)|=|[a,b]|=b-a,$ so the length of an open interval and a closed interval with the same boundary is the same.
+        
+        Note that $\mu(X) \ge \mu'(X)$ is easy to show since if we have an open interval covering of $X,$ we can take the closure of each interval to get a closed interval covering of $X.$ The length of the covering remains unchanged. Therefore, the infimum of the length of a closed interval covering is at most the infimum of the length of an open interval covering. 
+
+        To show that $\mu'(X) \ge \mu(X),$ we consider a closed interval covering of $X$ with length $L.$ We can then construct an open interval covering of $X$ with length $L+\epsilon$ for any $\epsilon > 0.$ To do so, consider an arbitrary closed covering and construct an open covering,
+        \begin{equation}
+            \bigcup_{i=1} [a_i,b_i] \subset \bigcup_{i=1} (a_i-\epsilon/2^{i+1}, a_i+\epsilon/2^{i+1}),
+        \end{equation}
+        where the total length is
+        \begin{equation}
+            \sum_{i=1} (a_i-\epsilon/2^{i+1}, a_i+\epsilon/2^{i+1}) = \sum_{i=1} [a_i,b_i] + \epsilon \sum_{i=1} \frac{1}{2^{i}} = L + \epsilon.
+        \end{equation}
+        Thus, every closed covering can be covered by an open covering with marginally larger length. Therefore, the infimum of the length of an open interval covering is at most the infimum of the length of a closed interval covering.
+        \item We can write 
+        \begin{equation}
+            C = \bigcap_i^{\infty} C_k
+        \end{equation}
+        where $C_k$ is a closed set with measure $(2/3)^k.$ We have $C \subseteq C^k$ for all $k$ so
+        \begin{equation}
+            \mu(C) \le \mu(C^k)
+        \end{equation}
+        for all $k.$ But $\mu(C^k)=(2/3)^k$ can be arbitrarily small, so $\mu(C^k)=0\implies \mu(C)=0.$
+        \item Let $\mu$ denote the measure defined using open intervals, $\mu'$ denote the measure defined using closed intervals, and $\mu''$ denote the measure defined using closed and open intervals.
+        
+        Showing $\mu''(X) \ge \mu'(X)$ is easy, and in fact it follows the exact same steps as showing $\mu(X) \ge \mu'(X).$ We can take any covering (using closed and/or intervals), take the closure of these intervals, and the length of the covering remains unchanged.
+
+        Showing $\mu''(X) \ge \mu(X)$ is also easy, and follows the exact same steps as showing $\mu'(X) \ge \mu(X).$ Consider any covering with length $L$ consisted of closed and/or open intervals, and we can construct an open covering where the total length is $L+\epsilon$ for any $\epsilon>0$ using the same method as in part (a). 
+
+        However, $\mu'(X)=\mu(X),$ so we really have $\mu(X) \le \mu''(X) \le \mu(X).$ Therefore, $\mu(X) = \mu''(X).$
+        \item Let $\mu$ denote the measure defined using rectangles and $\mu'$ denote the measure using squares. We wish to show that $\mu(X)=\mu'(X)$ for any $X\subseteq \in \mathbb{R}^2.$
+        
+        First note that $\mu(X) \le \mu'(X)$ is easy to show since every square-covering is a rectangle-covering.
+
+        We wish to show that $\mu'(X) \le \mu(X).$ For each rectangle, we wish to cover it with a finite number of squares\footnote{Technically it could be a countable number of squares, but then the proof would require accepting the axiom of choice.} such that the difference in areas can be bounded by $\epsilon$ for any $\epsilon > 0.$ Suppose this was possible (we will prove it later). Then:
+        \begin{equation}
+            \bigcup_{i=1} [a_i,b_i] \times [c_i,d_i] \subset \bigcup_{i=1} \left(\bigcup_{j=1}^{n_i} [x_j, x_j + L_j] \times [y_j, y_j + L_j]\right)
+        \end{equation}
+        where the total area is
+        \begin{align}
+            \sum_{i=1} \sum_{j=1}^{n_j} L_j^2 &= \sum_{i=1} (b_i-a_i)(c_i-d_i) + \sum_{i=1} \epsilon/2^{i+1} \\ 
+            &= \sum_{i=1} (b_i-a_i)(c_i-d_i) + \epsilon.
+        \end{align}
+        
+        Now, it just remains to show that we can cover any rectangle with a finite number of squares such that the difference in areas can be bounded by $\epsilon.$ To do so, WLOG, let $R=[0,a] \times [0,b]$ and cover it with squares of side length $\frac{\epsilon}{2^n},$ i.e. 
+                \begin{equation}
+                    R \subset \bigcup_{i=1}^{\text{ceil}(a2^n/\epsilon)} \bigcup_{j=1}^{\text{ceil}(b2^n/\epsilon)} [x_i, x_i + \frac{\epsilon}{2^n}] \times [y_j, y_j + \frac{\epsilon}{2^n}]
+                \end{equation} 
+                where $x_1=y_1=0.$ The difference in area is bounded by $\frac{\epsilon}{2^n}(a+b).$ As $n$ increases, the difference in area can be made arbitrarily small, and we're done.
+    \end{enumerate}
+    \newpage
+    \item \begin{enumerate}[label=(\alph*)]
+        \item See part (b)
+        % \item Let us look at $\mathbb{R}^n$ where $n>1.$ For any $\epsilon > 0,$ we can cover any straight line segment with a countable number of cubes such that their total area is smaller than $\epsilon.$ We first prove this for the half-line restricted to $x_1 > 0.$
+        
+        % We can parametrize this line by $\vec{x}_0 + t\vec{v}$ where $\vec{v}\in \mathbb{R}^n$ with $|\vec{v}|=1$ and $\vec{x}_0 = (0, x_2, \dots, x_n) \in \mathbb{R}^n.$ Define 
+        % \begin{equation}
+        %     C_r(x_1,\dots, x_n) = [x_1, x_1 + r] \times \cdots \times [x_n , x_n + r]
+        % \end{equation}
+        % to be the of side length $r$ with one corner at $(x_1,\dots,x_n).$ Then define the pseudo-rectangle:
+        % \begin{equation}
+        %     R_r(\vec{x}) = \bigcup_{i=1}^{n} C_r(\vec{x} + i\vec{v})
+        % \end{equation}  
+        % Let $C_r(\vec{x})$ be the rectangle centered at $\vec{x}$ with side length $r.$ Now consider the covering 
+        % \begin{equation}
+        %     \bigcup_{i=1}^{\infty} C_{\epsilon/2^{i+1}}(\vec)
+        % \end{equation}
+        \item We first solve an easier problem. Let $S \cong \mathbb{R}^k$ be a hyperplane in $\mathbb{R}^n$ with $k < n$ such that:
+        \begin{itemize}
+            \item $S$ passes through the origin
+            \item Any $v\in S$ is parallel to one of the coordinate axes.
+        \end{itemize} 
+        Then $S$ is measure zero in $\mathbb{R}^n.$ A direct consequence is that any $v\in S$ will be orthogonal to one of the coordinate axes, which WLOG we will assume is $x_1.$ Then consider the covering
+        \begin{equation}
+            \bigcup_{i=1}^{\infty} U_i
+        \end{equation}
+        where 
+        \begin{equation}
+            U_i = [-\epsilon/2^{i+1}, +\epsilon/2^{i+1}] \times [-i/2,i/2] \times \cdots \times [-i/2,i/2]
+        \end{equation}
+        which has volume 
+        \begin{equation}
+            \text{vol}(U_i) = \frac{\epsilon}{2^i} \cdot i^{n-1}.
+        \end{equation}
+        First note that this is a valid covering. Any point $(0, x_2, \dots, x_n)$ will be covered by $U_{2\cdot \text{ceil(}\text{max}\{|x_2|,\dots,|x_n|\})}.$
+        Now, we wish to show that the total volume is bounded by $\epsilon.$ We have,
+        \begin{equation}
+            \sum_{i=1}^{\infty}\text{vol}(U_i) = \frac{\epsilon i^{n-1}}{2^i} = M\epsilon
+        \end{equation}
+        for some constant $M>0.$ This infinite series converges by the comparison test (standard first-year calculus exercise). Therefore, we can make the volume of the covering arbitrary small by changing $\epsilon.$
+
+        Now we will show that any hyperplane $S' \cong \mathbb{R}^k$ that passes through the origin (with axes not necessarily parallel to coordinate axes) is measure 0. To do this, note that we can write 
+        \begin{equation}
+            S' = L(S)
+        \end{equation}
+        where $S$ is the hyperplane we originally described, and $L \in SO(n)$ is a linear transformation. Note that $\text{det}(L) = 1.$ Therefore, if $\bigcup_{i=1}^{\infty}U_i$ is a cover for $S$ then 
+        \begin{equation}
+            L\left(\bigcup_{i=1}^{\infty} U_i\right) \supset S'
+        \end{equation}
+        is a cover for $S'$ with the same volume (since $\text{det}(L)=1$). Therefore, if the measure defined by rotated prisms is equivalent to the measure defined by non-rotated prisms, then $S'$ will have measure 0.
+
+        The proof for this is a bit ugly, but very similar to question 4, and I believe it is something we covered in MAT257 when defining integration on $\mathbb{R}^n$ through defining partitions and taking refinements of these partitions until the error becomes arbitrarily small. This allows us to cover any connected open set with finitely many prisms such that the difference in volumes is bounded by $\epsilon.$
+
+        Finally, we need to show that an arbitrary hyperplane $S''$ is measure 0. To do this, note that we can perform a constant shift such that this hyperplane intersects the origin and becomes $S'.$ We proved that $S'$ is measure 0, so we can take a cover for $S'$ and shift it by the same constant to get a cover for $S''$ such that the cover has the same volume. Therefore, $S''$ is measure 0.
+        
+    \end{enumerate}
+\end{enumerate}
+\end{document}

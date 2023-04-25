@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{MAT347: Groups, Rings and Fields \\ Midterm 2 Review}
+\author{QiLin Xue}
+\date{Fall 2021}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Basic Definitions}
+Of sets:
+\begin{itemize}
+    \item \emf{Ring:} Set $(R,+,\times)$ where $(R,+)$ is abelian group, $\times$ is associative and distributive.
+    \item \emf{Integral domain:} No zero divisors
+    \item \emf{Field:} Finite integral domain
+    \item \emf{Subring:} Subgroup of $R$ that is closed under multiplication.
+    \item \emf{Ideal:} subring that is closed under left/right multiplication, i.e. $rI \subseteq I.$
+    \item \emf{Quotient Ring:} $R/I$ where $I$ is ideal
+\end{itemize}
+Of elements:
+\begin{itemize}
+    \item \emf{Zero divisor:} an element that divides $0$
+    \item \emf{Unit:} an element that has an inverse
+\end{itemize}
+Other:
+\begin{itemize}
+    \item \emf{Ring homomorphism:} $\phi(a+b)=\phi(a)+\phi(b),\phi(ab)=\phi(a)\phi(b)$
+\end{itemize}
+\section{Basic Theorems}
+\begin{itemize}
+    \item \emf{First Isomorphism Theorem:} $\varphi:R\to S,$ then $\ker \varphi$ is an ideal and 
+    \begin{equation}
+        R/\ker\varphi \cong \varphi(R)
+    \end{equation}
+    \emf{Natural projection} is $R\to R/I$ defined by $r\mapsto r + I.$ Every ideal is the kernel of a ring homomorphism.
+    \item \emf{}
+\end{itemize}
+\end{document}

@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{Phy450: Relativistic Electrodynamics \\ Quiz 6}
+\author{QiLin Xue}
+\date{Spring 2023}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\usepackage{siunitx}
+\usepackage{esint}
+\begin{document}
+
+\maketitle
+We can use Leibniz's rule,
+\begin{align}
+    \partial_\mu(x_\nu A^{\mu\nu} S) &= (\partial_\mu x_\nu) A^{\mu\nu}S + x_\nu (\partial_{\mu}A^{\mu\nu}) \partial_\mu S + x_\nu A^{\mu\nu}(\partial_\mu S) \\
+    &= (\partial_\mu x^\lambda g_{\lambda\nu}) A^{\mu\nu}S  + x_\nu A^{\mu\nu}(\partial_\mu S) \\ 
+    &= \delta^{\lambda}_{\mu} g_{\lambda\nu} A^{\mu\nu}S+ x_\nu A^{\mu\nu}(\partial_\mu S) \\ 
+    &= g_{\mu\nu} A^{\mu\nu}S+ x_\nu A^{\mu\nu}(\partial_\mu S), \label{eq:final}
+\end{align}
+where $\partial_\mu A^{\mu\nu}=0$ since $A$ is a constant tensor. We claim that this first term is zero. Let $\xi = g_{\mu\nu} A^{\mu\nu}.$ Then:
+\begin{align}
+    \xi &= \frac{1}{2}(\xi+\xi) \\ 
+       &= \frac{1}{2}\left(g_{\mu\nu} A^{\mu\nu} + g_{\nu\mu} A^{\mu\nu}\right) \\ 
+       &= \frac{1}{2}\left(g_{\mu\nu} A^{\mu\nu} - g_{\nu\mu} A^{\nu\mu}\right) \\ 
+       &= \frac{1}{2}\left(g_{\mu\nu} A^{\mu\nu} - g_{\mu\nu} A^{\mu\nu}\right) \\ 
+       &= \frac{1}{2}(\xi - \xi) \\ 
+       &= 0.
+\end{align}
+The second line is due to the symmetry of $g,$ third line is due to anti-symmetry of $A.$ In general, contracting a symmetric tensor with an antisymmetric one will give us zero. Therefore, only the second term of equation \ref{eq:final} survives, and we are left with 
+\begin{equation}
+    \partial_\mu(x_\nu A^{\mu\nu} S)  = x_\nu A^{\mu\nu}(\partial_\mu S).
+\end{equation}
+In this problem, we only assumed the anti-symmetry of $A^{\mu\nu},$ the symmetry of $g^{\mu\nu},$ and the fact that $A$ is constant. Therefore, this derivation will also hold for general curved spacetimes.
+\end{document}

@@ -1,0 +1,341 @@
+
+
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{\vspace{-2cm}MAT357: Real Analysis \\ Problem Set 5}
+\author{QiLin Xue}
+\date{2022-2023}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+I worked with Ahmad, and Nathan on this problem set.
+\begin{enumerate}
+    \item We will make use of the following lemma,
+    \begin{lemma}
+        If $f$ is continuous and constant on the rationals, then it is constant on the reals.
+        \begin{proof}
+            Let $f(q)=C$ for all rationals $q\in \mathbb{Q}.$ Suppose for the sake of contradiction that $f$ is not constant on the irrationals. That is, there exists some $a \in \mathbb{Q}^c$ such that $f(a) \neq C.$ Set $\epsilon = |f(a)-C|.$ 
+            \vspace{2mm}
+
+            Because $f$ is continuous at $a,$ there exists $\delta > 0$ such that 
+            \begin{equation}
+                |x-a| < \delta \implies |f(x)-f(a)| < \frac{\epsilon}{2}.
+            \end{equation}
+            But because the rationals are dense in the reals, there exists some $q\in \mathbb{Q}$ such that $|q-a|<\delta,$ and by definition of continuity, we have 
+            \begin{equation}
+                |f(q)-f(a)| < \epsilon/2.
+            \end{equation}
+            But we defined $\epsilon = |f(q)-f(a)|,$ so we have a contradiction. Note that we don't actually need the $\epsilon/2$ part and can keep it at $\epsilon,$ but the factor of 2 was introduced for emphasis that it's not something weird happening at the boundary of the inequality.
+        \end{proof}
+    \end{lemma}
+    I claim that $f$ is constant on the reals by showing it is constant on the rationals. Suppose for the sake of contradiction that $f$ is not constant on the rationals. Then there exists a rational number $p/q \in \mathbb{Q}$ where $p,q\in \mathbb{Z}$ and $\text{gcd}(p,q)=1$ such that $f(p/q) \neq f(0).$ Let $\epsilon = |f(p/q)-f(0)|.$
+
+    Because $f_n(x)$ is equicontinuous, there exists $\delta > 0$ such that $|t|<\delta$ implies that $|f_n(0)-f_n(t)| < \frac{\epsilon}{2}$ for all $n.$ Using the definition of $f_n,$ this implies that 
+    \begin{equation}
+        |f(0) - f(nt)| < \frac{\epsilon}{2}
+    \end{equation}
+    for all $n.$ However, note that there exists $N\in \mathbb{N}$ such that $\left|\frac{p}{Nq}\right| < \delta.$ Set $t=\frac{p}{Nq}$ such that we now have:
+    \begin{equation}
+        \left|f(0) - f\left(n\frac{p}{Nq}\right)\right| < \frac{\epsilon}{2}.
+    \end{equation}
+    for all $n\in \mathbb{N}.$ Pick $n=N$ so we now have:
+    \begin{equation}
+        \left|f(0) - f\left(\frac{p}{q}\right)\right| < \frac{\epsilon}{2} \implies \epsilon < \frac{\epsilon}{2},
+    \end{equation}
+    a contradiction. Using the lemma, because it is constant on the rationals, and $f$ is continuous, it must be constant on the irrationals as well.
+
+    \newpage 
+    \item \begin{enumerate}[label=(\alph*)]
+        \item WLOG let us set $[a,b]=[0,1]$ (we can apply a simple rescaling argument later).
+        
+        Because $(f_n)$ is equicontinuous, pick any $\epsilon > 0.$ Then there exists $\delta > 0$ such that $|s-t|<\delta,n\in \mathbb{N}$ implies that $|f_n(t)-f_n(s)| < \epsilon.$ There exists $N \in \mathbb{N}$ such that $1/N < \delta.$ Then,
+        \begin{align}
+            d(f_n(0), f_n(1)) &< d(f_n(0), f_n(1/N)) + d(f_n(1/N), f_n(2/N)) + \cdots + d(f_n((N-1)/N), f_n(1)) \\ 
+            &< N\epsilon,
+        \end{align}
+        which is true for all $n.$ This is just a rigorous way of saying that $[0,1]$ is covered by a finite number of open intervals with radius smaller than $\delta$ and the maximum change in $f_n$ in each of those open intervals is smaller than $\delta,$ so $d(f_n(0),f_n(1))< N \epsilon$ for some $N\in \mathbb{N}.$
+        
+        Also note that the maximum and minimum of $f_n$ is bounded by this same $N\epsilon,$ using the same line of reasoning. Because the minimum/maximum exist since $f_n$ is a continuous function on a compact set, we can let $f_n(x_m)$ be a minimum and $f_n(x_M)$ be a maximum.
+
+        Because $0 \le x_m,x_M \le 1,$ the interval $[x_m,x_M]$ is contained in a finite union of the above intervals of radius $\delta$ and by the same logic, we have 
+        \begin{equation}
+            d(f_n(x_m), f_n(x_M)) < N\epsilon.
+        \end{equation}
+        This means that each $f_n$ is individually bounded by 
+        \begin{equation}
+            f_n(p) - N\epsilon < f_n(x) < f_n(p) + N\epsilon
+        \end{equation}
+        for some $p\in [0,1].$ Now because $(f_n(p))$ is bounded, there exists a finite 
+        \begin{align}
+            m &:= \text{inf}\{f_n(p)\} \\ 
+            M &:= \text{sup}\{f_n(p)\}.
+        \end{align}
+        Then $f_n(x)$ is uniformly bounded since 
+        \begin{align}
+            \text{sup}\{f_n(x)\} &< \text{sup}\{f_n(p) + N\epsilon\} \le M + N\epsilon \\ 
+            \text{inf}\{f_n(x)\} &> \text{inf}\{f_n(p) - N\epsilon\}  \ge m - N\epsilon,
+        \end{align}
+        so 
+        \begin{equation}
+            m - N\epsilon \le f_n(x) \le M + N\epsilon.
+        \end{equation}
+        % WLOG let $x_m \le x_M$ (we can repeat the exact same argument the other way). Define $0 \le \delta',\delta'' < \delta$ such that there exists $N',N''\in\mathbb{N}$ where 
+        % \begin{equation}
+        %     x_m + \delta' = \frac{N'}{N},\quad\quad\quad\quad x_M - \delta'' = \frac{N''}{N}.
+        % \end{equation}
+        % Then we 
+        % \begin{align*}
+        %     d(f_n(x_m), f_n(x_M)) <& d(f_n(x_m), f_n(N'/N)) + d(f_n(N'/N), f_n((N'+1)/N)) \\ 
+        %     &+ \cdots + d(f_n((N''-1)/N), f_n(N''/N)) + d(f_n(N''/N), f_n(x_M)) \\ 
+        %     < &  d(f_n((N'-1)/N), f_n(N'/N)) + d(f_n(N'/N), f_n((N'+1)/N)) \\ 
+        %     &+ \cdots + d(f_n((N''-1)/N), f_n(N''/N)) + d(f_n(N''/N), f_n((N''+1)/N)) \\ 
+        %     <& d(f_n(0), f_n(1/N)) + \cdots + d(f_n((N-1)/N), f_n(1)) \\ 
+        %     <& (N+2)\epsilon.
+        % \end{align*}
+        \item If $(f_n)$ is an equicontinuous sequence of functions in $C^0([a,b],\mathbb{R})$ such that $(f_n(p))$ is bounded, then $(f_n)$ has a uniformly convergent subsequence.
+        \item \begin{enumerate}
+            \item For $(a,b):$ In the previous part, we used the fact that $[a,b]$ is compact to show that each $f_n$ is bounded, but we actually didn't need to do so. Because each $f_n$ is uniformly continuous on a bounded interval, we can create a finite open cover for $(0,1)$ with intervals of radius $\delta.$ In each of these intervals, the function $f_n$ can change by a maximum of $\epsilon$ (due to uniform continuity), so by triangle inequality, we can write 
+            \begin{equation}
+                d(f_n(s),f_n(t)) < N\epsilon
+            \end{equation}
+            for some $N \in \mathbb{N}$ which is valid for all $s,t\in (0,1).$ Now that we know $f_n$ is bounded. We still have 
+            \begin{equation}
+                f_n(p) - N\epsilon < f_n(x) < f_n(p) + N\epsilon
+            \end{equation}
+            since $|f_n(x)-f_n(p)|<N\epsilon.$ So the rest of the proof still applies.
+
+            Another quick way to see this is to extend $f$ to $\bar{f}:[a,b]\to \mathbb{R}$ as in problem set 2. This extension is unique and uniformly continuous, and with a bit of extra work, we can show that it is uniformly continuous with the same $\delta$ as before. Then $\bar{f}_n$ is equicontinuous, and we can apply the exact same proof as before. And if $(\bar{f}_n)$ is uniformly bounded, then so must $(f_n)$ be uniformly bounded.
+            % \item For $(a,b):$ In problem set 2, we proved that for a uniformly continuous function $f_n:S \to \mathbb{R},$ where $S$ is a subset of a metric space $M$ (in this case $\mathbb{R}$), we have a unique continuous extension from $f_n$ to $\bar{f}_n:\bar{S}\to \mathbb{R}$ and $\bar{f}_n$ is uniformly continuous. Note that we automatically get $\bar{f}_n$ is equicontinuous because the endpoints $a,b$ will have the same $\delta$ value as the rest of the interval $(a,b)$ (due to uniform continuity), so they will have the same $\delta$ value as any other point of any other function. 
+            \item For $\mathbb{R},$ consider the equicontinuous sequence $f_n(x) = x$ (the functions are all the same). Each $f_n$ is uniformly continuous with $\delta = \epsilon$ (from first-year calculus) and because all the functions are the same, it is equicontinuous.
+            
+            Also, because the functions are the same, $f_n(p)$ is bounded (as it is just the same point over and over again). However, $(f_n)$ is not uniformly bounded because each individual function is not bounded.
+            \item For $\mathbb{Q},\mathbb{N}$ we can consider the same sequence as before, $f_n(x)=x.$ Note that this is still uniformly continuous since the metric is induced from $\mathbb{R}.$ Therefore, if $f:M\to \mathbb{R}$ is uniformly continuous, then $f|_S:S\to \mathbb{R}$ is uniformly continuous, where $S\subseteq M.$ 
+            
+            So by the same reasons, the preconditions hold, but $(f_n)$ is not uniformly bounded since $f_n(x)$ is not bounded.
+        \end{enumerate}
+    \end{enumerate}
+    \newpage
+    \item \begin{enumerate}[label=(\alph*)]
+        \item \textbf{Convergence on a countable dense subset:} The proof for this is very similar to the proof of the Arzela-Ascoli Theorem. Since $M$ is compact, consider any countable dense subset $D \in \{d_1,d_2,\dots\} \subseteq M.$ Now consider the sequence 
+        \begin{equation}
+            i_{1}(d_1), \quad i_{2}(d_1),\quad i_{3}(d_1),\quad \dots
+        \end{equation}
+        This is a sequence of points in $M,$ so there exists a converging subsequence
+        \begin{equation}
+            i_{n_{1,1}}(d_1), \quad i_{n_{2,1}}(d_1),\quad i_{n_{3,1}}(d_1),\quad \dots.
+        \end{equation}
+        Now consider the sequence 
+        \begin{equation}
+            i_{n_{1,1}}(d_2), \quad i_{n_{2,1}}(d_2),\quad i_{n_{3,1}}(d_2),\quad \dots.
+        \end{equation}
+        Again, this has a converging subsequence
+        \begin{equation}
+            i_{n_{1,2}}(d_2), \quad i_{n_{2,2}}(d_2),\quad i_{n_{3,2}}(d_2),\quad \dots.
+        \end{equation}
+        We can repeat this process, in order to create a countable number of converging subsequences, where the isometries involved in each sequence are a subset of the isometries used in the previous sequence. That is, we have:
+        \begin{align}
+            & i_{n_{1,1}}(d_1),\quad i_{n_{2,1}}(d_1),\quad i_{n_{3,1}}(d_1),\quad \dots\\
+            & i_{n_{1,2}}(d_2),\quad i_{n_{2,2}}(d_2),\quad i_{n_{3,2}}(d_2),\quad \dots\\
+            & i_{n_{1,3}}(d_3),\quad i_{n_{2,3}}(d_3),\quad i_{n_{3,3}}(d_3),\quad \dots\\
+            & \quad\vdots
+        \end{align}
+        Now consider the sequence of isometries $i_{n_{1,1}},i_{n_{2,2}},i_{n_{3,3}},\dots.$ We will show that this sequence converges over $D.$ For any point $d_k \in D,$ there exists $N \in \mathbb{N}$ (i.e. $N=k$) such that $j>N$ implies that $i_{n_{j,j}} \subseteq \{i_{n_{1,k}},i_{n_{2,k}},\dots\},$ which was defined to send $d_k$ to a convergent sequence. 
+        
+        % \textbf{Convergence on M:} Now, we wish to show that this sequence of isometries converges over $M.$ Pick a point $x \in M \cap D^c.$ Because $D$ is dense, for any $\epsilon > 0,$ we can find a point $d_k \in D$ such that $d(x,d_k) < \epsilon.$
+        
+        % By the definition of isometries, we also know that $d(i_{n_{j,j}}(x), i_{n_{j,j}}(d_k)) < \epsilon$ for all $j \in \mathbb{N}.$ Therefore, since $i_{n_{j,j}}(d_k)$ converges, we must have that $i_{n_{j,j}}(x)$ converges as well (If it didn't converge, then we can pick an $\epsilon$ small enough such that this is not true anymore, but this is true for all $\epsilon$).
+
+        % \textbf{Converges to isometry:} What remains to be shown is that $i_{n_{j,j}}$ converges to an isometry. Consider arbitrary $p,q\in M.$ We have shown that $i_{n_{j,j}}(p) \to i(p) = p_0$ and $i_{n_{j,j}}(q) \to i(q) = q_0.$ We must show that $d(p_0,q_0) = d(p,q).$
+
+        % We can prove this via contradiction. Suppose that $d(p_0, q_0) \neq d(p,q).$
+        
+        
+
+        \textbf{Convergence on M:} We will use the following lemma:
+
+        \begin{lemma}
+            For any $x\in M$ and $\delta > 0,$ we can pick $d_j \in D$ such that $d(d_j,x) < \delta$ and $j \le J,$ where $J \in \mathbb{N}$ is picked large enough such that every $x\in M$ is within $\delta$ of some $d_j$ with $j \le J.$
+
+
+            \begin{proof}
+                Because $M$ is compact, it is totally bounded, so we can cover it with a finite number of balls with radius $\delta/2$ for all $\delta > 0.$ Every ball contains a point $d_{j_k}\in D$ such that the distance between any point in this ball and $d$ is less than $\delta.$
+                \vspace{2mm}
+
+                Pick $J = \text{max}\{d_{j_1},\dots , d_{j_k}\}.$
+            \end{proof}
+        \end{lemma}
+            
+        For all $\epsilon > 0$ there exists $N$ such that $n_k,n_\ell > N$ implies for all $x$, we can find a $d_j$ such per the lemma above such that:
+        \begin{equation}
+            d(i_{n_{k}}(x), i_{n_{\ell}}(x)) \le d(i_{n_{k}}(x), i_{n_{k}}(d_j)) + d(i_{n_{k}}(d_j), i_{n_{\ell}}(d_j)) + d(i_{n_{\ell}}(d_j), i_{n_{\ell}}(x)) < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} = \epsilon.
+        \end{equation}
+        We know that $d(i_{n_{k}}(x), i_{n_{k}}(d_j)) = d(i_{n_{\ell}}(d_j), i_{n_{\ell}}(x))< \epsilon/3$ since $d(x,d_j)<\epsilon$ per the lemma above.
+        
+        Furthermore, we also know that $d(i_{n_{k}}(d_j), i_{n_{\ell}}(d_j)) < \epsilon/3$ for large enough $N$ since $i_{n_{k'}}(d_j)$ converges in $M,$ so it must be Cauchy. Note that here, $N$ depends on the choice of $d_j,$ but since from the lemma there are a finite number of $d_j$'s for a given $\epsilon$, we can pick $N$ to pick  
+
+        Note that there exists an $N\in \mathbb{N}$ such that for all $x,$ we have $d(i_{n_{k}}(x), i_{n_{\ell}}(x)) < \epsilon,$ so this gives us uniform convergence as well.
+
+        \textbf{Converges to isometry:} What remains to be shown is that $i_{n_{k}}$ converges to an isometry. Consider arbitrary $p,q\in M.$ We have shown that $i_{n_{k}}(p) \to i(p) = p_0$ and $i_{n_{k}}(q) \to i(q) = q_0.$ We must show that $d(p_0,q_0) = d(p,q).$
+
+        We prove this by contradiction. Suppose for the sake of contradiction that 
+        \begin{equation}
+            |d(i(p),i(q)) - d(p,q)| = \epsilon > 0.
+        \end{equation}
+        However, by triangle inequality:
+        \begin{equation}
+            d(i(p), i(q)) \le d(i(p), i_{n_k}(p)) + d(i_{n_k}(p), i_{n_k}(q)) + d(i_{n_k}(q), i(q)) = d(i(p), i_{n_k}(p)) + d(i_{n_k}(q), i(q)) + d(p,q),
+        \end{equation}
+        so 
+        \begin{equation}
+            d(i(p), i(q)) - d(p,q) \le d(i(p), i_{n_k}(p)) + d(i_{n_k}(q), i(q)).
+        \end{equation}
+        However, since $i_{n_k}(p)\to i(p)$ and $i_{n_k}(q) \to i(q),$ there exists some $N$ such that $k>N$ implies that $d(i(p), i_{n_k}(p)) <\epsilon /2$ and $d(i_{n_k}(q), i(q)) <\epsilon/2.$ So we have:
+        \begin{equation}
+            |d(i(p),i(q)) - d(p,q)| < \epsilon,
+        \end{equation}
+        contradicting the assumption that $|d(i(p),i(q)) - d(p,q)| = \epsilon.$ Therefore, the sequence of isometries converges to an isometry.
+        \item The space of self isometries is compact if any sequence of isometries has a convergent subsequence. We proved this for arbitrary sequences of isometries in part (a), so this space must be compact.
+        \item  We prove this directly. Consider an arbitrary $x\in M.$ We wish to show that 
+        \begin{equation}
+            i_{n_1}^{-1}(x),\dots, i_{n_2}^{-1}(x), \dots
+        \end{equation}
+        converges to $i^{-1}.$ To do so, for any $\epsilon > 0,$ we want to show there exists $K \in \mathbb{N}$ such that $k>K$ implies that $d(i_{n_k}^{-1}(x),i^{-1}(x)) < \epsilon.$ But by the definition of isometries, we have 
+        \begin{equation}
+            d(i_{n_k}^{-1}(x),i^{-1}x) = d(x, i_{n_k}(i^{-1}(x))) = d(i(i^{-1}x), i_{n_k}(i^{-1}x)) = d(i(p), i_{n_k}(p)),
+        \end{equation}
+        where $p=i^{-1}x.$ But because $i_{n_k}$ uniformly converges to $i,$ there exists $K\in \mathbb{N}$ such that for all points $p\in M$ we have that $d(i(p), i_{n_k}(p)) < \epsilon.$ Therefore, if we pick this same $K$ value for all choices of $x,$ we have 
+        \begin{equation}
+            d(i_{n_k}^{-1}(x),i^{-1}x) < \epsilon,
+        \end{equation}
+        as desired.        
+        \item See part (e)
+        \item Yes, they are compact. The group of $m\times m$ orthogonal matrices is isomorphic to $O(m),$ which defines isometries of $\mathbb{R}^{m}$ that fixes the origin. It is a standard linear algebra exercise to show that this corresponds to isometries on the unit $m-1$ sphere. This is a compact space, and we've shown that the space of self-isometries on compact spaces is compact, so $O(m)$ is compact. 
+    \end{enumerate}
+
+
+
+
+
+
+
+
+    \newpage
+    \item \begin{enumerate}[label=(\alph*)]
+        \item Consider the function
+        \begin{equation}
+            f(x,y) = \begin{cases}
+                0 & \text{if } x = y = 0\\
+                x^yy^x & \text{ else}.
+            \end{cases}
+        \end{equation}
+        
+        This is symmetric in $x$ and $y,$ so we just need to check that for each fixed $y=y_0$ the function $g: x \mapsto f(x,y)$ is a continuous function in $x$. We have two cases:
+        \begin{itemize}
+            \item Case 1: $y_0 \neq 0.$ In this case, we have 
+            \begin{equation}
+                g(x) = \begin{cases}
+                    0 & \text{if } x = 0\\
+                    x^{y_0}y_0^x & \text{ else}.
+                \end{cases}
+            \end{equation}
+            This is continuous at $x>0$ because $x^{y_0}$ and $y_0^x$ are both continuous, so their product is continuous. It is also continuous at $x=0$ because $\lim_{x\to 0^+} x^{y_0}y_0^x = 0.$
+            \item Case 2: $y_0 = 0.$ In this case, we have:
+            \begin{equation}
+                g(x) = \begin{cases}
+                    0 & \text{if } x = 0\\
+                    x^0 0^x & \text{ else}.
+                \end{cases}
+            \end{equation}
+            Note that $x^00^x=0$ for all $x\neq 0,$ so $g(x)=0$ everywhere, and it is continuous.
+        \end{itemize}
+        Now, we just need to show that $f$ is not continuous, specifically at $(0,0).$ Consider restricting the function to the set $S = \{(t,t) \in \mathbb{R}^2 : t \in [0,1]\}.$ Let this restriction be $h.$ We then have 
+        \begin{align}
+            h(t) = \begin{cases}
+                0 & t = 0 \\
+                (t^t)^2 & t \neq 0.
+            \end{cases}
+        \end{align}
+        However, this is not continuous at $t=0$ since $\lim_{t\to 0^+} (t^t)^2 = 1 \neq 0.$ Since a restriction of the function on the domain $[0,1]\times [0,1]$ is not continuous, then the function is not continuous.
+    \item Consider a sequence $(x_n,y_n)$ that converges in $[0,1]\times [0,1].$ We wish to show that $(f(x_n,y_n))$ also converges, which would imply that $f$ is continuous.
+    
+    Let $(x_n,y_n)$ converge to $(x_0,y_0).$ Then for all $\delta > 0,$ there exists $N\in \mathbb{N}$ such that $n>N\implies |x_0-x_n|<\delta,|y_0-y_n|<\delta.$
+
+    Let $g(y)=f(x_0,y).$ Because $g(y)$ is continuous, for every $\epsilon > 0,$ there exists $\delta > 0$ such that $|y_0-y_n|<\delta \implies |g(y_0)-g(y_n)|<\frac{\epsilon}{2} \implies |f(x_0,y_0) - g(x_0,y_n)| < \frac{\epsilon}{2}.$ 
+    
+    Let $h_y(x)=f(x,y)$ be the restriction of $f$ to a certain $y$ value. Because these are equicontinuous for each $y,$ we have that $|x_0-x_n| < \delta \implies |h_{y_n}(x_0) - h_{y_n}(x_n)| < \epsilon \implies |f(x_0,y_n) - f(x_n,y_n)| < \epsilon.$ 
+
+    We can now put everything together. Consider an arbitrary $\delta > 0,$ and pick the corresponding $N\in \mathbb{N}$ such that both $|x_0-x_n|<\delta$ and $|y_0-y_n|<\delta$ is satisfied for all $n> N.$ Then by the triangle inequality, and using the above results, we have:
+    \begin{align}
+        |f(x_0,y_0) - f(x_n,y_n)| & \le |f(x_0,y_0) - f(x_0,y_n)| + |f(x_0,y_n) - f(x_n,y_n)| \\
+        & < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon,
+    \end{align}
+    where the last line follows from continuity of $g(y)$ and equicontinuity of $h_y(x).$
+    \end{enumerate}
+    \newpage
+    \item Let
+    \begin{equation}
+        P_n(x) = a_{10,n} x^{10} + a_{9,n} x^9 + \cdots + a_{0,n} x^0.
+    \end{equation}
+    Note that each coefficient $(a_{i,n})$ forms a bounded sequence since $P_n(x)$ converges to $0$ on $[0,1],$ so they must be bounded. Because the coefficients are all bounded, we must have that $P_n(x)$ is uniformly bounded on $[0,1]$ and so are the derivatives. Because they are uniformly bounded on a compact set, they are equicontinuous, so we get uniform convergence of $P_n(x)$ and its derivatives.
+
+    We just need to prove that $(a_{i,n})$ forms a bounded sequence.
+    \begin{lemma}
+        $(a_{i,n})$ forms a bounded sequence.
+        \begin{proof}
+            These $11$ coefficients are uniquely determined by 11 points of $P_n(x).$ Pick 11 arbitrary points in $[0,1].$ Because it converges point-wise at these 11 points, then these coefficients cannot grow without bound.
+
+            \vspace{2mm}
+
+            Note: I couldn't quite finish the proof here, but it makes sense that if any of the coefficients were to grow unbounded, then $P_n(x)$ cannot converge. An alternative way to prove this is to map this to a problem in $\mathbb{R}^{11}$ and match the coefficients to coordinates and in $\mathbb{R}^n$ a point converges to $0$ if all the components converge to $0$ 
+        \end{proof}
+    \end{lemma}
+    % \begin{lemma}
+    %     Let $P_n(x)$ be a sequence of polynomials with degree $d$ or less. I claim that if this sequence converges to $0$ on $[0,1],$ then its derivative will also uniformly converge to $0$ on $[0,1].$
+    
+    % \begin{proof}
+    %     We prove by contradiction. Suppose that the derivative doesn't uniformly converge to $0$ on $[0,1].$ Let $P'_n(x)$ converge to $Q(x).$ Then:
+    % \begin{equation}
+    %     \text{sup}\{Q(x)\} = M > 0.
+    % \end{equation}
+    % Because the derivative of a polynomial is still a polynomial and polynomials are continuous, then for all $\epsilon > 0$ there exists some non-empty closed interval $[a,b] \subseteq [0,1]$ such that $|Q(x) - M|<\epsilon$ inside this interval. In fact, for small enough $\epsilon,$ there exists some $M'>0$ such that inside this interval, we have $|Q(x)| > M'.$
+
+    % Consider this same interval $[a,b]$ where the magnitude of the derivative is greater than $M' >0.$ By the mean value theorem, there exists some point $c \in [a,b]$ such that 
+    % \begin{equation}
+    %     Q(c) = \frac{P(b) - P(a)}{b-a}.
+    % \end{equation}
+    % However, because $P_n(x)$ converges to $0$ on $[0,1],$ we have $P(b)-P(a)=0$ and since $b-a > 0,$ we must have $Q(c)=0,$ contradicting our statement that $P'(c) > M' > 0.$
+    % \end{proof}
+    % \end{lemma}
+    By extension, all higher derivatives will be uniformly continuous on $[0,1].$ We can apply this to the problem, where $d=10.$ Suppose 
+    \begin{equation}
+        P_n(x) = a_{10,n} x^{10} + a_{9,n} x^9 + \cdots + a_{0,n} x^0.
+    \end{equation}
+    We can show that all the coefficients approach zero, i.e. $a_{k,n} \to 0.$ To do this, the $k$th derivative is 
+    \begin{equation}
+        G_{k,n}(x) = \frac{d^k}{dx^k}P_n(x) = c_{10,k} a_{10,n} x^{10-k} + c_{9,k} a_{9,n} x^{9-k} + \cdots + c_{k,k} a_{k,n},
+    \end{equation}
+    where $c_{i,k} = i(i-1)\cdots (i-k+1)$ come from repeated applications of the power rule. But from the lemma, we know that $G_{k,n}(x)$ uniformly approaches $0$ on $[0,1],$ so $G_{k,n}(0) \to 0.$ But $G_{k,n}(0)=c_{k,k}a_{k,n},$ and since $c_{k,k} > 0$ is a constant that doesn't depend on $n,$ we have that $a_{k,n} \to 0.$
+
+    We have shown that all the coefficients approach $0.$ We will now use this to show that $P_n(x)$ uniformly converges to $0$ on the interval $[4,5]$ as well. Because $a_{i,n}\to 0,$ we have that for all $\epsilon > 0,$ there exists $N\in \mathbb{N}$ such that $n>N$ implies that $|a_{i,n}| < \frac{\epsilon}{11 \cdot 5^{10}}.$
+    
+    
+    Let $4 \le x \le 5.$ By triangle inequality, we have:
+    \begin{align}
+        |P_n(x)| &= |a_{10,n}x^{10} + a_{9,n}x^9 + \cdots + a_{0,n}x^0| \\ 
+        &\le |a_{10,n}| |x^{10}| + |a_{9,n}| |x^9| + \cdots + |a_{0,n}| |x^0| \\
+        &\le |a_{10,n}| 5^{10} + |a_{9,n}| 5^{10} + \cdots + |a_{0,n}| 5^{10} \\
+        &< \frac{\epsilon}{11} + \cdots + \frac{\epsilon}{11} = \epsilon.
+    \end{align}
+    For every $\epsilon > 0,$ there exists $N\in \mathbb{N}$ such that $n>N$ implies that $|P_n(x)-0|<\epsilon,$ so the sup-norm approaches $0$ and $P_n(x) \to 0$ uniformly on $[4,5].$    
+\end{enumerate}
+
+\end{document}

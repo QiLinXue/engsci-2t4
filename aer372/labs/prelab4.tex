@@ -1,0 +1,110 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{AER372: Control Systems  \\ Prelab 4}
+\author{}
+\date{Spring 2023}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\newcounter{mathematicapage}
+
+
+\tikzstyle{block} = [draw, fill=white, rectangle, 
+    minimum height=3em, minimum width=6em]
+\tikzstyle{sum} = [draw, fill=white, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+    \item We have the following circuit:
+    \begin{center}
+        \begin{circuitikz}
+            \draw[] (0,0) to[V, v=$v(t)$] (0,2)
+                        to[L, l=$L$] (2,2)
+                        to[R, l=$R$] (4,2);
+            \draw[] (4,2) node[elmech,scale=0.5] (M) {};
+            \draw[] (M.north) node[above] {$M$};
+            \draw[] (M.east) -- (6,2) -- (6,1);
+            \draw[] (0,0) -- (6,0) -- (6,1);
+        \end{circuitikz}
+    \end{center}
+    From Kirchoff's Law, we have 
+    \begin{equation}
+        v(t) - L \dot{i}(t) - i(t) R - K_e \dot{\theta}(s) = 0
+    \end{equation}
+    where $v_d = - K_e \dot{\theta}(s)$ is the voltage drop across the motor, given by Faraday's Law. We can then write the differential equation for the motor as
+    \begin{equation}
+        \tau_m = K_t i(t) = \left(\underbrace{J_r + \frac{1}{2}m_dr_d^2}_{J}\right)\ddot{\theta}(s)
+    \end{equation}
+    where $J$ is the moment of inertia of the motor and the load combined.
+    \item Taking the Laplace Transform, we get 
+    \begin{align}
+        V(s) &= LsI(s) + I(s)R + sK_e\Theta(s) \\ 
+        K_tI(s) &= s^2 J \Theta (s).
+    \end{align}
+    Solving for $I(s)$ and substituting that into the first equation gives 
+    \begin{equation}
+        V(s) = \frac{Ls^3J}{K_t}\Theta(s) + \frac{s^2JR}{K_t}\Theta(s) + sK_e \Theta(s)
+    \end{equation}
+    and solving for $\Theta(s)/V(s)$ gives 
+    \begin{equation}
+        \frac{\Theta(s)}{V(s)} = \frac{1}{\frac{Ls^3J}{K_t} + \frac{JR}{K_t}s^2+K_e s}.
+    \end{equation}
+    \item Dividing both the numerator and denominator by $R,$ we can set $\frac{Ls^3J}{K_tR}\to 0$ to get the second order system 
+    \begin{equation}
+        \frac{\Theta(s)}{V(s)} = \frac{K_t}{RJs^2+K_eK_ts}.
+    \end{equation}
+    \item We have 
+    \begin{center}
+        \begin{tikzpicture}[auto, node distance=2cm,>=latex']
+            % We start by placing the blocks
+            \node [input, name=input] {};
+            \node [sum, right of=input] (sum) {};
+            \node [block, right of=sum] (controller) {$k_P+\frac{k_I}{s} + k_Ds $};
+            \node [block, right of=controller,
+                    node distance=3cm] (system) {$ \frac{\Theta(s)}{V(s)}$};
+            % We draw an edge between the controller and system block to 
+            % calculate the coordinate u. We need it to place the measurement block. 
+            \draw [->] (controller) -- node[name=u] {} (system);
+            \node [output, right of=system] (output) {};
+            \node [block, below of=u] (measurements) {1};
+        
+            % Once the nodes are placed, connecting them is easy. 
+            \draw [draw,->] (input) -- node {$V(s)$} (sum);
+            \draw [->] (sum) -- node {} (controller);
+            \draw [->] (system) -- node [name=y] {$\Theta(s)$}(output);
+            \draw [->] (y) |- (measurements);
+            \draw [->] (measurements) -| node[pos=0.99] {$-$} 
+                node [near end] {} (sum);
+        \end{tikzpicture}
+    \end{center}
+    \item We're interested in the open-loop transfer function. If we multiply it out, we have 
+    \begin{equation}
+        G(s)D(s) = \left(k_P + \frac{k_I}{s} + k_Ds\right)\frac{K_t}{RJs^2+K_eK_ts} = \frac{K_T(k_I+k_ps+k_Ds^2)}{s^2(K_eK_T+JRs)}
+    \end{equation}
+    is type 2, so it can track a step and ramp input with zero steady state error. To compute the SS error for a quadratic input, we can use the final value theorem, 
+    \begin{equation}
+        K_a = \lim_{s\to 0} s^2 G(s)D(s) = \frac{K_Tk_I}{K_eK_T} = \frac{k_I}{K_e}
+    \end{equation}
+    so the steady state error is 
+    \begin{equation}
+        e_{ss} = \frac{1}{K_a} = \frac{K_e}{k_I}.
+    \end{equation}
+\end{enumerate}
+\end{document}

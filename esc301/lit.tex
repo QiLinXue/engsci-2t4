@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage{qilin}
+\tikzstyle{process} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=0.5cm,align=center, draw=black, fill=gray!30, auto]
+\title{ESC301 \\ Literature Review \vspace{-2mm}}
+\author{QiLin Xue}
+\date{\vspace{-5mm}Spring 2023}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{stmaryrd}
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+\usepackage{pgfplots}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\maketitle
+\section{Description of Paper Discovery}
+This year, I am planning to take a supervised reading course on quantum cryptography. I have communicated with the professor who agreed to teach me, and have recommended some papers we base the course off of. While many of these papers are very technical that may require months of work to write a proper literature review, I have chosen some less technical pieces to explore.
+
+\section{Introduction}
+Modern cryptography offers the ability to send messages securely and anonymously, but their working assumption relies on the fact that certain problems (such as factoring large numbers) are hard to solve. Because of this, we can never prove the security of our current systems, against both quantum or classical computers. As a result, interest in quantum cryptography has been growing in recent years, in part by the fact that quantum based protocols can be proven secure, using the fundamental laws of physics. 
+
+This literature review will focus around the goal of achieving this quantum internet, what steps we're taking to achieve it, and what are some current challenges? The first paper, \textit{Quantum internet: A vision for the road ahead} published in \textit{Science} is a review summary characterizing the five stages of a quantum internet and their potential applications\cite{Wehner2018}. 
+
+The above article has a very optimistic outlook, and for good reason. In 2018, a team from China made great progress in realizing the first stage by implementing quantum key distribution (QKD) over $7600\text{ km}$ on Earth. Their work is described in \textit{Satellite-Relayed Intercontinental Quantum Network,} published in \textit{Physical Review Letters}\cite{Liao2018}.
+
+Finally, we will discuss some of the security challengers that we must face, starting with one of the first ``hacking strategies'' known as Photon-number-splitting (PNS) attack. The paper \textit{Limitations on Practical Quantum Cryptography} published in \textit{Physical Review Letters} was one of the first to analyze this kind of attack back in 2000\cite{Brassard2000}. While more hacking strategies have been discovered since, we will discuss this as PNS attacks are still relevant today and is relatively accessible.
+
+% While this literature review will focus on these three articles, we will also be citing the 2020 review article \textit{Secure quantum key distribution with realistic devices}, published in \textit{Reviews of Modern Physics} in order to give more context to some of these articles. Although they were picked to be as accessible as possible, they are still very technical and a lot of details need to be contextualized.
+\section{Review}
+\subsection{Quantum Internet}
+The paper \textit{Quantum internet: A vision for the road ahead} describes five stages to a quantum internet\cite{Wehner2018}:
+\begin{enumerate}
+    \item Prepare and measure
+    \item Entanglement distribution
+    \item Quantum memory
+    \item Few-qubit fault-tolerant
+    \item Quantum computing
+\end{enumerate}
+The first stage: ``Prepare and measure'' allows for basic quantum key distribution between two parties. As the stages become more and more advanced, we start being able to construct a quantum network that allows for the same security and anonymity that classical cryptography offers, but with the added benefit of being able to prove this security. What is interesting is that the holy grail of quantum computing that popular science authors write about is the last stage, and we're currently far from achieving that. However, this article demonstrates that we don't need to wait for that to create a useful network.
+
+In fact, just having a single qubit at certain nodes of the network can already be very useful, and any noise caused by device imperfections could be fixed with classical error correcting codes.
+\subsection{Satellite-Relayed Intercontinental Quantum Network}
+The paper \textit{Satellite-Relayed Intercontinental Quantum Network} describes the practical details of how QKD can be implemented using satellites at long distances of up to $7500\text{ km}$\cite{Liao2018}. Specifically, they used the Bennet-Brassard 1984 (BB84) protocol, which is one of the most popular and standard QKD protocols. It has the extra advantage that it is immune to photon-number-splitting attacks, which is particularly effective at attacking longer distance communications.
+
+Fiber lasers emitted pulses with a wavelength of $850\text{ nm}$ at a repetition rate of $100\text{ MHz}.$ These pulses are encoded into random states as per the BB84 protocol, and sent to three ground stations. There were several effects that could cause information from being lost, such as
+\begin{itemize}
+    \item Channel Loss
+    \item Beam diffraction
+    \item Atmospheric Turbulence
+    \item Absorption
+\end{itemize}
+However, the authors noted that decoherence was not a problem, and can be safely ignored. Unlike traditional communications, the authors could not simply increase the signal power and were forced to put measures in place to reduce the background noise.
+
+Accounting for the above effects, and the trajectory of the satellite, the satellite was able to transmit useful information for 300 seconds everyday, with a sifted key rate of $3-9\text{ kb/s}$ depending on distance and weather conditions, and achieved an error rate of between $1.0\%-2.4\%,$ which were mainly a result of background noise and polarization errors.
+
+These rates are optimal enough to faciliate an intercontinental video conference between the Chinese and Austria Academy of Sciences using the AES-128 standard, where the satellite QKD network was integrated with fiber-based quantum networks. A total of 2GB of data was transmitted in the 75-minute video conference. 
+\subsection{Limitations on Practical Quantum Cryptography}
+While protocols such as BB84 theoretically protect against certain attacks such as the PNS attack, the paper \textit{Limitations on Practical Quantum Cryptography} shows that in practice, these attacks can still be effective against realistic devices\cite{Brassard2000}. In ideal communication, where no information is being lost, the two particles communicating (known as Alice and Bob) can detect if an eavesdropper (known as Eve) is trying to intercept their communication in the BB84 protocol. The working principle, which relies on quantum entanglement and the fact that every detail of a quantum state cannot be exactly measured, allows Alice and Bob to detect if the qubits they are being sent have been tampered with.
+
+However, under the presence of loss, it is difficult to determine if any lost or tampered information is due to natural background noise, or if it is due to Eve's attack. The authors derive a criterion that the error rate $e$ of practical devices must satisfy in order to be secure against PNS attacks, given by 
+\begin{equation}
+    e < \frac{1}{4}(p_\text{exp} - p_\text{multi})
+\end{equation}
+where $p_\text{exp}$ is known as the experimental detection probability: the probability that a qubit sent by the sender is detected by the receiver's detector. Similarly, $p_\text{multi}$ is the multiphoton probability: the probability that a single photon source accidentally emits more than one photon. These numbers are difficult to quantify, so practical estimates are done by estimating the fidelity $F,$ which is the overlap between two quantum states. It ranges from $0$ (all the information is being leaked) to $1$ (no information is being leaked). They derived 
+\begin{equation}
+    F > \frac{2\sqrt{d_B}}{\eta_B}
+\end{equation}
+to be the criteria for the fidelity of the device to be secure against PNS attacks. Here, $d_B$ is the dark count probability: the probability that the detector will detect a photon when no photon is present, and $\eta_B$ is the detector efficiency: the probability that the detector will detect a photon when a photon is present. Back in 2000, realistic estimates on $d_B,\eta_B$ and device parameters meant that the maximum distance QKD can be realized was around $24\text{ km}$ through optical fibers.
+
+In general, the fidelity $F$ falls off exponentially due to various noise, making it difficult to reliably send information over long distances. The use of quantum repeaters, which are analogs of classical repeaters, can be used to transmit qubits over longer distances while still maintaining security.
+\subsection{Next Steps}
+To realize guaranteed security through a quantum internet, we must be able to transmit qubits over long distances but also ensure they cannot be attacked, i.e. a full security proof is necessary. These two concepts will always be in a battle with one another, as longer distances will include more loss, which gives attackers more freedom to work with.  
+
+While Liao et. al were able to make great leaps by confirming the ability to do long distance QKD via satellites with low error rates on the order of $1\%,$ which is a huge leap from the estimates provided in 2000, they did not comment on parameters such as the experimental detection probability or the multiphoton probability. These parameters are crucial to determining the security of the system, and it would be beneficial if we could have a more detailed analysis of the security of their satellite system for future work, though we acknowledge it was not the focus of their paper.
+
+Nevertheless, security analyses are important if we are to realize a quantum internet. It may be promising to see if the satellite and ground stations can be repurposed to perform general quantum key distribution through different protocols, which have different advantages and weaknesses to different quantum hacking attacks. Furthermore, it would be very impactful if more research could be done in reducing background noise and sensor tracking, which are the main causes of error in the satellite system. Not only would it make future quantum internet systems more secure and faster, but it would also be useful in non-quantum applications of satellite systems.
+\subsection{Conclusion}
+In conclusion, this literature review focused on the goal of achieving a quantum internet, the steps being taken to achieve it, and the challenges we must overcome. The papers summarized the five stages of a quantum internet and their potential applications, described the practical details of implementing quantum key distribution using satellites over long distances, and finally discussed the photon-number-splitting attack, which is still relevant today.
+
+The findings of this review demonstrate that while we are still far from achieving the holy grail of quantum computing, we are already able to securely transmit qubits over long distances for practical applications, such as video conferencing, though the security for these systems is still not proven.
+
+However, there are still several challenges that need to be addressed, such as noise caused by device imperfections and background noise that affects the key rate and error rate. Further research is needed to develop methods that can mitigate these effects and improve the overall efficiency and security of quantum communication. Overall, the potential applications of a quantum internet are vast, and we are likely to see significant advancements in this field in the coming years.
+\section{References}
+\bibliographystyle{plain}
+\bibliography{citations}
+\end{document}
