@@ -1,0 +1,66 @@
+/* custom.css */
+
+/* Apply the Roboto font to the entire body */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Style for the main banner (jumbotron) */
+.main-banner {
+    background-color: #25355A;
+    color: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+}
+
+/* Style for card headers */
+.card-header-custom {
+    background-color: #128192;
+}
+
+/* Style for the toggle buttons in card headers */
+.card-header-custom .btn-link {
+    color: white;
+    text-align: left;
+    width: 100%;
+    text-decoration: none;
+    /* Remove the default button focus outline */
+    box-shadow: none;
+}
+
+/* Optional: Change the appearance of the toggle button on hover */
+.card-header-custom .btn-link:hover {
+    text-decoration: none;
+    color: #cce7f3; /* Lighter shade for hover effect */
+}
+
+/* Style for disabled buttons */
+.btn-disabled {
+    pointer-events: none;
+    opacity: 0.65;
+}
+
+/* Additional spacing between sections */
+.section-header {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Adjust the card-footer buttons */
+.card-footer .btn {
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Custom gutter class to reduce spacing between courses */
+.custom-gutter {
+    --bs-gutter-x: 1rem; /* Default Bootstrap g-4 is 1.5rem, reduce to 1rem */
+    --bs-gutter-y: 0.5rem; /* Adjust vertical gutter as needed */
+}
+
+/* Responsive adjustments (if needed) */
+@media (max-width: 768px) {
+    .card-header-custom .btn-link {
+        text-align: center;
+    }
+}
