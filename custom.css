@@ -58,6 +58,27 @@ body {
     --bs-gutter-y: 0.5rem; /* Adjust vertical gutter as needed */
 }
 
+/* Flexbox adjustments for consistent card height */
+.custom-card-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.custom-card-container .col {
+    display: flex;
+    flex: 1 1 0;
+}
+
+.custom-card-container .card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-card-container .card-body {
+    flex-grow: 1;
+}
+
 /* Responsive adjustments (if needed) */
 @media (max-width: 768px) {
     .card-header-custom .btn-link {

@@ -17,6 +17,14 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="custom.css">
     <title>University Notes</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBSG9EJDQZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-SBSG9EJDQZ');
+    </script>
   </head>
   <body>
     <main role="main" class="container mt-5">
@@ -24,7 +32,7 @@
       <div class="jumbotron main-banner">
         <h1 class="display-5">University Notes</h1>
         <p class="lead">
-          [Redesign WIP] Feedback is appreciated <a href="mailto:qilin.xue@mail.utoronto.ca">qilin.xue@mail.utoronto.ca</a>
+          [Redesign WIP] Feedback is appreciated via email: <a href="mailto:qilin.xue@mail.utoronto.ca" class="text-light">qilin.xue@mail.utoronto.ca</a> or discord: <strong class="text-light">qilin_xue</strong>
             <br><br>
           A compilation of typed notes, study guides, and solutions that are continuously updated throughout university. These notes are provided as-is and may not be entirely correct or complete.
         </p>
@@ -189,7 +197,7 @@
                   aria-expanded="false" 
                   aria-controls="collapseEsc101"
                 >
-                  ESC101 – Praxis
+                  ESC101 – Praxis I
                 </button>
               </h5>
             </div>
@@ -200,7 +208,8 @@
                 </p>
               </div>
               <div class="card-footer">
-                <!-- Empty footer as per original -->
+                <a href="esc101/PER.pdf" class="btn btn-secondary">Personal Engineering Recommendation</a>
+                <a href="esc101/Sprint Analysis.pdf" class="btn btn-secondary">Sprint Analysis</a>
               </div>
             </div>
           </div>
@@ -238,9 +247,9 @@
 
       </div>
 
-      <div class="row row-cols-1 g-4 custom-gutter">
-      <!-- Year 1, Spring -->
       <h2 class="section-header">Year 1, Spring 2021</h2>
+
+      <!-- Year 1, Spring -->
       <div class="row row-cols-1 g-4 custom-gutter">
           <!-- ESC195 - Calculus II -->
           <div class="col">
@@ -420,7 +429,7 @@
                   aria-expanded="false" 
                   aria-controls="collapseEsc102"
                 >
-                  ESC102 – Praxis
+                  ESC102 – Praxis II
                 </button>
               </h5>
             </div>
@@ -468,7 +477,6 @@
               </div>
             </div>
           </div>
-      <div class="row row-cols-1 g-4 custom-gutter">
       <!-- Year 2, Fall -->
       <h2 class="section-header">Year 2, Fall 2021</h2>
       <div class="row row-cols-1 g-4 custom-gutter">
@@ -498,6 +506,7 @@
               <div class="card-footer">
                 <a href="aer210/lectures/aer210.pdf" class="btn btn-secondary">Notes (Incomplete)</a>
                 <a href="aer210/lectures/midterm.pdf" class="btn btn-secondary">Midterm Review</a>
+                <a href="aer210/microfluidics.pdf" class="btn btn-secondary">Microfluidics Lab</a>
               </div>
             </div>
           </div>
@@ -560,6 +569,7 @@
               </div>
               <div class="card-footer">
                 <a href="ece253/midterm.pdf" class="btn btn-secondary">Midterm Cheat Sheet</a>
+                <a href="ece253/final.pdf" class="btn btn-secondary">Final Cheat Sheet</a>
               </div>
             </div>
           </div>
@@ -738,7 +748,7 @@
                   aria-expanded="false" 
                   aria-controls="collapseBme205"
                 >
-                  BME205
+                  BME205 - Physiology for Engineers
                 </button>
               </h5>
             </div>
@@ -768,7 +778,7 @@
                   aria-expanded="false" 
                   aria-controls="collapseEce259"
                 >
-                  ECE259
+                  ECE259 - Electromagnetism
                 </button>
               </h5>
             </div>
@@ -798,7 +808,7 @@
                   aria-expanded="false" 
                   aria-controls="collapseEce286"
                 >
-                  ECE286
+                  ECE286 - Statistics
                 </button>
               </h5>
             </div>
@@ -827,18 +837,23 @@
                   aria-expanded="false" 
                   aria-controls="collapseEsc204"
                 >
-                  ESC204
+                  ESC204 - Praxis III
                 </button>
               </h5>
             </div>
             <div id="collapseEsc204" class="collapse">
               <div class="card-body">
                 <p>
-                  Coming Never
+                  Praxis III
                 </p>
               </div>
               <div class="card-footer">
-                <a href="#" class="btn btn-secondary disabled">TBA</a>
+                <a href="esc204/bias.pdf" class="btn btn-secondary">Reflection: Bias</a>
+                <a href="esc204/communication.pdf" class="btn btn-secondary">Reflection: Communication</a>
+                <a href="esc204/empathy.pdf" class="btn btn-secondary">Reflection: Empathy</a>
+                <a href="esc204/widget1.pdf" class="btn btn-secondary">Widget Lab 1</a>
+                <a href="esc204/widget2.pdf" class="btn btn-secondary">Widget Lab 2</a>
+                <a href="esc204/widget3.pdf" class="btn btn-secondary">Widget Lab 3</a>
               </div>
             </div>
           </div>
@@ -1433,5 +1448,21 @@
     </main>
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Select all links in the body
+        document.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            // Send the click event to Google Analytics
+            gtag('event', 'click', {
+              'event_category': 'Link',
+              'event_label': link.href,
+              'value': 1
+            });
+          });
+        });
+      });
+    </script>
+    
   </body>
 </html>
